@@ -1,73 +1,69 @@
 -- ═══════════════════════════════════════════════════════════════════════════
--- DB MAINTENANCE — collation-mismatch remediation + person_roles index
--- Drafted 2026-06-07 (evening, during pooler-exhaustion chill). DO NOT run
--- until Ben gives the word, and NOT during the Monday-morning cron chain.
+-- DB MAINTENANCE v2 — collation-mismatch remediation + person_roles index
+-- Drafted 2026-06-07; self-review caught 4 flaws in v1 (halt-before-fix,
+-- refresh-after-partial-rebuild hole, missing statement_timeout=0, non-covering
+-- index). DO NOT run until Ben gives the word; quiet window only.
 --
--- WHY (two findings from the 2026-06-07 incident):
---  1. Postgres warns on every connection: collation 153.120 (db) vs 153.121
---     (OS) after a Supabase platform patch. Text btree indexes are physically
---     ordered by collation — if any string ordering changed, lookups can MISS
---     ROWS SILENTLY. Patch-level bumps rarely change order, but the failure
---     class is "silent wrong results", so: verify (amcheck) → reindex hot
---     text indexes → THEN refresh the recorded version. Refreshing first
---     would just paper over real inconsistency.
---  2. PostgREST statement timeouts on
---       SELECT person_name FROM person_roles
---       WHERE cessation_date IS NULL AND company_name = $1
---     (board-interlock lookups, called in a loop, with count=exact).
---     Fix: partial index matching the predicate exactly.
+-- WHY:
+--  1. Collation 153.120 (db) vs 153.121 (OS) after a Supabase platform patch.
+--     Text btrees are physically ordered by collation; if ordering changed,
+--     lookups MISS ROWS SILENTLY. Patch bumps rarely change order — so VERIFY
+--     first (amcheck, read-only), and only rebuild what actually fails.
+--  2. PostgREST timeouts on person_roles(company_name, cessation_date IS NULL)
+--     interlock lookups → covering partial index.
 --
--- HOW TO RUN (session-mode pooler port 5432 — CONCURRENTLY needs a real
--- session; do NOT use the 6543 transaction pooler):
+-- DESIGN (the v2 logic gate):
+--     amcheck ALL public text btrees (tolerant — failures recorded, not fatal)
+--       ├─ 0 failures → indexes consistent with new collation
+--       │               → REFRESH COLLATION VERSION directly. No rebuild needed.
+--       └─ N failures → REINDEX CONCURRENTLY exactly those N
+--                       → REFRESH is SKIPPED this run; RE-RUN the script:
+--                         second pass re-checks (now clean) and refreshes.
+--
+-- HOW TO RUN (session-mode pooler 5432 — CONCURRENTLY needs a real session;
+-- NOT the 6543 transaction pooler; direct db.<ref> host is dead):
 --
 --   PGPASSWORD="$DATABASE_PASSWORD" psql \
 --     -h aws-0-ap-southeast-2.pooler.supabase.com -p 5432 \
 --     -U postgres.tednluwflfhxyucgwigh -d postgres \
---     -v ON_ERROR_STOP=1 \
 --     -f scripts/db-maintenance-2026-06-07-collation-and-indexes.sql
 --
--- DURATION: phases 1–2 minutes; phase 3 (reindex) dominated by
--- austender_contracts (~800k rows) and communications_history (~27k) — expect
--- minutes-to-tens-of-minutes total. CONCURRENTLY = no table locks, but it
--- does consume I/O; run in a quiet window.
+--   (no ON_ERROR_STOP: amcheck failures are handled in-script; a REINDEX
+--    failure leaves an INVALID _ccnew index — cleanup query in Phase 9.)
 --
--- IF A REINDEX FAILS: it leaves an INVALID index suffixed _ccnew. Find and
--- drop with:
---   SELECT format('DROP INDEX CONCURRENTLY %I.%I;', n.nspname, c.relname)
---   FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
---   JOIN pg_index i ON i.indexrelid=c.oid
---   WHERE NOT i.indisvalid AND c.relname LIKE '%_ccnew%';
--- then re-run the failed REINDEX.
+-- DURATION: amcheck reads every text btree once (index only, not heap) —
+-- expect minutes; dominated by austender_contracts/state_tenders. Rebuilds
+-- only happen on actual failures.
 -- ═══════════════════════════════════════════════════════════════════════════
 
 \timing on
-\set ON_ERROR_STOP on
 
--- ── Phase 0 · Preflight (read-only) ─────────────────────────────────────────
-\echo '=== Phase 0: preflight ==='
+-- ── Phase 0 · Session safety ────────────────────────────────────────────────
+\echo '=== Phase 0: session settings ==='
+SET statement_timeout = 0;            -- role default would kill long REINDEX mid-flight
+SET lock_timeout = '5min';            -- don't queue forever behind a stuck lock
+SET maintenance_work_mem = '256MB';   -- faster index builds, modest footprint
+
+-- ── Phase 1 · Preflight (read-only) ─────────────────────────────────────────
+\echo '=== Phase 1: preflight ==='
 SELECT datname, datcollversion FROM pg_database WHERE datname = 'postgres';
 SELECT count(*) AS active_connections FROM pg_stat_activity;
-SELECT relname, pg_size_pretty(pg_total_relation_size(c.oid)) AS total_size, c.reltuples::bigint AS approx_rows
-FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
-WHERE n.nspname = 'public'
-  AND c.relkind = 'r'
-  AND c.relname IN ('person_roles','foundations','grant_opportunities','xero_transactions',
-                    'xero_invoices','ghl_contacts','communications_history',
-                    'person_identity_map','austender_contracts','state_tenders')
-ORDER BY pg_total_relation_size(c.oid) DESC;
+SELECT indexname FROM pg_indexes WHERE tablename = 'person_roles';  -- confirm partial idx absent
 
--- existing indexes on person_roles (confirm the partial index is actually missing)
-SELECT indexname, indexdef FROM pg_indexes WHERE tablename = 'person_roles';
-
--- ── Phase 1 · amcheck structure verification of hot text indexes ────────────
-\echo '=== Phase 1: amcheck (structure checks, ordering vs CURRENT collation) ==='
+-- ── Phase 2 · Candidate set: ALL public btree indexes touching text columns ─
+\echo '=== Phase 2: candidate indexes ==='
 CREATE EXTENSION IF NOT EXISTS amcheck;
 
--- Generate one bt_index_check per btree index that includes a text-ish column
--- on the hot tables. Structure-only (no heapallindexed) — fast, and exactly
--- the check that catches collation-order inconsistency.
-SELECT DISTINCT format('SELECT %L AS checking, bt_index_check(%L::regclass);',
-                       i.indexrelid::regclass::text, i.indexrelid::regclass::text)
+DROP TABLE IF EXISTS pg_temp.collation_check_results;
+CREATE TEMP TABLE collation_check_results (
+  index_name text PRIMARY KEY,
+  table_name text,
+  status     text,   -- 'ok' | 'FAILED'
+  detail     text
+);
+
+INSERT INTO collation_check_results (index_name, table_name, status)
+SELECT DISTINCT i.indexrelid::regclass::text, tc.relname, 'pending'
 FROM pg_index i
 JOIN pg_class ic ON ic.oid = i.indexrelid
 JOIN pg_class tc ON tc.oid = i.indrelid
@@ -75,66 +71,88 @@ JOIN pg_namespace n ON n.oid = tc.relnamespace
 JOIN pg_attribute a ON a.attrelid = tc.oid AND a.attnum = ANY (i.indkey)
 JOIN pg_type t ON t.oid = a.atttypid
 WHERE n.nspname = 'public'
-  AND tc.relname IN ('person_roles','foundations','grant_opportunities','xero_transactions',
-                     'xero_invoices','ghl_contacts','communications_history',
-                     'person_identity_map','austender_contracts','state_tenders')
   AND ic.relam = (SELECT oid FROM pg_am WHERE amname = 'btree')
-  AND t.typname IN ('text','varchar','bpchar','citext')
+  AND i.indisvalid
+  AND t.typname IN ('text','varchar','bpchar','citext');
+
+SELECT count(*) AS text_btree_indexes_to_check FROM collation_check_results;
+
+-- ── Phase 3 · amcheck every candidate (tolerant — failures recorded) ────────
+\echo '=== Phase 3: amcheck (this is the long read-only part) ==='
+DO $$
+DECLARE r record;
+BEGIN
+  FOR r IN SELECT index_name FROM collation_check_results LOOP
+    BEGIN
+      PERFORM bt_index_check(r.index_name::regclass);
+      UPDATE collation_check_results SET status = 'ok' WHERE index_name = r.index_name;
+    EXCEPTION WHEN OTHERS THEN
+      UPDATE collation_check_results
+        SET status = 'FAILED', detail = SQLERRM
+        WHERE index_name = r.index_name;
+      RAISE WARNING 'amcheck FAILED: % — %', r.index_name, SQLERRM;
+    END;
+  END LOOP;
+END $$;
+
+SELECT status, count(*) FROM collation_check_results GROUP BY 1;
+SELECT index_name, table_name, left(detail, 120) AS detail
+FROM collation_check_results WHERE status = 'FAILED' ORDER BY 2, 1;
+
+-- ── Phase 4 · Rebuild ONLY the failures (autocommit, outside txn) ───────────
+\echo '=== Phase 4: REINDEX CONCURRENTLY failed indexes (no-op when clean) ==='
+SELECT format('REINDEX INDEX CONCURRENTLY %s;', index_name)
+FROM collation_check_results WHERE status = 'FAILED'
 \gexec
 
--- If ANY check above errored, STOP HERE (ON_ERROR_STOP will have halted) —
--- the failed index is collation-inconsistent; phase 2 rebuilds it anyway, but
--- note WHICH failed before continuing.
-
--- ── Phase 2 · Rebuild hot text indexes under the new collation ──────────────
-\echo '=== Phase 2: REINDEX CONCURRENTLY hot text indexes ==='
-SELECT DISTINCT format('REINDEX INDEX CONCURRENTLY %s;', i.indexrelid::regclass)
-FROM pg_index i
-JOIN pg_class ic ON ic.oid = i.indexrelid
-JOIN pg_class tc ON tc.oid = i.indrelid
-JOIN pg_namespace n ON n.oid = tc.relnamespace
-JOIN pg_attribute a ON a.attrelid = tc.oid AND a.attnum = ANY (i.indkey)
-JOIN pg_type t ON t.oid = a.atttypid
-WHERE n.nspname = 'public'
-  AND tc.relname IN ('person_roles','foundations','grant_opportunities','xero_transactions',
-                     'xero_invoices','ghl_contacts','communications_history',
-                     'person_identity_map','austender_contracts','state_tenders')
-  AND ic.relam = (SELECT oid FROM pg_am WHERE amname = 'btree')
-  AND t.typname IN ('text','varchar','bpchar','citext')
+-- ── Phase 5 · Refresh collation version ONLY if everything checked ok ───────
+-- (If Phase 4 rebuilt anything, refresh is deliberately withheld: RE-RUN the
+--  script — the second pass re-checks the rebuilt indexes and refreshes.)
+\echo '=== Phase 5: conditional REFRESH COLLATION VERSION ==='
+SELECT 'ALTER DATABASE postgres REFRESH COLLATION VERSION;'
+WHERE NOT EXISTS (SELECT 1 FROM collation_check_results WHERE status = 'FAILED')
 \gexec
 
--- ── Phase 3 · Record the new collation version ──────────────────────────────
--- Only AFTER the rebuilds: this declares "objects are consistent with 153.121".
-\echo '=== Phase 3: refresh collation version ==='
-ALTER DATABASE postgres REFRESH COLLATION VERSION;
 SELECT datname, datcollversion FROM pg_database WHERE datname = 'postgres';
 
--- ── Phase 4 · person_roles partial index (the interlock-lookup fix) ─────────
-\echo '=== Phase 4: person_roles partial index ==='
+-- ── Phase 6 · person_roles covering partial index ───────────────────────────
+-- Matches the timing-out interlock lookup exactly; INCLUDE makes it index-only.
+\echo '=== Phase 6: person_roles covering partial index ==='
 CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_person_roles_company_active
-  ON public.person_roles (company_name)
+  ON public.person_roles (company_name) INCLUDE (person_name)
   WHERE cessation_date IS NULL;
 ANALYZE public.person_roles;
 
--- ── Phase 5 · Verify ─────────────────────────────────────────────────────────
-\echo '=== Phase 5: verify ==='
+-- ── Phase 7 · Verify ────────────────────────────────────────────────────────
+\echo '=== Phase 7: verify ==='
 SELECT indexname FROM pg_indexes
 WHERE tablename = 'person_roles' AND indexname = 'idx_person_roles_company_active';
 
 EXPLAIN (COSTS OFF)
 SELECT person_name FROM public.person_roles
 WHERE cessation_date IS NULL AND company_name = 'EXAMPLE PTY LTD';
--- expect: Index Scan / Bitmap Index Scan using idx_person_roles_company_active
+-- expect: Index Only Scan using idx_person_roles_company_active
 
--- leftover invalid indexes from any failed CONCURRENTLY (should be zero rows)
+-- ── Phase 8 · Summary for the runbook ───────────────────────────────────────
+\echo '=== Phase 8: summary ==='
+SELECT status, count(*) FROM collation_check_results GROUP BY 1;
+SELECT CASE
+  WHEN EXISTS (SELECT 1 FROM collation_check_results WHERE status = 'FAILED')
+  THEN 'REBUILDS RAN — collation version NOT refreshed. RE-RUN this script for the clean second pass.'
+  ELSE 'All clean — collation version refreshed. Done in one pass.'
+END AS outcome;
+
+-- ── Phase 9 · Debris check (should be zero rows) ────────────────────────────
+-- A failed CONCURRENTLY leaves an INVALID index suffixed _ccnew. If present:
+--   DROP INDEX CONCURRENTLY <name>;  then re-run.
 SELECT c.relname AS invalid_index
 FROM pg_class c JOIN pg_index i ON i.indexrelid = c.oid
 WHERE NOT i.indisvalid;
 
-\echo '=== DONE — note durations above for the runbook ==='
+\echo '=== DONE ==='
 
--- FOLLOW-UP (not in this script):
+-- FOLLOW-UP (outside this script):
 --  * The looping caller of person_roles-by-company (grantscope side) should
---    pass count:'none' — exact counts per iteration are pure waste.
---  * If amcheck flagged indexes on tables OUTSIDE the hot list, schedule a
---    second window for a broader REINDEX pass.
+--    pass count:'none' — the exact-count CTE doubles every scan for nothing.
+--  * Non-default collations (if any in pg_collation with version drift) would
+--    need ALTER COLLATION ... REFRESH VERSION — not flagged in current logs.
