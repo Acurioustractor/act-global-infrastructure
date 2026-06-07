@@ -67,9 +67,23 @@ Saved tag-queries (defined; build/verify in GHL = Phase C):
 
 `comms:act-newsletter` · `comms:goods-newsletter` · `comms:harvest-newsletter` · `comms:justicehub-newsletter` · `comms:funder-drip` · `comms:buyer-drip` · `comms:supporter-drip`. Each = enrolment in one stream; **gate:** newsletter streams require `newsletter_consent=Yes`; community-line never auto-enrolled (agency model). (D2 retired `comms:partner-drip` + `comms:nurture`.)
 
-## 6. Workflows (Layer 4 automations) — designed, not built
+## 6. Workflows — 19 LIVE in GHL (pulled 2026-06-08), only 7 PUBLISHED
 
-Triggers we're getting ready for: newsletter-submit → stamp consent + enrol + welcome · Goods inquiry → route+tag · `role:funder`(+not community) → flag for manual stewardship · behaviour (opened/clicked/donated) → advance `tier:` · `lane:community` added → strip `comms:*` lacking consent evidence (the guard) · Xero invoice paid → buyer/funder. **None live yet** — gated on forms-at-source + tag migration (a wrong trigger = a wrong send).
+**The risk is mostly LATENT, not active** — every newsletter / Goods / Contained / partner send is still DRAFT. The 7 published are plumbing + Harvest welcomes:
+
+| Published (7) | What it does | Send-risk |
+|---|---|---|
+| Sync to Supabase — New Contact | GHL→mirror sync | none (not a send) |
+| Sync to Supabase — Contact Updated | GHL→mirror sync | none |
+| Gmail Email to Contact | inbound Gmail→contact | none (ingestion) |
+| Harvest — Member Welcome | welcome new Harvest member | low (self-triggered signup) |
+| Harvest — Follow Welcome | welcome Harvest follower | ⚠️ **confirm** it excludes `lane:community` + has consent |
+| Harvest — Member Question Receipt | auto-reply to a question | low (transactional) |
+| Harvest Membership Journey | advance `tier:` ladder | low (stage moves) |
+
+**DRAFT (12) — must NOT publish until tags are clean:** ACT Core—Newsletter Signup · Newsletter Signup (dupe) · Contained launch 2025 (⚠️ community-line) · Goods Inquiry→Acknowledge · Goods media form · Grant Deadline reminder · Harvest—RSVP Pizza Dinner *(the June-20 "I'm coming" workflow — ties to `VITE_GHL_IM_COMING_URL`)* · Harvest—Shop Interest Receipt · New Order Notification · Shop prospect→create card · Contact Form→Universal Inquiry ×2 (dupe).
+
+**Cleanup seen:** 2 newsletter-signup dupes, 2 contact→inquiry dupes. **If any DRAFT send were published today** against current tags → it would hit the 284 consent-violation + 33 community-line + 221 `comms:partner-drip` contacts. That's the gate.
 
 ## 7. Pipelines (11 LIVE in GHL — pulled 2026-06-08)
 
