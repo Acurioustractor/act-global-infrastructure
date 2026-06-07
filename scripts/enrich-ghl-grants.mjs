@@ -112,13 +112,14 @@ function eligibility(row) {
   return clauses.length ? clauses.join(' · ') : null; // middle dot separator
 }
 
-// DATE -> epoch ms. closes_at / deadline are SQL `date` -> ISO 'YYYY-MM-DD' strings.
+// GHL DATE custom fields on opportunities accept ISO 'YYYY-MM-DD' on WRITE
+// (epoch-ms string is rejected — "Invalid Custom Field Value"). closes_at /
+// deadline are SQL `date`, already 'YYYY-MM-DD' (or a timestamp — take the date part).
 function dateToEpochMs(row) {
   const d = row.closes_at || row.deadline;
   if (!d) return null;
-  const t = Date.parse(d + (typeof d === 'string' && d.length === 10 ? 'T00:00:00Z' : ''));
-  if (Number.isNaN(t)) return null;
-  return String(t);
+  const iso = String(d).slice(0, 10); // YYYY-MM-DD
+  return /^\d{4}-\d{2}-\d{2}$/.test(iso) ? iso : null;
 }
 
 const NEW_FIELDS = [
