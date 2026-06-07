@@ -37,6 +37,7 @@
 -- ═══════════════════════════════════════════════════════════════════════════
 
 \timing on
+\set ON_ERROR_STOP on
 
 -- ── Phase 0 · Session safety ────────────────────────────────────────────────
 \echo '=== Phase 0: session settings ==='
@@ -52,7 +53,21 @@ SELECT indexname FROM pg_indexes WHERE tablename = 'person_roles';  -- confirm p
 
 -- ── Phase 2 · Candidate set: ALL public btree indexes touching text columns ─
 \echo '=== Phase 2: candidate indexes ==='
-CREATE EXTENSION IF NOT EXISTS amcheck;
+-- amcheck cannot be created by the postgres role on Supabase (superuser-only):
+-- enable it in the dashboard first (Database -> Extensions -> search 'amcheck').
+-- HARD GUARD: if bt_index_check is missing, ABORT before any check or rebuild —
+-- on 2026-06-07 the missing function marked all 1,191 indexes 'FAILED' and the
+-- script headed into a full-database REINDEX (killed in time, no debris).
+DO $guard$ BEGIN
+  BEGIN
+    CREATE EXTENSION IF NOT EXISTS amcheck;
+  EXCEPTION WHEN insufficient_privilege THEN
+    RAISE NOTICE 'CREATE EXTENSION amcheck denied for this role (expected on Supabase)';
+  END;
+  IF NOT EXISTS (SELECT 1 FROM pg_proc WHERE proname = 'bt_index_check') THEN
+    RAISE EXCEPTION 'amcheck unavailable. Enable it: Supabase dashboard -> Database -> Extensions -> amcheck. ABORTING (nothing checked, nothing rebuilt).';
+  END IF;
+END $guard$;
 
 DROP TABLE IF EXISTS pg_temp.collation_check_results;
 CREATE TEMP TABLE collation_check_results (
@@ -86,11 +101,14 @@ BEGIN
     BEGIN
       PERFORM bt_index_check(r.index_name::regclass);
       UPDATE collation_check_results SET status = 'ok' WHERE index_name = r.index_name;
-    EXCEPTION WHEN OTHERS THEN
-      UPDATE collation_check_results
-        SET status = 'FAILED', detail = SQLERRM
-        WHERE index_name = r.index_name;
-      RAISE WARNING 'amcheck FAILED: % — %', r.index_name, SQLERRM;
+    EXCEPTION
+      WHEN undefined_function THEN
+        RAISE;  -- the CHECKER is broken, not the index — abort the whole run
+      WHEN OTHERS THEN
+        UPDATE collation_check_results
+          SET status = 'FAILED', detail = SQLERRM
+          WHERE index_name = r.index_name;
+        RAISE WARNING 'amcheck FAILED: % — %', r.index_name, SQLERRM;
     END;
   END LOOP;
 END $$;
@@ -101,6 +119,16 @@ FROM collation_check_results WHERE status = 'FAILED' ORDER BY 2, 1;
 
 -- ── Phase 4 · Rebuild ONLY the failures (autocommit, outside txn) ───────────
 \echo '=== Phase 4: REINDEX CONCURRENTLY failed indexes (no-op when clean) ==='
+-- CIRCUIT BREAKER: mass failure means a systemic checker problem, not mass
+-- corruption. Never generate a full-database rebuild from a broken precondition.
+DO $breaker$
+DECLARE f int;
+BEGIN
+  SELECT count(*) INTO f FROM collation_check_results WHERE status = 'FAILED';
+  IF f > 50 THEN
+    RAISE EXCEPTION 'circuit breaker: % indexes flagged FAILED (>50). Investigate the checker before any rebuild.', f;
+  END IF;
+END $breaker$;
 SELECT format('REINDEX INDEX CONCURRENTLY %s;', index_name)
 FROM collation_check_results WHERE status = 'FAILED'
 \gexec
