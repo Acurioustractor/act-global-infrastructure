@@ -15,6 +15,7 @@ The brain's finance source-of-truth layer. Live operational data lives in the Co
 | File | What it holds |
 |---|---|
 | [act-money-framework.md](./act-money-framework.md) | **Canonical working document.** The unified ACT money strategy — Voice/Flow/Ground/Grants pile mix, FY27 target, concentration rules. Updated with Standard Ledger + R&D consultant in the loop. |
+| [knight-family-act-pay-and-entity-setup.md](./knight-family-act-pay-and-entity-setup.md) | Bridge from Knight Finances into ACT: Ben/Carla/children pay setup, Knight Family Trust role, Knight Photography routing, PSI guardrails, Witta/Harvest/Farm wealth path. |
 | [fy26-27-money-philosophy-and-plan.md](./fy26-27-money-philosophy-and-plan.md) | Working strategy: how the money should move, what the founders are paid, what gets reinvested. |
 | [sole-trader-pty-cutover-strategy.md](./sole-trader-pty-cutover-strategy.md) | The 30 Jun 2026 cutover plan from sole trader to A Curious Tractor Pty Ltd. Companion to `thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md`. |
 

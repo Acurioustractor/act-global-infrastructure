@@ -21,6 +21,8 @@ You don't *work* The Field. You **read** it, then you **tend** it.
 - **The constellation** — the community lane. Sovereign contributors (storytellers, elders). Measured by what ACT **owes back**, never by their use to us. The transcript owes-ledger lives here.
 - **The line** between them is never crossed into a funnel. (See [[energy-orbit]] for the mechanics.)
 
+**The Kristy rule — one person, many relationships.** Some people genuinely hold both lanes: Kristy Bloomfield is a Traditional Owner and storyteller (community) *and* runs Oonchiumpa, partners directly on Goods, and leads youth-justice work (a working peer). The model holds this by separating the person from the relationships: `lane:community` is a **floor of protections** (no tiers, no drips, owes honoured — always), not a box; **earned crossover** (real work, not newsletter subscriptions) means multi-project tags are *correct*; `circle:gsd-alliance` on a community person is **pure recognition** — it must never drag comms automation with it; and `role:` tags carry the multiplicity (`role:traditional-owner` + `role:storyteller` + `role:partner` can all be true; `role:funder` on a person is usually the org/person confusion — the org receives funds, the person is not your funder).
+
 ## Reciprocity — the heart of it
 Every relationship is alive when energy flows both ways. So the unit The Field tracks is not "frequency of contact" but **energy given / energy received**: did this touch *give* energy (we helped them) or *receive* it (they helped us)? Read each morning, the question is simple — *where is energy flowing, where is it stuck, what do I give today, what's being given to me?*
 
@@ -61,6 +63,9 @@ Every enrichment passes one test: *does knowing this help us **tend** them — g
 Open The Field each morning. It shows where energy is flowing and where it's stuck, who is **warm but unasked** (the latent gold), who is **cooling**, what ACT **owes**, and the day's moves — per project (what's needed → who we have → the gaps → the next move) and per person.
 
 Current surfaces: `thoughts/shared/orbit-viz.html` (the shape) · `thoughts/shared/project-scope-board.html` (the decisions). Built read-only by `scripts/build-orbit-viz.mjs` and `scripts/build-scope-board.mjs`.
+
+## Family & friends — the inner ground
+Dunbar's inner layers aren't a marketing audience; they're mostly **family and close friends** — the people the energy budget exists to protect. They carry `role:family` / `role:friend`, sit in the inner rings by right (no tier needed, no earning), and are **never** placed in a comms funnel. The Field holds them so the morning read can tell the truth: if the inner 5 is going quiet, that's the first thing to tend.
 
 ## Vocabulary
 - **Read the Field** — the morning practice (sense before act).
