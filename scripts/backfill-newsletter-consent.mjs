@@ -65,7 +65,9 @@ const CONSENT_SOURCE_FIELD_ID = 'HdnMUyXkZRPZG7l7cygG'; // Consent Source → li
 const CONSENT_TS_FIELD_ID = 'Z1E4OJl7lf8kWbJGASDM';     // Consent Timestamp → dateAdded as ISO 'YYYY-MM-DD'
 
 // Classification regexes.
-const OPTIN_RE = /member signup|newsletter|subscribe|act-regenerative-studio|website.?form/i;
+// "member list" = Harvest member-form imports; "gathering-footer" = footer newsletter box at the gathering.
+// Both promoted to OPT-IN on Ben's ruling 2026-06-08 (evidenced member/newsletter signups).
+const OPTIN_RE = /member signup|member list|newsletter|subscribe|act-regenerative-studio|website.?form|gathering-footer/i;
 const NOT_OPTIN_RE = /import|xero|gmail|migrat|csv|api|^ghl$/i;
 
 // Timing.
