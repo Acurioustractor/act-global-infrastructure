@@ -16,7 +16,7 @@
 
 import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import { trackedClaudeCompletion } from './lib/llm-client.mjs';
+import { trackedAgentCompletionWithFallback } from './lib/llm-client.mjs';
 import { loadProjects } from './lib/project-loader.mjs';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
@@ -171,8 +171,11 @@ Guidelines:
 - Keep requirements_summary concise (3-5 sentences)
 - If the page doesn't contain grant information, return {"error": "not_a_grant_page"}`;
 
-  const response = await trackedClaudeCompletion(prompt, SCRIPT_NAME, {
-    model: 'claude-haiku-4-5',
+  // provider-routed (MiniMax-first when MINIMAX_API_KEY set; falls back to
+  // Anthropic/Gemini on credit errors). Grant pages are public-domain — no
+  // person/relationship data, consistent with the Shanghai-servers rule.
+  const response = await trackedAgentCompletionWithFallback(prompt, SCRIPT_NAME, {
+    task: 'extract',
     maxTokens: 2000,
     operation: 'extract-requirements',
   });
@@ -218,8 +221,8 @@ Only include projects scoring 30+. Score based on thematic alignment, eligibilit
 
   let alignedProjects = [];
   try {
-    const alignResponse = await trackedClaudeCompletion(alignmentPrompt, SCRIPT_NAME, {
-      model: 'claude-haiku-4-5',
+    const alignResponse = await trackedAgentCompletionWithFallback(alignmentPrompt, SCRIPT_NAME, {
+      task: 'match',
       maxTokens: 800,
       operation: 'project-alignment',
     });

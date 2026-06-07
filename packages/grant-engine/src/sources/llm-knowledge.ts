@@ -39,9 +39,23 @@ const DEFAULT_AU_SOURCES: LLMSource[] = [
 ];
 
 export function createLLMKnowledgePlugin(config: LLMKnowledgeConfig = {}): SourcePlugin {
-  const anthropic = new Anthropic();
-  const model = config.model || 'claude-3-5-haiku-20241022';
-  const maxTokens = config.maxTokens || 2000;
+  // Plain chat calls — provider-portable. When MINIMAX_API_KEY is set, route to
+  // MiniMax's Anthropic-compatible endpoint (grant queries are public-domain;
+  // no person/relationship data, so the Shanghai-servers rule isn't in play).
+  // Anthropic fallback uses a CURRENT model — 3-5-haiku was retired and 404s
+  // (this package was archived during the Apr-27 model sweep and missed it).
+  const useMiniMax = !!process.env.MINIMAX_API_KEY;
+  const anthropic = useMiniMax
+    ? new Anthropic({
+        baseURL: process.env.MINIMAX_ANTHROPIC_BASE_URL || 'https://api.minimax.io/anthropic',
+        apiKey: process.env.MINIMAX_API_KEY,
+      })
+    : new Anthropic();
+  const model = config.model || (useMiniMax ? 'MiniMax-M3' : 'claude-haiku-4-5');
+  // M3 is a reasoning model — thinking blocks consume max_tokens before the
+  // text block lands, so give it headroom (text extraction already filters
+  // to type==='text' blocks below).
+  const maxTokens = config.maxTokens || (useMiniMax ? 4000 : 2000);
   const delayMs = config.requestDelayMs || 1000;
   let lastRequest = 0;
 

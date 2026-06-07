@@ -67,7 +67,10 @@ Rules:
 
 export function createWebSearchPlugin(config: WebSearchConfig = {}): SourcePlugin {
   const anthropic = new Anthropic();
-  const model = config.model || 'claude-sonnet-4-5-20250929';
+  // Anthropic-ONLY: depends on the server-side web_search tool, which
+  // Anthropic-compatible third-party endpoints (MiniMax etc.) cannot serve.
+  // sonnet-4-5 was retired — current model per the Apr-27 sweep convention.
+  const model = config.model || 'claude-sonnet-4-6';
   const maxUses = config.maxSearchUses || 5;
   const delayMs = config.requestDelayMs || 1000;
   let lastRequest = 0;

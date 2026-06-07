@@ -69,29 +69,48 @@ export function createGrantConnectPlugin(config: GrantConnectConfig = {}): Sourc
     geography: ['AU'],
 
     async *discover(query: DiscoveryQuery): AsyncGenerator<RawGrant> {
-      let firecrawl: FirecrawlApp;
-      try {
-        firecrawl = getFirecrawl();
-      } catch (err) {
-        const msg = err instanceof Error ? err.message : String(err);
-        console.error(`[grantconnect] ${msg}`);
-        return;
-      }
-
       console.log(`[grantconnect] Fetching RSS feed...`);
 
-      let html: string;
+      // Native fetch first: the 403 that motivated Firecrawl is UA-filtering —
+      // a browser User-Agent passes (verified 2026-06-07, 200/196KB). ASCII-only
+      // header (an em-dash in a UA once broke all fetches for 45 min).
+      let html = '';
       try {
-        const result = await firecrawl.scrape(RSS_URL, { formats: ['html'] });
-        html = result.html || '';
-        if (!html) {
-          console.error('[grantconnect] Empty response from Firecrawl');
+        const res = await fetch(RSS_URL, {
+          headers: {
+            'User-Agent':
+              'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+            Accept: 'application/rss+xml, application/xml, text/xml',
+          },
+        });
+        if (res.ok) html = await res.text();
+        else console.warn(`[grantconnect] Direct fetch ${res.status} — falling back to Firecrawl`);
+      } catch (err) {
+        console.warn(`[grantconnect] Direct fetch failed (${err instanceof Error ? err.message : err}) — falling back to Firecrawl`);
+      }
+
+      // Firecrawl fallback (requires credits) — only if direct fetch failed
+      if (!html) {
+        let firecrawl: FirecrawlApp;
+        try {
+          firecrawl = getFirecrawl();
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err);
+          console.error(`[grantconnect] ${msg}`);
           return;
         }
-      } catch (err) {
-        const msg = err instanceof Error ? err.message : String(err);
-        console.error(`[grantconnect] Firecrawl error: ${msg}`);
-        return;
+        try {
+          const result = await firecrawl.scrape(RSS_URL, { formats: ['html'] });
+          html = result.html || '';
+          if (!html) {
+            console.error('[grantconnect] Empty response from Firecrawl');
+            return;
+          }
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err);
+          console.error(`[grantconnect] Firecrawl error: ${msg}`);
+          return;
+        }
       }
 
       // Parse RSS XML (cheerio handles XML fine)
