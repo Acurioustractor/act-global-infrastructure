@@ -113,13 +113,13 @@ async function feedProject() {
   const out = [];
   try {
     const since = new Date(Date.now() - 7 * 864e5).toISOString().slice(0, 10);
-    // committed spend last 7d — by type, never by sign; ≤1000 rows is safe for one week
+    // committed spend last 7d — by type, never by sign. SPEND filter is SERVER-side:
+    // filtering client-side after .limit(1000) silently drops rows on a heavy week.
     const { data, error } = await sb.from('xero_transactions')
-      .select('project_code,total,type,date').gte('date', since).limit(1000);
+      .select('project_code,total').eq('type', 'SPEND').gte('date', since).limit(1000);
     if (error) throw new Error(error.message);
     const byCode = {};
     for (const t of data || []) {
-      if (t.type !== 'SPEND') continue;
       const code = t.project_code || 'untagged';
       byCode[code] = (byCode[code] || 0) + Number(t.total || 0);
     }
