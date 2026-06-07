@@ -82,7 +82,8 @@ for (const p of paid) {
     foundation_id: f.id, foundation_name: f.name, signal_type: 'act_funded',
     related_name: 'A Curious Tractor', source_url: 'act://xero/invoices',
     evidence_text: `Funded ACT: ${p.n} paid invoice(s) totalling $${Number(p.paid).toLocaleString('en-AU')} (last paid ${p.last_paid}) under Xero contact "${p.contact_name}"`,
-    strength: Number(p.paid), confidence: 'derived',
+    // strength is numeric(6,2) — a score, not dollars (dollars live in metadata.total_paid)
+    strength: 100, confidence: 'derived',
     metadata: { invoices: p.n, total_paid: Number(p.paid), last_paid: p.last_paid, xero_contact: p.contact_name },
   });
 }
@@ -100,7 +101,7 @@ for (const o of opps) {
     foundation_id: f.id, foundation_name: f.name, signal_type: 'act_pipeline',
     related_name: 'A Curious Tractor', source_url: `act://ghl/opportunity/${o.ghl_opportunity_id}`,
     evidence_text: `In ACT's grant pipeline: "${o.name}" (stage: ${o.pipeline_stage || 'unknown'})`,
-    strength: 1, confidence: 'derived',
+    strength: 10, confidence: 'derived',
     metadata: { grant_opportunity_id: o.id, ghl_opportunity_id: o.ghl_opportunity_id, pipeline_stage: o.pipeline_stage },
   });
   if (!o.foundation_id) linkFixes.push({ oppId: o.id, foundationId: f.id, oppName: o.name, fName: f.name });
@@ -122,7 +123,7 @@ for (const d of domains) {
     foundation_id: f.id, foundation_name: f.name, signal_type: 'act_email_contact',
     related_name: 'A Curious Tractor', source_url: `act://gmail-spine/${d.dom}`,
     evidence_text: `Email relationship: ${d.n} message(s) in the act.place comms spine with @${d.dom} (last touch ${d.last_touch})`,
-    strength: Number(d.n), confidence: 'derived',
+    strength: Math.min(Number(d.n), 100), confidence: 'derived',
     metadata: { domain: d.dom, messages: Number(d.n), last_touch: d.last_touch },
   });
 }
