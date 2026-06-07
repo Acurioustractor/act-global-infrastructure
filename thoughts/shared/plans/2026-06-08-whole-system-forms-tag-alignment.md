@@ -83,6 +83,29 @@ Legend: ✅ resolved (obvious from taxonomy) · ⚠️ **needs Ben's ruling (Rn)
 | `world-tour/EmailCaptureForm.tsx` | `empathy-ledger`,`world-tour`,interest[],`wt-stage:/wt-lane:/wt-stop:`,`partner-network` | `project:act-el` · `role:supporter` · `interest:storytelling` · `source:event:world-tour` · keep `wt-*` as approved EL sub-namespace? · `newsletter_consent` + `comms:*` only if explicit | ⚠️ R7 |
 | `world-tour/ContactForm.tsx` | `empathy-ledger`,`world-tour`,`contact-form`,`act-inquiry`,`project-empathy-ledger`,`wt-*` | `project:act-el` · `role:supporter` · `source:website` · drop `contact-form` | ⚠️ R7 |
 
+### D. theharvest (theharvestwitta.com.au) — **LARGELY PRE-ALIGNED, verify-don't-rebuild**
+Harvest already migrated to canonical via PR #26 ("tag taxonomy") + "Phase 3 code-flip" (`3739915`): `project:act-hv` added at the GHL chokepoint (`createGHLContact`+`upsertGHLContact`), `comms:harvest-newsletter`, `role:supplier`+`interest:markets` (shop EOI), dropped `role:member` and the flat `newsletter`/`harvest-*` aliases. **Action = a verify pass, not a rewrite:** confirm the live emit against the contract (newsletter consent gate, `lane:community` on the community-submit edge fn, no flat aliases reintroduced). Full per-form table still TODO (fresh-context pass — small).
+
+### E. goods-asset-tracker (goodsoncountry.com) — **NOT aligned (flat vocab, like JusticeHub)**
+Single GHL chokepoint: `src/lib/ghl/index.ts` → `createOrUpdateContact()` (`index.ts:546`, exposed `index.ts:1030`); base `services.leadconnectorhq.com`, `GHL_API_KEY`+`GHL_LOCATION_ID` (`index.ts:12-13`), gated by `GHL_ENABLED` (`index.ts:19`). All writes funnel here → **one place to enforce `project:act-gd`**. Today: flat `goods-*` tags + custom field `projectDesignation="Goods"`, no colon-namespaces. Full evidence: `thoughts/shared/reviews/goods-forms-tag-mapping-2026-06-08.md`.
+
+| Form (file:line) | Collects | CURRENT GHL emit | Target (canonical) | Ruling/flag |
+|---|---|---|---|---|
+| Contact → `/api/contact/route.ts:14` | name,email,phone,subject,org,msg,subscribe | `goods-inquiry`+`goods-<subject>`,`act-inquiry`,`project-goods`; subscribe→`goods-newsletter`+`goods-src-contact-form` (`route.ts:65,73,84`) | `project:act-gd`+`role:` (media→`role:media`)+`source:website`; subscribe→`comms:goods-newsletter` **only w/ explicit consent** | DRIFT; ⚠️ R8 (verify `subscribe`=real opt-in) |
+| Partnership/capital → `/api/partnership/route.ts:19` | org,name,email,phone,type,segment,tier,timeline | `goods-partner-lead`+`goods-segment-*`+`goods-tier-*`+`goods-timeline-*`,`act-inquiry`,`project-goods`; washer→`goods-washer-interest` (`index.ts:1272-96`) | `project:act-gd`+`role:funder/partner/buyer`+`source:website`; NO `comms:` | DRIFT; ⚠️ R10 (`goods-tier-*`=ticket-size, must NOT become belonging-ladder `tier:`) |
+| Newsletter signup → `newsletter-signup.tsx:29`→`/api/newsletter/route.ts:4` | email(+tag) | `goods-newsletter`+`goods-src-<tag>`, fires Smart Router (`index.ts:1449-62`) | `project:act-gd`+`comms:goods-newsletter`+`source:website`+`newsletter_consent=Yes` | **⚠️ R8 FLAG** — grants send-tag, NO explicit consent capture (Spam Act) |
+| Sponsor-interest → `sponsor/page.tsx:94`→`/api/newsletter` | email | `goods-newsletter`+`goods-src-sponsor-interest` | +`interest:beds`+consent field | **⚠️ R8** (same) |
+| Canberra Airport → `canberra/follow-form.tsx:25`→`/api/newsletter` | name,email,phone | `goods-newsletter`+`goods-src-canberra-airport-2026` | +`source:event:canberra-airport-2026`+`place:act`+consent | **⚠️ R8** (same) |
+| Order/sponsorship → `webhooks/stripe/route.ts:266` | email,name,phone,order,products | `goods-customer`(+`goods-bed-owner`/`goods-washer-owner`/`goods-sponsor`) (`index.ts:1147-62`) | `project:act-gd`+`role:buyer`/`role:supporter`+`interest:`+`source:website`; NO `comms:` | DRIFT; transactional≠marketing (no `comms:` = correct) |
+| Support ticket → `/api/support/route.ts:156` | assetId,contact,issue,priority | `goods-support-request`+`goods-asset-<slug>`(+`goods-urgent`) (`index.ts:1215-16`) | +`role:community`+`place:community:`+**`lane:community`**; NO `comms:` | **⚠️ R9 OCAP** — community recipient, no protective `lane:community` |
+| Recipient claim → `/api/claim/[asset_id]/route.ts:102` | phone,name,assetId,product,community | `goods-recipient`+`goods-asset-<slug>`(+`goods-claimed-*`) (`index.ts:1510-12`) | +`role:community`+**`lane:community`**+`place:community:`; NO `comms:` EVER | **⚠️ R9 OCAP (highest)** — router fires on `goods-recipient`, no `lane:community` |
+| Bed-story → `/api/bed/[id]/story/route.ts:233` | name,contact,story,consent flags | `goods-story-submitter`+(`goods-consent-to-contact`\|`goods-no-contact`)+`goods-asset-<slug>`+`goods-inquiry` (`route.ts:236-42`) | +`role:storyteller`+**`lane:community`**; NO `comms:` | **⚠️ R9+R11 OCAP** — `consent_to_contact`=reply-about-story, NOT marketing; never promote to `comms:` |
+| Feedback widget → `/api/feedback/route.ts:13` | page,msg,email | `goods-feedback`+`goods-inquiry`,`act-inquiry`,`project-goods` | +`source:website`; NO `comms:` | DRIFT (low priority) |
+
+**Not direct writers:** `bed/[id]/contact-row.tsx`, `bed/[id]/help-chooser.tsx` = `wa.me`/`sms:`/`tel:` deep links (CRM write happens off-codebase via inbound SMS to the GHL number). **Out of scope (not public lead forms):** `admin/reach-out/compose-form.tsx` (internal dispatch — but it's the surface where a wrong drip would actually fire), `createStrategicTargetContact` (CivicGraph prospecting), `sendSms` cron. **Static/non-GHL (checked):** `get-involved/page.tsx`, `funders/[slug]`, `communities/[slug]`, `press/page.tsx`.
+
+**UNCONFIRMED (next pass):** (1) the `/contact` + `/partner` client form components weren't opened → the `subscribe` opt-in checkbox default (load-bearing for R8) and the `partnershipType`/`partnerSegment` option values are unverified; (2) live `GHL_LOCATION_ID` env value — inferred (not verified) to be `agzsSZWgovjwgpcoASWG`; confirm against deployed Vercel env.
+
 ---
 
 ## Open rulings (Ben) — these gate the code edits
@@ -93,6 +116,10 @@ Legend: ✅ resolved (obvious from taxonomy) · ⚠️ **needs Ben's ruling (Rn)
 - **R5 — Nominations:** `NOMINATED` → keep as a tag, or move to a `nominated_person` custom field only?
 - **R6 — JusticeHub embedded GHL form (`GHLForm.tsx`):** native GHL form — tags set in GHL UI, not code. OK to audit + fix in the GHL UI as part of this?
 - **R7 — Empathy Ledger scope:** EL is multi-tenant — **verify the ACT/World-Tour tenant actually writes to "A Curious Tractor"** before aligning it. If it writes to a separate EL location, EL is out of THIS account's contract. (Verification step P0 below.)
+- **R8 — Goods newsletter consent (Spam Act gap):** every Goods newsletter path (`/api/newsletter`, contact `subscribe`, sponsor, Canberra) grants the `goods-newsletter` send-trigger tag with only *implied* consent — no captured `newsletter_consent` field. Add explicit consent capture before any `comms:goods-newsletter` is granted — yes? **Default = yes (legally required); needs the form-UI opt-in checkbox verified/added.**
+- **R9 — Goods OCAP `lane:community` (highest priority):** Goods has NO `lane:community` marker anywhere, yet recipients (`/api/claim` → `goods-recipient`), support reporters (`/api/support`) and bed-story tellers (`/api/bed/[id]/story`) are community-line people, and the Smart Router fires on their flat tags. Add `lane:community` (zero `comms:*` ever) to these three paths — yes? **Default = yes (OCAP), mirrors R3.**
+- **R10 — Goods `goods-tier-*` collision:** the capital-partnership form's `goods-tier-*` encodes *ticket size*, which must NOT be migrated into the belonging-ladder `tier:` namespace (curious→steward). Move to a custom field (`capital_tier`) or an `interest:`/`source:` value? **Proposal: `capital_tier` field, drop the tag.**
+- **R11 — Goods bed-story `consent_to_contact`:** this flag means "ok to reply about *this story*", NOT marketing consent. Pin the rule that it can never be promoted to `comms:` — confirm.
 
 ## Lists + newsletter review (the last part of the ask)
 Largely DECIDED in the contract doc; confirm at execution:
@@ -105,6 +132,8 @@ Largely DECIDED in the contract doc; confirm at execution:
 - **P1 — act.place (regen-studio):** finish the 5 unaligned formTypes + namespace `ContactForm`'s flat tags. `npx tsc --noEmit`. Branch off main, commit per group. (Tier 1 → push Tier 2.)
 - **P2 — JusticeHub:** rewrite `GHL_TAGS` constants (`src/lib/ghl/client.ts:550-609`) + the 5 routes to the canonical set. The single biggest pollution source. tsc. Branch + push.
 - **P3 — Empathy Ledger (if R7 in-scope):** align the 2 World Tour forms.
+- **P3b — Harvest (verify-only):** confirm the live emit still matches the contract (PR #26/Phase-3 already canonical) — consent gate on `newsletter-subscribe`, `lane:community` on `community-submit` edge fn, no flat aliases reintroduced. Fix only gaps found.
+- **P3c — Goods (align, after R8–R11):** at the `index.ts:546` chokepoint, add `project:act-gd` to every write; map flat `goods-*`→canonical per §E; add `lane:community` to claim/support/bed-story (R9); add explicit consent capture before `comms:goods-newsletter` (R8); move `goods-tier-*`→`capital_tier` field (R10). `npx tsc --noEmit` (whole `v2`). Branch off main, commit per group. First open `/contact`+`/partner` client components to close the UNCONFIRMED items.
 - **P4 — Deploy + tracer (Tier 3, Ben's verb):** one live tracer per representative form per repo → verify in GHL → automations safe to switch on.
 - **P5 — GHL tag migration (Tier 2/3, gated):** run `scripts/ghl-taxonomy-migrate.mjs --dry-run` worksheet → tracer → bucketed apply (one namespace at a time, re-assert community-line guard after each) per the taxonomy §6 path.
 - **P6 — Lists/newsletter confirm:** re-check smart-list counts + the 4 newsletter enrolments + consent gate.
@@ -134,3 +163,4 @@ writes) — never AFK.**
 
 ## Changelog
 - 2026-06-08 — plan created from the whole-system Vercel review.
+- 2026-06-08 PM — scope corrected 3→5 codebases; §D (Harvest, pre-aligned) + §E (Goods, full per-form map) added; Goods rulings R8–R11 + phases P3b/P3c added. §E evidence: `thoughts/shared/reviews/goods-forms-tag-mapping-2026-06-08.md`.
