@@ -1,0 +1,222 @@
+[
+  {
+    "Type": "ACCPAY",
+    "InvoiceID": "764b8b05-b5cc-4706-8d0c-236b88984b2e",
+    "Reference": "auto-pushed dext_import 03a26314",
+    "Prepayments": [],
+    "Overpayments": [],
+    "AmountDue": 1974.5,
+    "AmountPaid": 0,
+    "SentToContact": false,
+    "CurrencyRate": 1,
+    "IsDiscounted": false,
+    "HasAttachments": false,
+    "HasErrors": false,
+    "Attachments": [],
+    "InvoicePaymentServices": [],
+    "Contact": {
+      "ContactID": "9bd28ce0-4a72-4e07-89ff-f0d8f0c7625f",
+      "ContactStatus": "ACTIVE",
+      "Name": "Nicholas Marchesi",
+      "EmailAddress": "",
+      "BankAccountDetails": "",
+      "TaxNumber": "90868267018",
+      "Addresses": [
+        {
+          "AddressType": "STREET",
+          "City": "",
+          "Region": "",
+          "PostalCode": "",
+          "Country": ""
+        },
+        {
+          "AddressType": "POBOX",
+          "City": "",
+          "Region": "",
+          "PostalCode": "",
+          "Country": ""
+        }
+      ],
+      "Phones": [
+        {
+          "PhoneType": "DEFAULT",
+          "PhoneNumber": "",
+          "PhoneAreaCode": "",
+          "PhoneCountryCode": ""
+        },
+        {
+          "PhoneType": "DDI",
+          "PhoneNumber": "",
+          "PhoneAreaCode": "",
+          "PhoneCountryCode": ""
+        },
+        {
+          "PhoneType": "FAX",
+          "PhoneNumber": "",
+          "PhoneAreaCode": "",
+          "PhoneCountryCode": ""
+        },
+        {
+          "PhoneType": "MOBILE",
+          "PhoneNumber": "",
+          "PhoneAreaCode": "",
+          "PhoneCountryCode": ""
+        }
+      ],
+      "UpdatedDateUTC": "/Date(1778899730377+0000)/",
+      "ContactGroups": [],
+      "IsSupplier": true,
+      "IsCustomer": false,
+      "SalesTrackingCategories": [],
+      "PurchasesTrackingCategories": [],
+      "ContactPersons": [],
+      "HasValidationErrors": false
+    },
+    "DateString": "2025-11-24T00:00:00",
+    "Date": "/Date(1763942400000+0000)/",
+    "DueDateString": "2025-11-24T00:00:00",
+    "DueDate": "/Date(1763942400000+0000)/",
+    "Status": "AUTHORISED",
+    "LineAmountTypes": "Inclusive",
+    "LineItems": [
+      {
+        "Description": "Receipt auto-imported from dext_import (Dext 18813821780) — NEEDS CODING",
+        "UnitAmount": 1974.5,
+        "TaxType": "INPUT",
+        "TaxAmount": 179.5,
+        "LineAmount": 1974.5,
+        "AccountCode": "429",
+        "Tracking": [],
+        "Quantity": 1,
+        "LineItemID": "2a3a0959-ba11-49d2-9643-1cf25bd89f23",
+        "AccountID": "d41823f3-891a-448d-8f1a-6a5d1fac7041",
+        "ValidationErrors": []
+      }
+    ],
+    "SubTotal": 1795,
+    "TotalTax": 179.5,
+    "Total": 1974.5,
+    "UpdatedDateUTC": "/Date(1776846027510+0000)/",
+    "CurrencyCode": "AUD"
+  },
+  {
+    "Type": "ACCPAY",
+    "InvoiceID": "f8982afe-dc08-4186-8c55-8946f9a42ac8",
+    "Reference": "auto-pushed dext_import b6824c16",
+    "Prepayments": [],
+    "Overpayments": [],
+    "AmountDue": 591.28,
+    "AmountPaid": 0,
+    "SentToContact": false,
+    "CurrencyRate": 1,
+    "IsDiscounted": false,
+    "HasAttachments": true,
+    "HasErrors": false,
+    "Attachments": [
+      {
+        "AttachmentID": "735e9f64-2f0b-4cca-98a3-118540318ccc",
+        "FileName": "receipt.pdf",
+        "Url": "https://api.xero.com/api.xro/2.0/Invoices/f8982afe-dc08-4186-8c55-8946f9a42ac8/Attachments/receipt.pdf",
+        "MimeType": "application/pdf",
+        "ContentLength": 32005
+      }
+    ],
+    "InvoicePaymentServices": [],
+    "Contact": {
+      "ContactID": "4eff03d9-392e-44e9-a198-65cb6bfa8d5b",
+      "ContactStatus": "ACTIVE",
+      "Name": "matnic properties",
+      "EmailAddress": "",
+      "BankAccountDetails": "",
+      "Addresses": [
+        {
+          "AddressType": "STREET",
+          "City": "",
+          "Region": "",
+          "PostalCode": "",
+          "Country": ""
+        },
+        {
+          "AddressType": "POBOX",
+          "City": "",
+          "Region": "",
+          "PostalCode": "",
+          "Country": ""
+        }
+      ],
+      "Phones": [
+        {
+          "PhoneType": "DEFAULT",
+          "PhoneNumber": "",
+          "PhoneAreaCode": "",
+          "PhoneCountryCode": ""
+        },
+        {
+          "PhoneType": "DDI",
+          "PhoneNumber": "",
+          "PhoneAreaCode": "",
+          "PhoneCountryCode": ""
+        },
+        {
+          "PhoneType": "FAX",
+          "PhoneNumber": "",
+          "PhoneAreaCode": "",
+          "PhoneCountryCode": ""
+        },
+        {
+          "PhoneType": "MOBILE",
+          "PhoneNumber": "",
+          "PhoneAreaCode": "",
+          "PhoneCountryCode": ""
+        }
+      ],
+      "UpdatedDateUTC": "/Date(1776831472070+0000)/",
+      "ContactGroups": [],
+      "IsSupplier": true,
+      "IsCustomer": false,
+      "SalesTrackingCategories": [],
+      "PurchasesTrackingCategories": [],
+      "ContactPersons": [],
+      "HasValidationErrors": false
+    },
+    "DateString": "2026-03-11T00:00:00",
+    "Date": "/Date(1773187200000+0000)/",
+    "DueDateString": "2026-03-11T00:00:00",
+    "DueDate": "/Date(1773187200000+0000)/",
+    "Status": "AUTHORISED",
+    "LineAmountTypes": "Inclusive",
+    "LineItems": [
+      {
+        "Description": "matnic properties — Other — ACT-IN",
+        "UnitAmount": 591.28,
+        "TaxType": "INPUT",
+        "TaxAmount": 53.75,
+        "LineAmount": 591.28,
+        "AccountCode": "429",
+        "Tracking": [
+          {
+            "Name": "Business Divisions",
+            "Option": "A Curious Tractor",
+            "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+            "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+          },
+          {
+            "Name": "Project Tracking",
+            "Option": "ACT-IN — ACT Infrastructure",
+            "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+            "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
+          }
+        ],
+        "Quantity": 1,
+        "LineItemID": "8a6a3148-61bf-4708-808b-b21ddb552603",
+        "AccountID": "d41823f3-891a-448d-8f1a-6a5d1fac7041",
+        "ValidationErrors": []
+      }
+    ],
+    "SubTotal": 537.53,
+    "TotalTax": 53.75,
+    "Total": 591.28,
+    "UpdatedDateUTC": "/Date(1776852012580+0000)/",
+    "CurrencyCode": "AUD"
+  }
+]

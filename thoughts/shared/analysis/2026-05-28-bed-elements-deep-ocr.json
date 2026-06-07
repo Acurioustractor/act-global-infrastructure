@@ -1,0 +1,2088 @@
+[
+  {
+    "id": "0e915557-f44c-40e8-bbe6-c45e723c4946",
+    "xero_id": "63b55164-ff81-4f9c-961a-820fb94edf98",
+    "invoice_number": null,
+    "contact_name": "Centre Canvas And Upholstery",
+    "project_code": "ACT-IN",
+    "date": "2026-01-29",
+    "total": 4715,
+    "has_attachments": true,
+    "expected_element": "canvas",
+    "attachment": "Centre-Canvas-And-Upholstery-receipt.jpg",
+    "line_items": [
+      {
+        "description": "50 CANVAS Stretch covers.",
+        "line_total": 4675,
+        "quantity": 50,
+        "unit_price": 93.5
+      },
+      {
+        "description": "VISA Fee",
+        "line_total": 40
+      }
+    ],
+    "summary": "Invoice for 50 canvas stretch covers and a visa fee from Centre Canvas and Upholstery.",
+    "bed_relevant": "yes",
+    "bed_count_mentioned": 50,
+    "canvas_metres_mentioned": 0,
+    "gst": 0,
+    "invoice_date_on_doc": "30-1-26",
+    "per_unit_rates": "$93.50/cover",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 0,
+    "supplier_on_invoice": "CENTRE CANVAS AND UPHOLSTERY",
+    "total_inc_gst": 4715
+  },
+  {
+    "id": "5d2fd5f0-8393-4e37-a322-23cc238803b2",
+    "xero_id": "993dd389-f8ca-4ba0-9109-12eb5da17d0e",
+    "invoice_number": null,
+    "contact_name": "Centre Canvas And Upholstery",
+    "project_code": "ACT-IN",
+    "date": "2026-03-31",
+    "total": 10285,
+    "has_attachments": true,
+    "expected_element": "canvas",
+    "attachment": "receipt.pdf",
+    "line_items": [
+      {
+        "description": "Canvas stretchers covers",
+        "quantity": 110,
+        "unit_price": 93.5
+      }
+    ],
+    "summary": "Invoice for canvas stretchers covers.",
+    "bed_relevant": "yes",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 110,
+    "gst": 935,
+    "invoice_date_on_doc": "31/3/26",
+    "per_unit_rates": "$93.50/canvas stretcher cover",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 9350,
+    "supplier_on_invoice": "CENTRE CANVAS AND UPHOLSTERY",
+    "total_inc_gst": 10285
+  },
+  {
+    "id": "bc9db8d5-c85d-441d-818a-90fc04946a65",
+    "xero_id": "848e9742-c0fd-48e2-a223-5e2d035e8754",
+    "invoice_number": "ADG 6524337",
+    "contact_name": "Centre Canvas And Upholstery",
+    "project_code": "ACT-IN",
+    "date": "2026-03-31",
+    "total": 10285,
+    "has_attachments": true,
+    "expected_element": "canvas",
+    "attachment": "20105259250.pdf",
+    "line_items": [
+      {
+        "description": "Canvas stretchers covers",
+        "quantity": 110,
+        "unit_price": 93.5
+      }
+    ],
+    "summary": "Canvas stretchers covers.",
+    "bed_relevant": "yes",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 110,
+    "gst": 1028.5,
+    "invoice_date_on_doc": "31/3/26",
+    "per_unit_rates": "$93.50/ canvas stretcher cover",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 9256.5,
+    "supplier_on_invoice": "CENTRE CANVAS AND UPHOLSTERY",
+    "total_inc_gst": 10285
+  },
+  {
+    "id": "d041856e-308f-4be5-b0c2-e6ffb0b33df6",
+    "xero_id": "36b80256-20ed-4a39-8e26-1e8e22f4425e",
+    "invoice_number": "29003",
+    "contact_name": "Wholesale Canvas Australia",
+    "project_code": "ACT-IN",
+    "date": "2026-03-03",
+    "total": 771,
+    "has_attachments": true,
+    "expected_element": "canvas",
+    "attachment": "19795423720.pdf",
+    "line_items": [
+      {
+        "description": "12oz Cotton Canvas Roll\nDouble-Primed 120\" (3M X\n10M) | PC12120-10M",
+        "line_total": 621,
+        "product_code": "PC12120-10M",
+        "quantity": 1,
+        "unit_price": 621
+      },
+      {
+        "description": "Shipping (TNT Freight - Zone 1)",
+        "line_total": 150
+      }
+    ],
+    "summary": "Order confirmation for 12oz Cotton Canvas Roll and shipping.",
+    "bed_relevant": "unclear",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 30,
+    "gst": 70.09,
+    "invoice_date_on_doc": "3 March 2026",
+    "per_unit_rates": "$621.00/30m canvas",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 621,
+    "supplier_on_invoice": "Wholesale Canvas Australia",
+    "total_inc_gst": 771
+  },
+  {
+    "id": "3f87bfe6-b367-4661-a19a-64bbe5dc6b32",
+    "xero_id": "bbde4b4c-1f41-4210-9688-be6106004a8e",
+    "invoice_number": "RB20247673190",
+    "contact_name": "Coastal Fasteners",
+    "project_code": "ACT-FM",
+    "date": "2026-04-16",
+    "total": 130.94,
+    "has_attachments": true,
+    "expected_element": "hardware",
+    "attachment": "20247673190.jpeg",
+    "line_items": [
+      {
+        "description": "8-9x 41 C3 Trec",
+        "quantity": 2000,
+        "unit_price": 0.0645
+      }
+    ],
+    "summary": "Purchase of screws from Coastal Fasteners.",
+    "bed_relevant": "indirect",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 0,
+    "gst": 11.9,
+    "invoice_date_on_doc": "16.04.2026",
+    "per_unit_rates": "$0.0645/screw",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 119.04,
+    "supplier_on_invoice": "COASTAL FASTENERS PT",
+    "total_inc_gst": 130.94
+  },
+  {
+    "id": "24184311-4b5c-47c1-b8a0-2caaa435644c",
+    "xero_id": "19319ff8-8479-4031-a4f3-ec9e876ecbdd",
+    "invoice_number": "122124",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-03-31",
+    "total": 4196.07,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "17302726420.pdf",
+    "line_items": [
+      {
+        "description": "COLLAPSIBLE CRATE TACTIX +48X18X35CM 25L BLACK",
+        "line_total": 4683.48,
+        "product_code": "2583340",
+        "quantity": 372,
+        "unit_price": 11.45
+      }
+    ],
+    "summary": "Purchase of 372 collapsible crates from Bunnings.",
+    "bed_relevant": "no",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 0,
+    "gst": 425.77,
+    "invoice_date_on_doc": "31/03/2025",
+    "per_unit_rates": "$11.45/each",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 4257.71,
+    "supplier_on_invoice": "BUNNINGS",
+    "total_inc_gst": 4683.48
+  },
+  {
+    "id": "c8285187-ad25-4270-b0f5-aa29a5eb1f8c",
+    "xero_id": "ee03f8d8-d671-448b-bee8-7e0bf733eee6",
+    "invoice_number": "2325/99868439",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-04-22",
+    "total": 24288,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "16802252370.pdf",
+    "line_items": [
+      {
+        "description": "COLLAPSIBLE CRATE TACTIX++48X18X35CM 25L BLACK",
+        "line_total": 22080,
+        "product_code": "2583340",
+        "quantity": 2400,
+        "unit_price": 12.05
+      }
+    ],
+    "summary": "Invoice for collapsible crates from Bunnings.",
+    "bed_relevant": "no",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 0,
+    "gst": 2208,
+    "invoice_date_on_doc": "07/05/2025",
+    "per_unit_rates": "$12.05/each",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 22080,
+    "supplier_on_invoice": "BUNNINGS",
+    "total_inc_gst": 24288
+  },
+  {
+    "id": "7a1be70f-4275-4a56-9a87-7c69571d7281",
+    "xero_id": "90b7cfda-5e8e-49d4-967b-91e6c55e529d",
+    "invoice_number": "2325/99868433",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-04-28",
+    "total": 1943.04,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "16801170090.pdf",
+    "line_items": [
+      {
+        "description": "COLLAPSIBLE CRATE TACTIX++48X18X35CM 25L BLACK",
+        "line_total": 1766.4,
+        "product_code": "2583340",
+        "quantity": 192,
+        "unit_price": 12.05
+      },
+      {
+        "description": "COLLAPSIBLE CRATE TACTIX++48X18X35CM 25L BLACK",
+        "line_total": 22080,
+        "product_code": "2583340",
+        "quantity": 2400,
+        "unit_price": 12.05
+      }
+    ],
+    "summary": "Purchase of collapsible crates from Bunnings Trade.",
+    "bed_relevant": "no",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 0,
+    "gst": 176.64,
+    "invoice_date_on_doc": "07/05/2025",
+    "per_unit_rates": "$12.05/each",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 1766.4,
+    "supplier_on_invoice": "BUNNINGS TRADE",
+    "total_inc_gst": 1943.04
+  },
+  {
+    "id": "d1311e50-293d-470b-9980-57903e69ce3c",
+    "xero_id": "3078fe39-dd31-40d1-8383-c8db3bd0ed5e",
+    "invoice_number": "322889870",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-06-06",
+    "total": 7486.4,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "17110493180.pdf",
+    "line_items": [
+      {
+        "description": "COLLAPSIBLE CRATE TACTIX++48X18X35CM 25L BLACK",
+        "quantity": 720,
+        "unit_price": 9.2
+      },
+      {
+        "description": "CRANE DELIVERY++NEXT DAY",
+        "quantity": 1,
+        "unit_price": 181.82
+      }
+    ],
+    "summary": "Pro forma invoice for collapsible crates and crane delivery from Bunnings.",
+    "bed_relevant": "no",
+    "invoice_date_on_doc": "06/06/2025",
+    "supplier_on_invoice": "BUNNINGS",
+    "total_inc_gst": 7486.4
+  },
+  {
+    "id": "09acaa87-619a-4496-8ab1-b72cd2b7e63b",
+    "xero_id": "118b0ed9-bc05-412e-ab07-62437e822149",
+    "invoice_number": "8056/01359204",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-06-19",
+    "total": 1229.41,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "17298773220.jpeg",
+    "line_items": [
+      {
+        "description": "DISHWASHER F/STAND ESATTO\nWELS4.5STAR 12.7L/WSH EDW606CS",
+        "line_total": 500,
+        "product_code": "9349260097315",
+        "quantity": 1,
+        "unit_price": 500
+      },
+      {
+        "description": "FLEXIBLE DUCT\n3MX125MM DF3125",
+        "line_total": 21.83,
+        "product_code": "9321771006024",
+        "quantity": 1,
+        "unit_price": 21.83
+      },
+      {
+        "description": "VENT GRAVITY BUILDERS EDGE\n125MM PLASTIC VG125",
+        "line_total": 19.29,
+        "product_code": "9321771000077",
+        "quantity": 1,
+        "unit_price": 19.29
+      },
+      {
+        "description": "WEATHERSEAL SELF ADHESIVE MWS\n6X9MM 4G 5M GREY 1-33102",
+        "line_total": 3.38,
+        "product_code": "9323535007124",
+        "quantity": 1,
+        "unit_price": 3.38
+      },
+      {
+        "description": "FLOOR PROTECTION SURFACE GARD\n13MM RND CLEAR 12PCE 17595",
+        "line_total": 2.38,
+        "product_code": "9315570909556",
+        "quantity": 1,
+        "unit_price": 2.38
+      },
+      {
+        "description": "FLOOR PROTECTION SURFACE GARD\n10MM RND CLEAR 12PC 17593",
+        "line_total": 2.38,
+        "product_code": "9315570909532",
+        "quantity": 1,
+        "unit_price": 2.38
+      },
+      {
+        "description": "BOW SHACKLE GORILLA\n11MM LRT 1500KG GOR-SH-S11",
+        "line_total": 28.88,
+        "product_code": "9320432033577",
+        "quantity": 8,
+        "unit_price": 3.61
+      },
+      {
+        "description": "RANGEHOOD BELLINI\n60CM SS BRA6035X2-F^",
+        "line_total": 135.85,
+        "product_code": "9311106556713",
+        "quantity": 1,
+        "unit_price": 135.85
+      },
+      {
+        "description": "PLUG TOP DETA\n10AMP GREY 6336B",
+        "line_total": 9.48,
+        "product_code": "9311644060666",
+        "quantity": 3,
+        "unit_price": 3.16
+      },
+      {
+        "description": "SHOWER CURTAIN PLYSTR BARELLI\n180X210CM SLATE SC5346",
+        "line_total": 19.93,
+        "product_code": "9319652012677",
+        "quantity": 1,
+        "unit_price": 19.93
+      },
+      {
+        "description": "MICROWAVE MISTRAL\n25L DIGITAL BLACK BMW960B^",
+        "line_total": 79,
+        "product_code": "9311106559134",
+        "quantity": 1,
+        "unit_price": 79
+      },
+      {
+        "description": "ELECTRICAL METER ARLEC\nENERGY COST METER PC223",
+        "line_total": 106.32,
+        "product_code": "9311644124108",
+        "quantity": 4,
+        "unit_price": 26.58
+      },
+      {
+        "description": "3000X150MM MULTI LAYERED FOIL",
+        "line_total": 40.71,
+        "product_code": "9321771008105",
+        "quantity": 1,
+        "unit_price": 40.71
+      },
+      {
+        "description": "STORAGE CONTAINER EZY STORAGE\n32L CLASSIC GREY 31644",
+        "line_total": 128.7,
+        "product_code": "9326265170465",
+        "quantity": 10,
+        "unit_price": 12.87
+      },
+      {
+        "description": "PINE STRUCTURAL MGP10 BLUE H2\n70X35MM 2.4M",
+        "line_total": 131.28,
+        "product_code": "8030953",
+        "quantity": 12,
+        "unit_price": 10.94
+      }
+    ],
+    "summary": "Purchase of various home improvement and hardware items.",
+    "bed_relevant": "no",
+    "invoice_date_on_doc": "19/06/2025",
+    "supplier_on_invoice": "BUNNINGS warehouse",
+    "total_inc_gst": 1229.41
+  },
+  {
+    "id": "6eb97174-9b94-452c-a6d8-dda4f2ce0c26",
+    "xero_id": "804d232d-155f-490e-9217-9a83b6d8964f",
+    "invoice_number": "2325/01060790",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-06-25",
+    "total": 2801.32,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "17278176360.pdf",
+    "line_items": [
+      {
+        "description": "O NO PRO LAUNDRY POWDER 6KG ACTIVE CLEAN UL67740481",
+        "line_total": 219,
+        "quantity": 50,
+        "unit_price": 43.6
+      },
+      {
+        "description": "ROPE POLYPROPYLENE SYNECO DIAMOND BRAIDED 30M MFP8100",
+        "line_total": 99.54,
+        "quantity": 14,
+        "unit_price": 7.11
+      },
+      {
+        "description": "ROUTER TRIM C/L B/LESS MAKITA",
+        "line_total": 347.65,
+        "quantity": 1,
+        "unit_price": 347.65
+      },
+      {
+        "description": "SAU CIRCULAR CORDLESS MAKITA 18V LI SKIN ONLY DSS6112",
+        "line_total": 281.78,
+        "quantity": 1,
+        "unit_price": 281.78
+      },
+      {
+        "description": "GRINDER ANGLE CORDLESS MAKITA 115KM 180 SKIN ONLY DGA4522",
+        "line_total": 203.15,
+        "quantity": 1,
+        "unit_price": 203.15
+      },
+      {
+        "description": "COMBO KIT C/LESS B/LESS MAKITA 160 LI 2PCE 2X4.0AH DLX2283SH",
+        "line_total": 449,
+        "quantity": 1,
+        "unit_price": 449
+      },
+      {
+        "description": "CABLE MANAGEMENT TIES CRESCENT 200X4.6MM BLK PK100 MB8100",
+        "line_total": 7.58,
+        "quantity": 1,
+        "unit_price": 7.58
+      },
+      {
+        "description": "CABLE MANAGEMENT TIES CRESCENT 200X4.6MM BLK PK100 MB8100",
+        "line_total": 7.58,
+        "quantity": 1,
+        "unit_price": 7.58
+      },
+      {
+        "description": "KASKING TAPE PAINT PARTNER БРК 24МИХ27Н",
+        "line_total": 6.56,
+        "quantity": 18,
+        "unit_price": 6.56
+      },
+      {
+        "description": "BLADE CIRCULAR SAN MAKITA 165MM 40T BLUEMAK B-15089",
+        "line_total": 35.2,
+        "quantity": 1,
+        "unit_price": 35.2
+      },
+      {
+        "description": "EAR PLUGS CRAFTRIGHT 5PK 174000005N",
+        "line_total": 2.8,
+        "quantity": 1,
+        "unit_price": 2.8
+      },
+      {
+        "description": "EAR PLUGS CRAFTRIGHT 5PK 174000005N",
+        "line_total": 2.8,
+        "quantity": 19,
+        "unit_price": 2.8
+      },
+      {
+        "description": "SCREWS T/PINE TC ZENITH 8X30 SQ BX500 CST9430",
+        "line_total": 28.37,
+        "quantity": 1,
+        "unit_price": 26.37
+      },
+      {
+        "description": "SCREWS T/PINE CSK BUILDEX 10-10X65 STAR CC BX500 X526501",
+        "line_total": 17.06,
+        "quantity": 13,
+        "unit_price": 17.06
+      },
+      {
+        "description": "180MN POLYCAST 296H",
+        "line_total": 17.06,
+        "quantity": 1,
+        "unit_price": 17.06
+      },
+      {
+        "description": "PENCIL SHARPENER IRHIN 233250",
+        "line_total": 6.63,
+        "quantity": 1,
+        "unit_price": 6.63
+      },
+      {
+        "description": "MARKER EXPIKE 11PC WITH CASE EN11PMC",
+        "line_total": 18.98,
+        "quantity": 1,
+        "unit_price": 18.98
+      },
+      {
+        "description": "SAFETY GLASSES CRAFTRIGHT CLEAR 30124327",
+        "line_total": 2.38,
+        "quantity": 10,
+        "unit_price": 2.38
+      },
+      {
+        "description": "SAFETY GLASSES CRAFTRIGHT CLEAR 30124327",
+        "line_total": 2.3,
+        "quantity": 10,
+        "unit_price": 2.3
+      },
+      {
+        "description": "CARPENTER PENCIL EMPIRE MEDIUM 87BLKA",
+        "line_total": 1.85,
+        "quantity": 1,
+        "unit_price": 1.85
+      },
+      {
+        "description": "CARPENTER PENCIL EMPIRE NEDILUN 67BLKA",
+        "line_total": 1.85,
+        "quantity": 1,
+        "unit_price": 1.85
+      },
+      {
+        "description": "FASTENER DRIVE IMPACT FULL BR 40PC TORSION BIT SET",
+        "line_total": 37.95,
+        "quantity": 1,
+        "unit_price": 37.95
+      },
+      {
+        "description": "DRILL BIT SET CRAFTRIGHT 99PCE T/CTD U/CASE 1291000990",
+        "line_total": 22.98,
+        "quantity": 1,
+        "unit_price": 22.98
+      },
+      {
+        "description": "ROUTER BIT KIT ULTRA 6.4KM 12PCE 161264KB",
+        "line_total": 31.3,
+        "quantity": 1,
+        "unit_price": 31.3
+      },
+      {
+        "description": "KNIFE RETRACTABLE CRAFTRIGHT W/2BLADES FLUORO 27899",
+        "line_total": 11.32,
+        "quantity": 4,
+        "unit_price": 2.63
+      },
+      {
+        "description": "FORMPLY F14 2400X1200X17MK",
+        "line_total": 518.7,
+        "quantity": 6,
+        "unit_price": 86.45
+      }
+    ],
+    "summary": "This invoice is for a variety of hardware and trade supplies including power tools, fixings, safety equipment, and materials.",
+    "bed_relevant": "no",
+    "gst": 254.67,
+    "invoice_date_on_doc": "25/06/2025",
+    "supplier_on_invoice": "BUNNINGS",
+    "total_inc_gst": 2801.32
+  },
+  {
+    "id": "bdd7edfd-1aaa-401a-9d80-12649abae045",
+    "xero_id": "0bd78b81-57bb-407e-b9b1-2f854c4fcc12",
+    "invoice_number": "8056/01358581",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-07-05",
+    "total": 1532.67,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "17372037710.jpeg",
+    "line_items": [
+      {
+        "description": "STORAGE CONTAINER ALL SET 100L GREEN & GREY W/FLAT LID",
+        "quantity": 30,
+        "unit_price": 19.5
+      },
+      {
+        "description": "KEY SAFE MASTERLOCK LIGHT UP WALL MOUNTED 542500",
+        "quantity": 1,
+        "unit_price": 45.7
+      },
+      {
+        "description": "CABLE MANAGEMENT TIES CRESCENT 200X4.6MM BLACK PK500 V05500",
+        "quantity": 8,
+        "unit_price": 26.5
+      },
+      {
+        "description": "CLEANER H/PRESS CORDED GERMI 7000 SPV-7010",
+        "quantity": 1,
+        "unit_price": 521.55
+      }
+    ],
+    "summary": "This invoice is for the purchase of various home improvement and storage items from Bunnings Warehouse.",
+    "bed_relevant": "no",
+    "gst": 139.33,
+    "invoice_date_on_doc": "05/07/2025",
+    "supplier_on_invoice": "BUNNINGS warehouse",
+    "total_inc_gst": 1532.67
+  },
+  {
+    "id": "f6c966e8-cf2c-4144-bea1-7f312a253533",
+    "xero_id": "f17812a9-4e07-4492-b587-7e9ad11bdd99",
+    "invoice_number": "W266674593",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-07-08",
+    "total": 1199.8,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "17394959230.jpeg",
+    "line_items": [
+      {
+        "description": "Ezy Storage 160L Bunker Tough Heavy Duty Waterproof IP65 Container",
+        "quantity": 20,
+        "unit_price": 59.99
+      }
+    ],
+    "summary": "This order is for 20 Ezy Storage 160L Bunker Tough Heavy Duty Waterproof IP65 Containers from Bunnings.",
+    "bed_relevant": "no",
+    "invoice_date_on_doc": "08/07/2025",
+    "supplier_on_invoice": "Bunnings"
+  },
+  {
+    "id": "24b8f5ac-d043-40bb-9cad-0b0511e32abc",
+    "xero_id": "dc7f8074-8204-475f-9df2-a09997e8ab5d",
+    "invoice_number": "8161/99809868",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-07-09",
+    "total": 1199.8,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "17407869460.jpeg",
+    "line_items": [
+      {
+        "description": "STORAGE CONTAINER EZY STORAGE 4-160L BUNKER 2.0 H/DUTY",
+        "quantity": 20,
+        "unit_price": 54.54
+      }
+    ],
+    "summary": "Purchase of storage containers.",
+    "bed_relevant": "no",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 0,
+    "gst": 109.07,
+    "invoice_date_on_doc": "09/07/2025",
+    "per_unit_rates": "$54.54/each",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 1090.73,
+    "supplier_on_invoice": "BUNNINGS",
+    "total_inc_gst": 1199.8
+  },
+  {
+    "id": "8a2cc0d7-b222-43d5-b479-8bbeb59fd8e1",
+    "xero_id": "d301c329-0338-4b05-93b9-a577cde5674d",
+    "invoice_number": "013-93223-6079-2025-08-23",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-08-23",
+    "total": 1270.4,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "17832503310.jpeg",
+    "line_items": [
+      {
+        "description": "160GSM 6.1X9.1M SIL/OREN 59040",
+        "quantity": 2,
+        "unit_price": 156.56
+      },
+      {
+        "description": "PLYWOOD STRUCTURAL CD IMPORT 2400X1200X9MM",
+        "quantity": 10,
+        "unit_price": 54.9
+      },
+      {
+        "description": "STORAGE CONTAINER EZY STORAGE 40L SOLUTIONS PLUS 33119",
+        "quantity": 1,
+        "unit_price": 19.48
+      },
+      {
+        "description": "PINE STRUCTURAL HUP10 BLUE H2 70X35MM 3.0M",
+        "quantity": 15,
+        "unit_price": 14.4
+      },
+      {
+        "description": "PINE STRUCTURAL HUP10 BLUE H2 70X35MM 2.4M",
+        "quantity": 15,
+        "unit_price": 11.52
+      }
+    ],
+    "summary": "This invoice is for various building materials including tarpaulin, plywood, a storage container, and pine timber, purchased from Bunnings Warehouse.",
+    "bed_relevant": "unclear",
+    "gst": 115.49,
+    "invoice_date_on_doc": "23/08/2025",
+    "supplier_on_invoice": "BUNNINGS warehouse",
+    "total_inc_gst": 1270.4
+  },
+  {
+    "id": "5b409ffa-f9e0-4f60-8c39-43a4b71c917e",
+    "xero_id": "a3c84344-7132-41b9-9e8a-0da0449ac454",
+    "invoice_number": "008-10107-8220-2025-09-06",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-09-06",
+    "total": 1073.88,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "17966751590.jpeg",
+    "line_items": [
+      {
+        "description": "6340319 FILM FACE PLY\n2400X1200X17MM",
+        "quantity": 10,
+        "unit_price": 8.4
+      },
+      {
+        "description": "4520524003593 POLYURETHANE SEALANT SIKA\n3100 SIKAFLEX 221 INDUST WHITE",
+        "quantity": 2,
+        "unit_price": 32
+      },
+      {
+        "description": "0020751 PINE PRIMED D4R FJ\n92X18MM 5.4M",
+        "quantity": 3,
+        "unit_price": 25.96
+      },
+      {
+        "description": "931116559011 TV REMOTE CONTROL CLICK\n5 IN 1 UNIVERSAL CKTRS93B",
+        "quantity": 1,
+        "unit_price": 19.98
+      },
+      {
+        "description": "8030953 PINE STRUCTURAL MBPIO BLUE H2\n70X35MM 2.4M",
+        "quantity": 5,
+        "unit_price": 11.52
+      },
+      {
+        "description": "9318324100032 SILICONE ACCESSORY SIKA\n3PM SIKAFLEX NOZZLES 508359",
+        "quantity": 1,
+        "unit_price": 2.9
+      }
+    ],
+    "summary": "Purchase of building materials and accessories from Bunnings Warehouse.",
+    "bed_relevant": "no",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 0,
+    "gst": 97.62,
+    "invoice_date_on_doc": "06/09/2025",
+    "per_unit_rates": "",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 1073.88,
+    "supplier_on_invoice": "BUNNINGS WAREHOUSE",
+    "total_inc_gst": 1073.88
+  },
+  {
+    "id": "6c4ad38f-3079-40ca-8ed8-d7ba5ab791b1",
+    "xero_id": "827c5107-a657-4041-bb79-c3d9f0138854",
+    "invoice_number": "323817252",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-09-11",
+    "total": 9715.2,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "18043123880.pdf",
+    "line_items": [
+      {
+        "description": "COLLAPSIBLE CRATE TACTIX++48X18X35CM 25L BLACK\nETA 19/9",
+        "line_total": 9715.2,
+        "product_code": "2583340",
+        "quantity": 960,
+        "unit_price": 9.2
+      }
+    ],
+    "summary": "Purchase of 960 collapsible crates with dimensions 48x18x35cm and 25L capacity.",
+    "bed_relevant": "no",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 0,
+    "gst": 883.2,
+    "invoice_date_on_doc": "11/09/2025",
+    "per_unit_rates": "$9.20/EACH",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 8832,
+    "supplier_on_invoice": "Bunnings",
+    "total_inc_gst": 9715.2
+  },
+  {
+    "id": "00cd9ac2-7d26-4fef-9ba3-4bd7d0c6b3f3",
+    "xero_id": "bd3c2370-5d18-4180-8d07-207cf5429a85",
+    "invoice_number": "323968052",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-09-26",
+    "total": 3444.48,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "18256563680.pdf",
+    "line_items": [
+      {
+        "description": "LVL10 SMARTFRAME H2S++140X35MM PCE RATE 63/6 ETA 7-10 working days",
+        "quantity": 378,
+        "unit_price": 7.24
+      },
+      {
+        "description": "LVL10 SMARTFRAME H2S++70X35MM PCE RATE 20/6 ETA 7-10 working days",
+        "quantity": 120,
+        "unit_price": 3.3
+      }
+    ],
+    "summary": "Pro forma invoice for structural framing components.",
+    "bed_relevant": "indirect",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 0,
+    "gst": 313.13,
+    "invoice_date_on_doc": "26/09/2025",
+    "per_unit_rates": "7.24/LINEAR METRE, 3.30/LINEAR METRE",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 3131.35,
+    "supplier_on_invoice": "BUNNINGS",
+    "total_inc_gst": 3444.48
+  },
+  {
+    "id": "0eb14cb3-006f-45b1-ba03-4932096141a3",
+    "xero_id": "18a3e6e3-c427-471b-95b2-a97010163f93",
+    "invoice_number": "2125/01135215",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-11-03",
+    "total": 2797.38,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "18556090750.pdf",
+    "line_items": [
+      {
+        "description": "PARTY FILAMENT LENT LYTUORE",
+        "quantity": 1,
+        "unit_price": 875.99
+      },
+      {
+        "description": "SOPE LEDS WV CONNECTABLE V",
+        "line_total": 227.97,
+        "quantity": 1,
+        "unit_price": 227.97
+      },
+      {
+        "description": "NAILS COLLATED INPILSE PASLIDE",
+        "product_code": "5315104017597",
+        "quantity": 50,
+        "unit_price": 0.64
+      },
+      {
+        "description": "NAILS COLLATED IMPULSE PASLODE",
+        "product_code": "9315104300094",
+        "quantity": 50,
+        "unit_price": 0.65
+      },
+      {
+        "description": "LEAD EXTENSION CLICK",
+        "product_code": "9311644100944",
+        "quantity": 1,
+        "unit_price": 185.18
+      },
+      {
+        "description": "SCREWS HX BATTEN ZIP BIILSEX",
+        "product_code": "5310036513914",
+        "quantity": 12,
+        "unit_price": 32.11
+      },
+      {
+        "description": "STORAGE CUSTAINER ALL SET",
+        "product_code": "1320090608766",
+        "quantity": 1,
+        "unit_price": 45.73
+      },
+      {
+        "description": "SCREWS TIMBEN 117 CLIMASER",
+        "product_code": "9311496200858",
+        "quantity": 12,
+        "unit_price": 13.04
+      },
+      {
+        "description": "300ML IHITE",
+        "quantity": 1,
+        "unit_price": 12.92
+      },
+      {
+        "description": "SILICINE ROOF&BUTTER SISA",
+        "product_code": "4318324010430",
+        "quantity": 2,
+        "unit_price": 18.98
+      },
+      {
+        "description": "DRIVING EXTENSION BAR DIABLE",
+        "product_code": "0006925153665",
+        "quantity": 1,
+        "unit_price": 163.36
+      },
+      {
+        "description": "BIT BRIVING MASETTER KANGO",
+        "product_code": "0692210222053",
+        "quantity": 1,
+        "unit_price": 36.24
+      },
+      {
+        "description": "SCREW TRUSS SST 130 ECOAT OPING",
+        "product_code": "074605154802",
+        "quantity": 1,
+        "unit_price": 37.96
+      },
+      {
+        "description": "SEREN BUGLE BATTER BUILDEX",
+        "product_code": "9310006541647",
+        "quantity": 19,
+        "unit_price": 3
+      },
+      {
+        "description": "SPRAY PRINT GULOX",
+        "product_code": "5330511703503",
+        "quantity": 1,
+        "unit_price": 66.45
+      },
+      {
+        "description": "POR ADHESIVE PARFIX",
+        "product_code": "9303697116245",
+        "quantity": 1,
+        "unit_price": 15.11
+      },
+      {
+        "description": "COVERALLS DISPOSABLE PROVAL",
+        "product_code": "9311055515765",
+        "quantity": 1,
+        "unit_price": 16.39
+      },
+      {
+        "description": "WOOD GLUE",
+        "line_total": 7.44,
+        "quantity": 1,
+        "unit_price": 7.44
+      },
+      {
+        "description": "LAG PP",
+        "line_total": 7.44,
+        "quantity": 1,
+        "unit_price": 7.44
+      },
+      {
+        "description": "DUST MASKS CRAFTRIGHT",
+        "product_code": "6942629283355",
+        "quantity": 10,
+        "unit_price": 0.81
+      },
+      {
+        "description": "RESPIRATOR CARTRIDGE IN",
+        "product_code": "063896-0137383",
+        "quantity": 1,
+        "unit_price": 42.54
+      },
+      {
+        "description": "RESPIRATOR CARERSEGE IN",
+        "product_code": "051141958240",
+        "quantity": 1,
+        "unit_price": 24.2
+      },
+      {
+        "description": "6.OJES CRAFTRENT",
+        "product_code": "763222864",
+        "quantity": 1,
+        "unit_price": 48.4
+      },
+      {
+        "description": "MULTI TOOL BLADE DIABLO",
+        "product_code": "0006925162735",
+        "quantity": 1,
+        "unit_price": 28.03
+      },
+      {
+        "description": "BIT DRIVING SHORPTOR TRUCK",
+        "product_code": "5054905037444",
+        "quantity": 1,
+        "unit_price": 29.32
+      },
+      {
+        "description": "BIT HSS HETRIC SUTTON",
+        "product_code": "9311963645971",
+        "quantity": 1,
+        "unit_price": 14.24
+      },
+      {
+        "description": "BLADE RECIP SAV DIABLO",
+        "product_code": "0006925198539",
+        "quantity": 1,
+        "unit_price": 14.24
+      },
+      {
+        "description": "PLASTER 100 KAF BUILDERS EDLE",
+        "product_code": "9321771005053",
+        "quantity": 1,
+        "unit_price": 35.4
+      },
+      {
+        "description": "RESPIRATOR CARTRIDGE 3N",
+        "product_code": "051141958040",
+        "quantity": 2,
+        "unit_price": 24.2
+      },
+      {
+        "description": "BLOYES CRAFTRIGHT",
+        "product_code": "1945783222864",
+        "quantity": 17,
+        "unit_price": 2.22
+      },
+      {
+        "description": "MULTI TOOL BLADE DIABLO",
+        "product_code": "0006925162735",
+        "quantity": 1,
+        "unit_price": 28.03
+      },
+      {
+        "description": "BIT DRIVING S/ADAPTOR IRWIN",
+        "product_code": "5054905037444",
+        "quantity": 1,
+        "unit_price": 14.24
+      },
+      {
+        "description": "BIT HSS METRIC SUTTON",
+        "product_code": "9311963645971",
+        "quantity": 1,
+        "unit_price": 29.32
+      },
+      {
+        "description": "BLADE RECIP SAU DIABLO",
+        "product_code": "0006925098539",
+        "quantity": 1,
+        "unit_price": 39.4
+      },
+      {
+        "description": "PLASTER TOOL KNF BUILDERS EDGE",
+        "product_code": "9321771009063",
+        "quantity": 1,
+        "unit_price": 2.74
+      },
+      {
+        "description": "BIT HSS MET LONG SUTTON",
+        "product_code": "9311963018539",
+        "quantity": 1,
+        "unit_price": 13.53
+      },
+      {
+        "description": "WHEEL CUT OFF METAL IRVIN",
+        "product_code": "5054905252731",
+        "quantity": 1,
+        "unit_price": 16.14
+      },
+      {
+        "description": "POVER CUBE DETA",
+        "product_code": "9311644108351",
+        "quantity": 1,
+        "unit_price": 48.89
+      },
+      {
+        "description": "BIT MASONRY SDS 4CUT KANGO",
+        "product_code": "4092210146360",
+        "quantity": 1,
+        "unit_price": 47.41
+      },
+      {
+        "description": "BIT HSS MET LONG SUTTON",
+        "product_code": "9311963018539",
+        "quantity": 1,
+        "unit_price": 13.53
+      },
+      {
+        "description": "SAFETY GLASSES CRAFTRIGHT",
+        "product_code": "9312620124334",
+        "quantity": 15,
+        "unit_price": 0.5
+      },
+      {
+        "description": "EAR PLGS 38",
+        "product_code": "0051141333519",
+        "quantity": 12,
+        "unit_price": 20.36
+      },
+      {
+        "description": "SAFETY GLASSES CRAFTRIONT",
+        "product_code": "9312620124327",
+        "quantity": 58,
+        "unit_price": 0.5
+      },
+      {
+        "description": "CAULKING GUN NONARCH",
+        "product_code": "9320090011832",
+        "quantity": 1,
+        "unit_price": 9.45
+      },
+      {
+        "description": "BLADE NITRE SAU MAKITA",
+        "product_code": "0000381363457",
+        "quantity": 1,
+        "unit_price": 53.2
+      },
+      {
+        "description": "DRILLING CONDO SET RVORI",
+        "product_code": "4892210165543",
+        "quantity": 1,
+        "unit_price": 44.99
+      },
+      {
+        "description": "BLADE CIRCULAR SAV FULL BOAR",
+        "product_code": "9319510025610",
+        "quantity": 1,
+        "unit_price": 18.03
+      },
+      {
+        "description": "BLADE CIRCULAR SAM FULL BOAR",
+        "product_code": "9319510025610",
+        "quantity": 1,
+        "unit_price": 18.03
+      },
+      {
+        "description": "MOP UKINGER SABCU",
+        "product_code": "9310205320270",
+        "quantity": 1,
+        "unit_price": 17.79
+      },
+      {
+        "description": "BIT DRIVING HEX KANGO",
+        "product_code": "4892210210463",
+        "quantity": 1,
+        "unit_price": 11.16
+      },
+      {
+        "description": "SCREW BUGLE BATTEN TITAN INX",
+        "product_code": "9314932844313",
+        "quantity": 1,
+        "unit_price": 70.11
+      },
+      {
+        "description": "SAW HORSE CRAFTRIGHT",
+        "product_code": "9351378020017",
+        "quantity": 2,
+        "unit_price": 25.65
+      },
+      {
+        "description": "BUNNINGS BUCKET",
+        "product_code": "4711414285087",
+        "quantity": 1,
+        "unit_price": 4.99
+      },
+      {
+        "description": "PUNCH SET CRAFTRIGHT",
+        "product_code": "6945783206147",
+        "quantity": 1,
+        "unit_price": 4.73
+      },
+      {
+        "description": "NAILS BULLET HO BRT PASLODE",
+        "product_code": "9310086906259",
+        "quantity": 1,
+        "unit_price": 8.03
+      },
+      {
+        "description": "HOLESAV BIMETAL KANGO",
+        "product_code": "4892210249289",
+        "quantity": 1,
+        "unit_price": 26.59
+      },
+      {
+        "description": "HOLESAU ARBOR SUTTON",
+        "product_code": "9311963646008",
+        "quantity": 1,
+        "unit_price": 37.37
+      },
+      {
+        "description": "BIT SPADE IRVIN",
+        "product_code": "5054905304744",
+        "quantity": 1,
+        "unit_price": 9.97
+      },
+      {
+        "description": "BAGS WHEELIE BIN GRUNT",
+        "product_code": "9317607146581",
+        "quantity": 1,
+        "unit_price": 10
+      },
+      {
+        "description": "CLEANING FLOOR GLITZ",
+        "product_code": "9300764049033",
+        "quantity": 1,
+        "unit_price": 4.27
+      },
+      {
+        "description": "SCRAPER FLOOR MASTERFINISH",
+        "product_code": "9318428993509",
+        "quantity": 1,
+        "unit_price": 35.1
+      },
+      {
+        "description": "WIPES ON A ROLL ALL SET",
+        "product_code": "4711414248181",
+        "quantity": 1,
+        "unit_price": 2.5
+      },
+      {
+        "description": "CLOTHS CLEANING ALL SET",
+        "product_code": "9318757003368",
+        "quantity": 1,
+        "unit_price": 7.5
+      },
+      {
+        "description": "SPRAYER GARDEN NYLEX",
+        "product_code": "9312620134869",
+        "quantity": 1,
+        "unit_price": 13.92
+      },
+      {
+        "description": "DUCT TAPE PAINT PARTNER",
+        "product_code": "4711414134309",
+        "quantity": 1,
+        "unit_price": 9.49
+      },
+      {
+        "description": "BAR WRECKING HUMME",
+        "product_code": "9314572002913",
+        "quantity": 1,
+        "unit_price": 35.15
+      }
+    ],
+    "summary": "This invoice is for a variety of hardware and building supplies from Bunnings Warehouse.",
+    "bed_relevant": "unclear",
+    "invoice_date_on_doc": "03/11/2025",
+    "supplier_on_invoice": "BUNNINGS warehouse",
+    "total_inc_gst": 2797.38
+  },
+  {
+    "id": "171d4143-a089-4fe9-9b2c-31b98e9aabf9",
+    "xero_id": "38bc62dc-dd79-4b1a-9220-0df5ec6140e9",
+    "invoice_number": "RB18556094130",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-11-03",
+    "total": 1845.51,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "error": "Unexpected end of JSON input"
+  },
+  {
+    "id": "e10942c2-a154-41e8-a4d4-23622c91e4fa",
+    "xero_id": "de612434-acd1-4845-a172-682af9f8720d",
+    "invoice_number": null,
+    "contact_name": "Bunnings Warehouse",
+    "project_code": null,
+    "date": "2025-11-08",
+    "total": 1468.28,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "error": "{\"error\":{\"code\":400,\"message\":\"The document has no pages.\",\"status\":\"INVALID_ARGUMENT\"}}"
+  },
+  {
+    "id": "2a2e01ad-2339-45d0-92b1-e5b83889d994",
+    "xero_id": "58972005-1e87-4acc-b7a9-3d5716b7bcfe",
+    "invoice_number": null,
+    "contact_name": "Bunnings Warehouse",
+    "project_code": null,
+    "date": "2025-11-08",
+    "total": 1494.92,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "error": "{\"error\":{\"code\":400,\"message\":\"The document has no pages.\",\"status\":\"INVALID_ARGUMENT\"}}"
+  },
+  {
+    "id": "e9c43921-a50c-4262-8874-dbb69aac6ef8",
+    "xero_id": "7d6c59b6-6014-4f4b-bf0a-fe87db15cf33",
+    "invoice_number": "RB18850334190",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-11-30",
+    "total": 1204.31,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "18850334190.jpeg",
+    "line_items": [
+      {
+        "description": "CLEANER H/PRESS CORDED GERNI 7300 GPU-7300",
+        "line_total": 699,
+        "product_code": "9319510027089"
+      },
+      {
+        "description": "CARGO NET 1.8 X 2.0M",
+        "line_total": 88.38,
+        "product_code": "9314456011645"
+      },
+      {
+        "description": "BROOM OUTDOOR B/BOZER SABCO 600MM INDUST STRENGTH SAB57405",
+        "line_total": 41.99,
+        "product_code": "9310295574055"
+      },
+      {
+        "description": "P2 VALUE DISP-RESP CITECQ 10PK 30125768",
+        "line_total": 50.76,
+        "product_code": "9312520125768"
+      },
+      {
+        "description": "BROOM OUTDOOR 60CM W/STEEL HANDLE BB5002",
+        "line_total": 24.9,
+        "product_code": "9323461081022"
+      },
+      {
+        "description": "CLEANER HAND SOLVUL 2L LIQUID SOAP PI041",
+        "line_total": 24.9,
+        "product_code": "9312240710412"
+      },
+      {
+        "description": "DECK SCRUB SABCO 25CM NATURAL FIBRE SAB57513",
+        "line_total": 20,
+        "product_code": "9310205575137"
+      },
+      {
+        "description": "STORAGE CONTAINER ALL SET TOOL GREEN & GREY W/FLAT LID",
+        "line_total": 19.5,
+        "product_code": "9320095087629"
+      },
+      {
+        "description": "GLOVES MECHANIK VERR SPEEDKNIT LRG BUT-S206-56-009 2 B $15.40",
+        "line_total": 30.8,
+        "product_code": "0781513661925"
+      },
+      {
+        "description": "BROOM OUTDOOR DATES SOOPR SUPREME GARDEN B11306F 2 B $13.80",
+        "line_total": 27.6,
+        "product_code": "9310706113067"
+      },
+      {
+        "description": "BROOM OUTDOOR SABCO PREMIUM YARD SAB21076",
+        "line_total": 13.49,
+        "product_code": "9310205210762"
+      },
+      {
+        "description": "GLOVES WORK CRAFTRIGHT MEDIUM BLACK 10PK 175600010V",
+        "line_total": 12.93,
+        "product_code": "6945783237755"
+      },
+      {
+        "description": "CLOTHS CLEANING ALL SET 20PK MICROFIRE VH02 2 B $8.00",
+        "line_total": 16,
+        "product_code": "4711414220124"
+      },
+      {
+        "description": "RAINBOW SPONGE SCOUR GATES HPS ANTI BAC 173807 2 B $6.99",
+        "line_total": 13.98,
+        "product_code": "9310124715621"
+      },
+      {
+        "description": "SAFETY GLASSES CITECQ TINTED AF 30125997",
+        "line_total": 11.32,
+        "product_code": "9312628599977"
+      },
+      {
+        "description": "SAFETY GLASSES CITECQ CLEAR AF 30125980",
+        "line_total": 16.98,
+        "product_code": "9312620125980"
+      },
+      {
+        "description": "PAPER TOWEL HERCULES 250 SHEETS HSHT250",
+        "line_total": 10,
+        "product_code": "9322596011002"
+      },
+      {
+        "description": "GLOVES RUBBER SABCO RED EXTRA PROTECT SAB0022",
+        "line_total": 4.5,
+        "product_code": "9310205800222"
+      },
+      {
+        "description": "GLOVES RUBBER SABCO LUE EXTRA PROTECT SAB0023",
+        "line_total": 9,
+        "product_code": "9310205800239"
+      },
+      {
+        "description": "CLEANING FLOOR GLITZ 750ML SUGAR SOAP 3094499 2 B $4.49",
+        "line_total": 22.45,
+        "product_code": "9300764049033"
+      },
+      {
+        "description": "GLOVES VILEDA SUPER GRIP SMALL 1 PAIR",
+        "line_total": 3.79,
+        "product_code": "4023103092600"
+      },
+      {
+        "description": "GLOVES VILEDA SUPER GRIP LARGE 1 PAIR",
+        "line_total": 3.79,
+        "product_code": "4023103092624"
+      },
+      {
+        "description": "CLEANER GLITZ 750ML ULIEAR 3094485",
+        "line_total": 3.27,
+        "product_code": "9300764047308"
+      },
+      {
+        "description": "SAFETY GLASSES CRAFTRIght CLEAR 30124327 2 B $3.55",
+        "line_total": 7.09,
+        "product_code": "9312620124327"
+      },
+      {
+        "description": "TOTE BUCKET PLASTIC MULTIPURPOSE 70L ASSTD COLOURS BKY3L 2 B $0.99",
+        "line_total": 7.99,
+        "product_code": "8517000370013"
+      }
+    ],
+    "summary": "Invoice for various cleaning supplies, safety equipment, brooms, and tools from Bunnings Warehouse.",
+    "bed_relevant": "no",
+    "gst": 109.47,
+    "invoice_date_on_doc": "30/11/2025",
+    "supplier_on_invoice": "BUNNINGS WAREHOUSE",
+    "total_inc_gst": 1204.31
+  },
+  {
+    "id": "2cca8d7a-c007-40a5-9fa9-8a360737b657",
+    "xero_id": "556587f6-5d89-4168-824a-ca68ec20f1c6",
+    "invoice_number": "8437/01625278",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": null,
+    "date": "2025-12-01",
+    "total": 2885.9,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "18858762070.pdf",
+    "line_items": [
+      {
+        "description": "BASIN ST UNT SHAVANASON VELS3STAR SL/MIN SHM0236 LF",
+        "quantity": 10,
+        "unit_price": 8.74
+      },
+      {
+        "description": "BASIN ST WHT SHAVANASON VELS3STAR SL/MIN SHM0236 LF",
+        "quantity": 10,
+        "unit_price": 8.74
+      },
+      {
+        "description": "ENTRY LEVER ORBIS IKONIC MATTE BLACK KY1809ET-MB",
+        "quantity": 10,
+        "unit_price": 2.37
+      },
+      {
+        "description": "ENTRY LEVER ORBIS IKONIC MATTE BLACK KY1809ET-NB",
+        "quantity": 10,
+        "unit_price": 2.37
+      },
+      {
+        "description": "ENTRY LEVER ORBIS IKONIC MATTE BLACK KY1809SET-NB",
+        "quantity": 10,
+        "unit_price": 2.37
+      },
+      {
+        "description": "ENTRY LEVER ORBIS IKONIC MATTE BLACK KY1809E1-MB",
+        "quantity": 10,
+        "unit_price": 2.37
+      },
+      {
+        "description": "BASIN TP ASSM CHR SHAVEMASON SHN0292 LF",
+        "quantity": 10,
+        "unit_price": 7.22
+      },
+      {
+        "description": "BASIN TP ASSN CHR SHAVEMASON SHM0292 LF",
+        "quantity": 10,
+        "unit_price": 7.22
+      },
+      {
+        "description": "BASIN IP ASSN CHR SHAVEMASON SHM0292 LF",
+        "quantity": 10,
+        "unit_price": 7.22
+      },
+      {
+        "description": "BASIN IP ASSK CHR SHAVEMASON SHM0292 LF",
+        "quantity": 10,
+        "unit_price": 7.22
+      },
+      {
+        "description": "SHUR CURTAIN POLY BARELLI 1BOCH RETRO CINCLES SC184",
+        "quantity": 10,
+        "unit_price": 0.98
+      },
+      {
+        "description": "SHVR CURTAIN POLY BARELLI 18OCH RETRO CIRCLES SC164",
+        "quantity": 10,
+        "unit_price": 0.98
+      },
+      {
+        "description": "SHVR CURTAIN POLY BARELLI 18OCH RETRO CIRCLES SC164",
+        "quantity": 10,
+        "unit_price": 0.98
+      },
+      {
+        "description": "SHWR CURTAIN POLY BARELLI 180CK RETRO CIRCLES SC184",
+        "quantity": 10,
+        "unit_price": 0.98
+      },
+      {
+        "description": "SHOVER ALL DIRECT BRASSHARDS VELS3STARBL/MIN CHR 15SH422CL",
+        "quantity": 10,
+        "unit_price": 1.7
+      },
+      {
+        "description": "SHOVER ALL DIRECT BRASSHARDS VELS3STARBL/MIN CHR 15S6422CL",
+        "quantity": 10,
+        "unit_price": 1.7
+      },
+      {
+        "description": "SHOWER ALL DIRECT BRASSHARDS VELS3STARBL/MIN CHR 15SH422CL",
+        "quantity": 10,
+        "unit_price": 1.9
+      },
+      {
+        "description": "SHOVER ALL DIRECT BRASSHARDS WELS3STARBL/NIN CHR 15SH422CL",
+        "quantity": 10,
+        "unit_price": 1.9
+      },
+      {
+        "description": "SPANNER TAP KIT HARON UNIVERSAL TSS?",
+        "quantity": 10,
+        "unit_price": 1.11
+      },
+      {
+        "description": "PADBOLT PINNACLE 100MM STD SHOOT ZP GHS010",
+        "quantity": 10,
+        "unit_price": 0.35
+      },
+      {
+        "description": "ENTRY LEVER FELLINO IKONIC MATTE BLACK KY2007ET-MB",
+        "quantity": 10,
+        "unit_price": 3.61
+      },
+      {
+        "description": "ENTRY LEVER ORBIS IKONIC MATTE BLACK KY1809ET-MB",
+        "quantity": 10,
+        "unit_price": 2.37
+      },
+      {
+        "description": "ENTRY LEVER FELLINO IKONIC MATTE BLACK KY2007ET-MB",
+        "quantity": 10,
+        "unit_price": 3.61
+      },
+      {
+        "description": "ENTRY LEVER FELLINO IKONIC MATTE BLACK KY2007ET-MB",
+        "quantity": 10,
+        "unit_price": 3.61
+      },
+      {
+        "description": "SCREWS BUTT HO N/POINT BUILDEX 8-15X25 2A BX1000X943346",
+        "quantity": 1,
+        "unit_price": 65.09
+      },
+      {
+        "description": "SCREUS LONGTHREAD ZENITH 8X40 PHL BP CSK PK100 CUL3440",
+        "quantity": 1,
+        "unit_price": 20.05
+      },
+      {
+        "description": "BASIN ST UNT SHAVANASON VELS3STAR SL/MIN SHM0236 LF",
+        "quantity": 10,
+        "unit_price": 1.9
+      },
+      {
+        "description": "BASIN ST WHT SHAVANASON VELS3STAR SL/MIN SHM0236 LF",
+        "quantity": 10,
+        "unit_price": 1.9
+      },
+      {
+        "description": "SPANNER TAP KIT HARDN UNIVERSAL TSS?",
+        "quantity": 10,
+        "unit_price": 1.11
+      },
+      {
+        "description": "PADBOLT PINNACLE 100MM STD SHOOT ZP GR5010",
+        "quantity": 10,
+        "unit_price": 0.35
+      },
+      {
+        "description": "ENTRY LEVEN FELLING IKONIC MATTE BLACK KY2007ET-M",
+        "quantity": 10,
+        "unit_price": 3.61
+      },
+      {
+        "description": "ENTRY LEVER ORBIS IKONIC MATTE BLACK KYTBO09ET-NB",
+        "quantity": 10,
+        "unit_price": 2.37
+      },
+      {
+        "description": "ENTRY LEVER FELLING IKONIC MATTE BLACK KY2007ET-M",
+        "quantity": 10,
+        "unit_price": 3.61
+      },
+      {
+        "description": "ENTRY LEVER FELLING IKONIC MATTE BLACK KY2007ET-M",
+        "quantity": 10,
+        "unit_price": 3.61
+      },
+      {
+        "description": "SCREWS BUTT HON/POINT BUILDEX 8-15X25 24 BX1000X943346",
+        "quantity": 1,
+        "unit_price": 65.09
+      },
+      {
+        "description": "SCREWS LONGTHREAD ZENITH 8X40 PHL BP CSK PK100 CUL3440",
+        "quantity": 1,
+        "unit_price": 20.05
+      },
+      {
+        "description": "HINGE NON MORTISE FP DELF 100X65X2NN 12PK BLACK NG063",
+        "quantity": 10,
+        "unit_price": 3.36
+      },
+      {
+        "description": "HINGE NON MORTISE FP DELF 100X65K2MM 12PK BLACK NG063",
+        "quantity": 10,
+        "unit_price": 3.36
+      },
+      {
+        "description": "PADLOCK MAGNUM MASTERLOCK 45KM LAN 38MM SHK 4PK 810LF",
+        "quantity": 10,
+        "unit_price": 8.92
+      },
+      {
+        "description": "KEY RINGATAG T/MASTER 56X29KK ASSORTED 4PK 009571",
+        "quantity": 10,
+        "unit_price": 0.21
+      },
+      {
+        "description": "PROBOLT PINNACLE 100MM STD SHOOT ZP GKS010",
+        "quantity": 10,
+        "unit_price": 0.35
+      },
+      {
+        "description": "TAP RESEATER 321711",
+        "quantity": 10,
+        "unit_price": 1.43
+      },
+      {
+        "description": "PADBOLT PINNACLE 100MM STD SHOOT ZP GHS010",
+        "quantity": 10,
+        "unit_price": 0.35
+      },
+      {
+        "description": "PADBOLT PINNACLE 100WN STD SHOOT ZP GHS010",
+        "quantity": 10,
+        "unit_price": 0.35
+      },
+      {
+        "description": "WASHERS ASSORTED FIBRE KINETIC 403678",
+        "quantity": 10,
+        "unit_price": 0.79
+      },
+      {
+        "description": "PLASTER TOOL BUILDERS EDGE 150MN KNIFE STAINLESS STEEL",
+        "quantity": 10,
+        "unit_price": 3.11
+      },
+      {
+        "description": "DOOR SEAL RAVEN PIP 920MM PUC WHITE RP17W",
+        "quantity": 10,
+        "unit_price": 1.09
+      },
+      {
+        "description": "DOOR SEAL RAVEN P/P 920KN PUC WHITE RP17V",
+        "quantity": 10,
+        "unit_price": 1.09
+      },
+      {
+        "description": "DOOR SEAL RAVEN P/P 920NK PUC UNITE RP170",
+        "quantity": 10,
+        "unit_price": 1.09
+      },
+      {
+        "description": "DOOR SEAL RAVEN P/P 920MM PVC VHITE RP17V",
+        "quantity": 10,
+        "unit_price": 1.09
+      },
+      {
+        "description": "DOOR SEAL RAVEN PIP 920KK PUC WHITE RP17W",
+        "quantity": 10,
+        "unit_price": 1.09
+      },
+      {
+        "description": "DOOR SEAL RAVEN P/P 920NK PVC BROWN RP17BR",
+        "quantity": 10,
+        "unit_price": 1.09
+      },
+      {
+        "description": "BLADE RECIP SAU KANGO 6PC SET FORSBMP1-6PC",
+        "quantity": 10,
+        "unit_price": 2.85
+      },
+      {
+        "description": "BLADE RECIP SAV FULLBOAR 9IN STPI 2PK PRUNING",
+        "quantity": 10,
+        "unit_price": 1.8
+      },
+      {
+        "description": "SAV RECIP C/LESS B/LESS MAKITA TBU SKIN ONLY DUR1672",
+        "quantity": 10,
+        "unit_price": 4.14
+      },
+      {
+        "description": "DOOR FLUSH BLOCKBOARD 2040X620X35 STPC D/C",
+        "quantity": 10,
+        "unit_price": 41.36
+      },
+      {
+        "description": "DOOR FLUSH BLOCKBOARD 2040X820X35 STPC D/C",
+        "quantity": 10,
+        "unit_price": 18.81
+      },
+      {
+        "description": "DOOR FLUSH BLOCKBOARD 2040X820X35 STPC D/C",
+        "quantity": 10,
+        "unit_price": 16.81
+      },
+      {
+        "description": "DOOR FLUSH BLOCKBOARD 2040X820X35 STPC D/C",
+        "quantity": 10,
+        "unit_price": 18.81
+      },
+      {
+        "description": "DOOR FLUSH BLOCKBOARD 2040X820X35 STPC D/C",
+        "quantity": 10,
+        "unit_price": 16.81
+      },
+      {
+        "description": "DOOR FLUSH BLOCKBOARD 2040X820X35 STPC D/C",
+        "quantity": 10,
+        "unit_price": 18.81
+      },
+      {
+        "description": "MOULDING PUC JOINTER BRUTUS 6MM 2.4N DIVISION 18PM-D246",
+        "quantity": 10,
+        "unit_price": 0.65
+      },
+      {
+        "description": "FC ANGLE JH 6.0MM 3M PUC EXT ANGLE 305544",
+        "quantity": 10,
+        "unit_price": 1.91
+      },
+      {
+        "description": "FC ANGLE JH 6.0MM 3M PUC EXT ANGLE 305544",
+        "quantity": 10,
+        "unit_price": 1.91
+      },
+      {
+        "description": "FC ANGLE JH 6.0MM 3H PUC EXT ANGLE 305544",
+        "quantity": 10,
+        "unit_price": 1.91
+      },
+      {
+        "description": "FC ANGLE JH 6.0MM 3M PVC EXT ANALE 305544",
+        "quantity": 10,
+        "unit_price": 1.91
+      },
+      {
+        "description": "DOOR FLUSH BLOCKBOARD 2040X820X35 STPC D/C",
+        "quantity": 10,
+        "unit_price": 18.81
+      },
+      {
+        "description": "DOOR FLUSH BLOCKBOARD 2040X820X35 STPC D/C",
+        "quantity": 10,
+        "unit_price": 18.81
+      },
+      {
+        "description": "MOULDING PUC JOINTER BRUTUS 6MM 2.4N DIVISION 18PM-D246",
+        "quantity": 1,
+        "unit_price": 6.51
+      },
+      {
+        "description": "FC ANGLE JH 6.0MM 3M PUC EXT ANGLE 305544",
+        "quantity": 10,
+        "unit_price": 1.91
+      },
+      {
+        "description": "FC ANGLE JH 6.0MM 3M PUC EXT ANGLE 305544",
+        "quantity": 10,
+        "unit_price": 1.91
+      },
+      {
+        "description": "FC ANGLE JH 6.0MM 3H PUC EXT ANGLE 305544",
+        "quantity": 10,
+        "unit_price": 1.91
+      },
+      {
+        "description": "FC ANGLE JH 6.0MM 3M PVC EXT ANALE 305544",
+        "quantity": 10,
+        "unit_price": 1.91
+      },
+      {
+        "description": "U BOLT ROUND T/MASTER H8X125MM U/P&N 316SS 16456",
+        "quantity": 10,
+        "unit_price": 1.01
+      },
+      {
+        "description": "U BOLT ROUND T/MASTER M8X125MM W/P&N 316SS 16456",
+        "quantity": 10,
+        "unit_price": 1.01
+      }
+    ],
+    "summary": "This invoice is for various hardware and building materials, including basins, entry levers, curtains, shower hardware, taps, padbolts, screws, hinges, padlocks, keyrings, plaster tools, door seals, blades, and molding.",
+    "bed_relevant": "no",
+    "bed_count_mentioned": 0,
+    "canvas_metres_mentioned": 0,
+    "gst": 262.33,
+    "invoice_date_on_doc": "01/12/2025",
+    "per_unit_rates": "null",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 2885.9,
+    "supplier_on_invoice": "BUNNINGS warehouse",
+    "total_inc_gst": 2885.9
+  },
+  {
+    "id": "652af04c-e006-49b8-a2b4-4bf9fa70ee8e",
+    "xero_id": "6773cf4a-50de-4c1c-8c25-436330541781",
+    "invoice_number": "8437/00296034",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-IN",
+    "date": "2025-12-02",
+    "total": 1288.68,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "18887837770.jpeg",
+    "line_items": [
+      {
+        "description": "QUICKSTACK ROLLING REG-PROTRTB",
+        "line_total": 89,
+        "product_code": "7290112639783",
+        "quantity": 1,
+        "unit_price": 89
+      },
+      {
+        "description": "ENTRY LEVER ORBIS IKONIC",
+        "line_total": 94.92,
+        "product_code": "9318757001203",
+        "quantity": 4,
+        "unit_price": 23.73
+      },
+      {
+        "description": "PASSAGE LEVER ORBIS IKONIC",
+        "line_total": 20.88,
+        "product_code": "9318757001227",
+        "quantity": 1,
+        "unit_price": 20.88
+      },
+      {
+        "description": "BASIN SET CLASSIC EZYFIX",
+        "line_total": 103.46,
+        "product_code": "9326720001271",
+        "quantity": 1,
+        "unit_price": 103.46
+      },
+      {
+        "description": "JOIST PROTECT&DECK",
+        "line_total": 33.21,
+        "product_code": "9329793000990",
+        "quantity": 1,
+        "unit_price": 33.21
+      },
+      {
+        "description": "NAILS FLATHEAD PRYSM",
+        "line_total": 13.3,
+        "product_code": "9312082220131",
+        "quantity": 1,
+        "unit_price": 13.3
+      },
+      {
+        "description": "TRIPLE GRIPS 1.0MM PRYDA",
+        "line_total": 7.44,
+        "product_code": "9312082217308",
+        "quantity": 1,
+        "unit_price": 7.44
+      },
+      {
+        "description": "SCREW COACH GALV METRIC",
+        "line_total": 7.04,
+        "product_code": "9310086484863",
+        "quantity": 1,
+        "unit_price": 7.04
+      },
+      {
+        "description": "WALL TAPS CLASSIC EZYFIX",
+        "line_total": 202.92,
+        "product_code": "9329720001925",
+        "quantity": 3,
+        "unit_price": 67.64
+      },
+      {
+        "description": "BOLT AND CUP HDG ZENITH",
+        "line_total": 20.14,
+        "product_code": "9310086887176",
+        "quantity": 1,
+        "unit_price": 20.14
+      },
+      {
+        "description": "PINE STRUCTURAL TREATED H3",
+        "line_total": 314.97,
+        "product_code": "8032322",
+        "quantity": 3,
+        "unit_price": 104.99
+      },
+      {
+        "description": "DECKING TREATED PINE H3",
+        "line_total": 124.9,
+        "product_code": "8032563",
+        "quantity": 10,
+        "unit_price": 12.49
+      },
+      {
+        "description": "EZISTEP STAIR TRD TREATED PINE",
+        "line_total": 256.5,
+        "product_code": "0052940",
+        "quantity": 6,
+        "unit_price": 42.75
+      }
+    ],
+    "summary": "Purchase of various hardware and building materials from Bunnings Warehouse.",
+    "bed_relevant": "no",
+    "invoice_date_on_doc": "02/12/2025",
+    "supplier_on_invoice": "BUNNINGS warehouse",
+    "total_inc_gst": 1288.68
+  },
+  {
+    "id": "590b3705-a242-4bde-9ac5-9480b21ca9ce",
+    "xero_id": "6db66932-ff38-476f-8c4e-e28b182f9017",
+    "invoice_number": null,
+    "contact_name": "Bunnings Warehouse",
+    "project_code": null,
+    "date": "2025-12-26",
+    "total": 1597,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "Bunnings-Warehouse-receipt.jpg",
+    "line_items": [
+      {
+        "description": "0641629 AIR CON SPLIT REV MITSUBISHI 5.0KW CIARA DXK18ZTL-WF",
+        "line_total": 1597,
+        "quantity": 1,
+        "unit_price": 1597
+      }
+    ],
+    "summary": "Purchase of a Mitsubishi air conditioner.",
+    "bed_relevant": "no",
+    "gst": 145.18,
+    "invoice_date_on_doc": "27/12/2025",
+    "supplier_on_invoice": "BUNNINGS WAREHOUSE",
+    "total_inc_gst": 1597
+  },
+  {
+    "id": "43c4f128-60b1-4206-b446-51726caf33b9",
+    "xero_id": "2180ca80-e20e-4467-b3d9-9aaf5a35b8fb",
+    "invoice_number": "094-37374-8180-2025-12-27",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": null,
+    "date": "2025-12-27",
+    "total": 1597,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "19193005430.jpeg",
+    "line_items": [
+      {
+        "description": "AIR CON SPLIT REV MITSUBISHI 5.0KW CIARA DXK18ZTL-WF",
+        "line_total": 1597,
+        "quantity": 1,
+        "unit_price": 1597
+      }
+    ],
+    "summary": "Purchase of a Mitsubishi air conditioning unit.",
+    "bed_relevant": "no",
+    "invoice_date_on_doc": "27/12/2025",
+    "supplier_on_invoice": "Bunnings Warehouse",
+    "total_inc_gst": 1597
+  },
+  {
+    "id": "a739b7b8-57d2-487d-8d6a-570d1465366d",
+    "xero_id": "dba244ea-5edd-4279-ad1f-f12dd4de8df1",
+    "invoice_number": "001-75845-8176-2026-04-24",
+    "contact_name": "Bunnings Warehouse",
+    "project_code": "ACT-HV",
+    "date": "2026-04-24",
+    "total": 2223.94,
+    "has_attachments": true,
+    "expected_element": "hardware/bunnings",
+    "attachment": "20341896520.jpeg",
+    "line_items": [
+      {
+        "description": "STORAGE CONTAINER TACTIX 15L HEAVY DUTY W/HANDLES",
+        "line_total": 299.94,
+        "quantity": 3,
+        "unit_price": 99.98
+      },
+      {
+        "description": "CABLE MANAGEMENT TIES CRESCENT 200X4.6MM BLACK PK500 WB8500",
+        "line_total": 346.2,
+        "quantity": 12,
+        "unit_price": 28.85
+      },
+      {
+        "description": "CABLE MANAGEMENT TIES CRESCENT 300X7.6MM BLK HD PK100 WB15100",
+        "line_total": 779.4,
+        "quantity": 30,
+        "unit_price": 25.98
+      },
+      {
+        "description": "CABLE MANAGEMENT TIES CRESCENT 300X8MM BLKHD PK100 WB12100HD",
+        "line_total": 798.4,
+        "quantity": 32,
+        "unit_price": 24.95
+      }
+    ],
+    "summary": "Purchase of storage containers and cable management ties.",
+    "bed_relevant": "no",
+    "gst": 202.13,
+    "invoice_date_on_doc": "24/04/2026",
+    "subtotal_ex_gst": 2223.94,
+    "supplier_on_invoice": "BUNNINGS WAREHOUSE",
+    "total_inc_gst": 2426.07
+  },
+  {
+    "id": "8dee381b-f6fc-4d12-bb09-52cc4f7da528",
+    "xero_id": "8bd2dd9a-a8c4-4624-a301-f2ef5b00ef81",
+    "invoice_number": "INV-1507",
+    "contact_name": "Defy Manufacturing",
+    "project_code": "ACT-GD",
+    "date": "2025-11-19",
+    "total": 16500,
+    "has_attachments": true,
+    "expected_element": "defy-single-bed-recheck",
+    "attachment": "18741310960.pdf",
+    "line_items": [
+      {
+        "description": "Single Beds - New weave bed with updated design.\n- Recycled plastic\n- Steel\n- Canvas",
+        "quantity": 25,
+        "unit_price": 600
+      },
+      {
+        "description": "Freight T.B.C"
+      }
+    ],
+    "summary": "Invoice for the supply of single beds, including materials like recycled plastic, steel, and canvas, plus freight charges.",
+    "bed_relevant": "yes",
+    "bed_count_mentioned": 25,
+    "canvas_metres_mentioned": 0,
+    "gst": 1500,
+    "invoice_date_on_doc": "19 Nov 2025",
+    "per_unit_rates": "$600.00/bed",
+    "steel_metres_mentioned": 0,
+    "subtotal_ex_gst": 15000,
+    "supplier_on_invoice": "DEFY",
+    "total_inc_gst": 16500
+  }
+]
