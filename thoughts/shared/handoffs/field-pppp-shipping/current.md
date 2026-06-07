@@ -15,11 +15,21 @@ status: complete
 **Test:** `node scripts/foundation-shortlist.mjs` (expect top-10, Paul Ramsay #1) · `pm2 logs orchestrator --nostream` (grantscope orchestrator online, 172 agents)
 
 ### Now
-[->] RESUME POINT — the pipeline is built; now operate it:
-  1. **Rung-0 chases** (from warm→cold doc): Rotary Eclub $82.5K invoice 14-months stale · Indigenous Languages & Arts $300K in-progress needs push · INV-0314 Centrecorp $84.7K send/void with Nic.
-  2. **Community-line violations — VERIFY FIRST**: prior session re-ran prep = 0 flagged (live GHL), but today's DB-mirror read found Kristy Bloomfield / Shaun Fisher / Rachel Atkinson still tagged in funder/partner drips. Likely a STALE ghl_contacts MIRROR, not a regression — check live GHL before any remediation; if mirror is stale, re-sync it. No drip sends until resolved.
-  3. **Push** the 10 commits (Ben's verb or next PR).
-  4. Reconcile the Notion grant-tranche ledger ($592K) against Xero before quoting externally (single-source flag in current-state report).
+[->] RESUME POINT — pipeline built + operating; two things pending the DB instance recovering:
+  1. **FINISH GHL grant enrichment (blocked on DB REST)** — 198/375 grant opps enriched live; 177 RICH (date-bearing) ones still bare. Date bug FIXED (GHL DATE wants ISO 'YYYY-MM-DD' not epoch-ms; verified live on opp 2Y1NVSgtbQZuML7THmww). The 8 custom fields exist. Re-runs FAILED at buildMirrorMap — shared instance PostgREST degraded ("schema cache" errors, 4th wobble tonight). **WHEN REST HEALTHY: `node scripts/enrich-ghl-grants.mjs --apply` (idempotent; ~19min) → expect ~375 enriched, ~0 failed.** Then register the cron: it's in ecosystem.config.cjs (`enrich-grants-ghl`, 45 */6) but NOT in live PM2 yet (held back — pm2 start fires it immediately = one-shot trap + load on fragile instance). Register with `pm2 start ecosystem.config.cjs --only enrich-grants-ghl && pm2 save` once instance is calm.
+  2. **⚠ COMPUTE TIER NOW URGENT** — instance wobbled 4×+ tonight (Cloudflare 522 / "schema cache" / ECHECKOUTTIMEOUT). Compounding load: standing grantscope orchestrator (172 agents, 10s poll, added tonight) + heavy paginated supabase-js runs. max_connections=90 review from the 06-07 incident list is the real bottleneck — do BEFORE Monday 6am when discovery+orbit+enrich crons all fire together.
+  3. **Rung-0 chases**: Rotary Eclub $82.5K (Pene Curtis Gmail DRAFT created, awaiting send) · Indigenous Languages & Arts $300K in-progress · INV-0314 Centrecorp $84.7K send/void with Nic.
+  4. **Push** the ~9 local commits (Ben's verb).
+  5. Reconcile Notion grant-tranche ledger ($592K) vs Xero before external quoting.
+
+### Done this session (funding system buildout — see git log bc9123a..bec879d)
+- Community-line: 3 people (Kristy/Shaun/Rachel, 7 records) — funder+newsletter tags STRIPPED live (34 removals, verified). `scripts/strip-community-line-tags.mjs`.
+- Rotary INV-0222 traced: Pene Curtis Rotary Global Grant in-assembly (not a deadbeat) — Gmail draft created, send pending.
+- `/finance/opportunities` four-lane board shipped (commit bc9123a).
+- `push-prospects-to-ghl.mjs`: discovery→GHL rail (10 prospects pushed: 5 lapsed funders→Supporter Journey, 5 MMR→Buyer Pipeline; dedupe-protected).
+- Regional Business Gateways (Qld, $250-600K, EOI 17 Jul) added to Grants pipeline for Harvest — NOTE eligibility needs a consortium (council/chamber-led), ACT Pty can't apply solo.
+- Harvest = Sunshine Coast Council → free GrantGuru at sunshinecoast.grantguru.com.au (register Harvest, ~900 curated grants).
+- GHL grant enrichment: 8 opp custom fields created + backfill (see pending #1).
 
 ### Mon 8 Jun morning (all verified ready)
 6:00 discovery live-inserts ~150 grants (watchdog-guarded, scorer on fallback router) · 7:00 enrich on MiniMax · 7:32 pr-ci-sweep routine first fire (expect "no open PRs") · 7:45 PPPP scan (momentum feeds) · ritual with Nic: Place-vs-Pulse + gone-quiet projects + Kristy GHL-UI merge + James Davidson ring call.
