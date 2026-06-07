@@ -758,6 +758,8 @@ const cronScripts = [
   {
     name: 'discover-grants',
     script: 'scripts/discover-grants.mjs',
+    // grant-engine is TS source with parameter properties — strip-only mode can't run it
+    node_args: '--experimental-transform-types',
     cron_restart: '0 6 * * *', // Daily 6am AEST
   },
   {

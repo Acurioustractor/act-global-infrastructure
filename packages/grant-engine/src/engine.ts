@@ -17,14 +17,14 @@ import type {
   DiscoveryRunResult,
   CanonicalGrant,
   GrantScorer,
-} from './types.js';
-import { SourceRegistry } from './sources/registry.js';
-import { normalize } from './normalizer.js';
-import { deduplicateGrants, filterExisting } from './deduplicator.js';
-import { GrantRepository } from './storage/repository.js';
-import { createWebSearchPlugin } from './sources/web-search.js';
-import { createLLMKnowledgePlugin } from './sources/llm-knowledge.js';
-import { createGrantConnectPlugin } from './sources/grantconnect.js';
+} from './types.ts';
+import { SourceRegistry } from './sources/registry.ts';
+import { normalize } from './normalizer.ts';
+import { deduplicateGrants, filterExisting } from './deduplicator.ts';
+import { GrantRepository } from './storage/repository.ts';
+import { createWebSearchPlugin } from './sources/web-search.ts';
+import { createLLMKnowledgePlugin } from './sources/llm-knowledge.ts';
+import { createGrantConnectPlugin } from './sources/grantconnect.ts';
 
 export class GrantEngine {
   private registry: SourceRegistry;

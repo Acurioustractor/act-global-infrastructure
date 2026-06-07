@@ -5,7 +5,7 @@
  * Handles date parsing, amount normalization, category mapping, and dedup key generation.
  */
 
-import type { RawGrant, CanonicalGrant, GrantSource } from './types.js';
+import type { RawGrant, CanonicalGrant, GrantSource } from './types.ts';
 
 const MONTH_MAP: Record<string, string> = {
   jan: '01', feb: '02', mar: '03', apr: '04', may: '05', jun: '06',

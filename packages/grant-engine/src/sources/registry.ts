@@ -5,7 +5,7 @@
  * Each plugin runs independently — one failure doesn't stop others.
  */
 
-import type { SourcePlugin, SourcePluginConfig, DiscoveryQuery, RawGrant, DiscoveryRunStats } from '../types.js';
+import type { SourcePlugin, SourcePluginConfig, DiscoveryQuery, RawGrant, DiscoveryRunStats } from '../types.ts';
 
 export class SourceRegistry {
   private plugins = new Map<string, SourcePlugin>();

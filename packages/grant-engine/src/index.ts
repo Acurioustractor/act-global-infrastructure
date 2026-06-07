@@ -15,7 +15,7 @@
  */
 
 // Core engine
-export { GrantEngine } from './engine.js';
+export { GrantEngine } from './engine.ts';
 
 // Types
 export type {
@@ -31,15 +31,15 @@ export type {
   GrantScorer,
   GrantEngineConfig,
   ExistingGrantRecord,
-} from './types.js';
+} from './types.ts';
 
 // Source plugins
-export { createWebSearchPlugin } from './sources/web-search.js';
-export { createLLMKnowledgePlugin } from './sources/llm-knowledge.js';
-export { createGrantConnectPlugin } from './sources/grantconnect.js';
-export { SourceRegistry } from './sources/registry.js';
+export { createWebSearchPlugin } from './sources/web-search.ts';
+export { createLLMKnowledgePlugin } from './sources/llm-knowledge.ts';
+export { createGrantConnectPlugin } from './sources/grantconnect.ts';
+export { SourceRegistry } from './sources/registry.ts';
 
 // Utilities
-export { normalize, normalizeDate, normalizeAmount, normalizeCategories, generateDedupKey } from './normalizer.js';
-export { deduplicateGrants, filterExisting } from './deduplicator.js';
-export { GrantRepository } from './storage/repository.js';
+export { normalize, normalizeDate, normalizeAmount, normalizeCategories, generateDedupKey } from './normalizer.ts';
+export { deduplicateGrants, filterExisting } from './deduplicator.ts';
+export { GrantRepository } from './storage/repository.ts';
