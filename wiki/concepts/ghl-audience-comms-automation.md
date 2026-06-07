@@ -48,13 +48,14 @@ Each `comms:` tag = enrolment in one automated stream. Proposed canonical set:
 | Stream | Who (derived) | Cadence | Consent required |
 |---|---|---|---|
 | `comms:act-newsletter` | org supporters | monthly | `newsletter_consent=Yes` |
-| `comms:goods-newsletter` | Goods supporters/buyers opted-in | ~monthly | newsletter_consent + project opt-in |
+| `comms:goods-newsletter` | Goods supporters/buyers opted-in | ~monthly | newsletter_consent |
 | `comms:harvest-newsletter` | Harvest members/locals | event-driven | newsletter_consent |
+| `comms:justicehub-newsletter` | JusticeHub audience | event-driven | newsletter_consent |
 | `comms:funder-drip` | active funders (NOT community) | stewardship | relationship (not mass-consent) |
 | `comms:buyer-drip` | Goods buyers | commercial | relationship |
 | `comms:supporter-drip` | new supporters (first 30d) | onboarding | newsletter_consent |
 
-**Retire / fold (decision D2 below):** `comms:partner-drip` (community-line risk — most partners are community-led → hand-only), `comms:justicehub-newsletter` (low use — fold into act-newsletter with an interest filter), `comms:nurture` (vague — replace with the specific drips).
+**Four newsletters (D1 DECIDED 2026-06-08):** ACT main · Goods · Harvest members · JusticeHub — each a distinct opt-in list, a person can hold several. **Retire (D2 DECIDED):** `comms:partner-drip` (community-line risk — partners are hand-only) and `comms:nurture` (vague — replaced by the specific drips).
 
 ## Layer 4 — Automations (the workflows we're getting ready for)
 
@@ -87,11 +88,11 @@ Every form writes a deterministic, namespaced set — no more ad-hoc flat tags (
 | Event/EOI | `source:event:<slug>` · `project:*` |
 | Partnership inquiry | `role:partner` · `partnership_type` field (NO auto-drip — routes to human) |
 
-## Decision points (need Ben's call — flagged PROPOSED above)
+## Decision points — DECIDED 2026-06-08
 
-- **D1 — Newsletter architecture:** one `comms:act-newsletter` + per-project opt-in toggles (`comms:goods/harvest-newsletter`)? *(proposed: yes — one org list, project opt-ins layered on)*
-- **D2 — Partner drip:** retire `comms:partner-drip` and keep partners hand-only? *(proposed: yes — community-line risk)*
-- **D3 — Tier auto-advance:** drive `tier:` by behaviour (opens/donations) while `ring:` stays hand-set? *(proposed: yes)*
-- **D4 — Consent default:** explicit only, never implied from an inquiry? *(proposed: yes — Spam Act + OCAP)*
+- **D1 — Newsletters:** ✅ FOUR distinct lists — `comms:act-newsletter` · `comms:goods-newsletter` · `comms:harvest-newsletter` · `comms:justicehub-newsletter`. A contact can hold several.
+- **D2 — Partner drip:** ✅ Retire `comms:partner-drip` — partners are hand-only (community-line risk).
+- **D3 — Tier:** ✅ `tier:` auto-advances on behaviour (opens/donations/purchases); `ring:` stays hand-set (Field closeness).
+- **D4 — Consent:** ✅ Explicit only — `newsletter_consent=Yes` required before any newsletter enrol; inquiry/purchase never implies consent (Spam Act 2003 + OCAP).
 
-Once D1–D4 are settled, the comms streams + automation triggers above lock, and the migration script (`ghl-taxonomy-migrate.mjs`) lands every contact in the right segment with the gates enforced.
+The comms streams + triggers above are now locked. The migration worksheet (`thoughts/shared/reviews/ghl-taxonomy-migration-worksheet-2026-06-08.md`) is the gated input to the apply step.
