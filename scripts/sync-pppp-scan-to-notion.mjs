@@ -20,7 +20,9 @@
  *
  * Cron: Monday 7:45am AEST (entry pppp-scan in ecosystem.config.cjs) — before
  * the 8am weekly cockpit so the scan page is waiting when Ben + Nic sit down.
- * State: config/notion-database-ids.json → ppppScan { parentPage, runs: { <monday-iso>: { n, pageId } } }
+ * State: .pppp-scan-state.json (gitignored, like .xero-sync-state.json) → runs: { <monday-iso>: { n, pageId } }.
+ *        The cron must never dirty a tracked file — a stash/checkout over uncommitted state would lose the
+ *        idempotency record and double-create a run page. parentPage stays in config/notion-database-ids.json.
  */
 
 import { Client } from '@notionhq/client';
@@ -46,6 +48,10 @@ const sb = createClient(
 );
 
 const cfg = JSON.parse(readFileSync(CONFIG_PATH, 'utf-8'));
+const PARENT_PAGE = cfg.ppppScan?.parentPage || '1553e9c2-4bf3-49d2-960a-d77070f467cb';
+const STATE_PATH = join(REPO_ROOT, '.pppp-scan-state.json');
+const loadState = () => (existsSync(STATE_PATH) ? JSON.parse(readFileSync(STATE_PATH, 'utf8')) : { runs: {} });
+const saveState = (s) => writeFileSync(STATE_PATH, JSON.stringify(s, null, 2) + '\n');
 const log = (m) => console.log(`[${new Date().toISOString().slice(11, 19)}] ${m}`);
 const fmt = (n) => `$${Number(n || 0).toLocaleString('en-AU', { maximumFractionDigits: 0 })}`;
 const ageDays = (iso) => Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
@@ -229,27 +235,27 @@ if (PREFILL_PAGE) {
   // append feeds to an existing run page (Run #1 path)
   const blocks = await feedBlocks();
   await notion.blocks.children.append({ block_id: PREFILL_PAGE, children: blocks });
-  cfg.ppppScan = cfg.ppppScan || { parentPage: '1553e9c2-4bf3-49d2-960a-d77070f467cb', runs: {} };
-  cfg.ppppScan.runs[week] = cfg.ppppScan.runs[week] || { n: Object.keys(cfg.ppppScan.runs).length + 1, pageId: PREFILL_PAGE };
-  writeFileSync(CONFIG_PATH, JSON.stringify(cfg, null, 2) + '\n');
+  const state = loadState();
+  state.runs[week] = state.runs[week] || { n: Object.keys(state.runs).length + 1, pageId: PREFILL_PAGE };
+  saveState(state);
   log(`Pre-filled feeds onto page ${PREFILL_PAGE} (registered as week ${week} → cron will not double-create)`);
   process.exit(0);
 }
 
 // cron path: create this week's run page, idempotent per ISO week
-cfg.ppppScan = cfg.ppppScan || { parentPage: '1553e9c2-4bf3-49d2-960a-d77070f467cb', runs: {} };
-if (cfg.ppppScan.runs[week]) {
-  log(`Run page for week ${week} already exists (${cfg.ppppScan.runs[week].pageId}) — nothing to do`);
+const state = loadState();
+if (state.runs[week]) {
+  log(`Run page for week ${week} already exists (${state.runs[week].pageId}) — nothing to do`);
   process.exit(0);
 }
-const runN = Object.keys(cfg.ppppScan.runs).length + 1;
+const runN = Object.keys(state.runs).length + 1;
 const title = `PPPP Weekly Scan — Run #${runN} · Week of ${new Date(week).toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}`;
 const page = await notion.pages.create({
-  parent: { page_id: cfg.ppppScan.parentPage },
+  parent: { page_id: PARENT_PAGE },
   icon: { type: 'emoji', emoji: '🔭' },
   properties: { title: { title: [rt(title)] } },
   children: [...ritualBlocks(runN, week), ...(await feedBlocks())],
 });
-cfg.ppppScan.runs[week] = { n: runN, pageId: page.id };
-writeFileSync(CONFIG_PATH, JSON.stringify(cfg, null, 2) + '\n');
+state.runs[week] = { n: runN, pageId: page.id };
+saveState(state);
 log(`Created ${title} → ${page.url}`);
