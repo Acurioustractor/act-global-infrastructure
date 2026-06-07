@@ -9,22 +9,33 @@ status: complete
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-07T08:10:00Z
-**Goal:** Grant-chain revival DONE → DB incident survived + fully remediated (canary-verified collation refresh, 63 hot indexes rebuilt, person_roles covering index live). Funding-lanes build (tasks 1–4) parked mid-flight.
-**Branch:** main (~4 commits ahead of origin: maintenance script v3+v4 + doc fixes — "push" pending)
-**Test:** `node --experimental-transform-types scripts/discover-grants.mjs --dry-run` (expect ~150 unique, 0 errors)
+**Updated:** 2026-06-07T09:30:00Z
+**Goal:** Four-lane funding build SHIPPED + orchestrator revival COMPLETE (PM2-homed + saved) + warm→cold pipeline operating picture committed. Next: operate the pipeline (Rung-0 chases), violations verify, push.
+**Branch:** main (~10 commits ahead of origin — "push" pending, Tier 3)
+**Test:** `node scripts/foundation-shortlist.mjs` (expect top-10, Paul Ramsay #1) · `pm2 logs orchestrator --nostream` (grantscope orchestrator online, 172 agents)
 
 ### Now
-[->] RESUME POINT: four-lane funding tasks, parked on the incident, DB now healthy:
-  1. **Orchestrator revival** (procurement_alerts dead since 14 Mar) — ROOT CAUSE FOUND: grantscope's `orchestrator` (scripts/agent-orchestrator.mjs, its ONLY PM2 entry) was never `pm2 save`d → dropped on first restart ~14 Mar; contract-alert-checker is registered in its agent-registry but nothing executes it. Data fresh (austender 807k rows to 6 Jun, state_tenders 200k). REVIVAL NEEDS BEN'S CALL: starting it triggers a 3-month agent backlog burst + procurement_notification_outbox sends to assess first. ⚠ another session works in grantscope — touch only the orchestrator.
-  2. **Foundation shortlist ranker** — view over foundations(11,042) × foundation_relationship_signals(47 act_* derived, applied) × power profiles × Field warmth → weekly top-10.
-  3. **IPP/MMR standing query** — austender_contracts.is_mmr_applicable + furniture/community categories → Goods-biddable tenders via Butterfly/Oonchiumpa JV.
-  4. **Corporate double-door lens** — orgs in austender as buyers AND foundations as grant-makers; v_act_procurement_buyers (226) exists.
+[->] RESUME POINT — the pipeline is built; now operate it:
+  1. **Rung-0 chases** (from warm→cold doc): Rotary Eclub $82.5K invoice 14-months stale · Indigenous Languages & Arts $300K in-progress needs push · INV-0314 Centrecorp $84.7K send/void with Nic.
+  2. **Community-line violations — VERIFY FIRST**: prior session re-ran prep = 0 flagged (live GHL), but today's DB-mirror read found Kristy Bloomfield / Shaun Fisher / Rachel Atkinson still tagged in funder/partner drips. Likely a STALE ghl_contacts MIRROR, not a regression — check live GHL before any remediation; if mirror is stale, re-sync it. No drip sends until resolved.
+  3. **Push** the 10 commits (Ben's verb or next PR).
+  4. Reconcile the Notion grant-tranche ledger ($592K) against Xero before quoting externally (single-source flag in current-state report).
 
 ### Mon 8 Jun morning (all verified ready)
 6:00 discovery live-inserts ~150 grants (watchdog-guarded, scorer on fallback router) · 7:00 enrich on MiniMax · 7:32 pr-ci-sweep routine first fire (expect "no open PRs") · 7:45 PPPP scan (momentum feeds) · ritual with Nic: Place-vs-Pulse + gone-quiet projects + Kristy GHL-UI merge + James Davidson ring call.
 
-### This Session (2026-06-07 evening — DB incident + remediation)
+### This Session (2026-06-07 late evening — four lanes shipped + orchestrator revival + warm→cold pipeline)
+- [x] Four-lane funding tools (commit `1136fc9`): `foundation-shortlist.mjs` (weights: signal .45/warmth .25/capacity .20/recency .10 ×approachability; warmth via board_members↔field-decisions.jsonl) · `goods-tender-scan.mjs` (austender+state_tenders are AWARDED data → re-tender targets, not open feeds; 8 MMR targets/90d) · `corporate-double-door.mjs` (0 exact, 14 coincidental near-misses — dual-role thesis doesn't hold) · orchestrator revival brief.
+- [x] PREMISE CORRECTED: orchestrator wasn't dead globally — only contract-alert path (no agent_schedules row + entity_abn→supplier_abn schema drift + NULL watermark). procurement outbox EMPTY + in-app-only. Real exposure was 771 stale queued emails in grant_notification_outbox.
+- [x] QUARANTINE (Ben yes): 771 → status='cancelled' (reversible), verified 0 queued.
+- [x] CONTRACT-ALERT REVIVAL (Ben greenlit): 4-line column fix in grantscope `check-contract-alerts.mjs` (committed there, `0507e7d`) → watermark stamped now() (SQL-verified 0 would-alert; 5 historical stay buried) → dry-run clean → agent_schedules 24h registered (first fire ~7pm Bris 8 Jun, in-app only).
+- [x] EXECUTOR MYSTERY SOLVED: nothing was hosting the orchestrator (no PM2/Vercel/pg_cron/launchd) — today's runs were the other grantscope session running it manually. Ben ran `pm2 start ecosystem.config.js && pm2 save` → orchestrator id 133 ONLINE, in dump.pm2 (survives restarts), 172 registered agents, small due-backlog executed calmly.
+- [x] RELATIONSHIP MAPS (2 agents, commit `e546887`): `2026-06-08-funding-relationships-current-state.md` (11 FY26 grant-makers/$1.31M ACCREC; zero federal procurement footprint 0/806,713; PICC $365K largest payer; 6 adjacency recipes R1–R6) + `2026-06-08-pipelines-suppliers-dgr-doors.md` (GHL $272M Grants pipeline = discovery noise, real = 4 in-progress+3 submitted; spine warm threads Snow ToR 45/yr·Dusseldorp 40/yr; suppliers-as-relationships Defy ~$219K·Oonchiumpa Consultancy $14.9K; Butterfly DGR unlocks ~11 DGR-gated + 318 Indigenous-targeted grants + 551 DGR foundations) + provenance sidecars.
+- [x] SYNTHESIS: `2026-06-08-warm-to-cold-funding-pipeline.md` — five rungs (in-motion → renewals → adjacent → new doors → cold-ranked), weekly rhythm, hygiene gates. Never start colder than you have to.
+- [!] Classifier blocked grantscope edits mid-batch (half-edited file) — resolved with Ben's explicit verb; also blocked pm2 start (Ben ran via `!`). Pattern: cross-repo writes during another session's activity need Ben's words verbatim.
+- [!] DB wobbled again this evening (Cloudflare 522/ECHECKOUTTIMEOUT mid-agent-task, self-recovered) — watch for recurrence; compute-tier review still open from incident list.
+
+### Prior (2026-06-07 evening — DB incident + remediation)
 - [x] INCIDENT: shared DB wedged 16:24–17:22 (pool exhaustion → instance freeze). Causes: my pm2-restart fired discover-grants live (4h hang — scorer retry-storm on dead Anthropic key) + parallel ad-hoc probes + person_roles seq-scan loop (count=exact, no index) + uncached site polling (limit=5000 + justice_matrix bursts). Ben restarted via dashboard 17:22.
 - [x] Incident fixes committed: grant-scorer → fallback router · discover-grants 30-min watchdog · memory `pm2-oneshot-restart-trap` (pm2 restart on a cron one-shot = LIVE RUN; use stop)
 - [x] MAINTENANCE RUN (Ben-authorized, completed ~18:00): collation 153.120→153.121 mismatch remediated via v4 canary design (amcheck NOT in Supabase's catalogue at all — index-scan-order vs forced-sort-order on 7 unique text columns, all `ok` = order unchanged) → 63 hot-table text indexes rebuilt CONCURRENTLY → REFRESH applied (datcollversion=153.121, warning gone) → `idx_person_roles_company_active` covering partial index live, planner picks Index Only Scan → zero invalid-index debris.
@@ -55,7 +66,7 @@ status: complete
 - [ ] Mon 8 Jun sweep decisions now fed by evidence: gone-quiet projects (stop carrying?) · test junk in live pipelines (Wash Test, QuestionTest, FueyJCXaBUvnatyct) · James Davidson ring call
 - [ ] Kristy 4→1 merge still blocked: token lacks contacts-merge scope (403). Ben merges in GHL UI (keep yk4uK8rgDNGA87EUqNbu primary — holds full tag union) or grants scope + `node scripts/orbit-tracer.mjs merge-kristy`. Tier 3 either way.
 - [ ] 15 Jun: Run #2 auto-creates as child of field guide page (access verified, no action needed)
-- [ ] main is 2 commits ahead of origin (local-only) — push needs explicit word (Tier 3) or ride the next PR
+- [ ] main is ~10 commits ahead of origin (local-only) — push needs explicit word (Tier 3) or ride the next PR
 
 ### Decisions
 - SPEND filter server-side (`.eq('type','SPEND')`): client-side filter after `.limit(1000)` silently drops rows on a heavy week
