@@ -11,7 +11,7 @@ status: complete
 <!-- This section is extracted by SessionStart hook for quick resume -->
 **Updated:** 2026-06-08T07:00:00Z
 **Goal:** GHL CRM made automation-ready — taxonomy audited, audience/comms/automation strategy locked (D1-D4), consent backfilled from evidence. NEXT SESSION: review all current lists (the 4 newsletters + segments) on a clean context.
-**Branch:** main (~12 commits ahead of origin — "push" pending, Tier 3)
+**Branch:** main (7 commits ahead of origin — "push" pending, Tier 3)
 **Test:** `node scripts/backfill-newsletter-consent.mjs` (DRY RUN, writes nothing — shows current opt-in/unknown classification) · grant enrichment DONE (344/375, verified)
 
 ### Now
