@@ -9,30 +9,30 @@ status: complete
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-07T04:15:47Z
-**Goal:** Review + ship the PPPP/Field landscape work — DONE. PRs #142 and #87 merged; main at 67157d0; working tree clean; zero open PRs.
-**Branch:** main (wip/ecosystem-ghl-architecture-2026-06-02 merged + deleted)
-**Test:** `node scripts/sync-pppp-scan-to-notion.mjs --dry-run` (5 feeds render, no write)
+**Updated:** 2026-06-07T04:45:00Z
+**Goal:** Review + ship the PPPP/Field landscape work — DONE, then extended: Project momentum feed built + people-lane state verified clean.
+**Branch:** main (2 commits ahead of origin, local-only: 0608c9a handoff + c2aa820 momentum feed)
+**Test:** `node scripts/sync-pppp-scan-to-notion.mjs --dry-run` (5 feeds render incl. stage-moves + gone-quiet, no write)
 
 ### Now
-[->] Nothing in flight — session closed clean. Next touch is Monday's PPPP scan.
+[->] Nothing in flight. Next touch is Monday's PPPP scan — now with momentum evidence in the Project row.
 
-### This Session
-- [x] Reviewed PPPP landscape (pppp-operating-logic.md) + scan engine — all wikilinks verified, ~65-skills claim verified (62 actual), 5 feeds dry-run clean
-- [x] fix: SPEND filter server-side in sync-pppp-scan-to-notion.mjs (1000-cap exposure)
-- [x] fix: ppppScan run-state → gitignored `.pppp-scan-state.json` (cron never dirties git); Run #1 migrated; live no-op verified
-- [x] Committed field canon: Kristy rule, family/friends inner ground, OCAP-holds/CARE-owes community lane, Butterfly verified facts
-- [x] Rescued never-committed canon: energy-orbit.md, relationship-first-crm.md, field-workbench.mjs, apply-field-decisions.mjs
-- [x] Swept ~190 uncommitted files (3 weeks of cron artifacts, finance recon evidence, 8 handoffs) in grouped commits
-- [x] PR #142 (229 commits) merged → main; energy-orbit add/add conflicts vs PR #141 resolved to this branch's newer versions
-- [x] PR #87 (May alignment-loop synthesis) un-conflicted (656 behind → MERGEABLE) and merged on Ben's word
-- [x] Verified Notion integration CAN see field guide page → Run #2 auto-create on 15 Jun is unblocked
+### This Session (2026-06-07 PM — "do all now" follow-up)
+- [x] Verified community-line violations CLEAR: tracer (3 Jun) + sweep buckets A/B (3+5 Jun) already ran; prep re-run today = 0 flagged all buckets. Tanya, Rachel Atkinson, Shaun Fisher all fixed.
+- [x] feat: Project momentum feed in sync-pppp-scan-to-notion.mjs — opportunity stage-moves last 7d (live GHL, cursor-paginated past per-search 100-cap; ≥5 moves/same-minute = batch stamp, excluded but counted) + gone-quiet projects (90d spend, 21d+ silence). Dry-run verified: 17 genuine moves (+149 batch excluded), gone-quiet = ACT-GP 88d · ACT-SM 75d · ACT-PI 61d · ACT-DO 30d · ACT-OO.
+- [x] Canon updated to match (pppp-operating-logic.md §Surfaces) — commit c2aa820
+- [x] Name verified: "James Davidson" not "Davison" (person_identity_map); no email/GHL id anywhere → promotion needs Houston/Hutchinson LinkedIn-only precedent + Ben's ring call. Plan corrected.
+
+### Prior Session (2026-06-07 AM)
+- [x] PPPP landscape reviewed + shipped; PRs #142 + #87 merged; ~190 files swept; canon rescued (full detail in git history of this file)
 
 ### Next
 - [ ] Mon 8 Jun 7:45am: `pppp-scan` cron first scheduled fire — expect no-op (Run #1 registered); check `pm2 logs pppp-scan` if curious
 - [ ] Mon 8 Jun: PPPP scan ritual with Nic — settle the Place-vs-Pulse fork (recommended: keep Place, absorb Pulse into Process)
+- [ ] Mon 8 Jun sweep decisions now fed by evidence: gone-quiet projects (stop carrying?) · test junk in live pipelines (Wash Test, QuestionTest, FueyJCXaBUvnatyct) · James Davidson ring call
+- [ ] Kristy 4→1 merge still blocked: token lacks contacts-merge scope (403). Ben merges in GHL UI (keep yk4uK8rgDNGA87EUqNbu primary — holds full tag union) or grants scope + `node scripts/orbit-tracer.mjs merge-kristy`. Tier 3 either way.
 - [ ] 15 Jun: Run #2 auto-creates as child of field guide page (access verified, no action needed)
-- [ ] This handoff commit is local-only on main — push needs explicit word (Tier 3) or ride the next PR
+- [ ] main is 2 commits ahead of origin (local-only) — push needs explicit word (Tier 3) or ride the next PR
 
 ### Decisions
 - SPEND filter server-side (`.eq('type','SPEND')`): client-side filter after `.limit(1000)` silently drops rows on a heavy week
