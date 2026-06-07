@@ -32,6 +32,14 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 - [[funder-alignment-2026-05-14|Funder alignment — second pass, ledger expanded and receivables beginning to clear]] — 2026-05-14 · Q1 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
+- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Alignment Loop drift — 2026-04-24 to 2026-05-08]] — 2026-05-08 · 14-day drift summary. $207K receivables cleared; D&O 16 days from deadline; Section 11 scope added; novation template drafted.
+
+- [[entity-migration-truth-state-2026-05-08|Entity migration truth-state — 53 days to cutover, Section 11 scope added, D&O window critical]] — 2026-05-08 · Q3 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[project-truth-state-2026-05-08|Project truth-state — 75 codes × 4 sources, second pass]] — 2026-05-08 · Q2 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[funder-alignment-2026-05-08|Funder alignment — second pass, receivables clearing, D&O window tightening]] — 2026-05-08 · Q1 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
 - [[entity-migration-truth-state-2026-04-24|Entity migration truth-state — 67 days to cutover, what's done vs open]] — 2026-04-24 · Q3 baseline, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
 - [[project-truth-state-2026-04-24|Project truth-state — 74 codes × 4 sources, who's real]] — 2026-04-24 · Q2 baseline, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
