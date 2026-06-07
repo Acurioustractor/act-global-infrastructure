@@ -1,22 +1,22 @@
 # Newsletter Consent Backfill — Worksheet
 
-> Generated 2026-06-07T20:21:41.981Z · mode: **DRY RUN (nothing written to GHL)**
+> Generated 2026-06-07T20:39:07.876Z · mode: **APPLY**
 > Source of truth for `source` = LIVE GHL contact record (the mirror does not carry it).
 
 ## 1. Summary
 
 | Metric | Count |
 |---|---|
-| Newsletter-tagged, no consent recorded (worklist) | 212 |
-| Contacts checked (live GHL read OK) | 185 |
+| Newsletter-tagged, no consent recorded (worklist, live-readable ids) | 210 |
+| Contacts checked (live GHL read OK) | 183 |
 | Live read errors (could not classify) | 27 |
-| **OPT-IN (backfillable)** | **76** |
-| &nbsp;&nbsp;of which on Harvest list | 30 |
+| **OPT-IN (backfillable)** | **108** |
+| &nbsp;&nbsp;of which on Harvest list | 62 |
 | NOT-OPT-IN (flag, no backfill) | 11 |
-| UNKNOWN (Ben to rule) | 98 |
+| UNKNOWN (Ben to rule) | 64 |
 | Skipped (auto_/null mirror ids — not live GHL contacts) | 1 |
 
-Newsletter-tagged rows scanned in mirror (incl. already-consented): 327.
+Newsletter-tagged rows scanned in mirror (incl. already-consented): 325.
 
 ## 2. Source distribution (distinct live `source` → count → classification)
 
@@ -24,9 +24,9 @@ Newsletter-tagged rows scanned in mirror (incl. already-consented): 327.
 |---|---|---|
 | Website Inquiry | 37 | UNKNOWN |
 | Newsletter Signup (footer) | 31 | OPT-IN |
-| Harvest \| Member Signup | 30 | OPT-IN |
-| Harvest member list | 20 | UNKNOWN |
-| gathering-footer | 14 | UNKNOWN |
+| Harvest \| Member Signup | 28 | OPT-IN |
+| Harvest member list | 20 | OPT-IN |
+| gathering-footer | 14 | OPT-IN |
 | ACT Intelligence | 14 | UNKNOWN |
 | Container Request CSV | 8 | NOT-OPT-IN |
 | Newsletter Signup (canberra-airport-2026) | 5 | OPT-IN |
@@ -49,46 +49,36 @@ Newsletter-tagged rows scanned in mirror (incl. already-consented): 327.
 
 | List | Total no-consent | Backfillable (OPT-IN) | Not-opt-in | Unknown |
 |---|---|---|---|---|
-| ACT | 64 | 22 | 0 | 42 |
+| ACT | 63 | 55 | 0 | 8 |
 | Goods | 91 | 46 | 2 | 43 |
-| Harvest | 72 | 30 | 0 | 42 |
+| Harvest | 70 | 62 | 0 | 8 |
 | JusticeHub | 22 | 0 | 9 | 13 |
-| Generic | 61 | 22 | 0 | 39 |
+| Generic | 60 | 55 | 0 | 5 |
 
 _Note: a contact on more than one newsletter list is counted once per list, so list totals can exceed the worklist count._
 
-## 4. UNKNOWN — Ben rules on these (98 total, showing up to 50)
+## 4. UNKNOWN — Ben rules on these (64 total, showing up to 50)
 
 | ghl_id | Live source (verbatim) | List(s) |
 |---|---|---|
-| 6YbKCU69DfPAQ6zhbfRy | Harvest member list | Generic, Harvest, ACT |
 | V8n6DFh9apuRqjYHC0zI | phase3-question-verify | Harvest |
-| OKXlDD1Rjz5pHU4l1acb | Harvest member list | Generic, Harvest, ACT |
 | IBCn3GJoYY9yefSSRma9 | phase3-follow-verify | Harvest |
-| ZEE0vVoX5MXfU3T13Euz | Harvest member list | Generic, Harvest, ACT |
 | 5LqgNvZQ2TGXHyJguHkB | Website Inquiry | Goods, ACT |
 | 7ZKeS2H6Fyi1xDUTvING | Website Inquiry | Goods, ACT |
 | moxP9fCQ7a2pdibcxPDa | Website Inquiry | Goods |
 | 1FJKzuyt1IpEFdjbJhjC | Website Inquiry | Goods |
 | zeHEzXBZhDtcI0mtMzGz | phase3-follow-verify2 | Harvest |
-| ApN5twHwwU4oxdF8OHrg | Harvest member list | Generic, Harvest, ACT |
 | wHstWIW6zo1ifWnWsayd | Website Inquiry | Goods |
-| rDUI85k0HWkfxvTyiNXK | Harvest member list | Generic, Harvest, ACT |
 | o0nVQWqVWIGTqXbg0zuG | Website Inquiry | JusticeHub |
 | B7vVWvvVhrUhP3QL3Dnl | Website Inquiry | Goods |
-| tzA610VVaZhZMw8usZSF | Harvest member list | Generic, Harvest, ACT |
 | CjmW3zEgVVEYnrkw8tvq | Website Inquiry | Goods |
 | WaTXyJ8P4oFUYeR5sXHT | Website Inquiry | Goods |
 | 7WXGBE5zD73ipAJfb5qE | Website Inquiry | Goods, ACT |
 | l1v8gPj5zXhURMeS0mCv | Website Inquiry | JusticeHub |
 | eyr6Cv6B9cf2VFUzJBQs | Website Inquiry | Goods |
-| RO52WGl33UZKqZq8aPVc | Harvest member list | Generic, Harvest, ACT |
-| rEHR37T2BUe8FCr48Xdf | gathering-footer | Generic, Harvest, ACT |
 | M6SIDwBoUo4NxKaMXF6G | Website Inquiry | Goods |
 | HABAwRKk7dKtPNDRsn3S | Photo Wall — Witta Gathering | Generic, Harvest, ACT |
 | JGpJ2UCTsJlHT4GQDNGs | Website Inquiry | Goods |
-| o6LuFM2NYYIgg7M5h2Zj | Harvest member list | Generic, Harvest, ACT |
-| AZZdBUEvnabo5Nzv1Pzz | gathering-footer | Generic, Harvest, ACT |
 | GR0z6Lvl2N7gdUEqzMLk | Website Inquiry | Goods |
 | 38zTrONPDE7cLUlj0EQI | Website Contact Form | Generic, Harvest, ACT |
 | 601lLFL2WpQFwlcLmPBx | Website Inquiry | Goods |
@@ -97,22 +87,32 @@ _Note: a contact on more than one newsletter list is counted once per list, so l
 | LfwjeSOvc2Mq3u4f2qm4 | Website Inquiry | Goods |
 | YveuSGaoTk1fk105ExPO | Website Inquiry | Goods |
 | 7i2onyZFqX12BKlx5uLY | Website Inquiry | Goods |
-| 7P8CDMDeyGm7myGeo8c6 | gathering-footer | Generic, Harvest, ACT |
-| Ac7Vc7EZTDzpBhoDPYe7 | gathering-footer | Generic, Harvest, ACT |
 | ORCR9yml6dCRlrD87rMm | Website Contact Form | Generic, Harvest, ACT |
-| QHoFMbtABosoL0CN4PKt | Harvest member list | Generic, Harvest, ACT |
-| bitr3uj61sXeJJ6PJy2b | Harvest member list | Generic, Harvest, ACT |
 | 4xqT9yHGyDBJKaUPf2lJ | Website Inquiry | Goods |
 | b0ma8b1Gj8MnvCk7zHjS | ACT Agent | Goods |
 | mTsZ14zvtIs3XaaTHHhX | Website Inquiry | JusticeHub |
-| QPuFa9vmpyxlJqRAI9PW | Harvest member list | Generic, Harvest, ACT |
-| 3TqWxAoUQx4fLbzvO2sW | gathering-footer | Generic, Harvest, ACT |
 | AIrpQMtxPZJvHG45duw9 | ACT Intelligence | JusticeHub |
-| zwRfyGHWuqKMyMJ0FmOA | gathering-footer | Generic, Harvest, ACT |
 | Q4h5Aa8lRj8YDOZ0E8s2 | Website Inquiry | Goods |
-| ERXI5N36f2bSDj1OIrTd | Harvest member list | Generic, Harvest, ACT |
+| IgobH3bxpJMAMNxhUCVS | Website Inquiry | Goods |
+| j7hi3rlHwmIuDKNSIdTs | Website Inquiry | Goods |
+| 0w3yMTXm12bl74aKGce0 | Website Inquiry | Goods |
+| Qtl5PgkHPMnNS1mjnGRO | Website Inquiry | Goods |
+| xIjgrNst0t7q3xDPqOE4 | ACT Intelligence | JusticeHub |
+| tiC3ISBpkDdmS54agG6P | Website Inquiry | Goods |
+| qmFrCOsGrXQbLsIgjAzX | Website Inquiry | Goods |
+| aZICs18JhTlYcCja2awk | Website Inquiry | Goods |
+| Fhk0FK9FcN563lUcSKhT | Website Inquiry | Goods |
+| nZDW2c7bgNmKT62iOMP4 | Website Inquiry | Goods |
+| VbPl2qLoyWZlYL2HmOtY | ACT Intelligence | JusticeHub |
+| K9tX5VZ7kLi4bencvHSm | ACT Intelligence | Goods |
+| vcpRdRWPqykY2oHXrJ9I | ACT Intelligence | JusticeHub |
+| Z7OBTZkhvGwXGrDuTFBE | ACT Agent | Goods |
+| RI1TytFSVn0qCj3OpxMQ | Website Inquiry | Goods |
+| x4EfbfBlRvMu6ouCOowT | Direct outreach - education collaboration | Generic, Harvest, ACT |
+| 9eSq6vFfQEVxCToD8Mru | Website - Harvest Shop Interest | Generic, Harvest, ACT |
+| ua7d7GzRAlKkivxPTsrv | ACT Agent | Goods |
 
-_… and 48 more UNKNOWN not shown._
+_… and 14 more UNKNOWN not shown._
 
 ## Appendix — live read errors (27)
 
