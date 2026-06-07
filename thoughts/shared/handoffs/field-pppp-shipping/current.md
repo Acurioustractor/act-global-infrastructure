@@ -9,15 +9,29 @@ status: complete
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-07T07:15:00Z
-**Goal:** PPPP/Field shipped → extended into the full grant-chain revival: discovery dead since 27 Apr now alive on two free/cheap engines, FY26 P&L reported, foundation ACT-signals live, first cloud routine created.
-**Branch:** main (1 commit ahead of origin: ff56368 gemini-search; everything earlier pushed through 3278a05)
+**Updated:** 2026-06-07T08:10:00Z
+**Goal:** Grant-chain revival DONE → DB incident survived + fully remediated (canary-verified collation refresh, 63 hot indexes rebuilt, person_roles covering index live). Funding-lanes build (tasks 1–4) parked mid-flight.
+**Branch:** main (~4 commits ahead of origin: maintenance script v3+v4 + doc fixes — "push" pending)
 **Test:** `node --experimental-transform-types scripts/discover-grants.mjs --dry-run` (expect ~150 unique, 0 errors)
 
 ### Now
-[->] Nothing in flight. Tomorrow 6am: discovery inserts ~150 real grants (first live write since 27 Apr) · 7am enrich on MiniMax router (smoke-tested) · 7:32am pr-ci-sweep routine first fire · 7:45am PPPP scan.
+[->] RESUME POINT: four-lane funding tasks, parked on the incident, DB now healthy:
+  1. **Orchestrator revival** (procurement_alerts dead since 14 Mar) — ROOT CAUSE FOUND: grantscope's `orchestrator` (scripts/agent-orchestrator.mjs, its ONLY PM2 entry) was never `pm2 save`d → dropped on first restart ~14 Mar; contract-alert-checker is registered in its agent-registry but nothing executes it. Data fresh (austender 807k rows to 6 Jun, state_tenders 200k). REVIVAL NEEDS BEN'S CALL: starting it triggers a 3-month agent backlog burst + procurement_notification_outbox sends to assess first. ⚠ another session works in grantscope — touch only the orchestrator.
+  2. **Foundation shortlist ranker** — view over foundations(11,042) × foundation_relationship_signals(47 act_* derived, applied) × power profiles × Field warmth → weekly top-10.
+  3. **IPP/MMR standing query** — austender_contracts.is_mmr_applicable + furniture/community categories → Goods-biddable tenders via Butterfly/Oonchiumpa JV.
+  4. **Corporate double-door lens** — orgs in austender as buyers AND foundations as grant-makers; v_act_procurement_buyers (226) exists.
 
-### This Session (2026-06-07 PM2 — grant-chain revival, "fix and build all")
+### Mon 8 Jun morning (all verified ready)
+6:00 discovery live-inserts ~150 grants (watchdog-guarded, scorer on fallback router) · 7:00 enrich on MiniMax · 7:32 pr-ci-sweep routine first fire (expect "no open PRs") · 7:45 PPPP scan (momentum feeds) · ritual with Nic: Place-vs-Pulse + gone-quiet projects + Kristy GHL-UI merge + James Davidson ring call.
+
+### This Session (2026-06-07 evening — DB incident + remediation)
+- [x] INCIDENT: shared DB wedged 16:24–17:22 (pool exhaustion → instance freeze). Causes: my pm2-restart fired discover-grants live (4h hang — scorer retry-storm on dead Anthropic key) + parallel ad-hoc probes + person_roles seq-scan loop (count=exact, no index) + uncached site polling (limit=5000 + justice_matrix bursts). Ben restarted via dashboard 17:22.
+- [x] Incident fixes committed: grant-scorer → fallback router · discover-grants 30-min watchdog · memory `pm2-oneshot-restart-trap` (pm2 restart on a cron one-shot = LIVE RUN; use stop)
+- [x] MAINTENANCE RUN (Ben-authorized, completed ~18:00): collation 153.120→153.121 mismatch remediated via v4 canary design (amcheck NOT in Supabase's catalogue at all — index-scan-order vs forced-sort-order on 7 unique text columns, all `ok` = order unchanged) → 63 hot-table text indexes rebuilt CONCURRENTLY → REFRESH applied (datcollversion=153.121, warning gone) → `idx_person_roles_company_active` covering partial index live, planner picks Index Only Scan → zero invalid-index debris.
+- [x] Script v1→v4 lessons (all committed): halt-before-fix chicken-egg · refresh-after-partial-rebuild hole · missing statement_timeout=0 · **checker-failure ≠ subject-failure** (missing amcheck marked all 1,191 indexes FAILED → near-miss full-DB reindex, killed clean) · circuit breaker >50 = systemic.
+- [x] Load-reduction list given to Ben (ranked): person_roles index ✅ done · uncached site polling (justice_matrix/limit=5000 → ISR or JSON snapshot) ⬜ · vector-syntax + mv_gs_entity_stats.counterparty_count retry-churn bugs ⬜ · pm2_cron_status heartbeat frequency ⬜ · compute tier review (max_connections=90) ⬜. Ben "ran a few ideas" — WHAT HE CHANGED NOT YET CAPTURED, ask next session.
+
+### Prior (2026-06-07 PM2 — grant-chain revival, "fix and build all")
 - [x] FY26 P&L report + provenance sidecar shipped (`thoughts/shared/reports/fy26-pnl-to-date-2026-06-07.md`): rev $1.91M / exp $1.09M / net +$815K; pushed
 - [x] ROOT CAUSE: fae6ac5 (27 Apr) archived grant-engine as "zero consumers" but discover-grants imports it relatively — every 6am fire since crashed. Restored + .ts specifiers + --experimental-transform-types in PM2 entry
 - [x] THREE dead API keys found: Anthropic (no credit) · Firecrawl (no credit) · retired model defaults inside the archived package. Fixes: grantconnect RSS via native fetch + browser UA (the "403" was UA-filtering — free, 128 grants) · llm-knowledge → MiniMax M3 Anthropic-compat endpoint (key existed; honest []) · NEW gemini-search plugin (grounded googleSearch on funded GEMINI key, 503-retry + flash-lite fallback + salvage parser, ~34 grants) · enrich → trackedAgentCompletionWithFallback (MiniMax-first; smoke-tested "OK")
