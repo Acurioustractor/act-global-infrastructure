@@ -802,6 +802,12 @@ const cronScripts = [
     cron_restart: '15 */6 * * *', // Every 6 hours, 15min after ghl-sync
   },
   {
+    name: 'enrich-grants-ghl',
+    script: 'scripts/enrich-ghl-grants.mjs',
+    args: '--apply', // idempotent: merges rich grant_opportunities fields onto GHL opp custom fields, 404-guarded
+    cron_restart: '45 */6 * * *', // Every 6 hours, 30min after sync-grants-ghl pushes new opps
+  },
+  {
     name: 'pm2-status-sync',
     script: 'scripts/sync-pm2-status.mjs',
     cron_restart: '* * * * *', // Every minute (lightweight — just reads pm2 jlist + upserts)
