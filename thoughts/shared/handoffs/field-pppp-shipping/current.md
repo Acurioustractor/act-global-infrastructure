@@ -9,28 +9,33 @@ status: complete
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-08T07:00:00Z
-**Goal:** GHL CRM made automation-ready — taxonomy audited, audience/comms/automation strategy locked (D1-D4), consent backfilled from evidence. NEXT SESSION: review all current lists (the 4 newsletters + segments) on a clean context.
-**Branch:** main (7 commits ahead of origin — "push" pending, Tier 3)
-**Test:** `node scripts/backfill-newsletter-consent.mjs` (DRY RUN, writes nothing — shows current opt-in/unknown classification) · grant enrichment DONE (344/375, verified)
+**Updated:** 2026-06-08T12:30:00Z (PM — #4 signup path PROVEN + newsletter contract FIXED; pivot to whole-system forms alignment)
+**Goal:** GHL CRM automation-ready. Strategy locked (D1-D4), consent backfilled. **#4 DONE** (live signup path proven + newsletter tag contract fixed). **NEXT SESSION (Ben's ask): review ALL website forms + the whole website system and align every form's GHL tag-write to the canonical contract — before automations fire.**
+**Branch:** act-global-infrastructure `main` (8 ahead of origin — "push" pending, Tier 3). regen-studio `wip/newsletter-tag-contract-2026-06-08` (commit `a807396`, PUSHED, undeployed, no PR).
+**Test:** regen-studio `npx tsc --noEmit` clean. Deploy + live tracer of the corrected newsletter contract = PENDING (Tier 3, Ben's verb).
 
 ### Now
-[->] RESUME POINT — NEW SESSION: **review all current GHL lists on a clean context.** Read these 3 docs first, they are the state:
-  - `wiki/concepts/ghl-crm-taxonomy.md` — full tag/field audit + target taxonomy + gated migration
-  - `wiki/concepts/ghl-audience-comms-automation.md` — the 5-layer model + 4 newsletters + D1-D4 (DECIDED) + consent gates
-  - `thoughts/shared/reviews/newsletter-consent-backfill-worksheet-2026-06-08.md` — per-list consent state
-  THE 4 NEWSLETTERS (decided): ACT main · Goods · Harvest members · JusticeHub (distinct lists, a person can hold several).
+[->] RESUME POINT — NEW SESSION: **whole-system website forms tag-contract alignment.** READ FIRST: `thoughts/shared/reviews/website-forms-tag-contract-alignment-2026-06-08.md` (full mission brief + forms inventory + per-form gaps + method). Canonical contract: `wiki/concepts/ghl-audience-comms-automation.md` §"Forms → tag contract".
+  CORE GAP: 7 formTypes flow through regen-studio `/api/forms/submit` but FORM_RULES defines only 5 — **`csa`/`farm-stay`/`residency`/`payout-wall-contest`/`flagship-inquiry` have NO namespaced contract**; 6 form components still emit flat `Context:/Route:/Source:` tags. Also map Webflow ×2 (ACT + JusticeHub) form destinations.
 
-  OPEN DECISIONS for the review session:
-  1. **237 orphan tags** need rulings before the taxonomy migration `--apply` (script `scripts/ghl-taxonomy-migrate.mjs` is DRY-RUN-only; worksheet `thoughts/shared/reviews/ghl-taxonomy-migration-worksheet-2026-06-08.md`). The big mapping fix already found: flat `storyteller` (304) is 98% NOT community (only 7 have lane:community) → map to `interest:storytelling` EXCEPT the 7 → `role:storyteller`.
-  2. **Non-opt-ins re-permission-or-remove**: ~98 UNKNOWN + 11 NOT-OPT-IN on newsletter lists with no consent (Website Inquiry 37, contact forms, ACT Intelligence, Container CSV, test data). Either a re-permission "confirm your subscription" campaign or strip the comms tag. NOT backfilled (correctly).
+  FIRST, FINISH #4 (carry-over, Tier 3 — Ben's verb): deploy regen-studio `wip/newsletter-tag-contract-2026-06-08` (open PR → merge → Vercel prod) → run ONE live tracer (`ben+nltracer-<date>@…`, tag `test:tracer`) against act.place → verify the corrected contract (incl. never-seen-live `source:website` tag + consent-source field `HdnMUyXkZRPZG7l7cygG`) landed in GHL → decide on deleting the test contact (Tier 3). Then update memory `newsletter-consent-signup-path` (still says `tier:connected`).
+
+  OPEN DECISIONS still queued (carried from the lists review):
+  1. **237 orphan tags** need rulings before the taxonomy migration `--apply` (`scripts/ghl-taxonomy-migrate.mjs` DRY-RUN-only; worksheet `thoughts/shared/reviews/ghl-taxonomy-migration-worksheet-2026-06-08.md`). Big fix found: flat `storyteller` (304) is 98% NOT community (only 7 have lane:community) → `interest:storytelling` EXCEPT the 7 → `role:storyteller`. (Also cleans the stale-tag accumulation the forms leave on contacts.)
+  2. **Non-opt-ins re-permission-or-remove**: ~98 UNKNOWN + 11 NOT-OPT-IN on newsletter lists with no consent (Website Inquiry 37, contact forms, ACT Intelligence, Container CSV, test data). Re-permission campaign OR strip the comms tag. NOT backfilled (correctly).
   3. **role:community (person=block) vs role:community-controlled (org=ok)** — confirm the rule; 70 role:community* contacts carry comms tags.
-  4. **Prove the live signup path** — 0 contacts via `source:website-form` (the fixed 06-02 path) exist; confirm a real act.place newsletter signup lands a contact WITH consent before automations go live.
+  (#4 "prove the live signup path" → DONE this session, see "Done 2026-06-08 PM" below.)
 
   STILL PARKED (pre-consent-thread):
   - **Rotary $82.5K** — Pene Curtis Gmail DRAFT awaiting send (Tier 3).
-  - **Push** ~12 commits (Ben's verb).
+  - **Push** the act-global-infrastructure commits (Ben's verb).
   - **⚠ Compute-tier review** — instance wobbled 4×+ on 06-07 (Cloudflare 522/schema-cache); max_connections=90 bottleneck + standing grantscope orchestrator (172 agents). Do before lists work hammers the DB again.
+
+### Done 2026-06-08 (PM — #4 signup path proven + newsletter contract fixed)
+- **Proved the live signup path** end-to-end: real signup → prod fallback `pushToGHL` → GHL contact `spzexfNKtWDyktWC1bjb` carries `newsletter_consent=Yes` (field `aVnqmajnysMtGYhLD0oA`) + `comms:act-newsletter`. Consent gate WORKS. Only 1 real submission ever exists (the 06-02 self-test in `pending_form_submissions`, synced=true) — zero organic traffic; the current projectCode-routing code never had a verified live signup, so a 6-day-old test on superseded code was NOT proof.
+- **Found the drift** (live code vs taxonomy): missing `role:supporter` (→ signups invisible to "Org supporters" smart-list + role-gated automations) · `source:website-form` vs `source:website` · `tier:connected` jumps the ladder (D3 wants behaviour-driven) · flat-tag pollution · GHL upsert accumulates stale tags.
+- **Fixed newsletter contract** in regen-studio (`a807396`, branch pushed): role:supporter added, source slug fixed, `tier:curious` (Ben's ruling), flat tags dropped/namespaced, route/context provenance → Supabase `fields`. tsc clean. Deploy+tracer pending (above).
+- **Pivot**: Ben scoped the next session to the WHOLE forms system → brief `thoughts/shared/reviews/website-forms-tag-contract-alignment-2026-06-08.md`.
 
 ### Done 2026-06-08 (CRM automation-readiness — git log bc9123a..69b23a9)
 - **GHL audit**: 12 pipelines · 61 contact fields/8 folders · 31 opp fields · ~150 tags. Found dual taxonomy (namespaced vs legacy flat), 2 warmth systems (ring/tier), ~900 cruft tag-uses, redundant fields. → `ghl-crm-taxonomy.md`.
