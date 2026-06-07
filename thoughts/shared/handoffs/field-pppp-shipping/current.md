@@ -9,15 +9,24 @@ status: complete
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-07T04:45:00Z
-**Goal:** Review + ship the PPPP/Field landscape work — DONE, then extended: Project momentum feed built + people-lane state verified clean.
-**Branch:** main (2 commits ahead of origin, local-only: 0608c9a handoff + c2aa820 momentum feed)
-**Test:** `node scripts/sync-pppp-scan-to-notion.mjs --dry-run` (5 feeds render incl. stage-moves + gone-quiet, no write)
+**Updated:** 2026-06-07T07:15:00Z
+**Goal:** PPPP/Field shipped → extended into the full grant-chain revival: discovery dead since 27 Apr now alive on two free/cheap engines, FY26 P&L reported, foundation ACT-signals live, first cloud routine created.
+**Branch:** main (1 commit ahead of origin: ff56368 gemini-search; everything earlier pushed through 3278a05)
+**Test:** `node --experimental-transform-types scripts/discover-grants.mjs --dry-run` (expect ~150 unique, 0 errors)
 
 ### Now
-[->] Nothing in flight. Next touch is Monday's PPPP scan — now with momentum evidence in the Project row.
+[->] Nothing in flight. Tomorrow 6am: discovery inserts ~150 real grants (first live write since 27 Apr) · 7am enrich on MiniMax router (smoke-tested) · 7:32am pr-ci-sweep routine first fire · 7:45am PPPP scan.
 
-### This Session (2026-06-07 PM — "do all now" follow-up)
+### This Session (2026-06-07 PM2 — grant-chain revival, "fix and build all")
+- [x] FY26 P&L report + provenance sidecar shipped (`thoughts/shared/reports/fy26-pnl-to-date-2026-06-07.md`): rev $1.91M / exp $1.09M / net +$815K; pushed
+- [x] ROOT CAUSE: fae6ac5 (27 Apr) archived grant-engine as "zero consumers" but discover-grants imports it relatively — every 6am fire since crashed. Restored + .ts specifiers + --experimental-transform-types in PM2 entry
+- [x] THREE dead API keys found: Anthropic (no credit) · Firecrawl (no credit) · retired model defaults inside the archived package. Fixes: grantconnect RSS via native fetch + browser UA (the "403" was UA-filtering — free, 128 grants) · llm-knowledge → MiniMax M3 Anthropic-compat endpoint (key existed; honest []) · NEW gemini-search plugin (grounded googleSearch on funded GEMINI key, 503-retry + flash-lite fallback + salvage parser, ~34 grants) · enrich → trackedAgentCompletionWithFallback (MiniMax-first; smoke-tested "OK")
+- [x] web-search (Anthropic server tool) out of default sources, kept for --sources; Anthropic top-up now OPTIONAL
+- [x] foundation ACT-signals builder applied on Ben's word: 47 derived signals (Snow $402,930 matched) + 18/18 foundation_id backfills; QBE fully linked (strength = numeric(6,2) score — dollars in metadata)
+- [x] pr-ci-sweep cloud routine created (weekdays 7:30am Brisbane, Sonnet, git+GitHub only, connectors stripped): https://claude.ai/code/routines/trig_01FntCjquP2ZJh9zBsHfJbkU
+- [x] CLAUDE.md: skill-capture nudge added (one idea lifted from claude-power-tools in lieu of installing it)
+
+### Prior (2026-06-07 PM — "do all now" follow-up)
 - [x] Verified community-line violations CLEAR: tracer (3 Jun) + sweep buckets A/B (3+5 Jun) already ran; prep re-run today = 0 flagged all buckets. Tanya, Rachel Atkinson, Shaun Fisher all fixed.
 - [x] feat: Project momentum feed in sync-pppp-scan-to-notion.mjs — opportunity stage-moves last 7d (live GHL, cursor-paginated past per-search 100-cap; ≥5 moves/same-minute = batch stamp, excluded but counted) + gone-quiet projects (90d spend, 21d+ silence). Dry-run verified: 17 genuine moves (+149 batch excluded), gone-quiet = ACT-GP 88d · ACT-SM 75d · ACT-PI 61d · ACT-DO 30d · ACT-OO.
 - [x] Canon updated to match (pppp-operating-logic.md §Surfaces) — commit c2aa820
