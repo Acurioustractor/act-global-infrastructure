@@ -1,0 +1,67 @@
+{
+  "today": "2026-06-03",
+  "coverage": {
+    "transactions": {
+      "total": 2356,
+      "tagged": 2095,
+      "pct": 88.92190152801358
+    },
+    "invoices": {
+      "total": 97,
+      "tagged": 97,
+      "pct": 100
+    },
+    "opportunities": {
+      "total": 679,
+      "tagged": 634,
+      "pct": 93.37260677466863
+    },
+    "oppPiles": {
+      "total": 679,
+      "tagged": 397,
+      "pct": 58.46833578792342
+    }
+  },
+  "drift": [
+    {
+      "kind": "opp",
+      "amount": 1300000,
+      "label": "Pilbara Aboriginal Health Alliance Limited — Towards organsiational development and community driven initiates to improve the health and wellbeing outcomes of Aboriginal people across the Pilbara. · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 707180,
+      "label": "Puntukurnu Aboriginal Medical Service Aboriginal Corporation — Towards the renovation of shared and external spaces to establish the PAMS Short Stay Renal Hostel accommodation and the Wellness Centre, · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 628000,
+      "label": "Madalah Limited — Towards a digital transformation project that will support improved educational outcomes for Aboriginal young people and strengthen community connection across Western Australia. · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 500000,
+      "label": "2026 Research Acceleration Awards — Women And Infants Research Fou · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 493620,
+      "label": "Karrayili Adult Education  Centre (Aboriginal Corporation) — Towards upgrades of the Karrayili Community Hub to raise community connection and participation across the Fitzroy Valley. · Grants"
+    }
+  ],
+  "incoming": {
+    "receivables": 164250,
+    "grantsInFlight": 230000,
+    "pipelineWeighted": 2931671.7,
+    "projected90d": 3325921.7
+  },
+  "cash": -150205.68000000002,
+  "lifetime": {
+    "distinctCustomers": 39,
+    "paying": 30,
+    "paid": 1684324.31,
+    "ar": 164250,
+    "draft": 0,
+    "visibleBook": 1848574.31
+  }
+}

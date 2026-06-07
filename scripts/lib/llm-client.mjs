@@ -59,6 +59,11 @@ const PRICING = {
   minimax: {
     // Verified 2026-05-22 against minimax.io pricing. Cache reads ~$0.06/M
     // for repeated prefixes (5x cheaper than fresh input) — see PRICING.minimax_cache_read.
+    // M3 verified 2026-06-06 (platform.minimax.io): $0.60/$2.40 standard; 1M ctx, 512K max out.
+    // CAVEAT: rate DOUBLES past 512K input tokens — long-context runs cost 2× these numbers.
+    // RULE: M3 = code review / prompt-eng / grader work ONLY. NEVER relationship/person data
+    // (Shanghai servers) — The Field stays on local qwen/M3-weights. See energy-orbit memory.
+    'MiniMax-M3': { input: 0.60, output: 2.40 },
     'MiniMax-M2.7': { input: 0.30, output: 1.20 },
     'MiniMax-M2.7-highspeed': { input: 0.15, output: 0.60 },
     // Older variants kept for fallback safety (router won't pick them by
@@ -113,7 +118,9 @@ export function selectModel(task, provider = 'anthropic') {
     // cheap tier uses MiniMax-M2.7 (regular) — highspeed requires the separate
     // Plus-Highspeed subscription ($40/mo) which we don't have. See note in
     // apps/command-center/src/lib/llm-adapter.ts for context.
-    minimax: { cheap: 'MiniMax-M2.7', mid: 'MiniMax-M2.7', expensive: 'MiniMax-M2.7' },
+    // expensive → M3 (2026-06-06): 1M ctx for architecture/deep review. Pinned
+    // GRADE_*_MODEL overrides are unaffected. NEVER route person data here.
+    minimax: { cheap: 'MiniMax-M2.7', mid: 'MiniMax-M2.7', expensive: 'MiniMax-M3' },
     gemini: { cheap: 'gemini-2.5-flash-lite', mid: 'gemini-2.5-flash', expensive: 'gemini-2.5-pro' },
   };
 

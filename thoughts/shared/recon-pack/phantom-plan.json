@@ -1,0 +1,875 @@
+[
+  {
+    "txnId": "175a67e6-d501-465d-9cf5-32d5095493f8",
+    "billId": "2c9fe9d2-6896-43a5-b4d8-0104e8005c00",
+    "billNum": "PADMUZCI-0003",
+    "amount": 5,
+    "vendor": "Railway Corporation",
+    "date": "2025-12-23",
+    "conf": "medium"
+  },
+  {
+    "txnId": "0864d7d9-629f-4c31-bf08-5469ec515874",
+    "billId": "28438da1-18a0-4fc0-b0e2-3be06640a1f8",
+    "billNum": "075043-256",
+    "amount": 14.15,
+    "vendor": "Maleny Hardware And Rural Supplies",
+    "date": "2025-11-06",
+    "conf": "medium"
+  },
+  {
+    "txnId": "ae23274a-48ee-4528-8e7d-70f41cca6d82",
+    "billId": "703f9414-0936-47e7-9e51-7b87141461a1",
+    "billNum": "",
+    "amount": 15,
+    "vendor": "X Global LLC",
+    "date": "2025-12-01",
+    "conf": "high"
+  },
+  {
+    "txnId": "291babd1-2918-4894-9e29-040f6b1c3fd6",
+    "billId": "5f21011f-9e8f-4e23-8896-f47fd1db59ba",
+    "billNum": "",
+    "amount": 17,
+    "vendor": "CONFESSION",
+    "date": "2025-12-21",
+    "conf": "high"
+  },
+  {
+    "txnId": "4953cb96-00a3-4722-bbed-a41a88a3f273",
+    "billId": "a304889d-2ea5-43f9-9163-66e721fe9949",
+    "billNum": "MOZLLRUU-0002",
+    "amount": 17.75,
+    "vendor": "Bitwarden",
+    "date": "2026-01-07",
+    "conf": "medium"
+  },
+  {
+    "txnId": "8b674591-441e-4a67-9b20-d0986034e8f4",
+    "billId": "aff821b2-ac65-4b50-9da2-227f5ac6821e",
+    "billNum": "",
+    "amount": 19.23,
+    "vendor": "The Roastery Cafe",
+    "date": "2025-12-12",
+    "conf": "high"
+  },
+  {
+    "txnId": "3da4dda5-4440-4077-97ee-f48da493d26f",
+    "billId": "4848b6ee-0456-4939-ad5b-c244dc042740",
+    "billNum": "",
+    "amount": 20.5,
+    "vendor": "The Townsville Store",
+    "date": "2026-04-02",
+    "conf": "high"
+  },
+  {
+    "txnId": "b2ae236d-1e64-428b-850b-0d2b9a156793",
+    "billId": "a3dd13fd-57f5-4418-883c-2b2b9de6ab4f",
+    "billNum": "",
+    "amount": 25.4,
+    "vendor": "The Maleny Pie Guy",
+    "date": "2025-12-19",
+    "conf": "high"
+  },
+  {
+    "txnId": "9dbf33f3-00c0-4091-952d-39868d977b47",
+    "billId": "a0b3c50e-950b-4af3-a128-665f968068ad",
+    "billNum": "",
+    "amount": 28,
+    "vendor": "Dext Software",
+    "date": "2026-03-11",
+    "conf": "high"
+  },
+  {
+    "txnId": "44210898-1507-4fbb-b450-060254a7c4ec",
+    "billId": "685b2102-adea-44e7-b459-0045d950dc05",
+    "billNum": "PTJQ79UH-0001",
+    "amount": 29.14,
+    "vendor": "SideGuide Technologies",
+    "date": "2025-11-12",
+    "conf": "medium"
+  },
+  {
+    "txnId": "cc8b87b9-4449-4755-bd61-aeeda222fab6",
+    "billId": "b9b5440c-1f8f-43fa-b203-bc1bf83bc78e",
+    "billNum": "",
+    "amount": 29.99,
+    "vendor": "Apple Pty Ltd",
+    "date": "2025-11-26",
+    "conf": "high"
+  },
+  {
+    "txnId": "bf45a7a5-a628-4a68-b723-4d33f71bf7ec",
+    "billId": "28e7b652-754a-4006-ba62-3c7be15f291d",
+    "billNum": "NZ2Y87AU-0002",
+    "amount": 30.91,
+    "vendor": "Cognition AI",
+    "date": "2026-01-17",
+    "conf": "medium"
+  },
+  {
+    "txnId": "dfa821c7-f284-46ee-937a-e51716b36a72",
+    "billId": "3331e956-0fa6-43d5-9bf6-66cb15ba81b5",
+    "billNum": "NZ2Y87AU-0002",
+    "amount": 30.91,
+    "vendor": "Cognition AI",
+    "date": "2026-01-17",
+    "conf": "medium"
+  },
+  {
+    "txnId": "91c14b8b-5e52-4709-8cdf-a7e38925ada0",
+    "billId": "dd656d11-0e7b-410e-8664-66f81ca9f63c",
+    "billNum": "RB18199472640",
+    "amount": 30.97,
+    "vendor": "Uber",
+    "date": "2025-10-13",
+    "conf": "medium"
+  },
+  {
+    "txnId": "b75cbd28-d16b-41bd-bab0-06de7fa918d0",
+    "billId": "3511af9a-dfa7-433d-bb3c-5e436787c6b8",
+    "billNum": "AGAPY3VP-0010",
+    "amount": 36.21,
+    "vendor": "HighLevel",
+    "date": "2026-04-05",
+    "conf": "medium"
+  },
+  {
+    "txnId": "c438d8f2-d0de-4b31-bf60-7d45acf968b9",
+    "billId": "601c20f4-2ba4-418c-9f2c-39b2108a2a4f",
+    "billNum": "RB18146893190",
+    "amount": 36.28,
+    "vendor": "Uber",
+    "date": "2025-10-01",
+    "conf": "medium"
+  },
+  {
+    "txnId": "b9288bea-4c8a-4530-8281-79a90243ed5e",
+    "billId": "ca11be49-dc4a-4933-b171-edd290496582",
+    "billNum": "",
+    "amount": 39.09,
+    "vendor": "Dept of Transport & Main Roads",
+    "date": "2026-01-06",
+    "conf": "high"
+  },
+  {
+    "txnId": "f84b1f9f-f1e5-4b6b-993e-7c2929b1cf80",
+    "billId": "c5c9337d-ea7d-40a0-85c8-1a431b4e84cc",
+    "billNum": "",
+    "amount": 42.5,
+    "vendor": "Woolworths",
+    "date": "2026-03-15",
+    "conf": "high"
+  },
+  {
+    "txnId": "a243c2e6-bdfa-4e01-9b62-6f6c7fcabb64",
+    "billId": "7ebac46d-e968-4c75-9eaf-4853f81ebd9e",
+    "billNum": "GCOQMFL1-0004",
+    "amount": 42.6,
+    "vendor": "Every Media",
+    "date": "2026-04-09",
+    "conf": "medium"
+  },
+  {
+    "txnId": "719d6ba3-a5ad-49fb-b133-44639b1cf5f5",
+    "billId": "5dbbb2fe-901d-40df-8fcd-6d658e1aa3d1",
+    "billNum": "",
+    "amount": 42.83,
+    "vendor": "Budget Petrol Mascot",
+    "date": "2025-12-11",
+    "conf": "high"
+  },
+  {
+    "txnId": "177a386a-8047-4f1c-86d8-85d7b12675ac",
+    "billId": "620e7fa0-877c-4d09-b533-da0001cbf4bc",
+    "billNum": "1761283162",
+    "amount": 44.61,
+    "vendor": "Webflow",
+    "date": "2025-10-24",
+    "conf": "medium"
+  },
+  {
+    "txnId": "25c60707-828f-49e3-8590-0963fbacb849",
+    "billId": "dc88d544-1123-4c50-9d86-ba61ac0edeaf",
+    "billNum": "",
+    "amount": 44.9,
+    "vendor": "Sunshine Coast Council",
+    "date": "2025-12-02",
+    "conf": "high"
+  },
+  {
+    "txnId": "449f855f-37be-4ac5-ab32-e2d58bb90871",
+    "billId": "c5fccc57-2f55-4338-9632-5ef1f5af2df9",
+    "billNum": "",
+    "amount": 44.99,
+    "vendor": "Tripsim",
+    "date": "2025-11-15",
+    "conf": "high"
+  },
+  {
+    "txnId": "5d8722c5-15f7-46ec-b852-9e86d9b8cab6",
+    "billId": "c2cfe880-ecb0-4315-809d-ed904dbf9679",
+    "billNum": "",
+    "amount": 45.46,
+    "vendor": "The Roxburgh House",
+    "date": "2025-12-22",
+    "conf": "high"
+  },
+  {
+    "txnId": "0aa7fd91-7341-4f91-9fea-57858e3e3b3e",
+    "billId": "eadccf1b-e9ca-41d5-a932-deeba0992b33",
+    "billNum": "",
+    "amount": 48,
+    "vendor": "Edmonds Landscaping Supplies",
+    "date": "2025-12-03",
+    "conf": "high"
+  },
+  {
+    "txnId": "73d16265-f1fe-43ec-8d88-973f619fd397",
+    "billId": "59c60145-27cc-4f39-b493-be99e986c90f",
+    "billNum": "RB18779252080",
+    "amount": 50.05,
+    "vendor": "Zapier",
+    "date": "2025-10-03",
+    "conf": "medium"
+  },
+  {
+    "txnId": "e66e6d42-9b52-455c-a23d-fd361b31407f",
+    "billId": "90aa3278-f400-47dd-b105-8285dd501bc7",
+    "billNum": "019a4a7b-b374-2f97-1fdd-5d9ac3d2d202",
+    "amount": 50.42,
+    "vendor": "Zapier",
+    "date": "2025-11-01",
+    "conf": "medium"
+  },
+  {
+    "txnId": "b8e400bb-4c64-4bc6-a0c4-55b21295885b",
+    "billId": "1ae73482-fdd6-4f7d-84fd-2e808022724b",
+    "billNum": "",
+    "amount": 54.9,
+    "vendor": "Permewans Mitre 10",
+    "date": "2025-12-22",
+    "conf": "high"
+  },
+  {
+    "txnId": "a694ff76-83f9-4f06-afc8-ce0b1e718b91",
+    "billId": "01beac17-47b6-4470-add0-39506eb4fb14",
+    "billNum": "",
+    "amount": 57.6,
+    "vendor": "Taxi Receipt",
+    "date": "2025-10-24",
+    "conf": "high"
+  },
+  {
+    "txnId": "06440fdc-9bc3-4b7f-8ac2-462fe5266c71",
+    "billId": "85950266-da75-489b-95fd-fb098f86dce0",
+    "billNum": "397",
+    "amount": 59.3,
+    "vendor": "Woolworths",
+    "date": "2026-04-14",
+    "conf": "medium"
+  },
+  {
+    "txnId": "bfa89334-d753-4d69-a669-aa983d48a363",
+    "billId": "40f15e89-4219-4ec6-b552-faca021e14c0",
+    "billNum": "",
+    "amount": 60.96,
+    "vendor": "Memories Bistro",
+    "date": "2025-12-13",
+    "conf": "high"
+  },
+  {
+    "txnId": "00961f4b-bec2-4d5a-bea2-f4522d446084",
+    "billId": "239d81a9-5f0d-41c2-9815-ef595376baf8",
+    "billNum": "",
+    "amount": 67.98,
+    "vendor": "Google Australia",
+    "date": "2026-03-31",
+    "conf": "high"
+  },
+  {
+    "txnId": "baa4053c-623b-4e5f-887b-41a14bf268fd",
+    "billId": "3cdff99e-fdfc-4d0f-bd0e-2700d38361d5",
+    "billNum": "1760576604",
+    "amount": 71.3,
+    "vendor": "Webflow",
+    "date": "2025-10-14",
+    "conf": "medium"
+  },
+  {
+    "txnId": "043852c8-eacd-4940-afab-fafb1cd471b8",
+    "billId": "c1c5719a-ef30-46c3-b2f1-18f20bf38241",
+    "billNum": "",
+    "amount": 77.22,
+    "vendor": "Memories Bistro",
+    "date": "2025-12-13",
+    "conf": "high"
+  },
+  {
+    "txnId": "6eb5e5f0-7281-44b4-8c2f-486a3cee5c10",
+    "billId": "3d1c1a32-8c95-4379-bed1-79df723575fe",
+    "billNum": "TTI10299989051",
+    "amount": 80,
+    "vendor": "Telstra",
+    "date": "2025-10-14",
+    "conf": "high"
+  },
+  {
+    "txnId": "9c6ffec4-e226-40da-910d-256cfd137444",
+    "billId": "e8ccd851-3b75-45e0-87c7-07f97e65fd3a",
+    "billNum": "",
+    "amount": 86.36,
+    "vendor": "Clark Rubber Capalaba",
+    "date": "2026-01-06",
+    "conf": "high"
+  },
+  {
+    "txnId": "bae857c8-f60d-4ac3-a838-bf1514fa2d16",
+    "billId": "55427dbb-1d8f-45fb-ba04-0cd518ab89de",
+    "billNum": "",
+    "amount": 96,
+    "vendor": "Repco",
+    "date": "2025-12-11",
+    "conf": "high"
+  },
+  {
+    "txnId": "7e418b5a-6e47-46f4-a05e-d6795984f145",
+    "billId": "dd3a4e4d-13c5-4078-b4a2-e75f6839b7b5",
+    "billNum": "",
+    "amount": 99.03,
+    "vendor": "Reddy Express",
+    "date": "2026-01-10",
+    "conf": "high"
+  },
+  {
+    "txnId": "725f7cbf-56ef-4983-abd7-ee5f20561d65",
+    "billId": "62d56d8c-ed7b-4dff-b06b-a98b19a9c34b",
+    "billNum": "",
+    "amount": 99.89,
+    "vendor": "Voyages Indigenous Tourism Australia Pty Ltd",
+    "date": "2026-01-31",
+    "conf": "high"
+  },
+  {
+    "txnId": "1e3f57c1-84dd-413b-8e70-f75121c0099c",
+    "billId": "25d19210-d0e6-4e82-b34a-a5d439b1b955",
+    "billNum": "",
+    "amount": 105.67,
+    "vendor": "Alsahwa Estate",
+    "date": "2026-01-18",
+    "conf": "high"
+  },
+  {
+    "txnId": "6a87e299-d09f-4e12-bde6-8d2c0a3a3782",
+    "billId": "ec0b024a-715e-467a-9600-1528e9a1ceb1",
+    "billNum": "",
+    "amount": 111.2,
+    "vendor": "Bunnings Warehouse",
+    "date": "2026-03-27",
+    "conf": "high"
+  },
+  {
+    "txnId": "8689b0bf-9ab3-41ab-ad1c-eeeea426670a",
+    "billId": "f71dd2b6-4563-4cad-b00d-dc3bf38456f6",
+    "billNum": "",
+    "amount": 119,
+    "vendor": "Car Park",
+    "date": "2025-11-24",
+    "conf": "high"
+  },
+  {
+    "txnId": "fae92640-df5c-435b-8bf6-e299754c4a1d",
+    "billId": "d91a8fc6-e382-4759-ade0-9af36de05ec4",
+    "billNum": "",
+    "amount": 122.71,
+    "vendor": "Reddy Express",
+    "date": "2025-12-12",
+    "conf": "high"
+  },
+  {
+    "txnId": "87d6101e-ca59-40f0-8bd2-b2332453b994",
+    "billId": "4178b00e-2a09-41b0-8008-3957c1367e4b",
+    "billNum": "",
+    "amount": 124.79,
+    "vendor": "Nighton Harvey",
+    "date": "2025-12-04",
+    "conf": "high"
+  },
+  {
+    "txnId": "bf296a91-2398-4790-85cd-04182c9e60b5",
+    "billId": "10396498-a0f6-4303-849b-6b7dfdc0df82",
+    "billNum": "QBYK3J4VN",
+    "amount": 131,
+    "vendor": "Qantas Group Accommodation",
+    "date": "2025-10-27",
+    "conf": "medium"
+  },
+  {
+    "txnId": "f4e3a4f6-8485-42fc-895c-2c401dcf994b",
+    "billId": "356afc94-dc1e-4a2c-8bdb-5c22eb08dc80",
+    "billNum": "",
+    "amount": 131.69,
+    "vendor": "Lotte Duty Free",
+    "date": "2025-11-15",
+    "conf": "high"
+  },
+  {
+    "txnId": "db81f062-78fe-427f-828c-c3a317acff34",
+    "billId": "db1a5164-556c-4c72-8af9-7141b5a0661e",
+    "billNum": "",
+    "amount": 138.07,
+    "vendor": "Millicent Service Station",
+    "date": "2025-12-21",
+    "conf": "high"
+  },
+  {
+    "txnId": "fd2b0a91-c9c6-4c1c-a189-98cea6bc188b",
+    "billId": "f5db859a-63e1-43fa-929d-a9712093aa42",
+    "billNum": "",
+    "amount": 140.29,
+    "vendor": "Reddy Express",
+    "date": "2026-01-12",
+    "conf": "high"
+  },
+  {
+    "txnId": "d4812e80-e47e-4d47-aa9c-d1af68a6c1be",
+    "billId": "4b887363-6a4f-4a4d-a33d-e81559a7e97d",
+    "billNum": "58975172-0020",
+    "amount": 151.09,
+    "vendor": "Cognition AI",
+    "date": "2025-10-02",
+    "conf": "medium"
+  },
+  {
+    "txnId": "9b6dd774-64b4-42d9-b628-10af4660216e",
+    "billId": "53fc72cb-ee3b-4e93-9562-2df3d02f737e",
+    "billNum": "",
+    "amount": 159.74,
+    "vendor": "Mobil Mobil Hamilton",
+    "date": "2025-12-22",
+    "conf": "high"
+  },
+  {
+    "txnId": "a77b4cfe-4bb6-42c1-a258-275c28d5386a",
+    "billId": "c1c8a5b0-e376-4efd-a0c5-810c3bcea7e0",
+    "billNum": "",
+    "amount": 160,
+    "vendor": "Orange Sky Australia",
+    "date": "2026-03-12",
+    "conf": "high"
+  },
+  {
+    "txnId": "8412317b-b86c-4dd0-a0c0-6ef6dadfe159",
+    "billId": "2826adbe-bcb7-4214-86c4-6bca8a698263",
+    "billNum": "AGAPY3VP-0002",
+    "amount": 165.48,
+    "vendor": "HighLevel",
+    "date": "2025-11-23",
+    "conf": "medium"
+  },
+  {
+    "txnId": "66511cfb-a375-4652-a9ac-46c60149b4c9",
+    "billId": "21e9a2cf-c361-4b87-84f1-c3d849ca64b7",
+    "billNum": "",
+    "amount": 177.36,
+    "vendor": "Budget Car and Truck Rental (NT)",
+    "date": "2025-12-09",
+    "conf": "high"
+  },
+  {
+    "txnId": "c21abed2-6238-4927-8b23-e3ce6db2b88c",
+    "billId": "20427ef4-8936-4e32-b04b-b7c7713436bf",
+    "billNum": "",
+    "amount": 182.27,
+    "vendor": "The Bolt King",
+    "date": "2026-01-06",
+    "conf": "high"
+  },
+  {
+    "txnId": "7941df11-05e3-4b5e-9d68-b7eafad5ed0d",
+    "billId": "ce191d6a-0cc8-46ae-8c95-6d8dcdef81e1",
+    "billNum": "",
+    "amount": 185.7,
+    "vendor": "Brisbane Steel Supplies",
+    "date": "2026-01-06",
+    "conf": "high"
+  },
+  {
+    "txnId": "ca5483f0-cd5e-47ff-81ef-016dfafc72d0",
+    "billId": "ad894254-44e6-428e-854c-01fc38eeccb5",
+    "billNum": "",
+    "amount": 197.99,
+    "vendor": "Happy Boy",
+    "date": "2025-12-16",
+    "conf": "high"
+  },
+  {
+    "txnId": "d18e8056-086c-40cf-a686-a29d97ffe0cd",
+    "billId": "9da53ca3-194b-434e-87e6-bf061fa20160",
+    "billNum": "",
+    "amount": 264,
+    "vendor": "Edmonds Landscaping Supplies",
+    "date": "2025-12-03",
+    "conf": "high"
+  },
+  {
+    "txnId": "75746834-19fe-42d2-9370-1ce18d153f6b",
+    "billId": "e89e8673-447e-4271-9ef6-80d5a37e2adc",
+    "billNum": "",
+    "amount": 277.34,
+    "vendor": "Liberty Maleny",
+    "date": "2025-12-30",
+    "conf": "high"
+  },
+  {
+    "txnId": "bd03bd56-dbee-4e2d-8fad-69129455b2e1",
+    "billId": "fefb8001-22d1-4135-833c-f4d502852f0a",
+    "billNum": "",
+    "amount": 288,
+    "vendor": "Orange Sky Australia",
+    "date": "2026-01-27",
+    "conf": "high"
+  },
+  {
+    "txnId": "6b928272-c5c8-4ea5-bda5-34e5bc069240",
+    "billId": "211c092f-9a39-4f24-991e-5a3d5bf2a00e",
+    "billNum": "",
+    "amount": 299.29,
+    "vendor": "Blair Robertson - Oak & Anchor Hotel",
+    "date": "2025-12-21",
+    "conf": "high"
+  },
+  {
+    "txnId": "4818474e-5a95-45c1-96b4-73203b07a1c6",
+    "billId": "4af471fe-41c1-4b1a-ad7d-9099b3a38f66",
+    "billNum": "RB19543322010",
+    "amount": 300,
+    "vendor": "Montes Reef Resort",
+    "date": "2026-02-06",
+    "conf": "high"
+  },
+  {
+    "txnId": "d28c9992-071a-41fa-94c3-7962a96ac1a2",
+    "billId": "4e43002a-19fe-42d3-8c10-d41d244a4ef9",
+    "billNum": "W284861346",
+    "amount": 310.32,
+    "vendor": "Bunnings Warehouse",
+    "date": "2026-05-05",
+    "conf": "high"
+  },
+  {
+    "txnId": "e7018fcc-b993-43e4-b1a5-3c6acb3952ec",
+    "billId": "1a338c2a-01ef-463d-9291-6e74ba5b68e1",
+    "billNum": "2FBD9E4O-0001",
+    "amount": 312.71,
+    "vendor": "Easel Software",
+    "date": "2026-01-27",
+    "conf": "medium"
+  },
+  {
+    "txnId": "b364c190-1efa-4e50-9aa8-b217cc3155e1",
+    "billId": "5abfbed4-3492-48df-85ee-bc0cc49d8dba",
+    "billNum": "",
+    "amount": 319.09,
+    "vendor": "AGL",
+    "date": "2025-11-04",
+    "conf": "high"
+  },
+  {
+    "txnId": "43dceb21-df48-4a04-9ee0-0117ae62cefa",
+    "billId": "b82c883e-20cb-4bd1-9af2-7abc3ad7eec4",
+    "billNum": "",
+    "amount": 330,
+    "vendor": "Domino's Pizza Enterprises",
+    "date": "2025-12-02",
+    "conf": "high"
+  },
+  {
+    "txnId": "d42d0c23-6391-4991-bc7c-88c9f8a2fd8c",
+    "billId": "eb0fd810-4c92-4f4e-be69-146f342b4f3f",
+    "billNum": "",
+    "amount": 369.82,
+    "vendor": "Airbnb",
+    "date": "2025-12-22",
+    "conf": "high"
+  },
+  {
+    "txnId": "733551cf-3e04-4ae9-8f23-31b405b04f1c",
+    "billId": "b98dcb89-4cee-4c96-9e8c-1b62e1c32cc3",
+    "billNum": "",
+    "amount": 370,
+    "vendor": "Tennant Creek Retreat",
+    "date": "2025-12-12",
+    "conf": "high"
+  },
+  {
+    "txnId": "42a2d9bf-a241-4533-bbfd-c2500e3eeb2b",
+    "billId": "dbc638e7-83ba-4cde-a530-340d222dece2",
+    "billNum": "",
+    "amount": 373.52,
+    "vendor": "The Sand Yard",
+    "date": "2025-12-10",
+    "conf": "high"
+  },
+  {
+    "txnId": "a7628c87-0950-4dd1-a5d0-57eccb519d93",
+    "billId": "55dddccd-3726-450b-ac66-dfb7bd3f08c9",
+    "billNum": "",
+    "amount": 424,
+    "vendor": "Kennards Hire",
+    "date": "2025-11-12",
+    "conf": "high"
+  },
+  {
+    "txnId": "e36e24f4-1dca-42b6-a191-ea5e3168642c",
+    "billId": "e2059fe3-5cf2-4c68-ab38-1b88e44582b1",
+    "billNum": "",
+    "amount": 486.19,
+    "vendor": "Shorehouse Townsville",
+    "date": "2025-11-29",
+    "conf": "high"
+  },
+  {
+    "txnId": "693eb9e5-f06a-4e82-a50b-38c609117609",
+    "billId": "7e7381b3-193e-4fd9-af3e-57fefc0cfc95",
+    "billNum": "",
+    "amount": 549.05,
+    "vendor": "POLOLA",
+    "date": "2025-11-30",
+    "conf": "high"
+  },
+  {
+    "txnId": "ede19faf-6635-44df-9c9c-5ac6dac7f3c8",
+    "billId": "328ee314-43db-4ea2-a9e0-e414ebb26306",
+    "billNum": "",
+    "amount": 596.96,
+    "vendor": "Bunnings Warehouse",
+    "date": "2025-12-14",
+    "conf": "high"
+  },
+  {
+    "txnId": "ddc94c4a-590b-43cf-b0ee-6250fd938be2",
+    "billId": "be1ba034-7e9f-4fd5-ae3d-c87a0a3abefa",
+    "billNum": "081-2377540997",
+    "amount": 598.18,
+    "vendor": "Qantas",
+    "date": "2025-10-27",
+    "conf": "medium"
+  },
+  {
+    "txnId": "0bd21ffa-5092-4231-98a6-c312e228a3ff",
+    "billId": "8a308a32-3a3c-40f1-810f-5e26631f9964",
+    "billNum": "",
+    "amount": 600,
+    "vendor": "BOB BROWN FOUNDATION",
+    "date": "2026-03-23",
+    "conf": "high"
+  },
+  {
+    "txnId": "19b17b82-6881-4dea-8701-72891dc6f0e3",
+    "billId": "c8fbe125-b299-4990-a432-ef346cf989d0",
+    "billNum": "",
+    "amount": 616.97,
+    "vendor": "Bunnings Warehouse",
+    "date": "2026-01-12",
+    "conf": "high"
+  },
+  {
+    "txnId": "080f78fb-f170-4282-8565-a1724b141258",
+    "billId": "c159e6e7-3a85-4413-af84-bfa9bfbe4305",
+    "billNum": "",
+    "amount": 674,
+    "vendor": "Auto Sparky",
+    "date": "2025-11-27",
+    "conf": "high"
+  },
+  {
+    "txnId": "4bfeb7d0-1e2f-4bda-aacc-34eaeccd9198",
+    "billId": "3f67406e-c595-43b3-b990-8a150f40a714",
+    "billNum": "",
+    "amount": 750,
+    "vendor": "BOE Design",
+    "date": "2025-12-24",
+    "conf": "high"
+  },
+  {
+    "txnId": "08daff7c-44bf-4ea5-ad65-72e2202f6819",
+    "billId": "4c915112-4085-41b1-99f8-92863a1aaddf",
+    "billNum": "",
+    "amount": 893.47,
+    "vendor": "Defy",
+    "date": "2026-01-12",
+    "conf": "high"
+  },
+  {
+    "txnId": "569038e9-6546-4e9f-82c6-334036158a6c",
+    "billId": "44537e68-59d9-4683-b273-96e3c3c63d18",
+    "billNum": "",
+    "amount": 1243.59,
+    "vendor": "Loadshift Sydney",
+    "date": "2025-12-11",
+    "conf": "high"
+  },
+  {
+    "txnId": "b6ca711e-e27e-45f6-bee6-7d471d78e813",
+    "billId": "5334a921-5d6b-4076-8e8e-e838c5d0119a",
+    "billNum": "",
+    "amount": 1247.62,
+    "vendor": "Avis",
+    "date": "2025-11-09",
+    "conf": "high"
+  },
+  {
+    "txnId": "eaae5bfc-77f0-4aed-8b9d-a143937befb7",
+    "billId": "de612434-acd1-4845-a172-682af9f8720d",
+    "billNum": "",
+    "amount": 1468.28,
+    "vendor": "Bunnings Warehouse",
+    "date": "2025-11-08",
+    "conf": "high"
+  },
+  {
+    "txnId": "a7d099ee-4aa7-4e45-ab63-945b11070852",
+    "billId": "8651221a-2768-49a4-a498-eb6fb8617ffa",
+    "billNum": "",
+    "amount": 1714,
+    "vendor": "Kennards Hire",
+    "date": "2025-12-09",
+    "conf": "high"
+  },
+  {
+    "txnId": "94f474a7-6f6d-47a6-bfe0-2bfc56f76b92",
+    "billId": "8e0c1987-71ee-494e-bbfb-a3f716485af1",
+    "billNum": "",
+    "amount": 1811.7,
+    "vendor": "Carbatec Brisbane",
+    "date": "2026-01-12",
+    "conf": "high"
+  },
+  {
+    "txnId": "c496a052-c0f0-4543-b1de-c1d4a90f388b",
+    "billId": "c8d99460-6ba7-4813-86c7-2ba6739a9781",
+    "billNum": "",
+    "amount": 1894.1,
+    "vendor": "Defy",
+    "date": "2025-11-29",
+    "conf": "high"
+  },
+  {
+    "txnId": "4fcee4ef-84aa-40bf-a511-b14763beebbe",
+    "billId": "fdfe3ea2-55e2-4efb-99f6-62ecee5a6998",
+    "billNum": "INV-0368",
+    "amount": 2000,
+    "vendor": "RW Pacific Traders",
+    "date": "2026-01-14",
+    "conf": "medium"
+  },
+  {
+    "txnId": "9e2778dd-9c82-404a-a28b-116088bed001",
+    "billId": "5419a02c-223a-4407-b60f-260512b51165",
+    "billNum": "",
+    "amount": 2475.91,
+    "vendor": "Airbnb",
+    "date": "2025-11-11",
+    "conf": "high"
+  },
+  {
+    "txnId": "31fca37a-fb3a-4bb6-9eca-3f3779a3c8a1",
+    "billId": "e9a046f7-dad5-43ab-ae21-6e8b13e06cd1",
+    "billNum": "",
+    "amount": 2710.34,
+    "vendor": "Smartwood",
+    "date": "2026-01-07",
+    "conf": "high"
+  },
+  {
+    "txnId": "ebf6cf0a-d8a7-4d37-bc15-11a52b3eb206",
+    "billId": "372be68a-f2f7-4add-ae57-6f2a5e1bf2c6",
+    "billNum": "",
+    "amount": 3260.63,
+    "vendor": "Defy",
+    "date": "2025-12-19",
+    "conf": "high"
+  },
+  {
+    "txnId": "c5659706-8dc2-49c0-890c-e880974b1d1a",
+    "billId": "3c5e6ea6-0520-4f99-8960-b4a0c1758e23",
+    "billNum": "",
+    "amount": 3536.35,
+    "vendor": "Allclass",
+    "date": "2025-11-26",
+    "conf": "high"
+  },
+  {
+    "txnId": "4d5c4843-1ce3-48b7-bf7e-0c3a0a33c28d",
+    "billId": "8b96e972-4067-4424-954e-56d06ca1b3ec",
+    "billNum": "",
+    "amount": 3598.09,
+    "vendor": "Defy",
+    "date": "2025-12-23",
+    "conf": "high"
+  },
+  {
+    "txnId": "3eb2f80b-4044-49d5-bddf-b1c81dc35ff7",
+    "billId": "58da6612-ed5d-45e8-8fbc-071217f4d942",
+    "billNum": "",
+    "amount": 3745,
+    "vendor": "Kennards Hire",
+    "date": "2025-11-28",
+    "conf": "high"
+  },
+  {
+    "txnId": "faa4896c-ed8e-46cf-8ed8-cf41367a3d1d",
+    "billId": "b0d7936b-a7dc-4535-b3c4-ec4641a8eb56",
+    "billNum": "",
+    "amount": 4200,
+    "vendor": "RW Pacific Traders",
+    "date": "2026-01-06",
+    "conf": "high"
+  },
+  {
+    "txnId": "d8b32ab2-604c-46ff-8ac0-92d5bfd347c9",
+    "billId": "4f8826dd-f0e4-49d8-a4ac-4c876f540156",
+    "billNum": "",
+    "amount": 4575.65,
+    "vendor": "Carbatec Brisbane",
+    "date": "2026-01-06",
+    "conf": "high"
+  },
+  {
+    "txnId": "8861a415-c385-4e9a-80ea-77e643ef3e8d",
+    "billId": "63b55164-ff81-4f9c-961a-820fb94edf98",
+    "billNum": "",
+    "amount": 4715,
+    "vendor": "Centre Canvas And Upholstery",
+    "date": "2026-01-30",
+    "conf": "high"
+  },
+  {
+    "txnId": "3349b30e-e606-4520-a4fc-f1efabe15d42",
+    "billId": "af2a8efa-d84d-4d70-8482-56dadc5409a1",
+    "billNum": "",
+    "amount": 6865.65,
+    "vendor": "RNM CARPENTRY",
+    "date": "2025-11-26",
+    "conf": "high"
+  },
+  {
+    "txnId": "fec66998-2225-49f5-a054-5a9b2ea542f8",
+    "billId": "63533b93-444d-4ed4-a8ea-9bbeef2321df",
+    "billNum": "",
+    "amount": 8686.98,
+    "vendor": "Defy",
+    "date": "2026-03-31",
+    "conf": "high"
+  },
+  {
+    "txnId": "370fbede-ee74-471a-8868-4a6cbd553538",
+    "billId": "420d3522-8505-4e37-9ea0-97c9fc7b3ce6",
+    "billNum": "",
+    "amount": 12375,
+    "vendor": "Bionic Self Storage",
+    "date": "2025-12-29",
+    "conf": "high"
+  }
+]

@@ -13,6 +13,7 @@ import {
   ShieldAlert,
   Bot,
   Sparkles,
+  CalendarRange,
 } from 'lucide-react'
 import { TodayActionsHero } from '@/components/finance/TodayActionsHero'
 
@@ -64,6 +65,13 @@ const cards: Array<{
     accent: 'from-emerald-500/10 to-emerald-500/5 border-emerald-500/30',
   },
   {
+    title: 'Weekly report',
+    href: '/finance/weekly',
+    description: 'Whole-org snapshot: cash · runway · burn · income vs spend. Business strength at a glance.',
+    icon: CalendarRange,
+    accent: 'from-cyan-500/10 to-cyan-500/5 border-cyan-500/30',
+  },
+  {
     title: 'Money alignment',
     href: '/finance/money-alignment',
     description: 'Money in / money out alignment cockpit. Audit reconciled vs not.',
@@ -81,6 +89,13 @@ const cards: Array<{
     title: 'Tag a transaction',
     href: '/finance/tagger-v2',
     description: 'Assign project codes + R&D eligibility to Xero transactions.',
+    icon: Tag,
+    accent: 'from-purple-500/10 to-purple-500/5 border-purple-500/30',
+  },
+  {
+    title: 'Tagging health',
+    href: '/finance/tagging',
+    description: 'Cross-area project-code coverage, opp↔invoice conflicts, and what the resolver can fill.',
     icon: Tag,
     accent: 'from-purple-500/10 to-purple-500/5 border-purple-500/30',
   },
@@ -104,6 +119,59 @@ const cards: Array<{
     description: 'Budget vs actual per project code. Click a project to drill in.',
     icon: Layers,
     accent: 'from-indigo-500/10 to-indigo-500/5 border-indigo-500/30',
+  },
+  {
+    title: 'Cost drill — fix attribution',
+    href: '/finance/cost-drill',
+    description: 'FY26 P&L per project → drill into the Xero lines behind its costs → reassign cost-by-cost (grouped, reversible). Pull JusticeHub / PICC costs out of the overhead pool.',
+    icon: GitBranch,
+    accent: 'from-emerald-500/10 to-emerald-500/5 border-emerald-500/30',
+  },
+  {
+    title: 'Invoice tags',
+    href: '/finance/invoice-tags',
+    description: 'Every income invoice (or bill) and the project it’s tagged to — a flat list. Move any one to another project in-line, reversible.',
+    icon: Tag,
+    accent: 'from-cyan-500/10 to-cyan-500/5 border-cyan-500/30',
+  },
+]
+
+// Plan surface — the planning-side pages (previously unlinked from the front door).
+// These will be composed into the unified Money Cockpit (/finance/cockpit) as it lands.
+const planCards: Array<{
+  title: string
+  href: string
+  description: string
+  icon: typeof DollarSign
+  accent: string
+}> = [
+  {
+    title: 'PTY cutover readiness',
+    href: '/finance/pty-readiness',
+    description: 'Live 30-Jun cutover tracker — critical path, blockers, days to go.',
+    icon: Target,
+    accent: 'from-amber-500/10 to-amber-500/5 border-amber-500/30',
+  },
+  {
+    title: 'Project money',
+    href: '/finance/project-money',
+    description: 'All-projects income / received / expense / net. FY26, cash basis.',
+    icon: Layers,
+    accent: 'from-indigo-500/10 to-indigo-500/5 border-indigo-500/30',
+  },
+  {
+    title: 'Funders',
+    href: '/finance/funders',
+    description: 'Committed + potential incoming. GHL vs Xero drift, next reports.',
+    icon: GitBranch,
+    accent: 'from-blue-500/10 to-blue-500/5 border-blue-500/30',
+  },
+  {
+    title: 'Revenue model',
+    href: '/finance/revenue',
+    description: '18-month forward revenue timeline by layer + scenarios.',
+    icon: PieChart,
+    accent: 'from-emerald-500/10 to-emerald-500/5 border-emerald-500/30',
   },
 ]
 
@@ -170,6 +238,34 @@ export default function FinanceIndexPage() {
             </Link>
           )
         })}
+      </section>
+
+      <hr className="my-10 border-border" />
+
+      <section aria-labelledby="plan" className="space-y-4">
+        <div>
+          <h2 id="plan" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Plan</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            The planning side — what&apos;s coming in, what&apos;s going out, and the road to the Pty cutover. (Being composed into a single Money Cockpit.)
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {planCards.map((card) => {
+            const Icon = card.icon
+            return (
+              <Link
+                key={card.href}
+                href={card.href}
+                className={`group relative rounded-xl border bg-gradient-to-br ${card.accent} p-5 transition hover:shadow-md`}
+              >
+                <Icon className="mb-3 h-5 w-5 text-foreground/80" />
+                <h3 className="text-base font-semibold">{card.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{card.description}</p>
+                <span className="mt-3 inline-block text-xs font-medium text-foreground/60 group-hover:text-foreground">Open →</span>
+              </Link>
+            )
+          })}
+        </div>
       </section>
 
       <hr className="my-10 border-border" />

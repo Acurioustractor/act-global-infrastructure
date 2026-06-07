@@ -117,6 +117,26 @@ const FUNDERS = [
 // SEARCH + DEDUPE
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+// Phase 3 flip (2026-06-03): emit CANONICAL ONLY. The flat tags are being retired in
+// CONTRACT, so stop minting them — replace each flat with its canonical, keep unmapped
+// tags (e.g. campaign tags) as-is. Smart lists are already re-pointed to canonical.
+const CANON = {
+  'goods': ['project:act-gd'], 'act-gd': ['project:act-gd'], 'project-goods': ['project:act-gd'],
+  'goods-newsletter': ['comms:goods-newsletter'], 'newsletter': ['comms:act-newsletter'],
+  'justicehub': ['project:act-jh'], 'act-jh': ['project:act-jh'],
+  'contained': ['project:act-jh', 'interest:justice-reform'],
+  'partner': ['role:partner'], 'funder': ['role:funder'], 'goods-funder': ['role:funder'],
+  'goods-supporter': ['role:supporter'],
+};
+function toCanonical(tags) {
+  const s = new Set();
+  for (const t of tags) {
+    if (CANON[t]) CANON[t].forEach(c => s.add(c)); // replace flat with canonical
+    else s.add(t);                                 // keep unmapped (campaign tags, etc.)
+  }
+  return [...s];
+}
+
 async function gatherContactsFor(funder) {
   const byId = new Map();
   for (const q of funder.queries) {
@@ -234,7 +254,7 @@ async function main() {
       const remaining = contacts.filter(c => !deletedIds.has(c.id));
       for (const c of remaining) {
         const current = new Set(c.tags || []);
-        const missing = funder.defaultTags.filter(t => !current.has(t));
+        const missing = toCanonical(funder.defaultTags).filter(t => !current.has(t));
         if (missing.length === 0) continue;
 
         const email = (c.email || '').toLowerCase();

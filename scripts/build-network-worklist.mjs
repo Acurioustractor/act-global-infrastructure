@@ -24,7 +24,7 @@ if (!url || !key) { console.error('Missing Supabase env (NEXT_PUBLIC_SUPABASE_UR
 const sb = createClient(url, key);
 
 const PAGE = 1000;
-const NOISE = /qantas|webflow|officeworks|amazon|pinterest|codepen|virgin australia|tumblr|ratepunk|frequent flyer|customer service|no-?reply|notification|mailer|cosec|orange ?sky/i;
+const NOISE = /qantas|webflow|officeworks|amazon|pinterest|codepen|virgin australia|tumblr|ratepunk|frequent flyer|customer service|no-?reply|notification|mailer|cosec|orange ?sky|standardledger|standard ledger|thriday/i;
 
 // 1) Aggregate gmail comms per contact, paginating past the 1000-row cap.
 console.log('Aggregating gmail comms by contact (paginated)…');

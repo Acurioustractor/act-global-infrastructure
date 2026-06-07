@@ -1,0 +1,894 @@
+# NAB Visa #8815 — full reconciliation sheet (Oct–Dec 2025)
+**Generated:** 2026-06-01 05:56 · 872 card lines · source: bank_statement_lines × Xero bills/txns × Dext archive.
+
+> ⚠️ Directional, not gospel: bank mirror may be stale + vendor names are fuzzy across 3 systems. Eyeball the vendor before ticking. Surcharge = bank charge − receipt; add it via Xero **Adjustments → Bank Fees**.
+
+| Action | Lines | $ |
+|---|---|---|
+| ♻️ DUPLICATE (match bill, delete dup txn) | 105 | $67,742.62 |
+| 🔗 MATCH to existing bill/txn | 224 | $77,702.29 |
+| ✍️ APPROVE draft bill then match | 0 | $0.00 |
+| 🆕 CREATE w/ Dext coding+receipt | 42 | $28,086.81 |
+| ✏️ CREATE + code (no receipt) | 501 | $146,832.77 |
+
+## ♻️ DUPLICATES — match the bill, DELETE the duplicate card txn (105)
+- [ ] 2025-12-30 · $12,375.00 · Bionic Storage → bill "Bionic Self Storage" (PAID)
+- [ ] 2025-11-27 · $6,865.65 · RNM Carpentry → bill "RNM CARPENTRY" (PAID)
+- [ ] 2025-12-01 · $4,621.18 · Airbnb → bill "Airbnb" (PAID)
+- [ ] 2025-12-01 · $3,745.00 · Kennards Hire → bill "Kennards Hire" (PAID)
+- [ ] 2025-12-24 · $3,598.09 · Defy Design → bill "Defy" (PAID)
+- [ ] 2025-11-27 · $3,536.35 · Allclass → bill "Allclass" (PAID)
+- [ ] 2025-12-22 · $3,260.63 · Defy Design → bill "Defy" (PAID)
+- [ ] 2025-11-13 · $2,475.91 · Airbnb → bill "Airbnb" (PAID)
+- [ ] 2025-10-03 · $2,240.82 · Stratco → bill "Stratco" (DRAFT)
+- [ ] 2025-12-01 · $1,894.10 · Defy Design → bill "Defy" (PAID)
+- [ ] 2025-12-11 · $1,714.00 · Kennards Hire → bill "Kennards Hire" (PAID)
+- [ ] 2025-11-11 · $1,468.28 · Bunnings → bill "Bunnings Warehouse" (PAID)
+- [ ] 2025-10-28 · $1,418.45 · Qantas → bill "Qantas" (PAID) +$8.81 surcharge
+- [ ] 2025-10-27 · $1,409.64 · Qantas → bill "Qantas" (PAID)
+- [ ] 2025-11-12 · $1,247.62 · Avis → bill "Avis" (PAID)
+- [ ] 2025-12-30 · $1,242.84 · Qantas → bill "Qantas" (AUTHORISED)
+- [ ] 2025-12-29 · $750.00 · BOE Design → bill "BOE Design" (PAID)
+- [ ] 2025-12-17 · $596.96 · Bunnings → bill "Bunnings Warehouse" (PAID)
+- [ ] 2025-10-15 · $589.42 · Qantas → bill "Qantas" (PAID)
+- [ ] 2025-12-01 · $549.05 · Polola → bill "POLOLA" (PAID)
+- [ ] 2025-10-28 · $534.19 · DINKUM DUNNIES CABOOLTURE → bill "Onsite Rentals Dinkum Dunnies" (AUTHORISED) +$9.19 surcharge
+- [ ] 2025-11-18 · $518.18 · Budget Rent A Car → bill "Budget" (PAID)
+- [ ] 2025-12-02 · $486.19 · Shorehouse → bill "Shorehouse Townsville" (PAID)
+- [ ] 2025-11-21 · $458.28 · Qantas → bill "Qantas" (PAID)
+- [ ] 2025-11-21 · $443.30 · Qantas → bill "Qantas" (PAID) +$-14.98 surcharge
+- [ ] 2025-10-07 · $424.91 · CENTRE TRAILER SALES CICCONE → bill "Centre Trailer Sales" (AUTHORISED) +$4.91 surcharge
+- [ ] 2025-12-12 · $373.52 · The Sand Yard → bill "The Sand Yard" (PAID)
+- [ ] 2025-12-15 · $370.00 · Tennant Creek Retreat → bill "Tennant Creek Retreat" (PAID)
+- [ ] 2025-12-24 · $369.82 · Airbnb → bill "Airbnb" (PAID)
+- [ ] 2025-10-20 · $351.80 · Qantas → bill "Qantas" (PAID)
+- [ ] 2025-12-22 · $299.29 · Blair Robertson → bill "Blair Robertson - Oak & Anchor Hotel" (PAID)
+- [ ] 2025-11-21 · $289.80 · Qantas → bill "Qantas Group Accommodation" (PAID)
+- [ ] 2025-11-21 · $281.70 · Qantas → bill "Qantas Group Accommodation" (PAID) +$-8.10 surcharge
+- [ ] 2025-12-31 · $277.34 · Liberty → bill "Liberty Maleny" (PAID)
+- [ ] 2025-11-17 · $275.00 · Qantas → bill "Qantas Airways Limited" (AUTHORISED) +$15.00 surcharge
+- [ ] 2025-12-04 · $264.00 · Edmonds Landscaping → bill "Edmonds Landscaping Supplies" (PAID)
+- [ ] 2025-11-04 · $260.00 · Qantas → bill "Qantas" (PAID)
+- [ ] 2025-11-11 · $260.00 · Qantas → bill "Qantas" (PAID)
+- [ ] 2025-11-11 · $249.00 · Qantas → bill "Qantas" (PAID) +$-11.00 surcharge
+- [ ] 2025-10-08 · $244.00 · Kennards Hire → bill "Kennards Hire" (AUTHORISED)
+- [ ] 2025-12-17 · $197.99 · Happy Boy Restaurant → bill "Happy Boy" (PAID)
+- [ ] 2025-12-17 · $197.47 · Iris Todd Operations → bill "Todd Tavern" (PAID)
+- [ ] 2025-12-15 · $177.36 · Budget Rent A Car → bill "Budget Car and Truck Rental (NT)" (PAID)
+- [ ] 2025-11-24 · $166.23 · GoHighLevel → bill "HighLevel" (PAID)
+- [ ] 2025-12-24 · $159.74 · Gurcharan Singh → bill "Mobil Mobil Hamilton" (PAID)
+- [ ] 2025-11-26 · $148.03 · Budget Rent A Car → bill "Budget Car and Truck Rental (NT)" (PAID)
+- [ ] 2025-10-15 · $147.10 · Lolas Pergola Darwin CULLEN BA → bill "Lola's Pergola" (PAID)
+- [ ] 2025-10-24 · $145.00 · Qantas → bill "Qantas Group Accommodation" (PAID)
+- [ ] 2025-12-23 · $138.07 · Ampol → bill "Millicent Service Station" (PAID)
+- [ ] 2025-10-24 · $135.00 · Qantas → bill "Qantas Group Accommodation" (PAID)
+- [ ] 2025-10-24 · $135.00 · Qantas → bill "Qantas Group Accommodation" (PAID)
+- [ ] 2025-10-27 · $135.00 · Qantas → bill "Qantas Group Accommodation" (PAID)
+- [ ] 2025-10-27 · $135.00 · Qantas → bill "Qantas Group Accommodation" (PAID)
+- [ ] 2025-10-27 · $135.00 · Qantas → bill "Qantas Group Accommodation" (PAID)
+- [ ] 2025-11-17 · $135.00 · Qantas → bill "Qantas Airways Limited" (AUTHORISED) +$5.00 surcharge
+- [ ] 2025-11-17 · $131.69 · LOTTE TRAVEL RETAIL MELBOURNE  → bill "Lotte Duty Free" (PAID)
+- [ ] 2025-12-15 · $122.71 · Reddy Express → bill "Reddy Express" (PAID)
+- [ ] 2025-12-16 · $114.33 · Qantas → bill "Qantas" (AUTHORISED) +$-0.91 surcharge
+- [ ] 2025-12-10 · $100.00 · Celebrants Australia → bill "Celebrants Australia" (DRAFT)
+- [ ] 2025-12-12 · $96.00 · Repco → bill "Repco" (PAID)
+- [ ] 2025-12-15 · $81.97 · The Roastery Cafe → bill "The Roastery Cafe" (PAID)
+- [ ] 2025-10-17 · $80.00 · Telstra → bill "Telstra" (PAID)
+- [ ] 2025-12-15 · $77.22 · Memories Bistro → bill "Memories Bistro" (PAID)
+- [ ] 2025-12-15 · $73.67 · Duyu Coffee Roasters → bill "DuYu Coffee" (PAID)
+- [ ] 2025-10-16 · $71.35 · Webflow → bill "Webflow" (PAID)
+- [ ] 2025-10-14 · $71.20 · Webflow → bill "Webflow" (PAID) +$-0.15 surcharge
+- [ ] 2025-11-17 · $71.05 · Webflow → bill "Webflow" (PAID) +$0.21 surcharge
+- [ ] 2025-11-17 · $70.84 · Webflow → bill "Webflow" (PAID)
+- [ ] 2025-12-03 · $67.98 · Google → bill "Google Australia" (AUTHORISED)
+- [ ] 2025-12-23 · $67.70 · Bank St + Co → bill "BANK ST AND CO" (PAID)
+- [ ] 2025-12-18 · $65.00 · Qantas → bill "Qantas" (PAID)
+- [ ] 2025-12-04 · $61.42 · Liberty → bill "Liberty Idalia" (PAID)
+- [ ] 2025-12-15 · $60.96 · Memories Bistro → bill "Memories Bistro" (PAID)
+- [ ] 2025-12-01 · $60.00 · Little Pegs → bill "Little Pegs" (PAID)
+- [ ] 2025-12-04 · $58.74 · Good Morning Coffee → bill "Hermit Park - Good Morning Coffee" (PAID) +$2.78 surcharge
+- [ ] 2025-10-29 · $56.00 · Dialpad → bill "Dialpad" (AUTHORISED)
+- [ ] 2025-12-29 · $56.00 · Dialpad → bill "Dialpad" (DRAFT)
+- [ ] 2025-12-02 · $55.96 · Good Morning Coffee → bill "Hermit Park - Good Morning Coffee" (PAID)
+- [ ] 2025-12-23 · $54.90 · Permewans → bill "Permewans Mitre 10" (PAID)
+- [ ] 2025-11-03 · $51.54 · Google GSUITE_theharvestwSydne → bill "Google Australia" (PAID)
+- [ ] 2025-11-05 · $50.51 · Zapier → bill "Zapier" (PAID)
+- [ ] 2025-10-06 · $50.17 · Zapier → bill "Zapier" (PAID)
+- [ ] 2025-11-10 · $49.34 · Webflow → bill "Webflow" (PAID)
+- [ ] 2025-10-09 · $48.67 · Webflow → bill "Webflow" (DRAFT) +$2.47 surcharge
+- [ ] 2025-12-22 · $48.36 · Webflow → bill "Webflow" (DRAFT) +$2.16 surcharge
+- [ ] 2025-12-04 · $48.00 · Edmonds Landscaping → bill "Edmonds Landscaping Supplies" (PAID)
+- [ ] 2025-12-23 · $45.46 · The Roxburgh → bill "The Roxburgh House" (PAID)
+- [ ] 2025-11-24 · $45.18 · Webflow → bill "Webflow" (PAID) +$1.40 surcharge
+- [ ] 2025-11-17 · $44.99 · SP TRIPSIM BY SYD MASCOT → bill "Tripsim" (PAID)
+- [ ] 2025-12-04 · $44.90 · Townsville City Council → bill "Sunshine Coast Council" (PAID)
+- [ ] 2025-11-10 · $44.86 · Webflow → bill "Webflow" (DRAFT) +$-1.34 surcharge
+- [ ] 2025-10-13 · $44.84 · Webflow → bill "Webflow" (DRAFT) +$-1.36 surcharge
+- [ ] 2025-10-24 · $44.78 · Webflow → bill "Webflow" (DRAFT) +$-1.42 surcharge
+- [ ] 2025-12-11 · $43.85 · Webflow → bill "Webflow" (DRAFT) +$-2.35 surcharge
+- [ ] 2025-12-29 · $43.60 · Webflow → bill "Webflow" (PAID) +$1.25 surcharge
+- [ ] 2025-12-15 · $42.83 · Vezina → bill "Budget Petrol Mascot" (PAID)
+- [ ] 2025-11-24 · $42.20 · Webflow → bill "Webflow" (PAID) +$-1.58 surcharge
+- [ ] 2025-12-16 · $37.84 · J R Rowden → bill "F V Snowdon And J R Rowden" (AUTHORISED) +$0.34 surcharge
+- [ ] 2025-12-01 · $29.99 · Apple → bill "Apple Pty Ltd" (PAID)
+- [ ] 2025-12-17 · $22.26 · Duyu Coffee Roasters → bill "DuYu Coffee" (PAID)
+- [ ] 2025-12-15 · $19.23 · The Roastery Cafe → bill "The Roastery Cafe" (PAID)
+- [ ] 2025-12-22 · $17.00 · Confession → bill "CONFESSION" (PAID)
+- [ ] 2025-12-08 · $14.99 · Apple → bill "Apple Pty Ltd" (PAID)
+- [ ] 2025-10-31 · $12.25 · GoGet → bill "GoGet" (DRAFT)
+- [ ] 2025-11-17 · $11.99 · Apple → bill "Apple Pty Ltd" (PAID)
+
+## 🔗 MATCH — search the bill by name, tick it, add any surcharge (224)
+- [ ] 2025-10-01 · $2,554.39 · B- SEA SWIFT PTY. LT PORTSMITH → "SEA SWIFT" (PAID)
+- [ ] 2025-10-01 · $4,735.00 · Harvey Norman → "HARVEY NORMAN" (PAID)
+- [ ] 2025-10-01 · $518.90 · Qantas → "Qantas" (PAID)
+- [ ] 2025-10-01 · $64.20 · SQ *FISHBOWL DARLINGHURSTHayma → "Fishbowl Darlinghurst" (PAID)
+- [ ] 2025-10-01 · $16.60 · SUSHI SUSHI BDA BRISBANE → "Sushi Sushi Bisbane Domestic" (PAID)
+- [ ] 2025-10-02 · $13.50 · BridgeClimb → "BRIDGECLIMB SYDNEY" (PAID)
+- [ ] 2025-10-02 · $677.00 · GARRICKS CAMERA HOUSE GARBUTT → "Camera House" (PAID)
+- [ ] 2025-10-02 · $74.59 · JETBOOST.IO JETBOOST.IO HI → "Jetboost" (PAID)
+- [ ] 2025-10-02 · $7.07 · Rivareno Gelato Darlin Darling → "Rivareno Gelato" (PAID)
+- [ ] 2025-10-02 · $5.00 · SQ *GOLOSA Surry Hills → "Golosa" (PAID)
+- [ ] 2025-10-02 · $5.07 · The Rusty Rabbit Darlinghurst → "The Rusty Rabbit - Dario" (PAID)
+- [ ] 2025-10-03 · $50.99 · Google GSUITE_theharvestwSydne → "Google Australia" (PAID)
+- [ ] 2025-10-03 · $155.34 · MOFFAT BEACH BREWING CALOUNDRA → "Moffat Beach Brewing Co" (PAID)
+- [ ] 2025-10-03 · $305.97 · Piggyback → "Piggyback" (PAID)
+- [ ] 2025-10-03 · $48.50 · SQ *THE SHACK FISH & CHIPMoffa → "The Shack Fish & Chippery" (PAID)
+- [ ] 2025-10-03 · $14.25 · The Pocket Espresso Moffat Bea → "The Pocket Espresso Bar" (PAID)
+- [ ] 2025-10-03 · $152.63 · The Pocket Espresso Moffat Bea → "The Pocket Espresso Bar" (PAID)
+- [ ] 2025-10-06 · $267.89 · Liberty → "Liberty Maleny" (PAID)
+- [ ] 2025-10-06 · $497.48 · MALENY HARDWARE AND RURALMALEN → "Maleny Hardware And Rural Supplies" (PAID)
+- [ ] 2025-10-06 · $100.00 · Piggyback → "Piggyback" (AUTHORISED) +$1.00 surcharge
+- [ ] 2025-10-06 · $40.30 · The Source Bulk Foods Maleny → "The Source Bulk Foods Maleny" (PAID)
+- [ ] 2025-10-06 · $333.30 · UMART ONLINE MILTON → "Umart Online" (PAID)
+- [ ] 2025-10-06 · $27.38 · WARP PRO SUBSCRIPTION WARP.DEV → "Warp" (PAID)
+- [ ] 2025-10-07 · $15.23 · PAGE 27 CAFE ALICE SPRINGS → "Page 27" (PAID)
+- [ ] 2025-10-07 · $31.06 · PAGE 27 CAFE ALICE SPRINGS → "Page 27" (PAID)
+- [ ] 2025-10-07 · $196.00 · Qantas → "Qantas Group Accommodation" (PAID)
+- [ ] 2025-10-08 · $14.99 · Apple → "Apple Pty Ltd" (PAID)
+- [ ] 2025-10-08 · $296.50 · Coles → "Coles Supermarkets" (PAID) +$1.95 surcharge
+- [ ] 2025-10-08 · $490.00 · FOODBANK OF SOUTH AUSTRALMOUNT → "Foodbank Of South Au" (PAID)
+- [ ] 2025-10-08 · $65.53 · Hanuman Restaurant Ali Alice S → "Hanuman Alice Springs" (PAID)
+- [ ] 2025-10-08 · $29.75 · Reddy Express 1903 Alice Sprin → "Reddy Express" (PAID)
+- [ ] 2025-10-08 · $78.45 · Reddy Express 1903 Alice Sprin → "Reddy Express" (PAID)
+- [ ] 2025-10-09 · $371.57 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-10-10 · $749.35 · AIRNORTH MARRARA → "Airnorth Contact Centre" (PAID)
+- [ ] 2025-10-10 · $42.00 · ARLPARRA ABORIGINAL ALICE SPRI → "Arlparra" (PAID)
+- [ ] 2025-10-10 · $189.78 · Notion Labs → "Notion Labs" (PAID)
+- [ ] 2025-10-10 · $209.00 · Qantas → "Qantas Group Accommodation" (PAID)
+- [ ] 2025-10-13 · $25.51 · Anthropic → "Anthropic" (PAID)
+- [ ] 2025-10-13 · $68.84 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-10-13 · $294.55 · Coles → "Coles Supermarkets" (PAID)
+- [ ] 2025-10-13 · $203.71 · Hanuman Restaurant Ali Alice S → "Hanuman Alice Springs" (PAID)
+- [ ] 2025-10-13 · $159.00 · HUMAN.KIND STUDIOS ADELAIDE → "Human.Kind Studios" (PAID)
+- [ ] 2025-10-13 · $38.86 · Officeworks → "Officeworks" (PAID)
+- [ ] 2025-10-13 · $82.57 · Officeworks → "Officeworks" (PAID)
+- [ ] 2025-10-13 · $185.00 · Qantas → "Qantas Group Accommodation" (PAID)
+- [ ] 2025-10-13 · $792.01 · Qantas → "Qantas" (PAID)
+- [ ] 2025-10-13 · $300.00 · SP RED KANGAROO BOOKS ALICE SP → "Red Kangaroo Books" (PAID)
+- [ ] 2025-10-13 · $12.18 · ZLR*Uncle Don West End South B → "Uncle Don West End" (PAID) +$0.18 surcharge
+- [ ] 2025-10-13 · $89.34 · ZLR*Uncle Don West End South B → "Uncle Don West End" (PAID)
+- [ ] 2025-10-14 · $99.99 · Apple → "Apple Pty Ltd" (PAID)
+- [ ] 2025-10-14 · $111.95 · ONE68 GENERAL S& TA MANINGRIDA → "One68 General Store & Takeaway" (PAID)
+- [ ] 2025-10-14 · $517.00 · Qantas → "Qantas Group Accommodation" (PAID)
+- [ ] 2025-10-14 · $1,116.00 · Qantas → "Qantas Group Accommodation" (PAID)
+- [ ] 2025-10-14 · $1,735.00 · Qantas → "Qantas Group Accommodation" (PAID)
+- [ ] 2025-10-14 · $4.50 · ZLR*The Cheesecake Shop Mount  → "The Cheesecake Shop" (PAID)
+- [ ] 2025-10-16 · $11.99 · Apple → "Apple Pty Ltd" (PAID)
+- [ ] 2025-10-16 · $217.00 · PALM ISLAND COUNCIL PALM ISLAN → "Palm Island Motel" (PAID)
+- [ ] 2025-10-16 · $26.37 · SQ *LUCINDA STORE Lucinda → "Lucinda Store" (PAID)
+- [ ] 2025-10-20 · $29.99 · Apple → "Apple Pty Ltd" (PAID)
+- [ ] 2025-10-20 · $31.05 · Cursor AI → "Cursor AI" (PAID) +$0.28 surcharge
+- [ ] 2025-10-20 · $60.78 · Polola → "POLOLA" (PAID)
+- [ ] 2025-10-20 · $99.00 · Stratco → "Stratco" (PAID)
+- [ ] 2025-10-20 · $8.90 · Tully Bakery TULLY → "Tully Bakery" (PAID)
+- [ ] 2025-10-21 · $46.36 · CHEMIST WAREHOUSE GARBUTT → "Chemist Warehouse" (PAID)
+- [ ] 2025-10-21 · $5.32 · Officeworks → "Officeworks" (PAID)
+- [ ] 2025-10-21 · $182.22 · Officeworks → "Officeworks" (PAID)
+- [ ] 2025-10-21 · $610.00 · SP FORESTRY TOOLS ROSEVILLE → "Forestry Tools" (PAID)
+- [ ] 2025-10-21 · $170.00 · Stratco → "Stratco" (PAID)
+- [ ] 2025-10-21 · $17.20 · Sushi Train Oxford St Darlingh → "Sushi Sushi Bisbane Domestic" (PAID)
+- [ ] 2025-10-22 · $208.81 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-10-22 · $276.99 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-10-22 · $340.13 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-10-22 · $23.58 · CAFE MIA EDGECLIFF → "Cafe Mia" (AUTHORISED) +$0.28 surcharge
+- [ ] 2025-10-22 · $4.00 · SQ *GOLOSA Surry Hills → "Golosa" (PAID)
+- [ ] 2025-10-22 · $4.50 · SQ *GOLOSA Surry Hills → "Golosa" (PAID)
+- [ ] 2025-10-22 · $96.10 · SUKHOTHAI MALENY → "Sukhothai Authentic Thai Restaurant" (PAID)
+- [ ] 2025-10-22 · $273.63 · TRANSPORTMAINRDS BRISBANE → "Dept of Transport & Main Roads" (PAID)
+- [ ] 2025-10-22 · $49.30 · Webflow → "Webflow" (PAID) +$0.21 surcharge
+- [ ] 2025-10-22 · $17.24 · ZLR*The Sandwich Stop Northcot → "The Sandwich Stop" (PAID)
+- [ ] 2025-10-23 · $176.11 · Officeworks → "Officeworks" (PAID)
+- [ ] 2025-10-23 · $77.30 · SQ *GEORGE ST DELI Redfern → "George St Deli" (PAID)
+- [ ] 2025-10-23 · $4.50 · SQ *GOLOSA Surry Hills → "Golosa" (PAID)
+- [ ] 2025-10-23 · $42.00 · SQ *MOOLOOLAH VALLEY COMMMoolo → "Mooloolah Valley Community Association" (PAID)
+- [ ] 2025-10-23 · $47.25 · Taxipay → "GM Taxipay" (PAID)
+- [ ] 2025-10-23 · $52.50 · Taxipay → "GM Taxipay" (PAID)
+- [ ] 2025-10-23 · $63.00 · Taxipay → "GM Taxipay" (PAID)
+- [ ] 2025-10-23 · $70.98 · Taxipay → "GM Taxipay" (PAID)
+- [ ] 2025-10-23 · $173.83 · WW METRO/1 LAWSON SQUARE REDFE → "Metro" (PAID)
+- [ ] 2025-10-24 · $22.05 · Aldi → "Aldi Stores" (PAID)
+- [ ] 2025-10-24 · $200.00 · Ovarian Cancer Australia → "Ovarian Cancer Australia" (PAID)
+- [ ] 2025-10-24 · $4.50 · SQ *GOLOSA Surry Hills → "Golosa" (PAID)
+- [ ] 2025-10-24 · $49.26 · Webflow → "Webflow" (PAID)
+- [ ] 2025-10-27 · $125.83 · BUTCHERS BUFFET CHINAT HAYMARK → "Butchers Buffet Chinatown" (PAID)
+- [ ] 2025-10-27 · $4.50 · SQ *GOLOSA Surry Hills → "Golosa" (PAID)
+- [ ] 2025-10-27 · $116.93 · Webflow → "Webflow" (PAID) +$0.32 surcharge
+- [ ] 2025-10-27 · $79.09 · ZLR*SWEET SPELLS Haymarket → "Sweet Spells" (PAID)
+- [ ] 2025-10-28 · $226.35 · Liberty → "Liberty Maleny" (PAID)
+- [ ] 2025-10-28 · $28.20 · SQ *THE MALENY PIE GUY HQmalen → "The Maleny Pie Guy" (PAID)
+- [ ] 2025-10-28 · $15.66 · The Source Bulk Foods Maleny → "The Source Bulk Foods Maleny" (PAID)
+- [ ] 2025-10-28 · $3,270.26 · TradeMutt → "Trademutt" (PAID)
+- [ ] 2025-10-29 · $217.72 · Booking.com → "Booking.com" (PAID)
+- [ ] 2025-10-29 · $81.81 · MALENY HOTEL MALENY → "Maleny Hotel" (PAID)
+- [ ] 2025-10-29 · $227.70 · SP DTF DIRECT NEWSTEAD → "DTF Direct" (PAID)
+- [ ] 2025-10-30 · $17.32 · Cup of Eden Cafe Mount Druitt → "Cup Of Eden Cafe" (PAID)
+- [ ] 2025-10-30 · $415.90 · Qantas → "Qantas" (PAID)
+- [ ] 2025-10-30 · $4.50 · SQ *GOLOSA Surry Hills → "Golosa" (PAID)
+- [ ] 2025-10-30 · $30.00 · TARGET 5125 MOUNT DRUITT → "Target" (PAID)
+- [ ] 2025-10-31 · $33.69 · Figma → "Figma" (PAID)
+- [ ] 2025-10-31 · $45.50 · SQ *THE MALENY PIE GUY HQmalen → "Maleny Hardware And Rural Supplies" (AUTHORISED) +$-0.25 surcharge
+- [ ] 2025-10-31 · $78.18 · TRANSPORTMAINRDS BRISBANE → "Dept of Transport & Main Roads" (PAID)
+- [ ] 2025-11-03 · $184.73 · Brouhaha Maleny Maleny → "Brouhaha Maleny" (PAID)
+- [ ] 2025-11-03 · $75.03 · JETBOOST.IO JETBOOST.IO HI → "Jetboost" (PAID)
+- [ ] 2025-11-03 · $18.37 · Napkin AI → "Napkin AI" (PAID)
+- [ ] 2025-11-04 · $131.88 · BANH MI EXPRESS PTY L Alice Sp → "Banh Mi Express" (PAID)
+- [ ] 2025-11-04 · $185.05 · UNITED HEAVITREE GAP ALICE SPR → "United" (PAID)
+- [ ] 2025-11-04 · $219.99 · UNITED HEAVITREE GAP ALICE SPR → "United" (PAID)
+- [ ] 2025-11-05 · $1,308.00 · Kennards Hire → "Kennards Hire" (PAID)
+- [ ] 2025-11-05 · $285.20 · MALENY HARDWARE AND RURALMALEN → "Maleny Hardware And Rural Supplies" (PAID)
+- [ ] 2025-11-05 · $82.72 · PAGE 27 CAFE ALICE SPRINGS → "Page 27" (PAID)
+- [ ] 2025-11-06 · $1,845.51 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-11-06 · $2,797.38 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-11-10 · $17.01 · Anthropic → "Anthropic" (PAID)
+- [ ] 2025-11-10 · $163.34 · Notion Labs → "Notion Labs" (PAID) +$1.56 surcharge
+- [ ] 2025-11-10 · $14.95 · Woolworths → "Woolworths" (PAID)
+- [ ] 2025-11-11 · $6.92 · PAGE 27 CAFE ALICE SPRINGS → "Page 27" (PAID)
+- [ ] 2025-11-12 · $59.00 · Kmart → "Kmart" (PAID)
+- [ ] 2025-11-12 · $7.08 · SQ *BAMBINO ESPRESSO Mount Isa → "Bambino Espresso" (PAID)
+- [ ] 2025-11-12 · $24.29 · SQ *BAMBINO ESPRESSO Mount Isa → "Bambino Espresso" (PAID)
+- [ ] 2025-11-12 · $50.95 · Woolworths → "Woolworths" (PAID)
+- [ ] 2025-11-13 · $26.40 · ASM MONSURUL HUQ MOUNT ISA CIT → "ASM MONSURUL HUQ" (PAID)
+- [ ] 2025-11-13 · $104.29 · Reddy Express 1869 Mount Isa → "Reddy Express" (PAID)
+- [ ] 2025-11-13 · $20.61 · SMP*EzyMart Grey St f3 South B → "Ezymart Felix" (AUTHORISED) +$0.33 surcharge
+- [ ] 2025-11-13 · $7.08 · SQ *BAMBINO ESPRESSO Mount Isa → "Bambino Espresso" (PAID)
+- [ ] 2025-11-13 · $55.80 · Woolworths → "Woolworths" (PAID)
+- [ ] 2025-11-13 · $42.20 · ZAMBRERO MT ISA MOUNT ISA → "ZAMBRERO MT ISA" (PAID)
+- [ ] 2025-11-14 · $200.00 · Woolworths → "Woolworths" (PAID)
+- [ ] 2025-11-17 · $56.73 · Adobe → "Adobe Systems Software" (PAID)
+- [ ] 2025-11-17 · $105.10 · GRAYZA.COM BRISBANE CITY → "GRAYZA" (PAID)
+- [ ] 2025-11-17 · $47.98 · Officeworks → "Officeworks" (PAID)
+- [ ] 2025-11-17 · $5.64 · THE COFFEE CLUB MT ISA MOUNT I → "The Coffee Club Mt Isa" (PAID)
+- [ ] 2025-11-20 · $30.86 · Cursor AI → "Cursor AI" (PAID)
+- [ ] 2025-11-20 · $12.86 · URBAN BITES Badung (Kab) → "Urban Bites" (PAID)
+- [ ] 2025-11-21 · $199.17 · Indigo → "INDIGO A NEW EXPERIENCE" (PAID)
+- [ ] 2025-11-21 · $69.32 · Intex Stand Canggu → "INTEX STAND CANGGU BALI" (PAID)
+- [ ] 2025-11-21 · $122.00 · Qantas → "Qantas Group Accommodation" (PAID)
+- [ ] 2025-11-21 · $122.00 · Qantas → "Qantas Group Accommodation" (PAID)
+- [ ] 2025-11-21 · $196.27 · Qantas → "Qantas" (PAID)
+- [ ] 2025-11-21 · $532.00 · Qantas → "Qantas Group Accommodation" (PAID)
+- [ ] 2025-11-21 · $621.65 · Qantas → "Qantas" (PAID)
+- [ ] 2025-11-21 · $819.57 · Qantas → "Qantas" (PAID)
+- [ ] 2025-11-21 · $55.22 · Urban Bites → "Urban Bites" (PAID)
+- [ ] 2025-11-24 · $348.93 · Arthefact → "Arthefact" (PAID)
+- [ ] 2025-11-24 · $224.98 · Carriageworks → "Carriageworks" (PAID)
+- [ ] 2025-11-24 · $42.00 · Dext → "Dext Software" (PAID)
+- [ ] 2025-11-24 · $135.17 · La Porchetta → "La Porchetta - Colac" (PAID)
+- [ ] 2025-11-24 · $11.15 · Little Rosebery Cafe → "Little Rosebery Cafe" (PAID)
+- [ ] 2025-11-24 · $144.06 · Qantas → "Qantas Group Accommodation" (PAID)
+- [ ] 2025-11-24 · $1.60 · Railway → "Railway Corporation" (PAID)
+- [ ] 2025-11-24 · $97.44 · Supabase → "Supabase" (PAID)
+- [ ] 2025-11-24 · $177.12 · The Conscious Society → "The Conscious Society" (PAID)
+- [ ] 2025-11-26 · $25.50 · Delaware North → "Delaware North Airport" (PAID)
+- [ ] 2025-11-26 · $21.00 · United Carrara → "United Carrara" (PAID)
+- [ ] 2025-11-27 · $114.35 · GoGet → "GoGet Carshare" (PAID)
+- [ ] 2025-12-01 · $9.65 · Bloom Espresso → "Bloom Espresso" (PAID)
+- [ ] 2025-12-01 · $56.00 · Dialpad → "Dialpad" (PAID)
+- [ ] 2025-12-01 · $33.75 · Figma → "Figma" (PAID)
+- [ ] 2025-12-01 · $2,342.90 · Sydney Tools → "Sydney Tools" (PAID)
+- [ ] 2025-12-02 · $89.30 · Sunset Snack Foods → "Sunset Snack Bar" (PAID)
+- [ ] 2025-12-03 · $398.43 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-12-03 · $632.52 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-12-03 · $1,204.31 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-12-03 · $138.20 · Good Morning Coffee → "Hermit Park - Good Morning Coffee" (PAID)
+- [ ] 2025-12-03 · $536.97 · Officeworks → "Officeworks" (PAID)
+- [ ] 2025-12-03 · $108.00 · Starlink → "STARLINK INTERNET SERVICES" (PAID)
+- [ ] 2025-12-04 · $131.58 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-12-04 · $2,885.90 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-12-04 · $88.64 · Coles → "Coles Supermarkets" (PAID)
+- [ ] 2025-12-04 · $240.00 · Edmonds Landscaping → "Edmonds Landscaping Supplies" (PAID)
+- [ ] 2025-12-04 · $18.37 · Napkin AI → "Napkin AI" (PAID)
+- [ ] 2025-12-04 · $142.80 · UWEI → "Uwei" (PAID)
+- [ ] 2025-12-05 · $1,288.68 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-12-05 · $48.17 · Good Morning Coffee → "Hermit Park - Good Morning Coffee" (PAID)
+- [ ] 2025-12-05 · $47.60 · Nightowl → "Nightowl Belgian Gardens" (PAID)
+- [ ] 2025-12-05 · $178.42 · Splash Bar → "SPLASH BAR" (PAID)
+- [ ] 2025-12-05 · $50.49 · Zapier → "Zapier" (PAID)
+- [ ] 2025-12-08 · $717.50 · Cactus Jacks → "Cactus Jacks Bar and Grill" (TXN) +$8.65 surcharge
+- [ ] 2025-12-10 · $39.41 · Cup of Eden Cafe → "Cup Of Eden Cafe" (PAID)
+- [ ] 2025-12-11 · $79.90 · Notion Labs → "Notion Labs" (PAID)
+- [ ] 2025-12-11 · $65.59 · Thai Hanuman Ramakien → "Thai Hanuman" (PAID)
+- [ ] 2025-12-11 · $11.01 · The Ritual Espresso → "Ritual Espresso" (PAID)
+- [ ] 2025-12-12 · $44.96 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-12-12 · $548.81 · Bunnings → "Bunnings Warehouse" (PAID)
+- [ ] 2025-12-12 · $9.50 · Kmart → "Kmart" (PAID)
+- [ ] 2025-12-12 · $133.10 · Q Eats → "Q Eats" (PAID)
+- [ ] 2025-12-15 · $56.73 · Adobe → "Adobe Systems Software" (PAID)
+- [ ] 2025-12-15 · $40.00 · Alice Silver Passenger → "Alice Silver Passenger S" (PAID)
+- [ ] 2025-12-15 · $12.65 · Bay Leaf Cafe → "Bay Leaf Cafe" (PAID)
+- [ ] 2025-12-15 · $31.00 · Bay Leaf Cafe → "Bay Leaf Cafe" (PAID)
+- [ ] 2025-12-15 · $21.00 · Kmart → "Kmart" (PAID)
+- [ ] 2025-12-15 · $22.00 · Kmart → "Kmart" (PAID)
+- [ ] 2025-12-15 · $6.00 · Tennant Creek Memorial → "Tennant Creek Memorial Club" (PAID)
+- [ ] 2025-12-15 · $407.27 · Virgin Australia → "Virgin Australia" (PAID)
+- [ ] 2025-12-16 · $375.36 · Hinterland Aviation → "Hinterland Aviation" (PAID)
+- [ ] 2025-12-16 · $156.97 · TI Tree → "Ti Tree Roadhouse" (PAID)
+- [ ] 2025-12-17 · $11.99 · Apple → "Apple Pty Ltd" (PAID)
+- [ ] 2025-12-17 · $119.99 · Apple → "Apple Pty Ltd" (PAID)
+- [ ] 2025-12-17 · $77.72 · Hanuman Restaurant → "Hanuman Alice Springs" (TXN) +$1.22 surcharge
+- [ ] 2025-12-18 · $11.69 · Nightowl → "Nightowl Flinders St" (PAID)
+- [ ] 2025-12-18 · $21.27 · Polola → "POLOLA" (PAID)
+- [ ] 2025-12-19 · $30.23 · Vercel → "Vercel" (PAID)
+- [ ] 2025-12-22 · $89.00 · Booking.com → "Booking.com" (PAID)
+- [ ] 2025-12-22 · $42.00 · Dext → "Dext Software" (PAID)
+- [ ] 2025-12-22 · $57.15 · The Source Bulk Foods → "The Source Bulk Foods Maleny" (PAID)
+- [ ] 2025-12-24 · $19,800.00 · Telford Smith Engine → "Telford Smith Engineering" (PAID)
+- [ ] 2025-12-29 · $29.99 · Apple → "Apple Pty Ltd" (PAID)
+- [ ] 2025-12-29 · $146.90 · GoHighLevel → "HighLevel" (PAID)
+- [ ] 2025-12-29 · $7.57 · Railway → "Railway Corporation" (PAID)
+- [ ] 2025-12-29 · $751.23 · Woodfordia → "Woodfordia" (PAID)
+- [ ] 2025-12-29 · $59.90 · Woolworths → "The Source Bulk Foods Maleny" (PAID) +$2.75 surcharge
+- [ ] 2025-12-30 · $12.78 · Fresh & Save → "Fresh & Save Food Warehouse" (PAID)
+- [ ] 2025-12-30 · $12.24 · Nude Juice → "NUDE JUICE" (PAID)
+- [ ] 2025-12-30 · $160.30 · Piggyback → "Piggyback" (TXN) +$1.60 surcharge
+- [ ] 2025-12-30 · $24.00 · Woodfordia → "Woodfordia" (PAID)
+- [ ] 2025-12-31 · $2,420.00 · Bionic Storage → "Bionic Self Storage" (PAID)
+
+## ✍️ APPROVE draft bill first, then match (0)
+
+## 🆕 CREATE with Dext coding + attach receipt (42)
+- [ ] 2025-10-02 · $688.20 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-IN — ACT Infrastructure · receipt https://rbnk.me/i/mUneBvhjBvU
+- [ ] 2025-10-13 · $92.78 · OpenAI → 485 - Subscriptions · no project +$0.84 surcharge · receipt https://rbnk.me/i/9HdAKou7k9w
+- [ ] 2025-10-14 · $183.39 · Mighty Networks → 485 - Subscriptions · no project +$-0.25 surcharge · receipt https://rbnk.me/i/7LSPJZycf5k
+- [ ] 2025-10-15 · $289.27 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods +$5.98 surcharge · receipt https://rbnk.me/i/oUD2Ti4chTs
+- [ ] 2025-10-20 · $39.95 · Updoc → 485 - Subscriptions · no project · receipt https://rbnk.me/i/-LKbT2mvc2Y
+- [ ] 2025-10-24 · $55.76 · GoGet → 452 - Parking, Tolls & Taxis · no project · receipt https://rbnk.me/i/bucYbjdmbRs
+- [ ] 2025-10-24 · $78.96 · GoGet → 452 - Parking, Tolls & Taxis · A Curious Tractor · receipt https://rbnk.me/i/ED162lplsAA
+- [ ] 2025-10-24 · $7.72 · Railway →  · no project +$0.01 surcharge · receipt https://rbnk.me/i/yTIMdc7d9_M
+- [ ] 2025-10-29 · $110.00 · Qantas → 493 - Travel - National · no project +$0.14 surcharge · receipt https://rbnk.me/i/KDPmuyRfdkA
+- [ ] 2025-10-29 · $598.18 · Qantas → 493 - Travel - National · no project · receipt https://rbnk.me/i/AP5mxnmsYL8
+- [ ] 2025-11-11 · $1,913.31 · Qantas → 493 - Travel - National · no project · receipt https://rbnk.me/i/gylW19m1-fA
+- [ ] 2025-11-12 · $92.14 · OpenAI → 485 - Subscriptions · no project +$0.13 surcharge · receipt https://rbnk.me/i/20IVyCsS2gA
+- [ ] 2025-11-17 · $182.46 · Mighty Networks → 485 - Subscriptions · no project +$0.34 surcharge · receipt https://rbnk.me/i/Q71Rxk6UmaY
+- [ ] 2025-11-17 · $176.38 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-HV — The Harvest Witta · receipt https://rbnk.me/i/73aEOcNqx-s
+- [ ] 2025-11-17 · $718.50 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-HV — The Harvest Witta · receipt https://rbnk.me/i/fFSg4s_IK6c
+- [ ] 2025-11-17 · $80.00 · Telstra → 489 - Telephone & Internet · no project · receipt https://rbnk.me/i/olfeuzvZgXw
+- [ ] 2025-11-20 · $16,813.50 · Defy Design → 400 - Advertising & Marketing · no project · receipt https://rbnk.me/i/bGJB2Ppoeus
+- [ ] 2025-11-20 · $39.95 · Updoc → 485 - Subscriptions · no project · receipt https://rbnk.me/i/VI2DPtax3Mw
+- [ ] 2025-11-24 · $447.62 · Descript → 485 - Subscriptions · no project +$1.16 surcharge · receipt https://rbnk.me/i/WynMIOBjWoc
+- [ ] 2025-11-24 · $49.70 · Webflow → 485 - Subscriptions · A Curious Tractor +$0.32 surcharge · receipt https://rbnk.me/i/2pBIBle0834
+- [ ] 2025-11-25 · $593.20 · Qantas → 493 - Travel - National · no project · receipt https://rbnk.me/i/MoKt3ZuI6GM
+- [ ] 2025-11-25 · $1,636.08 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-PI — PICC · receipt https://rbnk.me/i/oJqhVIOUyzo
+- [ ] 2025-11-28 · $40.85 · Webflow → 485 - Subscriptions · A Curious Tractor +$0.25 surcharge · receipt https://rbnk.me/i/YHXm2zc1AmA
+- [ ] 2025-12-02 · $975.23 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-PI — PICC · receipt https://rbnk.me/i/QDak7aYwHzE
+- [ ] 2025-12-04 · $288.49 · DTF Direct → 446 - Materials & Supplies · A Curious Tractor · receipt https://rbnk.me/i/WdNnyzyrK18
+- [ ] 2025-12-09 · $61.00 · Product Of Italy Minchoury → 421 - Light meals &  refreshments · A Curious Tractor · receipt https://rbnk.me/i/1MZgT-SNprA
+- [ ] 2025-12-15 · $179.43 · Mighty Networks → 485 - Subscriptions · no project +$0.67 surcharge · receipt https://rbnk.me/i/uGhrB_cLUcU
+- [ ] 2025-12-15 · $90.58 · OpenAI → 485 - Subscriptions · no project +$0.19 surcharge · receipt https://rbnk.me/i/puzv6rd3iIw
+- [ ] 2025-12-15 · $135.00 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods · receipt https://rbnk.me/i/oYTp3LkT7Ho
+- [ ] 2025-12-15 · $69.66 · Webflow → 485 - Subscriptions · A Curious Tractor +$0.05 surcharge · receipt https://rbnk.me/i/kcysE6gagLo
+- [ ] 2025-12-17 · $69.66 · Webflow → 485 - Subscriptions · A Curious Tractor +$0.05 surcharge · receipt https://rbnk.me/i/kcysE6gagLo
+- [ ] 2025-12-18 · $130.00 · Qantas → 493 - Travel - National · no project · receipt https://rbnk.me/i/9QwiijcXaHk
+- [ ] 2025-12-18 · $80.00 · Telstra → 489 - Telephone & Internet · no project · receipt https://rbnk.me/i/_qQQM0k2PkQ
+- [ ] 2025-12-18 · $8.13 · The Beach Hotel → 421 - Light meals &  refreshments · A Curious Tractor +$0.13 surcharge · receipt https://rbnk.me/i/F0sBT22uYKk
+- [ ] 2025-12-19 · $242.23 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-MY — Mounty Yarns +$3.78 surcharge · receipt https://rbnk.me/i/ot3fr0WvV0M
+- [ ] 2025-12-19 · $259.16 · Qantas → 493 - Travel - National · no project · receipt https://rbnk.me/i/Smehdv7FqGw
+- [ ] 2025-12-22 · $39.95 · Updoc → 485 - Subscriptions · no project · receipt https://rbnk.me/i/inBNXRZBqZk
+- [ ] 2025-12-22 · $139.06 · Yianis Greek Restaurant → 421 - Light meals &  refreshments · A Curious Tractor +$2.06 surcharge · receipt https://rbnk.me/i/CPlyvf21smQ
+- [ ] 2025-12-29 · $14.94 · OpenAI → 485 - Subscriptions · no project +$0.03 surcharge · receipt https://rbnk.me/i/p6ErLyisUd4
+- [ ] 2025-12-29 · $289.00 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods · receipt https://rbnk.me/i/YS6O4t_jIO0
+- [ ] 2025-12-29 · $39.43 · Webflow → 485 - Subscriptions · A Curious Tractor +$0.06 surcharge · receipt https://rbnk.me/i/0lIbNwBRGBc
+- [ ] 2025-12-29 · $47.96 · Webflow → 485 - Subscriptions · A Curious Tractor +$0.42 surcharge · receipt https://rbnk.me/i/4vnxKRCip1Q
+
+## ✏️ CREATE + code by hand — no bill/receipt (501)
+- [ ] 2025-10-01 · $693.00 · DNPPHOTO.COM.AU PORT MELBOURN → code by hand
+- [ ] 2025-10-01 · $8.20 · Linktree → code by hand
+- [ ] 2025-10-01 · $449.26 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-10-01 · $22.40 · Uber → code by hand
+- [ ] 2025-10-01 · $23.01 · Uber → code by hand
+- [ ] 2025-10-01 · $25.99 · Uber → code by hand
+- [ ] 2025-10-01 · $26.19 · Uber → code by hand
+- [ ] 2025-10-01 · $35.00 · Uber → code by hand
+- [ ] 2025-10-01 · $51.24 · Uber → code by hand
+- [ ] 2025-10-01 · $57.88 · Uber → code by hand
+- [ ] 2025-10-01 · $71.25 · Uber → code by hand
+- [ ] 2025-10-02 · $9.99 · DocPlay → code by hand
+- [ ] 2025-10-02 · $159.16 · Mr Wong Sydney → code by hand
+- [ ] 2025-10-02 · $2.61 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-02 · $16.81 · Uber → code by hand
+- [ ] 2025-10-02 · $21.64 · Uber → code by hand
+- [ ] 2025-10-02 · $23.06 · Uber → code by hand
+- [ ] 2025-10-02 · $26.43 · Uber → code by hand
+- [ ] 2025-10-03 · $88.19 · BWC BRISBANE 133222 HAMILTON → 449 - MV - Fuel & Oil · A Curious Tractor / ACT-HV — The Harvest Witta (from your Dext vendor history)
+- [ ] 2025-10-03 · $152.09 · Claude.AI → 485 - Subscriptions (from your Dext vendor history)
+- [ ] 2025-10-03 · $5.32 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-03 · $14.32 · Uber → code by hand
+- [ ] 2025-10-03 · $36.28 · Uber → code by hand
+- [ ] 2025-10-03 · $42.29 · Uber → code by hand
+- [ ] 2025-10-03 · $48.20 · Uber → code by hand
+- [ ] 2025-10-06 · $35.00 · Belong → code by hand
+- [ ] 2025-10-06 · $260.00 · Internet Transfer → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-06 · $74.99 · LinkedIn → code by hand
+- [ ] 2025-10-06 · $0.96 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-06 · $1.76 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-06 · $300.00 · SP DRNKS MASLIN BEACH → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-06 · $6.86 · SQ *GREMLIN GROUNDS Maleny → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-10-06 · $21.42 · SQ *NEST IN WITTA Witta → code by hand
+- [ ] 2025-10-06 · $86.19 · SQ *NEST IN WITTA Witta → code by hand
+- [ ] 2025-10-06 · $447.84 · UPTON GROUP AUSTRALIA BEERWAH → code by hand
+- [ ] 2025-10-07 · $395.77 · A W M ELECTRICAL WHO ALICE SPR → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-10-07 · $100.00 · About Time Bathhouse Torquay → code by hand
+- [ ] 2025-10-07 · $275.44 · AGL → code by hand
+- [ ] 2025-10-07 · $16.45 · Audible → code by hand
+- [ ] 2025-10-07 · $214.61 · IGA NORTHSIDE BRAITLING → code by hand
+- [ ] 2025-10-07 · $0.82 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-07 · $94.00 · RICEBOI MOOLOOLABA → code by hand
+- [ ] 2025-10-07 · $23.50 · Squarespace → code by hand
+- [ ] 2025-10-07 · $62.79 · Taxipay → 449 - MV - Fuel & Oil · A Curious Tractor / ACT-MY — Mounty Yarns (from your Dext vendor history)
+- [ ] 2025-10-07 · $25.00 · Uber → code by hand
+- [ ] 2025-10-07 · $35.99 · Uber → code by hand
+- [ ] 2025-10-08 · $28.49 · Amazon → 453 - Office Expenses · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-08 · $7.11 · SUSHI GOSU PTY LTD Braitling → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-08 · $112.16 · SUSHI GOSU PTY LTD Braitling → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-08 · $56.70 · Woolworths → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-10-09 · $69.00 · AHERRENGE COMMUNITY AMPILATWAT → code by hand
+- [ ] 2025-10-09 · $1.70 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-10 · $175.67 · AHERRENGE COMMUNITY ST AMPILAT → code by hand
+- [ ] 2025-10-10 · $181.39 · AHERRENGE COMMUNITY ST AMPILAT → code by hand
+- [ ] 2025-10-10 · $50.00 · AUSTRAL*JUNCTION PARK 13008892 → 421 - Light meals &  refreshments · A Curious Tractor / ACT-PI — PICC (from your Dext vendor history)
+- [ ] 2025-10-10 · $19.11 · CabFare → 421 - Light meals &  refreshments (from your Dext vendor history)
+- [ ] 2025-10-10 · $6.64 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-13 · $188.18 · ALICE SPRINGS CASINO O ALICE S → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-10-13 · $31.75 · BOJANGLES SALOON&DININ ALICE S → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-10-13 · $44.84 · Codeguide → code by hand
+- [ ] 2025-10-13 · $18.00 · CULTURAL CENTRE CAR PA SOUTH B → code by hand
+- [ ] 2025-10-13 · $0.89 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-13 · $1.57 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-13 · $3.25 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-13 · $88.34 · SQ *DUYU COFFEE ROASTERS Cicco → 421 - Light meals &  refreshments · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-10-13 · $145.00 · TANGENTYERE ARTISTS ALICE SPRI → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-10-13 · $9.94 · Uber → code by hand
+- [ ] 2025-10-13 · $25.71 · Uber → code by hand
+- [ ] 2025-10-13 · $30.73 · Uber → code by hand
+- [ ] 2025-10-13 · $75.00 · Xero → code by hand
+- [ ] 2025-10-14 · $240.86 · BARLMARRK SUPERMARKT BERRIMAH → code by hand
+- [ ] 2025-10-14 · $64.99 · BEARPEP PTY LTD LARRAKEYAH → code by hand
+- [ ] 2025-10-14 · $323.30 · BEARPEP PTY LTD LARRAKEYAH → code by hand
+- [ ] 2025-10-14 · $239.00 · Booking.com → 493 - Travel - National · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-14 · $135.01 · BP GAP ROAD 6231 THE GAP → code by hand
+- [ ] 2025-10-14 · $156.20 · DAYUSE Paris → code by hand
+- [ ] 2025-10-14 · $1,820.69 · Hatch Electrical → 486 - Sub-contractors · A Curious Tractor / ACT-PI — PICC (from your Dext vendor history)
+- [ ] 2025-10-14 · $2.49 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-14 · $5.47 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-14 · $6.42 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-14 · $8.37 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-14 · $30.00 · Smarte Carte 0393383111 → code by hand
+- [ ] 2025-10-14 · $37.43 · Uber → code by hand
+- [ ] 2025-10-14 · $69.33 · Uber → code by hand
+- [ ] 2025-10-14 · $25.34 · WILD FOOD CAFE BERRIMAH → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-15 · $6.60 · AZUCAR CAFE PTY LTD MASCOT → 493 - Travel - National · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-15 · $194.75 · Booking.com → 493 - Travel - National · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-15 · $39.62 · IGA ROOTY HILL NORTH ROOTY HIL → code by hand
+- [ ] 2025-10-15 · $239.00 · NOVOTEL SYDNEY WEST HQ ROOTY H → code by hand
+- [ ] 2025-10-15 · $34.21 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-10-15 · $110.00 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-10-15 · $113.02 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-10-15 · $17.36 · Uber → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-15 · $30.97 · Uber → code by hand
+- [ ] 2025-10-16 · $9.99 · Amazon Prime → 453 - Office Expenses · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-16 · $204.62 · BARLMARRK SUPERMARKET MANINGRI → code by hand
+- [ ] 2025-10-16 · $125.54 · BP COCONUT GROVE 9054 COCONUT  → code by hand
+- [ ] 2025-10-16 · $2.50 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-16 · $15.20 · Relay → code by hand
+- [ ] 2025-10-16 · $12.00 · SUNSET SNACK FOODS PTY LTPALM  → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-16 · $18.47 · Uber → code by hand
+- [ ] 2025-10-16 · $32.95 · Uber → code by hand
+- [ ] 2025-10-16 · $37.92 · Uber → code by hand
+- [ ] 2025-10-16 · $48.99 · Uber → code by hand
+- [ ] 2025-10-16 · $8.50 · ZLR*TSVMAGG Garbutt → code by hand
+- [ ] 2025-10-20 · $1,032.90 · Avis → 449 - MV - Fuel & Oil · A Curious Tractor / ACT-MY — Mounty Yarns (from your Dext vendor history)
+- [ ] 2025-10-20 · $1.09 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-20 · $24.00 · News Pty Limited → code by hand
+- [ ] 2025-10-20 · $27.00 · SQ *GOLOSA Surry Hills → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-20 · $7.14 · SQ *NEST IN WITTA Witta → code by hand
+- [ ] 2025-10-20 · $65.28 · SQ *NEST IN WITTA Witta → code by hand
+- [ ] 2025-10-20 · $49.68 · TEITZEL'S IGA/20 MORRIS STULLY → code by hand
+- [ ] 2025-10-20 · $1,190.00 · Thriday → code by hand
+- [ ] 2025-10-20 · $11.45 · Uber → code by hand
+- [ ] 2025-10-20 · $19.76 · Uber → code by hand
+- [ ] 2025-10-20 · $19.81 · Uber → code by hand
+- [ ] 2025-10-20 · $28.17 · Uber → code by hand
+- [ ] 2025-10-20 · $31.56 · Uber → code by hand
+- [ ] 2025-10-20 · $759.45 · Virgin Australia → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-10-21 · $167.75 · BIG W/CRN OF GEORGE & PARSYDNE → code by hand
+- [ ] 2025-10-21 · $1,243.59 · Loadshift Sydney → 750 - Plant & Equipment · A Curious Tractor / ACT-MY — Mounty Yarns (from your Dext vendor history)
+- [ ] 2025-10-21 · $102.49 · Relay → code by hand
+- [ ] 2025-10-21 · $24.00 · Uber → code by hand
+- [ ] 2025-10-21 · $26.17 · Uber → code by hand
+- [ ] 2025-10-21 · $26.59 · Uber → code by hand
+- [ ] 2025-10-21 · $28.80 · Uber → code by hand
+- [ ] 2025-10-21 · $64.37 · Uber → code by hand
+- [ ] 2025-10-21 · $78.48 · Uber → code by hand
+- [ ] 2025-10-21 · $73.10 · Woolworths → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-21 · $89.69 · WWW.ECOFLO.COM.AU VIRGINIA → code by hand
+- [ ] 2025-10-22 · $0.41 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-22 · $1.73 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-22 · $2.90 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-22 · $1,008.90 · RedBalloon → code by hand
+- [ ] 2025-10-22 · $25.50 · SQ *GOLOSA Surry Hills → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-22 · $11.80 · Squarespace → code by hand
+- [ ] 2025-10-22 · $82.94 · Supabase → 485 - Subscriptions · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-22 · $20.35 · Uber → code by hand
+- [ ] 2025-10-22 · $21.10 · Uber → code by hand
+- [ ] 2025-10-22 · $21.42 · Uber → code by hand
+- [ ] 2025-10-22 · $22.99 · Uber → code by hand
+- [ ] 2025-10-22 · $25.79 · Uber → code by hand
+- [ ] 2025-10-22 · $30.62 · Uber → code by hand
+- [ ] 2025-10-22 · $385.79 · Virgin Australia → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-10-23 · $623.70 · Internet Transfer → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-23 · $0.75 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-23 · $21.44 · ONLYDOMAINS.COM 649-925-0327 → code by hand
+- [ ] 2025-10-23 · $17.83 · Uber → code by hand
+- [ ] 2025-10-23 · $19.73 · Uber → code by hand
+- [ ] 2025-10-23 · $30.62 · Uber → code by hand
+- [ ] 2025-10-24 · $2,000.00 · Internet Transfer → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-24 · $3,500.00 · Internet Transfer → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-24 · $0.27 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-24 · $1.57 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-24 · $1.72 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-24 · $20.22 · Uber → code by hand
+- [ ] 2025-10-24 · $21.90 · Uber → code by hand
+- [ ] 2025-10-24 · $22.50 · Uber → code by hand
+- [ ] 2025-10-24 · $29.05 · Uber → code by hand
+- [ ] 2025-10-24 · $42.55 · Uber → code by hand
+- [ ] 2025-10-27 · $16.45 · Audible → code by hand
+- [ ] 2025-10-27 · $3.96 · BUTCHERS BUFFET CHINAT HAYMARK → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $37.46 · Cabcharge → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $47.94 · Cabcharge → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $52.88 · Cabcharge → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $57.60 · Cabcharge → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $65.16 · Cabcharge → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $1,100.00 · Internet Transfer → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $75.66 · Mighty Networks → 485 - Subscriptions · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $2.65 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $4.09 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $14.95 · Uber → code by hand
+- [ ] 2025-10-27 · $16.12 · Uber → code by hand
+- [ ] 2025-10-27 · $31.87 · Uber → code by hand
+- [ ] 2025-10-27 · $42.20 · Uber → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $42.79 · Uber → code by hand
+- [ ] 2025-10-27 · $44.08 · Uber → code by hand
+- [ ] 2025-10-27 · $46.31 · Uber → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-27 · $64.72 · Uber → code by hand
+- [ ] 2025-10-28 · $314.20 · JMC No2 Pty Ltd TS Ken Kenilwo → code by hand
+- [ ] 2025-10-28 · $629.10 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-10-28 · $1,549.09 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-10-28 · $42.48 · Uber → code by hand
+- [ ] 2025-10-28 · $4.05 · VIBE SYDNEY SYDNEY → code by hand
+- [ ] 2025-10-29 · $28.10 · GUZMAN Y GOMEZ SURRY HILLS → code by hand
+- [ ] 2025-10-29 · $1.18 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-29 · $1.96 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-29 · $33.63 · OpenAI → 485 - Subscriptions (from your Dext vendor history)
+- [ ] 2025-10-29 · $438.97 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-10-29 · $37.93 · SMP*Gone Bonkers Disc72 Maleny → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-10-29 · $46.00 · Uber → code by hand
+- [ ] 2025-10-30 · $33.00 · Garmin → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-30 · $360.00 · Internet Transfer → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-30 · $12.60 · NAB Cash Advance Fee → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-30 · $746.71 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-10-30 · $352.22 · SQ *VALLEY SLICE PTY LTD Moolo → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-10-30 · $23.48 · Uber → code by hand
+- [ ] 2025-10-30 · $36.99 · Uber → code by hand
+- [ ] 2025-10-31 · $245.28 · Aldi → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-31 · $100.00 · Liberty → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-10-31 · $1.18 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-10-31 · $12.07 · The Source Bulk Foods Maleny → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-10-31 · $9.44 · Uber → code by hand
+- [ ] 2025-10-31 · $18.67 · Uber → code by hand
+- [ ] 2025-10-31 · $29.38 · Uber → code by hand
+- [ ] 2025-10-31 · $102.54 · Uber → code by hand
+- [ ] 2025-10-31 · $483.33 · Woolworths → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-10-31 · $34.48 · ZLR*S3POPU1 Mascot → 449 - MV - Fuel & Oil · A Curious Tractor / ACT-MY — Mounty Yarns (from your Dext vendor history)
+- [ ] 2025-11-03 · $210.00 · Brouhaha Brewery Baringa → 421 - Light meals &  refreshments (from your Dext vendor history)
+- [ ] 2025-11-03 · $153.12 · Claude.AI → 485 - Subscriptions (from your Dext vendor history)
+- [ ] 2025-11-03 · $9.99 · DocPlay → code by hand
+- [ ] 2025-11-03 · $21.00 · IGA MOOLOOLAH SUPER MOOLOOLAH  → 400 - Advertising & Marketing · A Curious Tractor / ACT-IN — ACT Infrastructure (from your Dext vendor history)
+- [ ] 2025-11-03 · $8.05 · Linktree → code by hand
+- [ ] 2025-11-03 · $25.05 · Maleny Hot Bread Bake Maleny → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-11-03 · $31.43 · Maleny Hot Bread Bake Maleny → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-11-03 · $203.23 · MAPLE STREET MEAT MERC MALENY → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-11-03 · $0.64 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-03 · $2.63 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-03 · $5.36 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-03 · $104.99 · SEASONS SUPERMARKET 10 MALENY → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-11-03 · $60.00 · SQ *ROSEBEDANDFINCH Eudlo → code by hand
+- [ ] 2025-11-03 · $99.76 · Uber → code by hand
+- [ ] 2025-11-03 · $102.40 · Woolworths → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-11-04 · $35.00 · Belong → code by hand
+- [ ] 2025-11-04 · $165.02 · BP BOWENBRIDGE1410 HERSTONQLD → code by hand
+- [ ] 2025-11-04 · $53.23 · CabFare → 421 - Light meals &  refreshments (from your Dext vendor history)
+- [ ] 2025-11-04 · $45.80 · Internet Banking Transfer → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-04 · $152.59 · Internet Banking Transfer → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-04 · $202.16 · Internet Banking Transfer → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-04 · $14.00 · LS tanakas pty ltd Alice Sprin → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-04 · $0.84 · NAB Interest → code by hand
+- [ ] 2025-11-04 · $65.00 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-11-04 · $440.00 · Thriday → code by hand
+- [ ] 2025-11-04 · $60.43 · Uber → code by hand
+- [ ] 2025-11-04 · $72.00 · Woolworths → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-04 · $165.99 · Woolworths → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-05 · $1.77 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-06 · $74.99 · LinkedIn → code by hand
+- [ ] 2025-11-07 · $16.45 · Audible → code by hand
+- [ ] 2025-11-10 · $14.99 · Apple → 485 - Subscriptions · A Curious Tractor / ACT-IN — ACT Infrastructure (from your Dext vendor history)
+- [ ] 2025-11-10 · $1,213.20 · BRALINDA INVESTMENTS P ALICE S → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-10 · $45.15 · CabFare → 421 - Light meals &  refreshments (from your Dext vendor history)
+- [ ] 2025-11-10 · $141.63 · EG GROUP/WILLS TCE & RAILALICE → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-10 · $0.60 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-10 · $1.57 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-10 · $1.73 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-10 · $5.72 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-10 · $24.00 · News Pty Limited → code by hand
+- [ ] 2025-11-10 · $348.41 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-11-10 · $9.99 · Uber → code by hand
+- [ ] 2025-11-11 · $383.00 · Airbnb → 493 - Travel - National · A Curious Tractor / ACT-PI — PICC (from your Dext vendor history)
+- [ ] 2025-11-11 · $135.00 · ALICE SPRINGS CASINO O ALICE S → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-11 · $1,012.56 · ALICE SPRINGS CASINO O ALICE S → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-11 · $110.94 · BP ALICE SPRINGS 1104 ALICE SP → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-11 · $5.08 · EPILOGUE ENTERPRISES ALICE SPR → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-11 · $249.79 · EPILOGUE ENTERPRISES ALICE SPR → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-11 · $5.00 · Uber → code by hand
+- [ ] 2025-11-11 · $13.30 · Uber → code by hand
+- [ ] 2025-11-11 · $65.52 · Uber → code by hand
+- [ ] 2025-11-11 · $75.07 · Uber → code by hand
+- [ ] 2025-11-12 · $319.09 · AGL → code by hand
+- [ ] 2025-11-12 · $4.57 · ALICE SPRINGS CASINO O ALICE S → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-11-12 · $20,244.64 · Hatch Electrical → 486 - Sub-contractors · A Curious Tractor / ACT-PI — PICC (from your Dext vendor history)
+- [ ] 2025-11-12 · $3.22 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-12 · $40.99 · Uber → code by hand
+- [ ] 2025-11-12 · $90.45 · Uber → code by hand
+- [ ] 2025-11-12 · $31.40 · UNITED CAB 4749 9999 MOUNT ISA → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-13 · $44.53 · Codeguide → code by hand
+- [ ] 2025-11-13 · $29.18 · Firecrawl → code by hand
+- [ ] 2025-11-13 · $1.02 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-13 · $1.56 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-13 · $75.00 · Xero → code by hand
+- [ ] 2025-11-14 · $100.22 · KNIGHT BUSINESS PTY LT MOUNT I → code by hand
+- [ ] 2025-11-14 · $26.77 · Live Payments Barangaroo → 421 - Light meals &  refreshments (from your Dext vendor history)
+- [ ] 2025-11-14 · $9.10 · MOUNT ISA ENT TOURISM MOUNT IS → code by hand
+- [ ] 2025-11-14 · $27.28 · ZLR*ISACLOV Mount Isa Cit → code by hand
+- [ ] 2025-11-17 · $34.00 · AIG Australia → code by hand
+- [ ] 2025-11-17 · $9.99 · Amazon Prime → 453 - Office Expenses · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-17 · $119.00 · Flyparks → code by hand
+- [ ] 2025-11-17 · $204.55 · Indonesia Arrival ROTTERDAM → code by hand
+- [ ] 2025-11-17 · $393.72 · Indonesia Arrival ROTTERDAM → code by hand
+- [ ] 2025-11-17 · $291.98 · Kogan.com 3BUDH9QW Melbourne → code by hand
+- [ ] 2025-11-17 · $2.48 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-17 · $2.49 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-17 · $6.39 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-17 · $7.16 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-17 · $13.78 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-17 · $180.00 · Scopri Olo Bar Carlton → code by hand
+- [ ] 2025-11-17 · $57.04 · Uber → code by hand
+- [ ] 2025-11-17 · $65.17 · Uber → code by hand
+- [ ] 2025-11-18 · $44.23 · BP EXP THE TULLA 1684 MELBOURN → code by hand
+- [ ] 2025-11-18 · $5,590.00 · Carla Furnishers → 446 - Materials & Supplies · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-11-18 · $1,199.29 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-11-18 · $103.00 · TICKETS*FARM MY SC 0404900312 → code by hand
+- [ ] 2025-11-19 · $137.50 · BRISBANE POWERHOUSE NEW FARM → code by hand
+- [ ] 2025-11-19 · $0.64 · GoPayID → code by hand
+- [ ] 2025-11-19 · $1.06 · GoPayID → code by hand
+- [ ] 2025-11-19 · $0.02 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-19 · $0.04 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-20 · $2,785.66 · Defy Design → 400 - Advertising & Marketing · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-11-20 · $14.99 · Ezviz → code by hand
+- [ ] 2025-11-20 · $0.83 · Gojek → code by hand
+- [ ] 2025-11-20 · $0.03 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-20 · $0.45 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-20 · $0.52 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-20 · $1.08 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-20 · $508.18 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-11-20 · $766.65 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-11-20 · $868.14 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-11-21 · $138.56 · Admission Badung → 447 - Minor Tools & Equipment < $1k · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-21 · $1.29 · GoPayID → code by hand
+- [ ] 2025-11-21 · $1.48 · GoPayID → code by hand
+- [ ] 2025-11-21 · $0.05 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-21 · $1.93 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-21 · $2.43 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-21 · $4.85 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-21 · $6.97 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $41.00 · Dar Teta → 421 - Light meals &  refreshments (from your Dext vendor history)
+- [ ] 2025-11-24 · $112.09 · Emme Mac Black → code by hand
+- [ ] 2025-11-24 · $1.21 · Gojek → code by hand
+- [ ] 2025-11-24 · $1.20 · GoPayID → code by hand
+- [ ] 2025-11-24 · $1.39 · GoPayID → code by hand
+- [ ] 2025-11-24 · $1.44 · GoPayID → code by hand
+- [ ] 2025-11-24 · $1.57 · GoPayID → code by hand
+- [ ] 2025-11-24 · $27,201.35 · Hatch Electrical → 486 - Sub-contractors · A Curious Tractor / ACT-PI — PICC (from your Dext vendor history)
+- [ ] 2025-11-24 · $0.04 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $0.05 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $0.06 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $0.41 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $1.48 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $1.58 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $1.74 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $2.55 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $3.41 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $5.82 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $6.20 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $12.21 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $15.67 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-24 · $11.80 · Squarespace → code by hand
+- [ ] 2025-11-24 · $72.90 · Squarespace → code by hand
+- [ ] 2025-11-24 · $63.05 · Uber → code by hand
+- [ ] 2025-11-25 · $50.92 · BP → code by hand
+- [ ] 2025-11-25 · $17.49 · IGA Colac East → 421 - Light meals &  refreshments (from your Dext vendor history)
+- [ ] 2025-11-25 · $15.65 · La Porchetta → 421 - Light meals &  refreshments (from your Dext vendor history)
+- [ ] 2025-11-25 · $19.33 · Uber → code by hand
+- [ ] 2025-11-25 · $41.63 · Uber → code by hand
+- [ ] 2025-11-26 · $16.45 · Audible → code by hand
+- [ ] 2025-11-26 · $76.34 · Mighty Networks → 485 - Subscriptions · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-26 · $2.67 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-26 · $17.03 · Uber → code by hand
+- [ ] 2025-11-27 · $1,166.00 · Internet Transfer → 489 - Telephone & Internet · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-11-28 · $1.43 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-01 · $809.29 · Bargain Car Rentals → 432 - Hire Expenses · A Curious Tractor / ACT-DL — DadLab (from your Dext vendor history)
+- [ ] 2025-12-01 · $998.94 · Bargain Car Rentals → 432 - Hire Expenses · A Curious Tractor / ACT-DL — DadLab (from your Dext vendor history)
+- [ ] 2025-12-01 · $25.00 · Garmin → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-01 · $1,491.90 · JB Hi-Fi → code by hand
+- [ ] 2025-12-01 · $9.84 · Linkt Avis Budget → 493 - Travel - National · A Curious Tractor / ACT-MY — Mounty Yarns (from your Dext vendor history)
+- [ ] 2025-12-01 · $1.18 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-01 · $1.96 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-01 · $33.75 · OpenAI → 485 - Subscriptions (from your Dext vendor history)
+- [ ] 2025-12-01 · $674.00 · P & J Mabasa → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-12-01 · $8.28 · Uber → code by hand
+- [ ] 2025-12-01 · $24.54 · Uber → code by hand
+- [ ] 2025-12-01 · $32.84 · Uber → code by hand
+- [ ] 2025-12-01 · $42.66 · Uber → code by hand
+- [ ] 2025-12-01 · $45.07 · Uber → code by hand
+- [ ] 2025-12-01 · $47.51 · Uber → code by hand
+- [ ] 2025-12-01 · $56.98 · Uber → code by hand
+- [ ] 2025-12-01 · $81.60 · Uber → code by hand
+- [ ] 2025-12-01 · $425.57 · Woolworths → 449 - MV - Fuel & Oil · A Curious Tractor / ACT-HV — The Harvest Witta (from your Dext vendor history)
+- [ ] 2025-12-02 · $9.99 · DocPlay → code by hand
+- [ ] 2025-12-02 · $16.23 · Linktree → code by hand
+- [ ] 2025-12-02 · $19.27 · TSV Magg → code by hand
+- [ ] 2025-12-02 · $24.11 · Uber → code by hand
+- [ ] 2025-12-02 · $26.08 · Uber → code by hand
+- [ ] 2025-12-02 · $27.27 · Uber → code by hand
+- [ ] 2025-12-03 · $330.00 · Dominos → code by hand
+- [ ] 2025-12-03 · $101.45 · EG Group → code by hand
+- [ ] 2025-12-03 · $0.53 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-03 · $55.61 · Uber → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-03 · $15.00 · X Corp → code by hand
+- [ ] 2025-12-04 · $35.00 · Belong → code by hand
+- [ ] 2025-12-04 · $153.05 · Claude.AI → 485 - Subscriptions (from your Dext vendor history)
+- [ ] 2025-12-04 · $120.00 · Edmonds Landscaping → 446 - Materials & Supplies · A Curious Tractor / ACT-PI — PICC (from your Dext vendor history)
+- [ ] 2025-12-04 · $0.64 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-04 · $5.36 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-05 · $1.77 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-05 · $124.79 · Nightowl → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-05 · $24.85 · Uber → code by hand
+- [ ] 2025-12-08 · $290.11 · AGL → code by hand
+- [ ] 2025-12-08 · $1,268.37 · Apple → 485 - Subscriptions · A Curious Tractor / ACT-IN — ACT Infrastructure (from your Dext vendor history)
+- [ ] 2025-12-08 · $16.45 · Audible → code by hand
+- [ ] 2025-12-08 · $74.99 · LinkedIn → code by hand
+- [ ] 2025-12-08 · $24.00 · News Pty Limited → code by hand
+- [ ] 2025-12-08 · $43.62 · Relay → code by hand
+- [ ] 2025-12-08 · $9.99 · Uber → code by hand
+- [ ] 2025-12-08 · $12.69 · Uber → code by hand
+- [ ] 2025-12-08 · $15.50 · Uber → code by hand
+- [ ] 2025-12-08 · $67.50 · Uber → code by hand
+- [ ] 2025-12-08 · $68.55 · Uber → code by hand
+- [ ] 2025-12-08 · $91.83 · Uber → code by hand
+- [ ] 2025-12-09 · $5,904.05 · Container Options → 750 - Plant & Equipment · A Curious Tractor / ACT-MY — Mounty Yarns (from your Dext vendor history)
+- [ ] 2025-12-09 · $3.94 · Uber → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-09 · $26.62 · Uber → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-09 · $32.07 · Uber → code by hand
+- [ ] 2025-12-09 · $39.37 · Uber → code by hand
+- [ ] 2025-12-09 · $46.25 · Uber → code by hand
+- [ ] 2025-12-09 · $47.44 · Uber → code by hand
+- [ ] 2025-12-09 · $58.63 · Uber → code by hand
+- [ ] 2025-12-09 · $177.48 · Uber → code by hand
+- [ ] 2025-12-10 · $2,871.00 · Kennards Hire → 432 - Hire Expenses · A Curious Tractor / ACT-OO — Oonchiumpa (from your Dext vendor history)
+- [ ] 2025-12-10 · $62.01 · Poi Minchinbury → code by hand
+- [ ] 2025-12-10 · $16.10 · Uber → code by hand
+- [ ] 2025-12-10 · $17.77 · Uber → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-10 · $46.22 · Uber → code by hand
+- [ ] 2025-12-10 · $74.48 · Uber → code by hand
+- [ ] 2025-12-11 · $1,182.18 · Bunnings → 446 - Materials & Supplies · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-11 · $1,614.88 · Bunnings → 446 - Materials & Supplies · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-11 · $436.24 · Colyton Hotel → 420 - Entertainment (0%) · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-11 · $1.53 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-11 · $2.80 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-11 · $913.50 · The Sand Yard → 446 - Materials & Supplies · A Curious Tractor / ACT-MY — Mounty Yarns (from your Dext vendor history)
+- [ ] 2025-12-11 · $1,068.00 · The Sand Yard → 446 - Materials & Supplies · A Curious Tractor / ACT-MY — Mounty Yarns (from your Dext vendor history)
+- [ ] 2025-12-12 · $3,732.43 · Hatch Electrical → 486 - Sub-contractors · A Curious Tractor / ACT-PI — PICC (from your Dext vendor history)
+- [ ] 2025-12-12 · $1,029.00 · The Sand Yard → 446 - Materials & Supplies · A Curious Tractor / ACT-MY — Mounty Yarns (from your Dext vendor history)
+- [ ] 2025-12-15 · $4.57 · Alice Springs Casino → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-12-15 · $298.92 · Alice Springs Casino → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-12-15 · $43.78 · Codeguide → code by hand
+- [ ] 2025-12-15 · $28.68 · Firecrawl → code by hand
+- [ ] 2025-12-15 · $424.00 · Kennards Hire → 432 - Hire Expenses · A Curious Tractor / ACT-OO — Oonchiumpa (from your Dext vendor history)
+- [ ] 2025-12-15 · $1.00 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-15 · $1.53 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-15 · $2.44 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-15 · $3.17 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-15 · $6.28 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-15 · $635.05 · NRMA Insurance → code by hand
+- [ ] 2025-12-15 · $171.00 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-12-15 · $75.00 · Xero → code by hand
+- [ ] 2025-12-16 · $9.99 · Amazon Prime → 453 - Office Expenses · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-16 · $21.47 · BP → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-16 · $137.33 · BP → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-16 · $28.50 · T60023 → code by hand
+- [ ] 2025-12-16 · $41.28 · Tennant Food Barn → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-16 · $7.21 · The Beet Bar → code by hand
+- [ ] 2025-12-16 · $10.31 · The Beet Bar → code by hand
+- [ ] 2025-12-16 · $11.98 · Uber → code by hand
+- [ ] 2025-12-16 · $69.41 · Uber → code by hand
+- [ ] 2025-12-16 · $70.71 · Uber → code by hand
+- [ ] 2025-12-16 · $59.68 · Woolworths → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-16 · $21.30 · Yo! Sushi → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-17 · $13,345.90 · ATO → code by hand
+- [ ] 2025-12-17 · $95.65 · BP → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-12-17 · $82.17 · Epilogue Enterprises → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-12-17 · $34.22 · Linkt Avis Budget → 493 - Travel - National · A Curious Tractor / ACT-MY — Mounty Yarns (from your Dext vendor history)
+- [ ] 2025-12-17 · $2.44 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-17 · $19.49 · Uber → code by hand
+- [ ] 2025-12-18 · $58.99 · Amazon → 453 - Office Expenses · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-18 · $6.19 · The Beet Bar → code by hand
+- [ ] 2025-12-18 · $9.28 · The Beet Bar → code by hand
+- [ ] 2025-12-18 · $29.90 · The Beet Bar → code by hand
+- [ ] 2025-12-18 · $22.92 · Uber → code by hand
+- [ ] 2025-12-18 · $52.36 · Uber → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-18 · $28.00 · Woolworths → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-19 · $8.78 · Alice Springs Casino → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-12-19 · $50.75 · Alice Springs Casino → 493 - Travel - National (from your Dext vendor history)
+- [ ] 2025-12-19 · $1.06 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-19 · $56.37 · Qantas → 493 - Travel - National · A Curious Tractor / ACT-GD — Goods (from your Dext vendor history)
+- [ ] 2025-12-19 · $23.16 · Uber → code by hand
+- [ ] 2025-12-19 · $66.12 · Uber → code by hand
+- [ ] 2025-12-22 · $220.00 · Booking.com → 493 - Travel - National · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-22 · $155.72 · BP → code by hand
+- [ ] 2025-12-22 · $14.99 · Ezviz → code by hand
+- [ ] 2025-12-22 · $0.41 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-22 · $0.52 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-22 · $1.69 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-22 · $3.12 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-22 · $4.19 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-22 · $7.70 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-22 · $11.80 · Squarespace → code by hand
+- [ ] 2025-12-22 · $119.77 · Supabase → 485 - Subscriptions · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-23 · $129.78 · Pholklore → code by hand
+- [ ] 2025-12-24 · $42.35 · Mortadeli → code by hand
+- [ ] 2025-12-29 · $826.00 · AIG Australia → code by hand
+- [ ] 2025-12-29 · $16.45 · Audible → code by hand
+- [ ] 2025-12-29 · $131.18 · BP → code by hand
+- [ ] 2025-12-29 · $36.88 · Chocolate Country → code by hand
+- [ ] 2025-12-29 · $73.66 · Mighty Networks → 485 - Subscriptions · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-29 · $0.26 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-29 · $0.52 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-29 · $1.15 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-29 · $1.38 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-29 · $1.53 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-29 · $1.68 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-29 · $1.96 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-29 · $2.58 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-29 · $5.14 · NAB International Fee → 452 - Parking, Tolls & Taxis · A Curious Tractor (from your Dext vendor history)
+- [ ] 2025-12-29 · $32.86 · OpenAI → 485 - Subscriptions (from your Dext vendor history)
+- [ ] 2025-12-29 · $151.73 · Woodfordia → 412 - Consulting & Accounting (from your Dext vendor history)
+- [ ] 2025-12-29 · $48.95 · Woolworths → 446 - Materials & Supplies · Farm Activities / ACT-FM — The Farm (from your Dext vendor history)
+- [ ] 2025-12-30 · $96.17 · BP → code by hand
+- [ ] 2025-12-30 · $25.00 · Garmin → 421 - Light meals &  refreshments · A Curious Tractor (from your Dext vendor history)

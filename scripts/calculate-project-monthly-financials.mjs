@@ -51,6 +51,7 @@ while (true) {
     .from('xero_transactions')
     .select('id, date, contact_name, total, type, project_code')
     .gte('date', sinceStr)
+    .or('status.is.null,status.neq.DELETED') // exclude voided rows (NULL-safe) — they inflate project_monthly_financials.expenses
     .order('date')
     .range(page * pageSize, (page + 1) * pageSize - 1);
 

@@ -1,0 +1,38 @@
+[
+  {
+    "invoiceId": "f6528324-4857-4636-9407-9d4e67427e2d",
+    "original": [
+      {
+        "Description": "The Plasticians — Other — ACT-IN",
+        "UnitAmount": 29800,
+        "TaxType": "INPUT",
+        "TaxAmount": 2709.09,
+        "LineAmount": 29800,
+        "AccountCode": "446",
+        "Tracking": [
+          {
+            "Name": "Business Divisions",
+            "Option": "A Curious Tractor",
+            "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+            "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+          },
+          {
+            "Name": "Project Tracking",
+            "Option": "ACT-IN — ACT Infrastructure",
+            "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+            "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
+          }
+        ],
+        "Quantity": 1,
+        "LineItemID": "70a9da6f-e8f0-47d4-b709-767dd390f813",
+        "AccountID": "d80fdbbc-0ce8-4d59-8cf4-b6ee6fde749f",
+        "ValidationErrors": []
+      }
+    ],
+    "before": {
+      "Total": 29800,
+      "SubTotal": 27090.91,
+      "AmountDue": 29800
+    }
+  }
+]

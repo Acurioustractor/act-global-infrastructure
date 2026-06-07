@@ -1,0 +1,41 @@
+{
+  "today": "2026-05-21",
+  "coverage": {
+    "transactions": {
+      "total": 0,
+      "tagged": 0,
+      "pct": 0
+    },
+    "invoices": {
+      "total": 0,
+      "tagged": 0,
+      "pct": 0
+    },
+    "opportunities": {
+      "total": 0,
+      "tagged": 0,
+      "pct": 0
+    },
+    "oppPiles": {
+      "total": 0,
+      "tagged": 0,
+      "pct": 0
+    }
+  },
+  "drift": [],
+  "incoming": {
+    "receivables": 0,
+    "grantsInFlight": 0,
+    "pipelineWeighted": 0,
+    "projected90d": 0
+  },
+  "cash": null,
+  "lifetime": {
+    "distinctCustomers": 0,
+    "paying": 0,
+    "paid": 0,
+    "ar": 0,
+    "draft": 0,
+    "visibleBook": 0
+  }
+}

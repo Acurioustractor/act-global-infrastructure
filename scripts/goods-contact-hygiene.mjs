@@ -5,7 +5,7 @@
  * Normalizes and segments all Goods-tagged contacts:
  * 1. Adds 'goods' to projects[] for contacts with goods tag
  * 2. Segments contacts by inferring role from existing tags
- * 3. Sets newsletter_consent = TRUE for contacts with email
+ * 3. (REMOVED 2026-06-02) Never sets newsletter_consent — consent only from a real opt-in
  * 4. Adds 'goods-newsletter' tag
  * 5. Updates engagement_status based on last communication
  * 6. Syncs tag changes to GHL
@@ -161,8 +161,11 @@ async function main() {
     // 2. Ensure 'goods' is in projects array
     const newProjects = [...new Set([...currentProjects, 'goods'])];
 
-    // 3. Newsletter consent for contacts with email
-    const shouldConsent = !!contact.email;
+    // 3. Newsletter consent — NEVER inferred. Having an email is NOT consent.
+    // Consent is only ever set by a real opt-in (the opt-in form writes newsletter_consent
+    // + newsletter_consent_at). This script must not manufacture consent. See
+    // wiki/decisions/comms-architecture.md + newsletter-consent-policy.md.
+    const shouldConsent = false;
 
     // 4. Engagement status
     const newEngagement = inferEngagementStatus(contact.last_contact_date);

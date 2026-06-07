@@ -15,7 +15,7 @@ el_v2_match_via: "org:oonchiumpa"
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/oonchiumpa-aunty-bev-and-uncle-tony-s-story.md`.
-> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 # Aunty Bev and Uncle Tony's Story
 
 > Aunty Barb and Uncle Tony

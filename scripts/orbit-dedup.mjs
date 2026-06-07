@@ -20,9 +20,11 @@
 import dotenv from 'dotenv';
 import { appendFileSync } from 'node:fs';
 import { createGHLService } from './lib/ghl-api-service.mjs';
+import { createClient } from '@supabase/supabase-js';
 dotenv.config({ path: '.env.local' });
 
 const ghl = createGHLService();
+const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 const loc = ghl.locationId;
 const mode = process.argv[2] || 'prep';
 const target = process.argv[3] || 'community';
@@ -59,7 +61,12 @@ async function planFor(term) {
   const primary = enriched[0];
   const secondaries = enriched.slice(1);
   const allTags = [...new Set(enriched.flatMap(tagsOf))];
-  const unionToAdd = allTags.filter(t => !tagsOf(primary).includes(t));
+  // COMMUNITY LINE: if ANY row in the set is community (lane:community / storyteller / elder),
+  // the union must never carry tier:* or *drip* onto the primary — that's how the 2026-06-03
+  // dedup resurrected comms:partner-drip on Kristy/Tanya after the sweep had stripped it.
+  const isCommunitySet = allTags.some(t => t === 'lane:community' || t === 'role:storyteller' || t === 'role:elder');
+  const unionToAdd = allTags.filter(t => !tagsOf(primary).includes(t))
+    .filter(t => !(isCommunitySet && (/^tier:/.test(t) || /drip/.test(t))));
   const deletable = secondaries.filter(s => s.hist.total === 0);
   const keep = secondaries.filter(s => s.hist.total > 0);
   return { term, set: enriched, primary, secondaries, unionToAdd, deletable, keep };
@@ -92,7 +99,13 @@ else if (mode === 'apply') {
     appendFileSync(LOG, `- ${t}: primary ${p.primary.id} (hist ${p.primary.hist.conv}/${p.primary.hist.opp}/${p.primary.hist.task}); unioned [${p.unionToAdd.join(' ')}]\n`);
     for (const s of p.deletable) {
       appendFileSync(LOG, `  - DELETE ${s.id} (empty) · recover-tags=[${tagsOf(s).join(' ')}]\n`);
-      try { await ghl.deleteContact(s.id); console.log(`   deleted ${s.id}`); }
+      try {
+        await ghl.deleteContact(s.id); console.log(`   deleted ${s.id}`);
+        // also remove the mirror row — deleted contacts never re-sync, so a stale mirror row
+        // haunts every downstream worklist with its old tags (the 2026-06-05 ghost-row lesson)
+        const { error: mErr } = await sb.from('ghl_contacts').delete().eq('ghl_id', s.id);
+        if (mErr) { console.error(`   mirror row ${s.id} NOT removed: ${mErr.message}`); appendFileSync(LOG, `  - MIRROR ROW LEFT BEHIND ${s.id}: ${mErr.message}\n`); }
+      }
       catch (e) {
         console.error(`   DELETE ${s.id} FAILED: ${e.message}`);
         appendFileSync(LOG, `  - DELETE BLOCKED: ${e.message} — deleteContact not permitted for this token; dedup is UI-only.\n`);

@@ -11,7 +11,7 @@ tags: [oonchiumpa, trust, case-work, stretch-bed, mparntwe, judges-on-country]
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/oonchiumpa-fred-xavier-trust.md`.
-> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # He trusts us. We earned that trust.
 

@@ -16,6 +16,7 @@ import {
 } from '@/lib/api'
 
 const REFRESH_INTERVAL = 30 * 1000
+const SECTION_PREVIEW_LIMIT = 5
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // SWIPEABLE CARD
@@ -182,8 +183,12 @@ function Section({
   defaultOpen?: boolean
 }) {
   const [open, setOpen] = useState(defaultOpen)
+  const [showAll, setShowAll] = useState(false)
 
   if (items.length === 0) return null
+
+  const visibleItems = showAll ? items : items.slice(0, SECTION_PREVIEW_LIMIT)
+  const hiddenCount = Math.max(0, items.length - visibleItems.length)
 
   return (
     <div>
@@ -203,9 +208,18 @@ function Section({
       </button>
       {open && (
         <div className="space-y-1.5">
-          {items.map((item) => (
+          {visibleItems.map((item) => (
             <SwipeableCommCard key={item.id} item={item} onAction={onAction} />
           ))}
+          {items.length > SECTION_PREVIEW_LIMIT && (
+            <button
+              type="button"
+              onClick={() => setShowAll(!showAll)}
+              className="w-full rounded-lg border border-white/10 px-3 py-2 text-xs text-white/45 transition-colors hover:border-blue-500/30 hover:text-blue-300"
+            >
+              {showAll ? 'Show fewer' : `Show ${hiddenCount} more`}
+            </button>
+          )}
         </div>
       )}
     </div>
@@ -279,9 +293,9 @@ export function CommunicationsNeeded() {
       <div className="flex items-center justify-between mb-4">
         <h2 className="font-semibold text-white flex items-center gap-2">
           <MessageSquare className="h-4 w-4 text-blue-400" />
-          Communications Needed
+          Reply Queue
         </h2>
-        <span className="text-xs text-white/40">{total} pending</span>
+        <span className="text-xs text-white/40">{total} waiting</span>
       </div>
 
       {total === 0 ? (

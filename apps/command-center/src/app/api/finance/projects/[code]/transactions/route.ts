@@ -16,6 +16,7 @@ type Row = {
   paymentOfBill: boolean
   xeroLink: string
   projectCode: string | null
+  hasReceipt: boolean
 }
 
 function firstDescr(li: any[] | null | undefined): string {
@@ -66,22 +67,29 @@ export async function GET(
     const { code } = await params
     const projectCode = decodeURIComponent(code).toUpperCase()
 
+    // Optional date window (cost-drill passes the FY so the lines reconcile with the FY26 P&L table).
+    // Omitted → all-time (the "full transaction ledger" page relies on that).
+    const url = new URL(request.url)
+    const from = url.searchParams.get('from')
+    const to = url.searchParams.get('to')
+
+    let billsQ = supabase
+      .from('xero_invoices')
+      .select('id, xero_id, date, contact_name, total, status, invoice_number, line_items, project_code, has_attachments')
+      .eq('project_code', projectCode)
+      .eq('type', 'ACCPAY')
+      .in('status', ['AUTHORISED', 'PAID'])
+    let spendsQ = supabase
+      .from('xero_transactions')
+      .select('id, xero_transaction_id, date, contact_name, total, status, type, line_items, project_code, has_attachments')
+      .eq('project_code', projectCode)
+      .in('type', ['SPEND', 'SPEND-OVERPAYMENT', 'RECEIVE'])
+    if (from) { billsQ = billsQ.gte('date', from); spendsQ = spendsQ.gte('date', from) }
+    if (to) { billsQ = billsQ.lte('date', to); spendsQ = spendsQ.lte('date', to) }
+
     const [billsRes, spendsRes] = await Promise.all([
-      supabase
-        .from('xero_invoices')
-        .select('id, xero_id, date, contact_name, total, status, invoice_number, line_items, project_code')
-        .eq('project_code', projectCode)
-        .eq('type', 'ACCPAY')
-        .in('status', ['AUTHORISED', 'PAID'])
-        .order('date', { ascending: false })
-        .range(0, 9999),
-      supabase
-        .from('xero_transactions')
-        .select('id, xero_transaction_id, date, contact_name, total, status, type, line_items, project_code')
-        .eq('project_code', projectCode)
-        .in('type', ['SPEND', 'SPEND-OVERPAYMENT', 'RECEIVE'])
-        .order('date', { ascending: false })
-        .range(0, 9999),
+      billsQ.order('date', { ascending: false }).range(0, 9999),
+      spendsQ.order('date', { ascending: false }).range(0, 9999),
     ])
 
     const bills = billsRes.data || []
@@ -125,6 +133,7 @@ export async function GET(
         paymentOfBill: false,
         xeroLink: `https://go.xero.com/AccountsPayable/View.aspx?InvoiceID=${xeroId}`,
         projectCode: (b.project_code as string) || null,
+        hasReceipt: b.has_attachments === true,
       })
     }
     for (const s of spends) {
@@ -149,6 +158,7 @@ export async function GET(
         paymentOfBill: matched.has(xeroId),
         xeroLink: `https://go.xero.com/Bank/ViewTransaction.aspx?bankTransactionID=${xeroId}`,
         projectCode: (s.project_code as string) || null,
+        hasReceipt: s.has_attachments === true,
       })
     }
 

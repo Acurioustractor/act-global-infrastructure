@@ -1,0 +1,425 @@
+{
+  "generatedAt": "2026-06-03T00:51:11.624Z",
+  "coverage": [
+    {
+      "area": "xero_txns FY26",
+      "n": 1911,
+      "tagged": 1709,
+      "pct": 89
+    },
+    {
+      "area": "xero_txns all",
+      "n": 3231,
+      "tagged": 2240,
+      "pct": 69
+    },
+    {
+      "area": "xero_invoices",
+      "n": 2227,
+      "tagged": 2155,
+      "pct": 97
+    },
+    {
+      "area": "ghl_opportunities",
+      "n": 769,
+      "tagged": 722,
+      "pct": 94
+    },
+    {
+      "area": "subscriptions",
+      "n": 68,
+      "tagged": 68,
+      "pct": 100
+    }
+  ],
+  "conflicts": [],
+  "fill": {
+    "opps": {
+      "auto": [],
+      "review": [],
+      "none": [
+        {
+          "id": "54a41f7b-f18b-4c38-8057-e9270986ac4f",
+          "name": "Ben Shop Dedicated TestShop Dedicated Test - Inquiry",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "09aa3b10-ee25-4a42-ad72-b914d8931b8b",
+          "name": "Codex Smoke Event - Event submission",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "229a02f6-c0b4-43df-9f3e-34c35d99eb8e",
+          "name": "Ben Workflow Test 1778705147335Workflow Test 1778705147335 - Inquiry",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "00af755b-0aee-4f3d-9aa2-7c6995bb9079",
+          "name": "GHL – Inquiry",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "447b66d0-fba1-4f0b-80c1-54f91e90290d",
+          "name": "Ben Shop UI TestShop UI Test - Inquiry",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "6efe6e4e-47ae-40cd-b246-41152f2ee2cc",
+          "name": "Funding for NSW businesses to assess installing a heat pump",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "58e181ab-39a2-454e-b05b-614c8405cec9",
+          "name": "Ben Question TestQuestion Test - Inquiry",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "47c95905-9b84-4ffb-ad4f-9642261e4f77",
+          "name": "Codex Smoke Workshop - Workshop booking",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "3ec07c96-cf1c-448e-8015-2f8b097a5de0",
+          "name": "Youth Development Pathway — The Trustee for Creating Chanc",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "a8fe1817-6ab6-469f-a073-935502d91efc",
+          "name": "Australian Economic Equity Initiative — The Judith Neilson Head Trust",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "42b38e92-c95f-4f37-8d6f-06aa96251ad6",
+          "name": "Sidney Myer Creative Fellowships — The Myer Foundation",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "11790cb3-1452-4099-b99b-aeaa379e1676",
+          "name": "Barayamal Accelerator",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "a5fedc66-cdd3-4652-8ef7-873f2c7a061c",
+          "name": "FRRR / ANZ Seeds of Renewal",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "f26058b0-065b-4ab8-bd33-f795f002ef08",
+          "name": "Many Rivers Microfinance",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "d03b74cf-4d5c-406c-81e3-7efb6e1e5f51",
+          "name": "Strengthening Rural Communities (SRC)",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "5e624b25-c073-4dc2-98d2-1e43cbc7b928",
+          "name": "Madalah Limited — Towards a digital transformation project that will support improved educational outcomes for Aboriginal young people and strengthen community connection across Western Australia.",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "11726ced-2876-4f1f-aec8-510575b09deb",
+          "name": "KKVAWnbZzxrsrkQBpgLvr",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "7d43a78b-89d9-4da3-9de8-b61ce7c51767",
+          "name": "2026-27 ACEMP Northern NSW",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "ccb80cd8-6bca-4dee-a604-b9dc21f87f7e",
+          "name": "YVJnZGWshQIrdfBoCw",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "b63443f7-f6c3-494f-92bc-3a98c60c8d76",
+          "name": "The Haven Project — THE PROPERTY INDUSTRY FOUNDATI",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "467303c9-d6b9-4e4c-b53c-9337467c91eb",
+          "name": "Codex Smoke Event - Event submission",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "6e7cce75-131a-4e59-a472-51616407d0e7",
+          "name": "NAIF Small Loans Program",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "98caeef9-d543-40b6-a84e-d17015ab6224",
+          "name": "Pilbara Aboriginal Health Alliance Limited — Towards organsiational development and community driven initiates to improve the health and wellbeing outcomes of Aboriginal people across the Pilbara.",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "6a60f63b-c038-459e-b334-60090574894f",
+          "name": "Supply Nation Certification + Buyer Access",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "5b558f8c-8742-48d8-878b-9872e7c6c95e",
+          "name": "KmPUgwfGwTxmTlRmpSiMjNmp",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "14fda448-1413-4ae0-9613-ee1e8fc731b5",
+          "name": "Micro Business Enterprises Project — NOVA PERIS FOUNDATION LIMITED",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "8649416d-70f1-4dac-9520-32eaf35e0555",
+          "name": "Lowitja Institute Seeding / GLOWS",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "a562a899-9397-4034-8a5d-31eda9532880",
+          "name": "IBA Start-Up Finance Package",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "f5221397-51d0-48bc-b372-51990fc19d4e",
+          "name": "John Monash Scholarship — General Sir John Monash Founda",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "fd5cc149-d1c1-4c9e-9bfc-5cd85805e988",
+          "name": "Support for New Art Acquisitions — Art Gallery Of NSW Foundation",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "369c54e2-4909-47a2-8f6d-bd66feda7394",
+          "name": "Wash Test",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "a151751b-3aca-4f17-8de6-669adfb7f3c8",
+          "name": "DHA-PROC26/572: Expression of Interest - Furnishings, Storage, Logistics and Associated Services",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "1c2168bc-0b8d-4027-823f-600b91025f60",
+          "name": "KbbzXlHazvflpHCKap",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "fb26ea60-66af-4d28-8d48-ef81670e6788",
+          "name": "Bek - Inquiry",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "6de53dbd-800a-4e07-ba27-1e656de896ce",
+          "name": "WTAdFcUQyFaBVnTtRZkPds",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "0a7b8838-a548-4638-af32-cbe109fedcd7",
+          "name": "FueyJCXaBUvnatyct",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "d341fa55-be62-44e7-9f38-b8a25475673a",
+          "name": "SHFT26015: Linen Supply - Cockatoo Island Accommodation",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "0d66eb50-28a0-4313-b1b9-9ddb2325d52e",
+          "name": "Wash Test",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "4e2b062b-59f4-4c45-b303-342f77d35074",
+          "name": "HqCGSyKsWTixCpflQZMz",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "8ba3d04d-bf8e-46f9-8fcd-255eefc128b7",
+          "name": "Laura McConnell Conti",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "d5c53280-7faa-419d-91bc-8c5fd8f41e48",
+          "name": "UzTVrDwPNTXpceiEnLTdfN",
+          "pipeline": "Universal Inquiry",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "75cdbe28-1aaa-4814-aa08-18abaf7e940f",
+          "name": "Puntukurnu Aboriginal Medical Service Aboriginal Corporation — Towards the renovation of shared and external spaces to establish the PAMS Short Stay Renal Hostel accommodation and the Wellness Centre,",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "bb7f4bde-2aa4-42b2-9718-46cdc78a59f7",
+          "name": "Banjima Native Title Aboriginal Corporation RNTBC — Towards the coordination and volunteer program costs required to deliver the Karijini Experience 2026, fostering connections between people, culture",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "e43ce3f5-de46-4eea-b66f-d5332b7024b8",
+          "name": "Karrayili Adult Education  Centre (Aboriginal Corporation) — Towards upgrades of the Karrayili Community Hub to raise community connection and participation across the Fitzroy Valley.",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "84a5fcf2-0a46-4e28-877c-e4d7f026a100",
+          "name": "Western Australian Family Violence Prevention Legal Service Aboriginal Corporation — Towards a vehicle to provide family and domestic violence outreach services across the East Kimberley.",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "ac436fe0-042d-4e0b-960f-8847177a0324",
+          "name": "2026 Research Acceleration Awards — Women And Infants Research Fou",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        },
+        {
+          "id": "e2f78a7a-263c-47b7-aeac-7c9a6c7913f0",
+          "name": "Professional Development Workshops — The Dyslexia Speld Foundation ",
+          "pipeline": "Grants",
+          "code": null,
+          "confidence": 0,
+          "source": "none"
+        }
+      ]
+    },
+    "subs": {
+      "auto": [],
+      "review": [],
+      "none": []
+    }
+  }
+}

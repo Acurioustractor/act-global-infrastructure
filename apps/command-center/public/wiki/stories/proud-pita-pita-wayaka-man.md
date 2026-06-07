@@ -6,7 +6,7 @@ projects: bg-fit
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/proud-pita-pita-wayaka-man.md`.
-> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Proud Pita Pita Wayaka Man: My Roots
 

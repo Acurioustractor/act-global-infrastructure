@@ -221,7 +221,9 @@ async function main() {
             firstName: 'Accounts',
             lastName: orgName,
             companyName: orgName,
-            tags: ['goods', 'auto-created-from-xero'],
+            // Canonical-only (Phase 3 flip 2026-06-03): project:act-gd + role:buyer (Goods buyer
+            // from a Xero invoice) + source:xero. Flat 'goods' dropped (retiring in CONTRACT).
+            tags: ['project:act-gd', 'role:buyer', 'source:xero'],
           }),
         });
         contactId = created.contact?.id || created.id;

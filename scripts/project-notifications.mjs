@@ -29,14 +29,15 @@ const supabase = createClient(MAIN_URL, MAIN_KEY);
 
 // Import project definitions
 const PROJECTS = {
-    'justicehub': { name: 'JusticeHub', tags: ['justicehub', 'justice', 'youth justice'], category: 'justice', priority: 'high' },
+    // Phase 2 re-point: canonical project: tags added alongside flat so matching works for both (flats retire in CONTRACT).
+    'justicehub': { name: 'JusticeHub', tags: ['justicehub', 'justice', 'youth justice', 'project:act-jh'], category: 'justice', priority: 'high' },
     'diagrama': { name: 'Diagrama', tags: ['diagrama'], category: 'justice', priority: 'high' },
-    'goods': { name: 'Goods', tags: ['goods'], category: 'enterprise', priority: 'high' },
-    'empathy-ledger': { name: 'Empathy Ledger', tags: ['empathy-ledger', 'empathy', 'storytelling'], category: 'stories', priority: 'high' },
-    'picc': { name: 'PICC', tags: ['picc', 'palm-island'], category: 'indigenous', priority: 'high' },
+    'goods': { name: 'Goods', tags: ['goods', 'project:act-gd'], category: 'enterprise', priority: 'high' },
+    'empathy-ledger': { name: 'Empathy Ledger', tags: ['empathy-ledger', 'empathy', 'storytelling', 'project:act-el'], category: 'stories', priority: 'high' },
+    'picc': { name: 'PICC', tags: ['picc', 'palm-island', 'project:act-pi'], category: 'indigenous', priority: 'high' },
     'mingaminga': { name: 'MingaMinga Rangers', tags: ['mingaminga', 'rangers'], category: 'indigenous', priority: 'high' },
-    'harvest': { name: 'The Harvest', tags: ['harvest', 'the-harvest', 'witta'], category: 'regenerative', priority: 'medium' },
-    'contained': { name: 'Contained', tags: ['contained'], category: 'enterprise', priority: 'medium' },
+    'harvest': { name: 'The Harvest', tags: ['harvest', 'the-harvest', 'witta', 'project:act-hv'], category: 'regenerative', priority: 'medium' },
+    'contained': { name: 'Contained', tags: ['contained', 'project:act-jh', 'interest:justice-reform'], category: 'enterprise', priority: 'medium' },
     'fishers-oysters': { name: 'Fishers Oysters', tags: ['fishers-oysters', 'fishers'], category: 'regenerative', priority: 'medium' },
     'smart': { name: 'SMART', tags: ['smart', 'smart-connect'], category: 'health', priority: 'medium' },
     'confessional': { name: 'The Confessional', tags: ['confessional'], category: 'stories', priority: 'medium' },
@@ -124,7 +125,8 @@ async function findProjectCommunications(since) {
 
         if (matchedProjects.length > 0) {
             // Check if contact is a partner/funder (high priority)
-            const isHighValue = contactTags.includes('partner') || contactTags.includes('funder');
+            const isHighValue = contactTags.includes('partner') || contactTags.includes('funder')
+                || contactTags.includes('role:partner') || contactTags.includes('role:funder');
             const isResponsive = contactTags.includes('responsive');
 
             notifications.push({

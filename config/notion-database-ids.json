@@ -52,5 +52,10 @@
   "actNowPage": "35bebcf9-81cf-8131-9f14-d8d4b23e35f4",
   "ecosystemDigest": "362ebcf9-81cf-8177-8c4e-c33d6c61d765",
   "eofyTracker": "63cbc05e-64ba-4203-b514-beb8eb4f9445",
-  "eofyTrackerDataSource": "2c8666b5-b0ed-4617-958d-37ededee15d0"
+  "eofyTrackerDataSource": "2c8666b5-b0ed-4617-958d-37ededee15d0",
+  "grantTranchesDb": "f8204bd0-abcd-42e6-b349-c33d6ac80ade",
+  "grantTranchesDataSource": "61a20e42-4df8-4a30-947b-b98a05f779fa",
+  "ppppScan": {
+    "parentPage": "1553e9c2-4bf3-49d2-960a-d77070f467cb"
+  }
 }

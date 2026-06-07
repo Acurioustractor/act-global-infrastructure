@@ -34,3 +34,10 @@
 - Tag union ran first: `goods-partner` added to primary `yk4uK8rgDNGA87EUqNbu` → it now holds the full union of all 4 dupes' tags. NO contacts deleted; all 4 still live; all 4 still clean of tier:/drips, all carry lane:community.
 - TO FINISH 4→1: merge in the GHL UI (preserves conversation/opportunity history; keep `yk4uK8rgDNGA87EUqNbu` as primary), OR grant the token the contacts-merge scope and re-run `node scripts/orbit-tracer.mjs merge-kristy`.
 - Do NOT substitute deleteContact for merge — it would drop the secondaries' inquiry/conversation history.
+
+## 2026-06-07 — identity-pass promotions (Ben: "promote them")
+Two ring-150 supporters created in live GHL (LinkedIn-only, no email/phone — joy woods precedent). Ben's read notes stay in field-decisions.jsonl, never GHL.
+- **Michael Houston** → `cAcR3ZitRcq3BGBmjMUM` · tags `ring:150 source:beeper` · read: "documentary maker — latent"
+- **Terry Hutchinson** → `72ybX7zZrX2NunOVNyuN` · tags `ring:150 source:beeper` · read: "offered journal help" · GHL name is clean ("Terry Hutchinson"); ledger key stays "Dr Terry Hutchinson" via field-warmth ALIAS
+Undo: deleteContact on the two IDs + drop the alias line.
+- **joy woods** `mDFpvRJHylVCabkQrM2Y` → +`ring:150` (Ben: "yes add it"; aligner couldn't match — no email either side). GHL response tags: act-gd project:act-gd ring:150. Mirror updated by hand. Identity context found in GHL: Safeguarding Consultant, custom field [Supporter, Warm, Safeguarding, Contained Tour], source "LinkedIn Comment Import". Undo: remove-tags ring:150.

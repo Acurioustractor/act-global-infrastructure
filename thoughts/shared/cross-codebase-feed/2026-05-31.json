@@ -1,0 +1,148 @@
+{
+  "generated_at": "2026-05-31T21:00:01.812Z",
+  "since": "1d",
+  "codebases": [
+    "act-global-infrastructure",
+    "act-regenerative-studio",
+    "empathy-ledger-v2",
+    "justicehub",
+    "goods",
+    "act-farm"
+  ],
+  "event_count": 21,
+  "events": [
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/act-core-facts.md",
+      "date": "2026-05-31T20:59:36.795Z",
+      "size_bytes": 15132
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/act-business-architecture.md",
+      "date": "2026-05-31T20:59:36.794Z",
+      "size_bytes": 8777
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-01-pty-test-invoice-runbook.md",
+      "date": "2026-05-31T20:59:36.792Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-01-cutover-30-day-critical-path.md",
+      "date": "2026-05-31T20:59:36.791Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/2026-05-31-rd-pack-session-handoff.md",
+      "date": "2026-05-31T19:24:57.060Z"
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/2026-05-31-q2q3-429-review-band-classification.md",
+      "date": "2026-05-31T19:22:18.723Z",
+      "size_bytes": 13907
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md",
+      "date": "2026-05-31T19:22:18.712Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/world-tour-tax-rd-system.provenance.md",
+      "date": "2026-05-31T19:22:18.711Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/the-harvest.md",
+      "date": "2026-05-31T19:22:18.710Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/rd-novelty-sweep.md",
+      "date": "2026-05-31T19:22:18.709Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/rd-history-proof.md",
+      "date": "2026-05-31T19:22:18.708Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/rd-existing-pack-synthesis.md",
+      "date": "2026-05-31T19:22:18.706Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/justicehub.md",
+      "date": "2026-05-31T19:22:18.705Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/empathy-ledger-v2.md",
+      "date": "2026-05-31T19:22:18.704Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/deepdive-justicehub-refugee.md",
+      "date": "2026-05-31T19:22:18.703Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/deepdive-grantscope-power.md",
+      "date": "2026-05-31T19:22:18.702Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/world-tour-tax-rd/deepdive-el-sovereignty.md",
+      "date": "2026-05-31T19:22:18.701Z"
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/index.md",
+      "date": "2026-05-31T05:47:32.046Z",
+      "size_bytes": 32751
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/finance/README.md",
+      "date": "2026-05-31T05:47:25.818Z",
+      "size_bytes": 5180
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/finance/knight-family-act-pay-and-entity-setup.md.provenance.md",
+      "date": "2026-05-31T05:47:15.779Z",
+      "size_bytes": 3828
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/finance/knight-family-act-pay-and-entity-setup.md",
+      "date": "2026-05-31T05:46:53.073Z",
+      "size_bytes": 12073
+    }
+  ]
+}

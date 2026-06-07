@@ -18,6 +18,18 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-06-07 11:07 | viewer-build | 346 articles · 89 photo maps · 2811KB | tools/act-wikipedia.html
+- 2026-06-07 11:07 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-06-05 09:32 | viewer-build | 345 articles · 89 photo maps · 2803KB | tools/act-wikipedia.html
+- 2026-06-05 09:32 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-06-03 13:22 | viewer-build | 341 articles · 89 photo maps · 2765KB | tools/act-wikipedia.html
+- 2026-06-03 13:22 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-31 09:15 | viewer-build | 326 articles · 89 photo maps · 2609KB | tools/act-wikipedia.html
+- 2026-05-31 09:15 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-31 09:05 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-31.md, wiki/decisions/url-audit-latest.json
+- 2026-05-31 09:00 | lint | 325 canonical articles · 262 broken links · 68 orphans · 98% source-bridge coverage | wiki/output/lint-2026-05-31.md, wiki/output/status-latest.json
+- 2026-05-27 04:58 | viewer-build | 321 articles · 92 photo maps · 2577KB | tools/act-wikipedia.html
+- 2026-05-27 04:58 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-05-25 05:37 | viewer-build | 321 articles · 92 photo maps · 2571KB | tools/act-wikipedia.html
 - 2026-05-25 05:37 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-05-24 09:15 | viewer-build | 321 articles · 92 photo maps · 2568KB | tools/act-wikipedia.html

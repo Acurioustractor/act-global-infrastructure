@@ -1,0 +1,11 @@
+[
+  {
+    "invoiceID": "c11e1ba4-9366-4959-bd95-649e77c225b3",
+    "contact": "MOL Nyrt.",
+    "before": {
+      "UnitAmount": 30691,
+      "LineAmount": 30691,
+      "AccountCode": "429"
+    }
+  }
+]

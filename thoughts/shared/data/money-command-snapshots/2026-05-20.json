@@ -1,0 +1,67 @@
+{
+  "today": "2026-05-20",
+  "coverage": {
+    "transactions": {
+      "total": 2280,
+      "tagged": 2019,
+      "pct": 88.55263157894737
+    },
+    "invoices": {
+      "total": 97,
+      "tagged": 97,
+      "pct": 100
+    },
+    "opportunities": {
+      "total": 404,
+      "tagged": 252,
+      "pct": 62.37623762376238
+    },
+    "oppPiles": {
+      "total": 404,
+      "tagged": 397,
+      "pct": 98.26732673267327
+    }
+  },
+  "drift": [
+    {
+      "kind": "opp",
+      "amount": 37507787,
+      "label": "ARC Centre of Excellence for Indigenous and Environmental Histories and Futures. ARC Centre of Excellence for Indigenous and Environmental Histories and Futures. The proposed Centre aims to generate a · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 37507787,
+      "label": "ARC Centre of Excellence for Indigenous Futures. ARC Centre of Excellence for Indigenous Futures. The ARC Centre of Excellence for Indigenous Futures aims to transform and improve the life chances of · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 12610000,
+      "label": "Aboriginal and Torres Strait Islander(ATSI) initiatives · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 3973880,
+      "label": "Transforming cities for Indigenous Peoples' social and emotional wellbeing. This Laureate Fellowship will establish an Australian first, Urban First Nations Research Agenda, that is transdiciplinary a · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 3856869,
+      "label": "A First Nations Sovereign Approach to Decolonising Colonial Institutions. This Laureate Fellowship aims to fundamentally re-make Australia’s colonial legal institutions in order to remove the harm the · Grants"
+    }
+  ],
+  "incoming": {
+    "receivables": 602040,
+    "grantsInFlight": 230000,
+    "pipelineWeighted": 2190240.6,
+    "projected90d": 3022280.6
+  },
+  "cash": 210620.11999999994,
+  "lifetime": {
+    "distinctCustomers": 39,
+    "paying": 29,
+    "paid": 1511634.31,
+    "ar": 602040,
+    "draft": 0,
+    "visibleBook": 2113674.31
+  }
+}

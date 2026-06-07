@@ -6,7 +6,7 @@ source_of_truth: wiki/concepts/soul.md
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/act-identity.md`.
-> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # A Curious Tractor (ACT)
 
@@ -30,7 +30,7 @@ ACT operates through a small group of entities, each with a clear job. The point
 |--------|------|
 | **A Curious Tractor Pty Ltd** | The trade muscle. Owned 50/50 by Knight Family Trust and Marchesi Family Trust. Service revenue, contracts, and corporate-trustee grants land here. Distributions flow through the trusts to the founders. |
 | **Harvest Pty Ltd** (forming) | Standalone P&L for The Harvest. Earns its own. Grows its own. |
-| **Farm Pty Ltd** (forming) | Standalone P&L for ACT Farm. Conservation, land practice, residencies, BCV. |
+| **ACT Farm** (program, not a Pty) | Runs as a program (ACT-FM) on the 150-acre Black Cockatoo Valley land, held in Nic's family trust and leased to ACT. A Farm Pty Ltd only forms if and when the Farm earns its own P&L. |
 | **A Kind Tractor Ltd** | Company Limited by Guarantee. Currently dormant, not yet DGR-endorsed. The public-good cap, ready to activate when the time comes. |
 
 A sole trader entity (Nic's ABN) is the legacy trading vehicle, winding down by 30 June 2026.

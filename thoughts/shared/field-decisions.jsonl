@@ -1,0 +1,100 @@
+{"name":"kristy bloomfield","email":"kristy.bloomfield@oonchiumpa.com.au","verdict":"confirm","adds":[],"removes":[],"note":"","lane":"community","projects":["act-jh","act-gd","act-hv"],"warmth":52,"energy":null,"ts":"2026-06-03T19:26:33.318Z","applied":false}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Pollyanna","ring":"family","energy":0,"lane":"family","relation":"Ben's 13-year-old daughter — not in the supporter orbit at all","algo_note":"machine ranked her #1 supporter off WhatsApp volume — family blindness"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"tahlia isaac","ring":"150","energy":20,"relation":"does prison support for women — not a strong connection but in the networks","role_hint":"justice-sector network node (JusticeHub-relevant)","algo_note":"machine said #2; reality ring-150 — volume over-rank"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Benjamin Croft","ring":"15","energy":75,"relation":"very good friends, family friends — potential long-term supporter, has money; supports the yearly Bali trip for Nic and Ben","give_receive":"mutual","keep":"circle:gsd-alliance"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Kabir Dhanji","ring":"15","energy":75,"relation":"friend and mentor, photographer in Kenya","give_receive":"receive (mentorship)"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Andy Fog","ring":"15","energy":75,"relation":"friend in Sweden — wants to connect more","cadence":"fortnightly","tend_intent":"contact fortnightly"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Scott McDougall","ring":"50","energy":45,"relation":"light touch — good person, does hydroponics; might support justice stuff soon","role_hint":"hydroponics (Harvest-relevant) + justice support potential","projects":["act-jh","act-hv"]}
+{"ts":"2026-06-06","source":"circle-session-1","name":"george newhouse","ring":"50","energy":50,"relation":"cool dude — could be a BIG JusticeHub collaborator","role_hint":"major JusticeHub collaboration potential","projects":["act-jh"]}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Hugo","ring":"150","energy":15,"relation":"light touch only — on the washing machine project, not counting much","role_hint":"Goods washing-machine project, light","projects":["act-gd"]}
+{"ts":"2026-06-06","source":"circle-session-1","name":"vanessa ordonez","ring":"vendor","energy":15,"relation":"finance and business support only — service provider, not a relationship","algo_note":"machine called her only warm supply-chain cover; reality = professional services. Goods supply chain is actually UNCOVERED"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Annie De'Ath","ring":"50","energy":45,"relation":"could support Contained and Farm activities — marketing and events","role_hint":"marketing/events for Contained + Farm","projects":["act-jh","act-fm"]}
+{"ts":"2026-06-06","source":"circle-session-1","name":"sam davies","ring":"15","energy":80,"relation":"core partner — makes our beds; options for deeper partnership, community production","give_receive":"mutual","projects":["act-gd"],"tend_intent":"explore deeper partnership — community production","algo_note":"machine scored ~12 (email-only channel blindness) for the $121K critical-path partner — biggest UNDER-rank found"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Shyaka Farid Lwanyaaga","ring":"50","energy":40,"relation":"good friend in Uganda — mainly friend, low-maintenance distance friendship"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Libby Beeching","ring":"150","energy":15,"relation":"loose — doesn't need much energy (Ben's words: all loose, low energy by design)"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Tharini Rouwette","ring":"150","energy":15,"relation":"loose — doesn't need much energy"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Peter Norden AO","ring":"150","energy":15,"relation":"loose — doesn't need much energy (inbound-lean thread)"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"cosecAU SL","ring":"vendor","energy":0,"relation":"Standard Ledger company-secretary service — compliance traffic, not a relationship","algo_note":"vendor pollution — 38/42 compliance emails ranked it #10"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Nav Sawhney","ring":"15","energy":75,"org":"The Washing Machine Project (confirmed by Ben)","relation":"friend and mentor — Goods-adjacent (washers)","give_receive":"receive (mentorship)","projects":["act-gd"]}
+{"ts":"2026-06-06","source":"circle-session-1","name":"teya dusseldorp","ring":"50","energy":50,"org":"Dusseldorp Forum","relation":"currently not supporting anything, but a good connection for a number of projects","ask_state":"potential — no current support","algo_note":"machine has her covering 7 needs; reality = potential not current"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"lucy stronach","ring":"50","energy":45,"org":"Minderoo Foundation","relation":"said NO to JusticeHub; can maybe help with Goods","ask_state":"NO to JusticeHub (current) · maybe Goods","algo_note":"scope board lists her covering JusticeHub capital — she has already declined it. Coverage needs asked/answered state"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Melissa DeLaney","ring":"50","energy":45,"org":"regional arts (supports ACT regional arts fellowship — org name TBC)","relation":"supports our regional arts fellowship — good for arts community","role_hint":"arts-community door, #1 email connector"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Juliet Uraz","ring":"out","energy":5,"relation":"Ben does not know them — probs not tight or close","algo_note":"generative WhatsApp thread yet unrecognized — possible Beeper identity misresolution or group-chat artifact"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Hazel Westbury","ring":"out","energy":5,"relation":"Ben does not know them — probs not tight or close","algo_note":"same — generative thread, unrecognized person. Error class 5: identity confusion"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"georgina byron am","ring":"50","energy":50,"org":"Snow Foundation (CEO)","relation":"largest secured funder ($403K) — keep engaged; also a storyteller (2 EL transcripts)","tend_intent":"keep engaged","projects":["act-jh","act-gd"]}
+{"ts":"2026-06-06","source":"circle-session-1","name":"sally grimsley-ballard","ring":"50","energy":45,"org":"Snow Foundation","relation":"Ben wants to keep engaging with Sally from Snow (named unprompted in circle session)","email":"s.grimsley-ballard@snowfoundation.org.au","tend_intent":"keep engaged"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"maree meredith","ring":"50","energy":45,"org":"Snow Foundation","relation":"supports the Palm Island art centre stories — keep engaged","email":"m.meredith@snowfoundation.org.au","role_hint":"Palm Island art centre stories — community-adjacent support","tend_intent":"keep engaged"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Daniel Daylight","ring":"50","energy":50,"org":"Dusseldorp cluster","relation":"we are helping with the backyarn development (Ben's words — project name spelling TBC)","give_receive":"give","ask_state":"active collaboration"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"margot beach","ring":"150","energy":15,"relation":"mainly just a Dusseldorp connection"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"carollyn kavanagh","ring":"50","energy":40,"org":"regional arts community","relation":"supports the regional arts community"}
+{"ts":"2026-06-06","source":"circle-session-1","name":"esther gyorki","ring":"50","energy":50,"org":"regional arts","relation":"has been great supporting the regional arts fellowship for the Harvest — should stay connected","tend_intent":"stay connected","projects":["act-hv"]}
+{"ts":"2026-06-06","source":"circle-session-1","name":"Daniel A Zelli","ring":"out","energy":5,"relation":"Ben has no idea who this is","algo_note":"identity confusion class — unrecognized WhatsApp thread"}
+{"ts":"2026-06-06","source":"fix-all-2026-06-06","name":"alexandra lagelee kean","email":"a.lageleekean@snowfoundation.org.au","relation":"Snow Foundation staff (unread-heaviest Snow thread) — funder/supporter lane; role:community + goods-community were Goods segment artifacts, not a community-individual marker","adds":[],"removes":["role:community","goods-community"],"applied":true}
+{"ts":"2026-06-06","source":"fix-all-2026-06-06","name":"sam","email":"samsamuels137@gmail.com","relation":"Harvest website signup — storyteller was form self-selection (audience-storyteller), not EL; recast as interest. Consented newsletters + tier:member stay.","adds":["interest:storytelling"],"removes":["role:storyteller","audience-storyteller"],"applied":true}
+{"ts":"2026-06-06","source":"fix-all-2026-06-06","name":"eloise hall","email":"eloisebernadette@gmail.com","relation":"TABOO co-founder / Goods-handover partner — supporter lane confirmed (NOT in EL, role:funder, goods-impact-finance). Fixed in code: removed from COMMUNITY_NAME regex in build-unified-orbit.mjs + orbit-community-line-sweep.mjs. No tag changes."}
+{"ts":"2026-06-06","source":"fix-all-2026-06-06","name":"sam","email":"samsamuels137@gmail.com","relation":"FOLLOW-UP: mirror ghl_contacts.is_storyteller=true was a stale heuristic flag (verified NOT in EL) — set false direct in mirror. Violations now 0.","applied":true}
+{"ts":"2026-06-06","source":"circle-session-2","name":"vanessa intan","ring":"out","energy":5,"relation":"Ben doesn't know this person","algo_note":"identity-confusion class — top-signal beeper thread (43) unrecognized; Beeper resolution suspect"}
+{"ts":"2026-06-06","source":"circle-session-2","name":"Michael Houston","ring":"out","energy":5,"relation":"Ben doesn't know this person","algo_note":"identity-confusion class — beeper signal 41 unrecognized"}
+{"ts":"2026-06-06","source":"circle-session-2","name":"joy woods","ring":"out","energy":5,"relation":"Ben doesn't know this person","algo_note":"identity-confusion class — carried project:act-gd tag yet unrecognized; check how she got the Goods tag"}
+{"ts":"2026-06-06","source":"circle-session-2","name":"Dr Terry Hutchinson","ring":"out","energy":5,"relation":"Ben doesn't know this person","algo_note":"identity-confusion class — SCU affiliation didn't help recognition"}
+{"ts":"2026-06-06","source":"circle-session-2","name":"Harry R.","ring":"out","energy":5,"relation":"Ben doesn't know this person","algo_note":"identity-confusion class — unresolved surname, beeper 39"}
+{"ts":"2026-06-06","source":"circle-session-2","name":"sophie","relation":"Sophie's Seedlings — the Harvest contracted gardener","projects":["act-hv"],"algo_note":"identity confirmed; ring unconfirmed (machine guessed 15 — contractor at the physical centre, revisit at warmth-v2 lock)"}
+{"ts":"2026-06-06","source":"circle-session-2","name":"Phoebe Frederick","ring":"150","relation":"gov worker (Dept of Employment & Workplace Relations) — not very connected","algo_note":"machine guessed 50; Ben's 'not very connected' = 150"}
+{"ts":"2026-06-06","source":"circle-session-2","name":"tina morris","relation":"Diagram — UK marketing","algo_note":"identity confirmed; ring unconfirmed (machine guessed 15, likely high for a UK marketing contact)"}
+{"ts":"2026-06-06","source":"circle-session-2","name":"Erin Jackson","ring":"50","relation":"SMART Recovery COO","algo_note":"machine ring 50 confirmed-by-silence; JusticeHub-adjacent org"}
+{"ts":"2026-06-06","source":"circle-ui","name":"Anurag Gummadi","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"Lorana Bartels","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"ardi muckan","ring":"out"}
+{"ts":"2026-06-06","source":"circle-ui","name":"cathy butterss","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"victoria palmer","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"anika baset","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"joel bird","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"jay boolkin","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"hannah march","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"ludmila andrade","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"katie norman","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"sal biggins","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"rachel fyfe","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"emily mayo","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"diego gonzalez","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"Marco The Fox","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"seana osbourne","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"pene curtis","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"yj_grants","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"minjerribah moorgumpin elders","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"teri campbell","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"james mclennan","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"hailey wetzel","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"william frazer","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"shaun christie-david","ring":"15"}
+{"ts":"2026-06-06","source":"circle-ui","name":"jan owen","ring":"15"}
+{"ts":"2026-06-06","source":"circle-ui","name":"nicole mekler","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"chelsea baker","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"georgia falzon","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"david mcguire","ring":"15"}
+{"ts":"2026-06-06","source":"circle-ui","name":"jim brabon","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"thalia anthony","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"ruari elkington","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"anne hollonds","ring":"15"}
+{"ts":"2026-06-06","source":"circle-ui","name":"mmeic justice","ring":"15"}
+{"ts":"2026-06-06","source":"circle-ui","name":"Vera Borsboom","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"mark powell, (he/him) wrad health on gunditjmara land","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"rohan lulham","ring":"50"}
+{"ts":"2026-06-06","source":"circle-ui","name":"fiona maxwell","ring":"15"}
+{"ts":"2026-06-06","source":"circle-ui","name":"lydia garrett","ring":"150"}
+{"ts":"2026-06-06","source":"circle-ui","name":"amy elson","ring":"150"}
+{"ts":"2026-06-06","source":"triage-ui","name":"tahlia isaac","vote":"down"}
+{"ts":"2026-06-06","source":"triage-ui","name":"Kabir Dhanji","vote":"down"}
+{"ts":"2026-06-06","source":"triage-ui","name":"Kabir Dhanji","vote":"confirm"}
+{"ts":"2026-06-06","source":"triage-ui","name":"Andy Fog","vote":"down"}
+{"ts":"2026-06-06","source":"triage-ui","name":"Andy Fog","vote":"up"}
+{"ts":"2026-06-06","source":"triage-ui","name":"Andy Fog","vote":"up"}
+{"ts":"2026-06-06","source":"triage-ui","name":"Andy Fog","vote":"down"}
+{"ts":"2026-06-06","source":"triage-ui","name":"Hugo","vote":"up"}
+{"ts":"2026-06-06","source":"triage-ui","name":"Hugo","vote":"down"}
+{"ts":"2026-06-06","source":"triage-ui","name":"Hugo","vote":"down"}
+{"ts":"2026-06-07","source":"identity-pass","name":"vanessa intan","email":"vanessa.intan@makenotion.com","ring":"out","relation":"Notion ambassador — 30-min call Sept 2025; vendor-ish, stays out","algo_note":"identity RESOLVED: vibe-pass note + GHL email + spine calendar invite; supersedes circle-session-2 identity-confusion entry"}
+{"ts":"2026-06-07","source":"identity-pass","name":"Michael Houston","ring":"150","relation":"documentary maker — latent","algo_note":"identity RESOLVED from vibe-pass note; Ben confirmed ring 150. Uncaptured (LinkedIn-only, not in GHL)"}
+{"ts":"2026-06-07","source":"identity-pass","name":"joy woods","ring":"150","relation":"you said you'd call — Goods-adjacent","algo_note":"identity RESOLVED from vibe-pass note (two-way thread); Ben confirmed ring 150. In GHL with project:act-gd, no email"}
+{"ts":"2026-06-07","source":"identity-pass","name":"Dr Terry Hutchinson","ring":"150","relation":"offered journal help — possibly SCU adjunct (web-derived, unverified)","algo_note":"identity RESOLVED from vibe-pass note; Ben confirmed ring 150. Uncaptured (LinkedIn-only). Distinct from terrence hutchinson / Allvey Property"}
+{"ts":"2026-06-07","source":"identity-pass","name":"Harry R.","ring":"out","relation":"cold LinkedIn outreach — leave out","algo_note":"identity pass: zero local evidence, Ben chose leave-out; supersedes identity-confusion entry"}

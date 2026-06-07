@@ -15,7 +15,7 @@ empathy_ledger_key: justicehub
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/justicehub/justicehub.md`.
-> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # JusticeHub
 

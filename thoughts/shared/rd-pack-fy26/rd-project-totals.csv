@@ -1,0 +1,8 @@
+project_code,project,rd_eligible_aud,fy,basis,status,notes
+ACT-CG,CivicGraph,61500,FY26,register,in_progress,"entity resolution; gold set unbuilt"
+ACT-EL,Empathy Ledger,79750,FY26,register,in_progress,"OCAP consent + multi-tenant ledger"
+ACT-GD,Goods,188250,FY26,register,in_progress,"buyer-supplier matching; largest single register"
+ACT-JH,JusticeHub,24547,FY26,register,in_progress,"federated mapping; JH personnel cost unallocated"
+SUBTOTAL,Four registered registers,354047,FY26,"sum of registers",in_progress,"pack total; grade WARN/62; ~$154K at 43.5% before ACT-IN"
+ACT-IN,Internal infrastructure,,FY26,"RESOLVED 2026-05-31: not a core register",excluded/reallocate,"Internal tools (Alignment Loop, rubric grader, finance harness) EXCLUDED as core (internal-admin, purpose-based) + fail the supporting test. Do NOT create an ACT-IN core register. Re-cut Ben's ~60% ACT-IN time: external-facing experimental portion (ALMA->ACT-JH, autoresearch->ACT-CG, Governed-Proof) -> product registers; internal-ops portion is not R&D. See act-in-classification.md"
+WT-OVERSEAS,World tour overseas (EL/JH),,FY26-27,"from Expense Ledger CT-RD bucket",planned,"FY26-27 income year; Overseas Finding required; Condition-4 less-than test vs FY26-27 Australian dev spend"

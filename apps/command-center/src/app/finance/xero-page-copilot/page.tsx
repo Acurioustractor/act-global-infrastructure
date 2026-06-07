@@ -27,6 +27,7 @@ import { RetagSelect, type ProjectOption } from '@/components/finance/RetagSelec
 // OPERATE workspace (plan 2026-05-29 P3) — the surfaces this copilot anchors.
 const OPERATE_TABS: Array<{ href: string; label: string }> = [
   { href: '/finance/xero-page-copilot', label: 'Reconcile Copilot' },
+  { href: '/finance/reconcile', label: 'Card Cockpit' },
   { href: '/finance/tagger-v2', label: 'Tagger' },
   { href: '/finance/receipts-triage', label: 'Receipts' },
   { href: '/finance/reconciliation', label: 'Reconciliation' },

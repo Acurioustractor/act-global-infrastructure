@@ -24,7 +24,7 @@
  * Run:  node scripts/build-project-needs-match.mjs
  * Out:  thoughts/shared/project-needs-match.csv
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 // ── tiny CSV parser (quoted fields, embedded commas) ───────────────────────
 function parseCSV(text) {
@@ -64,13 +64,17 @@ console.log(`${people.length} orbit people · ${supporters.length} on the suppor
 const tierRank = { 'tier:steward': 5, 'tier:active': 4, 'tier:member': 3, 'tier:connected': 2, 'tier:curious': 1 };
 function warmth(p) {
   const tags = (p.rel_tags || '').toLowerCase();
-  let s = 0, why = [];
+  let contact = 0, why = [];
   const bs = Number(p.beeper_score);
-  if (bs > 0) { s += bs; why.push(`beeper ${p.beeper_pattern || bs}`); }
+  if (bs > 0) { contact += bs; why.push(`beeper ${p.beeper_pattern || bs}`); }
   const [gi, go] = (p.gmail_in_out || '').split('/').map(Number);
-  if (gi && go) { s += Math.min(gi, go) * 2; why.push(`gmail 2-way ${p.gmail_in_out}`); }      // two-way email is the real signal
+  if (gi && go) { contact += Math.min(gi, go) * 2; why.push(`gmail 2-way ${p.gmail_in_out}`); }      // two-way email is the real signal
+  let s = contact;
   for (const [t, r] of Object.entries(tierRank)) if (tags.includes(t)) { s += r * 5; why.push(t.replace('tier:', 'tier-')); break; }
-  return { score: s, why: why.join(', ') || 'cold/uncaught' };
+  // contact = real two-way signal only; score adds tier rank for PRIORITY ranking.
+  // Consumers judge "warm enough to ask" on contact, never score — tier+affinity alone
+  // can clear 20 with zero actual contact (110 such rows before this split).
+  return { score: s, contact, why: why.join(', ') || 'cold/uncaught' };
 }
 
 // ── the five projects + their grounded needs ───────────────────────────────
@@ -104,13 +108,37 @@ const PROJECTS = [
 // named latent-energy people the orbit flagged as "reached in, never caught" (energy-orbit.md)
 const LATENT = /phoebe frederick|terry hutchinson|anurag gummadi/i;
 
+// emit the canonical needs catalog (ALL needs, matched or not) so the scope board can show empty-cell GAPS
+writeFileSync('thoughts/shared/project-needs-catalog.json',
+  JSON.stringify(PROJECTS.map(p => ({ project: p.key, needs: p.needs.map(n => n.type) })), null, 2));
+
 function rolesOf(p) { return [...(p.rel_tags || '').toLowerCase().matchAll(/role:([a-z0-9-]+)/g)].map(m => m[1]); }
+
+// ── ask-state from the circle-session ledger (the human's read wins) ────────
+// A declared "NO to <project>" removes that person from that project's candidate pool —
+// coverage must reflect answers, not tags (Lucy had declined JusticeHub while the board
+// still showed her covering its capital need). Free-text match on the project word.
+const PROJ_WORDS = { 'JusticeHub': /justicehub/i, 'Goods': /goods/i, 'The Harvest': /harvest/i, 'CivicGraph': /civicgraph/i, 'Studio': /studio/i };
+const declines = new Map(); // norm(name) -> Set(project keys declined)
+if (existsSync('thoughts/shared/field-decisions.jsonl'))
+  for (const l of readFileSync('thoughts/shared/field-decisions.jsonl', 'utf8').split('\n').filter(Boolean)) {
+    try {
+      const d = JSON.parse(l); if (!d.ask_state || !/\bNO\b/i.test(d.ask_state)) continue;
+      const k = (d.name || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+      for (const proj of PROJECTS) for (const [word, re] of Object.entries(PROJ_WORDS))
+        if (proj.key.includes(word) && re.test(d.ask_state) && new RegExp(`NO[^·]*${word}`, 'i').test(d.ask_state))
+          (declines.get(k) || declines.set(k, new Set()).get(k)).add(proj.key);
+    } catch {}
+  }
+if (declines.size) console.log(`ask-state declines loaded: ${[...declines.entries()].map(([n, s]) => `${n} ✗ ${[...s].join('/')}`).join(' · ')}`);
 
 // ── match ──────────────────────────────────────────────────────────────────
 const out = [];
 for (const proj of PROJECTS) {
   for (const need of proj.needs) {
     for (const p of supporters) {
+      const nk = (p.name || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+      if (declines.get(nk)?.has(proj.key)) continue;   // they answered NO — not a candidate
       const roles = rolesOf(p);
       const hasRole = need.roles.some(r => roles.includes(r));
       const hasAffinity = proj.affinity.source !== '$^' && proj.affinity.test(p.rel_tags || '');
@@ -123,7 +151,7 @@ for (const proj of PROJECTS) {
       const signals = [hasAffinity ? 'project-newsletter' : null, hasRole ? `role:${need.roles.filter(r => roles.includes(r)).join('/')}` : null, LATENT.test(p.name) ? 'LATENT — reached in, never caught' : null].filter(Boolean).join(' · ');
       out.push({
         project: proj.key, need: need.type, name: p.name,
-        why: `${signals} | ${w.why}`, warmth: w.score + affinityBoost,
+        why: `${signals} | ${w.why}`, warmth: w.score + affinityBoost, contact_warmth: w.contact,
         email: p.email, phone: p.phone, in_ghl: p.in_ghl, action: p.home,
       });
     }
@@ -135,7 +163,7 @@ for (const r of out) { const k = `${r.project}|${r.need}|${r.name}`; if (!seen.h
 const rows = [...seen.values()].sort((a, b) => a.project.localeCompare(b.project) || a.need.localeCompare(b.need) || b.warmth - a.warmth);
 
 const esc = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
-const cols = ['project', 'need', 'name', 'why', 'warmth', 'email', 'phone', 'in_ghl', 'action'];
+const cols = ['project', 'need', 'name', 'why', 'warmth', 'contact_warmth', 'email', 'phone', 'in_ghl', 'action'];
 writeFileSync('thoughts/shared/project-needs-match.csv', [cols.join(','), ...rows.map(r => cols.map(c => esc(r[c])).join(','))].join('\n'));
 
 // ── summary ──────────────────────────────────────────────────────────────

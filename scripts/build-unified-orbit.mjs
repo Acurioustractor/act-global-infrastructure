@@ -20,6 +20,7 @@
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { overlayBeeperRecency } from './lib/field-warmth.mjs';
 
 dotenv.config({ path: '.env.local' });
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_SHARED_URL;
@@ -32,7 +33,13 @@ const HONORIFICS = /\b(mba|bsc|phd|ao|am|oam|dr|prof|professor|she ?her|maipm|cp
 const normName = s => (s || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(HONORIFICS, '').replace(/\s+/g, ' ').trim();
 const normEmail = s => (s || '').toLowerCase().trim();
 const digits9 = s => (s || '').replace(/\D/g, '').slice(-9);
-const COMMUNITY_NAME = /bloomfield|oonchiump|tanya turner|eloise hall|brodie|germaine|\bpicc\b|atnarpa|kristy|valerie riley/i;
+// 2026-06-06: "eloise hall" removed — TABOO co-founder / Goods-handover partner, NOT in EL,
+// role:funder + goods-impact-finance = supporter lane (Ben: "fix all"). Was a false positive here.
+const COMMUNITY_NAME = /bloomfield|oonchiump|tanya turner|brodie|germaine|\bpicc\b|atnarpa|kristy|valerie riley/i;
+// Vendor pollution (circle-session error class, 2026-06-06): service providers whose email
+// volume fakes warmth — Standard Ledger ranked ring-15 by the matcher, Thriday support pages
+// got qwen-synthesised. Flag, don't delete: vendors stay visible but leave the rings.
+const VENDOR = /standardledger\.co|standard ledger|thriday|cosec/i;
 const COMMUNITY_ROLES = ['role:storyteller', 'role:community', 'role:community-controlled', 'role:elder']; // broad — lane/ptag classification only
 // The community-LINE VIOLATION (extraction-funnel protection) is about community INDIVIDUALS only.
 // `role:community` / `role:community-controlled` are SEGMENT / ORG markers (the Goods "community"
@@ -113,9 +120,13 @@ for (const c of contacts) {
   const ghost = tags.includes('gone-from-ghl');
   const isCommunity = c.is_storyteller || tags.some(t => COMMUNITY_ROLES.includes(t)) || COMMUNITY_NAME.test(c.full_name || '');
   const isOrg = ORG_NAME.test(c.full_name || '') || ORG_NAME.test(c.company_name || '') || /@goods\.civicgraph\.io$/i.test(c.email || '');
-  // a community INDIVIDUAL is the only thing the community-line protects (excludes orgs + segment-tagged funders)
-  const isCommunityIndividual = !isOrg && (c.is_storyteller || tags.some(t => COMMUNITY_INDIVIDUAL_ROLES.includes(t)) || COMMUNITY_NAME.test(c.full_name || ''));
-  const relTags = tags.filter(t => /^(tier:|circle:|role:|comms:)/.test(t));
+  // a community INDIVIDUAL is the only thing the community-line protects (excludes orgs + segment-tagged funders).
+  // ACT's own team is excluded by definition: the line protects community FROM ACT — the org can't
+  // violate it against itself. (Ben/Nic carry is_storyteller=true from their own EL transcripts,
+  // which flagged their Harvest tier:member as a "violation" — noise, fixed 2026-06-05.)
+  const isInternal = /@act\.place$/i.test(c.email || '') || /^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor|act admin|benjamin test)$/i.test((c.full_name || '').trim());
+  const isCommunityIndividual = !isOrg && !isInternal && (c.is_storyteller || tags.some(t => COMMUNITY_INDIVIDUAL_ROLES.includes(t)) || COMMUNITY_NAME.test(c.full_name || ''));
+  const relTags = tags.filter(t => /^(tier:|circle:|role:|comms:|project:|lane:|ring:)/.test(t));
   const hasTier = tags.some(t => t.startsWith('tier:'));
   const hasDrip = tags.some(t => /drip/.test(t));
   const g = gmailByEmail.get(ne) || gmailByName.get(nn);
@@ -158,6 +169,7 @@ for (const c of contacts) {
     gmail_total: g ? g.total : '', gmail_in_out: g ? `${g.inbound}/${g.outbound}` : '',
     last_contact: (c.last_contact_date || (g ? g.last_contact : '') || '').slice(0, 10),
     rel_tags: relTags.join(' '), dupe, home, ptag, flags: flags.join(' '), signalRank,
+    vendor: (VENDOR.test(c.full_name || '') || VENDOR.test(c.email || '')) ? 'yes' : '',
   });
 }
 
@@ -180,15 +192,40 @@ for (const b of beeper) {
     ptag: community ? 'lane:community (constellation)' : (Number(b.score) >= 80 ? 'circle:gsd-alliance? + tier:steward?' : 'tier: set-by-evidence'),
     flags: ['UNCAPTURED-ALLY', b.read ? b.read : ''].filter(Boolean).join(' '),
     signalRank: Number(b.score) + 120,
+    vendor: VENDOR.test(b.name || '') ? 'yes' : '',
   });
   if (!community) uncaptured++;
 }
 
+// fold warm-channel time into last_contact (max of GHL/Gmail/Beeper) — the cadence
+// clock was email-blind until 2026-06-07; surfaces also overlay live at render time.
+overlayBeeperRecency(rows);
+
 rows.sort((a, b) => b.signalRank - a.signalRank);
+
+// --- 4.5) carry the hand-annotation columns forward ----------------------
+// CIRCLE / LANE_FIX / NOTES are Ben's curation on the PREVIOUS worklist, not generated
+// data — a regen must never wipe them (same rule as person-page Reflections).
+// Keyed by email, falling back to normalised name.
+{
+  const prev = loadCSV('thoughts/shared/unified-orbit-worklist.csv');
+  const ann = new Map();
+  for (const p of prev) {
+    if (!(p.CIRCLE || p.LANE_FIX || p.NOTES)) continue;
+    const k = p.email ? 'e:' + normEmail(p.email) : 'n:' + normName(p.name || '');
+    if (!ann.has(k)) ann.set(k, { CIRCLE: p.CIRCLE, LANE_FIX: p.LANE_FIX, NOTES: p.NOTES });
+  }
+  let carried = 0;
+  for (const r of rows) {
+    const a = ann.get(r.email ? 'e:' + normEmail(r.email) : 'n:' + normName(r.name || '')) || ann.get('n:' + normName(r.name || ''));
+    if (a) { r.CIRCLE = a.CIRCLE; r.LANE_FIX = a.LANE_FIX; r.NOTES = a.NOTES; carried++; }
+  }
+  if (ann.size) console.log(`carried ${carried} hand-annotation row(s) forward (${ann.size} annotated in previous worklist)`);
+}
 
 // --- 5) write the worklist ----------------------------------------------
 const esc = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
-const cols = ['CIRCLE', 'LANE_FIX', 'NOTES', 'status', 'home', 'ptag', 'name', 'email', 'phone', 'in_ghl', 'sources', 'beeper_score', 'beeper_pattern', 'gmail_total', 'gmail_in_out', 'last_contact', 'rel_tags', 'dupe', 'flags'];
+const cols = ['CIRCLE', 'LANE_FIX', 'NOTES', 'status', 'home', 'ptag', 'name', 'email', 'phone', 'in_ghl', 'sources', 'beeper_score', 'beeper_pattern', 'gmail_total', 'gmail_in_out', 'last_contact', 'rel_tags', 'dupe', 'flags', 'vendor'];
 const lines = [cols.join(',')];
 for (const r of rows) lines.push(cols.map(c => esc(c in r ? r[c] : '')).join(','));
 const out = 'thoughts/shared/unified-orbit-worklist.csv';

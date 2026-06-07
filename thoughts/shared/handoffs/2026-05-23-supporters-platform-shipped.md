@@ -60,6 +60,9 @@ Pattern documented at `thoughts/shared/plans/funder-briefs-overlay-2026-05-23.md
 | 4 | Resolve 21 untagged grants ($1.05M) | `supabase WHERE project_code IS NULL` — human review needed |
 | 5 | Resolve bed-count discrepancy (369 vs 389 vs 140) | Snow review noted — affects QBE + Snow narrative |
 | 6 | Build /briefs index page | If Path A scales: a single page listing all briefs across funders/projects |
+| 7 | **JCF (June Canavan Foundation) $0** | Verified absent from xero_invoices + xero_transactions (all 3 accounts) + bank_statement_lines + sole-trader CSV. Either committed-but-unpaid, paid via partner (Oonchiumpa/PICC?), or never materialised. Need Ben to confirm with Anne Gripper. |
+| 8 | **Queensland — 3 dup rows, same entity** | "State of Queensland (acting through the Department of Families, Seniors, Disability Services and Child Safety)" (PAID $22K) + "Queenslandgives" (WARM $0) + "State of Queensland (DFSDSCS)" (COLD $0) — merge to single canonical row |
+| 9 | **NM Personal pre-cutover $** | Sole-trader had ~$1M flow but only $87K is in xero_transactions for NM Personal. Either xero sync is partial or pre-cutover data lives elsewhere. Worth a reconciliation pass. |
 
 ## Files added in this commit
 

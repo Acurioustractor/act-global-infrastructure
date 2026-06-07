@@ -158,3 +158,13 @@ thoughts/shared/data/compliance-calendar/[0-9]*.json
 
 # Xero incremental sync state (modifiedSince cursor)
 .xero-sync-state.json
+thoughts/shared/.triage-story-cache.json
+
+# PPPP weekly-scan run state (which ISO weeks already have a Notion run page) — cron-written, must never dirty git
+.pppp-scan-state.json
+
+# One-off bank/contact CSV exports dropped at repo root (personal financial data — never commit)
+/nicholas-marchesi*.csv
+
+# Codex CLI local cache
+.codex/cache/

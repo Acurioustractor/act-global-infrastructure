@@ -197,6 +197,7 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 ## Finance
 
 - [[finance/five-year-cashflow-model|Five-Year Cashflow Model]] — revenue projections, R&D tax, founder deposit path
+- [[finance/knight-family-act-pay-and-entity-setup|Knight Family + ACT Pay and Entity Setup]] — Ben/Carla/children payroll, Knight Family Trust role, Knight Photography routing, PSI guardrails, Witta/Harvest/Farm wealth path
 - [[finance/rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — FY26 founder invoicing, CPA booking, $200K+ refundable offset
 
 ## Operations
