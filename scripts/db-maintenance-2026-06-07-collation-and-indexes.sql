@@ -28,7 +28,7 @@
 --     -U postgres.tednluwflfhxyucgwigh -d postgres \
 --     -f scripts/db-maintenance-2026-06-07-collation-and-indexes.sql
 --
---   (no ON_ERROR_STOP: amcheck failures are handled in-script; a REINDEX
+--   (ON_ERROR_STOP is ON: per-index tolerance lives inside the check loop; a REINDEX
 --    failure leaves an INVALID _ccnew index — cleanup query in Phase 9.)
 --
 -- DURATION: amcheck reads every text btree once (index only, not heap) —
