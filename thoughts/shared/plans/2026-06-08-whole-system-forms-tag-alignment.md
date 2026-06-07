@@ -1,5 +1,5 @@
 ---
-title: Whole-system website forms → GHL tag-contract alignment (3 codebases, one account)
+title: Whole-system website forms → GHL tag-contract alignment (5 codebases, one account)
 date: 2026-06-08
 status: PROPOSED — awaiting Ben's per-form rulings (R1–R7) + verb to execute
 type: plan
@@ -14,6 +14,8 @@ repos:
   - act-regenerative-studio   (act.place — 7 formTypes)
   - JusticeHub                (justicehub.com.au — 5+ GHL routes, OWN flat vocab)
   - empathy-ledger-v2         (empathyledger.com — World Tour forms, OWN vocab; SCOPE conditional, see R7)
+  - theharvest                (theharvestwitta.com.au — Supabase edge fns: contact-form/newsletter-subscribe/community-submit + server/gohighlevel.ts; LARGELY PRE-ALIGNED, see scope)
+  - goods-asset-tracker       (goodsoncountry.com — Next v2: get-involved/canberra follow-form/bed contact-row/admin reach-out; mapping TODO)
 ---
 
 # Whole-system forms → GHL tag-contract alignment
@@ -25,13 +27,19 @@ BEFORE automations switch on (a wrong tag = a wrong send; for community-line
 people a wrong send is a relationship breach). Then migrate existing off-contract
 tags in the one account, and confirm the lists + 4 newsletters are clean.
 
-## Scope (revised from the review)
-Three live codebases write contacts/tags into the single "A Curious Tractor"
-account, each with its own ad-hoc vocabulary:
+## Scope (revised 2026-06-08 PM — corrected from 3 to 5 codebases)
+**Correction:** the original review marked the-harvest + goods as "no live GHL forms, OUT".
+That was WRONG — it assessed two dead repos (`the-harvest`, `goods-on-country`). The LIVE
+sites are served by different repos that BOTH have substantial live GHL integration:
+`theharvest` (theharvestwitta.com.au) and `goods-asset-tracker` (goodsoncountry.com). Ben
+2026-06-08: fold both in. **Five** live codebases write into the single "A Curious Tractor" account:
 - **act-regenerative-studio** — 7 formTypes via `/api/forms/submit` (newsletter FIXED/undeployed; 5 unaligned).
 - **JusticeHub** — 5+ `/api/ghl/*` + `/api/contact` + `/api/contained/nominations` routes, ENTIRELY flat vocab.
 - **empathy-ledger-v2** — World Tour `EmailCaptureForm` + `ContactForm` (own vocab; multi-tenant — **R7 gates inclusion**).
-OUT (no live GHL forms): the-harvest (docs-only repo; Vite site, no GHL forms), goods-on-country (build ERROR, no domain).
+- **theharvest** — Supabase edge fns (`contact-form`, `newsletter-subscribe`, `community-submit`, `ghl-webhook`) + `server/gohighlevel.ts`; GardenLaunch/GetInvolved forms. **LARGELY PRE-ALIGNED** already: PR #26 "tag taxonomy" + "Phase 3 code-flip" emit canonical-only (`project:act-hv` at the GHL chokepoint, `comms:harvest-newsletter`, `role:supplier`, `interest:markets`; dropped `role:member`/flat aliases). Action here is **verify against the contract**, not rebuild — see §D.
+- **goods-asset-tracker** — Next `v2/`: `get-involved` (multi-form), `canberra/follow-form`, `bed/[id]/contact-row`, admin `reach-out/compose-form`. **Per-form CURRENT→TARGET mapping TODO** (fresh-context review of v2 form handlers) — see §E.
+
+> §D (theharvest) and §E (goods-asset-tracker) per-form mappings are NOT YET WRITTEN — each is a focused fresh-context review per the plan's own "best in FRESH context per repo" rule. This turn corrected scope + inventory only.
 
 ## The canonical target (from the two wiki docs — do not re-derive)
 - **5-layer model:** DESCRIBE (identity tags) · SEGMENT (smart-lists) · ENROL (`comms:`) · ACT (workflows) · GATE (consent + community-line). Golden rule: **identity tags never trigger a send; only `comms:` does, and `comms:` is granted by the consent-capturing form/workflow — never a hand-added flat tag.**
@@ -109,7 +117,8 @@ rulings. **All of P4–P6 is day-shift, human-in-loop (external system-of-record
 writes) — never AFK.**
 
 ## Decision log
-- 2026-06-08 — ONE GHL account, ONE canonical contract for all 3 codebases (Ben).
+- 2026-06-08 — ONE GHL account, ONE canonical contract for all codebases (Ben).
+- 2026-06-08 PM — **SCOPE CORRECTED 3 → 5 codebases (Ben: "add both").** The original review's "the-harvest/goods = no live GHL forms, OUT" assessed two DEAD repos. Live sites are `theharvest` + `goods-asset-tracker`, both with substantial live GHL integration. Harvest found LARGELY PRE-ALIGNED (PR #26 + Phase-3 code-flip → canonical-only); Goods needs a per-form review. §D/§E mappings still to write (fresh context per repo).
 - 2026-06-08 — **RULINGS LOCKED (Ben):**
   - **R3** ✅ lived-experience / youth-voice → `lane:community` + `role:storyteller` (zero `comms:*` ever; hand-only). OCAP guardrail.
   - **R7** ✅ VERIFY EL's tenant location first; align EL only if it writes to `agzsSZWgovjwgpcoASWG`, else out of scope.
@@ -121,6 +130,7 @@ writes) — never AFK.**
 - VERIFIED: 5 sites' Vercel deploy status (Vercel MCP); `agzsSZWgovjwgpcoASWG`="A Curious Tractor" (GHL MCP); JusticeHub `.env`→same location; JusticeHub tag inventory (agent, file:line cited); EL tag inventory (agent, file:line).
 - VERIFIED 2026-06-08 (R7): **EL World Tour writes to A Curious Tractor → EL IN SCOPE.** `ghl_contacts` mirror (shared DB tednluwflfhxyucgwigh): `world-tour`=27, `empathy*`=282 of 2588. NOTE: `wt-*`=0 and `partner-network`=0 in the mirror — the newer namespaced EL tags haven't landed (forms not yet exercised, or mirror lag). **Verify EL's live form path before its tracer (P3).**
 - UNVERIFIED: regen-studio Vercel per-project `GHL_*_LOCATION_ID` values (moot now — one-account decided); JusticeHub `/api/booking` route's GHL writes; `GHLForm.tsx` native-form tags (R6 — audit in GHL UI).
+- VERIFIED 2026-06-08 PM (scope correction): `theharvest` GHL surface — Supabase edge fns `contact-form`/`newsletter-subscribe`/`community-submit`/`ghl-webhook` + `server/gohighlevel.ts` (grep, repo `/Users/benknight/Code/The Harvest Website`); Harvest tag alignment confirmed via shipped commits (PR #26 "tag taxonomy", "Phase 3 code-flip" 3739915 — canonical-only). `goods-asset-tracker` GHL surface — `v2/src/app/get-involved`, `canberra/follow-form.tsx`, `bed/[id]/contact-row.tsx`, `admin/reach-out/compose-form.tsx` (grep, repo `/Users/benknight/Code/Goods Asset Register`). Goods per-form emitted tags NOT yet audited.
 
 ## Changelog
 - 2026-06-08 — plan created from the whole-system Vercel review.
