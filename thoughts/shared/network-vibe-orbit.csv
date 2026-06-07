@@ -1,0 +1,56 @@
+rank,name,channel,channels_all,msgs,sent,recv,recip,days_since,span_days,pattern,score,read,lane
+1,Carla Knight,whatsapp,whatsapp,200,105,95,0.53,5,189,generative,98,family — exclude from CRM core,family
+2,Pollyanna,whatsapp,whatsapp,128,70,58,0.55,13,459,generative,95,,
+3,David Romero McGuire,whatsapp,whatsapp,147,91,56,0.62,4,338,generative,93,,
+4,Benjamin Croft,whatsapp,whatsapp,120,42,78,0.35,7,342,generative,91,uncaptured GSD ally — NOT in GHL,supporter
+5,+61 424 054 113,imessage,imessage,26,14,12,0.54,0,1,generative,87,Contained crew,supporter
+6,kabir.dhanji@icloud.com,imessage,imessage,19,10,9,0.53,0,1345,generative,86,same person as #7 (iMessage),
+7,Kabir Dhanji,whatsapp,whatsapp,20,9,11,0.45,0,803,generative,85,reciprocal long-history friend,
+8,+61 415 193 987,imessage,imessage,20,12,8,0.6,0,114,generative,82,Contained fit-out crew (Dan?),supporter
+9,+61 488 288 567,imessage,imessage,20,8,12,0.4,0,276,generative,82,iMessage — identify,
+10,Tahlia Isaac,linkedin,linkedin,18,8,10,0.44,9,868,generative,82,"reciprocal, 2.4yr history",supporter
+11,Andy Fog,whatsapp,whatsapp,39,24,15,0.62,20,655,generative,82,,
+12,Scott McDougall,linkedin,linkedin,13,7,6,0.54,6,542,generative,81,Qld Human Rights Commissioner,supporter
+13,+61 414 185 964,imessage,imessage,20,6,14,0.3,0,9,generative,77,iMessage — identify,
+14,Hugo,whatsapp,whatsapp,13,6,7,0.46,22,14,generative,77,,
+15,Annie De'Ath,linkedin,linkedin,11,5,6,0.45,33,36,generative,74,co-founder thread (Silvia/Jeremy),supporter
+16,Libby Beeching,linkedin,linkedin,6,3,3,0.5,26,0,generative,73,,
+17,Nicholas Marchesi OAM,linkedin,linkedin|whatsapp,23,6,17,0.26,19,1033,generative,72,co-founder — score understates (LinkedIn ≠ main channel),steward
+18,Tharini Rouwette,linkedin,linkedin,17,6,11,0.35,31,4,generative,72,had a meeting to confirm,supporter
+19,+61 433 590 223,imessage,imessage,6,2,4,0.33,0,167,generative,71,Jess? (Contained check-in),supporter
+20,Peter Norden AO,linkedin,linkedin,26,3,23,0.12,7,603,inbound-lean,68,one-sided (23 in / 3 out) — read the tone,supporter
+21,Shyaka Farid Lwanyaaga,linkedin,linkedin,7,3,4,0.43,37,0,generative,68,,
+22,Juliet Uraz,linkedin,linkedin,5,2,3,0.4,26,0,generative,67,,
+23,Hazel Westbury,linkedin,linkedin,14,4,10,0.29,31,49,generative,67,,
+24,George Newhouse AM,linkedin,linkedin,6,2,4,0.33,26,180,generative,65,human rights lawyer — "let's talk soon",supporter
+25,Nav Sawhney,whatsapp,whatsapp,5,2,3,0.4,37,6,generative,65,Washing Machine Project?,supporter
+26,Michael Stephan Terzich,linkedin,linkedin,6,0,6,0,39,2921,inbound-lean,46,cold,cold
+27,Daniel A Zelli,linkedin,linkedin,1,0,1,0,0,0,light,45,People for Nature ambassador — new inbound,latent
+28,Candice Jade Olivier,linkedin,linkedin,1,0,1,0,1,0,light,45,sales pitch,cold
+29,Juan Soublette,linkedin,linkedin,1,0,1,0,2,0,light,45,sales pitch (VAs),cold
+30,Okunade Abdulakeem Olalekan,linkedin,linkedin,2,0,2,0,13,24,light,45,sales pitch,cold
+31,Leoni Heaslip,linkedin,linkedin,1,0,1,0,6,0,light,44,sales pitch (speaking),cold
+32,Ashesh D Shah,linkedin,linkedin,5,0,5,0,39,2191,inbound-lean,44,cold,cold
+33,Vanessa Intan,linkedin,linkedin,1,0,1,0,8,0,light,43,Notion ambassador,latent
+34,Bridget Crook,linkedin,linkedin,1,0,1,0,10,0,light,43,sales pitch (AIB),cold
+35,Kristian Livolsi,linkedin,linkedin,4,0,4,0,39,708,inbound-lean,43,birthday-only,cold
+36,Gale Triphop,linkedin,linkedin,1,0,1,0,16,0,light,42,sales pitch (marketing),cold
+37,Marianne Kadunc,linkedin,linkedin,3,0,3,0,36,2924,light,42,birthday-only,cold
+38,Michael Houston,linkedin,linkedin,1,0,1,0,20,0,light,41,documentary maker — latent,latent
+39,Attila Ovari,linkedin,linkedin,3,0,3,0,39,730,light,41,birthday-only,cold
+40,"Rodney Reynders MBA (Fin), ACC",linkedin,linkedin,3,0,3,0,39,232,light,41,birthday-only,cold
+41,Joy Woods,linkedin,linkedin,2,1,1,0.5,34,15,light,40,you said you'd call,supporter
+42,Dr Terry Hutchinson,linkedin,linkedin,1,0,1,0,26,0,light,39,latent — offered journal help,latent
+43,Harry R.,linkedin,linkedin,1,0,1,0,27,0,light,39,,
+44,Sophie,whatsapp,whatsapp,1,0,1,0,28,0,light,39,contact share,
+45,Pieter van der Merwe,linkedin,linkedin,2,0,2,0,39,197,light,39,birthday-only,cold
+46,Bernd Brauer,linkedin,linkedin,2,0,2,0,39,365,light,39,birthday-only,cold
+47,Akino Davis,linkedin,linkedin,1,0,1,0,30,0,light,38,newsletter pitch,cold
+48,Mohammed Foysal,linkedin,linkedin,1,0,1,0,30,0,light,38,student,cold
+49,Phoebe Frederick,linkedin,linkedin,1,0,1,0,34,0,light,38,latent — NFP transparency-map collab,latent
+50,Patrick Nguyen,linkedin,linkedin,1,0,1,0,35,0,light,37,Rewind backups,cold
+51,Lawrence Owaraojo,linkedin,linkedin,1,0,1,0,38,0,light,37,birthday-only,cold
+52,Shaikh Mostofa,linkedin,linkedin,1,0,1,0,39,0,light,36,birthday-only,cold
+53,Clint Sheehan,linkedin,linkedin,1,0,1,0,39,0,light,36,birthday-only,cold
+54,Ian Bosler,linkedin,linkedin,1,0,1,0,39,0,light,36,birthday-only,cold
+55,Anurag Gummadi,linkedin,linkedin,1,0,1,0,40,0,light,36,latent — engaged with CONTAINED,latent
