@@ -24,7 +24,7 @@
  *   ids. We resolve UUID -> ghl_opportunities.ghl_id before writing (same pattern as
  *   sync-grants-ghl.mjs), otherwise those writes would 404.
  *
- * GHL DATE custom fields: written as epoch milliseconds (per existing opp convention).
+ * GHL DATE custom fields: written as ISO 'YYYY-MM-DD' (epoch-ms string is rejected on write).
  *
  * Companion: scripts/sync-grants-ghl.mjs (two-way name/status/URL/deadline sync).
  */
