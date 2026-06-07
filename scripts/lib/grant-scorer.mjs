@@ -9,7 +9,7 @@
  *   const scored = await scoreGrantBatch(grants, projects);
  */
 
-import { trackedClaudeCompletion } from './llm-client.mjs';
+import { trackedAgentCompletionWithFallback } from './llm-client.mjs';
 
 const SCRIPT_NAME = 'grant-scorer';
 const BATCH_SIZE = 5; // Grants per LLM call
@@ -80,8 +80,11 @@ Scoring guide:
 - categories: Grant focus areas from [justice, indigenous, stories, enterprise, regenerative, health, arts, community, technology, education]`;
 
     try {
-      const response = await trackedClaudeCompletion(prompt, SCRIPT_NAME, {
-        model: 'claude-haiku-4-5',
+      // Provider-routed with credit-aware fallback: a dead Anthropic key here
+      // caused the 2026-06-07 retry storm (127 grants x exponential backoff =
+      // a 4h hang holding pooler connections). Router picks the cheap tier.
+      const response = await trackedAgentCompletionWithFallback(prompt, SCRIPT_NAME, {
+        task: 'score',
         maxTokens: 2000,
         operation: 'score-batch',
       });

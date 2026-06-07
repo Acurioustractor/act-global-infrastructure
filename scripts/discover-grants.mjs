@@ -34,6 +34,16 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
+// Watchdog: a one-shot cron alive past 30 min is wedged, not working — exit
+// hard rather than hold pooler connections (the 2026-06-07 lesson: a hung run
+// held connections for 4h and starved the shared DB). unref() so a healthy
+// run's natural exit isn't delayed.
+const WATCHDOG_MS = 30 * 60 * 1000;
+setTimeout(() => {
+  console.error(`[watchdog] discover-grants still alive after ${WATCHDOG_MS / 60000} min — exiting 1`);
+  process.exit(1);
+}, WATCHDOG_MS).unref();
+
 // Parse CLI args
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
