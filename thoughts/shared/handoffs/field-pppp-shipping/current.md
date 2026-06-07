@@ -9,18 +9,41 @@ status: complete
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-07T09:30:00Z
-**Goal:** Four-lane funding build SHIPPED + orchestrator revival COMPLETE (PM2-homed + saved) + warm→cold pipeline operating picture committed. Next: operate the pipeline (Rung-0 chases), violations verify, push.
-**Branch:** main (~10 commits ahead of origin — "push" pending, Tier 3)
-**Test:** `node scripts/foundation-shortlist.mjs` (expect top-10, Paul Ramsay #1) · `pm2 logs orchestrator --nostream` (grantscope orchestrator online, 172 agents)
+**Updated:** 2026-06-08T07:00:00Z
+**Goal:** GHL CRM made automation-ready — taxonomy audited, audience/comms/automation strategy locked (D1-D4), consent backfilled from evidence. NEXT SESSION: review all current lists (the 4 newsletters + segments) on a clean context.
+**Branch:** main (~12 commits ahead of origin — "push" pending, Tier 3)
+**Test:** `node scripts/backfill-newsletter-consent.mjs` (DRY RUN, writes nothing — shows current opt-in/unknown classification) · grant enrichment DONE (344/375, verified)
 
 ### Now
-[->] RESUME POINT — pipeline built + operating; two things pending the DB instance recovering:
-  1. **FINISH GHL grant enrichment (blocked on DB REST)** — 198/375 grant opps enriched live; 177 RICH (date-bearing) ones still bare. Date bug FIXED (GHL DATE wants ISO 'YYYY-MM-DD' not epoch-ms; verified live on opp 2Y1NVSgtbQZuML7THmww). The 8 custom fields exist. Re-runs FAILED at buildMirrorMap — shared instance PostgREST degraded ("schema cache" errors, 4th wobble tonight). **WHEN REST HEALTHY: `node scripts/enrich-ghl-grants.mjs --apply` (idempotent; ~19min) → expect ~375 enriched, ~0 failed.** Then register the cron: it's in ecosystem.config.cjs (`enrich-grants-ghl`, 45 */6) but NOT in live PM2 yet (held back — pm2 start fires it immediately = one-shot trap + load on fragile instance). Register with `pm2 start ecosystem.config.cjs --only enrich-grants-ghl && pm2 save` once instance is calm.
-  2. **⚠ COMPUTE TIER NOW URGENT** — instance wobbled 4×+ tonight (Cloudflare 522 / "schema cache" / ECHECKOUTTIMEOUT). Compounding load: standing grantscope orchestrator (172 agents, 10s poll, added tonight) + heavy paginated supabase-js runs. max_connections=90 review from the 06-07 incident list is the real bottleneck — do BEFORE Monday 6am when discovery+orbit+enrich crons all fire together.
-  3. **Rung-0 chases**: Rotary Eclub $82.5K (Pene Curtis Gmail DRAFT created, awaiting send) · Indigenous Languages & Arts $300K in-progress · INV-0314 Centrecorp $84.7K send/void with Nic.
-  4. **Push** the ~9 local commits (Ben's verb).
-  5. Reconcile Notion grant-tranche ledger ($592K) vs Xero before external quoting.
+[->] RESUME POINT — NEW SESSION: **review all current GHL lists on a clean context.** Read these 3 docs first, they are the state:
+  - `wiki/concepts/ghl-crm-taxonomy.md` — full tag/field audit + target taxonomy + gated migration
+  - `wiki/concepts/ghl-audience-comms-automation.md` — the 5-layer model + 4 newsletters + D1-D4 (DECIDED) + consent gates
+  - `thoughts/shared/reviews/newsletter-consent-backfill-worksheet-2026-06-08.md` — per-list consent state
+  THE 4 NEWSLETTERS (decided): ACT main · Goods · Harvest members · JusticeHub (distinct lists, a person can hold several).
+
+  OPEN DECISIONS for the review session:
+  1. **237 orphan tags** need rulings before the taxonomy migration `--apply` (script `scripts/ghl-taxonomy-migrate.mjs` is DRY-RUN-only; worksheet `thoughts/shared/reviews/ghl-taxonomy-migration-worksheet-2026-06-08.md`). The big mapping fix already found: flat `storyteller` (304) is 98% NOT community (only 7 have lane:community) → map to `interest:storytelling` EXCEPT the 7 → `role:storyteller`.
+  2. **Non-opt-ins re-permission-or-remove**: ~98 UNKNOWN + 11 NOT-OPT-IN on newsletter lists with no consent (Website Inquiry 37, contact forms, ACT Intelligence, Container CSV, test data). Either a re-permission "confirm your subscription" campaign or strip the comms tag. NOT backfilled (correctly).
+  3. **role:community (person=block) vs role:community-controlled (org=ok)** — confirm the rule; 70 role:community* contacts carry comms tags.
+  4. **Prove the live signup path** — 0 contacts via `source:website-form` (the fixed 06-02 path) exist; confirm a real act.place newsletter signup lands a contact WITH consent before automations go live.
+
+  STILL PARKED (pre-consent-thread):
+  - **Rotary $82.5K** — Pene Curtis Gmail DRAFT awaiting send (Tier 3).
+  - **Push** ~12 commits (Ben's verb).
+  - **⚠ Compute-tier review** — instance wobbled 4×+ on 06-07 (Cloudflare 522/schema-cache); max_connections=90 bottleneck + standing grantscope orchestrator (172 agents). Do before lists work hammers the DB again.
+
+### Done 2026-06-08 (CRM automation-readiness — git log bc9123a..69b23a9)
+- **GHL audit**: 12 pipelines · 61 contact fields/8 folders · 31 opp fields · ~150 tags. Found dual taxonomy (namespaced vs legacy flat), 2 warmth systems (ring/tier), ~900 cruft tag-uses, redundant fields. → `ghl-crm-taxonomy.md`.
+- **Strategy locked**: 5-layer model (describe→segment→enrol→act→gate); D1=4 newsletters, D2=retire partner-drip, D3=auto tier/hand ring, D4=explicit consent. → `ghl-audience-comms-automation.md`.
+- **Taxonomy migration dry-run** (`ghl-taxonomy-migrate.mjs`): 2586 contacts, 1024 ADD/4115 REMOVE, 237 orphans, 0 true lane:community breaches (06-07 strip held), 284 consent-gaps.
+- **Consent reconciled**: EL = content-consent SoR for storytellers (story/photo/ai, mostly @storyteller.local placeholders, community-line/hand-comms). GHL field = newsletter consent. The "284" were mostly evidenced opt-ins missing the flag. Signup code CORRECT since 06-02 (commit 40730cb) — NOT the ARRAY bug.
+- **Consent BACKFILLED** (`backfill-newsletter-consent.mjs`): GHL live `source` field = the evidence (mirror only has sync-provenance). **108 evidenced opt-ins written** (Yes + source + ISO signup date), 0 failed, verified live (Rebecca Ward). Promoted Harvest member-list (20) + gathering-footer (14) on Ben's ruling.
+- Grant enrichment FINISHED earlier: 344/375 (31 = deleted-in-GHL phantoms), cron `enrich-grants-ghl` registered + saved.
+
+### Mon 8 Jun morning (all verified ready)
+6:00 discovery live-inserts ~150 grants (watchdog-guarded, scorer on fallback router) · 7:00 enrich on MiniMax · 7:32 pr-ci-sweep routine first fire (expect "no open PRs") · 7:45 PPPP scan (momentum feeds) · ritual with Nic: Place-vs-Pulse + gone-quiet projects + Kristy GHL-UI merge + James Davidson ring call.
+
+### This Session (2026-06-07 late evening — four lanes shipped + orchestrator revival + warm→cold pipeline)
 
 ### Done this session (funding system buildout — see git log bc9123a..bec879d)
 - Community-line: 3 people (Kristy/Shaun/Rachel, 7 records) — funder+newsletter tags STRIPPED live (34 removals, verified). `scripts/strip-community-line-tags.mjs`.
