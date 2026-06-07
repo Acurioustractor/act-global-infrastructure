@@ -190,6 +190,7 @@ When the user's request matches an active skill, invoke it as the FIRST action.
 - **Deploy** → `deploy`
 - **Verify a fix** → `verify-fix` before claiming done
 - **Scheduled background work** → `/schedule` (built-in)
+- **Skill-capture nudge (proactive)** — when something just got done the hard way and will clearly recur, propose capturing it as a skill (`write-a-skill`) while the context is hot. Etiquette: one proposal per opportunity, never stack proposals, enthusiasm ≠ approval — if declined, drop it without ceremony.
 
 For tasks that don't match any active skill, just do the work directly.
 
