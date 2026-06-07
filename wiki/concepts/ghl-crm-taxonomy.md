@@ -50,7 +50,7 @@ One namespace per question. Lowercase, colon-delimited, no spaces, no flat synon
 |---|---|---|---|
 | `project:` | Which ACT project(s)? | act-core/gd/hv/jh/el/oo/ra/ce/cn/fa/mr/ca/bg/cf/fm/gl/in/rp · watch | the 18 project codes |
 | `role:` | What is this person/org TO us? | funder · partner · supplier · buyer · supporter · storyteller · advisor · community · community-controlled · elder · gov · council · land-council · researcher · media · health-service · housing-provider | one or more |
-| `comms:` | Which automated stream may reach them? | act-newsletter · goods/harvest/justicehub-newsletter · funder/partner/buyer/supporter-drip · nurture | **lane:community ⇒ NONE** |
+| `comms:` | Which automated stream may reach them? | act-newsletter · goods/harvest/justicehub-newsletter · funder/partner/buyer/supporter-drip · nurture | **lane:community ⇒ never AUTO; explicit opt-in only** |
 | `interest:` | What do they care about? | community · events · markets · workshops · storytelling · justice-reform · sustainability · garden · food · volunteer · membership · washer · container · venue · festivals | self-declared |
 | `tier:` | How engaged (the ladder)? | curious → connected → member → active → steward | ONE, advances |
 | `ring:` | How close (the Field/Dunbar)? | 5 · 15 · 50 · 150 · out | ONE, hand-curated |
@@ -96,13 +96,13 @@ Tracer-first, never a blind bulk rewrite (the community-line breach risk is real
 
 1. **Mapping script (read-only, build first):** `scripts/ghl-taxonomy-migrate.mjs --dry-run` — for each legacy flat tag, the namespaced target (table in §2/§3), counts, and the exact add/remove plan per contact. Output a worksheet, write nothing.
 2. **Tracer:** apply to 1 contact end-to-end, verify in GHL UI.
-3. **Bucketed apply (Tier 2, per Ben's verb):** migrate one namespace at a time (e.g. all `goods-newsletter`→`comms:goods-newsletter` first), re-verify community-line guard after each (no `comms:` drip lands on a `lane:community` person).
+3. **Bucketed apply (Tier 2, per Ben's verb):** migrate one namespace at a time (e.g. all `goods-newsletter`→`comms:goods-newsletter` first), re-verify community-line guard after each (no AUTO-enrolled `comms:` lands on a `lane:community` person; a `comms:` paired with explicit `newsletter_consent=Yes` is a kept opt-in, not a breach).
 4. **Cruft sweep:** delete `gone-from-ghl*` artifacts last, after confirming nothing filters on them.
 5. **Fields:** retype `engagement_score`→numeric, dedupe the two how-did-you-hear fields, decide the 5→1 project-field collapse.
 
 ## 7. Guardrail baked in
 
-Any tag migration MUST re-assert the community-line rule: a contact carrying `lane:community` or `role:community`/`role:storyteller` gets **zero** `comms:*-drip` / newsletter tags. The 2026-06-07 strip (Kristy Bloomfield, Shaun Fisher, Rachel Atkinson) fixed the current breaches; the migration script must check this invariant on every write, not re-introduce it. See `scripts/strip-community-line-tags.mjs`.
+Any tag migration MUST re-assert the community-line rule (**agency model**, 2026-06-08): a contact carrying `lane:community` or `role:community`/`role:storyteller` is **never AUTO-enrolled** into any `comms:*-drip` / newsletter. A `comms:*` may sit on them **only** when paired with explicit consent evidence (`newsletter_consent=Yes` + source) — their own choice; for storyteller/Elder lines the opt-in must be **human-confirmed**, not a checkbox. The guard strips `comms:*` that LACKS consent evidence (auto-enrolments), never a genuine opt-in. This is **not** exclusion — community is out of the *funnel*, not out of *communication* (operational + human-deliberate replies always flow). OCAP = control rests with the person: default off, never grabbed, their explicit choice honored. The 2026-06-07 strip (Kristy Bloomfield, Shaun Fisher, Rachel Atkinson) was correct — those were auto-enrolments into funder/partner drips, never opted into. See `scripts/strip-community-line-tags.mjs`.
 
 ## What this buys
 

@@ -36,7 +36,7 @@ Saved tag-queries. These are the lists Ben thinks in. Each is a query, not a han
 | Harvest members | `project:act-hv` AND `tier:member`+ | harvest updates |
 | Active funders | `role:funder` AND NOT `lane:community` AND in a live opportunity | funder stewardship |
 | Goods buyers | `role:buyer` | commercial nurture |
-| Community / storytellers | `lane:community` OR `role:storyteller` | **HAND-ONLY — never a segment for automation** |
+| Community / storytellers | `lane:community` OR `role:storyteller` | **never a segment for automation; comms is per-person explicit opt-in only (storyteller/Elder human-confirmed)** |
 | Inner circle | `ring:5` / `ring:15` | Ben tends personally |
 
 Note community/storytellers is listed so it's explicit: it exists to be *excluded* from every automated audience, never targeted.
@@ -66,7 +66,7 @@ Each `comms:` tag = enrolment in one automated stream. Proposed canonical set:
 | `role:funder` added (+ not community) | flag for stewardship (manual enrol to funder-drip) | (no auto-send — funder cadence is human-paced) |
 | Behaviour: opened/clicked 2× | advance `tier:curious`→`connected` | `tier:connected` |
 | Behaviour: donated / bought / attended | advance →`tier:member` | `tier:member` |
-| **`lane:community` added** | **STRIP all `comms:*` (the guard, automated)** | removes every drip/newsletter tag |
+| **`lane:community` added** | **STRIP `comms:*` LACKING consent evidence (the guard)** | removes auto-enrolled drips; KEEPS a `comms:` paired with `newsletter_consent=Yes` (a genuine opt-in) |
 | Xero invoice paid | mark buyer/funder, capital tracking | `role:buyer\|funder` |
 
 ## Layer 5 — The gates (checked before ANY enrolment or send)
@@ -74,7 +74,7 @@ Each `comms:` tag = enrolment in one automated stream. Proposed canonical set:
 Two hard invariants. Every workflow asserts both; the migration script verifies them; a nightly check re-asserts them.
 
 1. **Consent gate** — no `comms:*-newsletter` unless `newsletter_consent=Yes`. (Australian Spam Act 2003 — explicit consent, no implied-from-inquiry.) Drips need a documented relationship, not mass consent.
-2. **Community-line gate** — `lane:community` OR community-context `role:storyteller` ⇒ **zero `comms:*-drip` / newsletter**. Replies are hand-written. (Enforced 2026-06-07; see `strip-community-line-tags.mjs`.)
+2. **Community-line gate (agency model)** — `lane:community` OR community-context `role:storyteller` is **never AUTO-enrolled** into a `comms:*-drip` / newsletter. A `comms:*` may sit on them **only** with explicit consent evidence (`newsletter_consent=Yes`); storyteller/Elder opt-ins are **human-confirmed**. This is **not exclusion** — they are out of the *funnel*, not out of *communication*: operational messages (their own action) and human-written replies always flow. OCAP = control rests with the person. (2026-06-07 strip removed auto-enrolments, not opt-ins; see `strip-community-line-tags.mjs`.)
 
 ## Forms → tag contract
 
