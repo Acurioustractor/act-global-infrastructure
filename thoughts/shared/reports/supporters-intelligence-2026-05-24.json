@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-23T20:09:36.544Z",
+  "generated_at": "2026-05-24T20:00:02.026Z",
   "summary": {
     "supporter_count": 158,
     "tier_counts": {
@@ -27,7 +27,7 @@
       "first_invoice_date": "2025-08-11",
       "last_invoice_date": "2026-05-22",
       "oldest_open_date": "2026-05-17",
-      "outstanding_age_days": 6,
+      "outstanding_age_days": 7,
       "outstanding_alert": "CRITICAL",
       "projects": [
         "ACT-GD"
@@ -36,7 +36,7 @@
       "primary_email": "randle@centrecorp.com.au, jodie@centrecorp.com.au",
       "cc_email": null,
       "last_communicated_at": "2026-02-13",
-      "days_since_last_contact": 99,
+      "days_since_last_contact": 100,
       "themes": [
         "indigenous-led",
         "central-australia",
@@ -72,7 +72,7 @@
       "first_invoice_date": "2025-02-04",
       "last_invoice_date": "2026-05-22",
       "oldest_open_date": "2026-05-22",
-      "outstanding_age_days": 1,
+      "outstanding_age_days": 2,
       "outstanding_alert": "CRITICAL",
       "projects": [
         "ACT-GD"
@@ -81,7 +81,7 @@
       "primary_email": "s.grimsley-ballard@snowfoundation.org.au, a.lageleekean@snowfoundation.org.au",
       "cc_email": "g.byron@snowfoundation.org.au, a.machuca@snowfoundation.org.au, c.ludovici@snowfoundation.org.au",
       "last_communicated_at": "2026-05-20",
-      "days_since_last_contact": 3,
+      "days_since_last_contact": 4,
       "themes": [
         "systems-change",
         "indigenous-led",
@@ -117,7 +117,7 @@
       "first_invoice_date": "2025-04-10",
       "last_invoice_date": "2025-04-10",
       "oldest_open_date": "2025-04-10",
-      "outstanding_age_days": 408,
+      "outstanding_age_days": 409,
       "outstanding_alert": "CRITICAL",
       "projects": [
         "ACT-GD"
@@ -126,7 +126,7 @@
       "primary_email": "pene.curtis@bigpond.com, greg@marlowcanete.com.au",
       "cc_email": null,
       "last_communicated_at": "2026-04-13",
-      "days_since_last_contact": 40,
+      "days_since_last_contact": 41,
       "themes": [],
       "tone": null,
       "framing_notes_excerpt": "DATA-ONLY STUB added 2026-05-07: Xero shows $82,500 AUTH on INV-0222 (392 days outstanding); funder-alignment synthesis flags this as the longest-overdue live invoice on the sole trader. Surfaced by 2026-05-07 funder-alignment synthesis as …",
@@ -157,7 +157,7 @@
       "first_invoice_date": "2026-05-18",
       "last_invoice_date": "2026-05-18",
       "oldest_open_date": "2026-05-18",
-      "outstanding_age_days": 5,
+      "outstanding_age_days": 6,
       "outstanding_alert": "AGING",
       "projects": [
         "ACT-JH"
@@ -197,7 +197,7 @@
       "first_invoice_date": "2026-02-16",
       "last_invoice_date": "2026-05-06",
       "oldest_open_date": "2026-05-06",
-      "outstanding_age_days": 17,
+      "outstanding_age_days": 18,
       "outstanding_alert": "AGING",
       "projects": [
         "ACT-HV",
@@ -236,7 +236,7 @@
       "first_invoice_date": "2025-12-11",
       "last_invoice_date": "2025-12-16",
       "oldest_open_date": "2025-12-16",
-      "outstanding_age_days": 158,
+      "outstanding_age_days": 159,
       "outstanding_alert": "AGING",
       "projects": [
         "ACT-HV"
@@ -274,7 +274,7 @@
       "first_invoice_date": "2026-04-15",
       "last_invoice_date": "2026-04-15",
       "oldest_open_date": "2026-04-15",
-      "outstanding_age_days": 38,
+      "outstanding_age_days": 39,
       "outstanding_alert": "AGING",
       "projects": [
         "ACT-BG"
@@ -312,7 +312,7 @@
       "first_invoice_date": "2025-06-09",
       "last_invoice_date": "2026-01-02",
       "oldest_open_date": "2025-07-04",
-      "outstanding_age_days": 323,
+      "outstanding_age_days": 324,
       "outstanding_alert": "AGING",
       "projects": [
         "ACT-FM",
@@ -351,7 +351,7 @@
       "first_invoice_date": "2025-02-07",
       "last_invoice_date": "2026-03-19",
       "oldest_open_date": "2026-03-19",
-      "outstanding_age_days": 65,
+      "outstanding_age_days": 66,
       "outstanding_alert": "AGING",
       "projects": [
         "ACT-SM"
@@ -389,7 +389,7 @@
       "first_invoice_date": "2026-05-03",
       "last_invoice_date": "2026-05-03",
       "oldest_open_date": "2026-05-03",
-      "outstanding_age_days": 20,
+      "outstanding_age_days": 21,
       "outstanding_alert": "FLAGGED",
       "projects": [
         "ACT-CORE"
@@ -664,7 +664,7 @@
       "primary_email": "jay@socialimpacthub.org, matt.allen@socialimpacthub.org",
       "cc_email": "malcolm.aikman@socialimpacthub.org",
       "last_communicated_at": "2026-05-19",
-      "days_since_last_contact": 4,
+      "days_since_last_contact": 5,
       "themes": [
         "enterprise",
         "unit-economics",
@@ -821,7 +821,7 @@
       "primary_email": "jessicaduffy@dusseldorp.org.au, margotbeach@dusseldorp.org.au",
       "cc_email": "teya@dusseldorp.org.au, rachelfyfe@dusseldorp.org.au",
       "last_communicated_at": "2026-05-19",
-      "days_since_last_contact": 4,
+      "days_since_last_contact": 5,
       "themes": [
         "education",
         "youth-voice",
@@ -979,7 +979,7 @@
       "primary_email": "adam@streetsmartaustralia.org, isabella@streetsmartaustralia.org, alan@streetsmartaustralia.org",
       "cc_email": null,
       "last_communicated_at": "2026-03-28",
-      "days_since_last_contact": 56,
+      "days_since_last_contact": 57,
       "themes": [
         "homelessness",
         "community-led"
@@ -2836,7 +2836,7 @@
       "primary_email": "lstronach@minderoo.org",
       "cc_email": null,
       "last_communicated_at": "2026-05-14",
-      "days_since_last_contact": 9,
+      "days_since_last_contact": 10,
       "themes": [
         "communities",
         "early-intervention",
@@ -2876,7 +2876,7 @@
       "primary_email": "knorman@tfff.org.au",
       "cc_email": null,
       "last_communicated_at": "2026-05-20",
-      "days_since_last_contact": 3,
+      "days_since_last_contact": 4,
       "themes": [
         "regional",
         "community-led",
@@ -3010,7 +3010,7 @@
       "primary_email": "anne.gripper@outlook.com",
       "cc_email": null,
       "last_communicated_at": "2026-05-21",
-      "days_since_last_contact": 2,
+      "days_since_last_contact": 3,
       "themes": [
         "impact-storytelling",
         "wind-down-legacy",
@@ -3399,17 +3399,17 @@
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": false,
-      "open_opp_count": 8,
+      "open_opp_count": 9,
       "open_opp_value_aud": 100000,
       "won_opp_count": 0,
       "won_opp_value_aud": 0,
       "pipelines": [
-        "Universal Inquiry",
         "ACT Events",
+        "Universal Inquiry",
         "Grants",
         "A Curious Tractor"
       ],
-      "latest_stage": "Needs Assessment",
+      "latest_stage": "New Inquiry",
       "latest_stage_pipeline": "Universal Inquiry"
     },
     {
@@ -4540,6 +4540,48 @@
       "latest_stage_pipeline": null
     },
     {
+      "slug": "garuwa",
+      "name": "Garuwa",
+      "xero_contact_name": null,
+      "tier": "PROSPECT",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "kieran satour",
+      "primary_email": "kieran@garuwa.com",
+      "cc_email": null,
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 0,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [],
+      "latest_stage": null,
+      "latest_stage_pipeline": null
+    },
+    {
       "slug": "orangesky",
       "name": "Orangesky",
       "xero_contact_name": null,
@@ -4567,48 +4609,6 @@
         "goods-inquiry",
         "goods",
         "goods-advisory",
-        "goods-supporter",
-        "goods-newsletter"
-      ],
-      "tone": null,
-      "framing_notes_excerpt": null,
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
-    },
-    {
-      "slug": "garuwa",
-      "name": "Garuwa",
-      "xero_contact_name": null,
-      "tier": "PROSPECT",
-      "stage": "ghl-only",
-      "total_paid_aud": 0,
-      "outstanding_aud": 0,
-      "invoice_count": 0,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 0,
-      "first_invoice_date": null,
-      "last_invoice_date": null,
-      "oldest_open_date": null,
-      "outstanding_age_days": null,
-      "outstanding_alert": "CLEAR",
-      "projects": [
-        "ACT-GD"
-      ],
-      "primary_contact": "kieran satour",
-      "primary_email": "kieran@garuwa.com",
-      "cc_email": null,
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [
-        "goods",
         "goods-supporter",
         "goods-newsletter"
       ],
@@ -5187,48 +5187,6 @@
       "latest_stage_pipeline": null
     },
     {
-      "slug": "smallgiants",
-      "name": "Smallgiants",
-      "xero_contact_name": null,
-      "tier": "PROSPECT",
-      "stage": "ghl-only",
-      "total_paid_aud": 0,
-      "outstanding_aud": 0,
-      "invoice_count": 0,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 0,
-      "first_invoice_date": null,
-      "last_invoice_date": null,
-      "oldest_open_date": null,
-      "outstanding_age_days": null,
-      "outstanding_alert": "CLEAR",
-      "projects": [
-        "ACT-GD"
-      ],
-      "primary_contact": "tamsin jones",
-      "primary_email": "tamsin@smallgiants.com.au",
-      "cc_email": "danny@smallgiants.com.au",
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [
-        "goods",
-        "goods-supporter",
-        "goods-newsletter"
-      ],
-      "tone": null,
-      "framing_notes_excerpt": null,
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
-    },
-    {
       "slug": "barklybackbone",
       "name": "Barklybackbone",
       "xero_contact_name": null,
@@ -5250,6 +5208,48 @@
       "primary_contact": "deborah hartman",
       "primary_email": "deborah.hartman@barklybackbone.com.au",
       "cc_email": null,
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 0,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [],
+      "latest_stage": null,
+      "latest_stage_pipeline": null
+    },
+    {
+      "slug": "smallgiants",
+      "name": "Smallgiants",
+      "xero_contact_name": null,
+      "tier": "PROSPECT",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "tamsin jones",
+      "primary_email": "tamsin@smallgiants.com.au",
+      "cc_email": "danny@smallgiants.com.au",
       "last_communicated_at": null,
       "days_since_last_contact": null,
       "themes": [

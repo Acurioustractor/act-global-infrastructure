@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-23T21:00:10.106Z",
+  "generated_at": "2026-05-26T21:00:10.670Z",
   "since": "1d",
   "codebases": [
     "act-global-infrastructure",
@@ -9,8 +9,873 @@
     "goods",
     "act-farm"
   ],
-  "event_count": 619,
+  "event_count": 689,
   "events": [
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "196ec56",
+      "date": "2026-05-27T06:51:43+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(repo): preserve 2026-05-23 handoff, untrack drift-detector artifacts",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "4a514da",
+      "date": "2026-05-27T06:39:40+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(confessions): remove the murmuration section",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "a2c674e",
+      "date": "2026-05-27T06:36:19+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(handoff): tenant alignment session shipped",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "6d8f5dd",
+      "date": "2026-05-27T06:36:12+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tenants): tenant structure + alignment closing session",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "27e31fe",
+      "date": "2026-05-27T06:33:52+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(confessions): replace switchboard with a voicemail inbox",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "dba5793",
+      "date": "2026-05-27T06:31:07+10:00",
+      "author": "Ben",
+      "title": "fix(finance): re-light P3 compliance calendar (time-aware API + crons)",
+      "plan_slug": "2026-05-26-act-operating-picture-blueprint"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "d7f63dd",
+      "date": "2026-05-27T05:41:47+10:00",
+      "author": "Ben",
+      "title": "feat(finance): P2 — entity dimension + durable bank-balance re-light",
+      "plan_slug": "2026-05-26-act-operating-picture-blueprint"
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "d388985",
+      "date": "2026-05-26T21:38:49+10:00",
+      "author": "Acurioustractor",
+      "title": "style(confessions): vintage telephone brand refresh",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "91751e5",
+      "date": "2026-05-26T21:31:36+10:00",
+      "author": "Ben",
+      "title": "refactor(finance): consolidate P&L surfaces onto the one ledger (accrual)",
+      "plan_slug": "2026-05-26-act-operating-picture-blueprint"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "fe376ec",
+      "date": "2026-05-26T21:26:51+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(build): fix prefer-const reassignment in cohort-folders",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "31d3303",
+      "date": "2026-05-26T21:17:06+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(confessions): Switchboard + Murmuration visualisations",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "6ddbb34",
+      "date": "2026-05-26T21:11:20+10:00",
+      "author": "Ben",
+      "title": "fix(finance): paginate 9 row-cap-truncated finance totals",
+      "plan_slug": "2026-05-26-act-operating-picture-blueprint"
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "a593bd3",
+      "date": "2026-05-26T20:55:04+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(confessions): full-bleed page, edge to edge",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "81ffc5b",
+      "date": "2026-05-26T20:46:14+10:00",
+      "author": "Ben",
+      "title": "fix(finance): paginate ledger reads — PostgREST 1000-row cap was truncating sums",
+      "plan_slug": "2026-05-26-act-operating-picture-blueprint"
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "7f6dced",
+      "date": "2026-05-26T20:35:39+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(confessions): Confessions to Philanthropy campaign page",
+      "plan_slug": null
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "empathy-ledger-v2",
+      "path": "thoughts/shared/handoffs/2026-05-27-tenant-alignment-shipped.md",
+      "date": "2026-05-26T20:35:09.830Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "empathy-ledger-v2",
+      "path": "thoughts/shared/plans/2026-05-27-tenant-alignment-session.md",
+      "date": "2026-05-26T20:30:55.937Z"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "a774340",
+      "date": "2026-05-26T20:25:49+10:00",
+      "author": "Ben",
+      "title": "docs(review): command-center data trust map + operating-picture blueprint",
+      "plan_slug": "2026-05-26-act-operating-picture-blueprint"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "775cff7",
+      "date": "2026-05-26T20:25:49+10:00",
+      "author": "Ben",
+      "title": "feat(finance): one money ledger + rebuilt /company front page",
+      "plan_slug": "2026-05-26-act-operating-picture-blueprint"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "1a0bcd8",
+      "date": "2026-05-26T20:20:57+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(accountability): server-resolve org from storyteller in /ai-runs",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "20a0b87",
+      "date": "2026-05-26T20:06:30+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(handoff): record Path A.1 desktop auth audit + Phase 2 plan",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "11f5531",
+      "date": "2026-05-26T20:05:58+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(auth): Phase A.1 — gate /api/desktop/* with requireAdminAuth",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "e072567",
+      "date": "2026-05-26T19:40:08+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(handoff): record post-CI state for 2026-05-26 evening session",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "654b505",
+      "date": "2026-05-26T19:38:44+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(test): cross-tenant-substitution — recognise resolveServiceToken",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "e238431",
+      "date": "2026-05-26T19:30:43+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(test): api-auth-coverage — recognise resolveServiceToken + 3 public routes",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "fbb0f5d",
+      "date": "2026-05-26T19:25:34+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(lint): fix 5 pre-existing errors blocking production deploys",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "1ebf703",
+      "date": "2026-05-26T19:21:24+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(site): launch-ready refresh — SEO metadata, public-copy sanitizer, /stories, externalized redirects",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "7888bba",
+      "date": "2026-05-26T18:56:15+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(rls): Phase A11 Tier 2.B — drop 5 over-permissive write policies",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "43063c7",
+      "date": "2026-05-26T18:11:21+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(accountability): storyteller-facing pages — consent control room + ai-log",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "c07c1a3",
+      "date": "2026-05-26T18:11:09+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(accountability): native /api/ai-runs reader + analyzer ledger hook",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "c2030e0",
+      "date": "2026-05-26T18:10:56+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(accountability): kernel barrel + /api/v1/accountability/* surface",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "6963e7e",
+      "date": "2026-05-26T18:10:43+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(accountability): ai_runs + accountability_events ledger schema",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "27eb7f3",
+      "date": "2026-05-26T17:25:51+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(handoff): 2026-05-26 — Phase A7→A11 shipped, Tier 2.B + Tier 3 remain",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "29fecc1",
+      "date": "2026-05-26T17:12:42+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): 2026-05-26 — Harvest finance cleanup, command-center login, /company audit",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "61b1188",
+      "date": "2026-05-26T16:57:04+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(rls): Phase A11 Tier 1.C — RLS on 3 remaining non-sensitive tables",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "984f37d",
+      "date": "2026-05-26T16:11:53+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(rls): Phase A11 Tier 2.A — drop 9 over-permissive write policies",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "416f823",
+      "date": "2026-05-26T15:52:08+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(rls): Phase A11 Tier 1.B — enable RLS on timeline_events cluster",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "c893e2d",
+      "date": "2026-05-26T13:37:13+10:00",
+      "author": "Ben",
+      "title": "chore: trigger preview build with DASHBOARD_PASSWORD env",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "4d9e6c0",
+      "date": "2026-05-26T13:29:34+10:00",
+      "author": "Ben",
+      "title": "feat(auth): one-click magic-link login (/login?k=password)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "ca7ab84",
+      "date": "2026-05-26T13:13:47+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(rls): Phase A11 Tier 1 — enable RLS on kinship_relations (sovereignty)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "61060bd",
+      "date": "2026-05-26T13:07:25+10:00",
+      "author": "Ben",
+      "title": "feat(auth): shared-password gate for command-center",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "1cb5799",
+      "date": "2026-05-26T11:04:31+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(plan): Phase A11 RLS hardening — audit findings + remediation roadmap",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "a15b665",
+      "date": "2026-05-26T10:39:17+10:00",
+      "author": "Acurioustractor",
+      "title": "ci: add workflow_dispatch for manual triggers (verification + future debug)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "cdd8344",
+      "date": "2026-05-26T10:28:50+10:00",
+      "author": "Ben",
+      "title": "feat(finance): Harvest stage/zone budget-vs-actual (garden pinned)",
+      "plan_slug": "harvest-stage-budget"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-05-26-act-operating-picture-blueprint.md",
+      "date": "2026-05-26T10:26:14.819Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/2026-05-26-harvest-finance-auth-overview.md",
+      "date": "2026-05-26T10:26:14.817Z"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "2e610a8",
+      "date": "2026-05-26T10:21:24+10:00",
+      "author": "Ben",
+      "title": "feat(finance): deep-linkable filters on transaction picker",
+      "plan_slug": "harvest-stage-budget"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "6f1f936",
+      "date": "2026-05-26T10:12:09+10:00",
+      "author": "Acurioustractor",
+      "title": "ci: add tenant-drift job — verify zero tenant_id drift on every PR (Phase A9)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "d604cfd",
+      "date": "2026-05-26T10:08:17+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(tenants): drift detector + audit reports (Phase A8 tooling)",
+      "plan_slug": null
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "empathy-ledger-v2",
+      "path": "thoughts/shared/handoffs/2026-05-26-desktop-auth-audit.md",
+      "date": "2026-05-26T09:47:33.629Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "empathy-ledger-v2",
+      "path": "thoughts/shared/handoffs/2026-05-26-evening-accountability-and-tier2b.md",
+      "date": "2026-05-26T09:40:05.254Z"
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/operations/flow-flywheel.md",
+      "date": "2026-05-26T09:22:37.223Z",
+      "size_bytes": 7702
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "12e835a",
+      "date": "2026-05-26T08:43:03+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(admin): storytellers/[id] — add per-storyteller org auth on PATCH/PUT",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "792d295",
+      "date": "2026-05-26T08:38:09+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(admin): editorial-command/bulk — close cross-tenant write paths",
+      "plan_slug": null
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "empathy-ledger-v2",
+      "path": "thoughts/shared/handoffs/2026-05-26-phase-a-rls-shipped.md",
+      "date": "2026-05-26T07:25:47.803Z"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "80efc68",
+      "date": "2026-05-26T06:02:24+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A7 — close last nullable tenant_id surfaces",
+      "plan_slug": null
+    },
+    {
+      "type": "plan_updated",
+      "repo": "empathy-ledger-v2",
+      "path": "thoughts/shared/plans/2026-05-26-phase-a11-rls-hardening.md",
+      "date": "2026-05-26T01:04:27.066Z"
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/projects/the-harvest/the-harvest.md",
+      "date": "2026-05-26T00:20:19.724Z",
+      "size_bytes": 12414
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/projects/goods.md",
+      "date": "2026-05-26T00:20:11.704Z",
+      "size_bytes": 22001
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/projects/contained.md",
+      "date": "2026-05-26T00:19:55.753Z",
+      "size_bytes": 19933
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-05-26-harvest-stage-budget.md",
+      "date": "2026-05-26T00:19:31.178Z"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "cbe801b",
+      "date": "2026-05-25T20:08:41+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A6 steps 3+4 — install 18 triggers + NOT NULL lock 9 tables",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "e5ca081",
+      "date": "2026-05-25T20:04:39+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A6 steps 1+2 — fix broken tenant_ids + sensitive drift",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "5f566f5",
+      "date": "2026-05-25T19:55:07+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A drift — bulk mechanical fix on 11 unambiguous tables",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "8073c96",
+      "date": "2026-05-25T19:48:28+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(admin): EnhancedMediaPicker — scope by project_id alone when a project is selected",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "fb0e617",
+      "date": "2026-05-25T19:44:30+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A follow-up — default-tenant content drift cleanup",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "6f27c4f",
+      "date": "2026-05-25T19:39:03+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A follow-up — full storyteller_organizations drift sweep",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "72e7a68",
+      "date": "2026-05-25T19:29:49+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A follow-up #3 final — re-tenant Ben's story, hard-delete pcyc fixtures",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "14662b1",
+      "date": "2026-05-25T19:22:46+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A follow-up #3 Tier 2 — named decisions + so drift correction",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "3568e01",
+      "date": "2026-05-25T19:15:44+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A follow-up #3 Tier 1 — re-tenant 24 orphan-tenant profiles",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "1e5e101",
+      "date": "2026-05-25T18:29:56+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A follow-up #3 — delete 11 orphan tenants (zero-data only)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "355da05",
+      "date": "2026-05-25T18:15:35+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(phase-a): add verify-a4-coverage.mjs for the 25 storyteller-linked tables",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "0d5e8a5",
+      "date": "2026-05-25T18:14:29+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(handoff): phase A follow-ups — defer trove orphans, ship platform tenant fix",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "1880f46",
+      "date": "2026-05-25T18:10:49+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(tenants): centralise PLATFORM_TENANT_ID, remove all-zeros fallback",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "9d39702",
+      "date": "2026-05-25T18:04:08+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(handoff): 2026-05-25 evening — Phase A tenant ownership shipped",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "ccae800",
+      "date": "2026-05-25T18:01:16+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A5 — correct media_assets cross-tenant drift + attach trigger",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "a2955e3",
+      "date": "2026-05-25T17:56:25+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A4.2 — backfill tenant_id, lock NOT NULL, install storyteller trigger",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "5198da8",
+      "date": "2026-05-25T17:49:57+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A4.1 — add nullable tenant_id to 25 storyteller-linked tables",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "e9f666f",
+      "date": "2026-05-25T17:37:59+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A3 — backfill tenant_id, lock NOT NULL, install auto-fill trigger",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "f6f8250",
+      "date": "2026-05-25T17:34:54+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(audit): pass tenant_id explicitly to super_admin_audit_log inserts",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "9426133",
+      "date": "2026-05-25T17:20:58+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A2 — add nullable tenant_id to 53 tables",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "348669e",
+      "date": "2026-05-25T17:06:31+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): Phase A2 prep — drafts for tenant_id column add (not applied)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "d7aad9a",
+      "date": "2026-05-25T16:43:43+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(schema): drop dead story_syndication_consent family",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "7a28df8",
+      "date": "2026-05-25T16:33:59+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(api): storytellers strangler batch — 5 routes migrated to v2 platform",
+      "plan_slug": "thoughts/shared/plans/2026-05-25-api-consolidation-strangler-migration.md"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "a1938e6",
+      "date": "2026-05-25T15:56:19+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(handoff): 2026-05-25 session — strangler + widgets + tenant ownership",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "1fa7e16",
+      "date": "2026-05-25T15:33:52+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(uploads): gallery uploads were silently using DEFAULT_TENANT_ID",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "7227287",
+      "date": "2026-05-25T15:30:08+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(embed): <el-hero-video> for full-bleed background video sections",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "0ee3cf0",
+      "date": "2026-05-25T15:20:34+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(ownership): canonical resolver for tenant_id / org_id / storyteller_id",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "74b2dae",
+      "date": "2026-05-25T15:13:09+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(gallery-consent): galleries table has no tenant_id, derive from org",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "c719234",
+      "date": "2026-05-25T14:57:24+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(api): strangler batch 3, organizations (+ slug, + people)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "52128d8",
+      "date": "2026-05-25T14:54:06+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(syndication): story consent matrix UI",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "45b38b4",
+      "date": "2026-05-25T14:47:33+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(api): strangler batch 2, +interest (POST) and analytics/network",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "b6dcdf0",
+      "date": "2026-05-25T14:45:21+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(embed): partner-ready packaging — v1.min.js + integration doc",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "05addd1",
+      "date": "2026-05-25T14:43:11+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(embed): per-site story widget",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "d401044",
+      "date": "2026-05-25T14:12:45+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(galleries): fallback cover image from first photo when cover_image is null",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "8bb200f",
+      "date": "2026-05-25T14:02:34+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(embed): per-site widgets + admin consent matrix",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "31749ba",
+      "date": "2026-05-25T13:48:51+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(embed-demo): hydration mismatch on inline style tag",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "982ee09",
+      "date": "2026-05-25T13:39:39+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(embed): drop-in widget library v1 + live demo page",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "f0d8170",
+      "date": "2026-05-25T12:00:58+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(api): strangler batch 1, four more public routes onto /v2/platform/*",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "f0e1fe1",
+      "date": "2026-05-25T11:55:02+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(api): strangler migration worked example, featured-stories on /v2/platform/*",
+      "plan_slug": null
+    },
     {
       "type": "commit",
       "repo": "justicehub",
@@ -19,12 +884,6 @@
       "author": "Acurioustractor",
       "title": "docs/handoffs: Codex handoff for civic-intelligence work",
       "plan_slug": null
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "justicehub",
-      "path": "thoughts/shared/handoffs/2026-05-24-codex-civic-intelligence.md",
-      "date": "2026-05-23T20:55:04.942Z"
     },
     {
       "type": "commit",
@@ -1341,12 +2200,6 @@
       "plan_slug": "minimax-full-migration-2026-05-22"
     },
     {
-      "type": "handoff_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/handoffs/2026-05-23-supporters-platform-shipped.md",
-      "date": "2026-05-23T08:11:27.258Z"
-    },
-    {
       "type": "commit",
       "repo": "justicehub",
       "sha": "f449edf",
@@ -1354,180 +2207,6 @@
       "author": "Acurioustractor",
       "title": "Daily rescore cron + email backfill script",
       "plan_slug": null
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "justicehub",
-      "path": "thoughts/shared/handoffs/2026-05-23-civic-intelligence-session.md",
-      "date": "2026-05-23T08:07:09.367Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/funder-briefs-overlay-2026-05-23.md",
-      "date": "2026-05-23T07:56:56.488Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/ghl-pipelines-supporter-integration-2026-05-23.md",
-      "date": "2026-05-23T07:21:50.009Z"
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/cockpit/weekly-digest-2026-05-23.md",
-      "date": "2026-05-23T06:48:31.339Z",
-      "size_bytes": 1210
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/cockpit/weekly-narrative-2026-05-23.md",
-      "date": "2026-05-23T06:47:45.000Z",
-      "size_bytes": 2105
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/log.md",
-      "date": "2026-05-23T06:47:38.965Z",
-      "size_bytes": 81409
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/decisions/url-audit-2026-05-23.md",
-      "date": "2026-05-23T06:47:30.393Z",
-      "size_bytes": 3922
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/cockpit/four-lanes-today.md",
-      "date": "2026-05-23T06:47:25.127Z",
-      "size_bytes": 1172
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/output/lint-2026-05-23.md",
-      "date": "2026-05-23T06:47:22.630Z",
-      "size_bytes": 18648
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/funders-ghl-alignment-2026-05-23.md",
-      "date": "2026-05-23T06:27:56.633Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/funders-alignment-findings-2026-05-23.md",
-      "date": "2026-05-23T06:24:15.191Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-evening-pickup.md",
-      "date": "2026-05-23T06:14:27.443Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-goods-upload-flow-response.md",
-      "date": "2026-05-23T05:52:10.254Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/newsletter-notion-db-schemas.md",
-      "date": "2026-05-23T05:34:51.148Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/act-communication-pipeline-2026-05-23-locked.md",
-      "date": "2026-05-23T05:29:32.177Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-capture-and-drafts-session.md",
-      "date": "2026-05-23T05:22:05.866Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/telegram-noise-audit-2026-05-23.md",
-      "date": "2026-05-23T04:27:04.095Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/handoffs/money-state-of-play/current.md",
-      "date": "2026-05-23T04:22:48.873Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-observatory-cosmetic-sweep-and-phase-2-plan.md",
-      "date": "2026-05-23T04:18:49.724Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/plans/2026-05-23-resonance-field-phase-2-unification.md",
-      "date": "2026-05-23T04:16:58.349Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "act-regenerative-studio",
-      "path": "thoughts/shared/handoffs/ultimate-project-pages/current.md",
-      "date": "2026-05-23T04:09:29.153Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/act-communication-pipeline-2026-05-23.md",
-      "date": "2026-05-23T03:59:54.136Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/newsletter-pipeline-2026-05-23.md",
-      "date": "2026-05-23T03:52:53.713Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-desktop-editorial-surfaces.md",
-      "date": "2026-05-23T03:44:59.787Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-world-tour-followups-shipped.md",
-      "date": "2026-05-23T00:41:47.143Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-world-tour-spine-end-to-end.md",
-      "date": "2026-05-23T00:15:26.606Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-contained-syndication-pipeline.md",
-      "date": "2026-05-22T23:36:26.607Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-desktop-governance-layer.md",
-      "date": "2026-05-22T23:29:23.150Z"
     },
     {
       "type": "commit",

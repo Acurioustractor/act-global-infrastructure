@@ -1,108 +1,18 @@
 {
-  "generated_at": "2026-05-23T20:09:36.544Z",
+  "generated_at": "2026-05-29T20:00:02.315Z",
   "summary": {
-    "supporter_count": 158,
+    "supporter_count": 161,
     "tier_counts": {
-      "PAID": 64,
-      "OUTSTANDING": 4,
+      "OUTSTANDING": 3,
+      "PAID": 65,
       "PROSPECT": 62,
-      "WARM": 20,
+      "WARM": 23,
       "COLD": 8
     },
-    "total_paid_aud": 1613795.65,
-    "total_outstanding_aud": 602040
+    "total_paid_aud": 1786485.65,
+    "total_outstanding_aud": 164250
   },
   "supporters": [
-    {
-      "slug": "centrecorp",
-      "name": "Centrecorp Foundation",
-      "xero_contact_name": "Centrecorp Foundation",
-      "tier": "PAID",
-      "stage": "active-partner",
-      "total_paid_aud": 123332,
-      "outstanding_aud": 265100,
-      "invoice_count": 12,
-      "paid_invoice_count": 2,
-      "outstanding_invoice_count": 3,
-      "first_invoice_date": "2025-08-11",
-      "last_invoice_date": "2026-05-22",
-      "oldest_open_date": "2026-05-17",
-      "outstanding_age_days": 6,
-      "outstanding_alert": "CRITICAL",
-      "projects": [
-        "ACT-GD"
-      ],
-      "primary_contact": "Randle Walker / Jodie Tilmouth",
-      "primary_email": "randle@centrecorp.com.au, jodie@centrecorp.com.au",
-      "cc_email": null,
-      "last_communicated_at": "2026-02-13",
-      "days_since_last_contact": 99,
-      "themes": [
-        "indigenous-led",
-        "central-australia",
-        "community-enterprise"
-      ],
-      "tone": "community-respectful, place-based, evidence-rich",
-      "framing_notes_excerpt": "Active partner via Goods on Country Production Plant. Tranche 1 ($85,712) paid Nov 2025. Tranche 2 (INV-0314 $84,700) currently DRAFT 70 days old pending only-Ben decision — send / void / reissue-from-Pty post-cutover. Named in Goods → Mind…",
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": true,
-      "open_opp_count": 1,
-      "open_opp_value_aud": 84700,
-      "won_opp_count": 5,
-      "won_opp_value_aud": 300564,
-      "pipelines": [
-        "Goods — Buyer Pipeline",
-        "A Curious Tractor"
-      ],
-      "latest_stage": "Growth",
-      "latest_stage_pipeline": "A Curious Tractor"
-    },
-    {
-      "slug": "snow-foundation",
-      "name": "The Snow Foundation",
-      "xero_contact_name": "The Snow Foundation",
-      "tier": "PAID",
-      "stage": "active-partner",
-      "total_paid_aud": 270929.79,
-      "outstanding_aud": 132000,
-      "invoice_count": 7,
-      "paid_invoice_count": 6,
-      "outstanding_invoice_count": 1,
-      "first_invoice_date": "2025-02-04",
-      "last_invoice_date": "2026-05-22",
-      "oldest_open_date": "2026-05-22",
-      "outstanding_age_days": 1,
-      "outstanding_alert": "CRITICAL",
-      "projects": [
-        "ACT-GD"
-      ],
-      "primary_contact": "Sally Grimsley-Ballard / Alexandra Lagelee Kean",
-      "primary_email": "s.grimsley-ballard@snowfoundation.org.au, a.lageleekean@snowfoundation.org.au",
-      "cc_email": "g.byron@snowfoundation.org.au, a.machuca@snowfoundation.org.au, c.ludovici@snowfoundation.org.au",
-      "last_communicated_at": "2026-05-20",
-      "days_since_last_contact": 3,
-      "themes": [
-        "systems-change",
-        "indigenous-led",
-        "rural-regional"
-      ],
-      "tone": "values-driven, community-respectful",
-      "framing_notes_excerpt": "Active multi-tranche partner. Xero shows $402,930 received + $132,000 AUTHORISED across 7 tranches over 14 months (INV-0321 $132K currently outstanding 37d). No single canonical ask — relationship funds in rolling tranches on project ACT-GD…",
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": true,
-      "open_opp_count": 1,
-      "open_opp_value_aud": 132000,
-      "won_opp_count": 5,
-      "won_opp_value_aud": 352144.99,
-      "pipelines": [
-        "Goods — Buyer Pipeline",
-        "A Curious Tractor"
-      ],
-      "latest_stage": "Graduation",
-      "latest_stage_pipeline": "A Curious Tractor"
-    },
     {
       "slug": "rotary-eclub-outback-australia-9560",
       "name": "Rotary Eclub Outback Australia, Division 9560",
@@ -117,7 +27,7 @@
       "first_invoice_date": "2025-04-10",
       "last_invoice_date": "2025-04-10",
       "oldest_open_date": "2025-04-10",
-      "outstanding_age_days": 408,
+      "outstanding_age_days": 414,
       "outstanding_alert": "CRITICAL",
       "projects": [
         "ACT-GD"
@@ -126,7 +36,7 @@
       "primary_email": "pene.curtis@bigpond.com, greg@marlowcanete.com.au",
       "cc_email": null,
       "last_communicated_at": "2026-04-13",
-      "days_since_last_contact": 40,
+      "days_since_last_contact": 46,
       "themes": [],
       "tone": null,
       "framing_notes_excerpt": "DATA-ONLY STUB added 2026-05-07: Xero shows $82,500 AUTH on INV-0222 (392 days outstanding); funder-alignment synthesis flags this as the longest-overdue live invoice on the sole trader. Surfaced by 2026-05-07 funder-alignment synthesis as …",
@@ -134,14 +44,14 @@
       "next_report_name": null,
       "in_funders_json": true,
       "open_opp_count": 1,
-      "open_opp_value_aud": 82500,
+      "open_opp_value_aud": 0,
       "won_opp_count": 0,
       "won_opp_value_aud": 0,
       "pipelines": [
-        "Goods — Buyer Pipeline"
+        "Goods Supporter Journey"
       ],
-      "latest_stage": "Invoiced",
-      "latest_stage_pipeline": "Goods — Buyer Pipeline"
+      "latest_stage": "Ask made",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "homeland-school-company",
@@ -157,7 +67,7 @@
       "first_invoice_date": "2026-05-18",
       "last_invoice_date": "2026-05-18",
       "oldest_open_date": "2026-05-18",
-      "outstanding_age_days": 5,
+      "outstanding_age_days": 11,
       "outstanding_alert": "AGING",
       "projects": [
         "ACT-JH"
@@ -173,54 +83,16 @@
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": true,
-      "open_opp_count": 1,
-      "open_opp_value_aud": 4950,
+      "open_opp_count": 2,
+      "open_opp_value_aud": 48950,
       "won_opp_count": 0,
       "won_opp_value_aud": 0,
       "pipelines": [
+        "Goods Supporter Journey",
         "Goods — Buyer Pipeline"
       ],
-      "latest_stage": "Invoiced",
-      "latest_stage_pipeline": "Goods — Buyer Pipeline"
-    },
-    {
-      "slug": "sonas-properties-pty-ltd",
-      "name": "Sonas Properties Pty Ltd",
-      "xero_contact_name": "Sonas Properties Pty Ltd",
-      "tier": "PAID",
-      "stage": "needs-writeup",
-      "total_paid_aud": 81290,
-      "outstanding_aud": 37290,
-      "invoice_count": 4,
-      "paid_invoice_count": 2,
-      "outstanding_invoice_count": 1,
-      "first_invoice_date": "2026-02-16",
-      "last_invoice_date": "2026-05-06",
-      "oldest_open_date": "2026-05-06",
-      "outstanding_age_days": 17,
-      "outstanding_alert": "AGING",
-      "projects": [
-        "ACT-HV",
-        "The Harvest"
-      ],
-      "primary_contact": null,
-      "primary_email": null,
-      "cc_email": null,
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [],
-      "tone": "TBD — write narrative based on existing Xero relationship history",
-      "framing_notes_excerpt": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": true,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
+      "latest_stage": "Delivering",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "regional-arts-australia",
@@ -236,7 +108,7 @@
       "first_invoice_date": "2025-12-11",
       "last_invoice_date": "2025-12-16",
       "oldest_open_date": "2025-12-16",
-      "outstanding_age_days": 158,
+      "outstanding_age_days": 164,
       "outstanding_alert": "AGING",
       "projects": [
         "ACT-HV"
@@ -274,7 +146,7 @@
       "first_invoice_date": "2026-04-15",
       "last_invoice_date": "2026-04-15",
       "oldest_open_date": "2026-04-15",
-      "outstanding_age_days": 38,
+      "outstanding_age_days": 44,
       "outstanding_alert": "AGING",
       "projects": [
         "ACT-BG"
@@ -312,7 +184,7 @@
       "first_invoice_date": "2025-06-09",
       "last_invoice_date": "2026-01-02",
       "oldest_open_date": "2025-07-04",
-      "outstanding_age_days": 323,
+      "outstanding_age_days": 329,
       "outstanding_alert": "AGING",
       "projects": [
         "ACT-FM",
@@ -326,82 +198,6 @@
       "themes": [],
       "tone": "TBD — write narrative based on existing Xero relationship history",
       "framing_notes_excerpt": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": true,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
-    },
-    {
-      "slug": "smart-recovery-australia",
-      "name": "SMART Recovery Australia",
-      "xero_contact_name": "SMART Recovery Australia",
-      "tier": "PAID",
-      "stage": "needs-writeup",
-      "total_paid_aud": 156500,
-      "outstanding_aud": 2200,
-      "invoice_count": 8,
-      "paid_invoice_count": 7,
-      "outstanding_invoice_count": 1,
-      "first_invoice_date": "2025-02-07",
-      "last_invoice_date": "2026-03-19",
-      "oldest_open_date": "2026-03-19",
-      "outstanding_age_days": 65,
-      "outstanding_alert": "AGING",
-      "projects": [
-        "ACT-SM"
-      ],
-      "primary_contact": null,
-      "primary_email": null,
-      "cc_email": null,
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [],
-      "tone": "TBD — write narrative based on existing Xero relationship history",
-      "framing_notes_excerpt": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": true,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
-    },
-    {
-      "slug": "the-john-villiers-trust",
-      "name": "The John Villiers Trust",
-      "xero_contact_name": "The John Villiers Trust",
-      "tier": "OUTSTANDING",
-      "stage": "lapsed",
-      "total_paid_aud": 0,
-      "outstanding_aud": 1200,
-      "invoice_count": 1,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 1,
-      "first_invoice_date": "2026-05-03",
-      "last_invoice_date": "2026-05-03",
-      "oldest_open_date": "2026-05-03",
-      "outstanding_age_days": 20,
-      "outstanding_alert": "FLAGGED",
-      "projects": [
-        "ACT-CORE"
-      ],
-      "primary_contact": null,
-      "primary_email": null,
-      "cc_email": null,
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [],
-      "tone": null,
-      "framing_notes_excerpt": "DATA-ONLY STUB added 2026-05-07: Xero shows $1,200 paid historically; very small amount; no current GHL activity. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-ass…",
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": true,
@@ -452,6 +248,175 @@
       ],
       "latest_stage": "Invoiced",
       "latest_stage_pipeline": "Goods — Buyer Pipeline"
+    },
+    {
+      "slug": "snow-foundation",
+      "name": "The Snow Foundation",
+      "xero_contact_name": "The Snow Foundation",
+      "tier": "PAID",
+      "stage": "active-partner",
+      "total_paid_aud": 402929.79,
+      "outstanding_aud": 0,
+      "invoice_count": 7,
+      "paid_invoice_count": 7,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": "2025-02-04",
+      "last_invoice_date": "2026-05-22",
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "Sally Grimsley-Ballard / Alexandra Lagelee Kean",
+      "primary_email": "s.grimsley-ballard@snowfoundation.org.au, a.lageleekean@snowfoundation.org.au",
+      "cc_email": "g.byron@snowfoundation.org.au, a.machuca@snowfoundation.org.au, c.ludovici@snowfoundation.org.au",
+      "last_communicated_at": "2026-05-20",
+      "days_since_last_contact": 9,
+      "themes": [
+        "systems-change",
+        "indigenous-led",
+        "rural-regional"
+      ],
+      "tone": "values-driven, community-respectful",
+      "framing_notes_excerpt": "Active multi-tranche partner. Xero shows $402,930 received + $132,000 AUTHORISED across 7 tranches over 14 months (INV-0321 $132K currently outstanding 37d). No single canonical ask — relationship funds in rolling tranches on project ACT-GD…",
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": true,
+      "open_opp_count": 2,
+      "open_opp_value_aud": 534930,
+      "won_opp_count": 5,
+      "won_opp_value_aud": 352144.99,
+      "pipelines": [
+        "Goods — Buyer Pipeline",
+        "Goods Supporter Journey",
+        "A Curious Tractor"
+      ],
+      "latest_stage": "Stewarding / Reporting",
+      "latest_stage_pipeline": "Goods Supporter Journey"
+    },
+    {
+      "slug": "smart-recovery-australia",
+      "name": "SMART Recovery Australia",
+      "xero_contact_name": "SMART Recovery Australia",
+      "tier": "PAID",
+      "stage": "needs-writeup",
+      "total_paid_aud": 158700,
+      "outstanding_aud": 0,
+      "invoice_count": 8,
+      "paid_invoice_count": 8,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": "2025-02-07",
+      "last_invoice_date": "2026-03-19",
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-SM"
+      ],
+      "primary_contact": null,
+      "primary_email": null,
+      "cc_email": null,
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "framing_notes_excerpt": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": true,
+      "open_opp_count": 0,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [],
+      "latest_stage": null,
+      "latest_stage_pipeline": null
+    },
+    {
+      "slug": "centrecorp",
+      "name": "Centrecorp Foundation",
+      "xero_contact_name": "Centrecorp Foundation",
+      "tier": "PAID",
+      "stage": "active-partner",
+      "total_paid_aud": 123332,
+      "outstanding_aud": 0,
+      "invoice_count": 12,
+      "paid_invoice_count": 2,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": "2025-08-11",
+      "last_invoice_date": "2026-05-22",
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "Randle Walker / Jodie Tilmouth",
+      "primary_email": "randle@centrecorp.com.au, jodie@centrecorp.com.au",
+      "cc_email": null,
+      "last_communicated_at": "2026-02-13",
+      "days_since_last_contact": 105,
+      "themes": [
+        "indigenous-led",
+        "central-australia",
+        "community-enterprise"
+      ],
+      "tone": "community-respectful, place-based, evidence-rich",
+      "framing_notes_excerpt": "Active partner via Goods on Country Production Plant. Tranche 1 ($85,712) paid Nov 2025. Tranche 2 (INV-0314 $84,700) currently DRAFT 70 days old pending only-Ben decision — send / void / reissue-from-Pty post-cutover. Named in Goods → Mind…",
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": true,
+      "open_opp_count": 3,
+      "open_opp_value_aud": 208032,
+      "won_opp_count": 5,
+      "won_opp_value_aud": 300564,
+      "pipelines": [
+        "Goods — Buyer Pipeline",
+        "Goods Supporter Journey",
+        "A Curious Tractor"
+      ],
+      "latest_stage": "In Conversation",
+      "latest_stage_pipeline": "Goods — Buyer Pipeline"
+    },
+    {
+      "slug": "sonas-properties-pty-ltd",
+      "name": "Sonas Properties Pty Ltd",
+      "xero_contact_name": "Sonas Properties Pty Ltd",
+      "tier": "PAID",
+      "stage": "needs-writeup",
+      "total_paid_aud": 118580,
+      "outstanding_aud": 0,
+      "invoice_count": 4,
+      "paid_invoice_count": 3,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": "2026-02-16",
+      "last_invoice_date": "2026-05-06",
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-HV",
+        "The Harvest"
+      ],
+      "primary_contact": null,
+      "primary_email": null,
+      "cc_email": null,
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "framing_notes_excerpt": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": true,
+      "open_opp_count": 0,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [],
+      "latest_stage": null,
+      "latest_stage_pipeline": null
     },
     {
       "slug": "ingkerreke-services-aboriginal-corporation",
@@ -664,7 +629,7 @@
       "primary_email": "jay@socialimpacthub.org, matt.allen@socialimpacthub.org",
       "cc_email": "malcolm.aikman@socialimpacthub.org",
       "last_communicated_at": "2026-05-19",
-      "days_since_last_contact": 4,
+      "days_since_last_contact": 10,
       "themes": [
         "enterprise",
         "unit-economics",
@@ -821,7 +786,7 @@
       "primary_email": "jessicaduffy@dusseldorp.org.au, margotbeach@dusseldorp.org.au",
       "cc_email": "teya@dusseldorp.org.au, rachelfyfe@dusseldorp.org.au",
       "last_communicated_at": "2026-05-19",
-      "days_since_last_contact": 4,
+      "days_since_last_contact": 10,
       "themes": [
         "education",
         "youth-voice",
@@ -832,15 +797,16 @@
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": true,
-      "open_opp_count": 0,
+      "open_opp_count": 1,
       "open_opp_value_aud": 0,
       "won_opp_count": 1,
       "won_opp_value_aud": 15000,
       "pipelines": [
+        "Goods Supporter Journey",
         "A Curious Tractor"
       ],
-      "latest_stage": "Composting",
-      "latest_stage_pipeline": "A Curious Tractor"
+      "latest_stage": "Cultivating",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "red-dust-role-models-limited",
@@ -979,7 +945,7 @@
       "primary_email": "adam@streetsmartaustralia.org, isabella@streetsmartaustralia.org, alan@streetsmartaustralia.org",
       "cc_email": null,
       "last_communicated_at": "2026-03-28",
-      "days_since_last_contact": 56,
+      "days_since_last_contact": 62,
       "themes": [
         "homelessness",
         "community-led"
@@ -1069,13 +1035,15 @@
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": true,
-      "open_opp_count": 0,
+      "open_opp_count": 1,
       "open_opp_value_aud": 0,
       "won_opp_count": 0,
       "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
+      "pipelines": [
+        "Goods Supporter Journey"
+      ],
+      "latest_stage": "Qualified",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "brisbane-powerhouse-foundation",
@@ -1295,15 +1263,16 @@
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": true,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 5434,
       "won_opp_count": 1,
       "won_opp_value_aud": 5434,
       "pipelines": [
+        "Goods Supporter Journey",
         "Goods — Buyer Pipeline"
       ],
-      "latest_stage": "Paid",
-      "latest_stage_pipeline": "Goods — Buyer Pipeline"
+      "latest_stage": "Cultivating",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "emma-k-coto",
@@ -1716,6 +1685,44 @@
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": false,
+      "open_opp_count": 0,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [],
+      "latest_stage": null,
+      "latest_stage_pipeline": null
+    },
+    {
+      "slug": "the-john-villiers-trust",
+      "name": "The John Villiers Trust",
+      "xero_contact_name": "The John Villiers Trust",
+      "tier": "PAID",
+      "stage": "lapsed",
+      "total_paid_aud": 1200,
+      "outstanding_aud": 0,
+      "invoice_count": 1,
+      "paid_invoice_count": 1,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": "2026-05-03",
+      "last_invoice_date": "2026-05-03",
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-CORE"
+      ],
+      "primary_contact": null,
+      "primary_email": null,
+      "cc_email": null,
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [],
+      "tone": null,
+      "framing_notes_excerpt": "DATA-ONLY STUB added 2026-05-07: Xero shows $1,200 paid historically; very small amount; no current GHL activity. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-ass…",
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": true,
       "open_opp_count": 0,
       "open_opp_value_aud": 0,
       "won_opp_count": 0,
@@ -2836,7 +2843,7 @@
       "primary_email": "lstronach@minderoo.org",
       "cc_email": null,
       "last_communicated_at": "2026-05-14",
-      "days_since_last_contact": 9,
+      "days_since_last_contact": 15,
       "themes": [
         "communities",
         "early-intervention",
@@ -2876,7 +2883,7 @@
       "primary_email": "knorman@tfff.org.au",
       "cc_email": null,
       "last_communicated_at": "2026-05-20",
-      "days_since_last_contact": 3,
+      "days_since_last_contact": 9,
       "themes": [
         "regional",
         "community-led",
@@ -3010,7 +3017,7 @@
       "primary_email": "anne.gripper@outlook.com",
       "cc_email": null,
       "last_communicated_at": "2026-05-21",
-      "days_since_last_contact": 2,
+      "days_since_last_contact": 8,
       "themes": [
         "impact-storytelling",
         "wind-down-legacy",
@@ -3358,6 +3365,52 @@
       "latest_stage_pipeline": null
     },
     {
+      "slug": "ianpotter",
+      "name": "Ianpotter",
+      "xero_contact_name": null,
+      "tier": "WARM",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "alberto furlan",
+      "primary_email": "alberto.furlan@ianpotter.org.au",
+      "cc_email": null,
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods",
+        "project:act-gd",
+        "goods-funder",
+        "goods-warm",
+        "audience-funder"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [
+        "Goods Supporter Journey"
+      ],
+      "latest_stage": "Cultivating",
+      "latest_stage_pipeline": "Goods Supporter Journey"
+    },
+    {
       "slug": "gmail",
       "name": "Gmail",
       "xero_contact_name": null,
@@ -3381,36 +3434,38 @@
       ],
       "primary_contact": "talia liddle",
       "primary_email": "talialiddle@gmail.com",
-      "cc_email": "romina.ilad@gmail.com, cgeo6633@gmail.com, peterdanielevans@gmail.com",
+      "cc_email": "romina.ilad@gmail.com, eloisebernadette@gmail.com, michelleluff12@gmail.com",
       "last_communicated_at": null,
       "days_since_last_contact": null,
       "themes": [
         "goods",
         "goods-supporter",
         "goods-newsletter",
+        "audience-brand",
         "contained-hot-lead",
         "justicehub",
         "funder",
-        "container-request",
-        "project:act-ce"
+        "container-request"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": false,
-      "open_opp_count": 8,
+      "open_opp_count": 10,
       "open_opp_value_aud": 100000,
       "won_opp_count": 0,
       "won_opp_value_aud": 0,
       "pipelines": [
-        "Universal Inquiry",
         "ACT Events",
+        "Harvest Inbox",
+        "Goods Supporter Journey",
         "Grants",
-        "A Curious Tractor"
+        "A Curious Tractor",
+        "Universal Inquiry"
       ],
-      "latest_stage": "Needs Assessment",
-      "latest_stage_pipeline": "Universal Inquiry"
+      "latest_stage": "Cultivating",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "reddust",
@@ -3431,119 +3486,36 @@
       "projects": [
         "ACT-GD"
       ],
-      "primary_contact": "fiona scicluna",
-      "primary_email": "fiona@reddust.org.au",
-      "cc_email": null,
+      "primary_contact": "bridgit mcmullen",
+      "primary_email": "bridgit@reddust.org.au",
+      "cc_email": "fiona@reddust.org.au",
       "last_communicated_at": null,
       "days_since_last_contact": null,
       "themes": [
         "goods",
+        "project:act-gd",
         "goods-supporter",
+        "goods-cooling",
         "goods-newsletter",
-        "project:act-gd"
+        "audience-funder",
+        "audience-partner",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 15950,
       "won_opp_count": 1,
       "won_opp_value_aud": 15950,
       "pipelines": [
-        "Goods — Buyer Pipeline"
+        "Goods — Buyer Pipeline",
+        "Goods Supporter Journey"
       ],
-      "latest_stage": "Paid",
-      "latest_stage_pipeline": "Goods — Buyer Pipeline"
-    },
-    {
-      "slug": "portable",
-      "name": "Portable",
-      "xero_contact_name": null,
-      "tier": "PROSPECT",
-      "stage": "ghl-only",
-      "total_paid_aud": 0,
-      "outstanding_aud": 0,
-      "invoice_count": 0,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 0,
-      "first_invoice_date": null,
-      "last_invoice_date": null,
-      "oldest_open_date": null,
-      "outstanding_age_days": null,
-      "outstanding_alert": "CLEAR",
-      "projects": [
-        "ACT-GD"
-      ],
-      "primary_contact": "willhemina wahlin",
-      "primary_email": "willhemina.wahlin@portable.com.au",
-      "cc_email": "willhemina.wahlin@portable.com.au, simon@portable.com.au",
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [
-        "goods-inquiry",
-        "goods",
-        "goods-supporter",
-        "goods-newsletter"
-      ],
-      "tone": null,
-      "framing_notes_excerpt": null,
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
-    },
-    {
-      "slug": "jvtrust",
-      "name": "Jvtrust",
-      "xero_contact_name": null,
-      "tier": "PROSPECT",
-      "stage": "ghl-only",
-      "total_paid_aud": 0,
-      "outstanding_aud": 0,
-      "invoice_count": 0,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 0,
-      "first_invoice_date": null,
-      "last_invoice_date": null,
-      "oldest_open_date": null,
-      "outstanding_age_days": null,
-      "outstanding_alert": "CLEAR",
-      "projects": [
-        "ACT-GD"
-      ],
-      "primary_contact": "fiona maxwell",
-      "primary_email": "ceo@jvtrust.org.au",
-      "cc_email": null,
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [
-        "goods-inquiry",
-        "goods",
-        "goods-supporter",
-        "goods-newsletter",
-        "goods-gmail-active",
-        "goods-gmail-funder"
-      ],
-      "tone": null,
-      "framing_notes_excerpt": null,
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
+      "latest_stage": "Stewarding / Reporting",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "smsau",
@@ -3585,51 +3557,6 @@
       "latest_stage_pipeline": null
     },
     {
-      "slug": "defydesign",
-      "name": "Defydesign",
-      "xero_contact_name": null,
-      "tier": "PROSPECT",
-      "stage": "ghl-only",
-      "total_paid_aud": 0,
-      "outstanding_aud": 0,
-      "invoice_count": 0,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 0,
-      "first_invoice_date": null,
-      "last_invoice_date": null,
-      "oldest_open_date": null,
-      "outstanding_age_days": null,
-      "outstanding_alert": "CLEAR",
-      "projects": [
-        "ACT-GD"
-      ],
-      "primary_contact": "sam davies",
-      "primary_email": "sam@defydesign.org",
-      "cc_email": "sam@defydesign.org",
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [
-        "goods",
-        "goods-supporter",
-        "goods-newsletter",
-        "goods-inquiry",
-        "goods-gmail-active",
-        "goods-gmail-partner"
-      ],
-      "tone": null,
-      "framing_notes_excerpt": null,
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
-    },
-    {
       "slug": "futureanything",
       "name": "Futureanything",
       "xero_contact_name": null,
@@ -3656,7 +3583,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -3672,48 +3600,10 @@
       "latest_stage_pipeline": null
     },
     {
-      "slug": "usc",
-      "name": "Usc",
+      "slug": "jvtrust",
+      "name": "Jvtrust",
       "xero_contact_name": null,
       "tier": "WARM",
-      "stage": "ghl-only",
-      "total_paid_aud": 0,
-      "outstanding_aud": 0,
-      "invoice_count": 0,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 0,
-      "first_invoice_date": null,
-      "last_invoice_date": null,
-      "oldest_open_date": null,
-      "outstanding_age_days": null,
-      "outstanding_alert": "CLEAR",
-      "projects": [],
-      "primary_contact": "Mervat Quirke",
-      "primary_email": "mquirke@usc.edu.au",
-      "cc_email": null,
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [
-        "funder"
-      ],
-      "tone": null,
-      "framing_notes_excerpt": null,
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
-    },
-    {
-      "slug": "centreforpublicimpact",
-      "name": "Centreforpublicimpact",
-      "xero_contact_name": null,
-      "tier": "PROSPECT",
       "stage": "ghl-only",
       "total_paid_aud": 0,
       "outstanding_aud": 0,
@@ -3728,28 +3618,35 @@
       "projects": [
         "ACT-GD"
       ],
-      "primary_contact": "anika baset",
-      "primary_email": "anika@centreforpublicimpact.org",
-      "cc_email": "allison@centreforpublicimpact.org",
+      "primary_contact": "fiona maxwell",
+      "primary_email": "ceo@jvtrust.org.au",
+      "cc_email": null,
       "last_communicated_at": null,
       "days_since_last_contact": null,
       "themes": [
+        "goods-inquiry",
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "goods-gmail-active",
+        "goods-gmail-funder",
+        "project:act-gd",
+        "goods-funder"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": false,
-      "open_opp_count": 0,
+      "open_opp_count": 1,
       "open_opp_value_aud": 0,
       "won_opp_count": 0,
       "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
+      "pipelines": [
+        "Goods Supporter Journey"
+      ],
+      "latest_stage": "Cultivating",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "status",
@@ -3791,6 +3688,326 @@
       "latest_stage_pipeline": null
     },
     {
+      "slug": "envirobank",
+      "name": "Envirobank",
+      "xero_contact_name": null,
+      "tier": "PROSPECT",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "narelle anderson",
+      "primary_email": "nanderson@envirobank.com.au",
+      "cc_email": "mtaylor@envirobank.com.au",
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods",
+        "project:act-gd",
+        "goods-supporter",
+        "goods-warm"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 0,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [],
+      "latest_stage": null,
+      "latest_stage_pipeline": null
+    },
+    {
+      "slug": "brianmdavis",
+      "name": "Brianmdavis",
+      "xero_contact_name": null,
+      "tier": "WARM",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "sarah bartak",
+      "primary_email": "sarah.bartak@brianmdavis.org.au",
+      "cc_email": "anita.hopkins@brianmdavis.org.au",
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods",
+        "project:act-gd",
+        "goods-funder",
+        "goods-warm",
+        "audience-funder"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [
+        "Goods Supporter Journey"
+      ],
+      "latest_stage": "Ask made",
+      "latest_stage_pipeline": "Goods Supporter Journey"
+    },
+    {
+      "slug": "defydesign",
+      "name": "Defydesign",
+      "xero_contact_name": null,
+      "tier": "PROSPECT",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "sam davies",
+      "primary_email": "sam@defydesign.org",
+      "cc_email": "sam@defydesign.org, sam@defydesign.org",
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods-inquiry",
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "goods-gmail-active",
+        "goods-gmail-partner",
+        "audience-partner",
+        "audience-brand"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 0,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [],
+      "latest_stage": null,
+      "latest_stage_pipeline": null
+    },
+    {
+      "slug": "portable",
+      "name": "Portable",
+      "xero_contact_name": null,
+      "tier": "PROSPECT",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "willhemina wahlin",
+      "primary_email": "willhemina.wahlin@portable.com.au",
+      "cc_email": "willhemina.wahlin@portable.com.au, willhemina.wahlin@portable.com.au, simon@portable.com.au",
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods-inquiry",
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "audience-brand"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 0,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [],
+      "latest_stage": null,
+      "latest_stage_pipeline": null
+    },
+    {
+      "slug": "centreforpublicimpact",
+      "name": "Centreforpublicimpact",
+      "xero_contact_name": null,
+      "tier": "PROSPECT",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "anika baset",
+      "primary_email": "anika@centreforpublicimpact.org",
+      "cc_email": "allison@centreforpublicimpact.org",
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "audience-brand"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 0,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [],
+      "latest_stage": null,
+      "latest_stage_pipeline": null
+    },
+    {
+      "slug": "qic",
+      "name": "Qic",
+      "xero_contact_name": null,
+      "tier": "WARM",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "cat vecchio",
+      "primary_email": "cvecchio@qic.com",
+      "cc_email": "c.sullivan@qic.com",
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods",
+        "project:act-gd",
+        "goods-funder",
+        "goods-cooling",
+        "audience-funder",
+        "goods-partner",
+        "goods-newsletter",
+        "audience-partner"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 12000,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [
+        "Goods Supporter Journey"
+      ],
+      "latest_stage": "Stewarding / Reporting",
+      "latest_stage_pipeline": "Goods Supporter Journey"
+    },
+    {
+      "slug": "dewr",
+      "name": "Dewr",
+      "xero_contact_name": null,
+      "tier": "WARM",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "real innovation fund ",
+      "primary_email": "realinnovationfund@dewr.gov.au",
+      "cc_email": "realinnovationfund@dewr.gov.au",
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods",
+        "project:act-gd",
+        "goods-funder",
+        "goods-warm",
+        "audience-funder",
+        "goods-government-grant",
+        "goods-supporter"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 2000000,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [
+        "Goods Supporter Journey"
+      ],
+      "latest_stage": "Ask made",
+      "latest_stage_pipeline": "Goods Supporter Journey"
+    },
+    {
       "slug": "acso",
       "name": "Acso",
       "xero_contact_name": null,
@@ -3817,7 +4034,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -3831,6 +4049,55 @@
       "pipelines": [],
       "latest_stage": null,
       "latest_stage_pipeline": null
+    },
+    {
+      "slug": "philanthropy",
+      "name": "Philanthropy",
+      "xero_contact_name": null,
+      "tier": "PROSPECT",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "kim harland",
+      "primary_email": "kim@philanthropy.org.au",
+      "cc_email": null,
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods-inquiry",
+        "goods-gmail-active",
+        "goods-gmail-funder",
+        "goods",
+        "project:act-gd",
+        "goods-supporter",
+        "goods-warm",
+        "audience-funder"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [
+        "Goods Supporter Journey"
+      ],
+      "latest_stage": "Cultivating",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "sefa",
@@ -3859,7 +4126,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -3901,7 +4169,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -3943,7 +4212,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -3985,7 +4255,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4027,7 +4298,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4069,7 +4341,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4111,7 +4384,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4153,7 +4427,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4195,7 +4470,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4233,7 +4509,8 @@
       "last_communicated_at": null,
       "days_since_last_contact": null,
       "themes": [
-        "funder"
+        "funder",
+        "audience-funder"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4275,7 +4552,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4313,7 +4591,8 @@
       "last_communicated_at": null,
       "days_since_last_contact": null,
       "themes": [
-        "funder"
+        "funder",
+        "audience-funder"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4354,9 +4633,11 @@
       "days_since_last_contact": null,
       "themes": [
         "funder",
+        "audience-funder",
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4398,7 +4679,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4456,48 +4738,6 @@
       "latest_stage_pipeline": null
     },
     {
-      "slug": "powerpass",
-      "name": "Powerpass",
-      "xero_contact_name": null,
-      "tier": "PROSPECT",
-      "stage": "ghl-only",
-      "total_paid_aud": 0,
-      "outstanding_aud": 0,
-      "invoice_count": 0,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 0,
-      "first_invoice_date": null,
-      "last_invoice_date": null,
-      "oldest_open_date": null,
-      "outstanding_age_days": null,
-      "outstanding_alert": "CLEAR",
-      "projects": [
-        "ACT-GD"
-      ],
-      "primary_contact": "bunnings trade",
-      "primary_email": "bunningstrade@powerpass.bunnings.com.au",
-      "cc_email": null,
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [
-        "goods",
-        "goods-supporter",
-        "goods-newsletter"
-      ],
-      "tone": null,
-      "framing_notes_excerpt": null,
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
-    },
-    {
       "slug": "miwatj",
       "name": "Miwatj",
       "xero_contact_name": null,
@@ -4524,7 +4764,57 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "project:act-gd",
+        "goods-role-health",
+        "goods-state-nt",
+        "goods-communitycontrolled",
+        "goods-stage-active"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [
+        "Goods — Buyer Pipeline"
+      ],
+      "latest_stage": "In Conversation",
+      "latest_stage_pipeline": "Goods — Buyer Pipeline"
+    },
+    {
+      "slug": "powerpass",
+      "name": "Powerpass",
+      "xero_contact_name": null,
+      "tier": "PROSPECT",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "bunnings trade",
+      "primary_email": "bunningstrade@powerpass.bunnings.com.au",
+      "cc_email": null,
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4610,7 +4900,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4648,7 +4939,8 @@
       "last_communicated_at": null,
       "days_since_last_contact": null,
       "themes": [
-        "funder"
+        "funder",
+        "audience-funder"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4689,9 +4981,11 @@
       "days_since_last_contact": null,
       "themes": [
         "funder",
+        "audience-funder",
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4736,7 +5030,9 @@
         "goods",
         "goods-supporter",
         "goods-newsletter",
-        "project:act-ca"
+        "project:act-ca",
+        "audience-partner",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4782,7 +5078,9 @@
         "goods-supporter",
         "goods-newsletter",
         "festivals-target",
-        "project:act-ce"
+        "project:act-ce",
+        "audience-partner",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4827,20 +5125,25 @@
         "funder",
         "goods",
         "goods-funder",
-        "goods-newsletter"
+        "goods-newsletter",
+        "goods-cooling",
+        "audience-funder",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 21900,
       "won_opp_count": 0,
       "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
+      "pipelines": [
+        "Goods Supporter Journey"
+      ],
+      "latest_stage": "Stewarding / Reporting",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "queenslandgives",
@@ -4871,6 +5174,8 @@
         "goods-supporter",
         "goods-newsletter",
         "project:act-jh",
+        "audience-funder",
+        "audience-brand",
         "funder"
       ],
       "tone": null,
@@ -4916,7 +5221,9 @@
         "funder",
         "goods",
         "goods-funder",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-funder",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -4959,61 +5266,27 @@
         "goods",
         "goods-supporter",
         "goods-newsletter",
-        "project:act-gd"
+        "project:act-gd",
+        "goods-cooling",
+        "audience-funder",
+        "audience-partner",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 50000,
       "won_opp_count": 1,
       "won_opp_value_aud": 50000,
       "pipelines": [
+        "Goods Supporter Journey",
         "A Curious Tractor"
       ],
-      "latest_stage": "Graduation",
-      "latest_stage_pipeline": "A Curious Tractor"
-    },
-    {
-      "slug": "dewr",
-      "name": "Dewr",
-      "xero_contact_name": null,
-      "tier": "PROSPECT",
-      "stage": "ghl-only",
-      "total_paid_aud": 0,
-      "outstanding_aud": 0,
-      "invoice_count": 0,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 0,
-      "first_invoice_date": null,
-      "last_invoice_date": null,
-      "oldest_open_date": null,
-      "outstanding_age_days": null,
-      "outstanding_alert": "CLEAR",
-      "projects": [],
-      "primary_contact": "DEWR - REAL Innovation Fund",
-      "primary_email": "realinnovationfund@dewr.gov.au",
-      "cc_email": null,
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [
-        "goods",
-        "goods-supporter"
-      ],
-      "tone": null,
-      "framing_notes_excerpt": null,
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
+      "latest_stage": "Stewarding / Reporting",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "josephmark",
@@ -5042,7 +5315,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5085,7 +5359,10 @@
         "goods",
         "goods-supporter",
         "goods-newsletter",
-        "project:act-ca"
+        "project:act-ca",
+        "audience-funder",
+        "audience-partner",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5129,7 +5406,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5171,49 +5449,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
-      ],
-      "tone": null,
-      "framing_notes_excerpt": null,
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
-    },
-    {
-      "slug": "smallgiants",
-      "name": "Smallgiants",
-      "xero_contact_name": null,
-      "tier": "PROSPECT",
-      "stage": "ghl-only",
-      "total_paid_aud": 0,
-      "outstanding_aud": 0,
-      "invoice_count": 0,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 0,
-      "first_invoice_date": null,
-      "last_invoice_date": null,
-      "oldest_open_date": null,
-      "outstanding_age_days": null,
-      "outstanding_alert": "CLEAR",
-      "projects": [
-        "ACT-GD"
-      ],
-      "primary_contact": "tamsin jones",
-      "primary_email": "tamsin@smallgiants.com.au",
-      "cc_email": "danny@smallgiants.com.au",
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [
-        "goods",
-        "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5255,7 +5492,51 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
+      ],
+      "tone": null,
+      "framing_notes_excerpt": null,
+      "next_report_due": null,
+      "next_report_name": null,
+      "in_funders_json": false,
+      "open_opp_count": 0,
+      "open_opp_value_aud": 0,
+      "won_opp_count": 0,
+      "won_opp_value_aud": 0,
+      "pipelines": [],
+      "latest_stage": null,
+      "latest_stage_pipeline": null
+    },
+    {
+      "slug": "smallgiants",
+      "name": "Smallgiants",
+      "xero_contact_name": null,
+      "tier": "PROSPECT",
+      "stage": "ghl-only",
+      "total_paid_aud": 0,
+      "outstanding_aud": 0,
+      "invoice_count": 0,
+      "paid_invoice_count": 0,
+      "outstanding_invoice_count": 0,
+      "first_invoice_date": null,
+      "last_invoice_date": null,
+      "oldest_open_date": null,
+      "outstanding_age_days": null,
+      "outstanding_alert": "CLEAR",
+      "projects": [
+        "ACT-GD"
+      ],
+      "primary_contact": "tamsin jones",
+      "primary_email": "tamsin@smallgiants.com.au",
+      "cc_email": "danny@smallgiants.com.au",
+      "last_communicated_at": null,
+      "days_since_last_contact": null,
+      "themes": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5297,7 +5578,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5339,7 +5621,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5394,44 +5677,6 @@
       "latest_stage_pipeline": null
     },
     {
-      "slug": "ianpotter",
-      "name": "Ianpotter",
-      "xero_contact_name": null,
-      "tier": "WARM",
-      "stage": "ghl-only",
-      "total_paid_aud": 0,
-      "outstanding_aud": 0,
-      "invoice_count": 0,
-      "paid_invoice_count": 0,
-      "outstanding_invoice_count": 0,
-      "first_invoice_date": null,
-      "last_invoice_date": null,
-      "oldest_open_date": null,
-      "outstanding_age_days": null,
-      "outstanding_alert": "CLEAR",
-      "projects": [],
-      "primary_contact": "Alberto Furlan",
-      "primary_email": "alberto.furlan@ianpotter.org.au",
-      "cc_email": null,
-      "last_communicated_at": null,
-      "days_since_last_contact": null,
-      "themes": [
-        "funder"
-      ],
-      "tone": null,
-      "framing_notes_excerpt": null,
-      "next_report_due": null,
-      "next_report_name": null,
-      "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
-      "won_opp_count": 0,
-      "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
-    },
-    {
       "slug": "adaptabilityq",
       "name": "Adaptabilityq",
       "xero_contact_name": null,
@@ -5458,7 +5703,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5501,7 +5747,8 @@
         "goods",
         "goods-advisory",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5543,7 +5790,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5585,7 +5833,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5670,7 +5919,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5712,7 +5962,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5757,7 +6008,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5800,7 +6052,9 @@
         "funder",
         "contained-hot-lead",
         "contained-original-requester",
-        "project:act-ce"
+        "project:act-ce",
+        "audience-funder",
+        "audience-partner"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5844,7 +6098,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5887,22 +6142,27 @@
         "goods",
         "goods-supporter",
         "goods-newsletter",
-        "project:act-gd"
+        "project:act-gd",
+        "goods-steady",
+        "audience-funder",
+        "audience-partner",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 19800,
       "won_opp_count": 1,
       "won_opp_value_aud": 19800,
       "pipelines": [
-        "Goods — Buyer Pipeline"
+        "Goods — Buyer Pipeline",
+        "Goods Supporter Journey"
       ],
-      "latest_stage": "Paid",
-      "latest_stage_pipeline": "Goods — Buyer Pipeline"
+      "latest_stage": "Renewing",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "plateitforward",
@@ -5931,7 +6191,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -5973,7 +6234,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -6017,23 +6279,26 @@
         "goods",
         "goods-funder",
         "goods-newsletter",
-        "goods-supporter",
-        "project:act-ca"
+        "goods-cooling",
+        "audience-funder",
+        "audience-brand",
+        "goods-supporter"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": false,
-      "open_opp_count": 0,
-      "open_opp_value_aud": 0,
+      "open_opp_count": 1,
+      "open_opp_value_aud": 130000,
       "won_opp_count": 1,
       "won_opp_value_aud": 146973.26,
       "pipelines": [
-        "A Curious Tractor"
+        "A Curious Tractor",
+        "Goods Supporter Journey"
       ],
-      "latest_stage": "Graduation",
-      "latest_stage_pipeline": "A Curious Tractor"
+      "latest_stage": "Stewarding / Reporting",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "legalvisionforbusiness",
@@ -6058,7 +6323,8 @@
       "last_communicated_at": null,
       "days_since_last_contact": null,
       "themes": [
-        "funder"
+        "funder",
+        "audience-funder"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -6100,7 +6366,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -6142,7 +6409,8 @@
       "themes": [
         "goods",
         "goods-supporter",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -6185,7 +6453,9 @@
         "funder",
         "goods",
         "goods-funder",
-        "goods-newsletter"
+        "goods-newsletter",
+        "audience-funder",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
@@ -6228,20 +6498,26 @@
         "funder",
         "goods",
         "goods-funder",
-        "goods-newsletter"
+        "goods-newsletter",
+        "project:act-gd",
+        "goods-warm",
+        "audience-funder",
+        "audience-brand"
       ],
       "tone": null,
       "framing_notes_excerpt": null,
       "next_report_due": null,
       "next_report_name": null,
       "in_funders_json": false,
-      "open_opp_count": 0,
+      "open_opp_count": 1,
       "open_opp_value_aud": 0,
       "won_opp_count": 0,
       "won_opp_value_aud": 0,
-      "pipelines": [],
-      "latest_stage": null,
-      "latest_stage_pipeline": null
+      "pipelines": [
+        "Goods Supporter Journey"
+      ],
+      "latest_stage": "Cultivating",
+      "latest_stage_pipeline": "Goods Supporter Journey"
     },
     {
       "slug": "nt",

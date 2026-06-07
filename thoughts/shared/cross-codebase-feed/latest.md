@@ -1,53 +1,37 @@
-# Cross-codebase feed — 2026-05-23
+# Cross-codebase feed — 2026-06-06
 
-> Activity since 1d · 533 events across 6 codebases
+> Activity since 1d · 287 events across 6 codebases
 
-## commit (516)
+## commit (283)
 
-- `e5fa50a` (act-global-infrastructure · plan: act-communication-pipeline-2026-05-23) — docs(plan): ACT communication pipeline — backbone + cross-codebase + newsletter alignment
-- `5c7ca7f` (justicehub) — Data-quality page + YJ classifier + ABN dedup design
-- `23ecdfa` (act-global-infrastructure · plan: newsletter-pipeline-2026-05-23) — feat(ops): continuous tagging (2h cron) + 5 audit skills + newsletter PRD
-- `363fbc8` (empathy-ledger-v2) — docs(handoff): desktop editorial surfaces — 2026-05-23 afternoon session
-- `0ac9a87` (empathy-ledger-v2) — chore(projects): archive 7 empty ACT placeholder projects
-- `fd6ccfe` (act-global-infrastructure · plan: minimax-full-migration-2026-05-22) — docs(handoff): Plan C deployed + audit doc shipped — full ledger close
-- `5f3e6a8` (justicehub) — /intelligence/civic/foundations: deep-dive on philanthropy-to-ACCO gap
-- `251fdbf` (empathy-ledger-v2) — feat(desktop): storyteller browser at /desktop/storytellers
-- `ae00435` (justicehub) — v_entity_360: cross-source org view joined by ABN
-- `460c0ed` (justicehub) — Civic claims: ACCO foundation share + oversight tallies + AIHW indigenous overrep
-- `4df957e` (justicehub) — Data quality fixes: ACCO flag + foundation tagging + ORIC backfill script
-- `1f2f9b4` (empathy-ledger-v2) — feat(desktop): articles browser at /desktop/articles
-- `022ee11` (act-global-infrastructure) — docs(audit): bot tools × LLM adapter compatibility (46 tools)
-- `0706226` (act-global-infrastructure · plan: minimax-full-migration-2026-05-22) — feat(llm): Plan C — Gemini Flash Lite as cheap-tier primary
-- `3e38e9c` (justicehub) — Sentencing Advisory Councils ingestion (VIC/TAS/NSW/NT)
-- `841c1ea` (justicehub) — Surface AIHW Indigenous overrep ratios as civic claims
-- `cf0b2f8` (empathy-ledger-v2) — fix(stories): filter photo-records by storyteller, not title regex
-- `41b10dd` (empathy-ledger-v2) — feat(cohort-folders): activity digest preview + email
-- `cc49fc5` (justicehub) — AIHW schema patches: source_format + source_sheet_label columns
-- `43ab44c` (act-global-infrastructure · plan: minimax-full-migration-2026-05-22) — docs(handoff): Phase 4d Test (a) PASSED — bot live on MiniMax
-- _...and 496 more_
+- `f3abd3a` (act-global-infrastructure) — feat(the-field): /field hub — the one front door (morning read inline + triage/circle/orbit/scope + capture box)
+- `b41093e` (act-global-infrastructure) — feat(the-field): WARMTH V2 LOCKED — ring is human-only, cadence keeps time, all four surfaces on one engine
+- `1e1e009` (empathy-ledger-v2) — docs: relay-live handoff + family tour and MRFF proposals
+- `7d7bdf7` (empathy-ledger-v2) — chore(tsconfig): include per-process distdir types paths (.next-3031/.next-4000)
+- `f4aeb3b` (empathy-ledger-v2) — docs(mrff): live map Alice-first pitch proposal
+- `65aae83` (empathy-ledger-v2) — docs(relay): route-adjacent picks folded into planner stop notes
+- `10026db` (empathy-ledger-v2) — feat(admin): km + est hours on collapsed planner cards
+- `f85aa9f` (empathy-ledger-v2) — feat(admin): sixth B-to-A tab - Kalgoorlie southern loop
+- `6c28724` (empathy-ledger-v2) — feat(relay): whole-journey overview toggle on the public map
+- `be1f351` (act-global-infrastructure) — feat(the-field): post-align regen — 53 ring: tags verified through mirror to worklist + surfaces
+- `35c03fa` (act-global-infrastructure) — feat(the-field): ring alignment APPLIED — 53 ring: tags live in GHL, undo-logged
+- `dff4301` (act-global-infrastructure) — feat(the-field): GHL alignment pass — ring: namespace carries Ben's reads to the system of record
+- `cc64c66` (empathy-ledger-v2) — fix(relay): journey pin popup builds DOM instead of setHTML
+- `d1eff2f` (act-global-infrastructure) — feat(the-field): triage story-so-far is now an actual summary, not raw subjects
+- `db1e49e` (act-global-infrastructure) — feat(the-field): triage cards tell the story — projects, suggestions, live email history
+- `55c45d4` (act-global-infrastructure) — feat(the-field): triage v2 — one person, two buttons, nothing to remember
+- `f7b3618` (act-global-infrastructure) — feat(the-field): triage mode — every person, one list, flick-speed votes — /field/triage
+- `8d3fd66` (empathy-ledger-v2) — fix(relay): stop-stats counts move into the database
+- `af0fb7b` (act-global-infrastructure) — feat(the-field): post-session refresh — 50 new pre-reads queued, 10 read-pages rebuilt ground-truth-shaped
+- `a20f20b` (empathy-ledger-v2) — fix(relay): review trio - note draft leak, Mutitjulu day-dot, custodians updated_at trigger
+- _...and 263 more_
 
-## plan_updated (5)
+## handoff_updated (2)
 
-- act-global-infrastructure: `thoughts/shared/plans/act-communication-pipeline-2026-05-23.md` (2026-05-23)
-- act-global-infrastructure: `thoughts/shared/plans/newsletter-pipeline-2026-05-23.md` (2026-05-23)
-- act-global-infrastructure: `thoughts/shared/plans/minimax-full-migration-2026-05-22.md` (2026-05-22)
-- act-global-infrastructure: `thoughts/shared/plans/finance-overnight-audit-2026-05-21.md` (2026-05-22)
-- act-global-infrastructure: `thoughts/shared/plans/finance-fix-runbook-2026-05-22.md` (2026-05-22)
+- empathy-ledger-v2: `thoughts/shared/handoffs/2026-06-06-australia-tour-planner.md` (2026-06-05)
+- empathy-ledger-v2: `thoughts/shared/handoffs/2026-06-06-relay-live-palmer-package.md` (2026-06-05)
 
-## handoff_updated (8)
+## wiki_update (2)
 
-- empathy-ledger-v2: `thoughts/shared/handoffs/2026-05-23-desktop-editorial-surfaces.md` (2026-05-23)
-- act-global-infrastructure: `thoughts/shared/handoffs/money-state-of-play/current.md` (2026-05-23)
-- empathy-ledger-v2: `thoughts/shared/handoffs/2026-05-23-world-tour-followups-shipped.md` (2026-05-23)
-- empathy-ledger-v2: `thoughts/shared/handoffs/2026-05-23-world-tour-spine-end-to-end.md` (2026-05-23)
-- empathy-ledger-v2: `thoughts/shared/handoffs/2026-05-23-contained-syndication-pipeline.md` (2026-05-22)
-- empathy-ledger-v2: `thoughts/shared/handoffs/2026-05-23-desktop-governance-layer.md` (2026-05-22)
-- act-global-infrastructure: `thoughts/shared/handoffs/2026-05-19-money-state-of-play.md` (2026-05-22)
-- act-global-infrastructure: `thoughts/shared/handoffs/2026-05-17-money-state-of-play.md` (2026-05-22)
-
-## wiki_update (4)
-
-- act-global-infrastructure: `wiki/log.md` (2026-05-23)
-- act-global-infrastructure: `wiki/decisions/url-audit-2026-05-23.md` (2026-05-23)
-- act-global-infrastructure: `wiki/cockpit/four-lanes-today.md` (2026-05-23)
-- act-global-infrastructure: `wiki/output/lint-2026-05-23.md` (2026-05-23)
+- act-global-infrastructure: `wiki/concepts/ghl-tag-namespaces.md` (2026-06-06)
+- act-global-infrastructure: `wiki/log.md` (2026-06-05)

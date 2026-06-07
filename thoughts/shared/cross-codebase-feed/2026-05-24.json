@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-23T21:00:10.106Z",
+  "generated_at": "2026-05-24T21:00:09.812Z",
   "since": "1d",
   "codebases": [
     "act-global-infrastructure",
@@ -9,8 +9,182 @@
     "goods",
     "act-farm"
   ],
-  "event_count": 619,
+  "event_count": 614,
   "events": [
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/finance/act-money-thesis-discussion.md",
+      "date": "2026-05-24T20:58:50.115Z",
+      "size_bytes": 35111
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/lcaa-method.md",
+      "date": "2026-05-24T20:57:07.588Z",
+      "size_bytes": 12808
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/glossary.md",
+      "date": "2026-05-24T20:56:38.995Z",
+      "size_bytes": 10388
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/ceo-operating-model.md",
+      "date": "2026-05-24T20:56:00.058Z",
+      "size_bytes": 19309
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/operations/act-operational-thesis.md",
+      "date": "2026-05-24T20:55:04.061Z",
+      "size_bytes": 43973
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/index.md",
+      "date": "2026-05-24T20:54:48.415Z",
+      "size_bytes": 32524
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/ai-ethics.md",
+      "date": "2026-05-24T20:54:29.622Z",
+      "size_bytes": 6589
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/act-ecosystem.md",
+      "date": "2026-05-24T20:53:47.075Z",
+      "size_bytes": 6911
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/act-identity.md",
+      "date": "2026-05-24T20:53:11.376Z",
+      "size_bytes": 7474
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/soul.md",
+      "date": "2026-05-24T20:52:57.904Z",
+      "size_bytes": 10199
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/evidence-as-by-product.md",
+      "date": "2026-05-24T20:48:29.931Z",
+      "size_bytes": 12652
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/governed-proof.md",
+      "date": "2026-05-24T20:47:05.328Z",
+      "size_bytes": 2614
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/alma.md",
+      "date": "2026-05-24T20:46:28.254Z",
+      "size_bytes": 11130
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/technical/transcription-workflow.md",
+      "date": "2026-05-24T20:38:45.458Z",
+      "size_bytes": 7606
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/projects/justicehub/justicehub.md",
+      "date": "2026-05-24T20:38:45.457Z",
+      "size_bytes": 20266
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/roadmap-2026.md",
+      "date": "2026-05-24T20:38:45.456Z",
+      "size_bytes": 4580
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/act-core-facts.md",
+      "date": "2026-05-24T20:38:45.455Z",
+      "size_bytes": 14497
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/act-brand-alignment-map.md",
+      "date": "2026-05-24T20:38:45.454Z",
+      "size_bytes": 17644
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/AGENTS.md",
+      "date": "2026-05-24T20:38:45.451Z",
+      "size_bytes": 4982
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/civic-world-model.md",
+      "date": "2026-05-24T20:27:22.238Z",
+      "size_bytes": 8964
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/civic-reflex-automation.md",
+      "date": "2026-05-24T20:22:08.925Z",
+      "size_bytes": 13172
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/civic-operating-system.md",
+      "date": "2026-05-24T20:17:31.605Z",
+      "size_bytes": 12701
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/2026-04-five-year-plan.md",
+      "date": "2026-05-24T20:15:43.191Z",
+      "size_bytes": 17086
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/2026-05-25-civic-cerebellum-reframe.md",
+      "date": "2026-05-24T20:15:21.974Z",
+      "size_bytes": 14851
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-05-25-fy27-launch-operations-plan.md",
+      "date": "2026-05-24T20:11:28.571Z"
+    },
     {
       "type": "commit",
       "repo": "justicehub",
@@ -19,12 +193,6 @@
       "author": "Acurioustractor",
       "title": "docs/handoffs: Codex handoff for civic-intelligence work",
       "plan_slug": null
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "justicehub",
-      "path": "thoughts/shared/handoffs/2026-05-24-codex-civic-intelligence.md",
-      "date": "2026-05-23T20:55:04.942Z"
     },
     {
       "type": "commit",
@@ -1341,12 +1509,6 @@
       "plan_slug": "minimax-full-migration-2026-05-22"
     },
     {
-      "type": "handoff_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/handoffs/2026-05-23-supporters-platform-shipped.md",
-      "date": "2026-05-23T08:11:27.258Z"
-    },
-    {
       "type": "commit",
       "repo": "justicehub",
       "sha": "f449edf",
@@ -1354,180 +1516,6 @@
       "author": "Acurioustractor",
       "title": "Daily rescore cron + email backfill script",
       "plan_slug": null
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "justicehub",
-      "path": "thoughts/shared/handoffs/2026-05-23-civic-intelligence-session.md",
-      "date": "2026-05-23T08:07:09.367Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/funder-briefs-overlay-2026-05-23.md",
-      "date": "2026-05-23T07:56:56.488Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/ghl-pipelines-supporter-integration-2026-05-23.md",
-      "date": "2026-05-23T07:21:50.009Z"
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/cockpit/weekly-digest-2026-05-23.md",
-      "date": "2026-05-23T06:48:31.339Z",
-      "size_bytes": 1210
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/cockpit/weekly-narrative-2026-05-23.md",
-      "date": "2026-05-23T06:47:45.000Z",
-      "size_bytes": 2105
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/log.md",
-      "date": "2026-05-23T06:47:38.965Z",
-      "size_bytes": 81409
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/decisions/url-audit-2026-05-23.md",
-      "date": "2026-05-23T06:47:30.393Z",
-      "size_bytes": 3922
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/cockpit/four-lanes-today.md",
-      "date": "2026-05-23T06:47:25.127Z",
-      "size_bytes": 1172
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/output/lint-2026-05-23.md",
-      "date": "2026-05-23T06:47:22.630Z",
-      "size_bytes": 18648
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/funders-ghl-alignment-2026-05-23.md",
-      "date": "2026-05-23T06:27:56.633Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/funders-alignment-findings-2026-05-23.md",
-      "date": "2026-05-23T06:24:15.191Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-evening-pickup.md",
-      "date": "2026-05-23T06:14:27.443Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-goods-upload-flow-response.md",
-      "date": "2026-05-23T05:52:10.254Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/newsletter-notion-db-schemas.md",
-      "date": "2026-05-23T05:34:51.148Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/act-communication-pipeline-2026-05-23-locked.md",
-      "date": "2026-05-23T05:29:32.177Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-capture-and-drafts-session.md",
-      "date": "2026-05-23T05:22:05.866Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/telegram-noise-audit-2026-05-23.md",
-      "date": "2026-05-23T04:27:04.095Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/handoffs/money-state-of-play/current.md",
-      "date": "2026-05-23T04:22:48.873Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-observatory-cosmetic-sweep-and-phase-2-plan.md",
-      "date": "2026-05-23T04:18:49.724Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/plans/2026-05-23-resonance-field-phase-2-unification.md",
-      "date": "2026-05-23T04:16:58.349Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "act-regenerative-studio",
-      "path": "thoughts/shared/handoffs/ultimate-project-pages/current.md",
-      "date": "2026-05-23T04:09:29.153Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/act-communication-pipeline-2026-05-23.md",
-      "date": "2026-05-23T03:59:54.136Z"
-    },
-    {
-      "type": "plan_updated",
-      "repo": "act-global-infrastructure",
-      "path": "thoughts/shared/plans/newsletter-pipeline-2026-05-23.md",
-      "date": "2026-05-23T03:52:53.713Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-desktop-editorial-surfaces.md",
-      "date": "2026-05-23T03:44:59.787Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-world-tour-followups-shipped.md",
-      "date": "2026-05-23T00:41:47.143Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-world-tour-spine-end-to-end.md",
-      "date": "2026-05-23T00:15:26.606Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-contained-syndication-pipeline.md",
-      "date": "2026-05-22T23:36:26.607Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-05-23-desktop-governance-layer.md",
-      "date": "2026-05-22T23:29:23.150Z"
     },
     {
       "type": "commit",

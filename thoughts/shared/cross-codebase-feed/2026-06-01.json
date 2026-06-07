@@ -1,0 +1,780 @@
+{
+  "generated_at": "2026-06-01T21:00:01.439Z",
+  "since": "1d",
+  "codebases": [
+    "act-global-infrastructure",
+    "act-regenerative-studio",
+    "empathy-ledger-v2",
+    "justicehub",
+    "goods",
+    "act-farm"
+  ],
+  "event_count": 94,
+  "events": [
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "a137110",
+      "date": "2026-06-02T06:20:25+10:00",
+      "author": "Ben",
+      "title": "content(ghl): Conversation AI agent config + 'commerce yes, community never' rule",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "de5e8b8",
+      "date": "2026-06-01T22:22:36+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(admin): avoid prerender search params bailout",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "258e117",
+      "date": "2026-06-01T22:13:01+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(world-tour): generalize contribution review",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "e278cf7",
+      "date": "2026-06-01T22:07:58+10:00",
+      "author": "Ben",
+      "title": "content+docs(ghl): re-opt-in email (voice 100/100) + 26-workflow cleanup walkthrough",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "403f7f5",
+      "date": "2026-06-01T22:03:32+10:00",
+      "author": "Ben",
+      "title": "docs(comms): ACT comms architecture — 4 newsletters + drips + one consent model",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "432472f",
+      "date": "2026-06-01T21:58:07+10:00",
+      "author": "Ben",
+      "title": "feat(finance): Q2+Q3 BAS morning runbook — packs, fresh GST, learnings",
+      "plan_slug": "2026-06-01-reconciliation-cockpit"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "743e903",
+      "date": "2026-06-01T21:55:04+10:00",
+      "author": "Ben",
+      "title": "docs(ghl): step-by-step Goods GHL build walkthrough + add-from-other-lists helper",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "02cbbd3",
+      "date": "2026-06-01T21:50:25+10:00",
+      "author": "Ben",
+      "title": "feat(ghl): enroll Goods audiences into funnels + build sheet",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "33e04ae",
+      "date": "2026-06-01T21:40:09+10:00",
+      "author": "Ben",
+      "title": "docs(goods): record Utopia-trip consent (public-marketing scope) + unlock plan",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "bd513b3",
+      "date": "2026-06-01T21:37:20+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(contribute): allow public contribution posts",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "aa3eca8",
+      "date": "2026-06-01T21:28:06+10:00",
+      "author": "Ben",
+      "title": "feat(finance): Q2 FY26 reconciliation pack + weekly card-reconcile system",
+      "plan_slug": "2026-06-01-reconciliation-cockpit"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ffdc30d",
+      "date": "2026-06-01T21:27:20+10:00",
+      "author": "Ben",
+      "title": "docs(goods): GHL operating system + Goods drip-feed plan + content inventory",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "55f685f",
+      "date": "2026-06-01T21:26:54+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(story): add public share invitation",
+      "plan_slug": null
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/comms-architecture.md",
+      "date": "2026-06-01T20:59:43.544Z",
+      "size_bytes": 6925
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/2026-06-01-ghl-workflow-cleanup-walkthrough.md",
+      "date": "2026-06-01T20:59:43.543Z"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "a6178ed",
+      "date": "2026-06-01T20:40:53+10:00",
+      "author": "Ben",
+      "title": "feat(skills): reconcile-cycle skill + ACT finance skill-suite map",
+      "plan_slug": "2026-06-01-act-finance-skill-suite"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "2e740ff",
+      "date": "2026-06-01T20:40:29+10:00",
+      "author": "Ben",
+      "title": "fix(finance): reconcile cockpit — already-reconciled verdict prevents duplicate CREATEs",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "dad9652",
+      "date": "2026-06-01T20:37:36+10:00",
+      "author": "Acurioustractor",
+      "title": "copy(nav): make public CTA story-led",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "6a48f3f",
+      "date": "2026-06-01T20:28:42+10:00",
+      "author": "Ben",
+      "title": "feat(ghl): delete-junk-ghl-tags — Phase 3 safe junk cleanup",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "91c91ff",
+      "date": "2026-06-01T20:25:35+10:00",
+      "author": "Ben",
+      "title": "feat(ghl): seed-goods emits canonical tags (project:act-gd, source:xero)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "12c876a",
+      "date": "2026-06-01T20:16:32+10:00",
+      "author": "Ben",
+      "title": "docs(ghl): Phase 2 workflow re-point checklist (26 workflows)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "288887e",
+      "date": "2026-06-01T20:13:43+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(nav): simplify public launch journey",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "76aa157",
+      "date": "2026-06-01T17:17:07+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(confessions): one contained listening page; retire the data wall",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "e928572",
+      "date": "2026-06-01T17:09:29+10:00",
+      "author": "Ben",
+      "title": "chore(ghl): skip gone-from-ghl contacts in tag migration + log skip count",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "beb180c",
+      "date": "2026-06-01T16:57:19+10:00",
+      "author": "Ben",
+      "title": "feat(finance): reconciliation cockpit Phase 1 — read-only /finance/reconcile",
+      "plan_slug": "thoughts/shared/plans/2026-06-01-reconciliation-cockpit.md"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "0a75bca",
+      "date": "2026-06-01T16:48:01+10:00",
+      "author": "Ben",
+      "title": "docs(ghl): tag taxonomy decision + additive-first migration (dry-run)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "adba653",
+      "date": "2026-06-01T16:20:50+10:00",
+      "author": "Ben",
+      "title": "fix(finance): reconcile-line-lookup — fuzzy amount (surcharges), dup detection, stricter vendor gate",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "aee7013",
+      "date": "2026-06-01T16:02:52+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(atlas): ship expanded story map analytics",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "8a92f66",
+      "date": "2026-06-01T15:58:35+10:00",
+      "author": "Ben",
+      "title": "docs(finance): reconciliation cockpit plan + ledger (Dext→Xero diagnosis, co-pilot tooling)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "c025091",
+      "date": "2026-06-01T15:56:48+10:00",
+      "author": "Ben",
+      "title": "feat(finance): full per-line NAB Visa reconcile sheet (SL handoff)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "0e12772",
+      "date": "2026-06-01T13:55:53+10:00",
+      "author": "Ben",
+      "title": "feat(finance): co-pilot line lookup for Xero card reconciliation",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "7a2cc3d",
+      "date": "2026-06-01T13:46:52+10:00",
+      "author": "Ben",
+      "title": "feat(finance): Dext-vs-Xero reconciliation diagnostics for the NAB Visa",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "33990ff",
+      "date": "2026-06-01T12:47:42+10:00",
+      "author": "Ben",
+      "title": "feat(finance): reconciliation worklist generator + corrected SL founder-drawings figure",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "4726fd2",
+      "date": "2026-06-01T12:21:04+10:00",
+      "author": "Ben",
+      "title": "feat(grant-tranches): add AMP $21,900 as a manual (non-Xero-sourced) tranche",
+      "plan_slug": null
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/goods-ghl-operating-model.md",
+      "date": "2026-06-01T12:01:20.849Z",
+      "size_bytes": 22982
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/ghl-operating-system.md",
+      "date": "2026-06-01T12:01:20.847Z",
+      "size_bytes": 15008
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/2026-06-01-utopia-trip-story-approval.md",
+      "date": "2026-06-01T12:01:20.845Z",
+      "size_bytes": 4141
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-01-goods-drip-feed-content-plan.md",
+      "date": "2026-06-01T12:01:20.825Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/2026-06-01-goods-ghl-build-walkthrough.md",
+      "date": "2026-06-01T12:01:20.823Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/2026-06-01-goods-ghl-build-sheet.md",
+      "date": "2026-06-01T12:01:20.821Z"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "79107ec",
+      "date": "2026-06-01T11:57:46+10:00",
+      "author": "Ben",
+      "title": "docs(plan): Plan 2 turnkey spec + primed ledger for fresh-context tracer-bullet",
+      "plan_slug": "2026-06-02-ingest-deposit-account-bank-lines"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "61bcd8e",
+      "date": "2026-06-01T11:57:11+10:00",
+      "author": "Ben",
+      "title": "fix(grant-tranches): filter PAID only (exclude VOIDED/DELETED) + add 3 funders",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "19f2793",
+      "date": "2026-06-01T11:49:54+10:00",
+      "author": "Ben",
+      "title": "feat(grant-tranches): per-tranche Xero-sourced grant ledger in Notion",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "f6d22c7",
+      "date": "2026-06-01T11:49:39+10:00",
+      "author": "Ben",
+      "title": "docs(plans): Plan 1 Tier-1 shipped/Tier-3 deferred; Plan 2 approach=derive + de-risked",
+      "plan_slug": "2026-06-02-ingest-deposit-account-bank-lines"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "45e2756",
+      "date": "2026-06-01T11:44:13+10:00",
+      "author": "Ben",
+      "title": "docs(finance): PM-7 ledger + db-check guard — VOIDED≠DELETED for invoices",
+      "plan_slug": "2026-06-02-account-class-credit-card-detection"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "1f43880",
+      "date": "2026-06-01T11:41:05+10:00",
+      "author": "Ben",
+      "title": "fix(finance): exclude VOIDED invoices from the workbench tagging queue, not just DELETED",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "c7bc7e0",
+      "date": "2026-06-01T11:32:59+10:00",
+      "author": "Ben",
+      "title": "refactor(finance): account class is an explicit declaration, not a fuzzy name regex",
+      "plan_slug": "2026-06-02-account-class-credit-card-detection"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "a323bc7",
+      "date": "2026-06-01T11:21:51+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): PM-6 ledger — remaining finance skills aligned to workbench+money-guards (shipped+pushed); NEXT = 2 systemic plans + live tagging queue",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "c192b1a",
+      "date": "2026-06-01T11:16:14+10:00",
+      "author": "A Curious Tractor",
+      "title": "Ship Justice Matrix guide and strategy flow (#34)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "33748fc",
+      "date": "2026-06-01T11:14:04+10:00",
+      "author": "Ben",
+      "title": "skill(finance): align find-receipt/bas-cycle/scan-subscriptions/db-check/preflight to workbench + money guards",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "1b18fa4",
+      "date": "2026-06-01T11:07:11+10:00",
+      "author": "Ben",
+      "title": "feat(notion-sync): carry 7 GHL money-alignment fields + auto-dedupe opportunities DB",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "7a3b25e",
+      "date": "2026-06-01T11:04:36+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): PM-5 ledger — finance fixes shipped+pushed; NEXT = align remaining finance skills (fresh context)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ca49aef",
+      "date": "2026-06-01T10:56:07+10:00",
+      "author": "Ben",
+      "title": "skill(tag-transactions): workbench-first + encode money guards",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "a568e50",
+      "date": "2026-06-01T10:50:40+10:00",
+      "author": "Ben",
+      "title": "docs(review): clean-context confirmation of finance nit fixes (CONFIRMED)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "d6bceff",
+      "date": "2026-06-01T10:45:14+10:00",
+      "author": "Ben",
+      "title": "docs: queue 2 systemic finance follow-up plans (account class + deposit ingest)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "9aec8ae",
+      "date": "2026-06-01T10:43:54+10:00",
+      "author": "Ben",
+      "title": "harden(finance): NULL-safe DELETED guards + tighten card-payoff regex (review nits)",
+      "plan_slug": null
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/ghl-tag-taxonomy.md",
+      "date": "2026-06-01T10:42:26.635Z",
+      "size_bytes": 14103
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/finance-skill-suite.md",
+      "date": "2026-06-01T10:42:26.634Z",
+      "size_bytes": 4709
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-01-reconciliation-cockpit.md",
+      "date": "2026-06-01T10:42:26.631Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-01-act-finance-skill-suite.md",
+      "date": "2026-06-01T10:42:26.630Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/money-state-of-play/current.md",
+      "date": "2026-06-01T10:42:26.629Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/2026-06-01-ghl-workflow-migration-checklist.md",
+      "date": "2026-06-01T10:42:26.627Z"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ef508a3",
+      "date": "2026-06-01T10:25:11+10:00",
+      "author": "Ben",
+      "title": "feat(finance): clickable KPI cards + helpful empty state on workbench",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "932a69b",
+      "date": "2026-06-01T10:05:07+10:00",
+      "author": "Ben",
+      "title": "docs: mark credit-card direction fix done (c1b401b)",
+      "plan_slug": "2026-06-01-credit-card-direction-bank-lines"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "c1b401b",
+      "date": "2026-06-01T10:04:46+10:00",
+      "author": "Ben",
+      "title": "fix(finance): credit-card bank lines — credits are transfers/refunds, not income",
+      "plan_slug": "2026-06-01-credit-card-direction-bank-lines"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "fb02f1a",
+      "date": "2026-06-01T09:42:00+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): canonical DELETED fix done (fd47762); command center live for tagging",
+      "plan_slug": "2026-06-01-deleted-row-exclusion-canonical-finance"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "fd47762",
+      "date": "2026-06-01T09:41:00+10:00",
+      "author": "Ben",
+      "title": "fix(finance): exclude DELETED rows from ledger.ts + monthly rollup (R&D claim basis)",
+      "plan_slug": "2026-06-01-deleted-row-exclusion-canonical-finance"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "8ff6692",
+      "date": "2026-06-01T09:26:51+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): workbench DELETED+transfer fix shipped; canonical-surface fix queued",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "a09b7ea",
+      "date": "2026-06-01T09:23:43+10:00",
+      "author": "Ben",
+      "title": "fix(finance): workbench excludes internal transfers + DELETED rows",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "776defb",
+      "date": "2026-06-01T08:54:32+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): finance workbench recovered + cross-project alignment scoreboard + next steps",
+      "plan_slug": "2026-05-29-finance-cockpit-consolidation"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "b33ae56",
+      "date": "2026-06-01T08:52:24+10:00",
+      "author": "Ben",
+      "title": "recovered(finance): in-flight finance workbench — cross-project spend/income review",
+      "plan_slug": "2026-05-29-finance-cockpit-consolidation"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "632074a",
+      "date": "2026-06-01T08:40:21+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): session 2026-06-01 PM — draft review + doc-drift fix + push",
+      "plan_slug": "2026-06-01-cutover-30-day-critical-path"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "9a10f26",
+      "date": "2026-06-01T08:34:58+10:00",
+      "author": "Ben",
+      "title": "docs(finance): sharpen Minderoo row in novation drafts — Goods grant routes to Butterfly, not ACT Pty",
+      "plan_slug": "2026-06-01-cutover-30-day-critical-path"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "b035dbc",
+      "date": "2026-06-01T07:54:22+10:00",
+      "author": "Ben",
+      "title": "docs(wiki): reconcile four-lanes + act-identity to canonical entity architecture",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "cbd6e98",
+      "date": "2026-06-01T07:08:04+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): session 2026-06-01 — entity cutover + business architecture + Goods/Butterfly + R&D reframe",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "97a2099",
+      "date": "2026-06-01T07:02:34+10:00",
+      "author": "Ben",
+      "title": "docs(finance): SL-perspective R&D outcomes + FY27 engine setup + Goods service agreement",
+      "plan_slug": null
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-02-ingest-deposit-account-bank-lines.md",
+      "date": "2026-06-01T01:57:14.196Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-02-account-class-credit-card-detection.md",
+      "date": "2026-06-01T01:48:59.918Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "empathy-ledger-v2",
+      "path": "thoughts/shared/plans/2026-06-01-world-tour-atlas-alignment-plan.md",
+      "date": "2026-06-01T01:41:00.527Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "empathy-ledger-v2",
+      "path": "thoughts/shared/plans/2026-05-25-api-route-inventory.md",
+      "date": "2026-06-01T00:25:49.539Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/2026-06-01-goods-money-sync-xero-ghl-notion.md",
+      "date": "2026-06-01T00:24:46.574Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-01-deleted-row-exclusion-canonical-finance.md",
+      "date": "2026-06-01T00:12:55.939Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-01-credit-card-direction-bank-lines.md",
+      "date": "2026-06-01T00:12:55.937Z"
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/log.md",
+      "date": "2026-05-31T23:15:09.750Z",
+      "size_bytes": 83243
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/url-audit-2026-05-31.md",
+      "date": "2026-05-31T23:05:07.976Z",
+      "size_bytes": 3922
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/output/lint-2026-05-31.md",
+      "date": "2026-05-31T23:00:00.399Z",
+      "size_bytes": 18828
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/act-core-facts.md",
+      "date": "2026-05-31T22:36:08.860Z",
+      "size_bytes": 15132
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/four-lanes.md",
+      "date": "2026-05-31T22:36:08.858Z",
+      "size_bytes": 9595
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/act-identity.md",
+      "date": "2026-05-31T22:36:08.857Z",
+      "size_bytes": 7588
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/concepts/act-business-architecture.md",
+      "date": "2026-05-31T22:36:08.854Z",
+      "size_bytes": 8777
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-01-pty-test-invoice-runbook.md",
+      "date": "2026-05-31T22:36:08.851Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/2026-06-01-cutover-30-day-critical-path.md",
+      "date": "2026-05-31T22:36:08.849Z"
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/cockpit/weekly-digest-2026-05-31.md",
+      "date": "2026-05-31T22:01:36.626Z",
+      "size_bytes": 1086
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/cockpit/four-lanes-today.md",
+      "date": "2026-05-31T22:00:05.907Z",
+      "size_bytes": 1172
+    }
+  ]
+}
