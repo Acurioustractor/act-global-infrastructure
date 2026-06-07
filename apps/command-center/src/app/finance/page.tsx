@@ -146,6 +146,13 @@ const planCards: Array<{
   accent: string
 }> = [
   {
+    title: 'Opportunities — four-lane board',
+    href: '/finance/opportunities',
+    description: 'Every funding opportunity on one board: Grants · Philanthropy · Corporate/Procurement · Buyers, warm → cold. Plus in-flight receivables.',
+    icon: Target,
+    accent: 'from-cyan-500/10 to-emerald-500/5 border-cyan-500/30',
+  },
+  {
     title: 'PTY cutover readiness',
     href: '/finance/pty-readiness',
     description: 'Live 30-Jun cutover tracker — critical path, blockers, days to go.',
