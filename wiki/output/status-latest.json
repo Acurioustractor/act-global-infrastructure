@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-05-24T23:00:00.499Z",
+  "generated_at": "2026-05-31T23:00:00.400Z",
   "scope": "canonical-graph",
   "domains": {
     "art": 8,
     "communities": 3,
-    "concepts": 33,
-    "decisions": 33,
-    "finance": 19,
+    "concepts": 34,
+    "decisions": 35,
+    "finance": 21,
     "people": 23,
     "projects": 98,
     "research": 15,
@@ -15,15 +15,15 @@
     "technical": 6
   },
   "summary": {
-    "date": "2026-05-24",
-    "total_articles": 320,
-    "total_links": 2358,
+    "date": "2026-05-31",
+    "total_articles": 325,
+    "total_links": 2400,
     "orphans": 68,
-    "broken_links": 252,
+    "broken_links": 262,
     "stubs": 0,
-    "missing_from_index": 103,
-    "missing_backlinks": 527,
-    "advisory_backlinks": 626
+    "missing_from_index": 107,
+    "missing_backlinks": 539,
+    "advisory_backlinks": 655
   },
   "source_bridge": {
     "raw_sources": 154,
@@ -126,6 +126,12 @@
     ],
     "missing_from_index": [
       {
+        "stem": "act-business-architecture",
+        "title": "ACT Business Architecture",
+        "relative_path": "concepts/act-business-architecture.md",
+        "page_path": "concepts/act-business-architecture"
+      },
+      {
         "stem": "four-lanes",
         "title": "The Four Lanes",
         "relative_path": "concepts/four-lanes.md",
@@ -166,12 +172,6 @@
         "title": "Notion as the unified ask layer",
         "relative_path": "decisions/2026-05-14-notion-platform-architecture.md",
         "page_path": "decisions/2026-05-14-notion-platform-architecture"
-      },
-      {
-        "stem": "2026-05-15-act-system-architecture",
-        "title": "ACT system architecture",
-        "relative_path": "decisions/2026-05-15-act-system-architecture.md",
-        "page_path": "decisions/2026-05-15-act-system-architecture"
       }
     ],
     "missing_backlinks": [
@@ -236,43 +236,49 @@
         }
       },
       {
-        "stem": "ai-ethics",
-        "title": "AI Ethics & Agent Strategy",
-        "relative_path": "concepts/ai-ethics.md",
-        "page_path": "concepts/ai-ethics",
+        "stem": "act-business-architecture",
+        "title": "ACT Business Architecture",
+        "relative_path": "concepts/act-business-architecture.md",
+        "page_path": "concepts/act-business-architecture",
         "target": {
-          "stem": "governed-proof",
-          "title": "Governed Proof",
-          "relative_path": "concepts/governed-proof.md",
-          "page_path": "concepts/governed-proof"
+          "stem": "act-ecosystem",
+          "title": "ACT Ecosystem",
+          "relative_path": "concepts/act-ecosystem.md",
+          "page_path": "concepts/act-ecosystem"
         }
       },
       {
-        "stem": "four-lanes",
-        "title": "The Four Lanes",
-        "relative_path": "concepts/four-lanes.md",
-        "page_path": "concepts/four-lanes",
+        "stem": "act-business-architecture",
+        "title": "ACT Business Architecture",
+        "relative_path": "concepts/act-business-architecture.md",
+        "page_path": "concepts/act-business-architecture",
         "target": {
-          "stem": "beautiful-obsolescence",
-          "title": "Beautiful Obsolescence",
-          "relative_path": "concepts/beautiful-obsolescence.md",
-          "page_path": "concepts/beautiful-obsolescence"
+          "stem": "four-lanes",
+          "title": "The Four Lanes",
+          "relative_path": "concepts/four-lanes.md",
+          "page_path": "concepts/four-lanes"
         }
       },
       {
-        "stem": "governed-proof",
-        "title": "Governed Proof",
-        "relative_path": "concepts/governed-proof.md",
-        "page_path": "concepts/governed-proof",
+        "stem": "act-business-architecture",
+        "title": "ACT Business Architecture",
+        "relative_path": "concepts/act-business-architecture.md",
+        "page_path": "concepts/act-business-architecture",
         "target": {
-          "stem": "consent-as-infrastructure",
-          "title": "Consent as Infrastructure",
-          "relative_path": "concepts/consent-as-infrastructure.md",
-          "page_path": "concepts/consent-as-infrastructure"
+          "stem": "soul",
+          "title": "Soul",
+          "relative_path": "concepts/soul.md",
+          "page_path": "concepts/soul"
         }
       }
     ],
     "orphan_pages": [
+      {
+        "stem": "act-business-architecture",
+        "title": "ACT Business Architecture",
+        "relative_path": "concepts/act-business-architecture.md",
+        "page_path": "concepts/act-business-architecture"
+      },
       {
         "stem": "2026-04-18-bg-fit-story-approval",
         "title": "BG Fit org-level story approval",
@@ -304,22 +310,16 @@
         "page_path": "decisions/2026-05-15-act-system-architecture"
       },
       {
+        "stem": "2026-05-31-q2q3-429-review-band-classification",
+        "title": "Q2/Q3 General Expenses (429) REVIEW-band classification",
+        "relative_path": "decisions/2026-05-31-q2q3-429-review-band-classification.md",
+        "page_path": "decisions/2026-05-31-q2q3-429-review-band-classification"
+      },
+      {
         "stem": "2026-05-harvest-subsidiary-structure",
         "title": "The Harvest — Subsidiary Structure Decision",
         "relative_path": "decisions/2026-05-harvest-subsidiary-structure.md",
         "page_path": "decisions/2026-05-harvest-subsidiary-structure"
-      },
-      {
-        "stem": "2026-05-pile-opportunity-workspace",
-        "title": "Pile-Tagged Opportunity Workspace — Unified Architecture",
-        "relative_path": "decisions/2026-05-pile-opportunity-workspace.md",
-        "page_path": "decisions/2026-05-pile-opportunity-workspace"
-      },
-      {
-        "stem": "money-stack-one-stop-shop",
-        "title": "Money stack — one-stop-shop",
-        "relative_path": "decisions/money-stack-one-stop-shop.md",
-        "page_path": "decisions/money-stack-one-stop-shop"
       }
     ],
     "stubs": [],

@@ -15,13 +15,32 @@ empathy_ledger_key: the-harvest
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/the-harvest/the-harvest.md`.
-> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # The Harvest / Witta Harvest HQ
 
 > A regenerative community hub in Witta, QLD — seasonal kitchen, garden centre, workshops, and venue hire on the former Green Harvest site, bringing together local produce, native plants, and hands-on learning.
 
 **Status:** Active | **Code:** ACT-HV | **Tier:** Ecosystem
+
+## Goal Stack
+
+> The alignment chain from purpose to this week. The top three layers (**Purpose · 10-year · 12-month**) are durable. The lower layers (**Quarter · Month · Dominoes**) are *living* — refreshed each week in the [[flow-flywheel|Flow Flywheel]] ritual. The Harvest's weekly dominoes are tracked in Notion under code **ACT-HV**.
+
+| Layer | Goal | Proof it moved |
+|---|---|---|
+| **Purpose** | Run a regenerative community hub in Witta that is genuinely of its place — the public front of the ACT Farm / BCV place system, built with locals, not launched at them. | — |
+| **10-year** | The Harvest and Black Cockatoo Valley are an established regenerative place system on Jinibara Country — recognised locally, trading sustainably, holding ACT's place, enterprise, and story layers together. | Recognised hub; sustainable trade; paired program steady |
+| **12-month** (FY26→27) | A consistent weekend trading rhythm (kitchen, garden centre, workshops, venue hire), a running CSA, and monthly BCV dinners — the paired-site program operating as a reliable cycle. | Weekly rhythm holds; CSA members; monthly dinners run |
+| **This quarter** | *Establish the dependable weekly rhythm and the local channels that fill it.* — refine each cycle | |
+| **This month** (May 2026) | *e.g. build the local channel map; run the next public garden morning.* — set in ritual | |
+
+**This week's dominoes** (max 3 — set in the ritual, tracked in Notion · ACT-HV):
+1. *Build The Harvest local channel map (local Facebook groups, noticeboards, schools, garden/arts networks, accommodation) so invitations travel where Witta locals already gather.*
+2. *Confirm and promote the next public moment (garden morning / workshop / BCV dinner) through those channels.*
+3. *…*
+
+*Last reviewed: 2026-05-26 — update the lower three layers each [[flow-flywheel|Flow Flywheel]] cycle.*
 
 ## Overview
 
