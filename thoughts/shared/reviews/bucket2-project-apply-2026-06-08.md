@@ -1,0 +1,914 @@
+
+# bucket-2 project: migration — 2026-06-08T02:08:26.707Z (TRACER)
+Rows overlapping legacy project tags: 1088 · gone-from-ghl excluded: 304 · live: 784 · need work: 784
+
+--- live contacts per legacy project tag (mirror) ---
+  act-gd                   472
+  goods                    275
+  project-goods            32
+  act-hv                   94
+  harvest                  1
+  the harvest              1
+  the-harvest              1
+  harvest-website          178
+  act-jh                   53
+  justicehub               56
+  act-el                   26
+  empathy-ledger           14
+  world-tour               25
+  world-tour-partner       12
+  act-cn                   23
+  civicgraph               26
+  act-in                   7
+  act-regenerative-studio  15
+
+--- canonical ADDs (contacts gaining each tag; already-present excluded) ---
+  +project:act-cn         0
+  +project:act-core       14
+  +project:act-el         16
+  +project:act-gd         39
+  +project:act-hv         37
+  +project:act-in         6
+  +project:act-jh         3
+  +source:website         47
+  +source:world-tour      0
+
+--- legacy REMOVEs (by tag) ---
+  -act-cn                 23
+  -act-el                 26
+  -act-gd                 472
+  -act-hv                 94
+  -act-in                 7
+  -act-jh                 53
+  -act-regenerative-studio 15
+  -civicgraph             26
+  -empathy-ledger         14
+  -goods                  275
+  -harvest                1
+  -harvest-website        178
+  -justicehub             56
+  -project-goods          32
+  -the harvest            1
+  -the-harvest            1
+  -world-tour             25
+  -world-tour-partner     12
+
+TOTAL: 784 contacts · 162 adds · 1311 removes
+- skip (not in GHL): steph pearson MMrEpSBB5rbHzONLDirb
+- skip (not in GHL): Sonia Mascolo auto_bfed89e6
+- skip (not in GHL): corey tutt O5zWG2qnHYaeMPlYdK6z
+- skip (not in GHL): Vercel Test test-vercel-001
+- skip (not in GHL): Brigitta Hill auto_3bc842b0
+- skip (not in GHL): milingimbi nt pnKIc9CJvb4XmbcK8q74
+- skip (not in GHL): ben question test x9ThLGVPslEOSbyoYbNR
+
+## TRACER Annie Taylor (Da6Xww4GHaPXhj6dmffK)
+- before: [goods, goods-supporter, goods-newsletter, act-gd, audience-brand, project:act-gd, role:supporter, comms:goods-newsletter, comms:newsletter, comms:supporter-drip, comms:act-newsletter]
+- after:  [goods-supporter, goods-newsletter, audience-brand, project:act-gd, role:supporter, comms:goods-newsletter, comms:newsletter, comms:supporter-drip, comms:act-newsletter]
+- verify: ✅ canonical present + legacy gone
+
+TRACER done on 1 contact. Rerun with --apply for all 784.
+UNDO: remove []; re-add [goods, act-gd] on Da6Xww4GHaPXhj6dmffK
+
+# bucket-2 project: migration — 2026-06-08T02:09:24.167Z (APPLY)
+Rows overlapping legacy project tags: 1088 · gone-from-ghl excluded: 304 · live: 784 · need work: 784
+
+--- live contacts per legacy project tag (mirror) ---
+  act-gd                   472
+  goods                    275
+  project-goods            32
+  act-hv                   94
+  harvest                  1
+  the harvest              1
+  the-harvest              1
+  harvest-website          178
+  act-jh                   53
+  justicehub               56
+  act-el                   26
+  empathy-ledger           14
+  world-tour               25
+  world-tour-partner       12
+  act-cn                   23
+  civicgraph               26
+  act-in                   7
+  act-regenerative-studio  15
+
+--- canonical ADDs (contacts gaining each tag; already-present excluded) ---
+  +project:act-cn         0
+  +project:act-core       14
+  +project:act-el         16
+  +project:act-gd         39
+  +project:act-hv         37
+  +project:act-in         6
+  +project:act-jh         3
+  +source:website         47
+  +source:world-tour      0
+
+--- legacy REMOVEs (by tag) ---
+  -act-cn                 23
+  -act-el                 26
+  -act-gd                 472
+  -act-hv                 94
+  -act-in                 7
+  -act-jh                 53
+  -act-regenerative-studio 15
+  -civicgraph             26
+  -empathy-ledger         14
+  -goods                  275
+  -harvest                1
+  -harvest-website        178
+  -justicehub             56
+  -project-goods          32
+  -the harvest            1
+  -the-harvest            1
+  -world-tour             25
+  -world-tour-partner     12
+
+TOTAL: 784 contacts · 162 adds · 1311 removes
+- skip (not in GHL): steph pearson MMrEpSBB5rbHzONLDirb
+- skip (not in GHL): Sonia Mascolo auto_bfed89e6
+- skip (not in GHL): corey tutt O5zWG2qnHYaeMPlYdK6z
+- skip (not in GHL): Vercel Test test-vercel-001
+- skip (not in GHL): Brigitta Hill auto_3bc842b0
+- skip (not in GHL): milingimbi nt pnKIc9CJvb4XmbcK8q74
+- skip (not in GHL): ben question test x9ThLGVPslEOSbyoYbNR
+- Annie Taylor Da6Xww4GHaPXhj6dmffK: already canonical (no-op)
+- skip (not in GHL): follow test AdJpwIAPKGtcKw9WLu29
+- Rohit Rajnoor pCjNscznPeptVGWMhSE0: +[source:website] -[harvest-website]
+- skip (not in GHL): Malcolm Aikman auto_972c7343
+- skip (not in GHL): ben release question 1778702669934 EDKmaIE8UPjPtao6SbfS
+- Anamika Sortey ytARdPzKUf5JqJi3b44v: +[source:website] -[harvest-website]
+- Keiron Lander X4qlBT2huXIB5I5XJ2dK: +[] -[goods, act-gd]
+- skip (not in GHL):   WGk3celbZDDUfpnTB6RN
+- skip (not in GHL): ben releasetest1778702669934 SmUktK2W5UI0zUo6MQIb
+- skip (not in GHL): bruce redman HI1vnNSzvmxk0q6Yhd4u
+- skip (not in GHL): ui2  fMSdk1CPYVcrcJ0xZP8c
+- skip (not in GHL): ben contact workflow test FYz6uKocaowPMWGHjTUT
+- Pipeline Test EaE04tgZAwTipFg3wRKg: +[] -[empathy-ledger, act-el, world-tour]
+-   6mHktQIZz9Q3BmiVLB4X: +[] -[act-hv, harvest-website]
+- Susan fws668WgyjSbMxq5HStO: +[source:website] -[harvest-website]
+- Natalie Richy QGp8hxVEKPwavlPaclfQ: +[source:website] -[harvest-website]
+- Ren Fernando P5Qw6atbYWZIKKsVhKSQ: +[] -[goods, act-gd]
+- skip (not in GHL): jarlmadanka wa ac6FQdAwintboayVWUiM
+- Sophie n8tFGamYE9YzJv4PQ2KW: +[] -[act-hv, harvest-website]
+- QuestionTest V8n6DFh9apuRqjYHC0zI: +[source:website] -[harvest-website]
+- skip (not in GHL): codex smoke community kU26fEtOglOnyoyqGVVo
+- skip (not in GHL): warruwi nt Kfftjz1kr7re0quOvxxn
+- skip (not in GHL): kintore nt iuVqVB3OrXIEcOEw5riw
+- Alan White UBl1fZcEBtkbQ9Y3OIyR: +[] -[goods, act-gd, justicehub, act-jh]
+- skip (not in GHL): codex smoke quiz 8EthXME0LnnOjmPwfsHc
+- skip (not in GHL): suzanne  auto_5afd8e21
+- Tony Miles bJ0IHYKRVBtlwmyIydaQ: +[] -[goods, act-gd]
+- skip (not in GHL): umbakumba nt cosG1FgL133xMtL2ewdy
+- Ben Stammer B8w2YAuSCxbfsW9Jm0N2: +[] -[goods, act-gd]
+- Nicky — Relove dJ1Y9UKZTdh8wNIWBY0n: +[] -[goods, act-gd]
+- cRUQxDtsahEPqhVDiW qHhpImxgkfJRqQjQAcWw: +[project:act-gd] -[project-goods]
+- Willhemina Wahlin moxP9fCQ7a2pdibcxPDa: +[] -[goods, act-gd]
+- skip (not in GHL): el test 3hYfXXbTLgBzLwk7bN6c
+- Cat Sullivan WDTK77UPRktCuJ7drc1G: +[] -[goods, act-gd]
+- skip (not in GHL): ben live shop test 1778703436199 QgLd7zxm4Lt0kB2FOhVv
+- TKJoiieSkIGthXrpMmxyY r5cRnJzfYPzf76K7J4C5: +[project:act-gd] -[project-goods]
+- General — First Nations Futures FMrW22L6dDI45KoPVYfV: +[] -[goods, act-gd]
+- Jeremy Bigg iqk86FbdDvkyZvYrVkmu: +[] -[goods]
+-   sStnPXCre5bEZJd0gAtV: +[] -[act-hv, harvest-website]
+- WgSVtpDKmFDuaycFON c1bLRnL2j6iBtUXDAHk8: +[project:act-gd] -[project-goods]
+- ojSZzFNkjVsHSBUc dERu9XMHEJ866KKclssi: +[project:act-gd] -[project-goods]
+- Forum for Social Innovation Sweden ejPECOzgSAUra4dwjaOe: +[project:act-el] -[world-tour, world-tour-partner]
+- skip (not in GHL): opp test ziHSx6b2JsLhUwHCL2vx
+- Laynhapuy Homelands Aboriginal Corporation jyq6kpllvY6A9h9Vnx9s: +[] -[goods, act-gd]
+- NGUKURR NT TLWasEc2ouxn6TVfPinX: +[] -[act-gd]
+- MILINGIMBI NT 65oqqmNvJ056JG0Mp3pF: +[] -[act-gd]
+- Irene Portelli qZAN8H2SBfxvmYCA92ud: +[] -[justicehub, act-jh, act-cn]
+- Andy Beecroft 3Zj23DFHnxadPi1t8bBW: +[] -[goods, act-gd]
+- Anne Gripper kiIhguZ0qiW3ZsRHn1dw: +[] -[act-el]
+- skip (not in GHL): codex smoke contact ZV8lTCsDLPvf5KYntGdg
+- ePrint Online tCqk03o9pwcnf4F2pYi0: +[] -[goods]
+- Katrina Atkinson PaUdUwQxD4WwwutS4EtE: +[source:website] -[harvest-website]
+- Romina Reyftmann a6a3faSs6GGfjAAJw0ts: +[] -[justicehub, act-jh, act-cn]
+- Simon Quilty UJPGFZbcjcdslJC8jN6T: +[] -[goods, act-gd]
+- skip (not in GHL): codex smoke story RBe9lp1MeWFrohKqwuHW
+- skip (not in GHL): ui test qb7jjP8eSRQfe7cuc13P
+- skip (not in GHL): benjamin knight PuuRHAkYciTlzUYl9a8R
+- skip (not in GHL): codex smoke quiz HTzoATvFnEgCboIydA4p
+- skip (not in GHL): ben contact test 2yYqSMpfx3dYKc0pEwvC
+- skip (not in GHL): ben shop dedicated test e7XHmkh6FvO9KIvDrMO8
+- Graham & Tricia Cranney dmG9flEsnolxHsOECpJP: +[] -[act-hv, harvest-website]
+- Margot Beach irQ1IlKgFnz3ICrPXFkP: +[] -[goods, act-gd, justicehub, act-jh]
+- skip (not in GHL): ghlleg test yBUfcYnqk9g600pkNgNs
+- Marian DtcESE3B0aYJudaa8rvX: +[] -[act-hv, harvest-website]
+- Lois White w5wcwzUiQs0Af03PnEEz: +[source:website] -[harvest-website]
+- jennifer kitching B8hHjzzwIuQNf9lOeGze: +[] -[act-gd]
+- Nicole Dyson kRGsqyjG9hLiv9YL290S: +[] -[goods, act-gd]
+- Shellee Strickland II1BhBXv0iuzv888Wb7x: +[] -[goods, act-gd]
+- Karen vRQlEKxQaNv5y1B2BrpC: +[source:website] -[harvest-website]
+- Jacqui phCOGWcFt6BXb4x9wzHm: +[] -[harvest-website]
+- skip (not in GHL): John Cranwell auto_0813922f
+- skip (not in GHL): codex smoke community S7JiZX2xqyPOR0wKZod3
+- skip (not in GHL): gd2  bP4jEBSns3be5KnonIro
+- Lucy Stronach yCiaPtyAOWYsEs9ITUGj: +[] -[goods, act-gd, justicehub, act-jh, act-cn]
+- skip (not in GHL): gd test udsTOYoCZHLxSgq2orPg
+- skip (not in GHL):   6xH4kk4pEYuYjjeLDCuO
+- Julia Payne BSkTz0lYEJo8MVQJGFtc: +[] -[goods, act-gd, justicehub, act-jh]
+- GUNBALANYA NT ykfMyzruEdbaGZdVtF0M: +[] -[act-gd]
+- FQxXzTKHksRsGcPRhDojjeM qojZDdJtW9tjp46Cdjc4: +[project:act-gd] -[project-goods]
+- Dr. Simon Quilty 7ZKeS2H6Fyi1xDUTvING: +[] -[goods, act-gd]
+- Hewitt Agriculture DkNEIk96wrFHnCCg6Dze: +[] -[goods, act-gd]
+- jennifer kitching sbIeXVLqNf2kPWdiPle2: +[] -[act-gd]
+- NGALINGKADJI WA ihitC4ElCdANnHYJ7jCT: +[] -[act-gd]
+- caleigh smith 4nho9iVfzjKvN2pUMbD6: +[] -[act-hv, harvest-website]
+- Kim Harland qwvBT8hK74DMvrUPkIbd: +[] -[act-gd]
+- XRfLEDSLHWocXFlbOefy YANONJtB1s99J07ibMDK: +[project:act-gd] -[project-goods]
+- skip (not in GHL): codex smoke quiz gfrGr7W2LSHEq7SVkIu1
+- skip (not in GHL): codex smoke quiz KDJKQnV7kNDsrYRhFI5A
+- Outback Stores Pty Ltd FF17yRvsj47SUBxwEE3m: +[] -[goods, act-gd]
+- oyrDEUhvyjPNDvxV xmxXCRJfjp1l2nfJVfVo: +[project:act-gd] -[project-goods]
+- fEUqTWWEWEvyzwZhKj AZbcwSIC7jaMDuBeiSKO: +[project:act-gd] -[project-goods]
+- Shannon Keed P6VhI44tqkgOfBcYJeBo: +[] -[goods, act-gd]
+- skip (not in GHL): oppfix test j41O5wquUkLtHFDuuZh0
+- deUycmrdpsoUZRXUdBRBfly wH335AZ8O1hTQY0gRgXr: +[project:act-gd] -[project-goods]
+- xXxydvXbrcPwkpOsOiVHt FOX593hjVwknVDvuLk7o: +[project:act-gd] -[project-goods]
+- Aputula Housing Aboriginal Corporation SczQgdmEOSHYnVcs1LII: +[] -[goods, act-gd, civicgraph]
+- Leigh Brezler L3ofpDUVB9hofkBlHdrb: +[] -[goods, act-gd]
+- Wallace Rockhole Community Store Aboriginal Corporation 8gOgn0mjerwpKYSZvkVH: +[] -[goods, act-gd, civicgraph]
+- skip (not in GHL): Kurt Gruber auto_bbff2cfb
+- Ogole Oscar Vse75dT3to1FwGmQeCAi: +[] -[empathy-ledger, act-el, world-tour]
+- skip (not in GHL): codex smoke contact LRtH00umewufwteLGZRb
+- IMB Bank Community Foundation PHHd3dypMwyJ7FnSfbZk: +[] -[goods, act-gd]
+- Noeletta Mckenzie Z1kOiaNiVGNOuscHED4V: +[] -[goods, act-gd]
+- vSXiGmLYdfvryNioYvUDbPrj hfwq5NNmXUdw4oN0bpwV: +[project:act-gd] -[project-goods]
+- MlkYtWIWsDFebEvw hizlzOUVPL5pIXyPw0D2: +[project:act-gd] -[project-goods]
+- MacDonnell Regional Council 3324LKdWG2h5GIHRzErK: +[] -[goods, act-gd]
+- skip (not in GHL): el2  7QYiQUX8ft3bbIkyFVYU
+- skip (not in GHL): codex smoke event F56mJ4lKxj2FPEp6KhZf
+- IKjVutqbRwDAPkTJ dU8c2XwMQtu0UuMs8Onv: +[project:act-gd] -[project-goods]
+- East Arnhem Regional Council 8XcxNwsPWp677fIKM15j: +[] -[goods, act-gd]
+- Pauline Cowham yJx3Z2aXsmU9UuqeKEN0: +[] -[harvest-website]
+- Trish tMKB5LBZL0ZOYM8THpeD: +[] -[act-hv, harvest-website]
+- skip (not in GHL): codex smoke contact yFXUSt2iv8sf3fAzbKdB
+- Jacki XCHFBCHNayLdkj5NQbOs: +[] -[act-hv, harvest-website]
+- FollowTest IBCn3GJoYY9yefSSRma9: +[source:website] -[harvest-website]
+- skip (not in GHL): codex smoke workshop K0fgTViQk5ku9uSpZhQL
+- Tiwi Islands Regional Council o8zK6VSs5ze5t2rLyARI: +[] -[goods, act-gd]
+- PRINCE OF WALES QLD x16W2jUDXOVCJhBq6omX: +[] -[act-gd]
+- skip (not in GHL): ben member welcome test jNEODSZKLyfTawTNUgoy
+-   spzexfNKtWDyktWC1bjb: +[] -[act-in, act-regenerative-studio]
+- Tiwi Land Council 6jEeR6lbputXOxp4ZZqf: +[] -[goods, act-gd]
+- VmyGaTMSFuBskWDxZDHqEuNH 00CsYRanDFMm9dyuudLY: +[project:act-gd] -[project-goods]
+- FollowTest zeHEzXBZhDtcI0mtMzGz: +[source:website] -[harvest-website]
+- Openfields Solutions 7mUrvIfkaHofCGDDwXbn: +[] -[goods]
+- William Frazer WZQ7eABQAKf59F3Vyaow: +[] -[goods, act-gd, justicehub, act-jh]
+- Developing East Arnhem Limited 9wnByK8VulQhE5aP8fKy: +[] -[goods, act-gd]
+- Sue McGary ApN5twHwwU4oxdF8OHrg: +[] -[act-hv, harvest-website]
+- Chanel i9byhhAIos56bfVkjk1d: +[] -[act-hv, harvest-website]
+- uaeInxuxMozIVxufmGmNVw iMXVDwAhWo1di7wpozUl: +[] -[project-goods]
+- Madelyn Hay ef3tYp3HPNOmUNeu05gc: +[] -[goods, act-gd]
+- Rachel Atkinson VfEBYrMWswkt7jfYjmd0: +[] -[goods, act-gd]
+- skip (not in GHL): codex smoke contact HmPys2I7Hd87LzT4tkzN
+- Fortescue Foundation qTilKBcNiD0ZM9QIIRN5: +[] -[goods, act-gd]
+- Sue moxon 5H9Yrr6FJTqcXJTf5bTh: +[] -[harvest-website]
+- skip (not in GHL): codex smoke community MZKHI83VboIIVdnQvFEu
+- Victoria Daly Regional Council QYegLPAkJmrgpBMJbA0d: +[] -[goods, act-gd]
+- Northern Australian Aboriginal Charitable Trust E7ivWmLQPzfCXEwv9piz: +[] -[goods, act-gd]
+- skip (not in GHL): Test User ciOC2llhYBqBLb4W2hQ6
+- skip (not in GHL): oppfix goods Yb1SWjvliIRX5lPEyx4E
+- Toby Gowland o0nVQWqVWIGTqXbg0zuG: +[] -[act-gd, justicehub, act-jh, act-cn]
+- YARDOOGARRA WA iwG4UwCX5uJjTiWVPbru: +[] -[act-gd]
+- Jay Boolkin d0zn6ZAai0BVwoB8PZnA: +[] -[goods, act-gd]
+- Kristy Bloomfield yk4uK8rgDNGA87EUqNbu: +[] -[act-gd, justicehub, act-jh]
+- Mjd Foundation Limited ncVQTxZmdfspexpSkR8z: +[] -[goods, act-gd]
+- Georgina Byron WKPGDlP6FyYg4hUTmQzd: +[] -[goods, act-gd]
+- Final Check uxhVE8431BnJgPUVmyGI: +[] -[empathy-ledger, act-el, world-tour]
+- Test Admin Storyteller st31vJ7A70AJSLZWdqWS: +[] -[act-el]
+- tzUBBSXDTHLOraKXNO 8BkMmfmUWrmSUTo7WLaE: +[] -[project-goods]
+- Speed Queen Winning Iwev1EKV7JM57OvQkA07: +[] -[goods]
+- Australian Communities Foundation h4A6ROeJZd7rCeQBdwvo: +[] -[goods, act-gd]
+- Lachie taylor zbZRgE9QzZjEaVMXvYbE: +[] -[harvest-website]
+- skip (not in GHL): opp two 4DaokW1UNKU3uSjDBVuL
+- uzTVrDwPNTXpceiEnLTdfN TBueqicmPnv5MTfw6fa9: +[] -[project-goods]
+- Tracey Newman pvZ53c6JlkL5sOPPFiTc: +[] -[act-gd, justicehub, act-jh]
+- Corey Tutt 5LqgNvZQ2TGXHyJguHkB: +[] -[act-gd]
+- jodie davis CabhyQwSVhdry4vNGIrt: +[] -[act-gd]
+- kbbzXlHazvflpHCKap gGYuKv43Vi2uUkLij3DU: +[] -[project-goods]
+- yVJnZGWshQIrdfBoCw M9Tk5QXVTWiwj0tmJrXU: +[] -[project-goods]
+- Sam Davies B7vVWvvVhrUhP3QL3Dnl: +[] -[goods, act-gd]
+- WULUNUNJUR WA btYibB3o4EWqNhab84Kk: +[] -[act-gd]
+- PEPPAN QLD ROaK9ASzpkvDXQfj8YdW: +[] -[act-gd]
+- Tara Castle 1FJKzuyt1IpEFdjbJhjC: +[] -[goods, act-gd]
+- skip (not in GHL): codex smoke event j4Q3yT6ZQiAvV82zUjyI
+- Barkly Regional Council 6icrD8uAZZ27ZOeFod7R: +[] -[goods, act-gd]
+- Willhemina Wahlin CjmW3zEgVVEYnrkw8tvq: +[] -[goods, act-gd]
+- Jay Boolkin HRLfast9ci2Yq6XPoajQ: +[] -[goods, act-gd]
+- Willhemina Wahlin WaTXyJ8P4oFUYeR5sXHT: +[] -[goods, act-gd]
+- Adam Robinson wHstWIW6zo1ifWnWsayd: +[] -[goods, act-gd, justicehub, act-jh]
+- Wash Test W8NvPYuxVs8ZA6rR2Fsi: +[] -[project-goods]
+- Toby Gowland l1v8gPj5zXhURMeS0mCv: +[] -[act-gd, justicehub, act-jh, act-cn]
+- Sam Davies 7WXGBE5zD73ipAJfb5qE: +[] -[goods, act-gd]
+- Brisbane Steel USa6MIQloDgGc6MR8b8o: +[] -[goods]
+- skip (not in GHL): ben contact final test 59lCqC8pRDkTPwTVqcAT
+- BONDINI RESERVE WA HA9CmKAVCNWyj6PgUfz5: +[] -[act-gd]
+- NILLYGAN WA vODv4WEcboVdvA5wLHnp: +[] -[act-gd]
+- Toby Gowland mTsZ14zvtIs3XaaTHHhX: +[] -[act-gd, justicehub, act-jh, act-cn]
+- Roper Gulf Regional Council KIsaPph191gG6pDajAxk: +[] -[goods, act-gd]
+- Aboriginal Medical Services Alliance NT (AMSANT) MxDCQuWzhl1l9L0fujj6: +[] -[goods, act-gd]
+- jennifer kitching 4tZeGvHPsy6bw0UDubdx: +[] -[act-gd]
+- Pene Curtis eyr6Cv6B9cf2VFUzJBQs: +[] -[act-gd, goods]
+- The Arnhem Land Progress Aboriginal Corporation (ALPA) 64FUSK218liWpGTi9Z2u: +[] -[goods, act-gd]
+- Sam Davies Vk0et07jw3qccBZsqBF8: +[] -[goods, act-gd]
+- Benjamin Knight 7lzNuk9ykZbioseKyuVx: +[source:website] -[harvest-website]
+- Kate McKenzie btnzKJrWhUXrNWrSgcFO: +[] -[act-gd]
+- MANINGRIDA NT M88yKS6uU8J226otlOUg: +[] -[act-gd]
+- General — Impact Frontiers z54hf3IrFhNzQeMW6Gzv: +[] -[goods, act-gd]
+- skip (not in GHL): codex smoke workshop suggestion NhztIjirXqvTbZTs01br
+- FueyJCXaBUvnatyct M4aHnplys0Ab5Bn5c8MC: +[] -[project-goods]
+- Tangentyere Council Aboriginal Corporation BjPQ4FwKI6yXf9DqHFEG: +[] -[goods, act-gd]
+- Nicole Evans CkCkFydybbZ9TattykDJ: +[] -[act-gd]
+-   FRJTCrmKSIREn0TPlEdk: +[] -[act-gd]
+- skip (not in GHL): test runner khk5s2EIrtT9W5jP6clm
+- wTAdFcUQyFaBVnTtRZkPds vUF0sWNma75NwkMMr0K4: +[] -[project-goods]
+- Kay Ridge XnY9pPCwlRRmuR9VFgWZ: +[] -[harvest-website]
+- Kate kowald QHoFMbtABosoL0CN4PKt: +[] -[harvest-website]
+- Cassandra Edwards rEHR37T2BUe8FCr48Xdf: +[] -[act-hv, harvest-website]
+- Maree HABAwRKk7dKtPNDRsn3S: +[] -[act-hv, harvest-website]
+- Smartwood Timber ul5Hi4PBGkgtOGeGJNHF: +[] -[goods]
+- Peppimenarti Store Indigenous Corporation L0N5scaDjkWALI88SFGR: +[] -[goods, act-gd, civicgraph]
+- BADU COMMUNITY QLD K8TnlbUH6o1AqUQxECAV: +[] -[act-gd]
+- LAJAMANU NT Lr4knUOiiM6qKSbeiD1o: +[] -[act-gd]
+- Stratco Steel WGgGwpLY3wUVR9SnlPjR: +[] -[goods]
+-   9Pq2XZY2QXryskuHlFXS: +[] -[act-gd]
+- Leon Yeatman 77fd9bIzmjxaVvar4FsV: +[] -[act-gd]
+- Central Australian Aboriginal Congress bjixgh1blualVbNIKrPG: +[] -[goods, act-gd]
+- greg marlow JGpJ2UCTsJlHT4GQDNGs: +[] -[act-gd, goods]
+- Mud Jeans 8Q8a1eyak8iUfnTI3q8l: +[project:act-el] -[world-tour, world-tour-partner]
+- Matthew Carman Hfckaos5BIXAiDWhkD6v: +[] -[goods, act-gd]
+- Daguragu Community Store Aboriginal Corporation ev3DobfSdh8uqoW4NjMP: +[] -[goods, act-gd, civicgraph]
+- Marty Taylor IPzrkrahNKcSWL03d8Jq: +[] -[goods, act-gd]
+- Imanpa General Store Anangu Aboriginal Corporation cwjSZmZrwbpeoTi98qag: +[] -[goods, act-gd, civicgraph]
+- Sarah Johnson akl6jFdj2Ff5P0Dfam04: +[] -[act-el]
+- Arcadia Love iDZdzT3aAUp1p6tlrwWL: +[] -[harvest-website]
+- Carla Furnishers ViU0wq59SzgfeJnAFuVS: +[] -[goods]
+- Jo Saies e7bQhKOg4f52OfcA8nht: +[] -[act-el]
+- skip (not in GHL): ben shop ui test qpWfYkmn45j16lS2y6hd
+- KmPUgwfGwTxmTlRmpSiMjNmp ejNcw4Ba1tAKeKy7jb2N: +[] -[project-goods]
+- Metal Manufacturers DBaQByccQaUlcXTn4Voa: +[] -[goods]
+- Torres Strait Island Regional Council vqxczq4w4riYhca5Fr7D: +[] -[goods, act-gd]
+- Canteen Creek Store Charitable Trust BGyanKf035L4KIIshJnF: +[] -[goods, act-gd]
+- Anita Hopkins X9kE3G9rqvR51gUo0Bsx: +[] -[goods, act-gd]
+- george soady f41gjgDZkXQgd0IOnQX7: +[] -[harvest-website]
+- Sarah Bartak QdAmpE07Z361Rrx6ilS2: +[] -[goods, act-gd]
+- Suzanna QBCb0vlHyGlAv3DuG37c: +[] -[act-hv, harvest-website]
+- Julia Parker o6LuFM2NYYIgg7M5h2Zj: +[] -[harvest-website]
+- HqCGSyKsWTixCpflQZMz gZ3GXY1hv6iIBKLvNIBN: +[] -[project-goods]
+- Steelmart Steel Y93YnRnGZW5u47VcG6Fz: +[] -[goods]
+- Sally Knox yAlAcbmzacZWICuoJvJB: +[] -[goods, act-gd]
+- John Chambers x957DZg5cNXfzuw6keTQ: +[] -[goods, act-gd]
+- The Trustee For Yeperenye Charitable Trust xIStDdvnPsmfKp2EoAIW: +[] -[goods, act-gd]
+- Community Resources Limited fIiriDYS0e0HwR1M7D0F: +[] -[goods, act-gd]
+- Helen baker 1kOwJyUiuSPJVds9Crm2: +[] -[harvest-website]
+- SANTA TERESA NT ZglWAiFRwvjGj8Tcm45Q: +[] -[act-gd]
+- Joseph Kirmos b31aU8WclwCosFV8kOtx: +[] -[goods]
+- Rebecca Kennedy VJbXHbZaJJpjmYGhRMKq: +[] -[goods, act-gd]
+- Ntaria School Council Inc CFYndPCzvsnsgnXo9vNE: +[] -[goods, act-gd]
+- Sue z4T0HjqI9Lkattq0omX2: +[] -[act-hv, harvest-website]
+- Endless Parks DgvlWHKIX8MwpVUMcRM9: +[] -[goods]
+- Magnus Murray-Douglass iUgWpZM2c6E9RsYfwTPF: +[] -[goods]
+- Lucy Stronach bkZQ6vDNekvTtUVV1TpI: +[] -[goods, act-gd]
+- Monita Roughsedge HOLIHjbrs7sFvI2c6Tdk: +[] -[harvest-website]
+- Matthew Ryan sLrNSpHK0j64lsFLaiV0: +[] -[goods, civicgraph]
+- Simone Grimmond FVfAK0x3SjtTkBmPBTxI: +[] -[goods, act-gd]
+- Samuel Hafer Fm9G902uVPH8PLBFiHip: +[] -[goods]
+- Cat Vecchio wuS4YvyYiPeneECaGgtV: +[] -[goods, act-gd]
+- tracey newman D05Oa0eO8arILsSNjiPQ: +[] -[act-gd, justicehub, act-jh]
+- Bionic Self Storage RvXTSY2CxJcNR1BoEOKV: +[] -[goods]
+- Social Enterprise Development Initiative XKfO7huCETKk4t81mNqo: +[] -[goods, act-gd]
+- Sarah Stirling KD0vxJOe5CMV8TkbCAty: +[] -[harvest-website]
+- REAL Innovation Fund MymJIeUEL8btnnIT7bJB: +[] -[goods, act-gd]
+- Carbatec Tooling USmz3jRRvggEANHT30TX: +[] -[goods]
+- Kate HSJ7dbhtMrSLYU67MZ5q: +[] -[act-hv, harvest-website]
+- Uniting Church Australia Frontier Services KOtvGX8lGsN6ZNG8cPhb: +[] -[goods, act-gd]
+- skip (not in GHL): ben contact workflow test FI2BVUYDX25xYY1kItci
+- 1300 Washer VkNhirANqP1njpyd60rn: +[] -[goods]
+- skip (not in GHL): ben workflow test 1778705147335 7MNtnnpJvlgAWeM7oHOy
+- BHP Foundation zffdKRqhKOl2xBLEpSwm: +[] -[goods, act-gd]
+-   AZZdBUEvnabo5Nzv1Pzz: +[] -[act-hv, harvest-website]
+- PUTAPUTA SA 1PQwJgL8vG0X50WLNcFt: +[] -[act-gd]
+- RAMINGINING NT 2XxGmIJ5sKBHPybj7BTk: +[] -[act-gd]
+- Hinterland Aviation g3mCmF64426by14k24uk: +[] -[goods]
+- Anindilyakwa Land Council sq8AeMqnXJFhReHCxggr: +[] -[goods, act-gd]
+- R M Tanner eFTaEY5jTJKCWhJBgOGD: +[] -[goods]
+- BK uF3vH2GNse1MZN8nYzG2: +[] -[act-gd]
+- Telford Smith Engineering 3dhuv8mGGJ9kDtXAnko8: +[] -[goods]
+- skip (not in GHL): mdacbgvwmvzfngaht  UZ8Y5cguVMCuBAErgt8y
+- Country Connect Foundation Limited BkJQuNuBASZ8IjOUahd2: +[] -[goods, act-gd]
+- Tara Castle GR0z6Lvl2N7gdUEqzMLk: +[] -[goods, act-gd]
+- Robin Clayfiekd 4BUugukQNgMT3O4EdWnv: +[] -[act-hv, harvest-website]
+- Vanessa Ordonez rirjlbnB0qUPn8xujAAD: +[] -[goods]
+- William Frazer 86IotCHStn0fEHyhFtoF: +[] -[goods, act-gd]
+- General — Paul Ramsay Foundation qvh2D31s2PpIjDKhmg9E: +[] -[goods, act-gd, justicehub, act-jh]
+- Michelle Moore T0nWbywCA6S8O5BAaLD0: +[] -[harvest-website]
+- WELCOME STATION QLD uSbvhCQTmSaTsSjENyLR: +[] -[act-gd]
+- skip (not in GHL): test csa 8ilyMrr1lFb30eGhz6IF
+- GALIWINKU NT jJBHzRusRmhDnpWbE2ew: +[] -[act-gd]
+- QBE Foundation vsxUqDjzEYUkLVSNZqse: +[] -[goods, act-gd]
+- WILUNA COMMUNITY WA RLKRnukMDUqE1HTlkGZ0: +[] -[act-gd]
+- skip (not in GHL): Test  LDFFGoFDgc2akoi1G73z
+- Kaltukatjara Community Council (Aboriginal Corporation) wrRHeRChqJEXAcOp5HAw: +[] -[goods, act-gd, civicgraph]
+- Shannon Yeardley RO52WGl33UZKqZq8aPVc: +[] -[harvest-website]
+- Aurizon Community i8g38e4Oea01LoQAfXSW: +[] -[goods, act-gd]
+- Alberto Furlan PoPY4biO1VsofPFGdpv5: +[] -[goods, act-gd]
+- skip (not in GHL): Test  pbS0O13BNLr4TBwzUcvL
+- Kaltukatjara Nguratjaku Council (Aboriginal Corporation) 9DIjNWgD0WXnUhB2DAUm: +[] -[goods, act-gd, civicgraph]
+- Michelle Luff JQS5RXhUBAxaiznXtG7d: +[] -[goods, act-gd]
+- PUNTAWARI WA rwaXgwC8KYbNY1rNqMCQ: +[] -[act-gd]
+- Ngukurr Progress Aboriginal Corporation RCmAdzqPUceLaiQwkliv: +[] -[goods, act-gd, civicgraph]
+- Centre Canvas wXv7cRKlIkWUYYE3J0B6: +[] -[goods, act-gd]
+- Amundurrngu Mt Liebig Community Store (Aboriginal Corporation) 5SUZbGyG14Q4fSLtGfmK: +[] -[goods, act-gd, civicgraph]
+- Sarah J. SZb7dww3KLylgE9uZLc2: +[] -[act-el]
+- Matt Allen NVHZfqOTviJyw6Tw1old: +[] -[goods, act-gd]
+- Sefa IINOCdlanw4e1ah01Wun: +[] -[goods, act-gd]
+- KALKARINDJI NT 61EYs8DxPCQfSHYHNaOA: +[] -[act-gd]
+- Rio Tinto Foundation uo6eSEenYR3yTeFf93KF: +[] -[goods, act-gd]
+- Maningrida Progress Association Inc 5q4oAradjggObV2wtL5r: +[] -[goods, act-gd, civicgraph]
+- Eula Rohan K4ejYaIJ3ILO9yQTFBhm: +[] -[goods, act-gd]
+- Garma Festival — Beds Showcase xAzy2ZbeEM8eZIepIesD: +[] -[goods, act-gd]
+-   8bDzJgVE546C9Q09itdE: +[] -[act-gd]
+- Mt Liebig Community Store Aboriginal Corporation HAN2VLPXisHJErXrXkhy: +[] -[goods, act-gd, civicgraph]
+- Narelle Anderson TTYUVYxBumpscHz6m9Fz: +[] -[goods, act-gd]
+- Cat Harding ZEE0vVoX5MXfU3T13Euz: +[] -[harvest-website]
+- ORINERS QLD ANsVZBAfWzSWFeoirQf6: +[] -[act-gd]
+- Robert Tickner KlWmizeBMsCpZ9VYc02m: +[] -[act-gd]
+- Nicholas Marchesi rDUI85k0HWkfxvTyiNXK: +[] -[harvest-website]
+- Bridgit McMullen Q4fquuYzVh0z6NXLqrwU: +[] -[goods, act-gd]
+- Milingimbi and Outstations Progress Resources Aboriginal Corporation lj1HY0GS0vaHQYvXtAiS: +[] -[goods, act-gd, civicgraph]
+- Belyuen Community Government Council Fn64uikNJmXNWrokNL0H: +[] -[goods, act-gd, civicgraph]
+- Nturiya Community Store Aboriginal Corporation 1dUSJ8bwFl32u1UrZ0cu: +[] -[goods, act-gd, civicgraph]
+- Kim Harland YHR05hsHaxDiHO2gxo8f: +[] -[act-gd, goods]
+- HERMANNSBURG NT JySmgDeWWTbBhyhso7pg: +[] -[act-gd]
+- Nici Long Qz3p0EdjL4zAbQClqbvx: +[] -[goods, act-gd]
+- Central Land Council T11kOpYh703ud8IUkgOZ: +[] -[goods, act-gd]
+- Brandon Gien qd0lpqQ9dZpyDDERIMhE: +[] -[goods, act-gd]
+- Ketakii Jewson Brown KNXsmVEM8RvPGk2YBe68: +[] -[harvest-website]
+- Tracey Newman 5Ef5iz76fJvyK1b5hI1Q: +[] -[act-gd, justicehub, act-jh]
+- rebecca ward 6YbKCU69DfPAQ6zhbfRy: +[] -[harvest-website]
+- Eloise Hall OKXlDD1Rjz5pHU4l1acb: +[] -[goods, act-gd, harvest-website]
+- Ampilatwatja Health Centre Aboriginal Corporation Q6JZYRh0i6sJxbaDk5WA: +[] -[goods, act-gd]
+- Dr. Simon Quilty 601lLFL2WpQFwlcLmPBx: +[] -[goods, act-gd]
+- alexandra lagelee kean M6SIDwBoUo4NxKaMXF6G: +[] -[goods, act-gd]
+- Angela Lynch mmLzQtTJEMJE0KAiDTTO: +[] -[goods, act-gd]
+- Ampilatwatja Health Centre Aboriginal Corporation YSgKCLjrz8mOzXianscn: +[] -[goods, act-gd, civicgraph]
+- Naomi Lai 8VEIJFB1do9XybfLzYA3: +[] -[justicehub, act-jh]
+- Daniel Pittman Y0nkSQSpqJwpN3Bm4yYA: +[] -[goods, act-gd]
+- West Daly Regional Council hK0q5ejFbFps81hnlrzw: +[] -[goods, act-gd]
+- GHL Test Goods 3rFM5XO5UJJ2L67b9o52: +[] -[project-goods]
+- YALATA SA tf0hHvlpP2KBGJAdRuwo: +[] -[act-gd]
+- jodie davis 3DGTgCZt6R25rAYoODaW: +[] -[act-gd]
+- Bambi Hodgkins tzA610VVaZhZMw8usZSF: +[] -[act-hv, harvest-website]
+- ALIVE Uv47RXPyZub1vnmDF56K: +[] -[goods, act-gd]
+- Jeff Bonnick 38zTrONPDE7cLUlj0EQI: +[] -[act-hv, harvest-website]
+- Mandrillapp (Organization) N6I8ydJkGeVC7cEBlKeX: +[] -[goods, act-gd]
+- Anita Pahor KZ7RJfJUV7Pd720EYBVv: +[] -[justicehub, act-jh, act-cn]
+- Northern Peninsula Area Regional Council nXkAD87rJeDtLvreQCfF: +[] -[goods, act-gd]
+- Peppimenarti Health Services Aboriginal Corporation Ud33HAOZRSOg5kfV4FTy: +[] -[goods, act-gd, civicgraph]
+- Sam Davies LfwjeSOvc2Mq3u4f2qm4: +[] -[goods, act-gd]
+- max broadley XzYIATpLL8iVflrf1Hll: +[] -[goods, act-gd]
+- Erin Riddell iRmsOTOvF1DgmmJ6QpzT: +[] -[goods, act-gd]
+- YAWURU WA 8AFOcUy9esYG9EnkPk1U: +[] -[act-gd]
+- Nova Peris Foundation yvU4ZBhH8zW1IGG8wl0A: +[] -[goods, act-gd]
+- Lajamanu Progress Aboriginal Corporation TWi4OBECVJbse2HLtYQt: +[] -[goods, act-gd, civicgraph]
+- LOONGABID WA KOG1ayAAftRYkBe1nZxg: +[] -[act-gd]
+- Central Desert Regional Council 1VveHaFXey77ZSZ7Y1pO: +[] -[goods, act-gd]
+- KUPUNGARRI WA URDekfzUYrFAk8WK3Dkz: +[] -[act-gd]
+- WURRUMIYANGA NT 88OuJDK6lW7nO3DxdNNj: +[] -[act-gd]
+- Lucy McGarry 3GxNySmg9LkFFkJ1MLD5: +[] -[goods, act-gd]
+-   NcaSKYceqdqy1CkAb6gN: +[] -[act-gd]
+- KKVAWnbZzxrsrkQBpgLvr egO4mKoiE3UQOdVs3Fra: +[] -[project-goods]
+- Tracey Newman hOn1vWuI9tNNhW0Mn1jl: +[] -[act-gd, justicehub, act-jh]
+- Corey Tutt YveuSGaoTk1fk105ExPO: +[] -[act-gd]
+- Manyallaluk Store Aboriginal Corporation 3Ot8tdFR2Xlb8KkOgNWO: +[] -[goods, act-gd, civicgraph]
+- KINTORE NT kTimXhFlc71LShGqSwGI: +[] -[act-gd]
+- Rachel Atkinson oVIfdPjlceNMZJB20RsO: +[] -[goods, act-gd]
+- Barunga Community Store Aboriginal Corporation NDkOyddNl1Pajj1Fr4RO: +[] -[goods, act-gd, civicgraph]
+- Fiona Scicluna 3v2RCOhzU5fCgsxEDgff: +[] -[goods, act-gd]
+- Corey Tutt 7i2onyZFqX12BKlx5uLY: +[] -[act-gd]
+- skip (not in GHL): test runner 2 hCRawvTy4LqaVoFcmnle
+- PIRLANGIMPI NT dkzYZ4KLlBiSeU0sHkmB: +[] -[act-gd]
+- MINGALALKA WA v61ji16m7Y00y3EQiRNg: +[] -[act-gd]
+- Lydia Garrett fHO8Pz6D4q7ZKCXDYBMP: +[] -[goods, act-gd]
+- MUNGET WA MQg66x2sux7DpVe4imB0: +[] -[act-gd]
+- Anindilyakwa Housing Aboriginal Corporation rehcTEdarUUNx91r06ap: +[] -[goods, act-gd]
+- millie shearer RMUL5qNtnclYhvsmvjBP: +[] -[act-gd]
+- YOUNGALEENA WA olkCA3P2HYmQyykYz6im: +[] -[act-gd]
+- Areyonga Store Aboriginal Corporation dd5rHFESa8DCi5uSJyr6: +[] -[goods, act-gd, civicgraph]
+- BILLARD WA YfbLAEIIqZpCXAdF16FF: +[] -[act-gd]
+- Katherine West Health Board Aboriginal Corporation yduVJ4zdFaVn7fKMbPxf: +[] -[goods, act-gd]
+- carollyn kavanagh dgQZ3xUzj3E6aZwbGrvG: +[] -[act-gd]
+- Lara W9TXludPR2Onv29qeZTW: +[] -[act-hv, harvest-website]
+- Julia Rose van Haren BbAEDIFYxB5Gv02QmTCo: +[] -[act-hv, harvest-website]
+- Laramba Community Store Aboriginal Corporation M1nD1Eg2vQzS5bS7LwtR: +[] -[goods, act-gd, civicgraph]
+- YARILENA SA OhRuLuoVJC9H0w9xWMp9: +[] -[act-gd]
+- BLUE MOUNTAIN QLD HWcscoGWFSUHymYEm4Hx: +[] -[act-gd]
+- Kim Harland KKLU6JUmRSSvACtvyPyT: +[] -[act-gd]
+- Sheryl Batchelor AjznwiITMKOFoHW0H3Mb: +[] -[act-gd]
+- nrZlQeYOvWlYDeNV StEignH29EJfadvAaEvs: +[project:act-gd] -[project-goods]
+- Natalie conner COoFf8hmhAr15BxlBIZi: +[] -[act-hv, harvest-website]
+- Preye Kari blVypz4W1HHdPrCiMAAN: +[] -[act-gd]
+- MOOJEEBA QLD MkQfXMl2MdE56o3G8qc4: +[] -[act-gd]
+- xWbKLALWSzjSSPRelrykawc PoULIorUVo7iRlB6Su8w: +[project:act-gd] -[project-goods]
+- Laura McConnell Conti pWQHsiGXidopwSn0iAUb: +[] -[project-goods]
+- Heather xjRde6zNGFfRlkDICTwy: +[] -[act-hv, harvest-website]
+- qmsNJFvzunKazVkOouAE 9iKuhg5ZeUjxkwEvA9jO: +[project:act-gd] -[project-goods]
+- Dr. Simon Quilty 4xqT9yHGyDBJKaUPf2lJ: +[] -[goods, act-gd]
+- Stuart Nielsen 7pWxjvWnfa94nqNs9zZ1: +[] -[goods, act-gd]
+- Catherine 7P8CDMDeyGm7myGeo8c6: +[] -[act-hv, harvest-website]
+- Benjamin Knight 0PrtdUUsyqYv5QklTNte: +[] -[act-gd]
+- BAMAGA QLD V5UX8tUsn1IStcYo1WSV: +[] -[act-gd]
+- Katie Norman LrnFSa8OwzINnTHCmIGj: +[] -[goods, act-gd]
+- Numbulwar Homelands Council Association Inc mem5soSoIaoBRtZD85JD: +[] -[goods, act-gd, civicgraph]
+- LxAMmHZITMzIUfjzsQXi lS6odMdzaEcGJ4eVIEQT: +[project:act-gd] -[project-goods]
+- Bek ORCR9yml6dCRlrD87rMm: +[project:act-hv] -[harvest-website]
+- Robyn Ac7Vc7EZTDzpBhoDPYe7: +[] -[act-hv, harvest-website]
+- Melissa douglas 2pnFY2n6Kb3Ne1whX5GJ: +[] -[harvest-website]
+- Tash lHtrmPlULOfAA9e4dBDO: +[] -[harvest-website]
+- Bernadette bitr3uj61sXeJJ6PJy2b: +[] -[harvest-website]
+- camille.dobson b0ma8b1Gj8MnvCk7zHjS: +[] -[goods, act-gd]
+- Tilly Millican 5GgVmwi4oblcxdBT9Psx: +[source:website] -[harvest-website]
+- millie shearer 6dVAQFDuKNd4QHqPEO9s: +[] -[act-gd]
+- skip (not in GHL): Test LocalsDay 0a3PS0zjhgWVkBGTw1Qs
+- Titjikala Community Store Aboriginal Corporation QYFJPrbiYcK0R7wPzCxZ: +[] -[goods, act-gd, civicgraph]
+- Wash Test CWYLiCR10hR8wa3NTmLw: +[] -[project-goods]
+- jodie davis 6itSyoLzsKS3R35a8mfs: +[] -[act-gd]
+- Kate Nottingham AxG5DhDArLY5gLUbhdRh: +[] -[harvest-website]
+- Amanda Ninnis tHopnqzWXFU72FJjUbn3: +[] -[act-gd]
+- Atitjere Homelands Store Aboriginal Corporation vQYVHLQZlKDZB5b5Yitk: +[] -[goods, act-gd, civicgraph]
+-   3TqWxAoUQx4fLbzvO2sW: +[] -[act-hv, harvest-website]
+- Accounts Rotary Eclub Outback Australia, Division 9560 huXguIGvyFHkixustqey: +[] -[goods, act-gd]
+- Bunnings Trade JFLhPLmeKVq7ECTCf4DO: +[] -[goods, act-gd]
+- Sam QPuFa9vmpyxlJqRAI9PW: +[] -[harvest-website]
+- Accounts Homeland School Company hv7tFXO8UGDq3dMc98SG: +[] -[goods, act-gd]
+- Judith Meiklejohn Q4h5Aa8lRj8YDOZ0E8s2: +[] -[goods, act-gd]
+- Katherine Hayes AIrpQMtxPZJvHG45duw9: +[] -[act-cn]
+- Accounts Palm Island Community Company Limited (PICC) f8sbjgfZo1oD0Je0yArk: +[] -[goods, act-gd]
+- Julie Shelton ERXI5N36f2bSDj1OIrTd: +[] -[harvest-website]
+- Kieran Satour RdpfBoKoMV9oe66IT5i1: +[] -[goods, act-gd]
+- Zac 2JIwDNI9Iag2EOgZEK6w: +[] -[act-hv, harvest-website]
+- Adam Robinson IgobH3bxpJMAMNxhUCVS: +[] -[goods, act-gd, justicehub, act-jh]
+- Cathy wdcusgyz6jnrWYjbfnxB: +[] -[act-hv, harvest-website]
+- Prebhjot Kaur 4nTVTPHZJcIaXPnZNpLL: +[] -[goods, act-gd, justicehub, act-jh]
+-   x4lPKbiNdB5wC45pEuBP: +[] -[act-gd]
+- GNYLMARUNG WA PNACRhUZUoN9a6ioad1s: +[] -[act-gd]
+- Kristy Bloomfield gCok46nfL0BqYeYEeexd: +[] -[act-gd, justicehub, act-jh]
+- Kim zwRfyGHWuqKMyMJ0FmOA: +[] -[act-hv, harvest-website]
+- Steph Pearson j7hi3rlHwmIuDKNSIdTs: +[] -[goods, act-gd]
+- Jessica Wilson tiZ5Qu8NcbAPaXguI6bq: +[] -[goods, act-gd, justicehub, act-jh]
+- Kristy Bloomfield 0kEs9BJmkmi7ZUc5haEX: +[] -[act-gd, justicehub, act-jh]
+- Jo KjL71yzbIVVwVQqYmmEP: +[] -[act-hv, harvest-website]
+- millie shearer 7K273hja6a0nEfYMsea1: +[] -[act-gd]
+- Richard Graveur Qj33ZHADNKUaeC2DoPBB: +[] -[harvest-website]
+- Willhemina Wahlin 0w3yMTXm12bl74aKGce0: +[] -[goods, act-gd]
+- Adam Robinson Qtl5PgkHPMnNS1mjnGRO: +[] -[goods, act-gd, justicehub, act-jh]
+- Papunya Community Store Aboriginal Corporation agnn4YZ9Iwixiwco0f83: +[] -[goods, act-gd, civicgraph]
+- Helene Keenan 3v3NoY78PK4ddAbkVB13: +[] -[act-gd]
+- Bernice Hookey pPPOnORlirf9hf9Zih2C: +[] -[act-gd]
+- Baressa Frazer qIuqGLFoVusIOhYSL0Hf: +[] -[justicehub, act-jh, act-cn]
+- Anika Baset ka5rr93cXeabCXKOmkXH: +[] -[goods, act-gd]
+- Stuart Kiernan xlWCMFBV6kNPHmbyGNaX: +[] -[act-gd]
+- Sarah Heys 0Un5Pt5kJKP7IzBfCnon: +[] -[act-gd]
+- Rhian Miller xIjgrNst0t7q3xDPqOE4: +[] -[justicehub, act-jh, act-cn]
+- Sally Davison ybYHLyaTJr1QEwABcviQ: +[] -[act-gd]
+- YUENDUMU NT LMYmZLXXEHD435VcKuyi: +[] -[act-gd]
+- Sarah cMPSwQAB9xjh4nrj4j1S: +[] -[act-hv, harvest-website]
+- Tara Castle qmFrCOsGrXQbLsIgjAzX: +[] -[goods, act-gd]
+- Peter Bent MCNT6MZyAW4S0Fg0wLol: +[] -[goods, act-gd]
+- Phillip Allan avh1foMDU4rpglfjDxp3: +[] -[goods, act-gd]
+- Sya Wiersma UmiWJv19B25HaHW7AJMX: +[] -[harvest-website]
+- Accounts Mala’la Health Service Aboriginal Corporation Z6POQ8e2wtBKSWDuPLEx: +[] -[goods, act-gd]
+- todd sidery tiC3ISBpkDdmS54agG6P: +[] -[goods, act-gd]
+- Rebecca Keeley LRCna3ChkOadvQlDbYT7: +[] -[act-gd]
+- Misha 3MvfbilA5TYBuQkWuNB2: +[] -[harvest-website]
+- Alice Motion 6gXuoINuNymNoysZNECI: +[] -[goods, act-gd]
+- Serge r5KtOLAtXOtpIhw5Gd6x: +[] -[harvest-website]
+- bruce redman 47rRZh5KUga3AvHgxorp: +[] -[act-gd]
+- GHL Verify 4NQapTKKBjzZQGw1GVzd: +[] -[act-gd]
+- TILUN TILUN SA yeMPioJn5VX8Amps2tVA: +[] -[act-gd]
+- Hannelle Adams ROhAhrBGHrhn27zmSJo0: +[] -[harvest-website]
+- Fiona Maxwell Fhk0FK9FcN563lUcSKhT: +[] -[goods, act-gd]
+- narelle gleeson aZICs18JhTlYcCja2awk: +[] -[goods, act-gd]
+- Jill Fowles DG3kw78Tk3OaLIBUywhG: +[] -[harvest-website]
+- Samgiita Hope LRl1M1gtx9VovPGqrbOH: +[] -[act-gd]
+- Robin Stabler QOVdYQZRBNxPAMl41lHH: +[] -[act-hv, harvest-website]
+- Natalie sle0qbpuerBwjqpuksFL: +[] -[harvest-website]
+- Rowena Cann MLDUH7oecmisGwYJ7y8Q: +[] -[goods, act-gd]
+- Bob Philipson dXldWEW44GEHrV9Vlvrl: +[] -[act-gd]
+- DJOODOOD WA mGiSocLUxM0LlBomEJKO: +[] -[act-gd]
+- Fran D0vyUhiv1V9v8GxvB4cN: +[] -[harvest-website]
+- Sally Grimsley-Ballard nZDW2c7bgNmKT62iOMP4: +[] -[goods, act-gd]
+- Jacqui Storey V8eEOIJNmfX8cE35T25n: +[] -[act-gd]
+- Salli Cohen hpDwD6o5SLVxJ0v2jzgs: +[] -[act-gd]
+- BUTTAH WINDEE WA emFxTiYXcS1rEXdbhX4V: +[] -[act-gd]
+- Joel Bird QP8M4iLfBOfs66V81jiX: +[] -[goods, act-gd]
+- BMDCF Applications qvnemoBQU7FjnSdfEwPP: +[] -[goods, act-gd]
+- Peter Murchland tWsksNsEEYwmfVSwE0X0: +[] -[act-gd]
+- Sid Vashist Ram4ipw8zoT3TguVL6ti: +[] -[act-gd]
+- PAGO WA n8I1sKPauHc2otlC8rZb: +[] -[act-gd]
+- Sonia Randhawa VbPl2qLoyWZlYL2HmOtY: +[] -[justicehub, act-jh, act-cn]
+- Rhianna King vkkg0l2ONZ8RYn279Vji: +[] -[goods, act-gd]
+- Simone Phillips XUpKxUszMwgcU9tY3lOx: +[] -[harvest-website]
+- Talia Liddle zMrf3zHyyzmHxHksnbUR: +[] -[goods, act-gd]
+- Dayle B8r55AyPDU0BgP4bD239: +[] -[harvest-website]
+- Alice Benchoam yIYUvOBZMemF5tynz5wL: +[] -[goods, act-gd]
+- NGARANTJADU WA 72pMbIAD0lxcrJsVuIvm: +[] -[act-gd]
+- Susyn Young sanAvi38DOOdCFdBlNqO: +[] -[harvest-website]
+- Shaun Fisher fnCak04opqtSP8QPfD2G: +[] -[goods, act-gd]
+- StreetSmart K9tX5VZ7kLi4bencvHSm: +[] -[goods, act-gd, justicehub, act-jh]
+- Georgia Heath 3SnvHnOJAndvgughP0nD: +[] -[act-gd]
+- Tanya Pouwhare VVUe2UTb50gMcs0zAgdF: +[] -[act-gd]
+- Keesha Morikei Booth NDuoRUjtiwxsS8QSLlRC: +[] -[act-gd]
+- DINAH LINE SA NfBBaeWqSgN3DilQF4Zb: +[] -[act-gd]
+- Misty Carey Ie5x0lOTCNDRt5QINRzL: +[] -[act-gd]
+- AMP Foundation Tomorrow Makers wJXLZamvwqPSXxjtd6CC: +[] -[goods, act-gd]
+- Genevieve 1IZ48DYsXKo4xfMTRxnT: +[] -[act-hv, harvest-website]
+- Zac Rogers tpK24lCfvnFyBCSGbt2T: +[] -[act-hv, harvest-website]
+- Conan xKBeXMU6f9BiDGcrrMlz: +[] -[act-hv, harvest-website]
+- General — Kowa Collaboration hFSl19Su4LbrBuJ3J6Tz: +[] -[goods, act-gd]
+- Hannah March vcpRdRWPqykY2oHXrJ9I: +[] -[justicehub, act-jh, act-cn]
+- Emily Hilder xJy2gUo1uSEdNFjDPMbB: +[] -[act-gd]
+- Seana Osbourne wQVJE0BSUbasxNGSUuSE: +[] -[goods, act-gd]
+- Mindy Sotiri Ut0jUZOFgJVifnQBvZna: +[] -[justicehub, act-jh]
+- Michael Taylor Nr2qqEkJhQyjGkQClVPW: +[] -[goods, act-gd]
+- El Schwanke G4vUZfUSQadk1R4KGRZC: +[] -[goods, act-gd]
+- A Curious Tractor x9ppRP5MZJnF6v01DgWj: +[] -[act-hv, harvest-website]
+- John Mendoza Y7zgex4f8ruyUhHrB0X3: +[] -[act-gd]
+- Rachel Atkinson yZcX8GoQEqBYqcb5Uyjm: +[] -[goods, act-gd]
+- Susan Clear Z7OBTZkhvGwXGrDuTFBE: +[] -[goods, act-gd]
+- Dean Cracknell YwgJl8yDfDO4NykxER0e: +[] -[act-gd]
+- Tahlia Isaac xl8Pqc6dp9j0Z2s92OK8: +[] -[act-gd]
+- Nick Miller F7yGkm266VnXwECPpAJK: +[] -[act-gd]
+- Justin Welfare 0ShRsxG5CBklEgpCIQQU: +[] -[goods, act-gd]
+- skip (not in GHL): DEWR - REAL Innovation Fund auto_ff882964
+- Ben Johnston oGrp0otuvFuZGJh7ntgK: +[] -[goods, act-gd]
+- April Long vgrJGVhkqFXrq8eJNiWM: +[] -[act-gd]
+- Natalie Friday UI9bmZWQCiFY0gK9fkIQ: +[] -[act-gd]
+- Nadja Kostich e27gIe0otj5QDB5M95zs: +[] -[act-gd]
+- Nathaniel Diong AvB7la0T0klXleU1JSKy: +[] -[act-gd]
+- Eloise Hall Z4Pmrf32XhWZO7ymuKwb: +[] -[act-gd]
+- Scarlett Steven hlGY2sV3G9XUgJcBpM9O: +[] -[goods, act-gd, justicehub, act-jh]
+- Hayley Passmore Z64QDb873qrasSCb7OCX: +[] -[act-gd, justicehub, act-jh]
+- David Fagg aiXJBIAKBvfVgapEqa30: +[] -[act-gd]
+- MINDI RARDI WA HeuqniBi1H2Fe6HcEN4R: +[] -[act-gd]
+- Teena Townsend xXtsXKaLORkXQLgGbGwi: +[] -[act-gd]
+- MULGUL STATION WA UKb31FMRel8MFUJkbl9l: +[] -[act-gd]
+- skip (not in GHL): jack  oyq9xXZJL49lgIs8pAmR
+- Faye Bourke LzOedtxesPyXRNzrRVeu: +[] -[act-gd]
+- Natalie Chiappazzo kX0EJ0MZWyTdgM2AZueN: +[] -[act-gd]
+- Anna Holtom 7pM0QICJlbma2BwYgcUN: +[] -[act-hv, harvest-website]
+- Jodie Davis d1iSnUNRv78E1m43NmFv: +[] -[act-gd]
+- jim.rebbechi HTujeK3XWvJRt32IoyqQ: +[] -[goods, act-gd]
+- Kim Harland wgEuHdAaGZnXGHBxKR1Q: +[] -[act-gd]
+-   ggTLWM2ERpaUdbtBofrW: +[] -[act-hv, harvest-website]
+-   VGYudw4qT3yYP5KN2FE6: +[] -[act-hv, harvest-website]
+- TALLOWON SA grx9GGjCACtrtgxwjyxc: +[] -[act-gd]
+- Seide Ramadani fUesAUwlaWM5XjWWzJM9: +[] -[goods, act-gd]
+- AMPILATWATJA NT D92Es2ULBuVt172OtTRy: +[] -[act-gd]
+- NUMBULWAR NT l9lmkPUaT2kGlfyhchEW: +[] -[act-gd]
+- WADEYE NT AYQsBL3uvU1hKU3HCrsj: +[] -[act-gd]
+- George Newhouse qP0P9lbEty4t4qWIbpQf: +[] -[justicehub, act-jh]
+- Rohan Lulham pZ9kGnooEvG4MG13E6KA: +[] -[justicehub, act-jh, act-cn]
+- Test RI1TytFSVn0qCj3OpxMQ: +[] -[act-gd]
+- GAPUWIYAK NT LQkHp9pCoKnCJvUqFfBG: +[] -[act-gd]
+- LINGARA NT ZC6OOSxs3h5ZOGPm4Qgr: +[] -[act-gd]
+- Amelia Clifford x4EfbfBlRvMu6ouCOowT: +[] -[act-hv, harvest-website]
+- NYGAH NYGAH WA NxMkIvOuA4gwEhmqLWd1: +[] -[act-gd]
+- Simon Goodrich Iuoc1r5YKcKYVMlSxQup: +[] -[goods, act-gd]
+- Erika Martino GXuA8r1zLuKvKX4TcRrI: +[] -[act-gd]
+- DOWAR ISLAND QLD 5OH8wj9dbYaZjeb4nzjb: +[] -[act-gd]
+- GOOBINY WA kYeSImxSw1fOJGTs1vzH: +[] -[act-gd]
+- DAJARRA QLD cKVOOorXaGuuHbmcm81x: +[] -[act-gd]
+- Frances 4GOU2PF9TbKyrbQhyMZp: +[] -[act-hv, harvest-website]
+- Vanessa yr6wir2kjRSuFXJshvRD: +[] -[act-hv, harvest-website]
+- SOUTHWELL QLD 2wbFPbLwzUiqGpvVpA7Z: +[] -[act-gd]
+- JOES LAGOON QLD spPgzzyIoriQBgEWcnou: +[] -[act-gd]
+- The Myer Foundation & Sidney Myer Fund 10phNqWAjEmflMzAzXYT: +[] -[goods, act-gd]
+- Shell sQradwv1cEIceRSM7mzZ: +[] -[act-hv, harvest-website]
+- THREE MILE WA CrKIhxyK5JX9UINlIUtl: +[] -[act-gd]
+- Bridging the Gap Africa kdIrKiIP2nvRzkS5pfMc: +[project:act-el] -[world-tour, world-tour-partner]
+- Alli Edwards LffLurx9jiy2hOFdRdKB: +[] -[goods, act-gd]
+-   gaTAuowcjOeiIhNTQfVW: +[] -[act-hv, harvest-website]
+- Noella Sorensen nZzzKwRu3dNIaaVG1Ak9: +[] -[act-hv, harvest-website]
+- Ania Karzek gEDDwf6mL9UdIgPU5Q7s: +[] -[act-gd]
+- KING GEORGE RIVER WA dqikATaNcATh7yBYT2Cw: +[] -[act-gd]
+- Sharon Wunungmurra NRil64vikfVIWIbSZDvS: +[] -[goods, act-gd]
+- Joy Woods mDFpvRJHylVCabkQrM2Y: +[] -[act-gd]
+- Meriel Chamberlin 6u4Eop2MP4zCMI3TlgP1: +[] -[act-gd]
+- Amy Orange ePLa96IrjsNrcxOnIUuY: +[] -[act-gd]
+- MILLARGOON WA ZG23Ls4wXAy4geGqr9Ue: +[] -[act-gd]
+- Tom Donaghy zZNfq0VS2awMvNlWIiH1: +[] -[act-gd]
+- Gemma Livingston GvC4uhNgXqQlgBrHEKUF: +[] -[act-gd]
+- Katrina Raynor dNifB0vpBE8Qr15xuGy1: +[] -[act-gd]
+- Tina Alexandra dxO6YTaPA5V47D8D2qn6: +[] -[act-gd]
+- WARRUWI NT i3odQcXuB5Ek7jjnayH6: +[] -[act-gd]
+- Leone Crayden EokNAx7BGuUYF8pwQUH7: +[] -[act-hv, harvest-website]
+- Deborah Hartman 7gMlEz6bBG9FLfAlAmhB: +[] -[goods, act-gd]
+- Tamsin Jones vNbxzxUXGBjx5QaJq8N5: +[] -[goods, act-gd]
+- PANTIJAN WA O2JVXQrnXoxDd3TVHc3Q: +[] -[act-gd]
+- ATAMBAYA QLD 7GNE9X3vWpSyp3bb6Id7: +[] -[act-gd]
+- DAUAN ISLAND QLD T9TiIXAMEGaqYFY8yAea: +[] -[act-gd]
+- FAIRVIEW STATION QLD u7d9n0XKA84Gz44QeTU5: +[] -[act-gd]
+- TAPPER'S INLET WA OO91V7JaWqZStMbYRaUg: +[] -[act-gd]
+- UMBAKUMBA NT 6bjo08S459GAjsCrJEa0: +[] -[act-gd]
+- JABIR JABIR WA rkrcjP5LQUCOu90E7hI7: +[] -[act-gd]
+- Matt Brein rWhSuvCxYVITE1OfReO2: +[] -[goods, act-gd]
+- Jordy Burrows mFT1yhDtpViYdgoth8bE: +[] -[goods, act-gd]
+- Richard De Martin opDZa3wEsauWY7SzQnEV: +[] -[act-gd]
+- MELTERR QLD S7ElQCh6ure0nhCze9Gd: +[] -[act-gd]
+- Mats Målqvist 8NX4HXMy26tgvivGu6z5: +[] -[empathy-ledger, act-el, world-tour]
+-   RUUWJWWCrMLVQkMG9OZT: +[] -[act-gd]
+- Dominic Brook LKQTR68JGXbEGrZEEdkf: +[] -[act-gd]
+- Christine Thomas Sbbo07EKr7S5M1rIYIce: +[] -[act-gd]
+- MARRA WORRA WORRA WA hKvQvAYqZSDpbXX7itO9: +[] -[act-gd]
+- NGANMARRIYANGA NT FKxRWSPSEeK6dxGSgpam: +[] -[act-gd]
+- Delilah MacGillivray 1MIZAZ9Kqj0vQveEZydt: +[] -[justicehub, act-jh, act-cn]
+- kathy.mcconnell U6JBvrURgkIAvaFftsz4: +[] -[goods, act-gd]
+- Aaron Baker 98BNICB0EQi4SEsXNhcN: +[] -[act-gd]
+- KALKA SA 5MYHdXULAX5BhC7nTZQa: +[] -[act-gd]
+- Dhabakaya 22Ge1w82SqUc47jUGonQ: +[] -[act-hv, harvest-website]
+- Victoria Palmer NbyCZh6HSaYdoS5o6LDp: +[] -[goods, act-gd]
+- Test Person bIcMRFHo25DKODaOrlzn: +[] -[act-gd]
+- PARUKUPAN WA UsaoP8VVTbtLXH52woG8: +[] -[act-gd]
+- GUDA GUDA WA EbG9e0fDuRUKbZG1ZG9q: +[] -[act-gd]
+- Design Hub Kampala HITH0e1JgMPqLsPKInoe: +[project:act-el] -[world-tour, world-tour-partner]
+- JARLMADANKA WA L1kooixF2tOI61OSdbP8: +[] -[act-gd]
+- Leeza Stratford 9eSq6vFfQEVxCToD8Mru: +[] -[act-hv, harvest-website]
+- EUNNMEN QLD nT3ouWvINi012LEpRERD: +[] -[act-gd]
+- WATHANHIIN QLD MPRAYiwYgow3O48hHagA: +[] -[act-gd]
+- Ludmila Andrade vw6Jm7f2nthXcoQ2izyX: +[] -[justicehub, act-jh, act-cn]
+- Ashley Machuca ua7d7GzRAlKkivxPTsrv: +[] -[goods, act-gd]
+- CHUULA QLD bNReEzWIh2My7vUYv3xU: +[] -[act-gd]
+- AMBANG QLD 2cMA4iQ3y5ilf0LPMOmY: +[] -[act-gd]
+- WALBERI QLD jAUMeZcG3FcQC6LIzNWd: +[] -[act-gd]
+- NYUMWAH WA T5OMQxquSFP6URSS4lyO: +[] -[act-gd]
+- NYAPARI SA bSdWDr23YVZb7qfeHyFm: +[] -[act-gd]
+- ANGURUGU NT rCZvszCFVZhrntB1pR8d: +[] -[act-gd]
+- JIMBALAKUDUNJ WA bbxwznARO7AUZC0rInDR: +[] -[act-gd]
+- Nicole Mekler 3nOgW4r1aD8wZsgt1HHH: +[] -[justicehub, act-jh]
+- WARRALONG WA oN98M0rrPl8CyoPPpOPr: +[] -[act-gd]
+- KALTUKATJARA NT OAM0dvKcNPuLwjT15smE: +[] -[act-gd]
+- BARUNGA NT uPpIqeOMahVTSBk5N3j3: +[] -[act-gd]
+- BESWICK NT tBKNUXD8tPybDqV8pqCi: +[] -[act-gd]
+- YIRRKALA NT 6ldmF1XhCf5wJBEsCHq4: +[] -[act-gd]
+- Frances Birungi 4ZkpmTVx6gySVJX3kO36: +[] -[empathy-ledger, act-el, world-tour]
+- ALPURRURULAM NT tlqWqWhNuJJMPnbcPJ2F: +[] -[act-gd]
+- Jonas Kubitscheck tf12kWs3CZiR5WYCDswA: +[] -[goods, act-gd, justicehub, act-jh]
+- Penny Lamaro wHWVWBV4762pDYvsRIsw: +[] -[justicehub, act-jh, act-cn]
+- Danny Almagor V6CCMRZkvacxfweuDEby: +[] -[goods, act-gd]
+- SuSana DzlCWvGJBBJpTJOjfU88: +[] -[act-hv, harvest-website]
+- Marie QPff8x6D9CvZWu6NksFZ: +[] -[act-hv, harvest-website]
+- Alice Mahar rmrG40t5m6Yn8cGcoznb: +[] -[justicehub, act-jh, act-cn]
+-   CwcOrXeWjmjWQNryceX1: +[] -[empathy-ledger, act-el, world-tour]
+- Taylor Boyley SpkbvX2o2NduUdpOrQOZ: +[] -[goods, act-gd]
+- Megan Argent bZjxOwN7Hv4UPqCtnr6b: +[] -[act-gd]
+- Isaac Opio KvnSoGIQyHSvl0iPYedB: +[] -[empathy-ledger, act-el, world-tour]
+- Loic Fery SA723TCBUsGizxCfNs4n: +[] -[justicehub, act-jh, act-cn]
+-   x59KrrwRzlhOSgIcqEON: +[] -[empathy-ledger, act-el, world-tour]
+- Cory Tutt kMG435sXyNZ3g0ka2hzg: +[] -[act-gd]
+- Lewina Schrale Q5m6C54kTgx4zPM3dMfu: +[] -[justicehub, act-jh, act-cn]
+- Maxine 0Rn4FkLiyKn4nocY4PJz: +[] -[act-hv, harvest-website]
+- Toby Gowland cnNzFM6zrQjRaMJ69NpE: +[] -[act-gd, justicehub, act-jh, act-cn]
+-   lmJ8hteXvekXDXjvUg6s: +[] -[act-hv, harvest-website]
+- Thea Warburton jLccimatxhBMle2cxpc5: +[] -[act-hv, harvest-website]
+- Claire Meraki AWxn08Z53cmeQa1fJr4t: +[] -[act-hv, harvest-website]
+- Davina dQ0fiMBOGInL3UDBvZX9: +[] -[act-hv, harvest-website]
+- Stephen Alexander fHCJVf3yWEnLg2eTspTK: +[] -[act-hv, harvest-website]
+-   FFy51sNVFicJ1VJG2rXu: +[] -[act-hv, harvest-website]
+- Judy wefwa7rG6CEy1OsdKKgv: +[] -[act-hv, harvest-website]
+- Chris Smith ANavcbYH9Alz0f1StYGu: +[] -[act-hv, harvest-website]
+-   vMRdijXzt96TnBPoPwbr: +[] -[act-hv, harvest-website]
+- Angel NGe9QQrMKk6nhxeBN007: +[] -[act-hv, harvest-website]
+- Shannalee QT8aOjrZp3lyUdH1TyNn: +[] -[act-hv, harvest-website]
+- SILVER PLAINS QLD vI75fv3vDBImW5Anp08I: +[] -[act-gd]
+- Rachel IhL3Nl4WhFpACoXF9KtW: +[] -[act-hv, harvest-website]
+- LANGI QLD fl1l7BEio7oAuN7b1dsZ: +[] -[act-gd]
+- NGURTUWARTA WA Z2H2ncLdT2u5eCtZBp7a: +[] -[act-gd]
+- Anna mgomEJWOKoJIQhQolaZk: +[] -[act-hv, harvest-website]
+- Andry Kiernan 8JTcQg7vKsczvVXX35tv: +[] -[act-hv, harvest-website]
+- OLD RODEO GROUND QLD pnQYdYCfWN4ERnfHmBJ8: +[] -[act-gd]
+- Michelle y3URoL0Fu2RZKldeZ9Gx: +[] -[act-hv, harvest-website]
+- Lance and Carole Lewis 8tAE2aoTLbSFCc7bGWBZ: +[] -[act-hv, harvest-website]
+- Amy Lee 7ox7Rp2Dr3OZdLNXjHVW: +[] -[goods, act-gd]
+- Simon Matuzelski m2hHnfX8XT4rX8y4AmXd: +[] -[act-gd]
+- Joedi & Pepper 4utsHHvJUGAdQfZ6xzJ4: +[] -[act-hv, harvest-website]
+- Margoe KjIdU919Ko6hacsPMLrg: +[] -[act-hv, harvest-website]
+- Angela Turney YijG5HohLvKau4W1WRIz: +[] -[act-hv, harvest-website]
+- Michael Haji-Ali RmiaAGfDHtChd5HxDECM: +[] -[justicehub, act-jh, act-cn]
+-   KffOj7U6WW1OAdEODDIr: +[] -[act-hv, harvest-website]
+- Tracy Adams MRePMa46oO7En4zf8JS2: +[] -[act-hv, harvest-website]
+- skip (not in GHL): Frances  Qt24NY3AVPfyzRL2TwaJ
+- NAUIYU NT hoFdvQNJAEIHgPcKkFbu: +[] -[act-gd]
+- PAPUNYA NT sTvgHaWnDeaKnCayvyf8: +[] -[act-gd]
+- Bruce 8wf1853qquegSDV6dSlO: +[] -[act-hv, harvest-website]
+- Bea rYu1k6YRQZ74Buwl9s48: +[] -[act-hv, harvest-website]
+- Michael Itge1aEu0WoKoUnVPKf9: +[] -[act-hv, harvest-website]
+- Katy rnuHnY9s37KxKYcXULpb: +[] -[act-hv, harvest-website]
+- Natalie McGregor boedikM5yqnR8HSVEsH2: +[] -[act-hv, harvest-website]
+- Gary & Bron Hawkins wgohnalkdmIASVV6dvnv: +[] -[act-hv, harvest-website]
+- Melissa Cuddy 62LDll0nzLiMlHgI32A7: +[] -[act-hv, harvest-website]
+- Teya Dusseldorp 3LNDa9OQDi3ztpZFHJr2: +[] -[goods, act-gd, justicehub, act-jh]
+- End2End Test 2qmt1jDzLLCgjGrvLkfJ: +[] -[empathy-ledger, act-el, world-tour]
+- skip (not in GHL): Lucy McGarry auto_a25bcda7
+- Maureen Cummings OKn95bkiAVRAWDKxeh2U: +[] -[act-el]
+- Dean Ervik Zi4sNZGx5b6118bjXjzZ: +[] -[act-hv, harvest-website]
+- Navjot Sawhney j0aE4PtzdyUbUDWjfBgo: +[] -[empathy-ledger, act-el, world-tour]
+- Freek van Eijk 4uzxckvqGrLp9GL1yesu: +[] -[empathy-ledger, act-el, world-tour]
+- Nina Fitzgerald FNVDamtQMZD7urBYy5fx: +[] -[goods, act-gd]
+- Randle Walker ehnCEv62bCaGNTd1QuGp: +[] -[goods, act-gd]
+- Dee and Clive EW9zpG1K6H9bbaeokSuP: +[] -[act-hv, harvest-website]
+- Andrew McLean eM15WL5Wu78JqRBMfbnc: +[] -[act-hv, harvest-website]
+- Coompanion Sweden ivFlnzJmn2kJzHnw9UzU: +[project:act-el] -[world-tour, world-tour-partner]
+- Fairphone PIOQw38UGqEOZpLQnxG7: +[project:act-el] -[world-tour, world-tour-partner]
+- Verify Test vlX3HNiW2jRfsRgxuoQK: +[] -[empathy-ledger, act-el, world-tour]
+- Pepa Demasson XUSutX8IIZGWzGHJkWGu: +[] -[act-hv, harvest-website]
+- Allan & Jenny x7ddIQkDbIz2R0M5vqKF: +[] -[act-hv, harvest-website]
+- Glennis Mcalpine JBoDtkN7nL7qvpgtzTq1: +[] -[act-hv, harvest-website]
+- Andy Kazim 47KXodKLJunNtNEDioqv: +[] -[act-gd]
+- Bradley Clair rrgEBXu2GCqLApc7pqwF: +[] -[act-gd]
+- jennifer kitching lXK8sKfCmHJQYLC9Din1: +[] -[act-gd]
+- Fashion for Good vModnrmOJYDCM9F8zztx: +[project:act-el] -[world-tour, world-tour-partner]
+- skip (not in GHL): vsnppprfkumreocrntbh  rJstoVBIUBqpjuml4RZc
+-   DafXFLvaZMz8ntAOHlZd: +[] -[act-gd]
+- Suzie Zemek KTjh17bNjaGKt2f72ojv: +[] -[act-hv, harvest-website]
+- Dianne Knight 4AE4p8YvMZKr4Oox5NPu: +[] -[act-hv, harvest-website]
+- Yalla Trappan zfKZxKtfKaVlzw68Hsq9: +[project:act-el] -[world-tour, world-tour-partner]
+- FabLab Winam 3m7IMYzMg8dGRHesi4sy: +[project:act-el] -[world-tour, world-tour-partner]
+- Rikki Andrews zscpp6b9DaD7JhOuUWxx: +[] -[act-gd]
+- Anita G1Ie3I6kphciwsaxS0Ux: +[] -[act-hv, harvest-website]
+- Brightlands Chemelot Campus nYvRVUO0WArpAsd0BcVo: +[project:act-el] -[world-tour, world-tour-partner]
+- Jan Owen ex9aYWsBbQBJcnPR90jG: +[] -[goods, act-gd]
+- Maree Giles n5xzxyjQheaKnN0OA9ig: +[] -[act-gd]
+- Truth and Reconciliation Archive JA2ElDrosFHY97MKLcQU: +[project:act-el] -[world-tour, world-tour-partner]
+- Juanita Schaffa De Mauri ciuPaQzs703GQVWyntCx: +[] -[act-gd]
+- Barry oEDfsRvBJ73oM6pl2JBO: +[] -[act-hv, harvest-website]
+- Tiff 6t2e8EBZGObockmjRHGZ: +[] -[act-hv, harvest-website]
+-   ISgl96DXeWYO0yquucha: +[] -[act-gd]
+- Chansey Paech 9t9PsB2J3QLi98KbUl6s: +[] -[act-gd]
+-   5K4JXts16JNkBWrY3l2V: +[] -[act-hv, harvest-website]
+- Accounts ACT Evf4J6yT8Z7U1AUl7X3T: +[] -[act-el]
+- Shannen Cooper tTdpiot9fu7sAXCuyhHk: +[] -[act-hv, harvest-website]
+- Jonty Bush fHZWrQFlMzBtK5GxvuCp: +[] -[act-gd]
+- Daniel Paffenholz T6qsruRpwDRF8n9JAq65: +[] -[empathy-ledger, act-el, world-tour]
+- World Voices Uganda nnCreh2er6OYLnXucwIJ: +[project:act-el] -[world-tour, world-tour-partner]
+- MILIKAPITI NT r70CURB5tnJdiZhmU0Bp: +[] -[act-gd]
+- Adeem r0cto11ohqwMM34j2Tle: +[] -[goods, act-gd]
+- Ebony Abbott-McCormack w8Zg6ZcBWhkwXylXga4I: +[] -[goods, act-gd]
+- Maree Meredith 9xn4Hn689ubEtXdRkR84: +[] -[goods, act-gd]
+- Thais Pupio VVt7xWPOwucDgufwdLQO: +[] -[goods, act-gd, act-hv, harvest-website]
+- Test Media User S4MU3bAVg2kxv6VwSrxe: +[] -[act-gd]
+- Mary Storyteller WGE5JMqrw9Y7BFKBf3ra: +[] -[act-el]
+- Deputy CEO — Urapuntja QD8Y6J35dqP72hZsWSTN: +[] -[goods, act-gd]
+- Chair c2WPF9Kr2cb56KgKPXGZ: +[] -[goods, act-gd]
+- John Community 0mY8TH030AgbpEIS3F8R: +[] -[act-el]
+- Journey Complete Exjf4TijWNE9IBNB8Lh7: +[] -[act-el]
+- Walking on Country gTFWoqKLgh38omXGcuUL: +[] -[goods, act-gd]
+- Test User IHgDqFAMzhYIaj96Kviz: +[] -[act-gd]
+- Norcoast mVanchkStJDoUmZM8sPj: +[] -[goods, act-gd]
+- Max Archibald AiITDB5uKoCyJOXHu3rB: +[] -[goods, act-gd]
+- Collis Taeed qgkStg126RqnxXz7T2aM: +[] -[goods, act-gd]
+- The Harvest Witta W5QHmOOu0GJLjJgICCMU: +[] -[act-gd]
+- Shannon Lemanski biTWj8ZEBLtP0abMMjS9: +[] -[act-cn]
+- Anne Gripper tr58drIUZzB7slo70af6: +[] -[goods, act-gd, justicehub, act-jh]
+- Faith Makwanya A0DNdL5bEL0dWjoMBtL5: +[] -[goods, act-gd]
+- Reception — Urapuntja bymOHIStCNF8Rv7b6BPF: +[] -[goods, act-gd]
+- GM Corporate — Julalikari OSWHIOCG3vHdyAEHot6F: +[] -[goods, act-gd]
+- CEO — Julalikari Eqcko6VbVFA0XQfV0mVY: +[] -[goods, act-gd]
+- Shaun Christie-David 6WU58D4mf7l8on03a0NA: +[] -[goods, act-gd]
+- Millie Shearer MaE0EVXGdc8cOZpgkCGI: +[] -[act-gd]
+- Marketing — Melbourne Fringe c0n7ndKiUlKYR6huBQn0: +[] -[goods, act-gd]
+- Simon Robinson G9PItuZMWk1c8x6unFvB: +[] -[goods, act-gd]
+- Kristen Lark eCzgIXkVKLh3B413GVde: +[] -[goods, act-gd]
+- Our Shed Secretary YhKLGpjTiHouq9qX098e: +[] -[goods, act-gd]
+- CHEEDITHA WA ySlREZLXJ6zbe0j9b8MM: +[] -[act-gd]
+- Delaicee Power CINaVh3o4cgFjBuscV0C: +[] -[goods, act-gd]
+- Jimmy Frank 8f3onwaS2iK3Lk7ThsiA: +[] -[goods, act-gd]
+- Jess Lilley Ja3sGsiivyv4Hjc52byI: +[] -[justicehub, act-jh, act-cn]
+- Environment iDm1tAtvOAh9SVJnhCxi: +[] -[goods, act-gd]
+- Isabella Stanley x1yXL4Rbs4zcBq5L2oBz: +[] -[goods, act-gd, justicehub, act-jh]
+- Shannon Cant sd5V2TQpNpCLe4hKRgWB: +[] -[justicehub, act-jh]
+- Tanya Turner lQ4ROlknfvUmlVbCJhVu: +[] -[act-gd, justicehub, act-jh]
+- matt.davies ot4pX3AbwrBSIzKRrAgC: +[] -[goods, act-gd]
+- Rachel Fyfe 643e8sHlP3I5GooP85EC: +[] -[goods, act-gd, justicehub, act-jh]
+- Treasurer — Our Community Shed njoAmMmD94nzpOjyzAus: +[] -[goods, act-gd]
+- Chair — Our Community Shed OHCxJA8daszAWVVVVPrf: +[] -[goods, act-gd]
+- Sarah Williams SZLSRjrKt8W7C5BFNdPE: +[] -[goods, act-gd]
+- Nicholas Marchesi BTMtHeL4MpDwYX2Uppc9: +[] -[act-gd]
+- Coordinator — Our Community Shed SYhvJjn05QVkvbFJPhGv: +[] -[goods, act-gd]
+- Maddi Alderuccio 7NVtg5cAWxbYn12ZixJU: +[] -[goods, act-gd]
+- Annabelle Macansh HniMghKhq56Ne2hL667f: +[] -[goods, act-gd]
+- Matthew Cox MgsF7e1f2HSeuFcZZVhF: +[] -[goods, act-gd]
+- Test User V6hQxi6yLVDtQK3M8RCD: +[] -[justicehub, act-jh]
+- Grant Luff X4Md4sr73fZdL33BPmlz: +[] -[goods, act-gd]
+- Joey TtE60X5siWeLMnjeDiw7: +[] -[act-hv, harvest-website]
+- carollyn kavanagh TF4i9w40DIGne1wPg5uN: +[] -[act-gd]
+- Carolyn Ludovici laCUDrYPbaEP5rC9UEcf: +[] -[goods, act-gd]
+- Ben Croft Mvd6MBqRPUZVZpwrrX4b: +[] -[act-gd]
+- Tara Castle 8QyHvajKpuyHyDmBfcCY: +[] -[goods, act-gd]
+- Amy Elson B1U3yW6G9UoDI5BsAV4c: +[] -[goods, act-gd]
+
+Done. contacts 712 · adds 43 · removes 1222 · not-in-GHL 71 · errors 0. (LIVE)
+UNDO: per line — remove the +canonical tags, re-add the -legacy tags.
