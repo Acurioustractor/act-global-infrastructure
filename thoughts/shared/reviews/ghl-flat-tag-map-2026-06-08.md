@@ -64,3 +64,31 @@
 
 ## Counts
 256 distinct flat tags · 5,413 uses. Cruft delete ≈ 652+tests. Bulk mechanical ≈ ~180 tags. Orphans/campaign needing rulings ≈ ~40.
+
+## ✅ ORPHAN RULINGS — RESOLVED 2026-06-08 (Ben, evidence-checked against live contacts)
+
+**MAP → canonical:**
+- `grant` (12) → **`role:funder`** (all grant-makers: Snow/Minderoo/FRRR/AMP/VFFF/QIC/Centrecorp/Rotary) · ADD **`role:gov`** to government bodies (Real Innovation Fund/`dewr.gov.au` etc.). Grant lifecycle lives in the **Grants pipeline** (soft-separated from funder stewardship + Supporters & Donors) — NO `role:grant` tag, NO extra grant tag; pipeline membership carries grant context. Funder smart-list/drip can include/exclude grant-only contacts via Grants-pipeline membership.
+- `goods-government-grant` (3) → **`role:funder` + `role:gov` + `project:act-gd`**
+- `government` (1) → **`role:gov`**
+- `njp` (2) → **`role:partner` + `interest:justice-reform`** (National Justice Project)
+- `legal` (2) → **`interest:justice-reform`**
+- `conference-host` (2) → **`role:partner` + `interest:justice-reform`** (Justice Reform Initiative)
+- `detention centre` (1) → **`interest:justice-reform`** (NSW Education contact; Ben to confirm if education-only)
+- `uwa-law` (1) → **`role:researcher` + `place:perth`**
+- `tour-funding` (1) → **`role:funder`** (Dusseldorp; world-tour funder)
+- `collaborator` (1) → **`role:advisor`**
+- `speech-pathology` · `food-and-phonics` · `education` · `homeschool-programs` → **`interest:education`**
+- `24-carrot-gardens` (1) → **`interest:garden`**
+- `venue` · `venue-enquiry` → **`interest:venue`**; `venue-partner` (3) → **`role:partner` + `interest:venue`**
+- `festivals-target` (3) → **`interest:festivals`**
+- `workshop-booking` · `workshop-suggestion` → **`interest:workshops`**
+- `goods-li-contained-tour` (1) → **`source:linkedin` + `interest:justice-reform`**
+- `goods-canberra-airport-—-reconciliation-week` (1) → **`source:event:canberra-airport-2026`** (em-dash dupe)
+
+**DROP (test cruft / data-quality / notes):**
+- Test-only (codex-smoke contacts → delete the contacts too): `community-idea` (3) · `idea-general` (3) · `residency-applicant` · `residency-artist` · `business-interest` · `biz-expression-of-interest`
+- Operational/data-quality: `no email` (2) · `needs-attention` · `ai-flagged` · `business-registration` · `ramsey` (unclear single)
+- Relationship note (drop tag; person keeps their role): `minderoo-connection` (1)
+
+These rulings + the mechanical buckets above = the complete Phase-B migration input. Remaining open: the 62 non-community no-consent newsletter holders (Spam-Act decision, separate).

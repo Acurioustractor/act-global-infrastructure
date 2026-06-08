@@ -9,7 +9,7 @@
 | Phase | What | Status |
 |---|---|---|
 | **A. Forms → canonical tags AT SOURCE** | every form writes namespaced tags | 🟡 in progress — Goods PR #98 (draft, gated); Harvest done; act.place/JH/EL pending |
-| **B. Tag migration (existing contacts)** | 237 orphans + legacy flat → canonical | ⬜ not started — worksheet ready, gated on rulings + Ben's verb |
+| **B. Tag migration (existing contacts)** | 237 orphans + legacy flat → canonical | 🟡 **rulings DONE 2026-06-08** (orphans + mechanical map in `ghl-flat-tag-map`); ready to run tracer→bucketed apply (Ben's verb) |
 | **C. Lists (smart-lists)** | 7 saved tag-queries built/verified in GHL | ⬜ defined, not built/verified live |
 | **D. Comms streams** | 7 `comms:*` drips wired to consent + gates | ⬜ defined, not wired |
 | **E. Workflows (automations)** | Layer-4 triggers | ⬜ designed, not built |
