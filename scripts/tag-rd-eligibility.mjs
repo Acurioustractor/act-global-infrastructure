@@ -108,7 +108,8 @@ const RD_PROJECT_CODES = new Set([
   'ACT-IN',    // ALMA / Intelligence
   'ACT-JH',    // JusticeHub
   'ACT-GD',    // Goods marketplace
-  'ACT-BCV',   // Black Cockatoo Valley tech
+  'ACT-FM',    // The Farm (Black Cockatoo Valley regen tech — ACT-BV/ACT-BCV merged in 2026-06-08)
+  'ACT-BCV',   // legacy alias of ACT-FM (kept for un-migrated records)
   'ACT-PS',    // PICC Photo Kiosk
   'ACT-CAMP',  // CAMPFIRE
   'ACT-HARV',  // The Harvest

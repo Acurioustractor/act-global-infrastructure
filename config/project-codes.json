@@ -511,24 +511,36 @@
       "canonical_slug": "act-farm",
       "slug_aliases": [
         "farm",
-        "the-farm"
+        "the-farm",
+        "bcv",
+        "black-cockatoo-valley"
+      ],
+      "legacy_codes": [
+        "ACT-BV",
+        "ACT-BCV"
       ],
       "category": "regenerative",
       "tier": "ecosystem",
       "priority": "high",
       "status": "active",
-      "description": "Land-based healing and cultural connection",
+      "description": "Land-based healing and cultural connection, incl. Black Cockatoo Valley regenerative conservation (ACT-BV merged into ACT-FM 2026-06-08 — same Witta land)",
       "notion_pages": [
         "The Farm",
-        "ACT Farm"
+        "ACT Farm",
+        "BCV Reforest",
+        "BCV: Regenerative Conservation"
       ],
       "ghl_tags": [
         "farm",
-        "the-farm"
+        "the-farm",
+        "bcv",
+        "black-cockatoo"
       ],
       "xero_tracking": "ACT-FM — The Farm",
       "xero_tracking_aliases": [
-        "The Farm"
+        "The Farm",
+        "BCV",
+        "ACT-BV — Black Cockatoo Valley"
       ],
       "dext_category": "Regenerative",
       "alma_program": "land-healing",
@@ -1014,38 +1026,6 @@
       "github_repo": "Acurioustractor/grantscope",
       "syndication_slug": "act_cs",
       "production_url": "https://civicgraph.app"
-    },
-    "ACT-BV": {
-      "name": "Black Cockatoo Valley",
-      "code": "ACT-BV",
-      "canonical_slug": "black-cockatoo-valley",
-      "slug_aliases": [
-        "act-farm",
-        "bcv",
-        "the-farm"
-      ],
-      "legacy_codes": [
-        "ACT-BCV"
-      ],
-      "category": "regenerative",
-      "tier": "satellite",
-      "priority": "medium",
-      "status": "active",
-      "description": "Regenerative conservation",
-      "notion_pages": [
-        "BCV Reforest",
-        "BCV: Regenerative Conservation"
-      ],
-      "ghl_tags": [
-        "bcv",
-        "black-cockatoo"
-      ],
-      "xero_tracking": "ACT-BV — Black Cockatoo Valley",
-      "xero_tracking_aliases": [
-        "BCV"
-      ],
-      "dext_category": "Regenerative",
-      "alma_program": "conservation"
     },
     "ACT-MY": {
       "name": "Mounty Yarns",

@@ -12,6 +12,8 @@ export const LEGACY_WRAPPERS: Record<string, string> = {
   'ACT-CG': 'ACT-CS',
   'ACT-HQ': 'ACT-CORE',
   'ACT-PC': 'ACT-PI',
+  'ACT-BV': 'ACT-FM',
+  'ACT-BCV': 'ACT-FM',
 }
 
 /** Upper/trim a code and fold any legacy wrapper to its canonical code. Null/empty → null. */

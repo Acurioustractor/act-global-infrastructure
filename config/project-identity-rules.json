@@ -46,8 +46,8 @@
       "entity_type": "project",
       "tagging_mode": "own-code",
       "canonical_slug": "black-cockatoo-valley",
-      "canonical_code": "ACT-BV",
-      "recommended_action": "Normalise legacy ACT-BCV references to ACT-BV over time. Keep wiki page and public name as Black Cockatoo Valley."
+      "canonical_code": "ACT-FM",
+      "recommended_action": "ACT-BV merged into ACT-FM (The Farm) 2026-06-08 — same Witta land. Normalise legacy ACT-BV/ACT-BCV references to ACT-FM over time. Keep wiki page and public place name as Black Cockatoo Valley (an alias of The Farm)."
     },
     "green-harvest-witta": {
       "entity_type": "sub-project",

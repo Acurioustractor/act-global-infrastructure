@@ -18,13 +18,13 @@
  */
 
 /** Retained non-canonical codes that fold to a canonical one on resolve. */
-export const LEGACY_WRAPPERS = { 'ACT-CG': 'ACT-CS', 'ACT-HQ': 'ACT-CORE', 'ACT-PC': 'ACT-PI' };
+export const LEGACY_WRAPPERS = { 'ACT-CG': 'ACT-CS', 'ACT-HQ': 'ACT-CORE', 'ACT-PC': 'ACT-PI', 'ACT-BV': 'ACT-FM', 'ACT-BCV': 'ACT-FM' };
 
 /** tag prefix → code (from the contact resolver). */
 export const PREFIX_RULES = [
   ['goods-', 'ACT-GD'], ['harvest-', 'ACT-HV'], ['contained-', 'ACT-CN'], ['picc-', 'ACT-PI'],
-  ['justicehub-', 'ACT-JH'], ['el-', 'ACT-EL'], ['empathy-', 'ACT-EL'], ['bcv-', 'ACT-BV'],
-  ['black-cockatoo-', 'ACT-BV'], ['farm-', 'ACT-FM'], ['the-farm-', 'ACT-FM'],
+  ['justicehub-', 'ACT-JH'], ['el-', 'ACT-EL'], ['empathy-', 'ACT-EL'], ['bcv-', 'ACT-FM'],
+  ['black-cockatoo-', 'ACT-FM'], ['farm-', 'ACT-FM'], ['the-farm-', 'ACT-FM'],
 ];
 
 /** GHL pipeline-name substring → code (from align-ghl PIPELINE_MAP, used as substring hints). */
