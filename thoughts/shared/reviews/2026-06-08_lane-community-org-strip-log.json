@@ -1,0 +1,670 @@
+{
+  "mode": "APPLY",
+  "stamp": "2026-06-08",
+  "count": 35,
+  "heldIndividuals": [
+    {
+      "ghl_id": "bJ0IHYKRVBtlwmyIydaQ",
+      "name": "tony miles",
+      "email": "tony.miles@anyinginyi.com.au"
+    },
+    {
+      "ghl_id": "ef3tYp3HPNOmUNeu05gc",
+      "name": "madelyn hay",
+      "email": "madelyn.hay@miwatj.com.au"
+    },
+    {
+      "ghl_id": "FVfAK0x3SjtTkBmPBTxI",
+      "name": "simone grimmond",
+      "email": null
+    },
+    {
+      "ghl_id": "mmLzQtTJEMJE0KAiDTTO",
+      "name": "angela lynch",
+      "email": null
+    },
+    {
+      "ghl_id": "qIuqGLFoVusIOhYSL0Hf",
+      "name": "baressa frazer",
+      "email": "paiden.4892@gmail.com"
+    },
+    {
+      "ghl_id": "1MIZAZ9Kqj0vQveEZydt",
+      "name": "delilah macgillivray",
+      "email": "dmagilla@icloud.com"
+    },
+    {
+      "ghl_id": "RmiaAGfDHtChd5HxDECM",
+      "name": "michael haji-ali",
+      "email": "michaelhajiali@hotmail.com"
+    }
+  ],
+  "actions": [
+    {
+      "ghl_id": "jyq6kpllvY6A9h9Vnx9s",
+      "name": "laynhapuy homelands aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "8gOgn0mjerwpKYSZvkVH",
+      "name": "wallace rockhole community store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:wallace-rockhole",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "wrRHeRChqJEXAcOp5HAw",
+      "name": "kaltukatjara community council (aboriginal corporation)",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:kaltukatjara",
+        "place:nt",
+        "role:council",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "MxDCQuWzhl1l9L0fujj6",
+      "name": "aboriginal medical services alliance nt (amsant)",
+      "tagsBefore": [
+        "project:act-gd",
+        "role:health-service",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "64FUSK218liWpGTi9Z2u",
+      "name": "the arnhem land progress aboriginal corporation (alpa)",
+      "tagsBefore": [
+        "project:act-gd",
+        "role:buyer",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "BjPQ4FwKI6yXf9DqHFEG",
+      "name": "tangentyere council aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "role:council",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "L0N5scaDjkWALI88SFGR",
+      "name": "peppimenarti store indigenous corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:peppimenarti",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "bjixgh1blualVbNIKrPG",
+      "name": "central australian aboriginal congress",
+      "tagsBefore": [
+        "project:act-gd",
+        "role:health-service",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "BGyanKf035L4KIIshJnF",
+      "name": "canteen creek store charitable trust",
+      "tagsBefore": [
+        "project:act-gd",
+        "role:buyer",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "sLrNSpHK0j64lsFLaiV0",
+      "name": "matthew ryan",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:gapuwiyak",
+        "place:nt",
+        "role:council",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "6jEeR6lbputXOxp4ZZqf",
+      "name": "tiwi land council",
+      "tagsBefore": [
+        "project:act-gd",
+        "role:land-council",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "SczQgdmEOSHYnVcs1LII",
+      "name": "aputula housing aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:finke",
+        "place:nt",
+        "role:housing-provider",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "sq8AeMqnXJFhReHCxggr",
+      "name": "anindilyakwa land council",
+      "tagsBefore": [
+        "project:act-gd",
+        "role:land-council",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "ev3DobfSdh8uqoW4NjMP",
+      "name": "daguragu community store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:daguragu",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "cwjSZmZrwbpeoTi98qag",
+      "name": "imanpa general store anangu aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:imanpa",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "9DIjNWgD0WXnUhB2DAUm",
+      "name": "kaltukatjara nguratjaku council (aboriginal corporation)",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:kaltukatjara",
+        "place:nt",
+        "role:council",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "RCmAdzqPUceLaiQwkliv",
+      "name": "ngukurr progress aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:ngukurr",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "5SUZbGyG14Q4fSLtGfmK",
+      "name": "amundurrngu mt liebig community store (aboriginal corporation)",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:mount-liebig",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "HAN2VLPXisHJErXrXkhy",
+      "name": "mt liebig community store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:mount-liebig",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "lj1HY0GS0vaHQYvXtAiS",
+      "name": "milingimbi and outstations progress resources aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:milingimbi",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "1dUSJ8bwFl32u1UrZ0cu",
+      "name": "nturiya community store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:nturiya",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "T11kOpYh703ud8IUkgOZ",
+      "name": "central land council",
+      "tagsBefore": [
+        "project:act-gd",
+        "role:land-council",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "Q6JZYRh0i6sJxbaDk5WA",
+      "name": "ampilatwatja health centre aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "source:event:alive-beds",
+        "role:health-service",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "YSgKCLjrz8mOzXianscn",
+      "name": "ampilatwatja health centre aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:ampilatwatja",
+        "place:nt",
+        "role:health-service",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "Ud33HAOZRSOg5kfV4FTy",
+      "name": "peppimenarti health services aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:peppimenarti",
+        "place:nt",
+        "role:health-service",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "TWi4OBECVJbse2HLtYQt",
+      "name": "lajamanu progress aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:lajamanu",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "3Ot8tdFR2Xlb8KkOgNWO",
+      "name": "manyallaluk store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:manyallaluk",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "NDkOyddNl1Pajj1Fr4RO",
+      "name": "barunga community store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:barunga",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "rehcTEdarUUNx91r06ap",
+      "name": "anindilyakwa housing aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "role:housing",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:housing-provider"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "dd5rHFESa8DCi5uSJyr6",
+      "name": "areyonga store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:areyonga",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "yduVJ4zdFaVn7fKMbPxf",
+      "name": "katherine west health board aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "role:health-service",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "M1nD1Eg2vQzS5bS7LwtR",
+      "name": "laramba community store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:laramba",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "QYFJPrbiYcK0R7wPzCxZ",
+      "name": "titjikala community store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:titjikala",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "vQYVHLQZlKDZB5b5Yitk",
+      "name": "atitjere homelands store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:atitjere",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    },
+    {
+      "ghl_id": "agnn4YZ9Iwixiwco0f83",
+      "name": "papunya community store aboriginal corporation",
+      "tagsBefore": [
+        "project:act-gd",
+        "project:act-cn",
+        "place:community:papunya",
+        "place:nt",
+        "role:buyer",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "role:supplier"
+      ],
+      "removed": [
+        "lane:community"
+      ],
+      "ok": true
+    }
+  ]
+}

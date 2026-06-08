@@ -1,0 +1,38 @@
+{
+  "mode": "DRY_RUN",
+  "stamp": "2026-06-08",
+  "count": 35,
+  "heldIndividuals": [
+    {
+      "ghl_id": "bJ0IHYKRVBtlwmyIydaQ",
+      "name": "tony miles",
+      "email": "tony.miles@anyinginyi.com.au"
+    },
+    {
+      "ghl_id": "FVfAK0x3SjtTkBmPBTxI",
+      "name": "simone grimmond",
+      "email": null
+    },
+    {
+      "ghl_id": "mmLzQtTJEMJE0KAiDTTO",
+      "name": "angela lynch",
+      "email": null
+    },
+    {
+      "ghl_id": "qIuqGLFoVusIOhYSL0Hf",
+      "name": "baressa frazer",
+      "email": "paiden.4892@gmail.com"
+    },
+    {
+      "ghl_id": "1MIZAZ9Kqj0vQveEZydt",
+      "name": "delilah macgillivray",
+      "email": "dmagilla@icloud.com"
+    },
+    {
+      "ghl_id": "RmiaAGfDHtChd5HxDECM",
+      "name": "michael haji-ali",
+      "email": "michaelhajiali@hotmail.com"
+    }
+  ],
+  "actions": []
+}

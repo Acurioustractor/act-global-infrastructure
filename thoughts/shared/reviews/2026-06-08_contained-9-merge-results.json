@@ -1,0 +1,920 @@
+{
+  "mode": "APPLY",
+  "stamp": "2026-06-08",
+  "snapshot": [
+    {
+      "name": "Adam Robinson",
+      "primary": {
+        "id": "Qtl5PgkHPMnNS1mjnGRO",
+        "ok": true,
+        "contact": {
+          "id": "Qtl5PgkHPMnNS1mjnGRO",
+          "dateAdded": "2026-04-06T06:00:45.499Z",
+          "type": "lead",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "Adam",
+          "firstNameLowerCase": "adam",
+          "fullNameLowerCase": "adam robinson",
+          "lastName": "Robinson",
+          "lastNameLowerCase": "robinson",
+          "email": "adam@streetsmartaustralia.org",
+          "emailLowerCase": "adam@streetsmartaustralia.org",
+          "country": "AU",
+          "source": "Website Inquiry",
+          "createdBy": {
+            "source": "INTEGRATION",
+            "channel": "OAUTH",
+            "sourceId": "695cb35c2eda1cb50c2dd51f",
+            "timestamp": "2026-04-06T06:00:45.499Z"
+          },
+          "dateUpdated": "2026-06-08T04:09:25.408Z",
+          "tags": [
+            "goods-newsletter",
+            "source:inquiry",
+            "role:funder",
+            "project:act-gd",
+            "comms:goods-newsletter",
+            "project:act-jh",
+            "role:partner",
+            "comms:funder-drip",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "1V8IGG8wEyZ3cKV2m3F9",
+              "value": [
+                "Supporter",
+                "Strategic",
+                "Philanthropy",
+                "Goods Bed V3"
+              ]
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      },
+      "secondary": {
+        "id": "wHstWIW6zo1ifWnWsayd",
+        "ok": true,
+        "contact": {
+          "id": "wHstWIW6zo1ifWnWsayd",
+          "fullNameLowerCase": "adam robinson",
+          "firstNameLowerCase": "adam",
+          "lastName": "Robinson",
+          "dateAdded": "2026-06-01T06:00:32.436Z",
+          "lastNameLowerCase": "robinson",
+          "source": "Website Inquiry",
+          "email": "adam@streetsmartaustralia.org",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "country": "AU",
+          "emailLowerCase": "adam@streetsmartaustralia.org",
+          "type": "lead",
+          "createdBy": {
+            "source": "INTEGRATION",
+            "channel": "OAUTH",
+            "timestamp": "2026-06-01T06:00:32.436Z",
+            "sourceId": "695cb35c2eda1cb50c2dd51f"
+          },
+          "firstName": "Adam",
+          "dateUpdated": "2026-06-08T03:35:02.002Z",
+          "tags": [
+            "goods-newsletter",
+            "source:inquiry",
+            "role:funder",
+            "project:act-gd",
+            "comms:goods-newsletter",
+            "project:act-jh",
+            "role:partner",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "0MoauenxTpavjZXGQmaA",
+              "value": "Goods"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      }
+    },
+    {
+      "name": "Corey Tutt",
+      "primary": {
+        "id": "kMG435sXyNZ3g0ka2hzg",
+        "ok": true,
+        "contact": {
+          "id": "kMG435sXyNZ3g0ka2hzg",
+          "dateAdded": "2025-11-25T20:53:22.604Z",
+          "type": "lead",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "Cory",
+          "firstNameLowerCase": "cory",
+          "fullNameLowerCase": "cory tutt",
+          "lastName": "Tutt",
+          "lastNameLowerCase": "tutt",
+          "email": "ceo@deadlyscience.org.au",
+          "emailLowerCase": "ceo@deadlyscience.org.au",
+          "website": "https://deadlyscience.org.au/",
+          "companyName": "Deadly Science",
+          "assignedTo": "1L1oOCtqj2jhcQV1hpbN",
+          "attributionSource": {
+            "sessionSource": "CRM UI",
+            "medium": "csv_import",
+            "mediumId": null
+          },
+          "scoring": {},
+          "country": "AU",
+          "dateUpdated": "2026-06-08T04:14:01.039Z",
+          "tags": [
+            "audience-brand",
+            "comms:goods-newsletter",
+            "project:act-gd",
+            "comms:act-newsletter"
+          ],
+          "customFields": [
+            {
+              "id": "EstWWlB9q7STh69uv1cn",
+              "value": 0
+            },
+            {
+              "id": "tRTSuLPQcWM1YnHLVrmQ",
+              "value": "2026-01-07"
+            },
+            {
+              "id": "5A5LeU774If3GeMS5vGI",
+              "value": "Initial outreach - introduce yourself and ACT"
+            },
+            {
+              "id": "aVnqmajnysMtGYhLD0oA",
+              "value": "Yes"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      },
+      "secondary": {
+        "id": "5LqgNvZQ2TGXHyJguHkB",
+        "ok": true,
+        "contact": {
+          "id": "5LqgNvZQ2TGXHyJguHkB",
+          "lastNameLowerCase": "tutt",
+          "dateAdded": "2026-06-01T06:00:29.250Z",
+          "type": "lead",
+          "emailLowerCase": "ceo@deadlyscience.org.au",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "Corey",
+          "lastName": "Tutt",
+          "email": "ceo@deadlyscience.org.au",
+          "fullNameLowerCase": "corey tutt",
+          "country": "AU",
+          "firstNameLowerCase": "corey",
+          "createdBy": {
+            "timestamp": "2026-06-01T06:00:29.250Z",
+            "sourceId": "695cb35c2eda1cb50c2dd51f",
+            "channel": "OAUTH",
+            "source": "INTEGRATION"
+          },
+          "source": "Website Inquiry",
+          "dateUpdated": "2026-06-08T04:03:48.960Z",
+          "tags": [
+            "goods-newsletter",
+            "audience-brand",
+            "source:inquiry",
+            "comms:goods-newsletter",
+            "project:act-gd",
+            "comms:act-newsletter",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "0MoauenxTpavjZXGQmaA",
+              "value": "Goods"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      }
+    },
+    {
+      "name": "Dr. Simon Quilty",
+      "primary": {
+        "id": "UJPGFZbcjcdslJC8jN6T",
+        "ok": true,
+        "contact": {
+          "id": "UJPGFZbcjcdslJC8jN6T",
+          "dateAdded": "2025-11-25T20:53:44.045Z",
+          "type": "lead",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "Simon",
+          "firstNameLowerCase": "simon",
+          "fullNameLowerCase": "simon quilty",
+          "lastName": "Quilty",
+          "lastNameLowerCase": "quilty",
+          "email": "sq@wilyajanta.org",
+          "emailLowerCase": "sq@wilyajanta.org",
+          "phone": "+61459025798",
+          "attributionSource": {
+            "sessionSource": "CRM UI",
+            "medium": "csv_import",
+            "mediumId": null
+          },
+          "scoring": {},
+          "country": "AU",
+          "followers": [],
+          "assignedTo": "o0lc2jOd8banxv9pTBF2",
+          "website": "https://wilyajanta.org",
+          "companyName": "Wilyajanta",
+          "dateUpdated": "2026-06-08T03:33:48.302Z",
+          "tags": [
+            "goods-newsletter",
+            "audience-brand",
+            "project:act-gd",
+            "role:partner",
+            "comms:goods-newsletter",
+            "source:inquiry",
+            "comms:newsletter",
+            "comms:partner-drip",
+            "comms:act-newsletter",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "EstWWlB9q7STh69uv1cn",
+              "value": 40
+            },
+            {
+              "id": "tRTSuLPQcWM1YnHLVrmQ",
+              "value": "2026-01-07"
+            },
+            {
+              "id": "5A5LeU774If3GeMS5vGI",
+              "value": "Follow up - 27 days since last contact"
+            },
+            {
+              "id": "1V8IGG8wEyZ3cKV2m3F9",
+              "value": [
+                "Supporter",
+                "Strategic",
+                "Partner",
+                "Tennant Creek"
+              ]
+            },
+            {
+              "id": "aVnqmajnysMtGYhLD0oA",
+              "value": "Yes"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      },
+      "secondary": {
+        "id": "7ZKeS2H6Fyi1xDUTvING",
+        "ok": true,
+        "contact": {
+          "id": "7ZKeS2H6Fyi1xDUTvING",
+          "createdBy": {
+            "channel": "OAUTH",
+            "sourceId": "695cb35c2eda1cb50c2dd51f",
+            "timestamp": "2026-06-01T06:00:35.685Z",
+            "source": "INTEGRATION"
+          },
+          "lastName": "Quilty",
+          "country": "AU",
+          "email": "sq@wilyajanta.org",
+          "dateAdded": "2026-06-01T06:00:35.685Z",
+          "emailLowerCase": "sq@wilyajanta.org",
+          "fullNameLowerCase": "dr. simon quilty",
+          "type": "lead",
+          "source": "Website Inquiry",
+          "lastNameLowerCase": "quilty",
+          "firstName": "Dr. Simon",
+          "firstNameLowerCase": "dr. simon",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "dateUpdated": "2026-06-08T04:02:30.243Z",
+          "tags": [
+            "goods-newsletter",
+            "audience-brand",
+            "source:inquiry",
+            "project:act-gd",
+            "role:partner",
+            "comms:goods-newsletter",
+            "comms:act-newsletter",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "0MoauenxTpavjZXGQmaA",
+              "value": "Goods"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      }
+    },
+    {
+      "name": "Kristy Bloomfield",
+      "primary": {
+        "id": "0kEs9BJmkmi7ZUc5haEX",
+        "ok": true,
+        "contact": {
+          "id": "0kEs9BJmkmi7ZUc5haEX",
+          "dateAdded": "2025-11-25T20:53:33.988Z",
+          "type": "lead",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "Kristy",
+          "firstNameLowerCase": "kristy",
+          "fullNameLowerCase": "kristy bloomfield",
+          "lastName": "Bloomfield",
+          "lastNameLowerCase": "bloomfield",
+          "email": "kristy.bloomfield@oonchiumpa.com.au",
+          "emailLowerCase": "kristy.bloomfield@oonchiumpa.com.au",
+          "companyName": "Oonchiumpa",
+          "attributionSource": {
+            "sessionSource": "CRM UI",
+            "medium": "csv_import",
+            "mediumId": null
+          },
+          "scoring": {},
+          "country": "AU",
+          "followers": [
+            "1L1oOCtqj2jhcQV1hpbN"
+          ],
+          "dateUpdated": "2026-06-08T03:38:57.259Z",
+          "tags": [
+            "project:act-hv",
+            "project:act-gd",
+            "audience-brand",
+            "project:act-jh",
+            "role:partner",
+            "role:storyteller",
+            "lane:community",
+            "source:inquiry",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "sGf7MWeuQTUuQIYp4VpS",
+              "value": "https://civicgraph.com.au/entity/AU-JH-001"
+            },
+            {
+              "id": "aVnqmajnysMtGYhLD0oA",
+              "value": "Yes"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      },
+      "secondary": {
+        "id": "yk4uK8rgDNGA87EUqNbu",
+        "ok": true,
+        "contact": {
+          "id": "yk4uK8rgDNGA87EUqNbu",
+          "firstNameLowerCase": "kristy",
+          "country": "AU",
+          "emailLowerCase": "kristy.bloomfield@oonchiumpa.com.au",
+          "email": "kristy.bloomfield@oonchiumpa.com.au",
+          "type": "lead",
+          "source": "Website Inquiry",
+          "createdBy": {
+            "timestamp": "2026-06-01T06:00:29.950Z",
+            "channel": "OAUTH",
+            "source": "INTEGRATION",
+            "sourceId": "695cb35c2eda1cb50c2dd51f"
+          },
+          "firstName": "Kristy",
+          "fullNameLowerCase": "kristy bloomfield",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "lastName": "Bloomfield",
+          "dateAdded": "2026-06-01T06:00:29.950Z",
+          "lastNameLowerCase": "bloomfield",
+          "dateUpdated": "2026-06-08T03:34:22.426Z",
+          "tags": [
+            "project:act-hv",
+            "project:act-gd",
+            "audience-brand",
+            "source:inquiry",
+            "project:act-jh",
+            "role:partner",
+            "role:storyteller",
+            "lane:community",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "0MoauenxTpavjZXGQmaA",
+              "value": "Goods"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      }
+    },
+    {
+      "name": "Sam Davies",
+      "primary": {
+        "id": "Vk0et07jw3qccBZsqBF8",
+        "ok": true,
+        "contact": {
+          "id": "Vk0et07jw3qccBZsqBF8",
+          "email": "sam@defydesign.org",
+          "firstName": "Sam",
+          "createdBy": {
+            "timestamp": "2026-01-08T07:31:06.666Z",
+            "source": "INTEGRATION",
+            "sourceId": "695de78620a1f6092661d485",
+            "channel": "OAUTH"
+          },
+          "fullNameLowerCase": "sam davies",
+          "country": "AU",
+          "lastName": "Davies",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "type": "lead",
+          "lastNameLowerCase": "davies",
+          "firstNameLowerCase": "sam",
+          "dateAdded": "2026-01-08T07:31:06.667Z",
+          "emailLowerCase": "sam@defydesign.org",
+          "website": "https://defydesign.org",
+          "companyName": "Defy Design",
+          "source": "Goods supplier import",
+          "dateUpdated": "2026-06-08T04:04:20.073Z",
+          "tags": [
+            "audience-brand",
+            "supplier-hdpe",
+            "project:act-gd",
+            "role:supporter",
+            "comms:goods-newsletter",
+            "source:inquiry",
+            "source:gmail-discovery",
+            "role:partner",
+            "role:supplier",
+            "comms:supporter-drip",
+            "comms:buyer-drip",
+            "comms:act-newsletter",
+            "ring:15",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "sGf7MWeuQTUuQIYp4VpS",
+              "value": "https://civicgraph.com.au/entity/AU-JH-001"
+            },
+            {
+              "id": "aVnqmajnysMtGYhLD0oA",
+              "value": "Yes"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      },
+      "secondary": {
+        "id": "7WXGBE5zD73ipAJfb5qE",
+        "ok": true,
+        "contact": {
+          "id": "7WXGBE5zD73ipAJfb5qE",
+          "firstNameLowerCase": "sam",
+          "firstName": "Sam",
+          "createdBy": {
+            "channel": "OAUTH",
+            "timestamp": "2026-06-01T06:00:23.082Z",
+            "sourceId": "695cb35c2eda1cb50c2dd51f",
+            "source": "INTEGRATION"
+          },
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "lastName": "Davies",
+          "email": "sam@defydesign.org",
+          "fullNameLowerCase": "sam davies",
+          "country": "AU",
+          "dateAdded": "2026-06-01T06:00:23.083Z",
+          "type": "lead",
+          "lastNameLowerCase": "davies",
+          "source": "Website Inquiry",
+          "emailLowerCase": "sam@defydesign.org",
+          "dateUpdated": "2026-06-08T04:04:01.449Z",
+          "tags": [
+            "goods-newsletter",
+            "audience-brand",
+            "supplier-hdpe",
+            "source:inquiry",
+            "project:act-gd",
+            "role:supporter",
+            "comms:goods-newsletter",
+            "source:gmail-discovery",
+            "role:partner",
+            "role:supplier",
+            "comms:act-newsletter",
+            "ring:15",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "0MoauenxTpavjZXGQmaA",
+              "value": "Goods"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      }
+    },
+    {
+      "name": "Tara Castle",
+      "primary": {
+        "id": "8QyHvajKpuyHyDmBfcCY",
+        "ok": true,
+        "contact": {
+          "id": "8QyHvajKpuyHyDmBfcCY",
+          "dateAdded": "2026-04-13T06:00:15.304Z",
+          "type": "lead",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "Tara",
+          "firstNameLowerCase": "tara",
+          "fullNameLowerCase": "tara castle",
+          "lastName": "Castle",
+          "lastNameLowerCase": "castle",
+          "email": "tara@queenslandgives.org.au",
+          "emailLowerCase": "tara@queenslandgives.org.au",
+          "country": "AU",
+          "source": "Website Inquiry",
+          "createdBy": {
+            "source": "INTEGRATION",
+            "channel": "OAUTH",
+            "sourceId": "695cb35c2eda1cb50c2dd51f",
+            "timestamp": "2026-04-13T06:00:15.304Z"
+          },
+          "dateUpdated": "2026-06-08T03:41:12.638Z",
+          "tags": [
+            "goods-newsletter",
+            "source:inquiry",
+            "project:act-gd",
+            "role:community",
+            "lane:community",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "1V8IGG8wEyZ3cKV2m3F9",
+              "value": [
+                "Supporter",
+                "Hot",
+                "Philanthropy",
+                "Stretch Bed",
+                "Palm Island"
+              ]
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      },
+      "secondary": {
+        "id": "1FJKzuyt1IpEFdjbJhjC",
+        "ok": true,
+        "contact": {
+          "id": "1FJKzuyt1IpEFdjbJhjC",
+          "dateAdded": "2026-06-01T06:00:33.049Z",
+          "lastName": "Castle",
+          "fullNameLowerCase": "tara castle",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "lastNameLowerCase": "castle",
+          "createdBy": {
+            "timestamp": "2026-06-01T06:00:33.048Z",
+            "channel": "OAUTH",
+            "sourceId": "695cb35c2eda1cb50c2dd51f",
+            "source": "INTEGRATION"
+          },
+          "emailLowerCase": "tara@queenslandgives.org.au",
+          "source": "Website Inquiry",
+          "country": "AU",
+          "type": "lead",
+          "email": "tara@queenslandgives.org.au",
+          "firstName": "Tara",
+          "firstNameLowerCase": "tara",
+          "dateUpdated": "2026-06-08T03:34:55.339Z",
+          "tags": [
+            "goods-newsletter",
+            "source:inquiry",
+            "project:act-gd",
+            "role:community",
+            "lane:community",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "0MoauenxTpavjZXGQmaA",
+              "value": "Goods"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      }
+    },
+    {
+      "name": "Tracey Newman",
+      "primary": {
+        "id": "D05Oa0eO8arILsSNjiPQ",
+        "ok": true,
+        "contact": {
+          "id": "D05Oa0eO8arILsSNjiPQ",
+          "dateAdded": "2026-03-26T05:11:43.145Z",
+          "type": "lead",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "tracey",
+          "firstNameLowerCase": "tracey",
+          "fullNameLowerCase": "tracey newman",
+          "lastName": "newman",
+          "lastNameLowerCase": "newman",
+          "email": "traceynewman008@gmail.com",
+          "emailLowerCase": "traceynewman008@gmail.com",
+          "country": "AU",
+          "source": "Website Inquiry",
+          "createdBy": {
+            "source": "INTEGRATION",
+            "channel": "OAUTH",
+            "sourceId": "695cb35c2eda1cb50c2dd51f",
+            "timestamp": "2026-03-26T05:11:43.145Z"
+          },
+          "dateUpdated": "2026-06-08T04:05:19.268Z",
+          "tags": [
+            "source:inquiry",
+            "project:act-jh",
+            "role:partner",
+            "place:adelaide",
+            "project:act-gd",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "1V8IGG8wEyZ3cKV2m3F9",
+              "value": [
+                "Supporter",
+                "Strategic",
+                "Community",
+                "Contained Tour"
+              ]
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      },
+      "secondary": {
+        "id": "pvZ53c6JlkL5sOPPFiTc",
+        "ok": true,
+        "contact": {
+          "id": "pvZ53c6JlkL5sOPPFiTc",
+          "email": "traceynewman008@gmail.com",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "Tracey",
+          "emailLowerCase": "traceynewman008@gmail.com",
+          "firstNameLowerCase": "tracey",
+          "lastName": "Newman",
+          "createdBy": {
+            "channel": "OAUTH",
+            "timestamp": "2026-06-01T06:00:36.712Z",
+            "source": "INTEGRATION",
+            "sourceId": "695cb35c2eda1cb50c2dd51f"
+          },
+          "lastNameLowerCase": "newman",
+          "type": "lead",
+          "source": "Website Inquiry",
+          "dateAdded": "2026-06-01T06:00:36.712Z",
+          "fullNameLowerCase": "tracey newman",
+          "country": "AU",
+          "dateUpdated": "2026-06-08T03:41:43.941Z",
+          "tags": [
+            "source:inquiry",
+            "project:act-jh",
+            "role:partner",
+            "place:adelaide",
+            "project:act-gd",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "0MoauenxTpavjZXGQmaA",
+              "value": "Goods"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      }
+    },
+    {
+      "name": "Willhemina Wahlin",
+      "primary": {
+        "id": "0w3yMTXm12bl74aKGce0",
+        "ok": true,
+        "contact": {
+          "id": "0w3yMTXm12bl74aKGce0",
+          "dateAdded": "2026-04-06T06:00:55.671Z",
+          "type": "lead",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "Willhemina",
+          "firstNameLowerCase": "willhemina",
+          "fullNameLowerCase": "willhemina wahlin",
+          "lastName": "Wahlin",
+          "lastNameLowerCase": "wahlin",
+          "email": "willhemina.wahlin@portable.com.au",
+          "emailLowerCase": "willhemina.wahlin@portable.com.au",
+          "country": "AU",
+          "source": "Website Inquiry",
+          "createdBy": {
+            "source": "INTEGRATION",
+            "channel": "OAUTH",
+            "sourceId": "695cb35c2eda1cb50c2dd51f",
+            "timestamp": "2026-04-06T06:00:55.670Z"
+          },
+          "dateUpdated": "2026-06-08T03:39:04.741Z",
+          "tags": [
+            "goods-newsletter",
+            "source:inquiry",
+            "project:act-gd",
+            "role:supporter",
+            "comms:goods-newsletter",
+            "comms:supporter-drip",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "1V8IGG8wEyZ3cKV2m3F9",
+              "value": [
+                "Supporter",
+                "Warm",
+                "Design",
+                "Goods Bed Imagine"
+              ]
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      },
+      "secondary": {
+        "id": "moxP9fCQ7a2pdibcxPDa",
+        "ok": true,
+        "contact": {
+          "id": "moxP9fCQ7a2pdibcxPDa",
+          "createdBy": {
+            "channel": "OAUTH",
+            "source": "INTEGRATION",
+            "timestamp": "2026-06-01T06:00:33.870Z",
+            "sourceId": "695cb35c2eda1cb50c2dd51f"
+          },
+          "lastName": "Wahlin",
+          "type": "lead",
+          "emailLowerCase": "willhemina.wahlin@portable.com.au",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "Willhemina",
+          "firstNameLowerCase": "willhemina",
+          "lastNameLowerCase": "wahlin",
+          "country": "AU",
+          "source": "Website Inquiry",
+          "fullNameLowerCase": "willhemina wahlin",
+          "email": "willhemina.wahlin@portable.com.au",
+          "dateAdded": "2026-06-01T06:00:33.870Z",
+          "dateUpdated": "2026-06-08T03:31:29.436Z",
+          "tags": [
+            "goods-newsletter",
+            "source:inquiry",
+            "project:act-gd",
+            "role:supporter",
+            "comms:goods-newsletter",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "0MoauenxTpavjZXGQmaA",
+              "value": "Goods"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      }
+    },
+    {
+      "name": "Toby Gowland",
+      "primary": {
+        "id": "cnNzFM6zrQjRaMJ69NpE",
+        "ok": true,
+        "contact": {
+          "id": "cnNzFM6zrQjRaMJ69NpE",
+          "dateAdded": "2026-04-27T06:00:28.578Z",
+          "type": "lead",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "firstName": "Toby",
+          "firstNameLowerCase": "toby",
+          "fullNameLowerCase": "toby gowland",
+          "lastName": "Gowland",
+          "lastNameLowerCase": "gowland",
+          "email": "tobyg@kalianahoutdoors.com.au",
+          "emailLowerCase": "tobyg@kalianahoutdoors.com.au",
+          "country": "AU",
+          "source": "Website Inquiry",
+          "createdBy": {
+            "source": "INTEGRATION",
+            "channel": "OAUTH",
+            "sourceId": "695cb35c2eda1cb50c2dd51f",
+            "timestamp": "2026-04-27T06:00:28.577Z"
+          },
+          "dateUpdated": "2026-06-08T04:14:03.337Z",
+          "tags": [
+            "contained-hot-lead",
+            "project:act-ce",
+            "source:inquiry",
+            "project:act-jh",
+            "interest:justice-reform",
+            "role:partner",
+            "place:brisbane",
+            "interest:container",
+            "project:act-gd",
+            "project:act-cn",
+            "comms:justicehub-newsletter",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "1V8IGG8wEyZ3cKV2m3F9",
+              "value": [
+                "Supporter",
+                "Warm",
+                "Youth",
+                "Goods Bed V3"
+              ]
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      },
+      "secondary": {
+        "id": "mTsZ14zvtIs3XaaTHHhX",
+        "ok": true,
+        "contact": {
+          "id": "mTsZ14zvtIs3XaaTHHhX",
+          "country": "AU",
+          "emailLowerCase": "tobyg@kalianahoutdoors.com.au",
+          "source": "Website Inquiry",
+          "createdBy": {
+            "timestamp": "2026-06-01T06:00:30.596Z",
+            "sourceId": "695cb35c2eda1cb50c2dd51f",
+            "channel": "OAUTH",
+            "source": "INTEGRATION"
+          },
+          "firstName": "Toby",
+          "firstNameLowerCase": "toby",
+          "lastNameLowerCase": "gowland",
+          "email": "tobyg@kalianahoutdoors.com.au",
+          "type": "lead",
+          "lastName": "Gowland",
+          "fullNameLowerCase": "toby gowland",
+          "dateAdded": "2026-06-01T06:00:30.596Z",
+          "locationId": "agzsSZWgovjwgpcoASWG",
+          "dateUpdated": "2026-06-08T03:41:49.115Z",
+          "tags": [
+            "contained-hot-lead",
+            "project:act-ce",
+            "comms:justicehub-newsletter",
+            "project:act-jh",
+            "source:inquiry",
+            "interest:justice-reform",
+            "role:partner",
+            "place:brisbane",
+            "interest:container",
+            "project:act-gd",
+            "project:act-cn",
+            "role:buyer"
+          ],
+          "customFields": [
+            {
+              "id": "0MoauenxTpavjZXGQmaA",
+              "value": "Goods"
+            }
+          ],
+          "additionalEmails": [],
+          "additionalPhones": []
+        }
+      }
+    }
+  ],
+  "merges": [
+    {
+      "name": "Adam Robinson",
+      "merged": false,
+      "error": "GHL API Error (403): {\"message\":\"Permission denied.\",\"error\":\"Forbidden\",\"statusCode\":403}"
+    }
+  ],
+  "fixups": [],
+  "aborted": true
+}
