@@ -34,16 +34,22 @@ Contacts view (Contacts → Manage Fields/Views → add view → choose columns 
 Smart Lists = saved tag/field queries. ACT sends four newsletters + runs one relationship lane +
 keeps one never-send safety list. Each Sendable list = stream tag **AND** both gates.
 
-Consent = the GHL custom field **"Newsletter Consent"** (SINGLE_OPTIONS Yes|No) → filter **is `Yes`**.
-Expected sizes are from the Supabase mirror (2026-06-09, cap-safe counts, gone-from-ghl excluded) — GHL
-live will be ≈ these; the gate-proof in GHL is the real check.
+**⚠️ CONSENT GATE — HARDENED (2026-06-09).** `Newsletter Consent = Yes` **alone is not enough** — a cohort
+carries `Yes` with no provenance (PHANTOM consent, bulk-set 2026-01-08, never opted in; see
+`2026-06-09_contained-consent-resolution-worklist.md` — 106 phantom of 269). Every Sendable list MUST also
+require proof of opt-in:
+> **Sendable = `comms:X-newsletter` ∧ `Newsletter Consent = Yes` ∧ `Consent Source is not empty` ∧ NOT `lane:community`**
 
-| # | Smart List | Filter (AND) | Sendable? | ≈ size |
+(`Consent Source` / `Consent Timestamp` are blank on phantom consent and set on every real signup.) The
+`≈ size` below is the OLD `Yes`-only count — it will **shrink** once `Consent Source is not empty` is added
+(that's the gate correctly dropping phantom consent). Treat these as upper bounds.
+
+| # | Smart List | Filter (AND) | Sendable? | ≈ size (Yes-only; drops w/ provenance gate) |
 |---|------------|--------------|-----------|--------|
-| 1 | **ACT · Sendable** | `comms:act-newsletter` · Newsletter Consent = Yes · NOT `lane:community` | ✅ | **146** (of 158 tagged) |
-| 2 | **Goods · Sendable** | `comms:goods-newsletter` · consent · NOT `lane:community` | ✅ | **136** (of 182) |
-| 3 | **Harvest · Sendable** | `comms:harvest-newsletter` · consent · NOT `lane:community` | ✅ | **62** (of 80) |
-| 4 | **JusticeHub · Sendable** | `comms:justicehub-newsletter` · consent · NOT `lane:community` | ✅ | **1** ⚠️ (of 20) |
+| 1 | **ACT · Sendable** | `comms:act-newsletter` · Newsletter Consent = Yes · **Consent Source not empty** · NOT `lane:community` | ✅ | ≤146 |
+| 2 | **Goods · Sendable** | `comms:goods-newsletter` · consent+source · NOT `lane:community` | ✅ | ≤136 |
+| 3 | **Harvest · Sendable** | `comms:harvest-newsletter` · consent+source · NOT `lane:community` | ✅ | ≤62 |
+| 4 | **JusticeHub · Sendable** | `comms:justicehub-newsletter` · consent+source · NOT `lane:community` | ✅ | ~1 ⚠️ |
 | 5 | **Funders · Relationship-led** | `role:funder` (92) — *optional warm refine:* `engagement:hot`/`engagement:personal-vip` | ❌ no automation — human send only | 92 |
 | 6 | **Community-line · NEVER SEND** | `lane:community` | ❌ safety/visibility list, never an audience | 72 |
 
