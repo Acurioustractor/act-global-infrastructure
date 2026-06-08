@@ -22,7 +22,7 @@ Contacts view (Contacts → Manage Fields/Views → add view → choose columns 
 | 2 | **Justice** | role · `interest:justice-reform` · campaign-stage · CONTAINED tags · consent | `project:act-jh` OR `project:contained*` |
 | 3 | **Goods** | role (buyer/supplier/recipient) · Company · asset tags · consent | `project:act-gd` |
 | 4 | **Funders** | Company · grant pipeline · ask amount · owner | `role:funder` |
-| 5 | **Community-line** | `role:storyteller` · `place:community` · consent provenance · **NO comms fields** | `lane:community` |
+| 5 | **Community-line** | `role:storyteller` · `lane:community` · consent provenance · **NO comms fields** | `lane:community` |
 
 > View 5 deliberately omits comms/enrolment columns — a community-line record is read for context,
 > never operated as a send audience.
@@ -34,14 +34,34 @@ Contacts view (Contacts → Manage Fields/Views → add view → choose columns 
 Smart Lists = saved tag/field queries. ACT sends four newsletters + runs one relationship lane +
 keeps one never-send safety list. Each Sendable list = stream tag **AND** both gates.
 
-| # | Smart List | Filter (AND) | Sendable? |
-|---|------------|--------------|-----------|
-| 1 | **ACT · Sendable** | `comms:act-newsletter` · `newsletter_consent = Yes` · NOT `lane:community` | ✅ |
-| 2 | **Goods · Sendable** | `comms:goods-newsletter` · consent · NOT `lane:community` | ✅ |
-| 3 | **Harvest · Sendable** | `comms:harvest-newsletter` · consent · NOT `lane:community` | ✅ |
-| 4 | **JusticeHub · Sendable** | `comms:justicehub-newsletter` · consent · NOT `lane:community` | ✅ |
-| 5 | **Funders · Relationship-led** | `role:funder` · `tier:` warm/hot/personal | ❌ no automation — human send only |
-| 6 | **Community-line · NEVER SEND** | `lane:community` | ❌ safety/visibility list, never an audience |
+Consent = the GHL custom field **"Newsletter Consent"** (SINGLE_OPTIONS Yes|No) → filter **is `Yes`**.
+Expected sizes are from the Supabase mirror (2026-06-09, cap-safe counts, gone-from-ghl excluded) — GHL
+live will be ≈ these; the gate-proof in GHL is the real check.
+
+| # | Smart List | Filter (AND) | Sendable? | ≈ size |
+|---|------------|--------------|-----------|--------|
+| 1 | **ACT · Sendable** | `comms:act-newsletter` · Newsletter Consent = Yes · NOT `lane:community` | ✅ | **146** (of 158 tagged) |
+| 2 | **Goods · Sendable** | `comms:goods-newsletter` · consent · NOT `lane:community` | ✅ | **136** (of 182) |
+| 3 | **Harvest · Sendable** | `comms:harvest-newsletter` · consent · NOT `lane:community` | ✅ | **62** (of 80) |
+| 4 | **JusticeHub · Sendable** | `comms:justicehub-newsletter` · consent · NOT `lane:community` | ✅ | **1** ⚠️ (of 20) |
+| 5 | **Funders · Relationship-led** | `role:funder` (92) — *optional warm refine:* `engagement:hot`/`engagement:personal-vip` | ❌ no automation — human send only | 92 |
+| 6 | **Community-line · NEVER SEND** | `lane:community` | ❌ safety/visibility list, never an audience | 72 |
+
+> ⚠️ **JusticeHub·Sendable = 1.** The gate drops **19 of 20** `comms:justicehub-newsletter` holders —
+> they lack consent or are `lane:community`. That's the gate doing its job, but a 1-person send list is
+> a signal: either JH consent capture is broken, or the JH audience is genuinely community-line
+> (lived-experience people). The `tier:`/warmth tags the earlier draft used (`tier:warm/hot/personal`)
+> **do not exist** in this account; the real warmth vocab is `engagement:*` / `ring:*` (and
+> `tier:curious|member|connected` is Harvest membership, not funder warmth) — hence list 5 is plain
+> `role:funder` + an optional engagement refine.
+>
+> **DIAGNOSED + DECIDED (2026-06-09):** the 19 dropped are **all no-consent, non-community** (`src=ghl`
+> CONTAINED/import professionals bulk-tagged, never a signup; incl. `toby gowland ×4` duplicate
+> contacts → UI-merge, no merge API). They are NOT a consent-capture bug to silently fix and NOT
+> community-line. **Decision (Ben): LEAVE them in place — the consent gate already blocks every send to
+> them** — and fold into the single pending 62-person Spam-Act decision (strip-vs-investigate) rather
+> than piecemeal. Reversible tool built + dry-run only (NOT applied): `scripts/strip-unconsented-jh-newsletter-2026-06-09.mjs`;
+> re-opt-in worklist: `2026-06-09_jh-newsletter-reoptin-worklist.csv`. Consent was never touched/fabricated.
 
 ### Build order
 1. List 6 first (Community-line) — so it exists to eyeball *before* any send list is wired to a campaign.
