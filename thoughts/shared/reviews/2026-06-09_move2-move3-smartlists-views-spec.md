@@ -50,10 +50,18 @@ live will be ≈ these; the gate-proof in GHL is the real check.
 > ⚠️ **JusticeHub·Sendable = 1.** The gate drops **19 of 20** `comms:justicehub-newsletter` holders —
 > they lack consent or are `lane:community`. That's the gate doing its job, but a 1-person send list is
 > a signal: either JH consent capture is broken, or the JH audience is genuinely community-line
-> (lived-experience people). **Investigate before treating this list as live** — don't paper over it.
-> The `tier:`/warmth tags the earlier draft used (`tier:warm/hot/personal`) **do not exist** in this
-> account; the real warmth vocab is `engagement:*` / `ring:*` (and `tier:curious|member|connected` is
-> Harvest membership, not funder warmth) — hence list 5 is plain `role:funder` + an optional engagement refine.
+> (lived-experience people). The `tier:`/warmth tags the earlier draft used (`tier:warm/hot/personal`)
+> **do not exist** in this account; the real warmth vocab is `engagement:*` / `ring:*` (and
+> `tier:curious|member|connected` is Harvest membership, not funder warmth) — hence list 5 is plain
+> `role:funder` + an optional engagement refine.
+>
+> **DIAGNOSED + DECIDED (2026-06-09):** the 19 dropped are **all no-consent, non-community** (`src=ghl`
+> CONTAINED/import professionals bulk-tagged, never a signup; incl. `toby gowland ×4` duplicate
+> contacts → UI-merge, no merge API). They are NOT a consent-capture bug to silently fix and NOT
+> community-line. **Decision (Ben): LEAVE them in place — the consent gate already blocks every send to
+> them** — and fold into the single pending 62-person Spam-Act decision (strip-vs-investigate) rather
+> than piecemeal. Reversible tool built + dry-run only (NOT applied): `scripts/strip-unconsented-jh-newsletter-2026-06-09.mjs`;
+> re-opt-in worklist: `2026-06-09_jh-newsletter-reoptin-worklist.csv`. Consent was never touched/fabricated.
 
 ### Build order
 1. List 6 first (Community-line) — so it exists to eyeball *before* any send list is wired to a campaign.
