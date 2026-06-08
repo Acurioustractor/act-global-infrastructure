@@ -445,18 +445,19 @@
       "dext_category": "Health",
       "alma_program": "fitness"
     },
-    "ACT-BV": {
-      "name": "Black Cockatoo Valley",
-      "code": "ACT-BV",
+    "ACT-FM": {
+      "name": "The Farm",
+      "code": "ACT-FM",
       "category": "regenerative",
-      "priority": "medium",
+      "priority": "high",
       "status": "active",
-      "description": "Regenerative conservation",
-      "notion_pages": ["BCV Reforest", "BCV: Regenerative Conservation"],
-      "ghl_tags": ["bcv", "black-cockatoo"],
-      "xero_tracking": "BCV",
+      "description": "Land-based healing and cultural connection, incl. Black Cockatoo Valley regenerative conservation (ACT-BV merged into ACT-FM 2026-06-08 — same Witta land)",
+      "legacy_codes": ["ACT-BV", "ACT-BCV"],
+      "notion_pages": ["The Farm", "ACT Farm", "BCV Reforest", "BCV: Regenerative Conservation"],
+      "ghl_tags": ["farm", "the-farm", "bcv", "black-cockatoo"],
+      "xero_tracking": "ACT-FM — The Farm",
       "dext_category": "Regenerative",
-      "alma_program": "conservation"
+      "alma_program": "land-healing"
     },
     "ACT-MY": {
       "name": "Mounty Yarns",

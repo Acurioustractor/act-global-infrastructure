@@ -17,13 +17,15 @@ test('normalizeProjectCode: upper/trim and fold legacy wrappers', () => {
   assert.equal(normalizeProjectCode('ACT-HQ'), 'ACT-CORE')
   assert.equal(normalizeProjectCode('act-cg'), 'ACT-CS')
   assert.equal(normalizeProjectCode(' act-pc '), 'ACT-PI')
+  assert.equal(normalizeProjectCode('ACT-BV'), 'ACT-FM') // Black Cockatoo Valley merged into The Farm 2026-06-08
+  assert.equal(normalizeProjectCode('act-bcv'), 'ACT-FM')
   assert.equal(normalizeProjectCode('ACT-JH'), 'ACT-JH') // non-legacy passes through
   assert.equal(normalizeProjectCode(null), null)
   assert.equal(normalizeProjectCode(''), null)
 })
 
 test('LEGACY_WRAPPERS matches the resolver fold map', () => {
-  assert.deepEqual(LEGACY_WRAPPERS, { 'ACT-CG': 'ACT-CS', 'ACT-HQ': 'ACT-CORE', 'ACT-PC': 'ACT-PI' })
+  assert.deepEqual(LEGACY_WRAPPERS, { 'ACT-CG': 'ACT-CS', 'ACT-HQ': 'ACT-CORE', 'ACT-PC': 'ACT-PI', 'ACT-BV': 'ACT-FM', 'ACT-BCV': 'ACT-FM' })
 })
 
 test('foldMonthlyByCanonical: merges legacy rows into their canonical code', () => {

@@ -48,8 +48,8 @@ const PREFIX_RULES = [
   ['justicehub-', 'ACT-JH'],
   ['el-', 'ACT-EL'],
   ['empathy-', 'ACT-EL'],
-  ['bcv-', 'ACT-BV'],
-  ['black-cockatoo-', 'ACT-BV'],
+  ['bcv-', 'ACT-FM'],
+  ['black-cockatoo-', 'ACT-FM'],
   ['farm-', 'ACT-FM'],
   ['the-farm-', 'ACT-FM']
 ];

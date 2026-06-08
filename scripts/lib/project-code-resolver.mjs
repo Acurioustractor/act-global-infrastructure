@@ -21,8 +21,8 @@ export const PREFIX_RULES = [
   ['justicehub-', 'ACT-JH'],
   ['el-', 'ACT-EL'],
   ['empathy-', 'ACT-EL'],
-  ['bcv-', 'ACT-BV'],
-  ['black-cockatoo-', 'ACT-BV'],
+  ['bcv-', 'ACT-FM'],
+  ['black-cockatoo-', 'ACT-FM'],
   ['farm-', 'ACT-FM'],
   ['the-farm-', 'ACT-FM']
 ];
@@ -32,7 +32,7 @@ const LEGACY_SLUG_ALIASES = {
   'act-farm': 'ACT-FM',
   'act-studio': 'ACT-CORE',
   'goods-on-country': 'ACT-GD',
-  'bcv-residencies': 'ACT-BV'
+  'bcv-residencies': 'ACT-FM'
 };
 
 /**
