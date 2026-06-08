@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-08
 **Decision by:** Ben
-**Status:** Tier-1 (config/code) DONE · Tier-3 (Xero/Supabase money re-code) PENDING Ben's verb
+**Status:** Tier-1 (config/code) DONE · Tier-3 (Xero/Supabase money re-code) DONE 2026-06-08 (Ben's verb)
 
 ## Decision
 
@@ -33,13 +33,19 @@ Fold lever = the existing legacy-wrapper mechanism (`normalizeCode`/`normalizePr
 - **Money-alignment view** — `money-alignment/route.ts` hardcoded ACT-BV card ($525/1 line) folded into the ACT-FM card (now $131,386.29 exp / −$106,493.79 net / 154 lines); separate card removed.
 - **Tests** — `project-codes.test.ts` fold-map guard + `normalizeProjectCode` assertions updated to include ACT-BV/ACT-BCV→ACT-FM. Suites green (6/6 fold, 13/13 resolver), command-center `tsc --noEmit` clean.
 
-## What remains (Tier 3 — Ben's verb, day-shift)
+## Tier-3 execution (DONE 2026-06-08)
 
-The 9 ACT-BV-coded money records still literally carry `ACT-BV` until re-coded; the fold makes them roll up correctly meanwhile, but the source-of-record change is a Xero write:
+Script: `scripts/recode-act-bv-to-fm-2026-06-08.mjs` (gated, GET-fresh → modify-only-tracking → revert-log → POST → verify byte-identical totals). Revert log: `scripts/output/recode-act-bv-to-fm-revert-2026-06-08.json`.
 
-1. **Xero** — re-code the 9 records (1 invoice + 8 transactions) from the `ACT-BV — Black Cockatoo Valley` tracking category to `ACT-FM — The Farm`; then retire the ACT-BV tracking category.
-2. **Supabase** — update those rows' `project_code` `ACT-BV → ACT-FM` (set `project_code_source='manual'`).
-3. **Cleanup after re-code** — the literal-`ACT-BV` keys left in place for the interim become dead and can be removed: `config/xero-chart.json:1808`, the Xero-push maps (`add-tracking-to-bank-txns.mjs:39`, `push-ai-tracking-to-xero.mjs:66`), and the display/pile maps (`bunya-fixer.mjs:64`, `generate-project-financials.mjs:41`, `self-reliance/route.ts:9`, `pile-mapping.json:38`, `ledger.ts:812`).
+**Live Xero truth (probed first):** only the 1 invoice actually carried `ACT-BV` in Xero; all 8 Aleisha (BCV rent) txns had **no Project Tracking at all** (`null`) — their mirror `ACT-BV` never corresponded to live Xero tracking.
+
+1. **Xero invoice** — Dinkum Dunnies $525 bill (ACCPAY, post-lock) recoded `ACT-BV → ACT-FM`, total byte-intact, verified. ✅
+2. **Xero option retired** — `ACT-BV — Black Cockatoo Valley` Project Tracking option **DELETEd** (once unused; Xero rejects ARCHIVE on a not-in-use option, requires DELETE; reversible by recreate). Confirmed MISSING; `ACT-FM — The Farm` remains ACTIVE. ✅
+3. **Supabase mirror** — all 9 rows (1 invoice + 8 txns) → `project_code='ACT-FM'`, `project_code_source='manual-merge-2026-06-08'` (sync-protected). Verified: 0 ACT-BV remain. ✅
+4. **The 8 RECEIVE txns** — **could not be API-recoded**: reconciled bank transactions are API-locked (`"This Bank Transaction cannot be edited as it has been reconciled with a Bank Statement"`). They were never ACT-BV-tracked in Xero anyway, and now fold to ACT-FM via the mirror + resolver. Adding Xero Project Tracking to them would require manual UI edits (low value — correctly attributed already). **The "route 5 locked records to SL" step dissolved** — they're untracked in Xero, nothing to recode.
+
+### Still-dead literal-`ACT-BV` keys (cleanup, no rush)
+Now that no record carries ACT-BV, these literal keys are dead and can be swept anytime: `config/xero-chart.json:1808`, Xero-push maps (`add-tracking-to-bank-txns.mjs:39`, `push-ai-tracking-to-xero.mjs:66`), display/pile maps (`bunya-fixer.mjs:64`, `generate-project-financials.mjs:41`, `self-reliance/route.ts:9`, `pile-mapping.json:38`, `ledger.ts:812`). The fold handles them regardless.
 
 ## Intentionally NOT changed
 
