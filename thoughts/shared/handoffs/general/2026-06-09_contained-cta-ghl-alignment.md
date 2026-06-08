@@ -126,19 +126,21 @@ Suppression guard (A8 in the build spec) is unchanged and must be built FIRST: D
 
 **Phase D — gated live build (Tier 3, day-shift, 16 Jun go/no-go):** create the 2 missing custom fields (`cohort`, `slot_confirmed`); create the calendar; create the pipeline + 11 stages; build A1-A8 automations on canonical triggers; **run the off-contract → canonical tag migration on the ~260 contacts** (additive-then-strip, conflict-guarded, re-assert community-line guard after each bucket); resolve the 9 multi-way duplicate contacts in the GHL UI (Kristy Bloomfield = community line). First send of every stream = preview to Ben, then enable.
 
-## Open rulings (do not guess)
+## Locked rulings (Ben, 2026-06-09)
 
-- **RC1 — role mapping for CONTAINED's 12-role dropdown → 8 canonical roles.** Obvious: researcher/media/funder/community map 1:1; lived_experience→`lane:community`+`role:storyteller` (R3). **Needs ruling:** practitioner, service_org, student, policymaker, advocate, artist → which canonical `role:` / `interest:`? (Config encodes PROPOSED mappings, marked.)
-- **RC2 — `engagement:`/`campaign-stage:` keepers?** Are these formal-taxonomy namespaces or do they migrate in the taxonomy worksheet? The lifecycle layer depends on the answer.
-- **RC3 — the ~260 live `project:contained-adelaide-2026` contacts.** Strip the tag after adding canonical, or leave as a legacy campaign marker? (Recommend: add canonical, strip the off-contract tag in the gated migration.)
-- **RC4 — calendar location of record.** GHL native calendar vs an embedded booking form that writes the booking. (Spec assumes GHL native calendar.)
+- **RC1 — role mapping → LOCKED (Professional→partner).** researcher/media/funder/community map 1:1; lived_experience→`lane:community`+`role:storyteller` (R3); **service_org + practitioner + policymaker → `role:partner`**; **advocate + artist + student → `role:supporter`** (artist also `interest:storytelling`).
+- **RC2 — `engagement:`/`campaign-stage:` → LOCKED (keep).** They remain the CONTAINED lifecycle layer, keyed by `source:event:contained-adelaide`. No migration of these namespaces for this campaign.
+- **RC3 — the ~260 `project:contained-adelaide-2026` contacts → LOCKED (strip).** Gated migration adds canonical, then strips the off-contract tag (additive-then-strip).
+- **RC4 — booking → LOCKED (GHL native Calendar).** GHL Calendars, not an embedded form; a confirmed booking sets `slot_confirmed` and moves the opportunity to Booked.
 
 ## Decision + verification log
 
 - 2026-06-09 — **R4 wins (Ben, AskUserQuestion):** CONTAINED conforms to canonical; register route + build spec + ~260 contacts migrate. Self-serve calendar chosen (un-defers pipeline). All CTAs in scope.
+- 2026-06-09 — **RC1-RC4 locked (Ben, AskUserQuestion):** RC1 Professional→partner (service_org/practitioner/policymaker→`role:partner`; advocate/artist/student→`role:supporter`); RC2 keep `engagement:`/`campaign-stage:` lifecycle; RC3 strip legacy tag after canonical; RC4 GHL native Calendar.
 - 2026-06-09 VERIFIED (read-only, live GHL, loc `agzsSZWgovjwgpcoASWG`): custom fields present except `cohort`+`slot_confirmed` (to create); no "CONTAINED Adelaide 2026" pipeline yet; eligibility gate 113 eligible / 2916 blocked; `newsletter-stream:contained-adelaide-invite`=28; `project:contained-adelaide-2026`=260. Evidence: JusticeHub `eligibility-verification-2026-06-09.md`.
 - 2026-06-09 VERIFIED (read-only, JusticeHub): 24 CTAs mapped, 9 capture gaps, `GHL_CANONICAL` exists, 4/5 routes already canonical, `project:` split. Evidence: `contained-cta-ghl-inventory.md`.
 - 2026-06-09 FLAGGED: a colon→underscore `tag-normalize` dry-run artifact in JusticeHub `output/ghl-contained-adelaide-audit/` is wrong-direction (would orphan the register form's colon tags); do NOT apply it.
 
 ## Changelog
 - 2026-06-09 — alignment handoff created; R4 ruling recorded; canonical contract + CTA map + calendar spec + build sequence; config + dry-run scaffold produced.
+- 2026-06-09 — RC1-RC4 locked; config role_map finalized (practitioner→`role:partner`), lifecycle/migration/calendar rulings recorded; status → rulings-locked.

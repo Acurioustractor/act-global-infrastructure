@@ -1,8 +1,8 @@
 {
   "version": 1,
   "updated": "2026-06-09",
-  "status": "draft-for-build",
-  "description": "Canonical GHL campaign config for CONTAINED Adelaide 2026. P1 of thoughts/shared/plans/2026-06-08-contained-adelaide-campaign-crm.md, under the R4 ruling (CONTAINED conforms to the one-account canonical contract: project:act-jh + source:event:contained-adelaide + interest:justice-reform + comms:justicehub-newsletter). DATA ONLY. No code here applies anything; live GHL writes are Tier 3, day-shift, gated to the 16 Jun go/no-go. Source evidence cited in thoughts/shared/handoffs/general/2026-06-09_contained-cta-ghl-alignment.md.",
+  "status": "rulings-locked",
+  "description": "Canonical GHL campaign config for CONTAINED Adelaide 2026. P1 of thoughts/shared/plans/2026-06-08-contained-adelaide-campaign-crm.md, under the R4 ruling (CONTAINED conforms to the one-account canonical contract: project:act-jh + source:event:contained-adelaide + interest:justice-reform + comms:justicehub-newsletter). RC1-RC4 LOCKED 2026-06-09: RC1 Professional->partner; RC2 keep engagement:/campaign-stage: lifecycle; RC3 strip legacy tag after canonical; RC4 GHL native calendar. DATA ONLY. No code here applies anything; live GHL writes are Tier 3, day-shift, gated to the 16 Jun go/no-go. Source evidence cited in thoughts/shared/handoffs/general/2026-06-09_contained-cta-ghl-alignment.md.",
   "meta": {
     "campaign_code": "ACT-CN",
     "campaign_name": "CONTAINED Adelaide 2026",
@@ -22,18 +22,18 @@
       "interest:justice-reform"
     ],
     "role_map": {
-      "_comment": "JusticeHub register/signup role dropdown -> canonical role: namespace (8 canonical roles: funder/partner/buyer/supporter/storyteller/researcher/media/community). 'ruling' flags are OPEN (RC1) - PROPOSED mappings, not final.",
+      "_comment": "JusticeHub register/signup role dropdown -> canonical role: namespace (8 canonical roles: funder/partner/buyer/supporter/storyteller/researcher/media/community). RC1 LOCKED 2026-06-09 (Professional->partner scheme): service_org/practitioner/policymaker->role:partner; advocate/artist/student->role:supporter.",
       "researcher": { "tags": ["role:researcher"], "ruling": "locked" },
       "media": { "tags": ["role:media"], "ruling": "locked" },
       "funder": { "tags": ["role:funder"], "ruling": "locked" },
       "community": { "tags": ["role:community"], "ruling": "locked" },
       "lived_experience": { "tags": ["lane:community", "role:storyteller"], "suppress_comms": true, "ruling": "locked-R3", "_comment": "OCAP: never auto-enrolled into comms:*; automation suppressed even on a newsletter tick; explicit opt-in human-confirmed." },
-      "service_org": { "tags": ["role:partner"], "ruling": "PROPOSED-RC1" },
-      "practitioner": { "tags": ["role:supporter"], "ruling": "PROPOSED-RC1" },
-      "policymaker": { "tags": ["role:partner"], "ruling": "PROPOSED-RC1" },
-      "advocate": { "tags": ["role:supporter"], "ruling": "PROPOSED-RC1" },
-      "artist": { "tags": ["role:supporter", "interest:storytelling"], "ruling": "PROPOSED-RC1" },
-      "student": { "tags": ["role:supporter"], "ruling": "PROPOSED-RC1" },
+      "service_org": { "tags": ["role:partner"], "ruling": "locked-RC1" },
+      "practitioner": { "tags": ["role:partner"], "ruling": "locked-RC1" },
+      "policymaker": { "tags": ["role:partner"], "ruling": "locked-RC1" },
+      "advocate": { "tags": ["role:supporter"], "ruling": "locked-RC1" },
+      "artist": { "tags": ["role:supporter", "interest:storytelling"], "ruling": "locked-RC1" },
+      "student": { "tags": ["role:supporter"], "ruling": "locked-RC1" },
       "supporter": { "tags": ["role:supporter"], "ruling": "locked" }
     },
     "state_to_place": {
@@ -66,7 +66,8 @@
     }
   },
   "calendar": {
-    "_comment": "Self-serve booking (Ben, 2026-06-09) - the precondition that un-defers the pipeline (campaign-CRM plan D1). Live creation = Tier 3, gated to go/no-go.",
+    "_comment": "Self-serve booking (Ben, 2026-06-09) - the precondition that un-defers the pipeline (campaign-CRM plan D1). Live creation = Tier 3, gated to go/no-go. RC4 LOCKED 2026-06-09: GHL native Calendar, not an embedded form.",
+    "type": "ghl-native-calendar",
     "name": "CONTAINED Adelaide Walkthroughs",
     "venue": "Tandanya, Adelaide",
     "slot_minutes": 30,
@@ -97,7 +98,7 @@
     }
   },
   "lifecycle_layer": {
-    "_comment": "RC2 open: are engagement:/campaign-stage: formal-taxonomy keepers or do they migrate? Pending that ruling, treat as the campaign lifecycle SEGMENT layer, keyed to CONTAINED by source:event:contained-adelaide.",
+    "_comment": "RC2 LOCKED 2026-06-09: keep engagement:/campaign-stage: as the campaign lifecycle SEGMENT layer, keyed to CONTAINED by source:event:contained-adelaide. No migration of these namespaces for this campaign.",
     "namespaces": ["engagement:", "campaign-stage:"],
     "dropped": ["cohort:", "newsletter-stream:"]
   },
@@ -143,7 +144,8 @@
     "eligibility_gate": { "eligible": 113, "blocked": 2916, "verified": "2026-06-09" }
   },
   "migration": {
-    "_comment": "Off-contract -> canonical rename map for the gated taxonomy migration (Tier 3, day-shift, additive-then-strip, conflict-guarded, re-assert community-line guard after each bucket). Run via scripts/ghl-taxonomy-migrate.mjs --dry-run first. RC3 open: strip the legacy tag after adding canonical (recommended) vs leave as marker.",
+    "_comment": "Off-contract -> canonical rename map for the gated taxonomy migration (Tier 3, day-shift, additive-then-strip, conflict-guarded, re-assert community-line guard after each bucket). Run via scripts/ghl-taxonomy-migrate.mjs --dry-run first. RC3 LOCKED 2026-06-09: STRIP the legacy tag after adding canonical (additive-then-strip).",
+    "strip_legacy_after_canonical": true,
     "map": {
       "project:contained": "project:act-jh + source:event:contained-adelaide",
       "project:contained-adelaide-2026": "source:event:contained-adelaide (+ keep project:act-jh)",

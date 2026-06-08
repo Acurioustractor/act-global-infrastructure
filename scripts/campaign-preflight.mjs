@@ -89,7 +89,7 @@ for (const t of cfg.canonical_contract?.always || []) line(`  ${t}`);
 line(`  newsletter (consent-gated): ${cfg.newsletter?.enrolment_tag}`);
 line(`  community line: ${cfg.canonical_contract?.community_line?.tag} (no auto comms:*)`);
 
-line(`\n-- role map (RC1: PROPOSED entries need a ruling) --`);
+line(`\n-- role map (canonical role: tags; "<-- needs ruling" only if any remain PROPOSED) --`);
 for (const [role, def] of realEntries(cfg.canonical_contract?.role_map)) {
   const flag = def.ruling?.startsWith('PROPOSED') ? '  <-- needs ruling' : '';
   line(`  ${role.padEnd(16)} -> ${def.tags.join(', ')}${def.suppress_comms ? '  [suppress comms]' : ''}${flag}`);
