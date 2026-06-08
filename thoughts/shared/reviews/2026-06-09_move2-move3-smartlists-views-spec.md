@@ -49,13 +49,19 @@ keeps one never-send safety list. Each Sendable list = stream tag **AND** both g
    **zero** members carry `lane:community` (proves the gate).
 3. List 5 (Funders) last — relationship lane, never attached to an automation.
 
-### ⚠️ One open question for Ben (6 vs 7)
-`thoughts/shared/reviews/ghl-system-state-of-play-2026-06-08.md` §4 enumerated **7** streams — the 4
-newsletters **plus** three drips (`comms:funder-drip`, `comms:buyer-drip`, `comms:supporter-drip`).
-This spec collapses the drips into the Funders relationship list (5) rather than standalone Sendable
-lists, giving **6**. If you want `buyer-drip` / `supporter-drip` as their own Sendable Smart Lists,
-add them on the same template (stream tag · consent · NOT `lane:community`) → that's where the 7th/8th
-come from. Decide at build time; the gate rule is identical either way.
+### Decision (locked 2026-06-09): 6 now, expand just-in-time
+**The rule: build a Sendable Smart List only when a real send exists behind it.** A list with no
+workflow is clutter that *looks* like a live audience. State-of-play §4 enumerated 7 streams (the 4
+newsletters + `comms:funder-drip` / `comms:buyer-drip` / `comms:supporter-drip`), but the 4 newsletters
+are the only streams that send today — the drip workflows are all still DRAFT. So:
+- **Build the 6 above now.**
+- **`funder-drip` → never a standalone automated list.** Funders are relationship-led; an automated
+  drip to a program officer is off-brand and is the exact pattern that produced the community-line
+  violations. They stay in list 5 (Funders · Relationship-led, human send only) — permanently, not just
+  "for now".
+- **`buyer-drip` / `supporter-drip` → add a Sendable list JIT**, at the moment you build that drip's
+  *workflow* — never before. Same template (stream tag · consent · NOT `lane:community`). That is where
+  a 7th/8th list comes from, when (and only when) it has a send behind it.
 
 ---
 
