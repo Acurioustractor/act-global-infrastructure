@@ -45,3 +45,39 @@ Delete (or archive) these contact records once their Company twin is created and
 - Confirm the 3 possible-dups.
 - Provide orgs for baressa frazer / delilah macgillivray / michael haji-ali.
 - Verify WHSAC's full legal name + type.
+
+---
+
+## Resolutions (2026-06-09 PM — follow-up session)
+
+### The 3 "ORG TBC" people → RESOLVED: no org-Company (the TBC was a mis-classification)
+Checked their live mirror tags. None belong to an NT Goods org — they are **CONTAINED
+community-line individuals**:
+| Person | place | projects | verdict |
+|---|---|---|---|
+| baressa frazer | `place:cape-york` | act-jh · act-ce · contained-adelaide-2026 | community-line individual — **no org** |
+| delilah macgillivray | `place:rockhampton` | act-jh · act-ce · contained-adelaide-2026 | community-line individual — **no org** |
+| michael haji-ali | `place:perth`/`wa` | act-jh · act-ce · contained-adelaide-2026 | community-line individual — **no org** |
+
+**Action: none.** They keep `lane:community`, stay standalone Contacts (current state). They were
+wrongly swept into the "associate to org-Company" list. *(Minor residue, not fixed here: all three
+carry `role:community-controlled` — an org role — left over from the import; strip in a later tag pass
+if desired, separate from this migration.)*
+
+### Mt Liebig dup-Company pair → RECOMMENDATION
+Both are the **same store** (Amundurrngu Aboriginal Corporation operates the Mt Liebig / Watiyawanu
+community store):
+- **KEEP** `Amundurrngu Mt Liebig Community Store (Aboriginal Corporation)` (`5SUZbGyG14Q4fSLtGfmK` origin) — the registered AC name.
+- **DELETE** `Mt Liebig Community Store Aboriginal Corporation` (`HAN2VLPXisHJErXrXkhy` origin) — the bare duplicate.
+- Tier 3 (GHL Company delete) → Ben's call/verb, done in the Companies UI. The codebase GHL client
+  has no Company-delete method (Companies are read/scripted ad-hoc per the operating model).
+
+### Kaltukatjara dup-Company pair → KEEP BOTH (confirmed)
+`Kaltukatjara Community Council (AC)` and `Kaltukatjara Nguratjaku Council (AC)` are plausibly distinct
+legal entities (a community council vs the Nguratjaku Aboriginal Corporation). **No deletion** unless
+Ben confirms they're the same body.
+
+### Mirror reconcile of the 34 ghosts → DONE
+`scripts/reconcile-org-ghost-mirror-2026-06-09.mjs --apply`: all 34 retired org-as-contact rows live-
+confirmed 404 in GHL, marked `gone-from-ghl-2026-06-09` in `ghl_contacts` (soft-delete, not hard —
+7 tables FK), 34 FK'd opportunities NULLed. 0 failures.

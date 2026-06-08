@@ -13,6 +13,15 @@
  * (Snow, QBE, Centrecorp…) and previously-pushed prospects never duplicate. Lapsed/Declined
  * opps also block re-push (deliberate: re-engaging a decline is a human call, not a cron's).
  *
+ * Contact-shell hardening (2026-06-09): the org-shell a prospect opportunity needs is created
+ * via upsertContact keyed on a DETERMINISTIC synthetic email (shellEmail(name), .invalid TLD =
+ * non-routable, can never be emailed). On re-run the upsert find-or-updates that exact shell
+ * instead of blind-creating a twin when the fuzzy name-search misses — idempotent by construction
+ * (and GHL "Allow Duplicate Contact = OFF" is the second layer). Shells carry role:org-prospect-shell
+ * so they are filterable and never mistaken for people. NOTE: per wiki/concepts/ghl-crm-operating-model.md
+ * orgs should be Companies, not Contacts — but a GHL Opportunity structurally requires a Contact, so
+ * the marked shell is the deliberate bridge until/unless GHL exposes Company-anchored opportunities.
+ *
  * Usage:
  *   node scripts/push-prospects-to-ghl.mjs                # dry-run (default): print plan, write nothing
  *   node scripts/push-prospects-to-ghl.mjs --apply        # create contacts + opportunities
@@ -48,6 +57,15 @@ const norm = (s) =>
     .replace(/[^a-z0-9 ]/g, '')
     .replace(/\s+/g, ' ')
     .trim();
+
+// Deterministic, non-routable shell email for an org prospect — same name always maps to the
+// same address, so upsertContact find-or-updates instead of spawning a twin. .invalid (RFC 6761)
+// is reserved + guaranteed undeliverable, so a shell can never accidentally be emailed.
+const SHELL_ROLE_TAG = 'role:org-prospect-shell';
+const shellEmail = (name) => {
+  const slug = (name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+  return `prospect-${slug || 'unknown'}@prospect-shell.invalid`;
+};
 
 // ── 1. Gather prospects from the two discovery scripts ──────────────────────
 console.log(`Gathering prospects (shortlist top ${TOP}, tenders last ${DAYS}d)...`);
@@ -129,16 +147,17 @@ for (const p of prospects) {
     if (match) {
       contactId = match.id;
     } else {
-      // GHL requires ≥1 of email/phone/firstName/lastName — org-shell convention:
-      // firstName = first word, lastName = remainder (matches auto-created-from-xero shells)
+      // No live human match → find-or-update the deterministic org-shell (idempotent on re-run).
+      // firstName = first word, lastName = remainder (matches auto-created-from-xero shells).
       const words = p.name.trim().split(/\s+/);
-      const contact = await ghl.createContact({
+      const up = await ghl.upsertContact({
+        email: shellEmail(p.name),
         firstName: words[0],
         lastName: words.slice(1).join(' ') || words[0],
         companyName: p.name,
-        tags: [SOURCE_TAG],
+        tags: [SOURCE_TAG, SHELL_ROLE_TAG],
       });
-      contactId = contact?.id || contact?.contact?.id;
+      contactId = up?.contact?.id || up?.id;
     }
     await ghl.createOpportunity({
       pipelineId: p.target.pipelineId,
