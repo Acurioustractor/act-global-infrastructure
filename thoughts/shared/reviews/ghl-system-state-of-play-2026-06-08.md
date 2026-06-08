@@ -48,8 +48,9 @@ Full per-form CURRENT→TARGET tables: plan §A–§E. Summary:
 - 1,024 ADD ops · 4,115 REMOVE ops to reach canonical.
 - **237 distinct orphan tags** (unmapped — Ben must rule each).
 - **627 cruft tag-uses** (2 cruft tags) to delete.
-- **🔴 33 community-line violations** — contacts with `comms:*` while `lane:community`/`role:storyteller`. (7 already remediated 2026-06-07.)
-- **🔴 284 consent violations** — `comms:*newsletter` without `newsletter_consent=Yes` (Spam Act).
+- **🟢 community-line OCAP — backfilled 2026-06-08 PM:** `lane:community` 9 → ~103 (94 live community-line GHL contacts tagged) + **65 active drip-tags stripped** (partner/funder/buyer/nurture/supporter drips without consent). Tracer-first, 0 errors. Tooling `scripts/backfill-lane-community-2026-06-08.mjs`, audit+UNDO `lane-community-backfill-2026-06-08.md`.
+- **🔴 284 consent violations** — `comms:*newsletter` without `newsletter_consent=Yes` (Spam Act). STILL OPEN — newsletter comms on community-line/non-consented (e.g. Ren Fernando has 3) is the next OCAP cleanup, separate from the drip strip.
+- **⚠️ mirror ↔ GHL drift** — the `ghl_contacts` mirror holds stale rows for the storyteller population (277 `gone-from-ghl` + 12 of 106 candidates 404 in live GHL). Likely the EL storyteller sync writing non-GHL rows. Needs a reconciliation pass (separate).
 - Top legacy→canonical: `act-gd`→`project:act-gd` (491) · `goods`→`project:act-gd` (288) · `storyteller`→`role:storyteller` (287) · `audience-partner`→`role:partner` (277) · `empathy ledger`→`project:act-el` (267) · `goods-newsletter`→`comms:goods-newsletter` (210) · `harvest-website`→`source:website+project:act-hv` (179) … full table in worksheet §2.
 
 ## 4. Lists — smart-lists (7) — Layer 2
