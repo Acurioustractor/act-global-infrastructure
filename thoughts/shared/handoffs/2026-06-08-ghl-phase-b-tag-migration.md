@@ -28,7 +28,7 @@ Migrate the live "A Curious Tractor" GHL account (`agzsSZWgovjwgpcoASWG`) from l
 
 ## Execution order (buckets, safest → riskiest)
 Run each bucket as its own dry → tracer → apply. Re-assert the community-line guard after the comms bucket.
-1. **DROP cruft first** — delete `gone-from-ghl*` (652 uses), test tags + the codex-smoke TEST CONTACTS themselves, operational tags (`no email`/`needs-attention`/`ai-flagged`/`business-registration`). (Removes noise before mapping.)
+1. ~~**DROP cruft first**~~ ✅ **DONE 2026-06-08** — live reality was 11 tag defs (not 652; `gone-from-ghl*` is mirror-only; test contacts already gone from GHL). All 11 cruft defs deleted (incl. 2× `auto-triage` dup, `minderoo-connection` tag-drop). 393→382 tag defs. Record: `thoughts/shared/reviews/bucket1-cruft-apply-2026-06-08.md`. **Carry the lessons there into buckets 2–7** (map counts are mirror-inflated → reconcile vs live tag library first; `getAllContactsByTag` is broken → mirror worklists; GHL tags list is eventually consistent; `--tags` dedups by name → 2nd pass for dup defs).
 2. **`project:`** — `act-gd`/`goods`→`project:act-gd`, `act-hv`/`harvest-website`→`project:act-hv`(+`source:website`), `justicehub`→`project:act-jh`, `empathy ledger`→`project:act-el`, `civicgraph`→`project:act-cn`. Identity, no send risk, biggest volume.
 3. **`role:`** — per flat-tag-map (storyteller variants→`role:storyteller`, `grant`→`role:funder`(+`role:gov` for gov bodies), partner/supporter/supplier/buyer/community/elder/etc.).
 4. **`interest:`** — mostly hyphen→colon (`interest-*`→`interest:*`) + the orphan interest rulings.
