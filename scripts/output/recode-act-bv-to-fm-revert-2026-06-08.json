@@ -1,0 +1,28 @@
+[
+  {
+    "kind": "txn",
+    "id": "03005f0a-23a8-4918-ab32-b5e3e93ab458",
+    "label": "Aleisha $655 (RECEIVE, 2025-10-10)",
+    "original": [
+      {
+        "Description": "Aleisha J KeatingBCVRent and bills 11/10",
+        "UnitAmount": 655,
+        "TaxType": "INPUTTAXED",
+        "TaxAmount": 0,
+        "LineAmount": 655,
+        "AccountCode": "200",
+        "Tracking": [],
+        "Quantity": 1,
+        "LineItemID": "1e8f28a8-4447-4f9a-acb3-75ad48deb356",
+        "AccountID": "42c4e863-7b33-4718-ae5a-d1cd1d5be279",
+        "DiscountEnteredAsPercent": true,
+        "ValidationErrors": []
+      }
+    ],
+    "before": {
+      "Total": 655,
+      "SubTotal": 655,
+      "proj": null
+    }
+  }
+]
