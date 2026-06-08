@@ -1,0 +1,855 @@
+{
+  "runAt": "2026-06-08T09:49:41.776Z",
+  "location": "agzsSZWgovjwgpcoASWG",
+  "results": [
+    {
+      "email": "admin@myerfoundation.org.au",
+      "id": "10phNqWAjEmflMzAzXYT",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "newsletter-stream:funder-brief",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "newsletter-stream:funder-brief",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "alee@infoxchange.org",
+      "id": "7ox7Rp2Dr3OZdLNXjHVW",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "applications@brianmdavis.org.au",
+      "id": "qvnemoBQU7FjnSdfEwPP",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "newsletter-stream:funder-brief",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "newsletter-stream:funder-brief",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "csm@bawinanga.org.au",
+      "id": "Z1kOiaNiVGNOuscHED4V",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "delaicee.power@julalikari.com.au",
+      "id": "CINaVh3o4cgFjBuscV0C",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "erin@reddust.org.au",
+      "id": "iRmsOTOvF1DgmmJ6QpzT",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "eula.rohan@aracy.org.au",
+      "id": "K4ejYaIJ3ILO9yQTFBhm",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "gien@good-design.org",
+      "id": "qd0lpqQ9dZpyDDERIMhE",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "gm@bawinanga.org.au",
+      "id": "yIYUvOBZMemF5tynz5wL",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:future-city-partner",
+        "engagement:warm",
+        "newsletter-stream:contained-adelaide-invite",
+        "newsletter-stream:future-tour-update",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:future-city-partner",
+        "engagement:warm",
+        "newsletter-stream:contained-adelaide-invite",
+        "newsletter-stream:future-tour-update",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "info@impactfrontiers.org",
+      "id": "z54hf3IrFhNzQeMW6Gzv",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "jf@wilyajanta.org",
+      "id": "8f3onwaS2iK3Lk7ThsiA",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "comms:goods-newsletter",
+        "role:storyteller",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:storyteller",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "keiron.lander@ygcc.com.au",
+      "id": "X4qlBT2huXIB5I5XJ2dK",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "comms:goods-newsletter",
+        "role:storyteller",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:storyteller",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "madelyn.hay@miwatj.com.au",
+      "id": "ef3tYp3HPNOmUNeu05gc",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "project:act-gd",
+        "audience-brand",
+        "role:supporter",
+        "comms:goods-newsletter",
+        "role:health-service",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "comms:newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "project:act-gd",
+        "audience-brand",
+        "role:supporter",
+        "role:health-service",
+        "place:nt",
+        "role:community-controlled",
+        "role:partner",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "mcarman@reddust.org.au",
+      "id": "Hfckaos5BIXAiDWhkD6v",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "peter.bent@impactfrontiers.org",
+      "id": "MCNT6MZyAW4S0Fg0wLol",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "phillip.allan@bawinanga.org.au",
+      "id": "avh1foMDU4rpglfjDxp3",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "pkaur@paulramsayfoundation.org.au",
+      "id": "4nTVTPHZJcIaXPnZNpLL",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "project:act-jh",
+        "role:partner",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "newsletter-stream:funder-brief",
+        "newsletter-stream:youth-justice-brief",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "project:act-jh",
+        "role:partner",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "newsletter-stream:funder-brief",
+        "newsletter-stream:youth-justice-brief",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "ren@relove.org.au",
+      "id": "P5Qw6atbYWZIKKsVhKSQ",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "rowena.cann@aracy.org.au",
+      "id": "MLDUH7oecmisGwYJ7y8Q",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "shellee.strickland@murrup.org.au",
+      "id": "II1BhBXv0iuzv888Wb7x",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    },
+    {
+      "email": "sr@office.org.au",
+      "id": "G9PItuZMWk1c8x6unFvB",
+      "planned": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "removed": [
+        "comms:goods-newsletter",
+        "comms:act-newsletter"
+      ],
+      "skippedReason": null,
+      "status": "OK",
+      "before": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "comms:goods-newsletter",
+        "comms:act-newsletter",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "after": [
+        "goods-newsletter",
+        "audience-brand",
+        "project:act-gd",
+        "role:community",
+        "lane:community",
+        "campaign-stage:captured-newsletter-nurture",
+        "engagement:nurture",
+        "project:contained",
+        "project:contained-adelaide-2026"
+      ],
+      "error": null
+    }
+  ]
+}
