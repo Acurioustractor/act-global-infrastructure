@@ -87,7 +87,7 @@ function injectBanner(content, sourcePath) {
   const banner = [
     `> Generated legacy mirror for command-center.`,
     `> Source of truth: \`${sourcePath}\`.`,
-    `> Regenerated: \`${GENERATED_AT}\` via \`node scripts/wiki-sync-command-center-snapshot.mjs\`.`,
+    `> Regenerate via \`node scripts/wiki-sync-command-center-snapshot.mjs\`. Build timestamp lives in \`snapshot-meta.json\`.`,
     '',
   ].join('\n')
 
@@ -116,7 +116,6 @@ function writeWrapper(destRel, title, canonical, bodyLines) {
   const content = [
     '---',
     'status: generated',
-    `generated_at: ${GENERATED_AT}`,
     `canonical_source: ${canonical}`,
     '---',
     '',
@@ -162,7 +161,7 @@ writeFileSync(
     '',
     `This folder is a generated legacy mirror of the canonical repo-root wiki at \`/wiki\`.`,
     '',
-    `- Generated: \`${GENERATED_AT}\``,
+    '- Build timestamp lives in `snapshot-meta.json`.',
     '- Use `node scripts/wiki-sync-command-center-snapshot.mjs` to regenerate it.',
     '- Do not edit these files as the source of truth.',
     '',

@@ -11,7 +11,7 @@ tags: [oonchiumpa, detention, darwin, young-people, mparntwe, judges-on-country]
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/oonchiumpa-laquisha-darwin.md`.
-> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerate via `node scripts/wiki-sync-command-center-snapshot.mjs`. Build timestamp lives in `snapshot-meta.json`.
 
 # Court is scary because you don't know whether you're getting out or not
 

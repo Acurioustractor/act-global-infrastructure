@@ -15,7 +15,7 @@ empathy_ledger_key: act-studio
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/act-studio/act-studio.md`.
-> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerate via `node scripts/wiki-sync-command-center-snapshot.mjs`. Build timestamp lives in `snapshot-meta.json`.
 
 # ACT Regenerative Studio
 
