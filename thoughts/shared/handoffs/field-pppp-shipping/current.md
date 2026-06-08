@@ -9,18 +9,50 @@ status: complete
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-07T09:30:00Z
-**Goal:** Four-lane funding build SHIPPED + orchestrator revival COMPLETE (PM2-homed + saved) + warm→cold pipeline operating picture committed. Next: operate the pipeline (Rung-0 chases), violations verify, push.
-**Branch:** main (~10 commits ahead of origin — "push" pending, Tier 3)
-**Test:** `node scripts/foundation-shortlist.mjs` (expect top-10, Paul Ramsay #1) · `pm2 logs orchestrator --nostream` (grantscope orchestrator online, 172 agents)
+**Updated:** 2026-06-08T22:00Z (PM-2 — WHOLE-SYSTEM REVIEW DONE + alignment plan FILED + rulings R1–R7 LOCKED; implementation pending)
+**Goal:** GHL CRM automation-ready. Strategy locked (D1-D4), consent backfilled. **Whole-system forms review COMPLETE.** Ben's ask (review 5 sites via Vercel → align all forms → align all tags → review lists/newsletter) is through the review+plan phase; next is the 3-repo code implementation (day-shift, Tier 1→2→3).
+**KEY FINDINGS:** ONE GHL account `agzsSZWgovjwgpcoASWG` ="A Curious Tractor" receives forms from **THREE** codebases (act.place/regen-studio · JusticeHub · empathy-ledger-v2 World Tour), each with its OWN ad-hoc vocab → scope is ~3× the original brief. the-harvest/goods = no live GHL forms (out). **Decision LOCKED:** one account, one canonical contract for all 3. EL verified in-scope (27 `world-tour` contacts in mirror).
+**Plan (THE spec):** `thoughts/shared/plans/2026-06-08-whole-system-forms-tag-alignment.md` — full per-form CURRENT→TARGET mapping for all 3 repos + locked rulings + phases P0–P6. Review write-up appended to `thoughts/shared/reviews/website-forms-tag-contract-alignment-2026-06-08.md`.
+**Branch:** act-global-infrastructure `main` (9 ahead of origin — "push" pending, Tier 3). regen-studio `wip/newsletter-tag-contract-2026-06-08` (commit `a807396`, PUSHED, undeployed, no PR).
 
 ### Now
-[->] RESUME POINT — pipeline built + operating; two things pending the DB instance recovering:
-  1. **FINISH GHL grant enrichment (blocked on DB REST)** — 198/375 grant opps enriched live; 177 RICH (date-bearing) ones still bare. Date bug FIXED (GHL DATE wants ISO 'YYYY-MM-DD' not epoch-ms; verified live on opp 2Y1NVSgtbQZuML7THmww). The 8 custom fields exist. Re-runs FAILED at buildMirrorMap — shared instance PostgREST degraded ("schema cache" errors, 4th wobble tonight). **WHEN REST HEALTHY: `node scripts/enrich-ghl-grants.mjs --apply` (idempotent; ~19min) → expect ~375 enriched, ~0 failed.** Then register the cron: it's in ecosystem.config.cjs (`enrich-grants-ghl`, 45 */6) but NOT in live PM2 yet (held back — pm2 start fires it immediately = one-shot trap + load on fragile instance). Register with `pm2 start ecosystem.config.cjs --only enrich-grants-ghl && pm2 save` once instance is calm.
-  2. **⚠ COMPUTE TIER NOW URGENT** — instance wobbled 4×+ tonight (Cloudflare 522 / "schema cache" / ECHECKOUTTIMEOUT). Compounding load: standing grantscope orchestrator (172 agents, 10s poll, added tonight) + heavy paginated supabase-js runs. max_connections=90 review from the 06-07 incident list is the real bottleneck — do BEFORE Monday 6am when discovery+orbit+enrich crons all fire together.
-  3. **Rung-0 chases**: Rotary Eclub $82.5K (Pene Curtis Gmail DRAFT created, awaiting send) · Indigenous Languages & Arts $300K in-progress · INV-0314 Centrecorp $84.7K send/void with Nic.
-  4. **Push** the ~9 local commits (Ben's verb).
-  5. Reconcile Notion grant-tranche ledger ($592K) vs Xero before external quoting.
+[->] RESUME POINT — IMPLEMENTATION. The review+plan+rulings are DONE; execute the plan `thoughts/shared/plans/2026-06-08-whole-system-forms-tag-alignment.md` phase-at-a-time (best in FRESH context per repo — the plan is self-contained spec). Phases:
+  - **P1 — act.place (regen-studio):** finish the 5 unaligned formTypes (`csa`→project:act-hv+interest:food/membership · `farm-stay`→act-fa+interest:venue · `residency`→act-hv|fa+interest:workshops · `payout-wall-contest`→interest:justice-reform · `flagship-inquiry`→role:partner+partnership_type, NO drip) in FORM_RULES + namespace `ContactForm`'s flat `Context:/Route:/Source:` tags. tsc. Confirm R1 project codes with Ben first. (Tier 1 → push Tier 2.)
+  - **P2 — JusticeHub** (`/Users/benknight/Code/JusticeHub`): rewrite `GHL_TAGS` (`src/lib/ghl/client.ts:550-609`) + 5 routes to the canonical set. Locked mappings: Newsletter→comms:justicehub-newsletter+role:supporter+project:act-jh+consent · STEWARD→tier:steward · STATE_*→place:* · LIVED_EXPERIENCE/YOUTH_VOICE→**lane:community+role:storyteller (zero comms, OCAP)** · CONTAINED→interest:justice-reform+source:event:contained-<slug> · nominations→nominated_person field (drop NOMINATED tag). Audit the embedded `GHLForm.tsx` native form in the GHL UI (R6). Biggest pollution source.
+  - **P3 — EL** (`/Users/benknight/Code/empathy-ledger-v2`): align the 2 World Tour forms. ⚠ Verify the live form path first — mirror shows `world-tour`=27 but `wt-*`/`partner-network`=0 (forms may not have fired, or mirror lag).
+  - **P4 — Deploy + tracer (Tier 3, Ben's verb)** = ALSO finishes carry-over #4: deploy regen-studio `wip/newsletter-tag-contract-2026-06-08` (PR→merge→Vercel prod) + one live tracer per representative form per repo (`ben+nltracer-<date>@…`, tag `test:tracer`) → verify in GHL (incl. never-seen-live `source:website` + consent-source field `HdnMUyXkZRPZG7l7cygG`) → decide on deleting test contacts. Then update memory `newsletter-consent-signup-path` (still says `tier:connected`).
+  - **P5 — GHL tag migration (Tier 2/3, gated):** `scripts/ghl-taxonomy-migrate.mjs --dry-run` → tracer → bucketed apply, re-assert community-line guard each bucket (taxonomy §6).
+  - **P6 — Lists/newsletter confirm:** re-check the 4 `comms:*-newsletter` enrolments + smart-list counts + consent gate.
+
+  OPEN DECISIONS still queued (carried from the lists review):
+  1. **237 orphan tags** need rulings before the taxonomy migration `--apply` (`scripts/ghl-taxonomy-migrate.mjs` DRY-RUN-only; worksheet `thoughts/shared/reviews/ghl-taxonomy-migration-worksheet-2026-06-08.md`). Big fix found: flat `storyteller` (304) is 98% NOT community (only 7 have lane:community) → `interest:storytelling` EXCEPT the 7 → `role:storyteller`. (Also cleans the stale-tag accumulation the forms leave on contacts.)
+  2. **Non-opt-ins re-permission-or-remove**: ~98 UNKNOWN + 11 NOT-OPT-IN on newsletter lists with no consent (Website Inquiry 37, contact forms, ACT Intelligence, Container CSV, test data). Re-permission campaign OR strip the comms tag. NOT backfilled (correctly).
+  3. **role:community (person=block) vs role:community-controlled (org=ok)** — confirm the rule; 70 role:community* contacts carry comms tags.
+  (#4 "prove the live signup path" → DONE this session, see "Done 2026-06-08 PM" below.)
+
+  STILL PARKED (pre-consent-thread):
+  - **Rotary $82.5K** — Pene Curtis Gmail DRAFT awaiting send (Tier 3).
+  - **Push** the act-global-infrastructure commits (Ben's verb).
+  - **⚠ Compute-tier review** — instance wobbled 4×+ on 06-07 (Cloudflare 522/schema-cache); max_connections=90 bottleneck + standing grantscope orchestrator (172 agents). Do before lists work hammers the DB again.
+
+### Done 2026-06-08 (PM — #4 signup path proven + newsletter contract fixed)
+- **Proved the live signup path** end-to-end: real signup → prod fallback `pushToGHL` → GHL contact `spzexfNKtWDyktWC1bjb` carries `newsletter_consent=Yes` (field `aVnqmajnysMtGYhLD0oA`) + `comms:act-newsletter`. Consent gate WORKS. Only 1 real submission ever exists (the 06-02 self-test in `pending_form_submissions`, synced=true) — zero organic traffic; the current projectCode-routing code never had a verified live signup, so a 6-day-old test on superseded code was NOT proof.
+- **Found the drift** (live code vs taxonomy): missing `role:supporter` (→ signups invisible to "Org supporters" smart-list + role-gated automations) · `source:website-form` vs `source:website` · `tier:connected` jumps the ladder (D3 wants behaviour-driven) · flat-tag pollution · GHL upsert accumulates stale tags.
+- **Fixed newsletter contract** in regen-studio (`a807396`, branch pushed): role:supporter added, source slug fixed, `tier:curious` (Ben's ruling), flat tags dropped/namespaced, route/context provenance → Supabase `fields`. tsc clean. Deploy+tracer pending (above).
+- **Pivot**: Ben scoped the next session to the WHOLE forms system → brief `thoughts/shared/reviews/website-forms-tag-contract-alignment-2026-06-08.md`.
+
+### Done 2026-06-08 (CRM automation-readiness — git log bc9123a..69b23a9)
+- **GHL audit**: 12 pipelines · 61 contact fields/8 folders · 31 opp fields · ~150 tags. Found dual taxonomy (namespaced vs legacy flat), 2 warmth systems (ring/tier), ~900 cruft tag-uses, redundant fields. → `ghl-crm-taxonomy.md`.
+- **Strategy locked**: 5-layer model (describe→segment→enrol→act→gate); D1=4 newsletters, D2=retire partner-drip, D3=auto tier/hand ring, D4=explicit consent. → `ghl-audience-comms-automation.md`.
+- **Taxonomy migration dry-run** (`ghl-taxonomy-migrate.mjs`): 2586 contacts, 1024 ADD/4115 REMOVE, 237 orphans, 0 true lane:community breaches (06-07 strip held), 284 consent-gaps.
+- **Consent reconciled**: EL = content-consent SoR for storytellers (story/photo/ai, mostly @storyteller.local placeholders, community-line/hand-comms). GHL field = newsletter consent. The "284" were mostly evidenced opt-ins missing the flag. Signup code CORRECT since 06-02 (commit 40730cb) — NOT the ARRAY bug.
+- **Consent BACKFILLED** (`backfill-newsletter-consent.mjs`): GHL live `source` field = the evidence (mirror only has sync-provenance). **108 evidenced opt-ins written** (Yes + source + ISO signup date), 0 failed, verified live (Rebecca Ward). Promoted Harvest member-list (20) + gathering-footer (14) on Ben's ruling.
+- Grant enrichment FINISHED earlier: 344/375 (31 = deleted-in-GHL phantoms), cron `enrich-grants-ghl` registered + saved.
+
+### Mon 8 Jun morning (all verified ready)
+6:00 discovery live-inserts ~150 grants (watchdog-guarded, scorer on fallback router) · 7:00 enrich on MiniMax · 7:32 pr-ci-sweep routine first fire (expect "no open PRs") · 7:45 PPPP scan (momentum feeds) · ritual with Nic: Place-vs-Pulse + gone-quiet projects + Kristy GHL-UI merge + James Davidson ring call.
+
+### This Session (2026-06-07 late evening — four lanes shipped + orchestrator revival + warm→cold pipeline)
 
 ### Done this session (funding system buildout — see git log bc9123a..bec879d)
 - Community-line: 3 people (Kristy/Shaun/Rachel, 7 records) — funder+newsletter tags STRIPPED live (34 removals, verified). `scripts/strip-community-line-tags.mjs`.
