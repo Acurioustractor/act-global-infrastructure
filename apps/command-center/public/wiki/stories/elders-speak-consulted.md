@@ -6,7 +6,7 @@ projects: picc-storm-stories
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/elders-speak-consulted.md`.
-> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerate via `node scripts/wiki-sync-command-center-snapshot.mjs`. Build timestamp lives in `snapshot-meta.json`.
 
 # Elders Speak: "We Should Have Been Consulted"
 

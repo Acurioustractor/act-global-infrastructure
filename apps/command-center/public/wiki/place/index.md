@@ -1,6 +1,6 @@
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/place-land-practice.md`.
-> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerate via `node scripts/wiki-sync-command-center-snapshot.mjs`. Build timestamp lives in `snapshot-meta.json`.
 # Place & Land Practice
 
 ACT's work is grounded in place. Land practice is central to everything — not an add-on or afterthought, but the foundation that shapes how we work.
