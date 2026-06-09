@@ -2,7 +2,7 @@
   "version": 1,
   "updated": "2026-06-09",
   "status": "rulings-locked",
-  "description": "Canonical GHL campaign config for CONTAINED Adelaide 2026. P1 of thoughts/shared/plans/2026-06-08-contained-adelaide-campaign-crm.md, under the R4 ruling (CONTAINED conforms to the one-account canonical contract: project:act-jh + source:event:contained-adelaide + interest:justice-reform + comms:justicehub-newsletter). RC1-RC4 LOCKED 2026-06-09: RC1 Professional->partner; RC2 keep engagement:/campaign-stage: lifecycle; RC3 strip legacy tag after canonical; RC4 GHL native calendar. DATA ONLY. No code here applies anything; live GHL writes are Tier 3, day-shift, gated to the 16 Jun go/no-go. Source evidence cited in thoughts/shared/handoffs/general/2026-06-09_contained-cta-ghl-alignment.md.",
+  "description": "Canonical GHL campaign config for CONTAINED Adelaide 2026. P1 of thoughts/shared/plans/2026-06-08-contained-adelaide-campaign-crm.md, under the R4 ruling (CONTAINED conforms to the one-account canonical contract: project:act-jh + source:event:contained + interest:justice-reform + comms:justicehub-newsletter). RC1-RC4 LOCKED 2026-06-09: RC1 Professional->partner; RC2 keep engagement:/campaign-stage: lifecycle; RC3 strip legacy tag after canonical; RC4 GHL native calendar. RC5 LOCKED 2026-06-09 (Ben): UNIFIED source tag - one source:event:contained for every CONTAINED city; the stop is distinguished by place:<x> (Adelaide = place:sa), NOT a city-suffixed source. Matches JusticeHub shipped code (GHL_CANONICAL.SOURCE_EVENT_CONTAINED + PR #44). DATA ONLY. No code here applies anything; live GHL writes are Tier 3, day-shift, gated to the 16 Jun go/no-go. Source evidence cited in thoughts/shared/handoffs/general/2026-06-09_contained-cta-ghl-alignment.md.",
   "meta": {
     "campaign_code": "ACT-CN",
     "campaign_name": "CONTAINED Adelaide 2026",
@@ -12,13 +12,13 @@
     "go_no_go": "2026-06-16",
     "ghl_location_id": "agzsSZWgovjwgpcoASWG",
     "ghl_location_name": "A Curious Tractor",
-    "_comment": "campaign_slug drives the source:event:contained-<slug> tag. Per-stop campaigns reuse this config with a new slug (contained-mount-druitt, etc.)."
+    "_comment": "RC5 (2026-06-09, Ben): ONE unified CONTAINED source tag (source:event:contained) for every city; the stop is distinguished by place:<x>, NOT a city-suffixed source. campaign_slug names the campaign for internal/reporting use only; it does NOT drive the source tag. Per-stop campaigns reuse this config and segment on source:event:contained + place:<x>."
   },
   "canonical_contract": {
     "_comment": "Every CONTAINED contact gets these identity tags regardless of which form they arrived through. Identity tags NEVER trigger a send (5-layer model: DESCRIBE). Only comms:* enrols, and only with captured consent.",
     "always": [
       "project:act-jh",
-      "source:event:contained-adelaide",
+      "source:event:contained",
       "interest:justice-reform"
     ],
     "role_map": {
@@ -57,12 +57,12 @@
     "enrolment_tag": "comms:justicehub-newsletter",
     "consent_required": true,
     "segments": {
-      "adelaide-invite": { "query": ["comms:justicehub-newsletter", "source:event:contained-adelaide", "place:sa"], "build_spec_name": "Adelaide Warm Invite", "legacy_tag_migrated_from": "newsletter-stream:contained-adelaide-invite" },
-      "daily-recap": { "query": ["comms:justicehub-newsletter", "source:event:contained-adelaide", "engagement:experienced"], "build_spec_name": "Daily CONTAINED Recap" },
+      "adelaide-invite": { "query": ["comms:justicehub-newsletter", "source:event:contained", "place:sa"], "build_spec_name": "Adelaide Warm Invite", "legacy_tag_migrated_from": "newsletter-stream:contained-adelaide-invite" },
+      "daily-recap": { "query": ["comms:justicehub-newsletter", "source:event:contained", "place:sa", "engagement:experienced"], "build_spec_name": "Daily CONTAINED Recap", "_comment": "place:sa pins this to the Adelaide stop under the unified-source model (RC5)" },
       "youth-justice": { "query": ["comms:justicehub-newsletter", "interest:justice-reform"], "build_spec_name": "JusticeHub / Youth Justice", "_comment": "roles service/practitioner/policy/researcher all carry interest:justice-reform" },
       "media-pack": { "query": ["comms:justicehub-newsletter", "role:media"], "build_spec_name": "Media Pack" },
       "funder-brief": { "query": ["comms:justicehub-newsletter", "role:funder"], "build_spec_name": "Funder / Partner Brief" },
-      "future-cities": { "query": ["comms:justicehub-newsletter", "source:event:contained-next-city"], "build_spec_name": "Future Cities" }
+      "future-cities": { "query": ["comms:justicehub-newsletter", "source:event:contained"], "exclude": ["place:sa"], "build_spec_name": "Future Cities", "_comment": "RC5 unified source: future cities are source:event:contained contacts whose place: is NOT the current stop (sa). Build the per-city segment as source:event:contained + place:<city> when that stop is scoped." }
     }
   },
   "calendar": {
@@ -79,7 +79,7 @@
     "_comment": "Now SCOPED (was deferred D1) because the self-serve calendar exists. Triggers re-based onto canonical signals (replacing project:contained-adelaide-2026 / cohort: / engagement:booked tags). Build = Tier 3, gated.",
     "name": "CONTAINED Adelaide 2026",
     "stages": [
-      { "n": 1, "name": "Captured", "entry": "source:event:contained-adelaide added" },
+      { "n": 1, "name": "Captured", "entry": "source:event:contained + place:sa added (Adelaide stop under unified source, RC5)" },
       { "n": 2, "name": "Needs enrichment", "entry": "no role:* OR no org" },
       { "n": 3, "name": "Warm - review", "entry": "role:* + inbound signal" },
       { "n": 4, "name": "Personal invite", "entry": "role:funder OR role:media OR VIP segment" },
@@ -88,7 +88,7 @@
       { "n": 7, "name": "Experienced", "entry": "check-in (engagement:experienced)" },
       { "n": 8, "name": "Activated", "entry": "journal/story/pledge captured" },
       { "n": 9, "name": "Post-week nurture", "entry": "+7d after Activated" },
-      { "n": 10, "name": "Future city / partner", "entry": "source:event:contained-<next-city> interest" },
+      { "n": 10, "name": "Future city / partner", "entry": "source:event:contained + place:<other-city> interest (unified source, RC5)" },
       { "n": 11, "name": "Closed / no contact", "entry": "done OR lane:community no-contact" }
     ],
     "suppression_guard": {
@@ -98,7 +98,7 @@
     }
   },
   "lifecycle_layer": {
-    "_comment": "RC2 LOCKED 2026-06-09: keep engagement:/campaign-stage: as the campaign lifecycle SEGMENT layer, keyed to CONTAINED by source:event:contained-adelaide. No migration of these namespaces for this campaign.",
+    "_comment": "RC2 LOCKED 2026-06-09: keep engagement:/campaign-stage: as the campaign lifecycle SEGMENT layer, keyed to CONTAINED by source:event:contained + place:sa (unified source, RC5). No migration of these namespaces for this campaign.",
     "namespaces": ["engagement:", "campaign-stage:"],
     "dropped": ["cohort:", "newsletter-stream:"]
   },
@@ -121,18 +121,18 @@
   },
   "cta_map": {
     "_comment": "Condensed from the JusticeHub 24-CTA inventory (thoughts/shared/handoffs/contained-cta-ghl-inventory.md). status: canonical | migrate | build | local-only.",
-    "register": { "route": "/api/ghl/register", "status": "migrate", "from": ["project:contained", "project:contained-adelaide-2026", "source:form", "state:<x>", "newsletter-stream:contained-adelaide-invite"], "to": ["project:act-jh", "source:event:contained-adelaide", "interest:justice-reform", "place:<x>", "role:<x>", "comms:justicehub-newsletter (consent)"] },
-    "register_interest": { "route": "/api/ghl/signup", "status": "migrate", "fix": "drop underscore customTags contained/contained_<role>; add source:event:contained-adelaide + interest:justice-reform" },
-    "join": { "route": "/api/ghl/signup", "status": "canonical", "fix": "add source:event:contained-adelaide on CONTAINED-origin signups" },
-    "reaction": { "route": "/api/contained/reaction", "status": "migrate", "from": ["Reacted", "CONTAINED", "contained_adelaide", "public_visitor", "youth_remand"], "to": ["project:act-jh", "source:event:contained-adelaide", "interest:justice-reform", "role:supporter", "tier:curious"] },
+    "register": { "route": "/api/ghl/register", "status": "migrate", "from": ["project:contained", "project:contained-adelaide-2026", "source:form", "state:<x>", "newsletter-stream:contained-adelaide-invite"], "to": ["project:act-jh", "source:event:contained", "interest:justice-reform", "place:<x>", "role:<x>", "comms:justicehub-newsletter (consent)"] },
+    "register_interest": { "route": "/api/ghl/signup", "status": "migrate", "fix": "drop underscore customTags contained/contained_<role>; add source:event:contained + interest:justice-reform" },
+    "join": { "route": "/api/ghl/signup", "status": "canonical", "fix": "add source:event:contained on CONTAINED-origin signups" },
+    "reaction": { "route": "/api/contained/reaction", "status": "migrate", "from": ["Reacted", "CONTAINED", "contained_adelaide", "public_visitor", "youth_remand"], "to": ["project:act-jh", "source:event:contained", "interest:justice-reform", "role:supporter", "tier:curious"] },
     "share_story": { "route": "/api/projects/the-contained/tour-stories", "status": "migrate", "note": "legacy GHL_TAGS on email; canonicalise" },
-    "help": { "route": "/api/contact", "status": "canonical", "fix": "source:event:contained -> source:event:contained-adelaide" },
+    "help": { "route": "/api/contact", "status": "canonical", "note": "already emits source:event:contained (no-city, RC5); place from state. No change needed." },
     "canberra": { "route": "/api/contact", "status": "canonical", "fix": "same as help" },
-    "tour_newsletter": { "route": "/api/ghl/newsletter", "status": "migrate", "fix": "add source:event:contained-adelaide + interest:justice-reform" },
-    "nominate_leader": { "route": "/api/projects/[slug]/nominations", "status": "build", "gap": "dead anchor /contained#nominate (empty section); backend exists, no form renders", "to": ["project:act-jh", "source:event:contained-adelaide", "interest:justice-reform"], "field": "nominated_person" },
-    "host_back_tour": { "route": "(none)", "status": "build", "gap": "anchor/static card; no capture", "to": ["project:act-jh", "source:event:contained-adelaide", "role:partner|role:supporter", "interest:justice-reform"], "note": "host offer -> opportunity; pricing ladder $5K-$75K via Xero ACT-CN" },
-    "funder_partner_outreach": { "route": "mailto", "status": "build", "gap": "mailto only, zero CRM capture", "to": ["project:act-jh", "source:event:contained-adelaide", "role:funder|partner|media"], "note": "open opportunity; reply-to benjamin@act.place" },
-    "in_experience_widgets": { "route": "/api/contained/reflections,/stories/submit,/tour-stories", "status": "build", "gap": "Supabase only, no GHL contact", "to": ["project:act-jh", "source:event:contained-adelaide", "role:storyteller", "lane:community (if lived-exp)"], "note": "upsert only when name/email attached; no comms:" },
+    "tour_newsletter": { "route": "/api/ghl/newsletter", "status": "migrate", "fix": "add source:event:contained + interest:justice-reform" },
+    "nominate_leader": { "route": "/api/projects/[slug]/nominations", "status": "shipped", "shipped_in": "JH PR #44 (GAP #16, commit 6f6eec06)", "to": ["project:act-jh", "source:event:contained", "interest:justice-reform", "role:supporter"], "field": "nominated_person", "note": "NominateForm renders at /contained#nominate" },
+    "host_back_tour": { "route": "/api/contained/host + /api/projects/[slug]/backers", "status": "shipped", "shipped_in": "JH PR #44 (GAP #18/#21, commit fcc0d4f5)", "to": ["project:act-jh", "source:event:contained", "role:partner|role:supporter", "interest:justice-reform"], "note": "HostBackForm at /contained#back-this-tour; host -> role:partner + GHL opportunity gated on GHL_PARTNER_PIPELINE_ID; back -> role:supporter on the backers wall. Pricing ladder $5K-$75K via Xero ACT-CN handled in pipeline." },
+    "funder_partner_outreach": { "route": "/api/contained/connect", "status": "shipped", "shipped_in": "JH PR #44 (GAP #20, commit bb0e37c9)", "to": ["project:act-jh", "source:event:contained", "role:funder|partner|media"], "note": "ConnectForm at /contained/act#connect; funder/partner -> GHL opportunity gated on GHL_FUNDER_PIPELINE_ID / GHL_PARTNER_PIPELINE_ID; enquiry routed to benjamin@act.place (threaded emailFrom)." },
+    "in_experience_widgets": { "route": "/api/contained/reflections,/stories/submit,/tour-stories", "status": "build", "gap": "Supabase only, no GHL contact", "to": ["project:act-jh", "source:event:contained", "role:storyteller", "lane:community (if lived-exp)"], "note": "upsert only when name/email attached; no comms:" },
     "enroll_device": { "route": "/api/enrollment/*", "status": "local-only", "note": "anonymous device session by design; product decision on kiosk opt-in (open, low priority)" }
   },
   "preflight": {
@@ -147,9 +147,9 @@
     "_comment": "Off-contract -> canonical rename map for the gated taxonomy migration (Tier 3, day-shift, additive-then-strip, conflict-guarded, re-assert community-line guard after each bucket). Run via scripts/ghl-taxonomy-migrate.mjs --dry-run first. RC3 LOCKED 2026-06-09: STRIP the legacy tag after adding canonical (additive-then-strip).",
     "strip_legacy_after_canonical": true,
     "map": {
-      "project:contained": "project:act-jh + source:event:contained-adelaide",
-      "project:contained-adelaide-2026": "source:event:contained-adelaide (+ keep project:act-jh)",
-      "source:form": "source:event:contained-adelaide",
+      "project:contained": "project:act-jh + source:event:contained (+ place:<x> derived from state field, RC5)",
+      "project:contained-adelaide-2026": "source:event:contained + place:sa (+ keep project:act-jh) — the 260 Adelaide-cohort contacts (RC5 unified source)",
+      "source:form": "source:event:contained",
       "state:<x>": "place:<x>",
       "newsletter-stream:contained-adelaide-invite": "comms:justicehub-newsletter (only if newsletter_consent=Yes) + smart-list segment",
       "cohort:<x>": "drop tag; set cohort custom field",
