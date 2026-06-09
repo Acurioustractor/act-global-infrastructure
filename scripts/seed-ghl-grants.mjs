@@ -71,17 +71,37 @@ async function fetchTopGrants(limit) {
   return result;
 }
 
+const TRIAGE_EMAIL = 'grantscope-triage@act.place';
+
 async function ensureTriageContact() {
-  // GHL requires contactId on opportunity create. Use a single triage contact for grants
+  // GHL requires contactId on opportunity create. We use a single triage contact for grants
   // sourced via GrantScope sweeps — owners can re-link to a real funder contact later.
-  const upsert = await ghl.upsertContact({
-    email: 'grantscope-triage@act.place',
+  //
+  // Reuse a known id when configured. This avoids upserting a fixed email on EVERY run,
+  // which (with a flaky lookup) was spawning duplicate grantscope-triage@ contacts.
+  if (process.env.GHL_TRIAGE_CONTACT_ID) {
+    return process.env.GHL_TRIAGE_CONTACT_ID;
+  }
+
+  // Unconfigured: look up once, create only if truly absent. lookupContactByEmail now
+  // THROWS on a transient lookup failure (instead of returning null), so a flaky lookup
+  // can no longer fall through to a duplicate create here.
+  const existing = await ghl.lookupContactByEmail(TRIAGE_EMAIL);
+  if (existing) {
+    log(`Triage contact reuse ${existing.id} — set GHL_TRIAGE_CONTACT_ID=${existing.id} to skip lookup next run`);
+    return existing.id;
+  }
+
+  const created = await ghl.createContact({
+    email: TRIAGE_EMAIL,
     firstName: 'GrantScope',
     lastName: 'Triage',
     companyName: 'ACT — Foundation Research',
     tags: ['grantscope-source', 'auto-triage'],
   });
-  return upsert.contact.id || upsert.contact._id;
+  const id = created.id || created._id;
+  log(`Triage contact CREATED ${id} — set GHL_TRIAGE_CONTACT_ID=${id} to skip lookup next run`);
+  return id;
 }
 
 async function main() {
