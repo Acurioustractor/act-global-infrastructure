@@ -1,0 +1,290 @@
+bucket,important,email,action,ghl_id,name,tags,consent,empathy_ledger,last_seen
+MERGE,yes,"benjamin@act.place",KEEP,7lzNuk9ykZbioseKyuVx,"benjamin knight",17,yes,yes,2026-06-08
+MERGE,yes,"benjamin@act.place",MERGE_INTO_KEEP,QarRbCphkMj7BFzOPlcT,"ben knight",3,no,yes,2026-06-08
+MERGE,yes,"benjamin@act.place",MERGE_INTO_KEEP,5MBKnM7ruUX8J7YT4XJE,"benjamin knight",3,no,yes,2026-06-08
+MERGE,yes,"benjamin@act.place",MERGE_INTO_KEEP,pRSrM0tnXQjYHfGeASAo,"benjamin test",13,no,yes,2026-03-26
+MERGE,yes,"benjamin@act.place",MERGE_INTO_KEEP,dQmMJj9xcPx51SY04W7B,"benjamin knight",6,no,yes,2026-05-31
+MERGE,yes,"benjamin@act.place",MERGE_INTO_KEEP,bkaZQuNkFw5qCcBGME5m,"benjamin knight",2,no,no,2026-05-26
+MERGE,yes,"sam@defydesign.org",KEEP,Vk0et07jw3qccBZsqBF8,"sam davies",14,yes,no,2026-04-15
+MERGE,yes,"sam@defydesign.org",MERGE_INTO_KEEP,7WXGBE5zD73ipAJfb5qE,"sam davies",13,no,no,2026-06-08
+MERGE,yes,"sam@defydesign.org",MERGE_INTO_KEEP,LfwjeSOvc2Mq3u4f2qm4,"sam davies",10,no,no,2026-06-08
+MERGE,yes,"sam@defydesign.org",MERGE_INTO_KEEP,B7vVWvvVhrUhP3QL3Dnl,"sam davies",10,no,no,2026-06-08
+MERGE,yes,"sam@defydesign.org",MERGE_INTO_KEEP,dMiQCeVDknPCK9Mhy5fg,"sam davies",17,no,no,2026-06-08
+MERGE,yes,"adam@streetsmartaustralia.org",KEEP,Oe2NBiLSraMozWjQtN7H,"adam robinson",12,no,no,2026-05-29
+MERGE,yes,"adam@streetsmartaustralia.org",MERGE_INTO_KEEP,wHstWIW6zo1ifWnWsayd,"adam robinson",8,no,no,2026-06-08
+MERGE,yes,"adam@streetsmartaustralia.org",MERGE_INTO_KEEP,Fe8nEezHRiBho7G6ev5V,"adam robinson",11,no,no,2026-06-08
+MERGE,yes,"adam@streetsmartaustralia.org",MERGE_INTO_KEEP,IgobH3bxpJMAMNxhUCVS,"adam robinson",9,no,no,2026-06-08
+MERGE,yes,"adam@streetsmartaustralia.org",MERGE_INTO_KEEP,Qtl5PgkHPMnNS1mjnGRO,"adam robinson",9,no,no,2026-03-28
+MERGE,yes,"sq@wilyajanta.org",KEEP,UJPGFZbcjcdslJC8jN6T,"wilya janta",12,yes,no,2025-12-10
+MERGE,yes,"sq@wilyajanta.org",MERGE_INTO_KEEP,601lLFL2WpQFwlcLmPBx,"dr. simon quilty",6,no,no,2026-06-08
+MERGE,yes,"sq@wilyajanta.org",MERGE_INTO_KEEP,4xqT9yHGyDBJKaUPf2lJ,"dr. simon quilty",6,no,no,2026-06-08
+MERGE,yes,"sq@wilyajanta.org",MERGE_INTO_KEEP,7ZKeS2H6Fyi1xDUTvING,"dr. simon quilty",8,no,no,2026-06-08
+MERGE,yes,"sq@wilyajanta.org",MERGE_INTO_KEEP,tNmXNxNzKf61yG3HmvNc,"dr. simon quilty",12,no,no,2026-06-08
+MERGE,yes,"kim@philanthropy.org.au",KEEP,O8F7kwyzHdWEbOjQ0Zob,"kim harland",11,no,no,2026-06-08
+MERGE,yes,"kim@philanthropy.org.au",MERGE_INTO_KEEP,qwvBT8hK74DMvrUPkIbd,"kim harland",5,no,no,2026-06-08
+MERGE,yes,"kim@philanthropy.org.au",MERGE_INTO_KEEP,wgEuHdAaGZnXGHBxKR1Q,"kim harland",4,no,no,2026-03-24
+MERGE,yes,"kim@philanthropy.org.au",MERGE_INTO_KEEP,YHR05hsHaxDiHO2gxo8f,"kim harland",9,no,no,2026-06-08
+MERGE,yes,"kim@philanthropy.org.au",MERGE_INTO_KEEP,KKLU6JUmRSSvACtvyPyT,"kim harland",6,no,no,2026-06-08
+MERGE,yes,"willhemina.wahlin@portable.com.au",KEEP,FlyntveGZxWzVeDmFwZ5,"willhemina wahlin",9,no,no,2026-06-08
+MERGE,yes,"willhemina.wahlin@portable.com.au",MERGE_INTO_KEEP,moxP9fCQ7a2pdibcxPDa,"willhemina wahlin",6,no,no,2026-06-08
+MERGE,yes,"willhemina.wahlin@portable.com.au",MERGE_INTO_KEEP,0w3yMTXm12bl74aKGce0,"willhemina wahlin",7,no,no,2026-01-20
+MERGE,yes,"willhemina.wahlin@portable.com.au",MERGE_INTO_KEEP,CjmW3zEgVVEYnrkw8tvq,"willhemina wahlin",7,no,no,2026-06-08
+MERGE,yes,"willhemina.wahlin@portable.com.au",MERGE_INTO_KEEP,WaTXyJ8P4oFUYeR5sXHT,"willhemina wahlin",7,no,no,2026-06-08
+MERGE,yes,"tara@queenslandgives.org.au",KEEP,xzRV6dT0WTQhJP5BCsHX,"tara castle",8,no,no,2026-06-08
+MERGE,yes,"tara@queenslandgives.org.au",MERGE_INTO_KEEP,GR0z6Lvl2N7gdUEqzMLk,"tara castle",6,no,no,2026-06-08
+MERGE,yes,"tara@queenslandgives.org.au",MERGE_INTO_KEEP,8QyHvajKpuyHyDmBfcCY,"tara castle",6,no,no,2025-12-11
+MERGE,yes,"tara@queenslandgives.org.au",MERGE_INTO_KEEP,1FJKzuyt1IpEFdjbJhjC,"tara castle",6,no,no,2026-06-08
+MERGE,yes,"tara@queenslandgives.org.au",MERGE_INTO_KEEP,qmFrCOsGrXQbLsIgjAzX,"tara castle",6,no,no,2026-06-08
+MERGE,yes,"nicholas@act.place",KEEP,rDUI85k0HWkfxvTyiNXK,"australian medical students association",22,yes,yes,2026-06-08
+MERGE,yes,"nicholas@act.place",MERGE_INTO_KEEP,yX006WjgWqAAoWEIkdtb,"nic",4,no,no,2026-06-08
+MERGE,yes,"nicholas@act.place",MERGE_INTO_KEEP,GWbymO5vTuzl0ELUsM0O,"nicholas marchesi oam",4,no,no,2026-06-08
+MERGE,yes,"nicholas@act.place",MERGE_INTO_KEEP,auto_d5f091cc,"Nicholas Marchesi",4,no,yes,2026-04-26
+MERGE,yes,"tobyg@kalianahoutdoors.com.au",KEEP,mTsZ14zvtIs3XaaTHHhX,"toby gowland",12,no,no,2026-06-08
+MERGE,yes,"tobyg@kalianahoutdoors.com.au",MERGE_INTO_KEEP,o0nVQWqVWIGTqXbg0zuG,"toby gowland",11,no,no,2026-06-08
+MERGE,yes,"tobyg@kalianahoutdoors.com.au",MERGE_INTO_KEEP,cnNzFM6zrQjRaMJ69NpE,"toby gowland",12,no,no,2026-06-08
+MERGE,yes,"tobyg@kalianahoutdoors.com.au",MERGE_INTO_KEEP,l1v8gPj5zXhURMeS0mCv,"toby gowland",12,no,no,2026-06-08
+MERGE,yes,"ratkinson@picc.com.au",KEEP,yZcX8GoQEqBYqcb5Uyjm,"palm island community company limited (picc)",11,yes,yes,2026-01-22
+MERGE,yes,"ratkinson@picc.com.au",MERGE_INTO_KEEP,j6S1E0B1NNfv4MZIp6AI,"rachel atkinson",10,no,yes,2026-06-08
+MERGE,yes,"ratkinson@picc.com.au",MERGE_INTO_KEEP,oVIfdPjlceNMZJB20RsO,"rachel atkinson",8,no,yes,2026-06-08
+MERGE,yes,"ratkinson@picc.com.au",MERGE_INTO_KEEP,VfEBYrMWswkt7jfYjmd0,"rachel atkinson",11,no,yes,2026-06-08
+MERGE,yes,"jay@socialimpacthub.org",KEEP,jWlB8bMHxQxWMNIZLIoD,"jay boolkin",7,no,no,2026-06-08
+MERGE,yes,"jay@socialimpacthub.org",MERGE_INTO_KEEP,d0zn6ZAai0BVwoB8PZnA,"jay boolkin",6,no,no,2026-06-08
+MERGE,yes,"jay@socialimpacthub.org",MERGE_INTO_KEEP,HRLfast9ci2Yq6XPoajQ,"jay boolkin",5,no,no,2026-06-08
+MERGE,yes,"jay@socialimpacthub.org",MERGE_INTO_KEEP,auto_90abca15,"Jay Boolkin",0,no,no,2026-04-01
+MERGE,yes,"jennifer.kitching@anyinginyi.com.au",KEEP,lXK8sKfCmHJQYLC9Din1,"jennifer kitching",5,no,no,2026-06-08
+MERGE,yes,"jennifer.kitching@anyinginyi.com.au",MERGE_INTO_KEEP,B8hHjzzwIuQNf9lOeGze,"jennifer kitching",5,no,no,2026-06-08
+MERGE,yes,"jennifer.kitching@anyinginyi.com.au",MERGE_INTO_KEEP,sbIeXVLqNf2kPWdiPle2,"jennifer kitching",5,no,no,2026-06-08
+MERGE,yes,"jennifer.kitching@anyinginyi.com.au",MERGE_INTO_KEEP,4tZeGvHPsy6bw0UDubdx,"jennifer kitching",5,no,no,2026-06-08
+MERGE,yes,"jodie@redmovies.com.au",KEEP,6itSyoLzsKS3R35a8mfs,"jodie davis",5,no,no,2026-06-08
+MERGE,yes,"jodie@redmovies.com.au",MERGE_INTO_KEEP,d1iSnUNRv78E1m43NmFv,"jodie davis",3,no,no,2026-03-27
+MERGE,yes,"jodie@redmovies.com.au",MERGE_INTO_KEEP,3DGTgCZt6R25rAYoODaW,"jodie davis",5,no,no,2026-06-08
+MERGE,yes,"jodie@redmovies.com.au",MERGE_INTO_KEEP,CabhyQwSVhdry4vNGIrt,"jodie davis",5,no,no,2026-06-08
+MERGE,yes,"millie@defydesign.org",KEEP,RMUL5qNtnclYhvsmvjBP,"millie shearer",5,no,no,2026-06-08
+MERGE,yes,"millie@defydesign.org",MERGE_INTO_KEEP,7K273hja6a0nEfYMsea1,"millie shearer",5,no,no,2026-06-08
+MERGE,yes,"millie@defydesign.org",MERGE_INTO_KEEP,MaE0EVXGdc8cOZpgkCGI,"millie shearer",3,no,no,2026-03-25
+MERGE,yes,"millie@defydesign.org",MERGE_INTO_KEEP,6dVAQFDuKNd4QHqPEO9s,"millie shearer",5,no,no,2026-06-08
+MERGE,yes,"s.grimsley-ballard@snowfoundation.org.au",KEEP,nZDW2c7bgNmKT62iOMP4,"sally grimsley-ballard",20,no,no,2026-06-08
+MERGE,yes,"s.grimsley-ballard@snowfoundation.org.au",MERGE_INTO_KEEP,tr5gXz8M27R7Y6PyZ3WD,"(no name)",2,no,no,2026-05-23
+MERGE,yes,"s.grimsley-ballard@snowfoundation.org.au",MERGE_INTO_KEEP,NSn2Ywjd0g0RIlWp66Fs,"sally grimsley-ballard",13,no,no,2026-06-08
+MERGE,yes,"s.pearson@frrr.org.au",KEEP,j7hi3rlHwmIuDKNSIdTs,"steph pearson",18,no,no,2026-03-31
+MERGE,yes,"s.pearson@frrr.org.au",MERGE_INTO_KEEP,MMrEpSBB5rbHzONLDirb,"steph pearson",6,no,no,2026-05-15
+MERGE,yes,"s.pearson@frrr.org.au",MERGE_INTO_KEEP,jatY7yhZL4h5OtexuCJ1,"steph pearson",11,no,no,2026-06-08
+MERGE,yes,"kristy.bloomfield@oonchiumpa.com.au",KEEP,0kEs9BJmkmi7ZUc5haEX,"kristy bloomfield",9,yes,yes,2026-03-23
+MERGE,yes,"kristy.bloomfield@oonchiumpa.com.au",MERGE_INTO_KEEP,yk4uK8rgDNGA87EUqNbu,"kristy bloomfield",9,no,yes,2026-06-08
+MERGE,yes,"kristy.bloomfield@oonchiumpa.com.au",MERGE_INTO_KEEP,gCok46nfL0BqYeYEeexd,"kristy bloomfield",7,no,no,2026-06-08
+MERGE,yes,"lstronach@minderoo.org",KEEP,yCiaPtyAOWYsEs9ITUGj,"lucy stronach",24,yes,no,2026-04-29
+MERGE,yes,"lstronach@minderoo.org",MERGE_INTO_KEEP,bkZQ6vDNekvTtUVV1TpI,"lucy stronach",5,no,no,2026-06-08
+MERGE,yes,"scarlettsteven@dusseldorp.org.au",KEEP,hlGY2sV3G9XUgJcBpM9O,"scarlett steven",22,yes,no,2026-03-20
+MERGE,yes,"scarlettsteven@dusseldorp.org.au",MERGE_INTO_KEEP,1AuVcj7COcol4udwL2Nw,"scarlett steven",5,no,no,2026-05-27
+MERGE,yes,"wfrazer@paulramsayfoundation.org.au",KEEP,WZQ7eABQAKf59F3Vyaow,"william frazer",15,yes,no,2026-03-24
+MERGE,yes,"wfrazer@paulramsayfoundation.org.au",MERGE_INTO_KEEP,86IotCHStn0fEHyhFtoF,"william frazer",5,no,no,2026-06-08
+MERGE,yes,"judith@orangesky.org.au",KEEP,Q4h5Aa8lRj8YDOZ0E8s2,"judith meiklejohn",13,no,no,2026-03-03
+MERGE,yes,"judith@orangesky.org.au",MERGE_INTO_KEEP,c7ieIClxZbohQeuihgyq,"judith meiklejohn",11,no,no,2026-06-08
+MERGE,yes,"todd@defydesign.org",KEEP,tiC3ISBpkDdmS54agG6P,"todd sidery",12,no,no,2026-03-31
+MERGE,yes,"todd@defydesign.org",MERGE_INTO_KEEP,Ktm6aDokztnOYsToBWrR,"todd sidery",10,no,no,2026-06-08
+MERGE,yes,"narelle@picc.com.au",KEEP,pXbha9a8lYxHuD9oAM8S,"narelle gleeson",11,no,yes,2026-06-08
+MERGE,yes,"narelle@picc.com.au",MERGE_INTO_KEEP,aZICs18JhTlYcCja2awk,"narelle gleeson",13,no,no,2026-04-23
+MERGE,yes,"matt.allen@socialimpacthub.org",KEEP,NVHZfqOTviJyw6Tw1old,"matt allen",7,no,no,2026-06-08
+MERGE,yes,"matt.allen@socialimpacthub.org",MERGE_INTO_KEEP,auto_66af5eed,"Matt Allen",0,no,no,2026-04-27
+MERGE,yes,"will@defydesign.org",KEEP,TFYAX2ABmlLTPnc91Xt5,"will thompson",7,no,no,2026-05-27
+MERGE,yes,"will@defydesign.org",MERGE_INTO_KEEP,reconcile_e94191a5,"Will Thompson",3,no,no,2026-03-26
+MERGE,yes,"slovett@picc.com.au",KEEP,tip2wTi3wWy0nwLFE2Vp,"sharon lovett",7,no,no,2026-05-27
+MERGE,yes,"slovett@picc.com.au",MERGE_INTO_KEEP,b52Teph3cCcL1FEWaTgN,"sharon lovett",0,no,no,2026-02-18
+MERGE,yes,"tony.miles@anyinginyi.com.au",KEEP,bJ0IHYKRVBtlwmyIydaQ,"tony miles",6,no,no,2026-06-08
+MERGE,yes,"tony.miles@anyinginyi.com.au",MERGE_INTO_KEEP,auto_35b4e62f,"Tony Miles",0,no,no,2026-03-13
+MERGE,yes,"carollyn@anat.org.au",KEEP,TF4i9w40DIGne1wPg5uN,"carollyn kavanagh",6,no,no,2026-04-15
+MERGE,yes,"carollyn@anat.org.au",MERGE_INTO_KEEP,dgQZ3xUzj3E6aZwbGrvG,"carollyn kavanagh",6,no,no,2026-06-08
+MERGE,yes,"bruce@redmovies.com.au",KEEP,47rRZh5KUga3AvHgxorp,"bruce redman",5,no,no,2026-03-27
+MERGE,yes,"bruce@redmovies.com.au",MERGE_INTO_KEEP,HI1vnNSzvmxk0q6Yhd4u,"bruce redman",5,no,no,2026-05-15
+MERGE,yes,"cosecau@standardledger.co",KEEP,rirjlbnB0qUPn8xujAAD,"vanessa ordonez",4,no,no,2026-06-08
+MERGE,yes,"cosecau@standardledger.co",MERGE_INTO_KEEP,auto_f2330b32,"cosecAU SL",0,no,no,2026-04-27
+MERGE,yes,"sarah.bartak@brianmdavis.org.au",KEEP,QdAmpE07Z361Rrx6ilS2,"sarah bartak",4,no,no,2026-06-08
+MERGE,yes,"sarah.bartak@brianmdavis.org.au",MERGE_INTO_KEEP,auto_e4724ba2,"Sarah Bartak",0,no,no,2026-04-30
+MERGE,yes,"g.byron@snowfoundation.org.au",KEEP,WKPGDlP6FyYg4hUTmQzd,"georgina byron",4,no,no,2026-06-08
+MERGE,yes,"g.byron@snowfoundation.org.au",MERGE_INTO_KEEP,7S6pSw0fIMpMMwxtSPCz,"Georgina Byron",3,no,no,2026-04-08
+MERGE,yes,"anita.hopkins@brianmdavis.org.au",KEEP,X9kE3G9rqvR51gUo0Bsx,"anita hopkins",4,no,no,2026-06-08
+MERGE,yes,"anita.hopkins@brianmdavis.org.au",MERGE_INTO_KEEP,auto_9d9c9423,"Anita Hopkins",0,no,no,2026-05-13
+MERGE,yes,"bridgit@reddust.org.au",KEEP,Q4fquuYzVh0z6NXLqrwU,"bridgit mcmullen",4,no,no,2026-06-08
+MERGE,yes,"bridgit@reddust.org.au",MERGE_INTO_KEEP,auto_f1706418,"Bridgit McMullen",0,no,no,2026-03-10
+MERGE,yes,"alberto.furlan@ianpotter.org.au",KEEP,PoPY4biO1VsofPFGdpv5,"alberto furlan",4,no,no,2026-06-08
+MERGE,yes,"alberto.furlan@ianpotter.org.au",MERGE_INTO_KEEP,n9c8Aeyckfw1Qa6nupYD,"Alberto Furlan",3,no,no,2026-05-29
+MERGE,yes,"jessica@socialimpacthub.org",KEEP,reconcile_6547cf18,"Jessica Mendoza-Roth",1,no,no,2026-02-28
+MERGE,yes,"jessica@socialimpacthub.org",MERGE_INTO_KEEP,CxTAADLcBEUIzXLGhp5W,"social impact hub foundation",0,no,no,2026-06-08
+MERGE,yes,"nic.sharah@homelandschoolcompany.org.au",KEEP,r8oUYf3j3L0HcnoBqVeX,"homeland school company",0,no,no,2026-06-08
+MERGE,yes,"nic.sharah@homelandschoolcompany.org.au",MERGE_INTO_KEEP,auto_67832921,"Nic Sharah",0,no,no,2026-05-06
+MERGE,yes,"jenn@anat.org.au",KEEP,FZ9kj33EShcYmQt8BN1X,"jenn brazier",0,no,no,2026-06-08
+MERGE,yes,"jenn@anat.org.au",MERGE_INTO_KEEP,manual_95185c8b-d183-444f-b08c-8239cc673c1f,"Jenn Brazier",0,no,no,2026-03-18
+MERGE,yes,"traceynewman008@gmail.com",KEEP,8Ysd4HscCutj53m0Oqzx,"tracey newman",13,no,no,2026-05-29
+MERGE,yes,"traceynewman008@gmail.com",MERGE_INTO_KEEP,D05Oa0eO8arILsSNjiPQ,"tracey newman",6,no,no,2026-06-08
+MERGE,yes,"traceynewman008@gmail.com",MERGE_INTO_KEEP,5Ef5iz76fJvyK1b5hI1Q,"tracey newman",6,no,no,2026-06-08
+MERGE,yes,"traceynewman008@gmail.com",MERGE_INTO_KEEP,pvZ53c6JlkL5sOPPFiTc,"tracey newman",6,no,no,2026-06-08
+MERGE,yes,"traceynewman008@gmail.com",MERGE_INTO_KEEP,hOn1vWuI9tNNhW0Mn1jl,"tracey newman",6,no,no,2026-06-08
+MERGE,yes,"pene.curtis@bigpond.com",KEEP,eyr6Cv6B9cf2VFUzJBQs,"pene curtis",20,no,no,2026-06-08
+MERGE,yes,"pene.curtis@bigpond.com",MERGE_INTO_KEEP,5EfSDhGNzQmIcgLz5LuH,"pene curtis",13,no,no,2026-06-08
+MERGE,yes,"pene.curtis@bigpond.com",MERGE_INTO_KEEP,zByIWtdKk4Z83B7b4uML,"pene curtis",5,no,no,2026-04-20
+MERGE,yes,"pene.curtis@bigpond.com",MERGE_INTO_KEEP,PRoijdTUvWTYv2D5B29s,"pene curtis",7,no,no,2026-05-27
+MERGE,yes,"mtaylor@envirobank.com.au",KEEP,IPzrkrahNKcSWL03d8Jq,"marty taylor",4,no,no,2026-06-08
+MERGE,yes,"mtaylor@envirobank.com.au",MERGE_INTO_KEEP,auto_1c29c2da,"Marty Taylor",0,no,no,2026-02-26
+MERGE,yes,"mtaylor@envirobank.com.au",MERGE_INTO_KEEP,ipZjeDDR9uwHMdXR7KV6,"marty taylor",3,no,no,2026-06-08
+MERGE,yes,"knighttss@gmail.com",KEEP,9uBnZcxMfiGZDLgS22vg,"benjamin knight",4,no,yes,2026-05-27
+MERGE,yes,"knighttss@gmail.com",MERGE_INTO_KEEP,PuuRHAkYciTlzUYl9a8R,"benjamin knight",4,no,no,2026-05-25
+MERGE,yes,"knighttss@gmail.com",MERGE_INTO_KEEP,0PrtdUUsyqYv5QklTNte,"benjamin knight",4,no,no,2026-06-08
+MERGE,no,"susyn.young@gmail.com",KEEP,sanAvi38DOOdCFdBlNqO,"susyn young",19,yes,no,2026-06-08
+MERGE,no,"susyn.young@gmail.com",MERGE_INTO_KEEP,auto_c86bbe63,"Susyn Young",0,no,no,2026-05-04
+MERGE,no,"amy.elson@nt.gov.au",KEEP,B1U3yW6G9UoDI5BsAV4c,"amy elson",14,no,no,2026-04-22
+MERGE,no,"amy.elson@nt.gov.au",MERGE_INTO_KEEP,6IijuIN8YUSD200siSc8,"amy elson",12,no,no,2026-06-08
+MERGE,no,"grantluff@gmail.com",KEEP,X4Md4sr73fZdL33BPmlz,"grant luff",12,no,no,2026-03-26
+MERGE,no,"grantluff@gmail.com",MERGE_INTO_KEEP,V8YinCOfEn8BdsujGzW0,"grant luff",10,no,no,2026-06-08
+MERGE,no,"lorana.bartels@anu.edu.au",KEEP,ozylqwJZShaQnAwcOJby,"(no name)",7,yes,no,2026-06-08
+MERGE,no,"lorana.bartels@anu.edu.au",MERGE_INTO_KEEP,lDdMkRI18W42NlvS7k05,"Lorana Bartels",0,no,no,2026-03-25
+MERGE,no,"c.jones@pgud.org",KEEP,VO6mL3LulO6PqMgvBM9X,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"c.jones@pgud.org",MERGE_INTO_KEEP,ejNcw4Ba1tAKeKy7jb2N,"kmpugwfgwtxmtlrmpsimjnmp",4,no,no,2026-06-08
+MERGE,no,"srubiamador@sjusd.org",KEEP,vARf3DDefHHMj8tI35j2,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"srubiamador@sjusd.org",MERGE_INTO_KEEP,lS6odMdzaEcGJ4eVIEQT,"lxammhzitmziufjzsqxi",3,no,no,2026-06-08
+MERGE,no,"ciscoub@yahoo.com",KEEP,zVpUoZng3rFI78abJ861,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"ciscoub@yahoo.com",MERGE_INTO_KEEP,gGYuKv43Vi2uUkLij3DU,"kbbzxlhazvflphckap",4,no,no,2026-06-08
+MERGE,no,"hawk_b51@yahoo.com",KEEP,DkpXtag9mbaAp6yCuSrA,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"hawk_b51@yahoo.com",MERGE_INTO_KEEP,M9Tk5QXVTWiwj0tmJrXU,"yvjnzgwshqirdfbocw",4,no,no,2026-06-08
+MERGE,no,"sbruzda@allianceppc.com",KEEP,2Z6qZKDEfTRqATZN1oVk,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"sbruzda@allianceppc.com",MERGE_INTO_KEEP,wH335AZ8O1hTQY0gRgXr,"deuycmrdpsouzrxudbrbfly",3,no,no,2026-06-08
+MERGE,no,"dj.polodavi.s@gmail.com",KEEP,k51xRq1kMPEslLIjHRPP,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"dj.polodavi.s@gmail.com",MERGE_INTO_KEEP,vUF0sWNma75NwkMMr0K4,"wtadfcuqyfabvnttrzkpds",4,no,no,2026-06-08
+MERGE,no,"cperry@qt-az.com",KEEP,OCbQ4FD8QZ6H1J6SHSpR,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"cperry@qt-az.com",MERGE_INTO_KEEP,dU8c2XwMQtu0UuMs8Onv,"ikjvutqbrwdapktj",3,no,no,2026-06-08
+MERGE,no,"l.fclaf.fee@gmail.com",KEEP,5tsFtKJV3S9QHVVKlXo2,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"l.fclaf.fee@gmail.com",MERGE_INTO_KEEP,r5cRnJzfYPzf76K7J4C5,"tkjoiieskigthxrpmmxyy",3,no,no,2026-06-08
+MERGE,no,"kathy@klempel.me",KEEP,qB0Mm6PlNg9zMhYqgzPc,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"kathy@klempel.me",MERGE_INTO_KEEP,dERu9XMHEJ866KKclssi,"ojszzfnkjvshsbuc",3,no,no,2026-06-08
+MERGE,no,"javi_tess92@outlook.com",KEEP,z0VG38J9E9VD1CgAMdd1,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"javi_tess92@outlook.com",MERGE_INTO_KEEP,gZ3GXY1hv6iIBKLvNIBN,"hqcgsykswtixcpflqzmz",4,no,no,2026-06-08
+MERGE,no,"ryazantsova@chameleongroup.co",KEEP,n0x9Jeq9U7gUcDTIHcKi,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"ryazantsova@chameleongroup.co",MERGE_INTO_KEEP,PoULIorUVo7iRlB6Su8w,"xwbklalwszjssprelrykawc",3,no,no,2026-06-08
+MERGE,no,"sgbox@wanadoo.fr",KEEP,qPX3grwbIxKMhi09dnA8,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"sgbox@wanadoo.fr",MERGE_INTO_KEEP,9iKuhg5ZeUjxkwEvA9jO,"qmsnjfvzunkazvkoouae",3,no,no,2026-06-08
+MERGE,no,"7202034285@tmomail.net",KEEP,AANmMV55PgMLFCEvML8T,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"7202034285@tmomail.net",MERGE_INTO_KEEP,00CsYRanDFMm9dyuudLY,"vmygatmsfubskwdxzdhqeunh",3,no,no,2026-06-08
+MERGE,no,"vr@chameleongroup.co",KEEP,Skq21DRy4vKLLhj3Xxhf,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"vr@chameleongroup.co",MERGE_INTO_KEEP,qHhpImxgkfJRqQjQAcWw,"cruqxdtsahepqhvdiw",3,no,no,2026-06-08
+MERGE,no,"sd.sas.hco@gmail.com",KEEP,1H8Og5lXJvRRRe0D01GK,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"sd.sas.hco@gmail.com",MERGE_INTO_KEEP,hizlzOUVPL5pIXyPw0D2,"mlkytwiwsdfebevw",3,no,no,2026-06-08
+MERGE,no,"ecoury8751@aol.com",KEEP,aW4jtrU1dyKR0VHmM20z,"(no name)",6,yes,no,2026-06-08
+MERGE,no,"ecoury8751@aol.com",MERGE_INTO_KEEP,c1bLRnL2j6iBtUXDAHk8,"wgsvtpdkmfduaycfon",3,no,no,2026-06-08
+MERGE,no,"realinnovationfund@dewr.gov.au",KEEP,MymJIeUEL8btnnIT7bJB,"real innovation fund",5,no,no,2026-06-08
+MERGE,no,"realinnovationfund@dewr.gov.au",MERGE_INTO_KEEP,auto_ff882964,"DEWR - REAL Innovation Fund",2,no,no,2026-03-18
+MERGE,no,"stp@uonbi.ac.ke",KEEP,rzwKLf3DXKs3C02dBpPH,"fablab nairobi",4,no,no,2026-05-27
+MERGE,no,"stp@uonbi.ac.ke",MERGE_INTO_KEEP,CwcOrXeWjmjWQNryceX1,"(no name)",2,no,no,2026-06-08
+MERGE,no,"jeremy@colemanprint.com.au",KEEP,iqk86FbdDvkyZvYrVkmu,"jeremy bigg",4,no,no,2026-06-08
+MERGE,no,"jeremy@colemanprint.com.au",MERGE_INTO_KEEP,auto_e3c10d00,"jeremy",0,no,no,2026-05-15
+MERGE,no,"maggiebea@gmail.com",KEEP,xGUd9CrDEHyTZhjffqVs,"maggie beale",3,no,no,2026-06-08
+MERGE,no,"maggiebea@gmail.com",MERGE_INTO_KEEP,auto_acb2a874,"maggiebea",0,no,no,2026-03-30
+MERGE,no,"cherring@blackbird.vc",KEEP,ku4kKGWrrMSsUgBNv8Pe,"blackbird",0,no,no,2026-06-08
+MERGE,no,"cherring@blackbird.vc",MERGE_INTO_KEEP,auto_dd7e2e75,"Blackbird",0,no,no,2026-06-01
+MERGE,no,"cassie@devpost.com",KEEP,H4mOTf5X4in943diSVLE,"cassie from devpost",0,no,no,2026-06-08
+MERGE,no,"cassie@devpost.com",MERGE_INTO_KEEP,FUkMewWYXlKvY4iQsFKB,"Cassie from Devpost",0,no,no,2026-03-14
+MERGE,no,"jane.stecyk@m.mightynetworks.com",KEEP,TFBZR9piKBsEHbR9LAIQ,"jane stecyk",0,no,no,2026-06-08
+MERGE,no,"jane.stecyk@m.mightynetworks.com",MERGE_INTO_KEEP,320n1jeQmcihesXZUmye,"jane stecyk",0,no,no,2026-03-31
+MERGE,no,"learn@send.zapier.com",KEEP,ZAGln0nOLO1Li5gTbnGU,"Zapier",0,no,no,2026-06-08
+MERGE,no,"learn@send.zapier.com",MERGE_INTO_KEEP,I7Cxyx67diOdRbXnsVyA,"zapier",0,no,no,2026-03-21
+MERGE,no,"nicholas@ffproductions.com.au",KEEP,XDIJiY5M5UpTq731i8Gp,"nic marchesi",0,no,no,2026-06-08
+MERGE,no,"nicholas@ffproductions.com.au",MERGE_INTO_KEEP,auto_dbe6e4df,"Nicholas Marchesi",0,no,no,2026-04-27
+REVIEW,no,"ceo@deadlyscience.org.au",KEEP,kMG435sXyNZ3g0ka2hzg,"cory tutt",4,yes,no,2026-03-06
+REVIEW,no,"ceo@deadlyscience.org.au",REVIEW,5LqgNvZQ2TGXHyJguHkB,"corey tutt",7,no,no,2026-06-08
+REVIEW,no,"ceo@deadlyscience.org.au",REVIEW,O5zWG2qnHYaeMPlYdK6z,"corey tutt",4,no,no,2026-05-15
+REVIEW,no,"ceo@deadlyscience.org.au",REVIEW,wFviTiFi7euS3VyRWwLn,"corey tutt",9,no,no,2026-06-08
+REVIEW,no,"ceo@deadlyscience.org.au",REVIEW,7i2onyZFqX12BKlx5uLY,"corey tutt",5,no,no,2026-06-08
+REVIEW,no,"ceo@deadlyscience.org.au",REVIEW,YveuSGaoTk1fk105ExPO,"corey tutt",5,no,no,2026-06-08
+REVIEW,no,"contact@cdsuganda.org",KEEP,H02uVZuut3krrt7J4iV2,"ogole oscar",4,no,no,2026-05-27
+REVIEW,no,"contact@cdsuganda.org",REVIEW,Vse75dT3to1FwGmQeCAi,"ogole oscar",2,no,no,2026-06-08
+REVIEW,no,"jobs@key-systems.net",KEEP,Ix0bCx8mbJoEmKePeTer,"(no name)",6,yes,no,2026-06-08
+REVIEW,no,"jobs@key-systems.net",REVIEW,TBueqicmPnv5MTfw6fa9,"uztvrdwpntxpceienltdfn",4,no,no,2026-06-08
+REVIEW,no,"accounts@julalikari.com.au",KEEP,manual_323669aa-9ad2-46ae-910b-c5e795b64227,"Julalikari Accounts",1,no,no,2026-01-30
+REVIEW,no,"accounts@julalikari.com.au",REVIEW,2McL6zmvblS37U0Q5XOm,"julalikari council aboriginal corporation",0,no,no,2026-06-08
+REVIEW,no,"support.dk@ezviz.com",KEEP,jvbsIAwJdPpADLphJN4q,"ezviz international",0,no,no,2026-06-08
+REVIEW,no,"support.dk@ezviz.com",REVIEW,Qu9mAYCYeKQ49oneprmv,"support dk",0,no,no,2026-03-02
+REVIEW,no,"hi@act.place",KEEP,x9ppRP5MZJnF6v01DgWj,"a kind tractor",9,no,yes,2026-01-23
+REVIEW,no,"hi@act.place",REVIEW,b5iTn4wqP0LsYuknFPnd,"act admin",4,no,no,2026-05-29
+REVIEW,no,"contact@good360.org.au",KEEP,jHSaeQO107ZNdPE2663T,"good360 australia",0,no,no,2026-06-08
+REVIEW,no,"contact@good360.org.au",REVIEW,FYqz6jN9upIH186oBLKN,"Good360 Australia",0,no,no,2026-04-24
+REVIEW,no,"info@flyhav.com",KEEP,g3mCmF64426by14k24uk,"hinterland aviation",3,no,no,2026-06-08
+REVIEW,no,"info@flyhav.com",REVIEW,auto_25d2d21d,"info",0,no,no,2026-03-31
+REVIEW,no,"orders@eprintonline.com.au",KEEP,tCqk03o9pwcnf4F2pYi0,"eprint online",4,no,no,2026-06-08
+REVIEW,no,"orders@eprintonline.com.au",REVIEW,auto_2c98c781,"orders",0,no,no,2026-03-23
+REVIEW,no,"support@rubimicrocafe.com",KEEP,iZjD7QCXmTntsvhxRQSP,"(no name)",6,yes,no,2026-06-08
+REVIEW,no,"support@rubimicrocafe.com",REVIEW,hfwq5NNmXUdw4oN0bpwV,"vsxigmlydfvrynioyvudbprj",3,no,no,2026-06-08
+REVIEW,no,"info@e.atlassian.com",KEEP,fO8yjuMpilWMD5JDzJZ6,"loom",0,no,no,2026-06-08
+REVIEW,no,"info@e.atlassian.com",REVIEW,auto_fec6131c,"Loom",0,no,no,2026-04-17
+REVIEW,no,"ceo@jvtrust.org.au",KEEP,Fhk0FK9FcN563lUcSKhT,"fiona maxwell",21,no,no,2026-04-29
+REVIEW,no,"ceo@jvtrust.org.au",REVIEW,hQdMEJd33LmL3jzONRGh,"fiona maxwell",14,no,no,2026-06-08
+REVIEW,no,"accounts@act.place",KEEP,vT1CWtY6zB0kckOlzk8D,"accounts act",5,no,yes,2026-06-08
+REVIEW,no,"accounts@act.place",REVIEW,Evf4J6yT8Z7U1AUl7X3T,"accounts act",3,no,yes,2026-06-08
+REVIEW,no,"team@mail.miro.com",KEEP,MUEZf7YBTER80g9iPBB9,"the miro team",0,no,no,2026-06-08
+REVIEW,no,"team@mail.miro.com",REVIEW,TQfNIpXv2oBvNs03d6Hz,"The Miro Team",0,no,no,2025-12-16
+REVIEW,no,"hello@super.so",KEEP,1cDDSoegD8YYnQA4FbGK,"super",0,no,no,2026-06-08
+REVIEW,no,"hello@super.so",REVIEW,auto_89084644,"Super",0,no,no,2026-05-25
+REVIEW,no,"team@mail.perplexity.ai",KEEP,tIcBE6bbyxiKmFYPF1Vx,"perplexity enterprise",0,no,no,2026-06-08
+REVIEW,no,"team@mail.perplexity.ai",REVIEW,auto_fe7bbe3d,"Perplexity",0,no,no,2026-04-11
+SYSTEM,no,"grantscope-triage@act.place",KEEP,BZvB3crwSpby8FfzmB19,"grantscope triage",4,no,no,2026-05-23
+SYSTEM,no,"grantscope-triage@act.place",DELETE,go1AwjMi8D1trk8WsbYj,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,8SlnzOgAHhpOyLwywOIW,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,kL3sN6xV9WpGXRSqMgKM,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,NCBUYk9TQ7fnYIqFCD32,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,uAsIUWBHez3DzVex8rtm,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,RXTJqT4K3IpMk6XjRaj5,"grantscope triage",2,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,rxBfwMhOd3vyfOFCkvYD,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,5cWKwQGai8jg00jq23MJ,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,ls4MMNgOdTI2gEROPeW6,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,5kvBkyiJiSIlEC8EG2CO,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,OS6cGHu8rn3ySuwj1MOP,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,eWuHmHaqJqmO6M0qv5ku,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,N066soQXQ4SEPFm8jvDs,"grantscope triage",1,no,no,2026-06-08
+SYSTEM,no,"grantscope-triage@act.place",DELETE,ShJqUOpYkOwoJuZb1NjF,"grantscope triage",2,no,no,2026-06-08
+NOT_PEOPLE,no,"stripe@example.com",KEEP,Uo2GntyRd9gElysyXadb,"jenny rosen",3,no,no,2026-06-08
+NOT_PEOPLE,no,"stripe@example.com",DELETE,quQ1IVDWSP9KI5ixj2pd,"jenny rosen",1,no,no,2026-06-08
+NOT_PEOPLE,no,"stripe@example.com",DELETE,2Arkb6HM8Kde2MtGif5S,"jenny rosen",1,no,no,2026-06-08
+NOT_PEOPLE,no,"stripe@example.com",DELETE,gR2puEwwcN78LNSm1feT,"jenny rosen",1,no,no,2026-06-08
+NOT_PEOPLE,no,"m.cnu.rl.in.s@gmail.com",KEEP,Nnz7iZwHdneXV4Jevi5E,"(no name)",6,yes,no,2026-06-08
+NOT_PEOPLE,no,"m.cnu.rl.in.s@gmail.com",DELETE,iMXVDwAhWo1di7wpozUl,"uaeinxuxmozivxufmgmnvw",4,no,no,2026-06-08
+NOT_PEOPLE,no,"j.a.j.ab.ell.e8.1@gmail.com",KEEP,gXTEPv647NO8ZWZxnBrx,"(no name)",6,yes,no,2026-06-08
+NOT_PEOPLE,no,"j.a.j.ab.ell.e8.1@gmail.com",DELETE,StEignH29EJfadvAaEvs,"nrzlqeyovwlydenv",3,no,no,2026-06-08
+NOT_PEOPLE,no,"voicemail@dialpad.com",KEEP,J9r6ZqJc5UAFGkguBC9w,"dialpad",0,no,no,2026-06-08
+NOT_PEOPLE,no,"voicemail@dialpad.com",DELETE,auto_1eb1bdb3,"Dialpad",0,no,no,2026-03-10
+NOT_PEOPLE,no,"final-check@example.com",KEEP,qSAr8aMM9bgCPXzuTL1R,"test",9,no,no,2026-06-08
+NOT_PEOPLE,no,"final-check@example.com",DELETE,RI1TytFSVn0qCj3OpxMQ,"test",7,no,no,2026-06-08
+NOT_PEOPLE,no,"welcome@openrouter.ai",KEEP,xFafMw0kPSHRqudXbxzS,"openrouter team",0,no,no,2026-06-08
+NOT_PEOPLE,no,"welcome@openrouter.ai",DELETE,auto_7b5386cb,"OpenRouter Team",0,no,no,2026-06-03
+NOT_PEOPLE,no,"news@send.zapier.com",KEEP,JISEYTvuvj4g0PNcJ2nJ,"zapier news",0,no,no,2026-06-08
+NOT_PEOPLE,no,"news@send.zapier.com",DELETE,auto_6acba82c,"Zapier News",0,no,no,2026-03-26
+NOT_PEOPLE,no,"mi.ke661.8.10@gmail.com",KEEP,Hdz88yGNh9cQgxwdIVnH,"(no name)",6,yes,no,2026-06-08
+NOT_PEOPLE,no,"mi.ke661.8.10@gmail.com",DELETE,8BkMmfmUWrmSUTo7WLaE,"tzubbsxdthlorakxno",4,no,no,2026-06-08
+NOT_PEOPLE,no,"invoice+statements@supabase.com",KEEP,msoQkyq035iy0p92ayPu,"supabase pte. ltd.",0,no,no,2026-06-08
+NOT_PEOPLE,no,"invoice+statements@supabase.com",DELETE,JLIYqnZRZDJ2d4Qf5MQw,"supabase pte. ltd.",0,no,no,2026-03-21
+NOT_PEOPLE,no,"jarlmadanka@goods.civicgraph.io",KEEP,L1kooixF2tOI61OSdbP8,"jarlmadanka wa",2,no,no,2026-06-08
+NOT_PEOPLE,no,"jarlmadanka@goods.civicgraph.io",DELETE,ac6FQdAwintboayVWUiM,"jarlmadanka wa",2,no,no,2026-05-15
+NOT_PEOPLE,no,"warruwi@goods.civicgraph.io",KEEP,i3odQcXuB5Ek7jjnayH6,"warruwi nt",3,no,no,2026-06-08
+NOT_PEOPLE,no,"warruwi@goods.civicgraph.io",DELETE,Kfftjz1kr7re0quOvxxn,"warruwi nt",2,no,no,2026-05-15
+NOT_PEOPLE,no,"feedback+customerio@warp.dev",KEEP,NEPhpv06ImtmacDOjfye,"eric from warp",0,no,no,2026-06-08
+NOT_PEOPLE,no,"feedback+customerio@warp.dev",DELETE,auto_55e7da84,"Warp Team",0,no,no,2026-03-06
+NOT_PEOPLE,no,"kintore@goods.civicgraph.io",KEEP,kTimXhFlc71LShGqSwGI,"kintore nt",3,no,no,2026-06-08
+NOT_PEOPLE,no,"kintore@goods.civicgraph.io",DELETE,iuVqVB3OrXIEcOEw5riw,"kintore nt",2,no,no,2026-05-15
+NOT_PEOPLE,no,"accounting@thriday.com.au",KEEP,w9sayHZwpD9yy0cmahAb,"thriday accounting",0,no,no,2026-06-08
+NOT_PEOPLE,no,"accounting@thriday.com.au",DELETE,auto_5c5ea3f2,"Sally Hurst (Thriday Accounting Support)",0,no,no,2026-03-26
+NOT_PEOPLE,no,"maureen.cummings@jcf.placeholder",KEEP,OKn95bkiAVRAWDKxeh2U,"maureen cummings",3,no,yes,2026-06-08
+NOT_PEOPLE,no,"maureen.cummings@jcf.placeholder",DELETE,P7hT9BCbMgpmw3MYA1ub,"maureen cummings",4,no,no,2026-05-29
+NOT_PEOPLE,no,"a.s.hleyd.uk.es.1.2@gmail.com",KEEP,1wK7zf7Ja4VRRtyUID47,"(no name)",6,yes,no,2026-06-08
+NOT_PEOPLE,no,"a.s.hleyd.uk.es.1.2@gmail.com",DELETE,egO4mKoiE3UQOdVs3Fra,"kkvawnbzzxrsrkqbpglvr",4,no,no,2026-06-08
+NOT_PEOPLE,no,"wecare@thriday.com.au",KEEP,b1uGSGDl6iBEXJdiRFkV,"thriday",0,no,no,2026-06-08
+NOT_PEOPLE,no,"wecare@thriday.com.au",DELETE,auto_7ab4ec28,"Thriday",0,no,no,2026-03-11
+NOT_PEOPLE,no,"pete.rh.aup.e.nthal1.4@gmail.com",KEEP,Eyc5IpyXhUbBU09JhoSd,"(no name)",6,yes,no,2026-06-08
+NOT_PEOPLE,no,"pete.rh.aup.e.nthal1.4@gmail.com",DELETE,xmxXCRJfjp1l2nfJVfVo,"oyrdeuhvyjpndvxv",3,no,no,2026-06-08
+NOT_PEOPLE,no,"w.i.n.at.aro23.4@gmail.com",KEEP,8iuHKXd1fc399wTjBAao,"(no name)",6,yes,no,2026-06-08
+NOT_PEOPLE,no,"w.i.n.at.aro23.4@gmail.com",DELETE,qojZDdJtW9tjp46Cdjc4,"fqxxztkhksrsgcprhdojjem",3,no,no,2026-06-08
+NOT_PEOPLE,no,"umbakumba@goods.civicgraph.io",KEEP,6bjo08S459GAjsCrJEa0,"umbakumba nt",3,no,no,2026-06-08
+NOT_PEOPLE,no,"umbakumba@goods.civicgraph.io",DELETE,cosG1FgL133xMtL2ewdy,"umbakumba nt",2,no,no,2026-05-15
+NOT_PEOPLE,no,"updates@product.exa.ai",KEEP,UaApxKCDKpy7a1wYtDhT,"will bryk",0,no,no,2026-06-08
+NOT_PEOPLE,no,"updates@product.exa.ai",DELETE,mwZOKNJrRt23YeZSluLD,"Exa Product Updates",0,no,no,2026-03-05
+NOT_PEOPLE,no,"ben+washtest1779856038@benjamink.com.au",KEEP,CWYLiCR10hR8wa3NTmLw,"wash test",5,no,no,2026-06-08
+NOT_PEOPLE,no,"ben+washtest1779856038@benjamink.com.au",DELETE,W8NvPYuxVs8ZA6rR2Fsi,"wash test",5,no,no,2026-06-08
+NOT_PEOPLE,no,"milingimbi@goods.civicgraph.io",KEEP,65oqqmNvJ056JG0Mp3pF,"milingimbi nt",3,no,no,2026-06-08
+NOT_PEOPLE,no,"milingimbi@goods.civicgraph.io",DELETE,pnKIc9CJvb4XmbcK8q74,"milingimbi nt",2,no,no,2026-05-15
+NOT_PEOPLE,no,"cole.reply@formspree.io",KEEP,DQqLmSsP4hxU1iIUF14Y,"cole",0,no,no,2026-06-08
+NOT_PEOPLE,no,"cole.reply@formspree.io",DELETE,WUiKS4b8hgp2ePnV7LoC,"Cole",0,no,no,2026-03-12

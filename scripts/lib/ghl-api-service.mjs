@@ -209,14 +209,33 @@ export class GHLService {
    * @param {string} email - Email to lookup
    * @returns {Promise<Object|null>} Contact if found
    */
-  async lookupContactByEmail(email) {
-    try {
-      const data = await this.request(
-        `/contacts/lookup?locationId=${this.locationId}&email=${encodeURIComponent(email)}`
-      );
-      return data.contacts?.[0] || null;
-    } catch (err) {
-      return null;
+  async lookupContactByEmail(email, { retries = 1 } = {}) {
+    if (!email) return null;
+    const lower = String(email).toLowerCase();
+    for (let attempt = 0; ; attempt++) {
+      try {
+        // GHL's GET /contacts/lookup is broken — it reads "lookup" as a contact id and
+        // 4xx's, so this used to silently return null for EVERYONE. That meant
+        // upsertContact never found existing contacts and always created (the real
+        // engine of the duplicate pile, incl. grantscope-triage@). Use the working
+        // POST /contacts/search path with an exact-email match instead.
+        const matches = await this.searchContacts(email);
+        return matches.find(c => (c.email || '').toLowerCase() === lower) || null;
+      } catch (err) {
+        // A search "not found" is an empty 200, never an error — so any thrown error is
+        // a genuine failure. Returning null on a transient failure is exactly what lets
+        // upsertContact create a duplicate, so retry transients then THROW; never
+        // swallow to null.
+        const status = parseInt(
+          (String(err?.message).match(/GHL API Error \((\d+)\)/) || [])[1], 10
+        );
+        const transient = status === 429 || status >= 500 || Number.isNaN(status);
+        if (transient && attempt < retries) {
+          await new Promise(r => setTimeout(r, 500 * (attempt + 1)));
+          continue;
+        }
+        throw err; // fail loud — caller must NOT create-on-error
+      }
     }
   }
 
@@ -230,7 +249,19 @@ export class GHLService {
     const existing = await this.lookupContactByEmail(contactData.email);
 
     if (existing) {
-      const updated = await this.updateContact(existing.id, contactData);
+      // GHL's PUT /contacts/{id} REPLACES the tag array, so merge incoming tags onto the
+      // existing ones — otherwise an upsert carrying a handful of tags would wipe a
+      // contact's existing tags (including consent/comms tags). This update path only
+      // started firing for real once lookup was repointed at the working endpoint.
+      const updates = { ...contactData };
+      if (contactData.tags?.length) {
+        const have = new Set((existing.tags || []).map(t => String(t).toLowerCase()));
+        updates.tags = [
+          ...(existing.tags || []),
+          ...contactData.tags.filter(t => !have.has(String(t).toLowerCase())),
+        ];
+      }
+      const updated = await this.updateContact(existing.id, updates);
       return { contact: updated, created: false };
     } else {
       const created = await this.createContact(contactData);
