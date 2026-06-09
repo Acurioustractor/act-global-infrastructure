@@ -32,13 +32,21 @@ PR #44 already emits the unified `source:event:contained` everywhere. The gated 
 
 Opportunities and the calendar CTA are no-ops until these are set in Vercel.
 
+## Pre-built dry-run scripts (Tier 1 — run any time, read-only by default)
+
+Validated against the live account 2026-06-09 (read-only):
+
+- **`scripts/contained-ghl-ids-probe.mjs`** — READ-ONLY, no writes ever. Lists every pipeline + stage IDs, every calendar, and the CONTAINED custom-field IDs, then prints a paste-ready JusticeHub Vercel env block. Run it before AND after the UI create steps to capture IDs.
+- **`scripts/contained-ghl-custom-fields.mjs`** — creates the 2 fields. DRY RUN by default (prints exact POST bodies); `--apply` creates them and prints IDs. Idempotent.
+
 ## Phase D build sequence (Tier 3, day-shift, gated to 16 Jun — DRY-RUN FIRST)
 
+0. **Probe** — `node scripts/contained-ghl-ids-probe.mjs` to snapshot current IDs + get the env-block template.
 1. **Suppression guard workflow** — build FIRST (safety backstop before any send). Triggers: DND, Email Unsubscribed, consent_status=No consent, `lane:community`, `comms:do-not-bulk` → strip from all `comms:*`, stop workflows.
-2. **Custom fields (2 to create)** — `cohort` (SINGLE_OPTIONS) + `slot_confirmed` (DATE). API-supported via `scripts/lib/ghl-api-service.mjs` `createCustomField`. Record returned field IDs into the config `custom_fields.existing`.
-3. **Pipeline "CONTAINED Adelaide 2026" (11 stages)** — no `createPipeline` in the GHL lib; create in GHL UI. Record pipeline ID + each stage ID → set `GHL_PARTNER_PIPELINE_ID` / stages in JH Vercel env. (Funder pipeline: decide whether a separate pipeline or reuse — set `GHL_FUNDER_PIPELINE_ID` accordingly.)
-4. **Calendar "CONTAINED Adelaide Walkthroughs"** — GHL native, 30-min slots; create in GHL UI. `on_booking_confirmed` → set `slot_confirmed`, move opportunity to Booked. Record public booking URL → `NEXT_PUBLIC_GHL_CONTAINED_CALENDAR_URL` in JH Vercel env (un-gates the register CTA from PR #44).
-5. **Tag migration** — `scripts/ghl-taxonomy-migrate.mjs --dry-run` FIRST. 260 `project:contained-adelaide-2026` → `source:event:contained + place:sa`; additive-then-strip (RC3); conflict-guard the 9 multi-way email dupes (human merge in UI, skip); re-assert the community-line guard after each bucket. Eligibility gate: 113 eligible / 2916 blocked.
+2. **Custom fields (2 to create)** — `node scripts/contained-ghl-custom-fields.mjs` (dry-run) → `--apply`. Creates `cohort` (SINGLE_OPTIONS + 6 options) + `slot_confirmed` (DATE). Paste the printed IDs into the config `custom_fields.existing`. (`newsletter_consent` already exists: `aVnqmajnysMtGYhLD0oA`.)
+3. **Pipeline "CONTAINED Adelaide 2026" (11 stages)** — no `createPipeline` in the GHL lib; create in GHL UI, then re-run the probe to capture pipeline + stage IDs. **DESIGN DECISION (open):** JusticeHub host/connect routes open opportunities in *separate* `GHL_PARTNER_PIPELINE_ID` / `GHL_FUNDER_PIPELINE_ID`, but the campaign pipeline is the participant journey (Captured→Booked→Experienced). Map host/funder deals to either existing ACT pipelines — **Grants** (`scom3L0kNwA1W0zPIzMe`) for funders, **Empathy Ledger** (`aRGmSaMh62wPO2R0Bt4g`) for partners — or stand up dedicated ones. Pick, then set the env vars.
+4. **Calendar "CONTAINED Adelaide Walkthroughs"** — GHL native, 30-min slots; create in GHL UI. `on_booking_confirmed` → set `slot_confirmed`, move opportunity to Booked. Grab the public booking permalink → `NEXT_PUBLIC_GHL_CONTAINED_CALENDAR_URL` in JH Vercel env (un-gates the register CTA from PR #44).
+5. **Tag migration** — **still to build.** The existing `scripts/ghl-taxonomy-migrate.mjs` is a *generic, account-wide, read-only* worksheet over the Supabase mirror — NOT CONTAINED-specific and NOT RC5-aware. A focused CONTAINED-260 migration (read-only worksheet first, then a guarded `--apply`) is needed: 260 `project:contained-adelaide-2026` → `source:event:contained + place:sa`; additive-then-strip (RC3); conflict-guard the 9 multi-way email dupes (human merge in UI, skip); re-assert the community-line guard after each bucket. Eligibility gate: 113 eligible / 2916 blocked.
 6. **Segments (smart lists)** — build from the `newsletter.segments` queries (consent-gated).
 7. **Automations + sends** — last, never AFK, after suppression guard verified.
 
