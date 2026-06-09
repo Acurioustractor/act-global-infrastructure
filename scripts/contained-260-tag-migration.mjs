@@ -11,8 +11,9 @@
  *
  * Per contact (additive-then-strip, RC3):
  *   ADD    project:act-jh, source:event:contained, interest:justice-reform,
- *          place:<state> (derived from the person's State; FLAGGED if empty — NOT blanket
- *          place:sa, because the import includes interstate/UK delivery-circle contacts),
+ *          place:<x> (from State first; else a conservative org->place map for unambiguous
+ *          single-location orgs — FLAGGED as "place from org"; NOT blanket place:sa, because
+ *          the import is mostly the interstate/UK national network),
  *          lane:community + role:storyteller (if currently role:lived-experience).
  *   REMOVE project:contained, project:contained-adelaide-2026, source:form, state:<x>,
  *          cohort:<x> (-> set the cohort custom field instead), newsletter-stream:* (all).
@@ -82,6 +83,25 @@ const CONFLICT_SKIP = new Set([
   'cnNzFM6zrQjRaMJ69NpE', 'mTsZ14zvtIs3XaaTHHhX', // Toby Gowland
 ]);
 
+// Best-effort org -> place: enrichment (Ben, 2026-06-09) for contacts with NO State.
+// CONSERVATIVE: only orgs that are unambiguously SINGLE-LOCATION (state-in-name, or
+// place-fixed Aboriginal/community orgs). National funders (PRF, Dusseldorp, Snow, ARACY)
+// and international orgs (Diagrama = UK) are deliberately OMITTED — their "place" is
+// ambiguous, and place: is low-value for a funder anyway. Inferred place is FLAGGED in the
+// worksheet (place source = org) so a human can verify before --apply. Keys are lowercased.
+const ORG_TO_PLACE = {
+  'nt shelter': 'place:nt', 'nt phn': 'place:nt',
+  'julalikari council aboriginal corporation': 'place:nt', // Tennant Creek
+  'bawinanga aboriginal corporation': 'place:nt',          // Maningrida
+  'urapuntja aboriginal corporation': 'place:nt',          // Utopia
+  'ingkerreke commercial': 'place:nt',                     // Alice Springs (Mparntwe)
+  'miwatj health': 'place:nt',                             // East Arnhem
+  'barkly backbone': 'place:nt',                           // Barkly / Tennant Creek
+  'queensland gives': 'place:qld',
+  'cape york partnership': 'place:qld',                    // Cape York
+  'murrup barak': 'place:vic',                             // University of Melbourne
+};
+
 // Minimal CSV parser (handles quoted fields + embedded commas/newlines).
 function parseCSV(t) {
   const rows = []; let f = [], cur = '', q = false;
@@ -96,14 +116,19 @@ function parseCSV(t) {
 
 const norm = (tags) => Array.isArray(tags) ? tags : typeof tags === 'string' ? tags.split(',').map((s) => s.trim()).filter(Boolean) : [];
 
-function planFor(current, state) {
+function planFor(current, state, company) {
   const set = new Set(current);
   const add = [], remove = [];
   // ADD always-identity
   for (const t of ALWAYS) if (!set.has(t)) add.push(t);
-  // place from the person's state (NOT blanket place:sa)
-  const placeTag = state && STATE_TO_PLACE[state.toUpperCase()];
-  const emptyState = !placeTag;
+  // place: from the person's State first; if empty, best-effort org->place (FLAGGED).
+  let placeTag = state && STATE_TO_PLACE[state.toUpperCase()];
+  let placeSource = placeTag ? 'state' : null;
+  if (!placeTag && company) {
+    const orgPlace = ORG_TO_PLACE[company.toLowerCase().trim()];
+    if (orgPlace) { placeTag = orgPlace; placeSource = 'org'; }
+  }
+  const emptyState = !placeTag; // true only when neither State nor org yields a place:
   if (placeTag && !set.has(placeTag)) add.push(placeTag);
   // community line: lived-experience -> lane:community + role:storyteller
   const communityLine = set.has('role:lived-experience') || set.has('lane:community') || set.has('role:storyteller');
@@ -117,7 +142,7 @@ function planFor(current, state) {
   }
   // dedupe
   const uniq = (a) => [...new Set(a)];
-  return { add: uniq(add), remove: uniq(remove), cohortValue, emptyState, communityLine };
+  return { add: uniq(add), remove: uniq(remove), cohortValue, emptyState, communityLine, placeSource, placeTag };
 }
 
 async function loadMirror(sb) {
@@ -146,6 +171,7 @@ async function main() {
     ghlId: r[ix('GHL ID')]?.trim() || '',
     email: (r[ix('Email')] || '').trim().toLowerCase(),
     state: (r[ix('State')] || '').trim(),
+    company: (r[ix('Company')] || '').trim(),
     consent: (r[ix('Consent Status')] || '').trim(),
   }));
 
@@ -153,7 +179,7 @@ async function main() {
   const { byId } = await loadMirror(sb);
 
   const plans = [];
-  const counts = { total: records.length, matched: 0, unmatched: 0, conflicts: 0, emptyState: 0, communityLine: 0, cohortFieldSets: 0 };
+  const counts = { total: records.length, matched: 0, unmatched: 0, conflicts: 0, placeFromState: 0, placeFromOrg: 0, noPlace: 0, communityLine: 0, cohortFieldSets: 0 };
   for (const rec of records) {
     const mirror = (rec.ghlId && byId.get(rec.ghlId)) || null;
     if (!mirror) { counts.unmatched++; plans.push({ ...rec, status: 'UNMATCHED (not in mirror)', add: [], remove: [] }); continue; }
@@ -161,11 +187,18 @@ async function main() {
     if (isConflict) { counts.conflicts++; plans.push({ ...rec, status: 'SKIP (dupe-email -> 9-conflict merge owns it)', add: [], remove: [] }); continue; }
     counts.matched++;
     const current = norm(mirror.tags);
-    const p = planFor(current, rec.state);
-    if (p.emptyState) counts.emptyState++;
+    const p = planFor(current, rec.state, rec.company);
+    if (p.placeSource === 'state') counts.placeFromState++;
+    else if (p.placeSource === 'org') counts.placeFromOrg++;
+    else counts.noPlace++;
     if (p.communityLine) counts.communityLine++;
     if (p.cohortValue) counts.cohortFieldSets++;
-    plans.push({ ...rec, status: p.emptyState ? 'PLAN (FLAG: empty state -> no place:)' : 'PLAN', current, ...p });
+    const status = p.placeSource === 'org'
+      ? `PLAN (place from org -> ${p.placeTag})`
+      : p.placeSource === 'state'
+        ? 'PLAN'
+        : 'PLAN (FLAG: no place - no state, org not mappable)';
+    plans.push({ ...rec, status, current, ...p });
   }
 
   // Worksheet
@@ -178,14 +211,16 @@ async function main() {
   lines.push(`- matched in mirror: **${counts.matched}**`);
   lines.push(`- dupe-email conflicts SKIPPED (9-conflict merge owns): **${counts.conflicts}** (config: 9)`);
   lines.push(`- unmatched (not in mirror): **${counts.unmatched}**`);
-  lines.push(`- FLAG empty-state (no place:): **${counts.emptyState}**`);
+  lines.push(`- place: from State: **${counts.placeFromState}**`);
+  lines.push(`- place: from org enrichment (FLAGGED, verify): **${counts.placeFromOrg}**`);
+  lines.push(`- no place: (no State, org not mappable — reached via personal-invite): **${counts.noPlace}**`);
   lines.push(`- community-line (no comms:, ensure lane:community): **${counts.communityLine}**`);
   lines.push(`- cohort custom-field sets (from cohort:<x> tag): **${counts.cohortFieldSets}**`, '');
   lines.push('## Per-contact plan', '');
-  lines.push('| email | state | status | ADD | REMOVE | cohort field |');
-  lines.push('|---|---|---|---|---|---|');
+  lines.push('| email | state | company | status | ADD | REMOVE | cohort field |');
+  lines.push('|---|---|---|---|---|---|---|');
   for (const p of plans) {
-    lines.push(`| ${p.email || '(none)'} | ${p.state || '—'} | ${p.status} | ${(p.add || []).join(' ') || '—'} | ${(p.remove || []).join(' ') || '—'} | ${p.cohortValue || '—'} |`);
+    lines.push(`| ${p.email || '(none)'} | ${p.state || '—'} | ${p.company || '—'} | ${p.status} | ${(p.add || []).join(' ') || '—'} | ${(p.remove || []).join(' ') || '—'} | ${p.cohortValue || '—'} |`);
   }
   writeFileSync(WORKSHEET, lines.join('\n'));
 
@@ -210,9 +245,9 @@ async function main() {
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   async function migrateOne(t) {
     // re-read live tags to avoid acting on a stale mirror
-    const live = await ghl.getContact(t.ghlId);
+    const live = await ghl.getContactById(t.ghlId);
     const current = norm(live?.tags);
-    const p = planFor(current, t.state);
+    const p = planFor(current, t.state, t.company);
     for (const tag of p.add) { await ghl.addTagToContact(t.ghlId, tag); await sleep(RL); }
     for (const tag of p.remove) { await ghl.removeTagFromContact(t.ghlId, tag); await sleep(RL); }
     return p;
@@ -223,7 +258,7 @@ async function main() {
   if (!tracer) { console.error('No safe tracer contact found. Aborting before any write.'); process.exit(1); }
   console.log(`\nTRACER: migrating ${tracer.email} (${tracer.ghlId}) ...`);
   await migrateOne(tracer);
-  const verify = await ghl.getContact(tracer.ghlId);
+  const verify = await ghl.getContactById(tracer.ghlId);
   const vt = norm(verify?.tags);
   const ok = ALWAYS.every((a) => vt.includes(a)) && !vt.includes('project:contained-adelaide-2026');
   if (!ok) { console.error('TRACER verification FAILED — canonical tags not present / legacy not stripped. Aborting the rest.'); process.exit(1); }

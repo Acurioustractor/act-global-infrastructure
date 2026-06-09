@@ -97,6 +97,22 @@
       "action": "strip from all comms:*; stop other workflows"
     }
   },
+  "deal_pipeline": {
+    "_comment": "RC6 LOCKED 2026-06-09 (Ben): ONE pipeline for all CONTAINED *deals* (host venue offers, funder $, partner resources), fed by the JusticeHub host/connect routes. Distinct from the participant 'CONTAINED Adelaide 2026' pipeline above (that is the walk-through journey). BOTH GHL_PARTNER_PIPELINE_ID and GHL_FUNDER_PIPELINE_ID point here; the role: tag + opportunity-name prefix ('Host:' / 'Funder:' / 'Partner:') distinguish the deal type. Grants pipeline deliberately NOT reused (that is ACT applying FOR grants, not receiving philanthropy); Empathy Ledger NOT reused (EL-branded, no home for venue hosts). Build = Tier 3, GHL UI, gated to 16 Jun.",
+    "name": "CONTAINED: Partners & Funders",
+    "feeds_env": ["GHL_PARTNER_PIPELINE_ID", "GHL_PARTNER_STAGE_NEW", "GHL_FUNDER_PIPELINE_ID", "GHL_FUNDER_STAGE_NEW"],
+    "stages": [
+      { "n": 1, "name": "New", "entry": "host/connect form submission (role:partner | role:funder | host offer)" },
+      { "n": 2, "name": "Qualified", "entry": "genuine fit confirmed" },
+      { "n": 3, "name": "In Conversation", "entry": "active discussion underway" },
+      { "n": 4, "name": "Offer / Proposal", "entry": "venue offered / funding amount or scope proposed" },
+      { "n": 5, "name": "Committed", "entry": "pledged or signed (host $ via Xero ACT-CN)" },
+      { "n": 6, "name": "Delivered / Active", "entry": "venue secured / funds received / partnership live" },
+      { "n": 7, "name": "Declined / Lapsed", "entry": "no, or went cold" }
+    ],
+    "monetary": "host pricing ladder $5K-$75K (see cta_map.host_back_tour); funder amounts as pledged. GHL_*_STAGE_NEW = stage 1 'New' id.",
+    "ocap": "A lane:community contact is never moved into a deal pipeline automatically; community partnerships are 1:1, human-led."
+  },
   "lifecycle_layer": {
     "_comment": "RC2 LOCKED 2026-06-09: keep engagement:/campaign-stage: as the campaign lifecycle SEGMENT layer, keyed to CONTAINED by source:event:contained + place:sa (unified source, RC5). No migration of these namespaces for this campaign.",
     "namespaces": ["engagement:", "campaign-stage:"],
