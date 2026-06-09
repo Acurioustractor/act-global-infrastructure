@@ -84,6 +84,9 @@ backups/
 # Local export outputs (regenerable from scripts)
 out/
 
+# GHL spam-purge forensic logs (contain deleted-contact PII; keep local, not in git)
+scripts/output/delete-spam-dups-*.json
+
 # Binary documents (track in cloud storage, not git)
 *.docx
 
