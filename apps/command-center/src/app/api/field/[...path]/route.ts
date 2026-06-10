@@ -12,7 +12,7 @@ import path from 'path'
  *   /api/field/the-field-morning.html
  */
 const REPO = path.resolve(process.cwd(), '..', '..')
-const SURFACE_FILES = new Set(['orbit-viz.html', 'project-scope-board.html', 'the-field-morning.html'])
+const SURFACE_FILES = new Set(['orbit-viz.html', 'project-scope-board.html', 'the-field-morning.html', 'the-whole-picture.html', 'monday-card.html'])
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
 

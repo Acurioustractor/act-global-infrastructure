@@ -64,6 +64,7 @@ export const navStructure: SidebarNavGroup[] = [
     label: '',
     items: [
       { href: '/company', label: 'Company', icon: Sparkles, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
+      { href: '/api/field/surface?name=whole', label: 'Whole Picture', icon: Compass, color: 'text-sky-400', bg: 'bg-sky-500/20' },
       { href: '/eofy', label: 'EOFY Cutover', icon: CalendarClock, color: 'text-red-400', bg: 'bg-red-500/20' },
       { href: '/today', label: 'Today', icon: Sun },
       { href: '/strategy', label: 'Strategy', icon: Compass, color: 'text-amber-400', bg: 'bg-amber-500/20' },
