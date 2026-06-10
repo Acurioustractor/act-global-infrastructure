@@ -9,6 +9,8 @@
   "scripts": {
     "test": "node --test scripts/tests/*.test.mjs",
     "test:finance": "node scripts/finance-engine.mjs --self-test",
+    "recon:status": "node scripts/recon-status.mjs",
+    "recon:sidecar": "node scripts/reconcile-sidecar.mjs",
     "schema:check": "node scripts/check-schema-contract.mjs",
     "schema:baseline": "node scripts/check-schema-contract.mjs --baseline",
     "schema:snapshot": "node scripts/check-schema-contract.mjs --snapshot",

@@ -1,0 +1,271 @@
+{
+  "generatedAt": "2026-06-10T19:23:25.972Z",
+  "accounts": [
+    "NAB Visa ACT #8815",
+    "NJ Marchesi T/as ACT Everyday"
+  ],
+  "caveats": [
+    "CAVEAT: mirror is_reconciled DRIFTS vs Xero — single-GET BankTransactions/{id} is the only truth.",
+    "CAVEAT: xero_transactions.has_attachments drifts — refresh path is receipt_emails.status='uploaded'."
+  ],
+  "fy26Quarters": [
+    {
+      "key": "Q1",
+      "start": "2025-07-01",
+      "end": "2025-09-30"
+    },
+    {
+      "key": "Q2",
+      "start": "2025-10-01",
+      "end": "2025-12-31"
+    },
+    {
+      "key": "Q3",
+      "start": "2026-01-01",
+      "end": "2026-03-31"
+    },
+    {
+      "key": "Q4",
+      "start": "2026-04-01",
+      "end": "2026-06-30"
+    }
+  ],
+  "sections": {
+    "reconcileState": {
+      "rows": [
+        {
+          "bank_account": "NAB Visa ACT #8815",
+          "quarter": "Q1",
+          "unreconciled_n": 0,
+          "unreconciled_total": "$0",
+          "reconciled_n": 420,
+          "reconciled_total": "$278,627"
+        },
+        {
+          "bank_account": "NAB Visa ACT #8815",
+          "quarter": "Q2",
+          "unreconciled_n": 125,
+          "unreconciled_total": "$138,519",
+          "reconciled_n": 494,
+          "reconciled_total": "$428,449"
+        },
+        {
+          "bank_account": "NAB Visa ACT #8815",
+          "quarter": "Q3",
+          "unreconciled_n": 69,
+          "unreconciled_total": "$41,076",
+          "reconciled_n": 412,
+          "reconciled_total": "$244,176"
+        },
+        {
+          "bank_account": "NAB Visa ACT #8815",
+          "quarter": "Q4",
+          "unreconciled_n": 50,
+          "unreconciled_total": "$28,430",
+          "reconciled_n": 273,
+          "reconciled_total": "$173,330"
+        },
+        {
+          "bank_account": "NJ Marchesi T/as ACT Everyday",
+          "quarter": "Q1",
+          "unreconciled_n": 0,
+          "unreconciled_total": "$0",
+          "reconciled_n": 84,
+          "reconciled_total": "$506,076"
+        },
+        {
+          "bank_account": "NJ Marchesi T/as ACT Everyday",
+          "quarter": "Q2",
+          "unreconciled_n": 47,
+          "unreconciled_total": "$372,517",
+          "reconciled_n": 32,
+          "reconciled_total": "$276,858"
+        },
+        {
+          "bank_account": "NJ Marchesi T/as ACT Everyday",
+          "quarter": "Q3",
+          "unreconciled_n": 39,
+          "unreconciled_total": "$243,227",
+          "reconciled_n": 0,
+          "reconciled_total": "$0"
+        },
+        {
+          "bank_account": "NJ Marchesi T/as ACT Everyday",
+          "quarter": "Q4",
+          "unreconciled_n": 22,
+          "unreconciled_total": "$129,623",
+          "reconciled_n": 0,
+          "reconciled_total": "$0"
+        }
+      ]
+    },
+    "untagged": {
+      "rows": [
+        {
+          "quarter": "Q2",
+          "n": 57,
+          "total": "$35,265"
+        },
+        {
+          "quarter": "Q3",
+          "n": 4,
+          "total": "$1,497"
+        },
+        {
+          "quarter": "Q4",
+          "n": 8,
+          "total": "$2,692"
+        }
+      ]
+    },
+    "receipts": {
+      "spend": {
+        "rows": [
+          {
+            "quarter": "Q1",
+            "has_attachments": false,
+            "n": 258,
+            "total": "$169,830"
+          },
+          {
+            "quarter": "Q1",
+            "has_attachments": true,
+            "n": 149,
+            "total": "$90,128"
+          },
+          {
+            "quarter": "Q2",
+            "has_attachments": false,
+            "n": 253,
+            "total": "$96,898"
+          },
+          {
+            "quarter": "Q2",
+            "has_attachments": true,
+            "n": 340,
+            "total": "$337,139"
+          },
+          {
+            "quarter": "Q3",
+            "has_attachments": false,
+            "n": 201,
+            "total": "$6,857"
+          },
+          {
+            "quarter": "Q3",
+            "has_attachments": true,
+            "n": 268,
+            "total": "$120,112"
+          },
+          {
+            "quarter": "Q4",
+            "has_attachments": false,
+            "n": 186,
+            "total": "$27,010"
+          },
+          {
+            "quarter": "Q4",
+            "has_attachments": true,
+            "n": 128,
+            "total": "$81,434"
+          }
+        ]
+      },
+      "emailsByStatus": {
+        "rows": [
+          {
+            "status": "uploaded",
+            "n": 1920
+          },
+          {
+            "status": "review",
+            "n": 261
+          },
+          {
+            "status": "matched",
+            "n": 140
+          },
+          {
+            "status": "captured",
+            "n": 109
+          },
+          {
+            "status": "junk",
+            "n": 75
+          },
+          {
+            "status": "failed",
+            "n": 11
+          },
+          {
+            "status": "skipped",
+            "n": 8
+          }
+        ]
+      },
+      "docCounts": {
+        "finance_receipt_documents": 7172,
+        "finance_receipt_bank_line_links": 4292
+      }
+    },
+    "duplicateRadar": {
+      "rows": [
+        {
+          "quarter": "Q1",
+          "dup_groups": 9,
+          "txns_covered": 19,
+          "total": "$6,275"
+        },
+        {
+          "quarter": "Q2",
+          "dup_groups": 24,
+          "txns_covered": 58,
+          "total": "$59,981"
+        },
+        {
+          "quarter": "Q3",
+          "dup_groups": 10,
+          "txns_covered": 24,
+          "total": "$12,760"
+        },
+        {
+          "quarter": "Q4",
+          "dup_groups": 1,
+          "txns_covered": 2,
+          "total": "$2,142"
+        }
+      ]
+    },
+    "matchTargets": {
+      "rows": [
+        {
+          "n": 312,
+          "total": "$503,126",
+          "with_receipt": 305
+        }
+      ]
+    },
+    "freshness": {
+      "rows": [
+        {
+          "bank_account": "NJ Marchesi T/as ACT Everyday",
+          "max_date": "2026-06-05",
+          "max_updated": "2026-06-09T02:00:08.819042+00:00",
+          "rows_24h": 0,
+          "rows_7d": 46,
+          "state": "STALE",
+          "hours_since": 41.4
+        },
+        {
+          "bank_account": "NAB Visa ACT #8815",
+          "max_date": "2026-06-08",
+          "max_updated": "2026-06-10T02:38:51.224588+00:00",
+          "rows_24h": 3,
+          "rows_7d": 640,
+          "state": "fresh",
+          "hours_since": 16.7
+        }
+      ]
+    }
+  }
+}

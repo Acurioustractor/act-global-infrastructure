@@ -30,6 +30,25 @@ const cronScripts = [
     cron_restart: '0 6 * * *', // Daily 6am AEST — refresh bank closing balances (Reports/BankSummary) BEFORE the 7am briefings + 8:13 daily-pulse. Was manual-only until 2026-05-27, so cash ran ~27d stale ($586K shown vs true ~$130K). Balance-only upsert — no transaction re-tag risk.
   },
   {
+    // Daily 7:25am AEST: read-only mirror overview — reconcile state, untagged,
+    // receipts, dup radar, freshness per ACT account x FY26 quarter. Writes only
+    // thoughts/shared/reports/recon-status-latest.{md,json}. Zero Xero/DB writes.
+    // Plan: 2026-06-10-bas-reconciliation-automation-engine §8.
+    name: 'recon-status',
+    script: 'scripts/recon-status.mjs',
+    cron_restart: '25 7 * * *',
+  },
+  {
+    // Weekly Monday 7:20am AEST: regenerate the reconcile-session cheat sheet
+    // (FY26 scope, mirror-only). Read-only; --verify (live single-GET truth) is
+    // run manually day-shift before the click session. Feeds the Monday ritual
+    // in thoughts/shared/reviews/reconcile-weekly-log.md.
+    name: 'reconcile-sidecar-weekly',
+    script: 'scripts/reconcile-sidecar.mjs',
+    args: '--scope fy26',
+    cron_restart: '20 7 * * 1',
+  },
+  {
     name: 'daily-briefing',
     script: 'scripts/daily-briefing.mjs',
     cron_restart: '0 7 * * *', // Daily 7am AEST
@@ -493,12 +512,15 @@ const cronScripts = [
     args: '--source xero --apply --limit 30 --min-confidence 0.85',
     cron_restart: '0,30 8-18 * * 1-5', // xx:00 and xx:30, Mon-Fri 8am-6pm AEST
   },
-  {
-    name: 'push-ai-tracking-to-xero',
-    script: 'scripts/push-ai-tracking-to-xero.mjs',
-    args: '--limit 50',
-    cron_restart: '7,37 8-18 * * 1-5', // 8:07, 8:37, ..., 18:37 Mon-Fri AEST
-  },
+  // STOPPED 2026-06-11 — unattended Xero write (Tier-3, day-zero item in
+  // thoughts/shared/plans/2026-06-10-bas-reconciliation-automation-engine.md).
+  // Tracking pushes move into the day-shift Morning Apply batch (P0 item 5).
+  // {
+  //   name: 'push-ai-tracking-to-xero',
+  //   script: 'scripts/push-ai-tracking-to-xero.mjs',
+  //   args: '--limit 50',
+  //   cron_restart: '7,37 8-18 * * 1-5', // 8:07, 8:37, ..., 18:37 Mon-Fri AEST
+  // },
   {
     name: 'ghl-cleanup-auto',
     script: 'scripts/cleanup-stale-ghl-opps.mjs',
@@ -824,17 +846,23 @@ const cronScripts = [
     args: '--days 3',
     cron_restart: '30 */6 * * *', // Every 6 hours +30min (after xero-sync at :00)
   },
-  {
-    name: 'receipt-match',
-    script: 'scripts/match-receipts-to-xero.mjs',
-    args: '--apply --ai',
-    cron_restart: '0 7 * * *', // Daily 7am AEST (after Xero sync)
-  },
-  {
-    name: 'receipt-upload',
-    script: 'scripts/upload-receipts-to-xero.mjs',
-    cron_restart: '0 8 * * *', // Daily 8am AEST (after matching at 7am)
-  },
+  // STOPPED 2026-06-11 — day-zero item in
+  // thoughts/shared/plans/2026-06-10-bas-reconciliation-automation-engine.md.
+  // receipt-match: verified mirror-only (--apply writes Supabase receipt_emails,
+  // no Xero calls) — safe to re-enable as the staging engine when wanted.
+  // receipt-upload: writes Xero attachments unattended (Tier-3; attachments
+  // cannot be deleted via API) — PUTs move into the Morning Apply batch.
+  // {
+  //   name: 'receipt-match',
+  //   script: 'scripts/match-receipts-to-xero.mjs',
+  //   args: '--apply --ai',
+  //   cron_restart: '0 7 * * *', // Daily 7am AEST (after Xero sync)
+  // },
+  // {
+  //   name: 'receipt-upload',
+  //   script: 'scripts/upload-receipts-to-xero.mjs',
+  //   cron_restart: '0 8 * * *', // Daily 8am AEST (after matching at 7am)
+  // },
   {
     name: 'xero-project-tag',
     script: 'scripts/tag-xero-transactions.mjs',
@@ -932,6 +960,26 @@ const cronScripts = [
     script: 'scripts/build-field-surfaces.mjs',
     cron_restart: '50 6 * * *',
   },
+
+  // === The Whole Picture (founders' OS) ===
+  // Plan: 2026-06-10-whole-picture-visualization-recommendation
+  {
+    name: 'whole-picture',
+    script: 'scripts/build-whole-picture.mjs',
+    cron_restart: '20 8 * * *', // daily 8:20 AEST, after money-command-digest 8:15
+  },
+  {
+    name: 'monday-card',
+    script: 'scripts/build-monday-card.mjs',
+    cron_restart: '45 8 * * 1', // Mon 8:45 AEST, after recon 8:00 + snapshot 8:15
+  },
+  // v1.5 — uncomment when scripts/build-founders-session-kit.mjs lands (before 27 Jun).
+  // Sat 7:00 AEST with an in-script first-Tuesday guard (Sat+3d = Tue; fires once/month).
+  // {
+  //   name: 'founders-session-prep',
+  //   script: 'scripts/build-founders-session-kit.mjs',
+  //   cron_restart: '0 7 * * 6',
+  // },
 ];
 
 module.exports = {
