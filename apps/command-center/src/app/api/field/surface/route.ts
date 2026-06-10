@@ -13,6 +13,8 @@ const SURFACES: Record<string, string> = {
   morning: 'thoughts/shared/the-field-morning.html',
   orbit: 'thoughts/shared/orbit-viz.html',
   scope: 'thoughts/shared/project-scope-board.html',
+  whole: 'thoughts/shared/the-whole-picture.html',
+  monday: 'thoughts/shared/monday-card.html',
 }
 
 export async function GET(req: Request) {
