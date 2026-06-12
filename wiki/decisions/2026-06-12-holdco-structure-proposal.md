@@ -134,6 +134,8 @@ A question raised after the call: can moving money out of the sole trader before
 
 [Path C](../../thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md) (locked 2026-04-27) already settled the shape: sole traders are not eligible R&D entities, so work conducted before the Pty existed cannot enter a claim regardless of how the money is journaled in June. Moving cash moves a deduction; it does not move the activities. The February and March plans that assumed a Pty operating all year were archived for exactly this reason: structural eligibility risk, audit exposure, penalties.
 
+The same applies to any retrospective agency framing, in either direction. If the Pty "acted for the sole trader", agency attributes the work to the principal, the sole trader, which is not an R&D entity: that version is worse, not better. If the sole trader "acted for the Pty", there was no company in existence before 24 April to be the principal, and the R&DTI records requirement is contemporaneous: a June document describing a year of agency nobody wrote down at the time is a reconstruction, not a record. An arrangement assembled now whose purpose is the offset is also the exact profile the joint ATO and AusIndustry integrity checks exist for.
+
 | Slice of FY26 | Who can claim R&DTI | What it takes |
 |---|---|---|
 | 1 Jul 2025 to 23 Apr 2026 | Nobody. This was sole trader work; forfeited per Path C. | Nothing changes this; the Pty did not exist. Founder invoices to the sole trader (D11.5) still work as ordinary deductions: that is the founder-pay play, not an R&D play. |
@@ -148,6 +150,8 @@ Two repo-level flags this question surfaced:
 2. The FY26 pack carries a tension Path C names but does not resolve: the four-register total ($354,047) and the personnel basis read as full-year figures, while Path C's own timing rule says only activities from 24 April count. The R&D consultant and Standard Ledger need to cut the registers to the defensible window before AusIndustry registration. Better we find this than an AusIndustry reviewer.
 
 One modelling question for Standard Ledger before the FY26 draw is finalised: every extra dollar drawn as a sole-trader invoice is personal income now with no offset attached; every dollar the Pty pays for window R&D work, or FY27 payroll pays next year, sits in claimable territory. The split between the two is a decision, not a default.
+
+On value per dollar, the boring route may also be the bigger one for FY26. A founder invoice deducted against the sole trader's income is worth up to Nic's top marginal rate (about 47 cents), while the R&DTI pays 43.5 cents refundable. So even if a full-year FY26 claim were available, it would chase a smaller number than the deduction already in hand, at far higher risk. The premium flips to the company side from FY27: the payer is a company that can take the refundable offset in cash while in loss, and there is no sole trader income left to deduct against. Standard Ledger to model the exact rates and Nic's absorption before the draw is finalised.
 
 ## If adopted: exact canon edits (only after the decision, then run the sync)
 
