@@ -144,6 +144,8 @@ The same applies to any retrospective agency framing, in either direction. If th
 
 If the Pty cannot pay by 30 June (NAB is still blocked), the window costs are not lost: expenditure to associates that is incurred but unpaid carries to the year it is actually paid and enters that year's claim. Slower beats sloppy: a late clean payment is worth more than a rushed paper trail. Path C already lists "incurred AND paid" as a Standard Ledger question; treat paid-by-30-June as the working assumption until answered.
 
+The full working plan for the window claim and the FY27 setup, including the June-quarter invoice split at 24 April and the window evidence snapshot (2,506 commits across the five project repos), lives at [rd-fy26-window-and-fy27-setup](../../thoughts/shared/plans/rd-fy26-window-and-fy27-setup.md).
+
 Two repo-level flags this question surfaced:
 
 1. The migration checklist §3 R&D rows contradicted Path C ("grandfathered through 30 June", "claim FY26 in Nic's personal return"). Corrected 2026-06-12 to point at Path C.

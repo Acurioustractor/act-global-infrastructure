@@ -291,6 +291,7 @@ Status from the call: NAB account still blocked on Nick's trust docs; Xero opens
 - [ ] **DGR lawyer question list sent** — before 26 June — Ben
 - [ ] **FY26 draw totals agreed + transfers done** — before 30 June — Ben + Nick + Standard Ledger
 - [ ] **Nick confirms farm-stays-personal** — next founders conversation — Nick
+- [ ] **FY26 R&D window plan executed** (engagement papers, split Q4 invoices, pay by 30 Jun, consultant reconciliation) — see [`rd-fy26-window-and-fy27-setup.md`](rd-fy26-window-and-fy27-setup.md) — Ben + Nick + Standard Ledger
 
 ---
 
