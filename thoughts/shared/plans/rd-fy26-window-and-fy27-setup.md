@@ -139,6 +139,7 @@ Target shape per the Money Framework: ~$627K eligible (personnel + ACT-IN + per-
 5. Knight Photography legal form + PSI posture for invoicing the Pty.
 6. Any issue with the Pty paying window invoices out of seed-loan funds.
 7. FY26 vs FY27 modelling: 47c sole-trader deduction vs 43.5c refundable offset, founder cash needs, and the final draw split.
+8. Asset transfers (sole trader + Knight Photography → group): going-concern GST treatment, Subdiv 328-G rollover availability given the 50/50 trust ownership, effective date per class (default 1 July so recapture lands in Nic's low year), vehicles vs charge-back (FBT), Goods plant placement given community-ownership intent, and consideration credited to director loan accounts. Register: `thoughts/shared/finance/asset-transfer-register-2026.md`.
 
 ## Cross-references
 
