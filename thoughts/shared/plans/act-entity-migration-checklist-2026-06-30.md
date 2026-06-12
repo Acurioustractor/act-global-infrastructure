@@ -275,6 +275,25 @@ Standard Ledger called this out as the explicit cutover artefact: a spreadsheet 
 
 ---
 
+## 12. Addendum 2026-06-12: Standard Ledger structure call
+
+A follow-up call (filed at [`thoughts/shared/meetings/2026-06-12-standard-ledger-structure-call.md`](../meetings/2026-06-12-standard-ledger-structure-call.md)) re-confirmed D11.1, D11.2, and D11.5, and opened four decisions tracked at [`wiki/decisions/2026-06-12-holdco-structure-proposal.md`](../../wiki/decisions/2026-06-12-holdco-structure-proposal.md):
+
+1. **Holdco + ACT Projects subsidiary proposal: which entity trades from 1 July.** Until decided, **hold the novation letters (§2, Week 5-6)** and any new from-1-July contract naming. If Projects is adopted: the §3 R&D FY27 re-registration row repoints to Projects, the QBE contract (held by the Pty) needs assignment or stays in the holdco, the "Goods on Country" trading name re-registers, and Knight Photography Phase 3 invoices ACT Projects.
+2. **Butterfly connection to the group.** DGR lawyer question list goes before the 26 June handover; answers expected before August. Note Butterfly is likely a CLG (members, not shares), so "wholly owned subsidiary" may not be mechanically available.
+3. **Farm.** Per the call: no farm entity for now; income and accommodation in Nick's personal name. Once Nick confirms, update the act-core-facts Farm row and revisit the §1 Farm lease row.
+4. **FY26 founder draw scale.** Up to ~$200K each before 30 June per the call (vs ~$250K Ben-side already planned in D11.5). Final totals, Nick's vehicle, and tax provisioning to be set with Standard Ledger. Mechanisms stay D11.2 + D11.5.
+
+Status from the call: NAB account still blocked on Nick's trust docs; Xero opens after banking; Inv 15078 ($100K) still not raised; trust setup is done and post-budget trust rule changes were noted with no change planned.
+
+- [ ] **Decide operating entity (decision 1)** — by 19 June — Ben + Nick + Standard Ledger (in writing)
+- [ ] **Hold novation letters until decision 1 lands** — standing — Ben
+- [ ] **DGR lawyer question list sent** — before 26 June — Ben
+- [ ] **FY26 draw totals agreed + transfers done** — before 30 June — Ben + Nick + Standard Ledger
+- [ ] **Nick confirms farm-stays-personal** — next founders conversation — Nick
+
+---
+
 ## Cutover rules (decided by CEO review 2026-04-24)
 
 ### Rule 1 — Pre-cutover invoices stay with sole trader
