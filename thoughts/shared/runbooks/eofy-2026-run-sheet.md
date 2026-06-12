@@ -11,6 +11,10 @@ tags: [eofy, cutover, founder-pay, rd-tax, runbook]
 
 > One table, every open step from the holdco brief, checklist §12, and the R&D window plan, deduped and dated. Plan: everything decidable closes by Friday 19 June; the execution tail (payments, resolutions) runs 22 to 30 June. **Critical path: #1 bank → #13 seed loan → #17 paid-by-30-June.** If the bank slips, the FY26 R&D slice carries to FY27 and every other step still completes.
 
+> **Live status surface:** the Notion EOFY Setup Tracker (`https://app.notion.com/p/63cbc05e64ba4203b514beb8eb4f9445`) now carries every row below with per-task detail pages (built 2026-06-12). Per the tracker seed note, Notion is the source of truth for statuses; this file is the plan of record.
+>
+> **Two tracker findings folded in (2026-06-12):** (1) the tracker holds Inv 15078 pending Standard Ledger confirming invoice-vs-journal treatment (note dated 31 May), so steps #10, #11 and #14 execute after the Monday email answers that; (2) "Accept Standard Ledger proposal + clear Xero access" is an open P0 that gates SL's BAS cleanup, mapping review and R&D review: add it to Monday.
+
 ## Week of 15 to 19 June
 
 | # | Day | Step | Why | Owner |
@@ -37,7 +41,7 @@ tags: [eofy, cutover, founder-pay, rd-tax, runbook]
 | # | By | Step | Why | Owner |
 |---|---|---|---|---|
 | 17 | 30 Jun | Pty pays Ben's window invoice + Nic's window director's fees | Associate amounts enter the FY26 claim only if PAID by 30 June; unpaid amounts carry to FY27. If NAB is not live, take the carry rather than improvising. | Ben + Nick |
-| 18 | 30 Jun | Sole trader pays Inv 15078-15080 (cash permitting) | Paid-by-30-June is the safe default for Nic's deduction until SL confirms his cash-vs-accruals basis. | Nick |
+| 18 | 30 Jun | Sole trader pays 15079 + 15080 (cash permitting); 15078 is matched, not paid (the 6 Oct 2025 transfers already settled it) | Paid-by-30-June is the safe default for Nic's deduction until SL confirms his cash-vs-accruals basis. | Nick |
 | 19 | 30 Jun | Nic draws his cash as drawings, sized to collections | Liquidity only: no deduction, no tax event. Don't outrun the ~$507K of uncollected receivables. | Nick |
 | 20 | 30 Jun | Xero file opens once banking is live; $1 dry-run invoice end-to-end | Rule 2's "genuinely live" test: the Pty (or chosen entity) must be invoice-ready before 1 July trading is announced. | SL + Ben |
 | 21 | 30 Jun | Both founders provision ~40-45% of personal receipts for tax | The ATO will assess close to half; provisioning now beats a payment-plan scramble in 2027. | Ben + Nick |
