@@ -128,6 +128,27 @@ Call targets: up to ~$200K each before 30 June, with ~$300K total as the working
 | Tax provisioning | Expect close to half at personal marginal rates. ATO payment plans are available. PAYG instalments likely follow in FY27 unless payroll replaces the pattern. |
 | Mechanism | Unchanged: D11.5 for Ben, equivalent invoice path for Nick. This decision sets the totals those mechanisms execute. |
 
+## FY26 R&D and founder pay: two separate machines (added 2026-06-12)
+
+A question raised after the call: can moving money out of the sole trader before 30 June, and paying the founders for their FY26 R&D time as if the Pty operated all year, make the full year claimable? Short answer: no for the full year, yes for a ten-week slice, and FY27 is where the full-year machine runs.
+
+[Path C](../../thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md) (locked 2026-04-27) already settled the shape: sole traders are not eligible R&D entities, so work conducted before the Pty existed cannot enter a claim regardless of how the money is journaled in June. Moving cash moves a deduction; it does not move the activities. The February and March plans that assumed a Pty operating all year were archived for exactly this reason: structural eligibility risk, audit exposure, penalties.
+
+| Slice of FY26 | Who can claim R&DTI | What it takes |
+|---|---|---|
+| 1 Jul 2025 to 23 Apr 2026 | Nobody. This was sole trader work; forfeited per Path C. | Nothing changes this; the Pty did not exist. Founder invoices to the sole trader (D11.5) still work as ordinary deductions: that is the founder-pay play, not an R&D play. |
+| 24 Apr to 30 Jun 2026 (~10 weeks) | A Curious Tractor Pty Ltd | The Pty genuinely engages the founders now (resolutions and agreements dated today, describing the true period, never backdated), the work is documented contemporaneously, and amounts owed to associates are actually PAID by 30 June to land in the FY26 claim. Rough shape on the Path C personnel basis: about $59K (Ben ~$44K at 95% of the $250K basis, Nic ~$15K at 40% of $200K) for roughly $26K of refund, plus any other R&D costs the Pty incurs and pays in the window. Standard Ledger prices it. |
+| FY27, full year | The operating entity (decision 1) | Payroll per D11.2 from 1 July, every founder dollar on company books with records. Path C already names FY27 as the big year. |
+
+If the Pty cannot pay by 30 June (NAB is still blocked), the window costs are not lost: expenditure to associates that is incurred but unpaid carries to the year it is actually paid and enters that year's claim. Slower beats sloppy: a late clean payment is worth more than a rushed paper trail. Path C already lists "incurred AND paid" as a Standard Ledger question; treat paid-by-30-June as the working assumption until answered.
+
+Two repo-level flags this question surfaced:
+
+1. The migration checklist §3 R&D rows contradicted Path C ("grandfathered through 30 June", "claim FY26 in Nic's personal return"). Corrected 2026-06-12 to point at Path C.
+2. The FY26 pack carries a tension Path C names but does not resolve: the four-register total ($354,047) and the personnel basis read as full-year figures, while Path C's own timing rule says only activities from 24 April count. The R&D consultant and Standard Ledger need to cut the registers to the defensible window before AusIndustry registration. Better we find this than an AusIndustry reviewer.
+
+One modelling question for Standard Ledger before the FY26 draw is finalised: every extra dollar drawn as a sole-trader invoice is personal income now with no offset attached; every dollar the Pty pays for window R&D work, or FY27 payroll pays next year, sits in claimable territory. The split between the two is a decision, not a default.
+
 ## If adopted: exact canon edits (only after the decision, then run the sync)
 
 | File | Change |

@@ -71,8 +71,8 @@ Everything on this list needs one of three outcomes:
 | Final sole trader tax return FY26 | Lodge under normal schedule | Personal tax return due 31 October 2026 (or 15 May 2027 if using a registered tax agent). |
 | PAYG Instalments (sole trader) | Discontinue | Nic's PAYG instalments under sole trader cease at cutover. |
 | PAYG Instalments (Pty) | Register | ATO will set up after first tax return. Expect voluntary pre-payment Year 1. |
-| R&D Tax Incentive registration (AusIndustry) | RE-REGISTER under Pty for FY27 | Current R&D activities under Nic's sole trader are grandfathered through 30 June. For FY27, the Pty registers fresh. Standard Ledger coordinates. |
-| R&D FY26 claim (sole trader) | Lodge with sole trader tax return | Claim the FY26 activities in Nic's personal return. |
+| R&D Tax Incentive registration (AusIndustry) | FY26: Pty registers by 30 Apr 2027 for activities from 24 Apr 2026 only. FY27: register under the operating entity per §12 decision 1. | Per Path C (locked 2026-04-27): sole trader periods are not claimable; the old "grandfathered" wording here was wrong and is corrected 2026-06-12. See `rd-tax-incentive-fy2526-path-c.md`. Standard Ledger coordinates. |
+| R&D FY26 claim | Pty claims the 24 Apr to 30 Jun 2026 window only | Sole traders are not eligible R&D entities (Path C), so there is no sole-trader R&DTI claim; founder invoices to the sole trader are ordinary deductions only. Amounts owed to associates must be PAID by 30 Jun to enter the FY26 claim, otherwise they carry to the year paid. Standard Ledger confirms. |
 | Fringe Benefits Tax | Assess if applicable | Not relevant to sole trader; becomes a consideration once Pty has staff. |
 
 ---
