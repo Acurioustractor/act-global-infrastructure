@@ -73,7 +73,51 @@ Read this correctly: commits evidence activity and time density, not eligibility
 | 7 | rd-capture pass over the window: tag core-activity work in each register with window dates | Ben | Before 30 Jun |
 | 8 | Window reconciliation with the R&D consultant (Path C action 6): cut register totals + salary allocations to the window | Ben + SL + consultant | Book now |
 
-## FY27 setup: the actual prize
+## Money movement before 30 June, step by step (scenario figures; Standard Ledger finalises)
+
+### The asymmetry the "$200K each" framing hides
+
+Nic cannot invoice himself. The sole trader is Nic, so money he takes out is **drawings**: no deduction, no tax event, he is taxed on the sole trader's profit whether or not the cash moves. The only deductible founder pay this year is what flows to Ben's side (Knight Photography invoices), plus the small window amounts the Pty pays each founder. Ben's invoices do double work: each dollar shifts taxable income from Nic to Ben AND gives Nic a deduction. That is why D11.5 sets Ben's side at ~$250K; it carries the equalisation.
+
+### What one dollar of founder pay returns, by route
+
+The receiving founder pays personal tax on the dollar under every route; that never changes. What differs is what the payer gets back:
+
+| Route | Payer's return per $1 | When |
+|---|---|---|
+| Sole trader pays a Ben invoice (D11.5) | ~47c deduction against Nic's top-bracket income | Nic's FY26 return (or reduced instalments) |
+| Pty pays window R&D pay (this plan) | 43.5c refundable offset (replaces the deduction) | Cash after the FY26 company return lodges, months away |
+| Pty pays it as an ordinary non-R&D cost | 25c deduction, only against future Pty profit | Whenever profitable |
+| Anything routed via a family trust as service income | Rejected (PSI attribution risk, D11.5) | n/a |
+
+Caveat: 47c holds while Nic's taxable income stays above ~$190K after deductions; below that the marginal value steps down. Whether Nic deducts on invoice or on payment depends on his accounting basis (cash vs accruals): Standard Ledger confirms, so treat **paid by 30 June** as the safe default for everything.
+
+### The sequence
+
+| # | Step | Mechanics | Owner |
+|---|---|---|---|
+| 1 | NAB account opens (trust docs) | Gates every Pty-side payment | Nick, now |
+| 2 | Decision 1 (operating entity) by 19 Jun | Does not change these FY26 moves; sets where FY27 payroll + contracts land | Ben + Nick + SL |
+| 3 | Raise Inv 15078 ($100K to sole trader) | Per D11.5: matches the 6 Oct 2025 transfers; Nic enters as ACCPAY; SL books the director-loan journal for the off-Xero source | Ben |
+| 4 | Raise Phase 2 invoices 15079 + 15080 ($50K each, to sole trader) | Per D11.5 (Option A, confirmed with SL 2026-05-05); sole trader pays from its account | Ben |
+| 5 | Raise the split Q4 pair | Small invoice (work 1 to 23 Apr) to sole trader; window invoice (~$37-44K, work 24 Apr to 30 Jun) to the Pty | Ben + SL |
+| 6 | Board minute + engagement letters for the window | Dated now, describing the true period | Ben + Nick |
+| 7 | Nic seeds the Pty | Transfer to the new NAB account, documented as a director loan (loan note, separate loan account per founder). Scenario size: $75-100K = window payments (~$55-60K) + first-month FY27 buffer | Nick + SL |
+| 8 | Pty pays Ben's window invoice + Nic's window director's fees | By 30 June for the FY26 claim (associate rule); from seed funds. If NAB is not live, accept the FY27 carry rather than improvising | Ben + Nick |
+| 9 | Nic draws his cash from the sole trader as drawings | No invoice, no deduction, no tax event; liquidity only. Check sole trader cash against the ~$507K uncollected receivables before sizing | Nick |
+| 10 | Trustee resolutions if either family trust has ANY FY26 income | Standard 30 June trap; SL confirms whether needed | Ben + Nick + SL |
+| 11 | Provision for personal tax | Ben: expect a large assessment on ~$250K of invoice income (payment plan available; PAYG instalments likely next year unless payroll replaces the pattern). Nic: provision on remaining profit | Both |
+
+### What does NOT move before 30 June
+
+- **Nothing to the family trusts.** No service invoices through trusts (PSI, rejected in D11.5); no dividends possible because the Pty has no profit yet. Trusts matter from FY27+ as shareholders receiving franked dividends.
+- **No borrowing FROM the Pty.** Div 7A discipline is a FY27 concern; before 30 June the only director loans run INTO the Pty.
+- **The $100K characterisation.** Fixed by the bank trail.
+- **SaaS and cloud billing.** Stays with the sole trader until the 1 July migration; already deductible at ~47c there, so re-contracting mid-June to chase 43.5c on ~$2-3K is negative-value work.
+
+### Director loans: how to get the most from them
+
+Before 30 June the lever is loans **in**: a documented seed loan creates a future tax-free extraction lane, because loan repayments out of the company are not income. First cash out repays the loans before anything is called salary or dividend. Keep one loan account per founder; if only Nic seeds, only Nic holds that lane, so either both seed or the imbalance is tracked and squared in the Shareholders Agreement. From FY27 the direction flips: in-year top-ups are drawn against director loan accounts and cleared or put on Div 7A complying terms by 30 June 2027.
 
 Target shape per the Money Framework: ~$627K eligible (personnel + ACT-IN + per-project + SaaS) supporting the pack's $200-250K refund range, against ~$70K from base payroll alone ($120K × 95% + $120K × 40% = $162K basis).
 
