@@ -40,7 +40,7 @@ tags: [assets, cutover, depreciation, rd-tax, director-loans]
 |---|---|---|---|---|---|---|---|---|---|---|
 | Shipping containers (production) | Plant | Sole trader | | | | | TBD per Q5 | | Sale at MV or going concern | Community-ownership intent: check before placing |
 | Plastic shredder / press / moulds | Plant | Sole trader | | | | | TBD per Q5 | high | Same | Goods R&D core equipment |
-| Vehicle(s) | Vehicle | Sole trader / personal | | | | | TBD per Q4 | | Transfer vs charge-back | FBT if company-owned with private use |
+| Toyota HiLux ute, ~2020 (6 yrs old) | Vehicle | Sole trader / personal (confirm rego holder) | ~2020 | | | RedBook / comparable sales | Operating entity (confirmed 2026-06-13) | | Sale at MV, effective 1 Jul | FBT-exempt commercial vehicle path. If dual cab: confirm payload from the compliance plate (door jamb); most HiLux dual cabs pass the load/design test, single and extra cabs pass outright. Home-to-work driving allowed within the exemption; other private use minor and infrequent. Likely largely written off, so expect recapture at transfer: 1 July effective date. Value nowhere near the luxury caps. |
 | Workshop tools + gear | Tools | Sole trader | | | | | Operating entity | | Sale at MV | Likely written off; recapture timing matters |
 | Cameras, lenses, audio kit | Gear | Knight Photography | | | | | Operating entity or keep in KP | | Sale at MV or keep + invoice usage | Ben's loan account if sold |
 | Computers, screens, drives | IT | Mixed | | | | | Operating entity | | Sale at MV | |
