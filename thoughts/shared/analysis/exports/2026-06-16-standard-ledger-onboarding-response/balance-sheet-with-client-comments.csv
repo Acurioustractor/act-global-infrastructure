@@ -1,0 +1,50 @@
+Balance Sheet,,,,
+Nicholas Marchesi,,,,
+As at 8 June 2026,,,,
+,,,,
+,Account,8 June 2026,SL Comments,Client Comments (ACT)
+,,,,
+Assets,,,SL Comments,Client Comments
+,Bank,,,
+,NJ Marchesi T/as ACT Everyday,"288,981.73",Please send screenshot of bank balance as of today,"Nic to send screenshot. The real bank balance differs from this Xero book figure by the 213 unreconciled lines on #8536 - reconciling those closes the gap."
+,Total Bank,"288,981.73",,
+,Current Assets,,,
+,Accounts Receivable,"165,417.88",There are overdue invoices. Are these still collectible?,"Verified live 16 Jun: $248,698 across 21 invoices. Collectible / in-progress ~$202K - Sonas $44K (payment coming), Rotary $82.5K (being worked through), Homeland $44K, Regional Arts $16.5K, Brodie Germaine $15.4K. To confirm: Social Impact Hub $21.8K, Berry Obsession $13K. Write off ~$11.5K (Feel Good Project 925d, Ebony Reimers, Keating recurring). Full aging in cover note."
+,Loan - FFP Holdings Pty Ltd,457.79,Please confirm if loan balance is correct,"Matches live ledger. Nic to confirm the inter-entity loan is still on foot."
+,Loan - FFP investment Trust,"1,996.50",Please confirm if loan balance is correct,"Matches live ledger. Nic to confirm."
+,Total Current Assets,"167,872.17",,
+,Fixed Assets,,,
+,Computer Equipment,"7,049.04",Please advise why there is no depreciation as of now.,"Correct - the sole-trader file has never run a depreciation schedule. Please set one up; happy to adopt your treatment at cutover."
+,Farm Land & Building - Improvements at Cost,"50,476.50",,"Personal asset (Nic's Witta farm) - not a business asset; to be excluded from the trading entity at the Pty cutover."
+,Land & Buildings at Cost - Witta,"1,566,892.92",,"Personal asset (Nic's Witta farm) - to be excluded from the trading entity at cutover."
+,Motor Vehicle,"70,988.33",,"Includes the HiLux, transferring at market value on 1 Jul (exempt-vehicle path). Other items to be split business vs personal at cutover."
+,Office Equipment,"16,818.29",,
+,Plant & Equipment,"170,648.12",,
+,Total Fixed Assets,"1,882,873.20",,
+Total Assets,,"2,339,727.10",,
+,,,,
+Liabilities,,,,
+,Current Liabilities,,,
+,Accounts Payable,"500,038.34",There are overdue bills. Are these still unpaid? There are also draft bills. Please check,"Verified live 16 Jun: $485,116 across 347 bills. 90% ($437K / 314 bills) is 90+ days - bills paid from bank/card but not yet matched, plus Dext duplicates - NOT live trade debt. Clears as the 534 unreconciled bank lines reconcile. Separately, 170 draft bills ($45K) are auto-connector drafts (Qantas/PayPal/Xero) to triage."
+,ATO Clearing Account,"(5,420.62)",SL to check,"Over to you to reconcile against the BAS work."
+,Drawings - Ben Knight,"(4,124.43)",Please confirm if loan balance is correct,"Matches live ledger. Confirmed."
+,Drawings - Nicholas Marchesi,"(475,034.69)",Please confirm if loan balance is correct,"Live ledger now ($733,124) - moved ~$258K since your snapshot as personal items were coded during reconciliation. Pairs with Funds Introduced below; to finalise once reconciliation completes."
+,Funds Introduced - N Marchesi,"943,235.60",Will this be reimbursed in the future?,"Nic's introduced capital (live now $1,034,944). Reimbursement treatment is part of the sole-trader to Pty cutover loan-account structuring - let's resolve together."
+,GST,"12,797.05",SL to check,"Over to you / to confirm against BAS. Live now $29,667 (moves with reconciliation)."
+,Income Tax Payable,"32,820.77",SL to check,"Over to you."
+,NAB Visa ACT #8815,"131,937.70",Please send screenshot of bank balance as of today,"Nic to send screenshot. Note: the live ledger shows this card with a NEGATIVE balance - card payments recorded but spend not yet coded (321 unreconciled lines). Reconciliation will correct it."
+,NM Personal ,"375,991.57",SL: What is the nature of this bank account?,"Nic's personal NAB account, used pre-cutover for some business transactions. Excluded from ACT business totals; to be removed from the business file at cutover."
+,Rental Bonds Held,"1,650.00",The transaction was from 14 Mar 2022. Will this be written off?,"Agree - write off."
+,Rounding,(32.76),,
+,Total Current Liabilities,"1,513,858.53",,
+,Non-current Liabilities,,,
+,Heritage Loan - Land & Buildings - Witta,"967,816.72",Please confirm if loan balance is correct,"Matches live ledger. This is Nic's personal Witta farm mortgage - a personal liability, to be excluded from the trading entity at cutover. Nic to confirm balance with the lender."
+,Total Non-current Liabilities,"967,816.72",,
+Total Liabilities,,"2,481,675.25",,
+,,,,
+,Net Assets,"(141,948.15)",,
+,,,,
+Equity,,,,
+,Current Year Earnings,"(262,507.77)",,
+,Retained Earnings,"120,559.62",,
+Total Equity,,"(141,948.15)",,
