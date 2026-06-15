@@ -32,6 +32,12 @@ Sidecar for `onboarding-response.md` + `balance-sheet-with-client-comments.csv`.
 - **AP function owner** — who actions `accounts@act.place` — Nic to confirm.
 - **COA code-vs-name** — whether SL's standardisation preserves account codes (low automation risk) or renumbers (needs our code references updated) — to confirm with SL.
 
+## Round-2 alignment checks (16 Jun, read-only)
+
+- **Live bank book-balances** pulled via `Reports/BankSummary` (`scripts/sync-xero-bank-balances.mjs`): #8536 $56,821 · #8815 ~$64,870 · NM Personal −$388,938. Verified-live. (File also holds a *Maximiser* savings + archived *Heritage Visa* — outside business scope.)
+- **AR "to-confirm" items** — verified-live: Social Impact Hub Foundation has a prior **settled** invoice (INV-0272, $0 due) → repeat payer, $21.8K leans collectible; its INV-0289 due-date (2025-02-26) is mis-keyed (before invoice date) and should be fixed. Berry Obsession is a commercial PTY LTD, Feb-2026 invoice. Both reclassified from "confirm" to "likely collectible" — still judgement, not a paid confirmation.
+- **AP 90+ backlog concentration** (mirror, AUTHORISED, due < 18 Mar): The Funding Network **$144,558 / 2 bills** = ~30% of backlog — flagged as **likely misbooking** (intermediary, not supplier; matches known "TFN $144K in acct 429"). Travel (Qantas 38 bills + Virgin + Booking ≈ $56K) = paid-by-card awaiting match. Mirror total ($508K) runs ~$23K above live ($485K) — mirror was mid-resync; treat live as authoritative.
+
 ## Known caveats / traps
 
 - **Date-param snapping:** Xero's `Reports/BalanceSheet?date=YYYY-MM-DD` rounds to **period-end** — `2026-06-08` and `2026-06-16` both returned **as at 30 Jun 2026**. The live figures are therefore "current GL presented at FY-end", not a true 8 Jun snapshot. Immaterial here (the point is current state vs SL's stale snapshot), but don't read them as date-pinned.

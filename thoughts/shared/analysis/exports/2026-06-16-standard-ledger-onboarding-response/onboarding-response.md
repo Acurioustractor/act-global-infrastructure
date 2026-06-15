@@ -13,13 +13,13 @@
 
 Screenshots of the live balance, as at today, for:
 
-| Account | Xero book balance (your sheet) |
-|---|---|
-| NM Personal | $375,991.57 |
-| NAB #8536 (NJ Marchesi T/as ACT Everyday) | $288,981.73 |
-| NAB #8815 (NAB Visa ACT) | $131,937.70 |
+| Account | Book bal (your 8 Jun sheet) | Live book bal (16 Jun) |
+|---|---|---|
+| NM Personal | $375,991.57 | −$388,938 |
+| NAB #8536 (NJ Marchesi T/as ACT Everyday) | $288,981.73 | $56,821 |
+| NAB #8815 (NAB Visa ACT) | $131,937.70 | ~$64,870 |
 
-**Important framing:** the screenshot (real bank) will **not** match the Xero book figure — the difference is the unreconciled backlog (213 lines on #8536, 321 on #8815). Closing that gap is the reconciliation job below.
+**Important framing:** the screenshot (real bank) will **not** match the Xero book figure — the difference is the unreconciled backlog (213 lines on #8536, 321 on #8815). Closing that gap is the reconciliation job below. (Two other accounts exist in the file — *NJ Marchesi T/as ACT Maximiser* savings and an archived *Heritage Visa* — both outside the business scope.)
 
 ## 2. Accounts Payable function
 
@@ -41,16 +41,21 @@ Live AR is **$248,698 across 21 invoices**. Most of the value is aged:
 | Brodie Germaine Fitness | $15,400 | 48 days | collect |
 | Sonas Properties | $44,000 | 116 days | **coming — payment expected** |
 | Rotary Eclub Outback | $82,500 | 418 days | **in progress — being worked through** |
-| Social Impact Hub | $21,780 | 475 days | confirm status |
-| Berry Obsession | $13,000 | 126 days | confirm status |
+| Social Impact Hub | $21,780 | (due-date mis-keyed) | likely collectible — repeat payer (INV-0272 settled) |
+| Berry Obsession | $13,000 | 126 days | likely collectible — commercial, Feb 2026 |
 | Feel Good Project | $6,108 | 925 days | **write off** |
 | Aleisha Keating ×12 | $5,400 | 270–347 days | **void** (recurring-invoice artifact) |
 | Ebony Reimers | $10 | 529 days | write off |
 
-**Answer:** the large aged balances are **collectible, not bad debt** — Sonas ($44K) is coming and Rotary ($82.5K) is being worked through. Net: **~$202K collectible/in-progress**, ~$35K to confirm (Social Impact Hub, Berry Obsession), and only **~$11.5K** to write off (Feel Good Project, Ebony Reimers, the Keating recurring invoices).
+**Answer:** the large aged balances are **collectible, not bad debt** — Sonas ($44K) is coming and Rotary ($82.5K) is being worked through. Net: **~$202K collectible/in-progress**, ~$35K likely collectible (Social Impact Hub is a repeat payer; Berry is a commercial invoice), and only **~$11.5K** to write off (Feel Good Project, Ebony Reimers, the Keating recurring invoices).
 
 ### Accounts Payable — "overdue + draft bills?"
 Live AP is **$485,116 across 347 bills — 90% ($436,618 / 314 bills) is 90+ days overdue.** This is not live trade debt: it's bills that were paid from the bank/card but never matched, plus Dext duplicates. It clears as the unreconciled bank lines are reconciled. Separately, **170 draft bills ($45,385)** are auto-connector drafts to triage (approve the real ones, delete the duplicates).
+
+**Where the backlog sits (top vendors in the 90+ bucket):**
+- 🔴 **The Funding Network — $144,558 (2 bills)** — ~30% of the whole backlog, and almost certainly a **misbooking** (TFN is a fundraising intermediary, not a trade supplier). **First item to investigate** — likely reclassifies out of AP entirely.
+- ✈️ **Qantas $43.7K (38 bills) · Virgin $9.2K · Booking.com $3.5K** — travel paid by card, awaiting match (textbook paid-not-matched).
+- 🔧 **Real contractor/supplier mix:** Hatch Electrical $50K · The Plasticians $29.8K · Defy Manufacturing $26.3K · AAMI (insurance) $20K · Oonchiumpa $23.9K.
 
 ## 4. COA standardisation — **Yes, with one condition**
 
