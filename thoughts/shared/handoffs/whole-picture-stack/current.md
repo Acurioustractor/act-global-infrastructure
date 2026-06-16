@@ -9,9 +9,9 @@ status: active
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-16 (v1.5 phases 1-3 + the WIRING + sidecar crons all SHIPPED today, all on main)
-**Goal:** Whole-Picture v1.5 (plan `thoughts/shared/plans/2026-06-16-whole-picture-v1.5.md`) — founders' session kit + un-withholding the money read, TDD-first + display-gated. Build + wiring + sidecar crons done; remaining = GCal event + Ben's 2 inputs + founder decisions.
-**Branch:** main (c1c7af8)
+**Updated:** 2026-06-16 (v1.5 COMPLETE on the build side — phases 1-3 + wiring + sidecar crons + local drill all shipped; only Ben-hand + founder-decision items remain — see LEFT)
+**Goal:** Whole-Picture v1.5 (plan `thoughts/shared/plans/2026-06-16-whole-picture-v1.5.md`) — founders' session kit + un-withholding the money read, TDD-first + display-gated. **All my buildable work is done.** Resume = the 3 LEFT items below (all Ben-hand / founders).
+**Branch:** main (fe1cfa7)
 **Test:** node scripts/build-founders-session-kit.mjs --dry-run && node --test scripts/tests/two-account-cash.test.mjs scripts/tests/rd-basis.test.mjs
 
 ### Now (2026-06-16)
@@ -60,13 +60,12 @@ PR #175 cron-churn tidy + restored `service_role` EXECUTE on `exec_sql` (was sil
 
 ### Next
 - [x] Miro board prebuilt 2026-06-11: https://miro.com/app/board/uXjVHHbcARw=/ — frame 1 system map + frame 2 roles split (diagram_create), frame 3 horizon arc as 5 cards + run-sheet DOC (layout_create). Board is disposable scaffolding; corrections flow back to wiki/concepts/the-whole-picture-diagrams.md after the 16 Jun session, then archive the board.
-- [ ] v1.5 sitting before 27 Jun (see Now block: session kit + GCal recurring event, cash/runway TDD pipe, R&D-basis sidecar, pre-departure drill, Nic chat id)
-- [ ] Ben eyeball: does the §6 timeline block render in Notion? (PASTE-TEST marker on the page) · diagrams file is on GitHub main NOW — confirm all 7 blocks render at wiki/concepts/the-whole-picture-diagrams.md
-- [ ] Watch Mon 15 Jun ~8:50: first Monday card arrives on Telegram + week page appears under Monday cards (path verified green 11 Jun, but first unattended run is the real test)
-- [ ] Ask Ben: did the 10 Jun session with Nic happen — which of the Harvest hub's 8 decisions + Whole Picture N1/N2/N9 got decided? Write outcomes to wiki/decisions/ (convention N12)
-- [ ] Investigate: money-command-digest produced no snapshot for 06-10/06-11 (8:15 cron quiet — whole-picture surface greys those numbers meanwhile); gmail spine canary stale_days=null since ~06-09
-- [ ] This handoff file has uncommitted edits on main (Tier 1, rides the next PR sweep)
-- [ ] Standing urgent (from hub, dated): broker call (ACT Pty name) + council EH call; commit RSVP form source to main in Harvest repo; GHL gates to green; contracts out Mon 15 Jun
+- [x] v1.5 sitting build work — DONE (session kit, two-account cash, R&D sidecar, surface wiring, sidecar crons, local cron drill). Remaining = the LEFT block (Ben-hand/founders).
+- [ ] Ben eyeball: does the §6 timeline block render in Notion? (PASTE-TEST marker on the page) · confirm all 7 blocks render at wiki/concepts/the-whole-picture-diagrams.md on GitHub main
+- [ ] Confirm first Monday card actually landed (Mon 15 Jun ~8:50, Telegram + Notion week page) — path verified green 11 Jun; was the first unattended run clean?
+- [ ] Ask Ben: did the 10 Jun session with Nic happen — which Harvest-hub / Whole-Picture decisions got decided? Write outcomes to wiki/decisions/ (convention N12). Includes the 3 founder gate decisions (N3, R&D cure, #8815 recon) that flip the money figures live.
+- [ ] Investigate: money-command-digest snapshot gap 06-10/06-11 (8:15 cron quiet — surface greys those numbers); gmail spine canary stale_days=null since ~06-09. NOTE: whole-picture is built on snapshot .today AS-OF, so a stale snapshot greys but never lies.
+- [ ] Standing urgent (from Harvest hub, dated): broker call (ACT Pty name) + council EH call; commit RSVP form source to main in Harvest repo; GHL gates to green
 
 ### Decisions
 - Whole-stack architecture: Whole Picture (standing, monthly-session-edited) → Harvest hub (weekly ops) → staffing plan (repo). Notion pages created standalone/private, Ben drags into place; both are capture pages, keep OUT of sync-to-notion target lists.
