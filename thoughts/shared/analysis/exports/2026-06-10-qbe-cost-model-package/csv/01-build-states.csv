@@ -1,0 +1,29 @@
+State,Component,$/bed,Direct total,Capex added,Capex cumulative,Beds/day
+"Defy Kits (buy cut+finished kits, assemble in-house)","Defy bed kit (cut+finished, no hardware)",344.05,,,,
+"Defy Kits (buy cut+finished kits, assemble in-house)",Steel poles (DNA Steel),27.0,,,,
+"Defy Kits (buy cut+finished kits, assemble in-house)",Canvas (Centre Canvas),93.5,,,,
+"Defy Kits (buy cut+finished kits, assemble in-house)",End caps + screws + bolts,5.24,,,,
+"Defy Kits (buy cut+finished kits, assemble in-house)",In-house assembly labour ($400/day ÷ 10 beds),40.0,,,,
+"Defy Kits (buy cut+finished kits, assemble in-house)",Freight on Defy material (est),25.0,,,,
+"Defy Kits (buy cut+finished kits, assemble in-house)",DIRECT TOTAL,534.79,534.79,2000,2000,10
+"Defy Panels (buy panels, CNC + assemble)",Defy pre-pressed panels (2 × $200),400.0,,,,
+"Defy Panels (buy panels, CNC + assemble)",Steel poles,27.0,,,,
+"Defy Panels (buy panels, CNC + assemble)",Canvas,93.5,,,,
+"Defy Panels (buy panels, CNC + assemble)",End caps + screws + bolts,5.24,,,,
+"Defy Panels (buy panels, CNC + assemble)","Diesel (CNC only, no pressing)",5.0,,,,
+"Defy Panels (buy panels, CNC + assemble)",Labour ($400/day ÷ 7.5 beds),53.33,,,,
+"Defy Panels (buy panels, CNC + assemble)",DIRECT TOTAL,584.07,584.07,38000,40000,4
+Factory (raw shred → press → CNC → assemble in-house),HDPE shred 20kg @ $2.75/kg (incl delivery),55.0,,,,
+Factory (raw shred → press → CNC → assemble in-house),Diesel (25L/day ÷ 5 beds press + CNC),15.0,,,,
+Factory (raw shred → press → CNC → assemble in-house),Labour ($400/day ÷ 5 beds),80.0,,,,
+Factory (raw shred → press → CNC → assemble in-house),Steel poles,27.0,,,,
+Factory (raw shred → press → CNC → assemble in-house),Canvas,93.5,,,,
+Factory (raw shred → press → CNC → assemble in-house),End caps + screws + bolts,5.24,,,,
+Factory (raw shred → press → CNC → assemble in-house),DIRECT TOTAL,275.74,275.74,160000,200000,4
+"Community (waste plastic free, fair-wage paid work)",Community-collected plastic (free feedstock),0.0,,,,
+"Community (waste plastic free, fair-wage paid work)",Diesel (generator),15.0,,,,
+"Community (waste plastic free, fair-wage paid work)",Steel poles,27.0,,,,
+"Community (waste plastic free, fair-wage paid work)",Canvas,93.5,,,,
+"Community (waste plastic free, fair-wage paid work)",End caps + screws + bolts,5.24,,,,
+"Community (waste plastic free, fair-wage paid work)",Community labour (fair wage),130.0,,,,
+"Community (waste plastic free, fair-wage paid work)",DIRECT TOTAL,270.74,270.74,30000,230000,5

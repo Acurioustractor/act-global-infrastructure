@@ -1,0 +1,15 @@
+Item,Rate,Source,Confidence
+bed_kit_cut_finished,344.05,INV-1602 (92 kits) + INV-1732 (50 kits),verified
+pre_pressed_panel_each,200.0,"INV-1731 (20 panels bulk, 1200×1200×19mm)",verified
+cut_and_finish_only,121.0,"INV-1602 (16 beds, pre-purchased sheets)",verified
+assembly_labour,55.95,2026-03-19 line,verified
+hdpe_shred_per_kg,2.0,INV-1731 (1200kg bulk bag),verified
+delivery_per_kg,0.75,INV-1731 ($900 delivery / 1200kg),verified
+physics:hdpe_density_g_per_cm3,0.96,,
+physics:hdpe_kg_per_bed,20,,
+physics:raw_hdpe_cost_per_bed_no_delivery,40.0,,
+physics:raw_hdpe_cost_per_bed_with_delivery,55.0,,
+labour:production_operator_per_day,400,,
+labour:production_operator_per_hour,50,,
+labour:kirmos_facility_per_hour,45,,
+labour:kirmos_monthly_50pct_to_beds,2250,,

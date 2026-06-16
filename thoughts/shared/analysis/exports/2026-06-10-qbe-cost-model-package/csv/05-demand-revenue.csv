@@ -1,0 +1,5 @@
+Segment,Share %,Price/bed,Confidence,Y1 beds,Y2 beds,Y3 beds,3yr revenue
+Institutional,40,801,verified,60,160,240,368460
+Retail / corporate-RAP gift,40,800,unverified,60,160,240,368000
+Community / humanitarian,20,400,inferred,30,80,120,92000
+3-YEAR TOTAL,,,,,,,828460

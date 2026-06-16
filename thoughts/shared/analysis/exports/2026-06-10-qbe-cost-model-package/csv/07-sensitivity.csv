@@ -1,0 +1,8 @@
+Item,Value
+Dials (±20%),"volume, community_labour, institutional_price, per_site_capex, defy_hdpe_kit"
+Defy kit dial → community state,zero — free collected plastic decouples community COGS from Defy pricing
+,
+3-WAY JOINT DOWNSIDE (load-bearing),"volume -20%, institutional price -20%, labour +20%"
+Community co-op margin under downside,~$14/bed (collapses)
+ACT debt still serviced,True
+Implication,Under the joint downside the community co-op margin collapses to ~$14/bed while ACT debt is still serviced. Therefore the act_brokerage slider MUST FLEX DOWN in a downside (step to ~100/bed when margin/bed falls below a floor) or it crushes the community. This flex is the key CDFI/equity design point.

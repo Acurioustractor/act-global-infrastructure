@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goods on Country — bed cost model v6 explorer</title>
+<style>
+  :root{--ink:#121212;--red:#D02020;--blue:#1040C0;--yellow:#F0C020;--green:#1a7a3a;--canvas:#F0F0F0;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--canvas);color:var(--ink);padding:24px;max-width:1100px;margin:0 auto;}
+  h1{font-size:22px;text-transform:uppercase;letter-spacing:2px;border-bottom:4px solid var(--ink);padding-bottom:8px;}
+  .sub{font-size:12px;color:#555;margin:6px 0 18px;}
+  .grid{display:grid;grid-template-columns:380px 1fr;gap:20px;}
+  @media(max-width:860px){.grid{grid-template-columns:1fr;}}
+  .panel{background:#fff;border:3px solid var(--ink);padding:16px;}
+  .panel h2{font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;border-bottom:2px solid var(--ink);padding-bottom:4px;}
+  label{display:block;font-size:12px;font-weight:700;margin:12px 0 2px;}
+  .val{float:right;font-family:ui-monospace,Menlo,monospace;font-weight:700;}
+  input[type=range]{width:100%;}
+  select,input[type=number]{width:100%;padding:4px;border:2px solid var(--ink);font-size:13px;background:#FFF8DC;}
+  .chip{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;padding:1px 6px;margin-left:6px;border:1px solid;}
+  .chip.verified{color:var(--green);border-color:var(--green);background:#e8f5e9;}
+  .chip.inferred{color:var(--blue);border-color:var(--blue);background:#e8eefc;}
+  .chip.unverified{color:var(--red);border-color:var(--red);background:#fdeaea;}
+  .big{font-size:30px;font-weight:900;font-family:ui-monospace,Menlo,monospace;}
+  .stat{margin-bottom:14px;}
+  .stat .lbl{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#555;}
+  .bar{height:26px;display:flex;margin:10px 0 4px;border:2px solid var(--ink);}
+  .bar div{height:100%;}
+  .legend{font-size:11px;line-height:1.7;}
+  .legend b{font-family:ui-monospace,Menlo,monospace;}
+  .dot{display:inline-block;width:10px;height:10px;margin-right:5px;border:1px solid var(--ink);}
+  .warn{border:3px solid var(--red);background:#fdeaea;padding:10px;font-size:12px;margin-top:12px;font-weight:600;display:none;}
+  .ok{border:3px solid var(--green);background:#e8f5e9;padding:10px;font-size:12px;margin-top:12px;font-weight:600;}
+  .badge{display:inline-block;padding:3px 10px;font-weight:900;border:2px solid var(--ink);}
+  button{font-size:12px;font-weight:700;text-transform:uppercase;border:2px solid var(--ink);background:var(--yellow);padding:6px 10px;cursor:pointer;margin:10px 6px 0 0;}
+  button:hover{background:var(--ink);color:#fff;}
+  .foot{font-size:11px;color:#555;margin-top:22px;border-top:2px solid var(--ink);padding-top:10px;line-height:1.7;}
+  table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+  td,th{border:1px solid #999;padding:3px 6px;text-align:right;}
+  td:first-child,th:first-child{text-align:left;}
+</style>
+</head>
+<body>
+<h1>Goods on Country — Bed Cost Model v6</h1>
+<div class="sub">Interactive companion to <b>goods-cost-model-v6.xlsx</b> · source: cost-model explorer JSON v6 (2026-05-28/29) · QBE Catalysing Impact 2026 Stage 2 prep ·
+  <span class="chip verified">verified = invoice</span><span class="chip inferred">inferred = computed</span><span class="chip unverified">unverified = needs quote</span></div>
+
+<div class="grid">
+  <div class="panel">
+    <h2>Assumptions (drag to test)</h2>
+
+    <label>Production state</label>
+    <select id="state">
+      <option value="534.79">S2 — Defy kits, assemble in-house ($534.79 direct)</option>
+      <option value="584.07">S3 — Defy panels, cut+assemble ($584.07 direct)</option>
+      <option value="275.74">S4 — Central factory ($275.74 direct)</option>
+      <option value="community" selected>S5 — Community site, fair wage (computed)</option>
+    </select>
+
+    <div id="communityInputs">
+      <label>Community wage <span class="chip inferred">decision 5</span><span class="val" id="wageV"></span></label>
+      <input type="range" id="wage" min="30" max="40" step="1" value="40">
+      <label>Hours per bed<span class="val" id="hrsV"></span></label>
+      <input type="range" id="hrs" min="3" max="4" step="0.25" value="3.25">
+    </div>
+
+    <label>Sale price / bed <span class="chip verified">$801 Centrecorp anchor</span><span class="val" id="priceV"></span></label>
+    <input type="range" id="price" min="400" max="1200" step="1" value="801">
+
+    <label>Freight / bed <span class="chip unverified">est — verified pallet lines imply $101–185</span><span class="val" id="freightV"></span></label>
+    <input type="range" id="freight" min="50" max="455" step="5" value="100">
+
+    <label>ACT brokerage / bed <span class="chip inferred">must flex down in downside</span><span class="val" id="brokV"></span></label>
+    <input type="range" id="brok" min="60" max="500" step="5" value="200">
+    <label style="font-weight:400"><input type="checkbox" id="flex" checked> Downside-flex: auto-step brokerage toward $100 floor when community margin &lt; $100/bed</label>
+
+    <label>Cashflow buffer / bed<span class="val" id="bufV"></span></label>
+    <input type="range" id="buf" min="0" max="60" step="5" value="30">
+
+    <label>Year-3 volume (beds; 80% are revenue beds)<span class="val" id="volV"></span></label>
+    <input type="range" id="vol" min="360" max="720" step="10" value="600">
+
+    <label>Matching debt drawn<span class="val" id="debtV"></span></label>
+    <input type="range" id="debt" min="0" max="500000" step="25000" value="500000">
+    <label>Interest rate<span class="val" id="rateV"></span></label>
+    <input type="range" id="rate" min="5" max="7" step="0.25" value="7">
+    <label>Repayment</label>
+    <select id="term">
+      <option value="0">Interest-only (v6 base tables)</option>
+      <option value="3">Amortising — 3 years</option>
+      <option value="5">Amortising — 5 years</option>
+    </select>
+
+    <button id="base">Reset to base</button>
+    <button id="downside">3-way joint downside</button>
+  </div>
+
+  <div class="panel">
+    <h2>What the numbers say</h2>
+
+    <div class="stat"><div class="lbl">Direct cost (COGS) / bed</div><div class="big" id="cogs"></div></div>
+
+    <div class="lbl" style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#555;">Per-bed waterfall at sale price</div>
+    <div class="bar" id="bar"></div>
+    <div class="legend" id="legend"></div>
+
+    <div class="stat" style="margin-top:16px;"><div class="lbl">Community benefit / bed (labour + co-op margin)</div><div class="big" id="commBen"></div></div>
+
+    <table>
+      <tr><th></th><th>$/yr</th></tr>
+      <tr><td>ACT brokerage income (revenue beds × brokerage)</td><td id="actInc"></td></tr>
+      <tr><td>Debt obligation (<span id="termLbl"></span>)</td><td id="debtPay"></td></tr>
+      <tr><td><b>Coverage</b></td><td id="cover"></td></tr>
+    </table>
+    <div id="coverBadge" style="margin-top:10px;"></div>
+    <div class="warn" id="warnComm"></div>
+    <div class="warn" id="warnCover"></div>
+    <div class="ok" id="okNote" style="display:none;"></div>
+
+    <h2 style="margin-top:20px;">Fixed reference points</h2>
+    <table>
+      <tr><td>3-site standalone capex <span class="chip unverified">needs vendor quotes</span></td><td>$300K – $450K (med $375K)</td></tr>
+      <tr><td>Volume ramp (decision 8)</td><td>150 → 400 → 600 beds (util. 20/53/80%)</td></tr>
+      <tr><td>3-yr revenue, 40/40/20 mix <span class="chip inferred">gift price is biggest unknown</span></td><td>$828K (band $759K–$1,035K)</td></tr>
+      <tr><td>Commercial counterfactual (steel-frame bed, AU 2026)</td><td>$1,500 – $2,000</td></tr>
+      <tr><td>Defy-kit dial → community state</td><td><b>zero effect</b> (free plastic decouples from Defy)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="foot">
+  <b>Claim discipline (QBE taxonomy):</b> management data, not audited. COGS components are VERIFIED from supplier invoices (Defy INV-1507/1602/1731/1732, DNA Steel, Centre Canvas, Coastal Fasteners); the waterfall, ramp and coverage are INFERRED; site capex and gift pricing are UNVERIFIED.
+  Pipeline is not committed capital. The QBE match amount/cap is unconfirmed in writing — no match estimate is shown anywhere in this tool.
+  <br><b>Load-bearing design point:</b> under the 3-way joint downside (volume −20%, institutional price −20%, labour +20%) a FIXED $200 brokerage services ACT's debt but collapses community margin to ~$14/bed. The brokerage must be a downside-flexing instrument (floor ~$100) — try the button above and toggle the flex checkbox to see both worlds.
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>"$"+n.toLocaleString("en-AU",{maximumFractionDigits:0});
+const fmt2=n=>"$"+n.toLocaleString("en-AU",{minimumFractionDigits:2,maximumFractionDigits:2});
+const NONLABOUR=140.74; // S5: diesel 15 + steel 27 + canvas 93.50 + hardware 5.24 (verified) + plastic 0
+function calc(){
+  const stateSel=$("state").value;
+  const wage=+$("wage").value, hrs=+$("hrs").value;
+  $("communityInputs").style.display = stateSel==="community" ? "block":"none";
+  const labour=wage*hrs;
+  const cogs = stateSel==="community" ? NONLABOUR+labour : +stateSel;
+  const price=+$("price").value, freight=+$("freight").value, buf=+$("buf").value;
+  let brok=+$("brok").value;
+  const vol=+$("vol").value, revBeds=Math.round(vol*0.8);
+  const debt=+$("debt").value, rate=+$("rate").value/100, term=+$("term").value;
+  let comm = price-cogs-freight-brok-buf;
+  let flexed=false;
+  if($("flex").checked && comm<100 && brok>100){
+    const give=Math.min(brok-100, 100-comm);
+    brok-=give; comm+=give; flexed=true;
+  }
+  const landed=price-cogs-freight;
+  const actInc=brok*revBeds;
+  const debtPay = debt===0?0 : term===0 ? debt*rate : debt*rate/(1-Math.pow(1+rate,-term));
+  const cover = debtPay===0?Infinity:actInc/debtPay;
+
+  $("wageV").textContent="$"+wage+"/hr"; $("hrsV").textContent=hrs+" hr";
+  $("priceV").textContent=fmt(price); $("freightV").textContent=fmt(freight);
+  $("brokV").textContent=fmt(brok)+(flexed?" (flexed)":""); $("bufV").textContent=fmt(buf);
+  $("volV").textContent=vol+" beds ("+revBeds+" revenue)";
+  $("debtV").textContent=fmt(debt); $("rateV").textContent=(rate*100).toFixed(2)+"%";
+  $("cogs").textContent=fmt2(cogs)+(stateSel==="community"?"  (incl. "+fmt(labour)+" fair-wage labour)":"");
+
+  // waterfall bar
+  const segs=[["COGS",cogs,"#888"],["Freight",freight,"#bbb"],["ACT brokerage",brok,"#1040C0"],["Buffer",buf,"#F0C020"],["Community margin",Math.max(comm,0),"#1a7a3a"]];
+  const total=segs.reduce((a,s)=>a+s[1],0);
+  $("bar").innerHTML=segs.map(s=>`<div style="width:${100*s[1]/total}%;background:${s[2]}"></div>`).join("");
+  $("legend").innerHTML=segs.map(s=>`<span class="dot" style="background:${s[2]}"></span>${s[0]}: <b>${fmt2(s[1])}</b>`).join(" &nbsp; ")
+    + (comm<0?` &nbsp; <b style="color:#D02020">UNDERWATER by ${fmt2(-comm)}</b>`:"")
+    + ` &nbsp; | landed margin: <b>${fmt2(landed)}</b>`;
+  $("commBen").textContent=fmt2((stateSel==="community"?labour:0)+comm);
+
+  $("actInc").textContent=fmt(actInc);
+  $("debtPay").textContent=debtPay?fmt(Math.round(debtPay)):"—";
+  $("termLbl").textContent=term===0?"interest-only":"amortising "+term+"yr";
+  $("cover").textContent=debtPay? cover.toFixed(2)+"×":"no debt";
+  const b=$("coverBadge");
+  if(!debtPay){b.innerHTML='<span class="badge" style="background:#e8f5e9">NO DEBT DRAWN</span>';}
+  else if(cover>=1.5){b.innerHTML='<span class="badge" style="background:#e8f5e9">COVERAGE OK ('+cover.toFixed(1)+'×)</span>';}
+  else if(cover>=1){b.innerHTML='<span class="badge" style="background:#fff3b0">TIGHT ('+cover.toFixed(2)+'×) — little room for a volume miss</span>';}
+  else{b.innerHTML='<span class="badge" style="background:#fdeaea;border-color:#D02020">UNDER 1× — these terms do not work; needs patient/bullet structure, longer tenor, or less debt</span>';}
+
+  const wc=$("warnComm");
+  if(comm<100){wc.style.display="block";wc.textContent="Community co-op margin is "+fmt2(comm)+"/bed — below the $100 design floor. "+($("flex").checked?"Brokerage has flexed to protect it where possible.":"Enable downside-flex or lower brokerage: a fixed brokerage protects ACT and crushes the community (the v6 load-bearing finding).");}
+  else wc.style.display="none";
+  const wv=$("warnCover");
+  if(debtPay&&cover<1){wv.style.display="block";wv.textContent="Brokerage income does not cover the debt obligation. v6 finding: ~$91/bed brokerage floor covers $500K interest-only, but a 5-yr amortising $500K (~"+fmt(Math.round(500000*0.07/(1-Math.pow(1.07,-5))))+"/yr) exceeds base income — structure matters more than rate.";}
+  else wv.style.display="none";
+  $("okNote").style.display = (comm>=100&&(!debtPay||cover>=1.5))?"block":"none";
+  $("okNote").textContent="Both constraints hold: community margin ≥ $100/bed and debt coverage ≥ 1.5×.";
+}
+function setBase(){ $("state").value="community"; $("wage").value=40; $("hrs").value=3.25; $("price").value=801; $("freight").value=100; $("brok").value=200; $("buf").value=30; $("vol").value=600; $("debt").value=500000; $("rate").value=7; $("term").value=0; $("flex").checked=true; calc(); }
+$("downside").onclick=()=>{ $("price").value=Math.round(801*0.8); $("vol").value=480; $("wage").value=40; $("hrs").value=4; calc(); };
+$("base").onclick=setBase;
+document.querySelectorAll("input,select").forEach(el=>el.addEventListener("input",calc));
+setBase();
+</script>
+</body>
+</html>
