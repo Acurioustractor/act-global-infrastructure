@@ -8,8 +8,8 @@ generated_by: scripts/build-founders-session-kit.mjs
 
 # ACT Founders' Session Prep - Tue, 7 July 2026
 
-> Built 2026-06-16 13:29 AEST. Read-only fold of existing artifacts - no new money math. Preps the upcoming first-Tuesday session.
-> STALE inputs: 1 (snapshot 37.5h)
+> Built 2026-06-16 14:17 AEST. Read-only fold of existing artifacts - no new money math. Preps the upcoming first-Tuesday session.
+> STALE inputs: 1 (snapshot 38.3h)
 
 ## Key dates
 
@@ -18,19 +18,19 @@ generated_by: scripts/build-founders-session-kit.mjs
 
 ## Money engine
 
-Pipeline numbers (as-of snapshot 2026-06-15 (37.5h, daily) [STALE]):
+Pipeline numbers (as-of snapshot 2026-06-15 (38.3h, daily) [STALE]):
 - Receivables: $242,580
 - Grants in flight: $230,000
 - Weighted pipeline: $2,975,132
 - Tagging coverage: 82.5% of transactions
 
-Withheld (gated on session decisions - whole-picture v1.5):
-- Cash on hand: withheld - no pipeline
-- Runway: withheld - no pipeline
-- Monthly burn: withheld - no pipeline
-- R&D basis $: withheld - no pipeline
+Gated money reads (whole-picture v1.5 - figures show as the gates flip):
+- Cash on hand: withheld - pending N3 - founders have not declared the canonical money truth
+- Runway: withheld - no pipeline (needs trusted cash + burn)
+- Monthly burn: withheld - no pipeline (needs trusted cash + burn)
+- R&D basis $: withheld - at risk - $325,947 flagged but 73% founder drawings; nothing on paper (collapse-to-~$55K risk)
 
-Four lanes, last 90 days (verbatim, as-of four-lanes card 2026-06-15 (37.5h, weekly)):
+Four lanes, last 90 days (verbatim, as-of four-lanes card 2026-06-15 (38.3h, weekly)):
 
 - **To Us**: $0 (0%)
 - **To Down**: $252 (1%)
@@ -54,7 +54,7 @@ When did Ben and Nic last get paid by the entity that earns the money? If the an
 
 ## Drift lights
 
-> as-of four-lanes card 2026-06-15 (37.5h, weekly)
+> as-of four-lanes card 2026-06-15 (38.3h, weekly)
 
 - Art < 10%: ON (Art 5% of LCAA spend, last 90d)
 - Listen < 20%: off (Listen 39%, last 90d)
