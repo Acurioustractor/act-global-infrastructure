@@ -9,13 +9,25 @@ status: active
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-11T06:05:00+10:00
-**Goal:** The full ACT operating stack drawn and shipped: staffing plan → Harvest hub → Whole Picture page → viz rec → FIRST SITTING BUILD + Notion wiring (done 2026-06-11, merged to main).
-**Branch:** main (00df8ba merged via PR #172; feature branch deleted)
-**Test:** node scripts/build-monday-card.mjs --dry-run && pm2 jlist | grep -E 'whole-picture|monday-card'
+**Updated:** 2026-06-16 (v1.5 build phases 1-3 SHIPPED today, all on main)
+**Goal:** Whole-Picture v1.5 (plan `thoughts/shared/plans/2026-06-16-whole-picture-v1.5.md`) — founders' session kit + un-withholding the money read, TDD-first + display-gated. Build phases done; wiring + ops remain.
+**Branch:** main (ef57d45)
+**Test:** node scripts/build-founders-session-kit.mjs --dry-run && node --test scripts/tests/two-account-cash.test.mjs scripts/tests/rd-basis.test.mjs
 
-### Now
-[->] FIRST SITTING + NOTION WIRING COMPLETE, everything on main. Next = v1.5 sitting BEFORE 27 Jun (hard deadline): `build-founders-session-kit.mjs` (PM2 entry in ecosystem.config.cjs, COMMENTED — uncomment when script lands) + GCal recurring 1st-Tue event · extend money-command-digest with cash-on-hand/runway/burn (TDD-pinned) · R&D-basis JSON sidecar from reconciliation-worklist · pre-departure drill + resolve Open choice 1 (local-Mac cron host vs cloud, 27 Jun–7 Aug) · Nic's TELEGRAM_CHAT_ID_NIC. Nearer-term: Miro board prebuild before Tue 16 Jun 10:00. Withheld in v1 by design: cash/runway/R&D-basis (snapshot `.cash` = sum of ALL non-archived xero_bank_accounts balances incl. negative CC — point-in-time cash-in-bank, NOT two-account-scoped, known-stale feed; traced + documented in build-whole-picture.mjs header; never relabel it).
+### Now (2026-06-16)
+[done] **v1.5 phases 1-3 all merged to main, each TDD-pinned + display-gated:**
+- **P1 session kit** (PR #178) — `scripts/build-founders-session-kit.mjs`, monthly sibling of build-monday-card; Sat-7am PM2 with first-Tuesday guard; same withheld treatment. PM2 stub at ecosystem.config.cjs:976 still COMMENTED.
+- **P2 two-account cash** (PR #179) — `scripts/lib/two-account-cash-lib.mjs` (+test) + `scripts/build-two-account-cash.mjs`. Cash = #8815 + Everyday ONLY (excludes NM Personal −$388,937, Maximiser, archived). Live cash **$121,691.47**. TWO gates: displayable (fresh+complete) AND n3_decided (`WHOLE_PICTURE_MONEY_CANON`, default OFF). Regression anchor pins the 06-10 figure $223,761.05.
+- **P3 R&D basis** (PR #180) — `scripts/lib/rd-basis-lib.mjs` (+test) + `scripts/build-rd-basis.mjs`. Live: gross flagged **$325,947.23**, founder drawings **$238,653.88 (73%, strip)**, defensible CEILING **$87,293.35**, ~$37,972.61 offset. NOT bankable until `RD_BASIS_RECORDS_CURED=1` (nothing on paper: 15078-81 absent + collapse-to-~$55K). Sidecars gitignored.
+
+[->] **LEFT (input-blocked + wiring):**
+1. **Wire surfaces** to read the gated cash/R&D sidecars — `build-founders-session-kit.mjs` + `build-whole-picture.mjs` still show static "withheld - no pipeline"; swap to read the sidecar's `gated`/`withhold_reason` so the label upgrades (and un-withholds the moment the gates flip). Tier 1.
+2. **Ops:** uncomment PM2 founders-session-prep stub + `pm2 save` (Tier 2) · GCal recurring 1st-Tue founders'-session event (Tier 2/3, invite Nic) · pre-departure cron drill.
+3. **NEED FROM BEN (2 inputs):** cron host local-Mac vs cloud for 27 Jun–7 Aug; `TELEGRAM_CHAT_ID_NIC` value.
+4. **Founders to decide (not mine):** N3 one-money-truth (then flip `WHOLE_PICTURE_MONEY_CANON=1`) · the #8815 reconciliation that tightens the cash band · the R&D records cure.
+
+### Also shipped 2026-06-16 (separate threads, all merged to main)
+PR #175 cron-churn tidy + restored `service_role` EXECUTE on `exec_sql` (was silently blocking ALL PRs via stale schema snapshot) · PR #176 consolidated arbitrary-SQL helpers onto `exec_sql` (dropped `execute_sql`+`exec`) · GrantScope PR #70 repoint · PR #177 Standard Ledger onboarding + EOFY/R&D/entity docs. See [[supabase-search-path-trap]] for the exec_sql grant-loss writeup.
 
 ### Notion wiring (2026-06-11 ~6am, VERIFIED end-to-end)
 - [x] "Monday cards" page created under the Whole Picture page: https://app.notion.com/p/37bebcf981cf81e99845f8361ce08a97 — the week-per-page home (create-if-absent; founder move-block edits never overwritten).
