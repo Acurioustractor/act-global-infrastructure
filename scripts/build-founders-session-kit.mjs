@@ -23,11 +23,14 @@
  *      per-lane moves (To Us / To Down / To Grow / To Others x [5y|10y|20y|30y]) and
  *      "open questions" placeholders. A scaffold, never invented session content.
  *
- * Cash on hand / runway / monthly burn / R&D basis $ are WITHHELD (no trustworthy
- * pipeline). Deliberate and gated elsewhere (whole-picture v1.5, behind founders'
- * decisions N3/N14). The money snapshot .cash field is NOT cash on hand (it sums
- * every non-archived xero_bank_accounts mirror balance, ignores the two-account
- * rule, and the feed is known-stale) - it is never displayed here.
+ * Cash on hand + R&D basis $ read their GATED sidecars (whole-picture v1.5 phases
+ * 2/3, via lib/whole-picture-money-display-lib.mjs): each shows the figure ONLY
+ * when its sidecar gate is true AND the sidecar is itself fresh, else carries the
+ * live withhold reason and un-withholds the moment the gates flip (cash behind N3
+ * canon; R&D behind records-cured). Runway + monthly burn have no trustworthy
+ * pipeline yet, so they stay "withheld - no pipeline". The money snapshot .cash
+ * field is NOT cash on hand (it sums every non-archived xero_bank_accounts mirror
+ * balance, ignores the two-account rule, feed known-stale) - never displayed here.
  *
  * Staleness never lies: every section renders as-of + age; STALE badge past
  * 26h (daily inputs) / 8d (weekly inputs); a dead input renders a FAILED line
@@ -61,6 +64,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, append
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { homedir } from 'node:os';
+import { cashDisplay, rdDisplay } from './lib/whole-picture-money-display-lib.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -85,8 +89,24 @@ const OUT_HTML = join(ROOT, 'thoughts/shared/founders-session-kit.html');
 const NOTION_STATE = join(homedir(), '.act-founders-session-state.json'); // outside the repo on purpose: cron must never dirty a tracked file
 const REGEN_CMD = 'node scripts/build-founders-session-kit.mjs --dry-run';
 
-const WITHHELD = ['Cash on hand', 'Runway', 'Monthly burn', 'R&D basis $']
-  .map((k) => `${k}: withheld - no pipeline`);
+// Money gates (whole-picture v1.5): cash + R&D read their GATED sidecars; runway + burn have no
+// trustworthy pipeline yet. Fail-soft read (missing/unparseable -> null -> honestly withheld). The
+// kit is a read-only fold: it NEVER runs the builders (build-two-account-cash / build-rd-basis own
+// their cron), only reads their gated output, so the labels upgrade the moment the gates flip.
+const CASH_SIDE = join(ROOT, 'thoughts/shared/data/two-account-cash-latest.json');
+const RD_SIDE = join(ROOT, 'thoughts/shared/data/rd-basis-latest.json');
+const readSidecar = (p) => { try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return null; } };
+const noPipe = (reason) => ({ show: false, value: null, reason, asOf: null }); // runway/burn: not a sidecar
+const gateLineFull = ({ k, d }) => deDash(d.show ? `${k}: ${d.value}${d.reason ? ` (${d.reason})` : ''}` : `${k}: withheld - ${d.reason}`);
+const gateLineShort = ({ k, d }) => deDash(d.show ? `${k} ${d.value}` : `${k} withheld`);
+function moneyGates() {
+  return [
+    { k: 'Cash on hand', d: cashDisplay(readSidecar(CASH_SIDE)) },
+    { k: 'Runway', d: noPipe('no pipeline (needs trusted cash + burn)') },
+    { k: 'Monthly burn', d: noPipe('no pipeline (needs trusted cash + burn)') },
+    { k: 'R&D basis $', d: rdDisplay(readSidecar(RD_SIDE)) },
+  ];
+}
 
 // ---------- small helpers ----------
 const logErr = (section, err) => {
@@ -243,8 +263,8 @@ function buildKit(sessionYmd) {
   // 1. key dates (cutover countdown + the session being prepped) - pure date arithmetic
   kit.sections.dates = isolate('key-dates', () => keyDates(todayY, sessionYmd));
 
-  // 2. money engine
-  kit.sections.money = { snap, lanes, withheld: WITHHELD };
+  // 2. money engine — pipeline numbers from the snapshot + the gated cash/R&D reads
+  kit.sections.money = { snap, lanes, gates: moneyGates() };
 
   // 3. drift lights - ONLY from ratios already present in the four-lanes card
   kit.sections.drift = isolate('drift-lights', () => {
@@ -307,8 +327,8 @@ function moneyLinesMd(m) {
     if (m.snap.coveragePct != null) out.push(`- Tagging coverage: ${m.snap.coveragePct.toFixed(1)}% of transactions`);
   }
   out.push('');
-  out.push('Withheld (gated on session decisions - whole-picture v1.5):');
-  for (const w of m.withheld) out.push(`- ${w}`);
+  out.push('Gated money reads (whole-picture v1.5 - figures show as the gates flip):');
+  for (const g of m.gates) out.push(`- ${gateLineFull(g)}`);
   out.push('');
   if (m.lanes.failed) {
     out.push(`Four lanes / LCAA / soul check: ${FAILED_LINE}`);
@@ -414,7 +434,7 @@ function toHtml(kit) {
 <li>Weighted pipeline: <b>${money(m.snap.pipelineWeighted)}</b></li>
 ${m.snap.coveragePct != null ? `<li>Tagging coverage: <b>${m.snap.coveragePct.toFixed(1)}%</b> of transactions</li>` : ''}
 </ul>`)
-    + `<p class="withheld">Withheld (gated on session decisions):<br>${m.withheld.map(esc).join('<br>')}</p>`;
+    + `<p class="withheld">Gated money reads (whole-picture v1.5 - figures show as the gates flip):<br>${m.gates.map((g) => esc(gateLineFull(g))).join('<br>')}</p>`;
 
   const lanesBody = m.lanes.failed
     ? `<p class="bad">${esc(FAILED_LINE)}</p>`
@@ -498,7 +518,7 @@ function toTelegram(kit, notionLine, mdRelPath) {
     L.push(`LCAA 90d: ${lcaaLine}`);
     L.push(`Soul: ${soulLine}`);
   }
-  L.push('Cash on hand / runway / burn / R&D basis: withheld - no pipeline');
+  L.push(`Gated: ${m.gates.map(gateLineShort).join(' | ')}`);
   L.push(dr.failed ? `Drift lights: ${FAILED_LINE}` : `Drift: ${dr.lights.map((l) => l.text.split(' (')[0]).join(' | ')}`);
   L.push('*Agenda* (scaffold in the kit): decisions to ratify, per-founder per-lane moves, open questions');
   L.push(`Kit: ${mdRelPath}`);

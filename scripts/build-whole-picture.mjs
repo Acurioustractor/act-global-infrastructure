@@ -34,8 +34,13 @@
  *   -$152,230.52 on 2026-06-09), and (b) rides a bank-balance feed that is
  *   known to go stale, with no freshness check on the mirror. It is a
  *   point-in-time "everything in the mirror" figure, NOT ACT cash on hand.
- *   Until a trustworthy cash pipeline exists, cash on hand / runway / monthly
- *   burn / R&D basis $ render literally as "withheld - no pipeline".
+ *   So this page IGNORES snapshot .cash. Cash on hand + R&D basis $ now read
+ *   their own GATED sidecars (v1.5 phases 2/3 — two-account-cash-latest.json /
+ *   rd-basis-latest.json via lib/whole-picture-money-display-lib.mjs): the
+ *   figure shows ONLY when the sidecar's gate is true AND the sidecar is itself
+ *   fresh, else the row carries the live, self-upgrading withhold reason and
+ *   un-withholds the moment the gates flip. Runway + monthly burn still have no
+ *   trustworthy pipeline, so they remain "withheld - no pipeline".
  *
  * Run:  node scripts/build-whole-picture.mjs
  * Out:  thoughts/shared/the-whole-picture.html
@@ -43,6 +48,7 @@
 import { readFileSync, writeFileSync, existsSync, statSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { cashDisplay, rdDisplay } from './lib/whole-picture-money-display-lib.mjs';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const P = (...s) => join(ROOT, ...s);
@@ -104,6 +110,14 @@ const snap = safe('money-command-snapshots', () => {
   const asOfAge = j.today ? ageH(Date.parse(j.today + 'T00:00:00+10:00')) : null;
   return { j, file, rel: 'thoughts/shared/data/money-command-snapshots/' + file, age: asOfAge ?? ageH(mtimeOf(join(dir, file))), wroteAge: ageH(mtimeOf(join(dir, file))) };
 });
+
+// Two-account cash + R&D-basis sidecars (whole-picture v1.5 phases 2/3). Read-only fold: this page
+// NEVER runs the builders (build-two-account-cash / build-rd-basis own their cron) — it only reads
+// their gated output. Each fail-soft to null, so a missing sidecar keeps the row honestly withheld.
+const cashSide = safe('two-account-cash sidecar', () =>
+  JSON.parse(readFileSync(P('thoughts/shared/data/two-account-cash-latest.json'), 'utf8')));
+const rdSide = safe('rd-basis sidecar', () =>
+  JSON.parse(readFileSync(P('thoughts/shared/data/rd-basis-latest.json'), 'utf8')));
 
 // ════ BAND 1 - THIS WEEK ════
 const week = safe('this-week', () => {
@@ -262,6 +276,10 @@ const money = safe('the-money-engine', () => {
   const num = (k, v, m) => (typeof v === 'number'
     ? { k, v: $n(v), m, href: CC + '/company', tone: stale ? 'stale' : '' }
     : { k, v: 'FAILED - field missing in snapshot', m, tone: 'bad' });
+  // render a gated sidecar decision: the figure when shown (asOf in the message), else the live reason
+  const gatedRow = (k, d) => (d.show
+    ? { k, v: d.value, m: (d.reason ? d.reason + ' · ' : '') + (d.asOf ? 'as of ' + aestDate(new Date(d.asOf)) : 'live'), href: CC + '/company', tone: '' }
+    : { k, v: 'withheld', m: d.reason, tone: 'mut' });
   const rows = [
     num('Receivables', j.incoming?.receivables, '.incoming.receivables · ' + rel),
     num('Grants in flight', j.incoming?.grantsInFlight, '.incoming.grantsInFlight · ' + rel),
@@ -270,11 +288,13 @@ const money = safe('the-money-engine', () => {
     (typeof j.coverage?.transactions?.pct === 'number'
       ? { k: 'Tagging coverage (transactions)', v: j.coverage.transactions.pct.toFixed(1) + '%', m: '.coverage.transactions.pct (' + j.coverage.transactions.tagged + '/' + j.coverage.transactions.total + ') · ' + rel, href: CC + '/finance/reconciliation', tone: stale ? 'stale' : '' }
       : { k: 'Tagging coverage (transactions)', v: 'FAILED - field missing in snapshot', m: rel, tone: 'bad' }),
-    // withheld in v1 - see the .cash trace in this script's header
-    { k: 'Cash on hand', v: 'withheld - no pipeline', m: 'snapshot .cash is the whole xero_bank_accounts mirror, not ACT cash on hand', tone: 'mut' },
+    // cash + R&D read their GATED sidecars (v1.5 phases 2/3): show the figure only when the sidecar's
+    // own gate is true AND it is itself fresh, else surface the live withhold reason so the label
+    // upgrades the moment the gates flip. runway + burn have no pipeline yet — honestly withheld.
+    gatedRow('Cash on hand', cashDisplay(cashSide.failed ? null : cashSide)),
     { k: 'Runway', v: 'withheld - no pipeline', m: 'needs a trusted cash + burn pipeline first', tone: 'mut' },
     { k: 'Monthly burn', v: 'withheld - no pipeline', m: 'needs a trusted cash + burn pipeline first', tone: 'mut' },
-    { k: 'R&D basis $', v: 'withheld - no pipeline', m: '81% of the FY26 R&D flag was founder drawings - basis unsettled', tone: 'mut' },
+    gatedRow('R&D basis $', rdDisplay(rdSide.failed ? null : rdSide)),
     // pure date arithmetic + static doctrine
     { k: 'First $120K-each pay run', v: daysUntil('2026-07-01') + ' days (window opens 1 Jul 2026)', m: 'D11.2 founder pay from Jul 2026 · date arithmetic', href: CC + '/company' },
     { k: 'Top-up gate', v: 'RULE PENDING (7 Jul)', m: 'static label until the founders’ session ratifies', tone: 'mut' },
@@ -376,7 +396,7 @@ footer code{color:var(--ink);background:var(--panel);padding:2px 6px;border-radi
 <section><h2>The system</h2><div id=b-system></div></section>
 <section><h2>The money engine</h2><div id=b-money></div></section>
 <section><h2>The drumbeat</h2><div id=b-drum></div></section>
-<footer>regenerate: <code>node scripts/build-whole-picture.mjs</code> &nbsp;·&nbsp; every number carries its as-of date and source file; numbers grey to <span style="color:var(--stale)">#71808f</span> past their staleness rule; a missing input renders FAILED, never a guess; cash on hand / runway / burn / R&amp;D basis are withheld in v1 (no trusted pipeline).</footer>
+<footer>regenerate: <code>node scripts/build-whole-picture.mjs</code> &nbsp;·&nbsp; every number carries its as-of date and source file; numbers grey to <span style="color:var(--stale)">#71808f</span> past their staleness rule; a missing input renders FAILED, never a guess; cash on hand + R&amp;D basis read gated sidecars (shown only when fresh + gate-true, else the live withhold reason); runway / burn stay withheld (no trusted pipeline).</footer>
 <script>
 const D=${DATA};
 const $=id=>document.getElementById(id);

@@ -963,6 +963,21 @@ const cronScripts = [
 
   // === The Whole Picture (founders' OS) ===
   // Plan: 2026-06-10-whole-picture-visualization-recommendation
+  // Gated money sidecars (v1.5 phases 2/3) — built BEFORE every surface that reads them (founders
+  // kit 7:00 Sat, whole-picture 8:20, monday-card 8:45) so each reads a same-morning, sub-36h
+  // sidecar (the display lib withholds a staler one). Read-only: query xero_bank_accounts /
+  // xero_transactions, write one gitignored JSON each. Cash runs after xero-bank-balances (6:00).
+  // Gates stay OFF in cron (WHOLE_PICTURE_MONEY_CANON / RD_BASIS_RECORDS_CURED unset here).
+  {
+    name: 'two-account-cash',
+    script: 'scripts/build-two-account-cash.mjs',
+    cron_restart: '40 6 * * *', // daily 6:40 AEST, after bank-balance refresh (6:00), before the surfaces
+  },
+  {
+    name: 'rd-basis',
+    script: 'scripts/build-rd-basis.mjs',
+    cron_restart: '41 6 * * *', // daily 6:41 AEST, before the surfaces that read it
+  },
   {
     name: 'whole-picture',
     script: 'scripts/build-whole-picture.mjs',
@@ -973,13 +988,13 @@ const cronScripts = [
     script: 'scripts/build-monday-card.mjs',
     cron_restart: '45 8 * * 1', // Mon 8:45 AEST, after recon 8:00 + snapshot 8:15
   },
-  // v1.5 — uncomment when scripts/build-founders-session-kit.mjs lands (before 27 Jun).
-  // Sat 7:00 AEST with an in-script first-Tuesday guard (Sat+3d = Tue; fires once/month).
-  // {
-  //   name: 'founders-session-prep',
-  //   script: 'scripts/build-founders-session-kit.mjs',
-  //   cron_restart: '0 7 * * 6',
-  // },
+  // v1.5 — founders' session kit. Sat 7:00 AEST with an in-script first-Tuesday guard
+  // (Sat+3d = Tue; fires once/month). Reads the gated sidecars built at 6:40/6:41.
+  {
+    name: 'founders-session-prep',
+    script: 'scripts/build-founders-session-kit.mjs',
+    cron_restart: '0 7 * * 6',
+  },
 ];
 
 module.exports = {
