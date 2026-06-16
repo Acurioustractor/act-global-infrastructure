@@ -9,9 +9,9 @@ status: active
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-16 (v1.5 build phases 1-3 SHIPPED today, all on main)
-**Goal:** Whole-Picture v1.5 (plan `thoughts/shared/plans/2026-06-16-whole-picture-v1.5.md`) — founders' session kit + un-withholding the money read, TDD-first + display-gated. Build phases done; wiring + ops remain.
-**Branch:** main (ef57d45)
+**Updated:** 2026-06-16 (v1.5 phases 1-3 + the WIRING + sidecar crons all SHIPPED today, all on main)
+**Goal:** Whole-Picture v1.5 (plan `thoughts/shared/plans/2026-06-16-whole-picture-v1.5.md`) — founders' session kit + un-withholding the money read, TDD-first + display-gated. Build + wiring + sidecar crons done; remaining = GCal event + Ben's 2 inputs + founder decisions.
+**Branch:** main (c1c7af8)
 **Test:** node scripts/build-founders-session-kit.mjs --dry-run && node --test scripts/tests/two-account-cash.test.mjs scripts/tests/rd-basis.test.mjs
 
 ### Now (2026-06-16)
@@ -20,11 +20,14 @@ status: active
 - **P2 two-account cash** (PR #179) — `scripts/lib/two-account-cash-lib.mjs` (+test) + `scripts/build-two-account-cash.mjs`. Cash = #8815 + Everyday ONLY (excludes NM Personal −$388,937, Maximiser, archived). Live cash **$121,691.47**. TWO gates: displayable (fresh+complete) AND n3_decided (`WHOLE_PICTURE_MONEY_CANON`, default OFF). Regression anchor pins the 06-10 figure $223,761.05.
 - **P3 R&D basis** (PR #180) — `scripts/lib/rd-basis-lib.mjs` (+test) + `scripts/build-rd-basis.mjs`. Live: gross flagged **$325,947.23**, founder drawings **$238,653.88 (73%, strip)**, defensible CEILING **$87,293.35**, ~$37,972.61 offset. NOT bankable until `RD_BASIS_RECORDS_CURED=1` (nothing on paper: 15078-81 absent + collapse-to-~$55K). Sidecars gitignored.
 
-[->] **LEFT (input-blocked + wiring):**
-1. **Wire surfaces** to read the gated cash/R&D sidecars — `build-founders-session-kit.mjs` + `build-whole-picture.mjs` still show static "withheld - no pipeline"; swap to read the sidecar's `gated`/`withhold_reason` so the label upgrades (and un-withholds the moment the gates flip). Tier 1.
-2. **Ops:** uncomment PM2 founders-session-prep stub + `pm2 save` (Tier 2) · GCal recurring 1st-Tue founders'-session event (Tier 2/3, invite Nic) · pre-departure cron drill.
-3. **NEED FROM BEN (2 inputs):** cron host local-Mac vs cloud for 27 Jun–7 Aug; `TELEGRAM_CHAT_ID_NIC` value.
-4. **Founders to decide (not mine):** N3 one-money-truth (then flip `WHOLE_PICTURE_MONEY_CANON=1`) · the #8815 reconciliation that tightens the cash band · the R&D records cure.
+[done] **Wiring (LEFT item 1) — PR #182, merged c1c7af8.** Both surfaces read the gated cash/R&D sidecars via new pure lib `scripts/lib/whole-picture-money-display-lib.mjs` (`cashDisplay`/`rdDisplay`, +9-test branch table `scripts/tests/whole-picture-money-display.test.mjs`). Show ONLY when the sidecar gate is true AND the sidecar is itself fresh (`SIDE_FRESH_H=36h` — guards a frozen gate flag on a stalled cron); else the row carries the live, self-upgrading withhold reason. Runway+burn unchanged (no pipeline). `build-whole-picture` + `build-founders-session-kit` stay read-only folds — neither runs the builders. Verified both gate states live (OFF: cash "pending N3" / R&D "at risk $325,947, 73% drawings"; ON: cash $121,691 / R&D $87,293 +offset).
+[done] **Sidecar crons + founders stub (LEFT item 2, ops half) — same PR #182.** `ecosystem.config.cjs`: `two-account-cash` 6:40 + `rd-basis` 6:41 daily (before every consumer; cash after xero-bank-balances 6:00) + `founders-session-prep` Sat 7:00 uncommented. `pm2 start --only` registered all three + `pm2 save` persisted; founders run exited clean via its first-Tue guard (Sat+3=19 Jun, no send); sidecars seeded fresh 14:28 AEST, gates OFF. Gate env vars unset in cron = honest default.
+
+[->] **LEFT (still open):**
+1. **GCal recurring 1st-Tue founders'-session event** (Tier 2/3, invites Nic) — BLOCKED: no session **time-of-day** is in any plan/handoff. Needs Ben to name the time before I create it.
+2. **pre-departure cron drill (full)** — local-host drill done for the new crons; the real 27 Jun–7 Aug drill depends on the cron-host decision below.
+3. **NEED FROM BEN (now 3 inputs):** founders'-session time-of-day (for the GCal event); cron host local-Mac vs cloud for 27 Jun–7 Aug; `TELEGRAM_CHAT_ID_NIC` value.
+4. **Founders to decide (not mine):** N3 one-money-truth → flip `WHOLE_PICTURE_MONEY_CANON=1` · the #8815 reconciliation that tightens the cash band · the R&D records cure → `RD_BASIS_RECORDS_CURED=1`.
 
 ### Also shipped 2026-06-16 (separate threads, all merged to main)
 PR #175 cron-churn tidy + restored `service_role` EXECUTE on `exec_sql` (was silently blocking ALL PRs via stale schema snapshot) · PR #176 consolidated arbitrary-SQL helpers onto `exec_sql` (dropped `execute_sql`+`exec`) · GrantScope PR #70 repoint · PR #177 Standard Ledger onboarding + EOFY/R&D/entity docs. See [[supabase-search-path-trap]] for the exec_sql grant-loss writeup.
