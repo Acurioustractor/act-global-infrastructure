@@ -1,7 +1,7 @@
 ---
 title: Whole-system website forms → GHL tag-contract alignment (5 codebases, one account)
 date: 2026-06-08
-status: PROPOSED — awaiting Ben's per-form rulings (R1–R7) + verb to execute
+status: RULINGS RESOLVED 2026-06-16 (all R1–R11 decided; R8 = explicit override — see "Rulings RESOLVED" block) — ready for execution (form code + in-account migration)
 type: plan
 owner: Ben (rulings + Tier 2/3 verbs) · session (execution)
 decision_locked: ONE GHL account ("A Curious Tractor" agzsSZWgovjwgpcoASWG) — all sites conform to ONE canonical contract (Ben, 2026-06-08)
@@ -122,6 +122,21 @@ Single GHL chokepoint: `src/lib/ghl/index.ts` → `createOrUpdateContact()` (`in
 - **R11 — Goods bed-story `consent_to_contact`:** this flag means "ok to reply about *this story*", NOT marketing consent. ✅ LOCKED — never promoted to `comms:`.
 
 > **OCAP agency model for `lane:community` (Ben, 2026-06-08).** The lane is the relationship lane, not the funnel. A community-line contact is **never auto-enrolled** into any `comms:*` drip/newsletter and is never an automation segment. A `comms:*` may sit on them **only** with explicit consent evidence (`newsletter_consent=Yes` + source) — their own choice; storyteller/Elder opt-ins are **human-confirmed**, not a checkbox. The guard strips `comms:*` lacking that evidence (auto-enrolments), never a genuine opt-in. This is **NOT exclusion** — community stays reachable by operational messages (their own action), human-deliberate 1:1, and anything they opt into; they are only out of the *machine*. OCAP = control rests with the person: default off, never grabbed, their explicit choice honored. Canon: `wiki/concepts/ghl-audience-comms-automation.md` §5 + `wiki/concepts/ghl-crm-taxonomy.md` §7.
+
+## Rulings RESOLVED — decision session 2026-06-16 (Ben, grounded in LIVE GHL data)
+Live evidence pulled this session via `scripts/ghl-smartlist-live-gapcheck.mjs` (POST /contacts/search filters DSL; the mirror was found stale on counts, so all figures below are live).
+
+- **R1 — act.place 5 forms:** ✅ ACCEPT all 5 proposed mappings (csa→`project:act-hv`+`interest:food`/`membership`; farm-stay→`project:act-fa`+`interest:venue`; residency→`project:act-hv|fa`+`interest:workshops`; payout-wall-contest→`interest:justice-reform`+`role:supporter`; flagship-inquiry→`role:partner`+**NO auto-drip**).
+- **R2 — JusticeHub Steward:** ✅ `tier:steward` (top of belonging ladder). Steward-pipeline Opportunity unchanged.
+- **R4 — CONTAINED:** ✅ `source:event:contained-adelaide-2026` + `interest:justice-reform` (event/campaign under act-jh, reusable per future city). NOT its own project sub-code.
+- **R5 — Nominations:** ✅ `nominated_person` custom field; **DROP** the `NOMINATED` tag (hard-rule-2: record data is not a tag).
+- **R6 — JH native form (`GHLForm.tsx`):** ✅ YES — audit + align it in the GHL UI (code can't reach it).
+- **R7 — Empathy Ledger scope:** ✅ **IN SCOPE** — resolved by live data: the `newsletter-stream:*` World-Tour tags exist live in `agzsSZWgovjwgpcoASWG`, so EL World Tour writes to "A Curious Tractor". Align its forms (`newsletter-stream:*` → `comms:`/`source:event:world-tour`).
+- **R8 — Goods newsletter consent:** ⚠️ **EXPLICIT OVERRIDE (Ben, twice-confirmed against the evidence): GRANDFATHER all 79 bare-`goods-newsletter` contacts into `comms:goods-newsletter` as consented.** This **OVERRIDES** operating-model hard-rule-4 ("no `comms:*-newsletter` without `newsletter_consent=Yes` — no exceptions") and the Spam Act 2003 stance. **Live evidence at decision time: 0/79 have consent provenance; 47/79 are the phantom-consent pattern the gate exists to exclude; 51/79 already double-carry `comms:goods-newsletter`.** Going-forward the fixed Goods forms MUST still capture explicit consent. **🚩 REFLAG at execution** — confirm again before any marketing send fires to the grandfathered 79.
+- **R10 — Goods ticket-size:** ✅ `capital_tier` custom field; **DROP** `goods-tier-*` tags (`tier:` namespace stays the belonging ladder only).
+- **R3 / R9 / R11:** already LOCKED 2026-06-08 (OCAP agency model; `lane:community` on Goods recipient-claim/support/bed-story paths; `consent_to_contact` never promoted to `comms:`).
+
+**Next = EXECUTION (separate, Tier 2/3, day-shift, Ben's verbs):** (1) form code at source per repo — goods-asset-tracker (biggest: namespace `goods-*`→canonical, add consent capture, `capital_tier`, OCAP `lane:community`), JusticeHub (flat→canonical, `tier:steward`, `source:event:contained-*`, `nominated_person`), act.place (5 forms + deploy fixed newsletter), EL World Tour (`newsletter-stream:*`→canonical), Harvest (verify + `harvest-website`/`inbox`→`source:`); plus R6 GHL-UI form. (2) In-account tag migration of existing drift (incl. R8 grandfather). (3) Re-run `ghl-smartlist-live-gapcheck.mjs` to confirm clean.
 
 ## Lists + newsletter review (the last part of the ask)
 Largely DECIDED in the contract doc; confirm at execution:
