@@ -189,5 +189,8 @@ thoughts/shared/drafts/funder-notes/[0-9]*.md
 # Two-account cash pipeline sidecar — live financial balances, regenerable, point-in-time (v1.5 phase 2)
 thoughts/shared/data/two-account-cash-latest.json
 
+# FY26 R&D-basis sidecar — sensitive R&D-tax financials, regenerable (v1.5 phase 3)
+thoughts/shared/data/rd-basis-latest.json
+
 # Meeting-sync cursor (machine state, like .xero-sync-state.json above)
 wiki/raw/.last-meeting-sync
