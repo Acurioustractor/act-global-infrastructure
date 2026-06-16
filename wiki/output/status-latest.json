@@ -1,35 +1,35 @@
 {
-  "generated_at": "2026-05-31T23:00:00.400Z",
+  "generated_at": "2026-06-14T23:00:00.245Z",
   "scope": "canonical-graph",
   "domains": {
     "art": 8,
     "communities": 3,
-    "concepts": 34,
-    "decisions": 35,
+    "concepts": 47,
+    "decisions": 52,
     "finance": 21,
     "people": 23,
     "projects": 98,
     "research": 15,
     "stories": 54,
-    "synthesis": 30,
+    "synthesis": 34,
     "technical": 6
   },
   "summary": {
-    "date": "2026-05-31",
-    "total_articles": 325,
-    "total_links": 2400,
-    "orphans": 68,
-    "broken_links": 262,
+    "date": "2026-06-14",
+    "total_articles": 359,
+    "total_links": 2502,
+    "orphans": 88,
+    "broken_links": 273,
     "stubs": 0,
-    "missing_from_index": 107,
-    "missing_backlinks": 539,
-    "advisory_backlinks": 655
+    "missing_from_index": 141,
+    "missing_backlinks": 577,
+    "advisory_backlinks": 713
   },
   "source_bridge": {
-    "raw_sources": 154,
+    "raw_sources": 155,
     "source_summaries": 151,
     "covered_raw_sources": 151,
-    "missing_source_summaries": 3,
+    "missing_source_summaries": 4,
     "orphan_source_summaries": 0,
     "by_kind": {
       "published_article_capture": {
@@ -38,9 +38,9 @@
         "missing_raw_sources": 0
       },
       "database_export": {
-        "raw_sources": 3,
+        "raw_sources": 4,
         "covered_raw_sources": 2,
-        "missing_raw_sources": 1
+        "missing_raw_sources": 2
       },
       "raw_capture": {
         "raw_sources": 82,
@@ -63,7 +63,7 @@
         "missing_raw_sources": 0
       }
     },
-    "coverage_pct": 98
+    "coverage_pct": 97
   },
   "repair_queue": {
     "broken_links": [
@@ -132,46 +132,46 @@
         "page_path": "concepts/act-business-architecture"
       },
       {
+        "stem": "ecosystem-value-exchange",
+        "title": "Ecosystem Value-Exchange",
+        "relative_path": "concepts/ecosystem-value-exchange.md",
+        "page_path": "concepts/ecosystem-value-exchange"
+      },
+      {
+        "stem": "energy-orbit",
+        "title": "The Energy Orbit — how ACT builds, measures, and protects relational energy",
+        "relative_path": "concepts/energy-orbit.md",
+        "page_path": "concepts/energy-orbit"
+      },
+      {
+        "stem": "finance-skill-suite",
+        "title": "ACT Finance Skill Suite",
+        "relative_path": "concepts/finance-skill-suite.md",
+        "page_path": "concepts/finance-skill-suite"
+      },
+      {
         "stem": "four-lanes",
         "title": "The Four Lanes",
         "relative_path": "concepts/four-lanes.md",
         "page_path": "concepts/four-lanes"
       },
       {
-        "stem": "soul",
-        "title": "Soul",
-        "relative_path": "concepts/soul.md",
-        "page_path": "concepts/soul"
+        "stem": "ghl-audience-comms-automation",
+        "title": "GHL Audience · Comms · Automation Strategy",
+        "relative_path": "concepts/ghl-audience-comms-automation.md",
+        "page_path": "concepts/ghl-audience-comms-automation"
       },
       {
-        "stem": "2026-04-18-bg-fit-story-approval",
-        "title": "BG Fit org-level story approval",
-        "relative_path": "decisions/2026-04-18-bg-fit-story-approval.md",
-        "page_path": "decisions/2026-04-18-bg-fit-story-approval"
+        "stem": "ghl-crm-operating-model",
+        "title": "ACT GHL CRM — Operating Model",
+        "relative_path": "concepts/ghl-crm-operating-model.md",
+        "page_path": "concepts/ghl-crm-operating-model"
       },
       {
-        "stem": "2026-04-18-mounty-yarns-story-approval",
-        "title": "Mounty Yarns org-level story approval",
-        "relative_path": "decisions/2026-04-18-mounty-yarns-story-approval.md",
-        "page_path": "decisions/2026-04-18-mounty-yarns-story-approval"
-      },
-      {
-        "stem": "2026-04-18-oonchiumpa-story-approval",
-        "title": "Oonchiumpa org-level story approval — and the verbal-consent governance pattern",
-        "relative_path": "decisions/2026-04-18-oonchiumpa-story-approval.md",
-        "page_path": "decisions/2026-04-18-oonchiumpa-story-approval"
-      },
-      {
-        "stem": "2026-04-18-picc-selective-youth-voice",
-        "title": "PICC — selective youth-voice approval",
-        "relative_path": "decisions/2026-04-18-picc-selective-youth-voice.md",
-        "page_path": "decisions/2026-04-18-picc-selective-youth-voice"
-      },
-      {
-        "stem": "2026-05-14-notion-platform-architecture",
-        "title": "Notion as the unified ask layer",
-        "relative_path": "decisions/2026-05-14-notion-platform-architecture.md",
-        "page_path": "decisions/2026-05-14-notion-platform-architecture"
+        "stem": "ghl-crm-strategy-map",
+        "title": "ACT CRM — Strategy & Method Map",
+        "relative_path": "concepts/ghl-crm-strategy-map.md",
+        "page_path": "concepts/ghl-crm-strategy-map"
       }
     ],
     "missing_backlinks": [
@@ -274,52 +274,52 @@
     ],
     "orphan_pages": [
       {
-        "stem": "act-business-architecture",
-        "title": "ACT Business Architecture",
-        "relative_path": "concepts/act-business-architecture.md",
-        "page_path": "concepts/act-business-architecture"
+        "stem": "finance-skill-suite",
+        "title": "ACT Finance Skill Suite",
+        "relative_path": "concepts/finance-skill-suite.md",
+        "page_path": "concepts/finance-skill-suite"
       },
       {
-        "stem": "2026-04-18-bg-fit-story-approval",
-        "title": "BG Fit org-level story approval",
-        "relative_path": "decisions/2026-04-18-bg-fit-story-approval.md",
-        "page_path": "decisions/2026-04-18-bg-fit-story-approval"
+        "stem": "ghl-audience-comms-automation",
+        "title": "GHL Audience · Comms · Automation Strategy",
+        "relative_path": "concepts/ghl-audience-comms-automation.md",
+        "page_path": "concepts/ghl-audience-comms-automation"
       },
       {
-        "stem": "2026-04-18-mounty-yarns-story-approval",
-        "title": "Mounty Yarns org-level story approval",
-        "relative_path": "decisions/2026-04-18-mounty-yarns-story-approval.md",
-        "page_path": "decisions/2026-04-18-mounty-yarns-story-approval"
+        "stem": "ghl-crm-operating-model",
+        "title": "ACT GHL CRM — Operating Model",
+        "relative_path": "concepts/ghl-crm-operating-model.md",
+        "page_path": "concepts/ghl-crm-operating-model"
       },
       {
-        "stem": "2026-04-18-picc-selective-youth-voice",
-        "title": "PICC — selective youth-voice approval",
-        "relative_path": "decisions/2026-04-18-picc-selective-youth-voice.md",
-        "page_path": "decisions/2026-04-18-picc-selective-youth-voice"
+        "stem": "ghl-crm-taxonomy",
+        "title": "GHL CRM Taxonomy & Pipeline System",
+        "relative_path": "concepts/ghl-crm-taxonomy.md",
+        "page_path": "concepts/ghl-crm-taxonomy"
       },
       {
-        "stem": "2026-05-14-notion-platform-architecture",
-        "title": "Notion as the unified ask layer",
-        "relative_path": "decisions/2026-05-14-notion-platform-architecture.md",
-        "page_path": "decisions/2026-05-14-notion-platform-architecture"
+        "stem": "ghl-tag-namespaces",
+        "title": "GHL tag namespaces — the canonical registry",
+        "relative_path": "concepts/ghl-tag-namespaces.md",
+        "page_path": "concepts/ghl-tag-namespaces"
       },
       {
-        "stem": "2026-05-15-act-system-architecture",
-        "title": "ACT system architecture",
-        "relative_path": "decisions/2026-05-15-act-system-architecture.md",
-        "page_path": "decisions/2026-05-15-act-system-architecture"
+        "stem": "pppp-operating-logic",
+        "title": "PPPP Operating Logic",
+        "relative_path": "concepts/pppp-operating-logic.md",
+        "page_path": "concepts/pppp-operating-logic"
       },
       {
-        "stem": "2026-05-31-q2q3-429-review-band-classification",
-        "title": "Q2/Q3 General Expenses (429) REVIEW-band classification",
-        "relative_path": "decisions/2026-05-31-q2q3-429-review-band-classification.md",
-        "page_path": "decisions/2026-05-31-q2q3-429-review-band-classification"
+        "stem": "project-code-resolution",
+        "title": "Project-Code Resolution",
+        "relative_path": "concepts/project-code-resolution.md",
+        "page_path": "concepts/project-code-resolution"
       },
       {
-        "stem": "2026-05-harvest-subsidiary-structure",
-        "title": "The Harvest — Subsidiary Structure Decision",
-        "relative_path": "decisions/2026-05-harvest-subsidiary-structure.md",
-        "page_path": "decisions/2026-05-harvest-subsidiary-structure"
+        "stem": "the-whole-picture-diagrams",
+        "title": "The Whole Picture — the six diagrams",
+        "relative_path": "concepts/the-whole-picture-diagrams.md",
+        "page_path": "concepts/the-whole-picture-diagrams"
       }
     ],
     "stubs": [],
@@ -464,6 +464,13 @@
           "Empathy Ledger",
           "ACT Regenerative Studio"
         ]
+      },
+      {
+        "raw_source": "raw/2026-06-01-meeting-mike-check-in.md",
+        "suggested_summary": "sources/2026-06-01-meeting-mike-check-in.md",
+        "kind": "database_export",
+        "priority": "low",
+        "focus": []
       }
     ],
     "orphan_source_summaries": []

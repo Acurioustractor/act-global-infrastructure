@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-06T21:00:06.039Z",
+  "generated_at": "2026-06-15T21:00:09.307Z",
   "since": "1d",
   "codebases": [
     "act-global-infrastructure",
@@ -9,8 +9,2297 @@
     "goods",
     "act-farm"
   ],
-  "event_count": 287,
+  "event_count": 544,
   "events": [
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "60b4b8e",
+      "date": "2026-06-16T06:21:19+10:00",
+      "author": "Ben",
+      "title": "docs(standard-ledger): fold in live bank balances, AR backing, AP backlog breakdown",
+      "plan_slug": "act-entity-migration-checklist-2026-06-30"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "b6ed157",
+      "date": "2026-06-16T05:52:25+10:00",
+      "author": "Ben",
+      "title": "docs(standard-ledger): onboarding response + live AR/AP cross-check",
+      "plan_slug": "act-entity-migration-checklist-2026-06-30"
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "011b1ac",
+      "date": "2026-06-16T04:44:24+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(justice-reinvestment): jr_sites registry + typed bidirectional site links (#68)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "48dbb4f",
+      "date": "2026-06-15T20:32:39+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(justice-reinvestment): JR national network — per-site pages + cross-site search (#56)",
+      "plan_slug": null
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/raw/2026-06-14-meeting-harvest-community-space-launch-weekend-planning.md",
+      "date": "2026-06-15T20:30:03.135Z",
+      "size_bytes": 12239
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/act-core-facts.md",
+      "date": "2026-06-15T19:50:22.573Z",
+      "size_bytes": 16107
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/2026-06-12-holdco-structure-proposal.provenance.md",
+      "date": "2026-06-15T19:50:22.572Z",
+      "size_bytes": 4734
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/2026-06-12-holdco-structure-proposal.md",
+      "date": "2026-06-15T19:50:22.570Z",
+      "size_bytes": 19903
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md",
+      "date": "2026-06-15T19:50:22.567Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/rd-fy26-window-and-fy27-setup.md",
+      "date": "2026-06-15T19:50:22.565Z"
+    },
+    {
+      "type": "plan_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md",
+      "date": "2026-06-15T19:50:22.563Z"
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "act-global-infrastructure",
+      "path": "thoughts/shared/handoffs/2026-06-13-eofy-structure-rd-session.md",
+      "date": "2026-06-15T19:50:22.560Z"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "ea613d1",
+      "date": "2026-06-15T18:32:59+10:00",
+      "author": "Acurioustractor",
+      "title": "Add community sovereignty draft review",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "80a0eab",
+      "date": "2026-06-15T18:03:09+10:00",
+      "author": "Acurioustractor",
+      "title": "Add community sovereignty onboarding drafts",
+      "plan_slug": null
+    },
+    {
+      "type": "handoff_updated",
+      "repo": "justicehub",
+      "path": "thoughts/shared/handoffs/justice-matrix-roadmap/current.md",
+      "date": "2026-06-15T10:17:54.724Z"
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "0e02db1",
+      "date": "2026-06-15T06:06:11+10:00",
+      "author": "A Curious Tractor",
+      "title": "fix(justice-matrix): repair malformed LLM JSON so /ask answers don't salvage (#67)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "ce296d4",
+      "date": "2026-06-15T05:03:22+10:00",
+      "author": "A Curious Tractor",
+      "title": "fix(justice-matrix): size faithfulness budget for the reasoning-model background LLM (#66)",
+      "plan_slug": null
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/log.md",
+      "date": "2026-06-14T23:05:18.641Z",
+      "size_bytes": 85615
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/decisions/url-audit-2026-06-14.md",
+      "date": "2026-06-14T23:05:18.638Z",
+      "size_bytes": 3922
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/output/lint-2026-06-14.md",
+      "date": "2026-06-14T23:00:00.245Z",
+      "size_bytes": 19891
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/cockpit/weekly-digest-2026-06-14.md",
+      "date": "2026-06-14T22:01:13.911Z",
+      "size_bytes": 1248
+    },
+    {
+      "type": "wiki_update",
+      "repo": "act-global-infrastructure",
+      "path": "wiki/cockpit/four-lanes-today.md",
+      "date": "2026-06-14T22:00:10.892Z",
+      "size_bytes": 1168
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "be0facd",
+      "date": "2026-06-14T16:43:13+10:00",
+      "author": "A Curious Tractor",
+      "title": "ci(justice-matrix): enable the weekly scan-html schedule (#65)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "2a0766c",
+      "date": "2026-06-14T16:27:46+10:00",
+      "author": "A Curious Tractor",
+      "title": "fix(justice-matrix): robust HTML fetch — render-wait, richest container, block detection (#64)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "8fea677",
+      "date": "2026-06-14T16:19:09+10:00",
+      "author": "A Curious Tractor",
+      "title": "fix(ai): point Cerebras at an available model (gpt-oss-120b) (#63)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "5d22b5d",
+      "date": "2026-06-14T15:57:43+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(justice-matrix): external-ID dedup in the scan-html CLI (Phase 3 follow-up) (#62)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "b910ab8",
+      "date": "2026-06-14T15:48:09+10:00",
+      "author": "A Curious Tractor",
+      "title": "ci(justice-matrix): revive the HTML scan as a GitHub Action (Phase 3) (#61)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "c235acf",
+      "date": "2026-06-14T15:48:03+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(justice-matrix): external-ID / ECLI identity dedup for the scan pipeline (Phase 3) (#60)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "26613ac",
+      "date": "2026-06-14T15:47:09+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(justice-matrix): corpus gap sensor from /ask thin answers (Phase 3) (#59)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "a6047bd",
+      "date": "2026-06-14T15:43:59+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(justice-matrix): post-hoc faithfulness pass + rrf relevance sort (Phase 2) (#58)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "e068a30",
+      "date": "2026-06-13T19:12:19+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(justice-matrix): single hybrid RRF retrieval path (Phase 1) (#55)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "a54fc5a",
+      "date": "2026-06-13T18:19:48+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(site): align 44 project/artwork blurbs to voice + add ecosystem constellation",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "6eef620",
+      "date": "2026-06-13T18:13:12+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(justice-matrix): Phase 0 trust integrity, honest provenance in /ask (#54)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "98c1367",
+      "date": "2026-06-13T14:53:33+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): storyteller consent-spine — private capture, real purge, openness reconcile + capture-consent bridge",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "de52498",
+      "date": "2026-06-13T14:31:09+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(justice-matrix): natural-language ask + research amplification (#53)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "149a225",
+      "date": "2026-06-13T13:54:18+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(contained): await capture-route receipts so they survive serverless freeze",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "ecb4ba1",
+      "date": "2026-06-13T13:47:18+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(contained): durable-first capture + register-interest receipt (file 20 Defect A+B)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "6dc96bb",
+      "date": "2026-06-13T08:43:25+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(contained): fail loudly on form submit errors — 15s timeout + manual-registration fallback",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "512931d",
+      "date": "2026-06-13T00:20:18Z",
+      "author": "Ben",
+      "title": "docs(handoff): session summary, artifact index, open questions",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ceb7163",
+      "date": "2026-06-13T00:03:35Z",
+      "author": "Ben",
+      "title": "docs(assets): HiLux garaging facts (Mparntwe partner site, farm later), insurance + partner-use notes",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "2bbed6a",
+      "date": "2026-06-13T00:02:58Z",
+      "author": "Ben",
+      "title": "docs(assets): HiLux confirmed as exempt-vehicle path, transfer 1 Jul at MV",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "4c261ae",
+      "date": "2026-06-12T23:49:05Z",
+      "author": "Ben",
+      "title": "docs(assets): transfer register scaffold + SL question 8 (timing, 328-G, going concern, loan-account consideration)",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "c115e96",
+      "date": "2026-06-12T22:56:40Z",
+      "author": "Ben",
+      "title": "docs(eofy): sync run sheet with Notion tracker (15078 hold, SL proposal gate)",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "660cf30",
+      "date": "2026-06-12T22:05:49Z",
+      "author": "Ben",
+      "title": "docs(eofy): consolidated run sheet, every step with reason, target Fri 19 Jun",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "8810bce",
+      "date": "2026-06-12T17:02:10+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(contained): stat-tile generator — Day 2 canonical figures with source attribution",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "1f80d44",
+      "date": "2026-06-12T15:28:52+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(contained): nomination share tile — generated square tile, post-nomination share flow, receipt email link (#52)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "4625822",
+      "date": "2026-06-12T12:02:28+10:00",
+      "author": "A Curious Tractor",
+      "title": "fix(email): deliver receipts to the typed address, not the contact's primary email (#51)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "0548241",
+      "date": "2026-06-12T09:41:10+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(contained): edit nominations before approving (#50)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "9d0f30c",
+      "date": "2026-06-12T07:49:20+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(contained): nomination moderation gate (#49)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "a01862d",
+      "date": "2026-06-12T07:20:00+10:00",
+      "author": "A Curious Tractor",
+      "title": "fix(contained): naming sweep + capture funnel hardening + nominations leaderboard + mission control (#48)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "c7340d6",
+      "date": "2026-06-12T07:06:55Z",
+      "author": "Ben",
+      "title": "docs(rd): money-movement sequence before 30 Jun (routes table, seed loan, trusts)",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "f8f20db",
+      "date": "2026-06-12T06:03:53Z",
+      "author": "Ben",
+      "title": "docs(rd): FY26 window maximisation + FY27 setup plan",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "586f097",
+      "date": "2026-06-12T05:51:45Z",
+      "author": "Ben",
+      "title": "docs(rd): close the agency-framing question + value-per-dollar note on FY26 draw",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "729aadf",
+      "date": "2026-06-12T05:44:09Z",
+      "author": "Ben",
+      "title": "docs(rd): align FY26 R&D position with Path C across checklist + holdco brief",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "f734fd7",
+      "date": "2026-06-12T04:52:21Z",
+      "author": "Ben",
+      "title": "docs(structure): file Standard Ledger call + holdco proposal decision pack",
+      "plan_slug": "holdco-structure-proposal"
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "aa3d6be",
+      "date": "2026-06-11T15:46:52+10:00",
+      "author": "A Curious Tractor",
+      "title": "fix(db): record the capture-tables migration applied to production (#47)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "94826d1",
+      "date": "2026-06-11T14:09:46+10:00",
+      "author": "A Curious Tractor",
+      "title": "fix(contained): Adelaide launch readiness — site scrub, tag hygiene, nomination protections, page fixes (#46)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "e90bc46",
+      "date": "2026-06-11T11:47:07+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(login): localhost dev bypass only for /admin targets, not real-auth pages",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "5bb9742",
+      "date": "2026-06-11T11:40:18+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(dashboard): org home shell + profile read (increment 2)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "f07fe66",
+      "date": "2026-06-11T06:13:16+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(dashboard): correct spec — membership tables already existed, increment 1 adapted onto them",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "3b705cc",
+      "date": "2026-06-11T06:12:38+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(dashboard): adapt increment 1 to existing claim/membership tables, apply migration",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ae90a5f",
+      "date": "2026-06-11T06:09:04+10:00",
+      "author": "Ben",
+      "title": "feat(finance): Friday reconcile-sprint prep — verified sheet, dup worklist, recon:check alias",
+      "plan_slug": "2026-06-10-bas-reconciliation-automation-engine"
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "bead928",
+      "date": "2026-06-11T05:55:10+10:00",
+      "author": "Acurioustractor",
+      "title": "data(justice-reinvestment): deep profiles for Olabud Doogethu, Gunawuna Jungai, Tiraapendi Wodli",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "6c262f1",
+      "date": "2026-06-11T05:55:00+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(dashboard): claim approval + org membership (increment 1, migration NOT applied)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "00df8ba",
+      "date": "2026-06-11T05:43:08+10:00",
+      "author": "Ben",
+      "title": "feat(whole-picture): v1 surface + Monday card builders, registered + on cron",
+      "plan_slug": "2026-06-10-whole-picture-visualization-recommendation"
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "317eacc",
+      "date": "2026-06-11T05:40:41+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(enrichment): Cerebras retired qwen-3-235b, swap to zai-glm-4.7",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "0cad4ce",
+      "date": "2026-06-11T05:35:21+10:00",
+      "author": "Acurioustractor",
+      "title": "data(justice-reinvestment): org dedupe round 2 + deep profiles (JRNSW, Maranguka, Nja-marleya)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "f2220ae",
+      "date": "2026-06-11T05:29:58+10:00",
+      "author": "Ben",
+      "title": "feat(finance): recon-status overview + reconcile-sidecar with receipt links",
+      "plan_slug": "2026-06-10-bas-reconciliation-automation-engine"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "23f4f5a",
+      "date": "2026-06-11T05:29:58+10:00",
+      "author": "Ben",
+      "title": "docs(finance): BAS reconciliation automation engine plan + provenance + weekly log",
+      "plan_slug": "2026-06-10-bas-reconciliation-automation-engine"
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "a22791e",
+      "date": "2026-06-11T05:28:13+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(enrichment): --ids flag for targeted org runs (bypasses eligibility + dedupe)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "c4cf53f",
+      "date": "2026-06-11T05:19:56+10:00",
+      "author": "Acurioustractor",
+      "title": "data(justice-reinvestment): apply org-linking fixes (ABN backfills + 16 intervention FK repairs)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "73c4288",
+      "date": "2026-06-11T05:15:15+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(mcp): remove echo-stub disabled MCP servers (playwright/xero-expert/mcp-config-b-fzyb)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "f9afd74",
+      "date": "2026-06-11T05:10:21+10:00",
+      "author": "Ben",
+      "title": "docs(whole-picture): canonical six-diagram Mermaid set for the founders' page",
+      "plan_slug": "2026-06-10-whole-picture-visualization-recommendation"
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "d52944b",
+      "date": "2026-06-11T05:04:42+10:00",
+      "author": "Acurioustractor",
+      "title": "data(justice-reinvestment): ABN cross-links (28/34 verified) + dashboard backend spec",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "bf9607d",
+      "date": "2026-06-11T05:03:31+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(communities): full-screen JR map with organisation sidebar",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "2dfb63e",
+      "date": "2026-06-10T17:56:46+10:00",
+      "author": "Acurioustractor",
+      "title": "data(justice-reinvestment): enriched sites + history timeline (34 sites, sourced)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "9619ae1",
+      "date": "2026-06-10T17:55:38+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(communities): enterprise JR map + history timeline",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "15b3d04",
+      "date": "2026-06-10T17:46:11+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(communities): claim flow + Empathy Ledger story layer",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "5f3ffba",
+      "date": "2026-06-10T14:16:05+10:00",
+      "author": "Acurioustractor",
+      "title": "docs: JR census + discourse analysis + engagement model + motion stack memo",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "a8e6efa",
+      "date": "2026-06-10T14:13:30+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(communities): justice reinvestment network map view",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "8018ffe",
+      "date": "2026-06-10T14:04:31+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(communities): founding action-profiles (staged, anchor communities only)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "cd92737",
+      "date": "2026-06-10T14:00:50+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(justice-matrix): demo QA pass",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "d254df8",
+      "date": "2026-06-10T13:59:11+10:00",
+      "author": "Acurioustractor",
+      "title": "fix: clear the two pre-existing type errors (ghl-sync tag union, register insert overload)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "0f2c602",
+      "date": "2026-06-10T13:55:52+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(alma): enforce ai_generated guard on public intervention read paths",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "da2edbc",
+      "date": "2026-06-10T13:51:50+10:00",
+      "author": "Acurioustractor",
+      "title": "docs: community justice strategy (Newhouse/JR conversations) + org profile spec",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "47cf5c9",
+      "date": "2026-06-10T13:08:22+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(justice-matrix): filter-set export + LLM issue-mapper at staging",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "76daf24",
+      "date": "2026-06-10T13:03:41+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(justice-matrix): issue pages upgraded — doctrine view, recency, follow loop",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "63b5986",
+      "date": "2026-06-10T13:01:19+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(justice-matrix): issues as the hub front door + footer link",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "4d8015a",
+      "date": "2026-06-10T12:59:07+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(justice-matrix): canonical category vocabulary on every write path",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "8b8952c",
+      "date": "2026-06-10T12:55:35+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(middleware): edge-block crawler requests to faceted matrix URLs",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "3a4506f",
+      "date": "2026-06-10T12:53:07+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(justice-matrix): provenance gate on auto-publish + contributor CRM loop",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "b499c00",
+      "date": "2026-06-10T09:43:22+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(robots): block faceted-navigation crawl trap on justice-matrix list pages",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "a8cd23a",
+      "date": "2026-06-10T09:17:04+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(justice-matrix): page metadata for all public routes — shareable live links",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "de9db73",
+      "date": "2026-06-10T05:02:31+10:00",
+      "author": "A Curious Tractor",
+      "title": "chore(ci): reconcile typescript ratchet baseline 2147->2157 (#310)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "f53e4e0",
+      "date": "2026-06-10T04:55:15+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(contained): ledger checkpoint — Phase D prep committed locally (74cc447d), unpushed",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "63af001",
+      "date": "2026-06-09T20:05:01+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): name the participant + link the removal console on the erasure queue (#309)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "74cc447",
+      "date": "2026-06-09T19:25:58+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(contained): Phase D go-live prep — migration script + runbook (no live writes)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "cc7fa15",
+      "date": "2026-06-09T17:59:19+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(storyteller): erase/anonymise routing + fix permission-change trigger (#308)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "a3a6607",
+      "date": "2026-06-09T17:56:16+10:00",
+      "author": "Ben",
+      "title": "docs(goods): canonical Goods on Country governance roster",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "de4f3fa",
+      "date": "2026-06-09T16:32:19+10:00",
+      "author": "Ben",
+      "title": "docs(contained): network-launch runbook for 2026-06-10 + warm-network invite draft",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "4f6da78",
+      "date": "2026-06-09T16:16:49+10:00",
+      "author": "Ben",
+      "title": "feat(contained): RC6 deal pipeline + best-effort org->place enrichment + getContactById fix",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "0a25d8f",
+      "date": "2026-06-09T16:10:11+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(storyteller): own-story agency view (Two Doors) + SMART readiness cockpit (#307)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "7f2706c",
+      "date": "2026-06-09T15:44:46+10:00",
+      "author": "Acurioustractor",
+      "title": "ci: re-trigger flaky Vercel/quality-gates build (no code change)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "92f05f1",
+      "date": "2026-06-09T14:52:02+10:00",
+      "author": "Ben",
+      "title": "feat(contained): CONTAINED-260 tag-migration worksheet (read-only) + guarded --apply",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ec2f061",
+      "date": "2026-06-09T14:42:30+10:00",
+      "author": "Ben",
+      "title": "feat(contained): Phase D dry-run scripts — custom fields + IDs probe",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "dde1c95",
+      "date": "2026-06-09T14:20:46+10:00",
+      "author": "Ben",
+      "title": "feat(contained): RC5 unified source tag — align campaign config + Phase D readiness",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "8840d03",
+      "date": "2026-06-09T13:06:01+10:00",
+      "author": "Ben",
+      "title": "chore(ghl): one-off fix for accounts@act.place mis-tags",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "51bc683",
+      "date": "2026-06-09T13:02:06+10:00",
+      "author": "Ben",
+      "title": "chore(ghl): bot-signup purge script + gitignore its forensic log",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "d389ab8",
+      "date": "2026-06-09T10:08:36+10:00",
+      "author": "Ben",
+      "title": "chore(ghl): triaged contact-merge worklist builder + output",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "def4ae9",
+      "date": "2026-06-09T10:08:25+10:00",
+      "author": "Ben",
+      "title": "fix(ghl): dedupe at source — repoint contact lookup at working search endpoint",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "cb97319",
+      "date": "2026-06-09T09:55:34+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(contained): wire GHL native-calendar CTA on register booking step",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "bb0e37c",
+      "date": "2026-06-09T09:40:33+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(contained): funder/partner/media routed connect form (GAP #20)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "fcc0d4f",
+      "date": "2026-06-09T09:33:52+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(contained): Back the Tour / Host the Container form (GAP #18/#21)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "20e0c30",
+      "date": "2026-06-09T09:21:02+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(contained): Phase B progress — Feature 1 + GAP #16 done, #8/9/12 verified",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "6f6eec0",
+      "date": "2026-06-09T09:18:53+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(contained): render Nominate-a-Leader form at /contained#nominate (GAP #16)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "f16db31",
+      "date": "2026-06-09T09:15:05+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(contained): migrate all CONTAINED CTA capture routes to canonical GHL tags",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "b92941e",
+      "date": "2026-06-09T08:57:11+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(contained): Phase B continuity ledger + CTA->GHL inventory",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "940ed58",
+      "date": "2026-06-09T08:55:50+10:00",
+      "author": "Ben",
+      "title": "chore(ledger): PM-4 session close — GHL CRM arc done, build card is the resume point",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "017ef26",
+      "date": "2026-06-09T08:49:59+10:00",
+      "author": "Ben",
+      "title": "feat(ghl): phantom-consent guard (audit+revoke) + root-cause finding",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "fbbb233",
+      "date": "2026-06-09T08:33:01+10:00",
+      "author": "Ben",
+      "title": "docs(campaign-crm): lock RC1-RC4; finalize CONTAINED campaign config",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "239d2b6",
+      "date": "2026-06-09T08:14:19+10:00",
+      "author": "Ben",
+      "title": "docs(campaign-crm): CONTAINED CTA->GHL canonical alignment (R4) + campaign config + dry-run validator",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "550942a",
+      "date": "2026-06-09T08:05:53+10:00",
+      "author": "Ben",
+      "title": "fix(ghl): phantom-consent finding + harden Sendable gate (require Consent Source)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "f92d5ed",
+      "date": "2026-06-09T07:37:45+10:00",
+      "author": "Ben",
+      "title": "chore(ghl): JH=1 diagnosed + decision recorded (LEAVE — gate protects) + held strip tool",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "6ce05f2",
+      "date": "2026-06-09T07:37:02+10:00",
+      "author": "Acurioustractor",
+      "title": "Contained CRM: eligibility + tag-count verification (2026-06-09)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "3d4fe3a",
+      "date": "2026-06-09T07:24:20+10:00",
+      "author": "Ben",
+      "title": "fix(ghl): ground Move 2/3 spec in live vocab — drop nonexistent place:community + tier:warm tags",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "84e7cdb",
+      "date": "2026-06-09T07:12:01+10:00",
+      "author": "Ben",
+      "title": "chore(ghl): lock Move 2 at 6 smart lists (build a list only when a send exists behind it)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "68c0743",
+      "date": "2026-06-09T07:00:44+10:00",
+      "author": "Ben",
+      "title": "chore(ledger): Move 1 tail closed — mirror reconcile, push-prospects harden, Moves 2/3 spec, 3-people resolution",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "1169bd0",
+      "date": "2026-06-09T07:00:02+10:00",
+      "author": "Ben",
+      "title": "chore(ghl): Move 1 tail — mirror-reconcile 34 ghosts, harden push-prospects, Moves 2/3 spec",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "46024ef",
+      "date": "2026-06-09T06:42:47+10:00",
+      "author": "Acurioustractor",
+      "title": "Contained CRM: GHL UI build spec + 6 stream email bodies",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "b2ceb89",
+      "date": "2026-06-09T06:42:02+10:00",
+      "author": "Ben",
+      "title": "feat(ghl): CRM operating-model + orgs→Companies migration + seed archive (dedup prevention)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "933318d",
+      "date": "2026-06-09T06:33:24+10:00",
+      "author": "Acurioustractor",
+      "title": "Contained register: emit colon tags to match live CRM",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "c9dd45a",
+      "date": "2026-06-09T05:20:03+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): surface withdrawal collateral (manual interim, not face-blur) (#306)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "4c7021f",
+      "date": "2026-06-09T05:04:17+10:00",
+      "author": "Acurioustractor",
+      "title": "Contained register: brand alignment + canonical tag contract",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "7db8681",
+      "date": "2026-06-08T20:54:46+10:00",
+      "author": "Ben",
+      "title": "chore(ghl): CONTAINED 9-conflict brief + GHL tag cleanup (scripts, logs, runbook, ledger)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "466256a",
+      "date": "2026-06-08T20:13:54+10:00",
+      "author": "Acurioustractor",
+      "title": "Sync ACT context block in CLAUDE.md (2026-06-07)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "e85c049",
+      "date": "2026-06-08T20:13:54+10:00",
+      "author": "Acurioustractor",
+      "title": "Civic Scope: SA/Adelaide assistant workflow + research playbook",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "e321dd2",
+      "date": "2026-06-08T20:13:47+10:00",
+      "author": "Acurioustractor",
+      "title": "Community directory: public directory + review surface + quality scoring",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "ea2a171",
+      "date": "2026-06-08T20:13:42+10:00",
+      "author": "Acurioustractor",
+      "title": "ALMA data-sprint: add service_freshness mode, handle ABN ambiguity",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "1e3ded1",
+      "date": "2026-06-08T20:13:35+10:00",
+      "author": "Acurioustractor",
+      "title": "Contained Adelaide launch: Victoria Square activation + cohort registration",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "6172c92",
+      "date": "2026-06-08T19:27:53+10:00",
+      "author": "A Curious Tractor",
+      "title": "docs(consent): 706 re-host scoping + 57-avatar consent review + face-blur plan (#305)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "bace9aa",
+      "date": "2026-06-08T18:59:04+10:00",
+      "author": "A Curious Tractor",
+      "title": "ci: install canvas native build deps so npm ci stops flaking (#304)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "32c3779",
+      "date": "2026-06-08T18:52:53+10:00",
+      "author": "Acurioustractor",
+      "title": "fix: harden GHL event registration route",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "1a7bd2b",
+      "date": "2026-06-08T18:23:07+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): storyteller-self withdrawal + discoverability links (#303)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "justicehub",
+      "sha": "c769770",
+      "date": "2026-06-08T17:59:22+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(ghl): migrate 4 JusticeHub form routes to canonical tag contract (P2)",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "a991d37",
+      "date": "2026-06-08T17:56:27+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): storyteller media withdrawal + face-rec sweep (right to be forgotten) (#302)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "fa09001",
+      "date": "2026-06-08T17:21:07+10:00",
+      "author": "Ben",
+      "title": "chore(wiki): drop per-file regen timestamp from command-center snapshot mirror",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "84817a9",
+      "date": "2026-06-08T16:54:10+10:00",
+      "author": "Ben",
+      "title": "chore(project-codes): ACT-BV→ACT-FM Tier-3 recode evidence + session records",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "4eb0d21",
+      "date": "2026-06-08T16:38:06+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): flip-safe external feeds + serving-route raw fallback (W2 follow-on Slice 4) (#301)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "f9b263a",
+      "date": "2026-06-08T16:19:54+10:00",
+      "author": "Ben",
+      "title": "refactor(project-codes): merge ACT-BV (Black Cockatoo Valley) into ACT-FM (The Farm)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "3bac829",
+      "date": "2026-06-08T15:51:23+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): family-viewer flip-safe media serving (W2 follow-on Slice 3) (#300)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "496e826",
+      "date": "2026-06-08T14:51:58+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(forms): align the 5 inquiry forms + ContactForm to the tag contract (P1)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "edc819f",
+      "date": "2026-06-08T14:40:58+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): authed media serving Slice 2 — adopt admin/workspace media renders (#299)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "42aa685",
+      "date": "2026-06-08T14:19:01+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): authed media serving (Slice 1) — owner/admin escalation + storyteller owner views (#298)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "39e3e65",
+      "date": "2026-06-08T14:17:52+10:00",
+      "author": "Ben",
+      "title": "feat(ghl): Phase B bucket 7 (comms) + loose ends — COMPLETE, 0 errors",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "2501b4b",
+      "date": "2026-06-08T13:46:00+10:00",
+      "author": "Ben",
+      "title": "feat(ghl): Phase B buckets 3-6 (role/interest/source/place) — 873 contacts, 0 errors",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "9f99aaf",
+      "date": "2026-06-08T13:33:03+10:00",
+      "author": "A Curious Tractor",
+      "title": "fix(consent): gate public-media page queries so blocked media never enters a public render list (#297)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "821962f",
+      "date": "2026-06-08T13:11:38+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): W2 follow-on — route public media display through gate-enforcing serving layer (#296)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "7e37e19",
+      "date": "2026-06-08T12:46:58+10:00",
+      "author": "Ben",
+      "title": "feat(ghl): Phase B bucket 2 (project:) contact migration — 712 contacts, 0 errors",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "030638c",
+      "date": "2026-06-08T12:29:39+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(consent): checkpoint ledger — W2 merged + deployed + prod-verified",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "6866039",
+      "date": "2026-06-08T12:12:47+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): W2 private-media storage layer (leak sweep + serving layer) (#295)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "94f8441",
+      "date": "2026-06-08T11:28:24+10:00",
+      "author": "Ben",
+      "title": "feat(ghl): Phase B bucket 1 (cruft) DONE — 11 tag defs deleted, 393→382",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "a988027",
+      "date": "2026-06-08T10:31:23+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): GHL Phase B tag-migration resume brief (self-contained, tracer-first)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "63fca9e",
+      "date": "2026-06-08T10:26:41+10:00",
+      "author": "Ben",
+      "title": "docs(ghl): orphan tag rulings RESOLVED (grant→role:funder, grants stay in pipeline) + Phase B ready",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ea48270",
+      "date": "2026-06-08T10:11:42+10:00",
+      "author": "Ben",
+      "title": "docs(ghl): dashboard — community-line consent cleanup done (13 stripped); 62 non-community open",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "942cd31",
+      "date": "2026-06-08T10:11:24+10:00",
+      "author": "Ben",
+      "title": "feat(ocap): strip newsletter comms from 13 no-consent community-line contacts",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "83111cd",
+      "date": "2026-06-08T10:06:04+10:00",
+      "author": "Ben",
+      "title": "docs(ghl): dashboard — lane:community backfill done (9→~103, 65 drips stripped) + mirror-drift flag",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "5319fd0",
+      "date": "2026-06-08T10:05:13+10:00",
+      "author": "Ben",
+      "title": "feat(ocap): backfill lane:community on 94 live community-line GHL contacts",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "3ddb376",
+      "date": "2026-06-08T10:01:33+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(act): sync ACT context + consent handoff notes",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "08215aa",
+      "date": "2026-06-08T09:43:44+10:00",
+      "author": "Ben",
+      "title": "docs(ghl): flat-tag→canonical map (256 tags) + live workflow/risk state",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "7e09365",
+      "date": "2026-06-08T09:39:33+10:00",
+      "author": "A Curious Tractor",
+      "title": "feat(consent): W4 consent catch-queue — surface live content failing its gate (#294)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "8994cfc",
+      "date": "2026-06-08T09:26:38+10:00",
+      "author": "Ben",
+      "title": "docs(ghl): whole-system state of play — sites/forms/tags/lists/comms/workflows/pipelines",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "de3a4a2",
+      "date": "2026-06-08T09:19:29+10:00",
+      "author": "Ben",
+      "title": "docs(ocap): refine lane:community to the agency model (not exclusion)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "6193f03",
+      "date": "2026-06-08T09:07:01+10:00",
+      "author": "A Curious Tractor",
+      "title": "fix(consent): gate every unattended/bulk publish path (W1 sweep) (#292)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "05b69ea",
+      "date": "2026-06-08T08:41:05+10:00",
+      "author": "Ben",
+      "title": "docs(plan): Goods §E per-form GHL tag map + rulings R8–R11",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "45245fc",
+      "date": "2026-06-08T08:30:42+10:00",
+      "author": "Ben",
+      "title": "docs(plan): forms alignment scope 3→5 codebases (theharvest + goods-asset-tracker)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "8656397",
+      "date": "2026-06-08T08:02:41+10:00",
+      "author": "Ben",
+      "title": "docs(crm): whole-system forms→GHL tag-contract review + alignment plan",
+      "plan_slug": "2026-06-08-whole-system-forms-tag-alignment"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "efdf0dc",
+      "date": "2026-06-08T07:21:39+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): #4 signup path proven + newsletter contract fixed; next = whole-system forms alignment",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-regenerative-studio",
+      "sha": "a807396",
+      "date": "2026-06-08T07:10:54+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(forms): align newsletter signup tags to canonical taxonomy contract",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "a4da9d0",
+      "date": "2026-06-08T06:50:55+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): correct commit-count to 7 ahead",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "6c50da3",
+      "date": "2026-06-08T06:50:31+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): resume point = clean-context review of all GHL lists; CRM automation-readiness done",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "69b23a9",
+      "date": "2026-06-08T06:39:57+10:00",
+      "author": "Ben",
+      "title": "chore(crm): consent backfill applied — 108 evidenced opt-ins recorded",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "5dd661e",
+      "date": "2026-06-08T06:27:18+10:00",
+      "author": "Ben",
+      "title": "feat(crm): promote 'member list' + 'gathering-footer' sources to OPT-IN",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "349457d",
+      "date": "2026-06-08T06:24:00+10:00",
+      "author": "Ben",
+      "title": "feat(crm): source-evidenced newsletter consent backfill + worksheet",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "f574557",
+      "date": "2026-06-08T05:33:50+10:00",
+      "author": "Ben",
+      "title": "feat(crm): taxonomy migration dry-run worksheet + lock D1-D4 strategy decisions",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "1fccc42",
+      "date": "2026-06-08T05:27:59+10:00",
+      "author": "Ben",
+      "title": "docs(crm): audience/comms/automation strategy — the layer the taxonomy serves",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "7a2a43c",
+      "date": "2026-06-08T05:23:25+10:00",
+      "author": "Ben",
+      "title": "docs(crm): GHL taxonomy audit + target design — dual-taxonomy cleanup, field consolidation, per-pipeline enrichment, gated migration",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "8555cb8",
+      "date": "2026-06-07T21:13:58+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): grant enrichment 198/375 done, 177 blocked on DB REST wobble; compute-tier now urgent",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "49f737c",
+      "date": "2026-06-07T21:05:15+10:00",
+      "author": "Ben",
+      "title": "docs(funding): correct header note to match ISO date fix (amend follow-up)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "bec879d",
+      "date": "2026-06-07T21:04:44+10:00",
+      "author": "Ben",
+      "title": "fix(funding): GHL DATE custom fields take ISO YYYY-MM-DD, not epoch-ms string",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "7018e09",
+      "date": "2026-06-07T21:01:29+10:00",
+      "author": "Ben",
+      "title": "feat(ops): nightly enrich-grants-ghl cron — keeps GHL grant cards rich",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "866e9cd",
+      "date": "2026-06-07T20:56:42+10:00",
+      "author": "Ben",
+      "title": "feat(funding): enrich-ghl-grants — rich grant data → GHL opportunity custom fields",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "1d55217",
+      "date": "2026-06-07T20:38:36+10:00",
+      "author": "Ben",
+      "title": "feat(funding): push-prospects-to-ghl — discovery → existing GHL pipelines rail",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "3d87c2b",
+      "date": "2026-06-07T20:32:47+10:00",
+      "author": "Ben",
+      "title": "fix(sync): entity template caught up to core-facts — ACT Pty ABN issued (36 697 347 676, t/a Goods on Country), Butterfly Movement Ltd added as Goods DGR home, AKT marked not-the-Goods-vehicle",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "24bd297",
+      "date": "2026-06-07T20:11:46+10:00",
+      "author": "Ben",
+      "title": "fix(community-line): strip funder/newsletter tags from 3 community people + Rotary nudge tooling",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "bc9123a",
+      "date": "2026-06-07T19:36:22+10:00",
+      "author": "Ben",
+      "title": "feat(finance): /finance/opportunities — four-lane funding board",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "2b389b0",
+      "date": "2026-06-07T19:22:35+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): four lanes shipped, orchestrator PM2-homed, warm→cold pipeline live — resume at Rung-0 chases",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "e546887",
+      "date": "2026-06-07T19:09:49+10:00",
+      "author": "Ben",
+      "title": "docs(funding): warm→cold pipeline operating picture + two relationship maps",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "f451eb2",
+      "date": "2026-06-07T19:01:26+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(funnel): follow-the-relay hooks on /articles + /relay/journey, funnel plan, lead article draft",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "94b10a3",
+      "date": "2026-06-07T19:01:26+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(tour): APY entry truth in communities data - eastern via Erldunda-Marla, western dead",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "1136fc9",
+      "date": "2026-06-07T18:42:36+10:00",
+      "author": "Ben",
+      "title": "feat(funding): four-lane funding tools — shortlist ranker, tender scan, double-door lens, orchestrator brief",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "17d3eb7",
+      "date": "2026-06-07T17:51:12+10:00",
+      "author": "Acurioustractor",
+      "title": "chore(tour): trip-date audit script + stale Day-1 comment fix",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "62d2886",
+      "date": "2026-06-07T17:49:35+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): incident + remediation arc, four-lane funding tasks parked at resume point",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "987bbbd",
+      "date": "2026-06-07T17:46:59+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(tour): Lake Argyle birthday night availability confirmed 6-7 Jul",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "0c7c377",
+      "date": "2026-06-07T17:41:40+10:00",
+      "author": "Ben",
+      "title": "feat(ops): maintenance script v4 — canary collation check, no amcheck dependency",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "d328eed",
+      "date": "2026-06-07T17:36:29+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): leg maps per guide chapter + per-stop pages guide/[slug]",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "9be4f34",
+      "date": "2026-06-07T17:33:59+10:00",
+      "author": "Ben",
+      "title": "docs(ops): header comment matches v3 ON_ERROR_STOP behavior",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "1913b3a",
+      "date": "2026-06-07T17:33:37+10:00",
+      "author": "Ben",
+      "title": "fix(ops): maintenance script v3 — checker-failure is not subject-failure",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "8fae11b",
+      "date": "2026-06-07T17:26:50+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): /admin/relay/guide - the trip as a rolling report",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "da775d4",
+      "date": "2026-06-07T17:15:10+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): REV 3.1 - back-half reshape from Ningaloo-Adelaide research",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "d10a107",
+      "date": "2026-06-07T17:01:46+10:00",
+      "author": "Ben",
+      "title": "fix(ops): maintenance script v2 — self-review caught 4 flaws in v1",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ac63347",
+      "date": "2026-06-07T16:50:28+10:00",
+      "author": "Ben",
+      "title": "fix(grants)+ops: retry-storm + wedge guards, collation maintenance script drafted",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "069edea",
+      "date": "2026-06-07T16:36:17+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(tour): The Ville Townsville chosen for pre-ferry night 14 Jun",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "09e0f05",
+      "date": "2026-06-07T16:22:26+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): communities layer on planning map + card deep links",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ffeba6a",
+      "date": "2026-06-07T16:09:22+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): grant-chain revival arc — discovery alive, signals applied, routine live",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ff56368",
+      "date": "2026-06-07T16:07:18+10:00",
+      "author": "Ben",
+      "title": "feat(grants): gemini-search source — grounded web search on the funded key",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "e710691",
+      "date": "2026-06-07T16:00:18+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): /admin/relay/communities - per-community reference for the route",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "3278a05",
+      "date": "2026-06-07T15:43:56+10:00",
+      "author": "Ben",
+      "title": "feat(grants): MiniMax M3 routing + native RSS fetch — discovery alive at zero credit cost",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "19198cd",
+      "date": "2026-06-07T15:31:06+10:00",
+      "author": "Ben",
+      "title": "fix(grants): strength is numeric(6,2) score, not dollars — signals applied",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "ddd2b8a",
+      "date": "2026-06-07T15:21:08+10:00",
+      "author": "Ben",
+      "title": "feat(grants): foundation ACT-signals builder (dry-run proven, apply gated)",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "daa68b8",
+      "date": "2026-06-07T15:15:09+10:00",
+      "author": "Ben",
+      "title": "fix(grants): restore grant-engine from archive — daily discovery has been crashing since 27 Apr",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "6b27e23",
+      "date": "2026-06-07T15:06:44+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(tour): whale shark tour BOOKED for 20 Jul - fixed point holds",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "927094a",
+      "date": "2026-06-07T14:58:22+10:00",
+      "author": "Ben",
+      "title": "report(finance): FY26 P&L to date (1 Jul 2025 - 7 Jun 2026) + provenance sidecar",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "540a5bc",
+      "date": "2026-06-07T14:53:52+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): booked tracking on itinerary + storytelling doors per stop + /admin/relay redirect",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "9e12083",
+      "date": "2026-06-07T14:44:06+10:00",
+      "author": "Acurioustractor",
+      "title": "docs(tour): REV 3 booking sheet + community engagement map (3-lens, partially superseded header)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "d9d79a0",
+      "date": "2026-06-07T14:40:24+10:00",
+      "author": "Ben",
+      "title": "docs(claude): proactive skill-capture nudge in skill routing",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "7e7ff00",
+      "date": "2026-06-07T14:36:25+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): field-pppp-shipping — momentum feed shipped, people-lane verified clean, Monday decisions queued",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "436e1ff",
+      "date": "2026-06-07T14:35:28+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): REV 3 Ningaloo pivot - whale sharks 20 Jul, GCR crossing, fly home Sun 2 Aug",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "c2aa820",
+      "date": "2026-06-07T14:35:19+10:00",
+      "author": "Ben",
+      "title": "feat(pppp): Project row reads movement, not just money — stage-moves + gone-quiet feeds",
+      "plan_slug": "field-pppp-shipping"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "0608c9a",
+      "date": "2026-06-07T14:17:05+10:00",
+      "author": "Ben",
+      "title": "docs(handoff): field-pppp-shipping ledger — session closed clean, PRs #142+#87 merged",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "e4fa6db",
+      "date": "2026-06-07T11:47:23+10:00",
+      "author": "Ben",
+      "title": "docs(handoffs): late-May session handoffs land in git — blockers, grill sessions, R&D pack, money sync",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "784d4e3",
+      "date": "2026-06-07T11:47:14+10:00",
+      "author": "Ben",
+      "title": "chore(cron): three weeks of daily generated artifacts swept — feeds, snapshots, digests, agent cockpits",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "53b2efc",
+      "date": "2026-06-07T11:47:05+10:00",
+      "author": "Ben",
+      "title": "chore(finance): June recon working artifacts — bed-OCR evidence, reconcile worklists, close packs, revert logs",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "71da7d7",
+      "date": "2026-06-07T11:46:35+10:00",
+      "author": "Ben",
+      "title": "fix(pppp): run-state out of tracked config — cron must never dirty git",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "d3c43f0",
+      "date": "2026-06-07T11:42:35+10:00",
+      "author": "Ben",
+      "title": "chore(wiki): generated-surface sweep — snapshot-sync, viewer-build, cockpit + audit outputs through 7 Jun",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "8c29578",
+      "date": "2026-06-07T11:42:26+10:00",
+      "author": "Ben",
+      "title": "docs(wiki): field canon sweep — Kristy rule, holds/owes lane, two never-committed concept pages, Butterfly verified facts",
+      "plan_slug": "2026-06-03-act-network-circle-action-stages"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "3a32709",
+      "date": "2026-06-07T11:42:16+10:00",
+      "author": "Ben",
+      "title": "feat(the-field): curation workbench + gated applier — the untracked half of the workbench loop lands in git",
+      "plan_slug": "2026-06-03-act-network-circle-action-stages"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "da722b0",
+      "date": "2026-06-07T11:42:08+10:00",
+      "author": "Ben",
+      "title": "fix(pppp): SPEND filter moved server-side — client-side filter after .limit(1000) silently drops rows on a heavy week",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "410b9d2",
+      "date": "2026-06-07T10:04:04+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): country names on every stop + engage lists (art centres, programs)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "f25acec",
+      "date": "2026-06-07T09:55:03+10:00",
+      "author": "Ben",
+      "title": "feat(pppp): weekly scan pre-fill engine — Monday's ritual starts from evidence, not blank lines",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "a602e0c",
+      "date": "2026-06-07T09:52:49+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(admin): itinerary table view - /admin/relay/itinerary",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "53f7fe8",
+      "date": "2026-06-07T09:41:05+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(admin): day anchor rev 2 - Day 1 = 27 Jun, the Brisbane-to-Alice fly day + Mparntwe welcome",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "e735f14",
+      "date": "2026-06-07T09:37:09+10:00",
+      "author": "Ben",
+      "title": "docs(wiki): PPPP operating logic — five-P field scan canon, skill-library theory, Place-vs-Pulse position",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "4faedeb",
+      "date": "2026-06-07T09:33:05+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(admin): map pins show trip day numbers, not stop order",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "2734425",
+      "date": "2026-06-07T09:24:55+10:00",
+      "author": "Ben",
+      "title": "feat(the-field): joy woods ring:150 to live GHL — and her identity lands (Safeguarding Consultant, Contained Tour)",
+      "plan_slug": "2026-06-03-act-network-circle-action-stages"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "c8b1476",
+      "date": "2026-06-07T09:21:40+10:00",
+      "author": "Ben",
+      "title": "feat(the-field): Houston + Hutchinson promoted to GHL (Ben: 'promote them') — uncaptured 25→23",
+      "plan_slug": "2026-06-03-act-network-circle-action-stages"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "291a885",
+      "date": "2026-06-07T08:47:15+10:00",
+      "author": "Acurioustractor",
+      "title": "fix(relay): public journey dates follow the Darwin drop (Kimberley 3-12, coast 12-20 Jul)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "e57c77e",
+      "date": "2026-06-07T08:46:24+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): Knight-adventure day numbering + Darwin dropped",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "9a848bc",
+      "date": "2026-06-07T08:45:40+10:00",
+      "author": "Ben",
+      "title": "feat(the-field): identity pass — the 5 unrecognized beeper threads resolved, 4 by Ben's word",
+      "plan_slug": "2026-06-03-act-network-circle-action-stages"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "58e167c",
+      "date": "2026-06-07T08:40:08+10:00",
+      "author": "Ben",
+      "title": "feat(the-field): noteless board rows click into the circle UI — notes accumulate as you tend",
+      "plan_slug": "2026-06-03-act-network-circle-action-stages"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "f5d7d55",
+      "date": "2026-06-07T08:33:57+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): crossing decided - Tanami via Halls Creek, comparison tabs retired",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "46042e6",
+      "date": "2026-06-07T08:32:57+10:00",
+      "author": "Ben",
+      "title": "feat(the-field): hand-confirmed beeper identities — bare-'Sam' +61422513893 IS sam davies (Ben's word)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "3fd5a58",
+      "date": "2026-06-07T08:30:38+10:00",
+      "author": "Ben",
+      "title": "feat(the-field): cadence clock is no longer email-blind — Beeper recency folds into last_contact",
+      "plan_slug": "2026-06-03-act-network-circle-action-stages"
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "fe39f4d",
+      "date": "2026-06-07T08:30:33+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(tour): Bali out, WA coast block in - world tour retired to Australia tour",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "759d960",
+      "date": "2026-06-07T07:54:03+10:00",
+      "author": "Ben",
+      "title": "chore(the-field): freshness stamp",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "d31a54c",
+      "date": "2026-06-07T07:42:12+10:00",
+      "author": "Ben",
+      "title": "feat(the-field): the orbit is now a TENDING BOARD — rows you can read, not a radial you can't",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "099766f",
+      "date": "2026-06-07T07:34:18+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(stories): watercolor location maps for 5 stories missing them (Witta, Mount Isa x3, Doomadgee)",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "02bda79",
+      "date": "2026-06-07T07:33:33+10:00",
+      "author": "Ben",
+      "title": "feat(the-field): orbit rebuilt to be USED + person pages browser-served",
+      "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "empathy-ledger-v2",
+      "sha": "6ca46e5",
+      "date": "2026-06-07T07:23:41+10:00",
+      "author": "Acurioustractor",
+      "title": "feat(relay): Wongatha Country watercolor map for Gloria bed-01 story",
+      "plan_slug": null
+    },
     {
       "type": "commit",
       "repo": "act-global-infrastructure",
@@ -55,13 +2344,6 @@
       "author": "Acurioustractor",
       "title": "docs(mrff): live map Alice-first pitch proposal",
       "plan_slug": null
-    },
-    {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/concepts/ghl-tag-namespaces.md",
-      "date": "2026-06-06T20:58:32.525Z",
-      "size_bytes": 6377
     },
     {
       "type": "commit",
@@ -541,25 +2823,6 @@
       "plan_slug": "2026-06-03-act-network-circle-action-stages"
     },
     {
-      "type": "wiki_update",
-      "repo": "act-global-infrastructure",
-      "path": "wiki/log.md",
-      "date": "2026-06-05T23:32:58.454Z",
-      "size_bytes": 83807
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-06-06-australia-tour-planner.md",
-      "date": "2026-06-05T23:28:32.198Z"
-    },
-    {
-      "type": "handoff_updated",
-      "repo": "empathy-ledger-v2",
-      "path": "thoughts/shared/handoffs/2026-06-06-relay-live-palmer-package.md",
-      "date": "2026-06-05T21:01:37.525Z"
-    },
-    {
       "type": "commit",
       "repo": "act-global-infrastructure",
       "sha": "0e7e724",
@@ -594,6 +2857,15 @@
       "author": "Ben",
       "title": "docs(plan): close out the 2026-06-05 Field session in the task ledger",
       "plan_slug": "2026-06-03-act-network-circle-action-stages"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "7625b70",
+      "date": "2026-06-05T08:27:28+10:00",
+      "author": "A Curious Tractor",
+      "title": "docs(alignment-loop): 2026-05-08 second pass — re-run with checklist-verified state + Section 11 analysis",
+      "plan_slug": null
     },
     {
       "type": "commit",
@@ -701,6 +2973,15 @@
       "date": "2026-06-04T04:38:19+10:00",
       "author": "Ben",
       "title": "feat(the-field): name + canon + the living surfaces — soil, person pages, morning read, Dunbar orbit",
+      "plan_slug": "2026-06-03-act-network-circle-action-stages"
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "7dbfa10",
+      "date": "2026-06-03T21:01:35+10:00",
+      "author": "Ben",
+      "title": "feat(energy-orbit): relational CRM system + /orbit skill",
       "plan_slug": "2026-06-03-act-network-circle-action-stages"
     },
     {
@@ -1557,6 +3838,15 @@
       "author": "Acurioustractor",
       "title": "feat(forms): notify GHL intake workflow webhook after upsert (reliable seating)",
       "plan_slug": null
+    },
+    {
+      "type": "commit",
+      "repo": "act-global-infrastructure",
+      "sha": "1db8ddc",
+      "date": "2026-06-02T16:16:28+10:00",
+      "author": "Ben",
+      "title": "feat(finance): NAB Visa #8815 reconcile co-pilot (read-only, TDD'd)",
+      "plan_slug": "2026-06-02-reconcile-copilot"
     },
     {
       "type": "commit",

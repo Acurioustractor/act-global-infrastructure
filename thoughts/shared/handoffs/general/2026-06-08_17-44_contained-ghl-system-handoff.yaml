@@ -1,0 +1,69 @@
+---
+session: general
+date: 2026-06-08
+status: complete
+outcome: SUCCEEDED
+---
+
+goal: Hand off the CONTAINED Adelaide CRM/GHL campaign alignment work from JusticeHub into act-global-infrastructure, where the durable GoHighLevel system should live.
+now: In act-global-infrastructure, review existing GHL service patterns, then port the CONTAINED preflight/tagging/sync workflow into this repo as a reusable campaign CRM module.
+test: Review this handoff, then run read-only GHL checks only; do not mutate until dry-run counts match the JusticeHub evidence.
+
+done_this_session:
+  - task: Built CONTAINED Adelaide GHL preparation layer in JusticeHub.
+    files: [/Users/benknight/Code/JusticeHub/scripts/prepare-contained-ghl-import.mjs, /Users/benknight/Code/JusticeHub/output/ghl-contained-adelaide-audit/contained-ghl-import.csv, /Users/benknight/Code/JusticeHub/output/ghl-contained-adelaide-audit/contained-warm-group.csv, /Users/benknight/Code/JusticeHub/output/ghl-contained-adelaide-audit/contained-discovery-seeds.csv, /Users/benknight/Code/JusticeHub/output/ghl-contained-adelaide-audit/contained-ghl-strategy.md]
+  - task: Ran live HighLevel preflight and then applied safe additive tags.
+    files: [/Users/benknight/Code/JusticeHub/scripts/ghl-contained-preflight.mjs, /Users/benknight/Code/JusticeHub/output/ghl-contained-adelaide-audit/contained-ghl-preflight-actions.csv, /Users/benknight/Code/JusticeHub/output/ghl-contained-adelaide-audit/contained-ghl-preflight-actions.json]
+  - task: Enriched and aligned Notion CRM rows with campaign fields and GHL status.
+    files: [/Users/benknight/Code/JusticeHub/scripts/sync-contained-ghl-alignment-to-notion.mjs, /Users/benknight/Code/JusticeHub/output/ghl-contained-adelaide-audit/notion-ghl-alignment-sync-summary.json]
+  - task: Confirmed target repo has existing GHL infrastructure patterns to reuse.
+    files: [/Users/benknight/Code/act-global-infrastructure/scripts/lib/ghl-api-service.mjs, /Users/benknight/Code/act-global-infrastructure/apps/command-center/src/app/api/webhooks/ghl/route.ts, /Users/benknight/Code/act-global-infrastructure/apps/command-center/src/app/api/goods/merge/route.ts]
+
+blockers:
+  - Do not auto-merge/delete GHL duplicates; 9 contacts need human review in GHL UI.
+  - The JusticeHub api/ghl/register route has now been patched in the live codex/remand-contained-live session; do not rework it from act-global-infrastructure unless that branch has landed and the diff is reviewed.
+
+questions:
+  - Should CONTAINED Adelaide become a dedicated ACT campaign pipeline in GHL, or remain tag-driven until bookings/open viewing forms are final?
+  - Which ACT repo owns the long-term CRM source of truth: live GHL mirror in Supabase, Notion command plan, or a campaign-specific table?
+  - Should discovery seeds from GrantScope be imported to GHL only after public contact enrichment and consent review?
+
+decisions:
+  - source_backed_only: Location, organisation, campaign stage, and newsletter streams were synced only from existing audited files/live GHL/Notion, not from fresh guesses.
+  - additive_tags_only: Live GHL mutation was limited to adding tags to unambiguous existing contacts; no creates, merges, deletes, or opportunity writes were performed.
+  - conflict_guard: If GHL export ID and duplicate-email lookup returned different IDs, the row was marked pending conflict review and skipped during tag apply.
+  - target_repo_pattern: act-global-infrastructure should reuse scripts/lib/ghl-api-service.mjs and existing webhook/mirror tables rather than importing JusticeHub's local GHL client as-is.
+
+findings:
+  - live_ghl_apply: 269 CONTAINED import rows were checked live; 260 existing contacts were tagged; 9 were skipped as GHL ID conflicts.
+  - notion_sync: 297 Notion CRM rows were matched and updated; verification found Engagement, Campaign Stage, Newsletter Streams, Warm Signals, GHL Preflight Status, and GHL Tags To Add populated.
+  - notion_counts: Engagement counts were warm 28, hot 30, nurture 185, review 6, personal-vip 36, active-delivery 12.
+  - stage_counts: Notion stage counts were Future city / partner 27, GHL conflict review 9, Warm review 22, Captured / newsletter nurture 191, Needs enrichment 1, Personal invite 47.
+  - preflight_counts: Notion preflight statuses were tags added 257, pending conflict review 9, not checked 31.
+  - discovery_sources: GrantScope seed outputs include SA Social Enterprise Council members, SECNA directory entries, and Supply Nation SA-servicing businesses; these are review backlog only, not a mailing list.
+  - target_repo_ghl: act-global-infrastructure already has GHLService with rate limiting, contact lookup/create/update/tag, opportunity support, merge patterns, webhooks, and Supabase mirror tables.
+
+worked:
+  - Use dry-run first, then apply only after exact counts are understood.
+  - Use local CSV/JSON audit artifacts as the handoff boundary between Notion, GHL, GrantScope, and code.
+  - Mark conflicts visibly rather than resolving them automatically.
+  - Keep discovery orgs separate from contact import rows.
+
+failed:
+  - Notion MCP SQL query was listed but unavailable; fallback to @notionhq/client with JUSTICEHUB_NOTION_TOKEN worked.
+  - HighLevel plugin did not expose direct mutation tools; repo GHL API credentials and local client scripts were used instead.
+  - Early location enrichment attempts were too guessy; later passes were constrained to source/history-backed evidence.
+
+next:
+  - In act-global-infrastructure, read AGENTS.md and docs/governance/git-branching.md before edits; run repo hygiene before branching.
+  - After codex/remand-contained-live lands, review the final api/ghl/register diff before porting any route pattern into act-global-infrastructure.
+  - Port the useful parts of /Users/benknight/Code/JusticeHub/scripts/ghl-contained-preflight.mjs into a generalized campaign GHL preflight script using scripts/lib/ghl-api-service.mjs.
+  - Add a campaign config for CONTAINED Adelaide 2026: canonical tags, pipeline stages, streams, forms, preflight rules, and conflict policy.
+  - Build a read-only dashboard or report in apps/command-center showing campaign contacts by Engagement, Campaign Stage, Preflight Status, Newsletter Stream, and Dedupe Conflict.
+  - Decide whether to mirror the Notion enrichment into Supabase tables such as ghl_contacts, campaign/alignment tables, or a new campaign_crm_segments table after schema verification.
+  - Run a live read-only check for the 9 conflicts before any further GHL writes; inspect Adam Robinson, Corey Tutt, Dr. Simon Quilty, Kristy Bloomfield, Sam Davies, Tara Castle, Tracey Newman, Willhemina Wahlin, and Toby Gowland.
+  - Only after review, create a gated apply command for opportunities/pipeline stages; require explicit user approval like existing field-align/orbit scripts.
+
+files:
+  created: [/Users/benknight/Code/act-global-infrastructure/thoughts/shared/handoffs/general/2026-06-08_17-44_contained-ghl-system-handoff.yaml]
+  modified: []

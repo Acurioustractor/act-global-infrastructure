@@ -18,6 +18,15 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-06-14 09:05 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-06-14.md, wiki/decisions/url-audit-latest.json
+- 2026-06-14 09:00 | lint | 359 canonical articles · 273 broken links · 88 orphans · 97% source-bridge coverage | wiki/output/lint-2026-06-14.md, wiki/output/status-latest.json
+- 2026-06-14 08:59 | lint | 359 canonical articles · 273 broken links · 88 orphans · 97% source-bridge coverage | wiki/output/lint-2026-06-14.md, wiki/output/status-latest.json
+- 2026-06-08 17:15 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-06-08 17:15 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-06-07 09:15 | viewer-build | 353 articles · 89 photo maps · 2867KB | tools/act-wikipedia.html
+- 2026-06-07 09:15 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-06-07 09:05 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-06-07.md, wiki/decisions/url-audit-latest.json
+- 2026-06-07 09:00 | lint | 352 canonical articles · 271 broken links · 84 orphans · 98% source-bridge coverage | wiki/output/lint-2026-06-07.md, wiki/output/status-latest.json
 - 2026-06-07 11:07 | viewer-build | 346 articles · 89 photo maps · 2811KB | tools/act-wikipedia.html
 - 2026-06-07 11:07 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-06-05 09:32 | viewer-build | 345 articles · 89 photo maps · 2803KB | tools/act-wikipedia.html

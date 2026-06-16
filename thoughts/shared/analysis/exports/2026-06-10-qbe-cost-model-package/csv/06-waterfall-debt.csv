@@ -1,0 +1,18 @@
+Input,Base,Note
+Sale price ($/bed),801,verified anchor: Centrecorp INV-0291 $801
+COGS — community state ($/bed),270.74,"inferred (sheet 1, State 5)"
+Freight ($/bed),100,ESTIMATE — verified pallet lines imply $101–185 Botany→Alice
+ACT brokerage ($/bed),200,slider 60–500; must flex DOWN in a downside (floor ~$100)
+Cashflow buffer ($/bed),30,4-state buffer policy
+"Revenue beds / yr (Y3, 80% of vol)",480,institutional + gift segments only
+Debt drawn ($),500000,"range 250,000–500,000"
+Interest rate (%),7,range 5–7%
+"Amortisation term (yrs, 0 = interest-only)",0,v6 tables are interest-only; set 3 or 5 to see amortising reality
+
+Computed (base case),,
+Landed margin/bed,430.26,
+Community co-op margin/bed,200.26,
+Community total benefit/bed,330.26,
+ACT brokerage income/yr,96000,
+Coverage interest-only,2.7–7.7x,
+Coverage $500K 5yr amortising,~0.8x — UNDER 1. Needs patient/bullet terms.,

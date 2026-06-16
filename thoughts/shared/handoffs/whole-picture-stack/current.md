@@ -1,7 +1,7 @@
 ---
-date: 2026-06-11T09:30:00+10:00
+date: 2026-06-11T06:05:00+10:00
 session_name: whole-picture-stack
-branch: feat/contained-launch-runbook
+branch: main
 status: active
 ---
 
@@ -9,13 +9,19 @@ status: active
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-11T05:45:00+10:00
-**Goal:** The full ACT operating stack drawn and shipped: staffing plan → Harvest hub → Whole Picture page → viz rec → FIRST SITTING BUILD (done 2026-06-11).
-**Branch:** feat/contained-launch-runbook
+**Updated:** 2026-06-11T06:05:00+10:00
+**Goal:** The full ACT operating stack drawn and shipped: staffing plan → Harvest hub → Whole Picture page → viz rec → FIRST SITTING BUILD + Notion wiring (done 2026-06-11, merged to main).
+**Branch:** main (00df8ba merged via PR #172; feature branch deleted)
 **Test:** node scripts/build-monday-card.mjs --dry-run && pm2 jlist | grep -E 'whole-picture|monday-card'
 
 ### Now
-[->] FIRST SITTING COMPLETE (2026-06-11 ~5:45am, all 8 items — see block below). Next = v1.5 sitting BEFORE 27 Jun (hard deadline): `build-founders-session-kit.mjs` (PM2 entry already in ecosystem.config.cjs, COMMENTED — uncomment when script lands) + GCal recurring 1st-Tue event · extend money-command-digest with cash-on-hand/runway/burn (TDD-pinned) · R&D-basis JSON sidecar from reconciliation-worklist · pre-departure drill + resolve Open choice 1 (local-Mac cron host vs cloud, 27 Jun–7 Aug) · Nic's TELEGRAM_CHAT_ID_NIC. ALSO: add a `foundersHub.parentPage` key to config/notion-database-ids.json (or NOTION_FOUNDERS_HUB_PAGE_ID env) AND share that page with the NOTION_TOKEN integration, so the Monday card's Notion week-page stops skipping. Withheld in v1 by design: cash/runway/R&D-basis (snapshot `.cash` = sum of ALL non-archived xero_bank_accounts balances incl. negative CC — point-in-time cash-in-bank, NOT two-account-scoped, known-stale feed; traced + documented in build-whole-picture.mjs header; never relabel it).
+[->] FIRST SITTING + NOTION WIRING COMPLETE, everything on main. Next = v1.5 sitting BEFORE 27 Jun (hard deadline): `build-founders-session-kit.mjs` (PM2 entry in ecosystem.config.cjs, COMMENTED — uncomment when script lands) + GCal recurring 1st-Tue event · extend money-command-digest with cash-on-hand/runway/burn (TDD-pinned) · R&D-basis JSON sidecar from reconciliation-worklist · pre-departure drill + resolve Open choice 1 (local-Mac cron host vs cloud, 27 Jun–7 Aug) · Nic's TELEGRAM_CHAT_ID_NIC. Nearer-term: Miro board prebuild before Tue 16 Jun 10:00. Withheld in v1 by design: cash/runway/R&D-basis (snapshot `.cash` = sum of ALL non-archived xero_bank_accounts balances incl. negative CC — point-in-time cash-in-bank, NOT two-account-scoped, known-stale feed; traced + documented in build-whole-picture.mjs header; never relabel it).
+
+### Notion wiring (2026-06-11 ~6am, VERIFIED end-to-end)
+- [x] "Monday cards" page created under the Whole Picture page: https://app.notion.com/p/37bebcf981cf81e99845f8361ce08a97 — the week-per-page home (create-if-absent; founder move-block edits never overwritten).
+- [x] `NOTION_FOUNDERS_HUB_PAGE_ID=37bebcf9-81cf-81e9-9845-f8361ce08a97` added to `.env.local` (gitignored; script checks env BEFORE config, so no config/notion-database-ids.json edit needed).
+- [x] Ben added the **JusticeHub** connection on the Whole Picture page → integration access VERIFIED (API GET 200 on both pages). Dry-run resolves parent + builds the 82-block week page. Mon 15 Jun 8:45 path fully green: card → Notion week page → Telegram ending with the Notion link.
+- [x] §7 of the founders' page now links the live Monday-card surface + the Monday cards page (page now links all four surfaces).
 
 ### First sitting (2026-06-11, this session — all 8 items)
 - [x] 1. Diagrams file `wiki/concepts/the-whole-picture-diagrams.md` (6 diagrams / 7 blocks) committed f9afd74. GitHub render check pending next push.
@@ -26,7 +32,7 @@ status: active
 - [x] 6. `scripts/build-monday-card.mjs` (workflow-built, 1 fix round, re-verify PASS): dated+latest md, monday-card.html, ≤30-line Telegram (Ben + Nic-if-env), Notion week-page create-if-absent via gitignored ~/.act-monday-card-state.json. First live card Mon 15 Jun 8:45.
 - [x] 8. Miro co-draw BOOKED: Tue 16 Jun 10:00–10:30 AEST, Meet link, Nic invited, run-sheet in description. Board prebuild (~20 min via Miro MCP) still to do before the session.
 - TRAPS learned: cross-codebase latest.json is a 1-DAY window (weekly views aggregate the dated dailies — build-whole-picture does); snapshot 2026-06-09.json was WRITTEN 06-10 08:15 (filename lags write date — staleness judged on as-of, not mtime); money-command-digest dropped NO snapshot 06-10/06-11 (check the 8:15 cron); field-freshness stale_days=null since ~06-09 (gmail canary quiet — fix upstream); telegram lib silently queues 21:00–06:30 + 8/day budget (urgent:true bypasses).
-- CROSS-SESSION: BAS-engine session LIVE in this repo (commit f2220ae 05:29 folded this session's ecosystem.config.cjs PM2 entries in with its day-zero Xero-cron stops; content correct, attribution mixed).
+- CROSS-SESSION (RESOLVED): BAS-engine session was live in this worktree all morning — it folded this session's PM2 entries into its f2220ae commit, merged PR #171, checked out main mid-flight (briefly stranding 00df8ba), then rescued 00df8ba onto feat/whole-picture-v1-surface and merged it as PR #172 (30d2611). Everything from both sessions is now on main; local main pulled current.
 
 ### This Session (2026-06-10, three workflows + two Notion pages shipped)
 - [x] **10-week staffing plan** (Katrina/Denis/Joey/Suzie, 27 Jun–4 Sep): `thoughts/shared/plans/2026-06-10-harvest-goods-10-week-staffing-alignment.md` + provenance. Core: all via ACT Pty; Denis = fixed-term employee; Katrina = B2B via Oonchiumpa at $1,500/wk cost-recovery (QLD labour-hire register check before signing); D1–D14 decision list; payroll stack live by 26 Jun.
@@ -36,11 +42,13 @@ status: active
 - [x] Memory updated: `act-whole-picture-founders-os.md` (new), `harvest-june-20-launch.md` (2026-06-10 update block), MEMORY.md index line.
 
 ### Next
-- [ ] v1.5 sitting before 27 Jun (see Now block: session kit + GCal event, cash/runway TDD pipe, R&D-basis sidecar, pre-departure drill, Nic chat id, foundersHub Notion key)
-- [ ] Ben eyeball: does the §6 timeline block render in Notion? (PASTE-TEST marker on the page) + open the diagrams file on GitHub after next push to confirm all 7 blocks render
-- [ ] Prebuild the Miro board before Tue 16 Jun 10:00 (frames 1+2 via diagram_create, 5 horizon cards via layout_create)
+- [x] Miro board prebuilt 2026-06-11: https://miro.com/app/board/uXjVHHbcARw=/ — frame 1 system map + frame 2 roles split (diagram_create), frame 3 horizon arc as 5 cards + run-sheet DOC (layout_create). Board is disposable scaffolding; corrections flow back to wiki/concepts/the-whole-picture-diagrams.md after the 16 Jun session, then archive the board.
+- [ ] v1.5 sitting before 27 Jun (see Now block: session kit + GCal recurring event, cash/runway TDD pipe, R&D-basis sidecar, pre-departure drill, Nic chat id)
+- [ ] Ben eyeball: does the §6 timeline block render in Notion? (PASTE-TEST marker on the page) · diagrams file is on GitHub main NOW — confirm all 7 blocks render at wiki/concepts/the-whole-picture-diagrams.md
+- [ ] Watch Mon 15 Jun ~8:50: first Monday card arrives on Telegram + week page appears under Monday cards (path verified green 11 Jun, but first unattended run is the real test)
 - [ ] Ask Ben: did the 10 Jun session with Nic happen — which of the Harvest hub's 8 decisions + Whole Picture N1/N2/N9 got decided? Write outcomes to wiki/decisions/ (convention N12)
-- [ ] Investigate: money-command-digest produced no snapshot for 06-10/06-11; gmail spine canary stale_days=null since ~06-09
+- [ ] Investigate: money-command-digest produced no snapshot for 06-10/06-11 (8:15 cron quiet — whole-picture surface greys those numbers meanwhile); gmail spine canary stale_days=null since ~06-09
+- [ ] This handoff file has uncommitted edits on main (Tier 1, rides the next PR sweep)
 - [ ] Standing urgent (from hub, dated): broker call (ACT Pty name) + council EH call; commit RSVP form source to main in Harvest repo; GHL gates to green; contracts out Mon 15 Jun
 
 ### Decisions
@@ -54,21 +62,21 @@ status: active
 - UNCONFIRMED: Suzie/Susie printed-form spelling choice (Ben+Nic warm-up item).
 
 ### Workflow State
-pattern: mine → design → check → write (Workflow tool, background)
-phase: 2 (design, in flight on resume)
+pattern: recon → build×2 → adversarial verify → fix (Workflow tool, background)
+phase: COMPLETE (run wf_0048114e-920, 7 agents, both builders PASS; monday-card 1 fix round)
 total_phases: 4
-retries: 2
+retries: 0
 max_retries: 3
 
 #### Resolved
-- goal: "Recommend how to draw The Whole Picture: diagrams, dashboard, tools, cadence + flows"
-- resource_allocation: balanced (~9 agents; mine cached)
+- goal: "Execute the 8-item first-sitting build list from the viz rec §6" — DONE, merged to main (PR #172)
+- resource_allocation: balanced (7 agents, ~678K subagent tokens)
 
 #### Unknowns
-- none blocking; all inputs cached in run journal
+- Notion's pinned mermaid version (timeline render) — settled by Ben's paste-test eyeball on the page
 
 #### Last Failure
-2026-06-10 night: design/check/write agents died on API connection errors (socket closed / ConnectionRefused). Mine phase 4/4 completed and is cached. Resumed 2026-06-11 ~9:25am as task w716olp0a.
+(none this session — the 2026-06-10 viz-rec workflow API failures were resolved by resume; rec doc landed ~5:03am)
 
 ---
 
