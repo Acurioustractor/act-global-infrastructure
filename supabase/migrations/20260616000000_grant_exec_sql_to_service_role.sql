@@ -1,0 +1,14 @@
+-- Restore EXECUTE on public.exec_sql(text) to service_role.
+--
+-- exec_sql(query text) is a SECURITY DEFINER admin helper (runs as postgres) used by backend
+-- scripts and CI to run raw SQL and read live schema. Its EXECUTE grant to service_role was lost
+-- during the 2026-06-03 -> 06-06 external-advisor function-hardening sweep (the same event that
+-- mis-quoted search_path on 318 functions, fixed in 20260606000000). With the grant gone:
+--   * scripts/check-schema-contract.mjs could no longer read live schema via exec_sql,
+--   * it silently fell back to a stale config/schema-snapshot.json,
+--   * and false-failed every PR to main on legitimately-new tables (e.g. tagging_sweep_runs,
+--     created in 20260603000000) -- while also running the guardrail blind to genuine drift.
+--
+-- Restore service_role ONLY. Do NOT grant to anon/authenticated: exec_sql executes arbitrary
+-- SQL as postgres and must remain backend-only.
+GRANT EXECUTE ON FUNCTION public.exec_sql(text) TO service_role;
