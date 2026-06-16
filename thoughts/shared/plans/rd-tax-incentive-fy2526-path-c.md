@@ -72,6 +72,12 @@ characterisation, $200K basis). Standard Ledger sets Nic's arms-length figure at
 3. **Nic arms-length salary** — sets the $80K base. Owner: Standard Ledger.
 4. Close in-progress actual outcomes (gold sets, audits, conversion measurement). Owner: Ben + Nic.
 5. **Overseas Finding** lodgement plan (FY26-27; before 30 Jun 2027). Owner: Standard Ledger + Ben.
+6. **Window reconciliation (raised 2026-06-12)** — the four-register total ($354,047) and the personnel basis above read
+   as full-year FY26 figures, but the Timing section of this plan limits the claim to activities conducted by the Pty
+   from 24 Apr 2026 (~10 weeks). Cut the registers and salary allocations to the defensible window with the R&D
+   consultant before AusIndustry registration. Associate amounts must also be PAID (not just incurred) to enter the
+   FY26 claim; unpaid amounts carry to the year paid. Owner: Ben + Standard Ledger + R&D consultant. Context:
+   `wiki/decisions/2026-06-12-holdco-structure-proposal.md` §"FY26 R&D and founder pay".
 
 ## Specialist questions for Standard Ledger
 

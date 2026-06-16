@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACT entity structure: decision pack, June 2026</title>
+<style>
+  :root {
+    --paper: #faf7f0;
+    --card: #fffdf8;
+    --ink: #22302a;
+    --muted: #6b7a72;
+    --forest: #2d4a3a;
+    --ochre: #b8742d;
+    --terracotta: #a4543a;
+    --line: #e4dccd;
+    --soft: #f1ebdf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    padding: 40px 20px 80px;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; }
+  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; color: var(--forest); font-weight: 600; }
+  h1 { font-size: 34px; line-height: 1.15; margin-bottom: 6px; }
+  h2 { font-size: 23px; margin: 48px 0 6px; }
+  h3 { font-size: 17px; margin-bottom: 6px; }
+  .kicker { text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; color: var(--ochre); font-weight: 700; margin-bottom: 10px; }
+  .sub { color: var(--muted); max-width: 760px; }
+  .pill {
+    display: inline-block; padding: 4px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    background: var(--terracotta); color: #fff; vertical-align: middle; margin-left: 10px;
+  }
+  .meta { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+
+  .warn {
+    margin: 26px 0 0; padding: 14px 18px; border-left: 4px solid var(--terracotta);
+    background: #f7ece6; border-radius: 0 8px 8px 0; font-size: 14.5px;
+  }
+  .warn strong { color: var(--terracotta); }
+
+  .toggle { margin: 18px 0 22px; display: flex; gap: 8px; }
+  .toggle button {
+    font: inherit; font-weight: 700; font-size: 13.5px; cursor: pointer;
+    padding: 8px 18px; border-radius: 999px; border: 1.5px solid var(--forest);
+    background: transparent; color: var(--forest);
+  }
+  .toggle button.active { background: var(--forest); color: #fff; }
+
+  .tree { display: none; }
+  .tree.show { display: block; }
+  .trusts { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .node {
+    background: var(--card); border: 1.5px solid var(--line); border-radius: 10px;
+    padding: 12px 16px; min-width: 200px; max-width: 280px;
+    box-shadow: 0 1px 2px rgba(45,74,58,0.06);
+  }
+  .node .t { font-family: Georgia, serif; font-weight: 700; font-size: 15px; color: var(--forest); }
+  .node .d { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+  .node .tag {
+    display: inline-block; margin-top: 8px; font-size: 10.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 4px;
+  }
+  .tag.green { background: #e3ece6; color: var(--forest); }
+  .tag.amber { background: #f3e6d4; color: var(--ochre); }
+  .tag.red { background: #f7e3dc; color: var(--terracotta); }
+  .node.hold { border-color: var(--forest); border-width: 2px; background: #eef3ef; }
+  .node.new { border-color: var(--ochre); border-width: 2px; }
+  .node.dashed { border-style: dashed; }
+  .node.ghost { opacity: 0.85; background: var(--soft); }
+  .vline { width: 2px; height: 22px; background: var(--line); margin: 0 auto; }
+  .center { display: flex; justify-content: center; }
+  .children { display: flex; gap: 14px; justify-content: center; align-items: stretch; flex-wrap: wrap; margin-top: 0; }
+  .branch { display: flex; flex-direction: column; align-items: center; }
+  .edge { font-size: 11px; color: var(--muted); text-align: center; margin: 2px 0 4px; }
+  .floaters { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 26px; padding-top: 18px; border-top: 1px dashed var(--line); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  @media (max-width: 760px) { .grid2, .grid4 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px;
+  }
+  .card .num {
+    font-family: Georgia, serif; font-size: 13px; font-weight: 700; color: var(--ochre);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px;
+  }
+  .card ul { margin: 10px 0 0 18px; }
+  .card li { margin-bottom: 7px; font-size: 14px; }
+  .who { margin-top: 12px; font-size: 12.5px; color: var(--muted); }
+  .who b { color: var(--forest); }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; font-size: 13.5px; }
+  th { text-align: left; background: var(--forest); color: #fff; padding: 9px 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+  td { padding: 9px 12px; border-top: 1px solid var(--line); vertical-align: top; }
+  td:first-child { font-weight: 600; }
+
+  .paycols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  @media (max-width: 760px) { .paycols { grid-template-columns: 1fr; } }
+  .paycols .card h3 span { display: block; font-size: 12px; color: var(--muted); font-family: -apple-system, sans-serif; font-weight: 400; margin-top: 2px; }
+  .step { display: flex; gap: 10px; margin-top: 12px; }
+  .step .dot {
+    flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--forest); color: #fff;
+    font-size: 11.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .step p { font-size: 13.5px; }
+  .step p b { color: var(--forest); }
+  .step .note { color: var(--muted); font-size: 12.5px; }
+
+  ol.actions { margin: 16px 0 0 0; list-style: none; counter-reset: act; }
+  ol.actions li {
+    counter-increment: act; background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 16px 12px 50px; margin-bottom: 8px; position: relative; font-size: 14px;
+  }
+  ol.actions li::before {
+    content: counter(act); position: absolute; left: 14px; top: 12px;
+    width: 24px; height: 24px; border-radius: 50%; background: var(--ochre); color: #fff;
+    font-weight: 700; font-size: 12.5px; display: flex; align-items: center; justify-content: center;
+  }
+  .chip {
+    display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
+    background: var(--soft); color: var(--forest); margin-left: 8px; white-space: nowrap;
+  }
+  .due { color: var(--terracotta); font-weight: 700; }
+
+  footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+  footer code { background: var(--soft); padding: 1px 5px; border-radius: 4px; font-size: 11.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">A Curious Tractor · entity structure · decision pack</div>
+  <h1>One structure decision, four moving parts<span class="pill">PROPOSED, NOT DECIDED</span></h1>
+  <p class="sub">From the Standard Ledger strategy call (filed 12 June 2026). Most of the call re-confirmed decisions already made in May. Four things are open. Canon stays as it is until Ben and Nick decide and the DGR lawyer answers.</p>
+  <p class="meta">Cutover: 30 June 2026, 18 days away · NAB account blocked on Nick's trust docs · Xero not yet open · Novation letters not yet sent</p>
+
+  <div class="warn"><strong>Hold the novation letters.</strong> Under every option below, the wrong move is sending letters or signing new from-1-July contracts that name an entity which might change within weeks. The operating-entity decision comes first.</div>
+
+  <h2>The structure</h2>
+  <p class="sub">Toggle between where canon stands today and what the call proposed.</p>
+
+  <div class="toggle">
+    <button id="btnA" class="active" onclick="show('A')">Today (canon)</button>
+    <button id="btnB" onclick="show('B')">Proposed (the call)</button>
+  </div>
+
+  <div id="treeA" class="tree show">
+    <div class="trusts">
+      <div class="node"><div class="t">Knight Family Trust</div><div class="d">50 shares</div></div>
+      <div class="node"><div class="t">Marchesi Family Trust</div><div class="d">50 shares</div></div>
+    </div>
+    <div class="vline"></div>
+    <div class="center">
+      <div class="node hold" style="max-width:340px">
+        <div class="t">A Curious Tractor Pty Ltd</div>
+        <div class="d">Primary trading entity from 1 Jul 2026. Contracts, R&amp;D claimant, Goods commercial arm. Trades as Goods on Country. ACN 697 347 676.</div>
+        <span class="tag green">OPERATES + HOLDS</span>
+      </div>
+    </div>
+    <div class="vline"></div>
+    <div class="children">
+      <div class="branch">
+        <div class="edge">majority · landlord minority (decided 5 May)</div>
+        <div class="node"><div class="t">The Harvest Pty Ltd</div><div class="d">To incorporate before Sep 2026. Venue, workshops, cafe, events.</div><span class="tag green">DECIDED</span></div>
+      </div>
+    </div>
+    <div class="floaters">
+      <div class="node ghost"><div class="t">Nic sole trader</div><div class="d">Stops new transactions 30 Jun. ~$507K receivables run off. New work novates to the Pty.</div><span class="tag amber">WINDING DOWN</span></div>
+      <div class="node dashed"><div class="t">The Butterfly Movement Ltd</div><div class="d">DGR + PBI charity, standalone. Indigenous-led board. Handover 26 Jun.</div><span class="tag green">BESIDE THE GROUP</span></div>
+      <div class="node ghost"><div class="t">Farm entity</div><div class="d">Undecided in canon ("designing").</div><span class="tag amber">TBD</span></div>
+      <div class="node ghost"><div class="t">A Kind Tractor Ltd</div><div class="d">Dormant CLG, not DGR.</div><span class="tag amber">DORMANT</span></div>
+    </div>
+  </div>
+
+  <div id="treeB" class="tree">
+    <div class="trusts">
+      <div class="node"><div class="t">Knight Family Trust</div><div class="d">50 shares</div></div>
+      <div class="node"><div class="t">Marchesi Family Trust</div><div class="d">50 shares</div></div>
+    </div>
+    <div class="vline"></div>
+    <div class="center">
+      <div class="node hold" style="max-width:340px">
+        <div class="t">A Curious Tractor Pty Ltd</div>
+        <div class="d">Holding company only. Holds shares, carries no operations. Future wealth sits here.</div>
+        <span class="tag green">HOLDS ONLY</span>
+      </div>
+    </div>
+    <div class="vline"></div>
+    <div class="children">
+      <div class="branch">
+        <div class="edge">wholly owned · Nick seeds working capital as a loan</div>
+        <div class="node new"><div class="t">ACT Projects Pty Ltd</div><div class="d">NEW. Contracts, R&amp;D claimant, founder payroll, Goods commercial arm. Closest to what the sole trader does today. Justice + storytelling revenue lands here.</div><span class="tag red">TO DECIDE</span></div>
+      </div>
+      <div class="branch">
+        <div class="edge">majority · landlord minority (standing decision)</div>
+        <div class="node"><div class="t">The Harvest Pty Ltd</div><div class="d">Venue, workshops, cafe, events. Self-contained for future carve-off, sale, or raise.</div><span class="tag green">DECIDED</span></div>
+      </div>
+      <div class="branch">
+        <div class="edge">form unresolved: a CLG has members, not shares</div>
+        <div class="node dashed"><div class="t">The Butterfly Movement Ltd</div><div class="d">DGR + PBI, Indigenous-led board. Philanthropic capital for on-country production. Likely beside the group, connected by agreements. DGR lawyer to advise.</div><span class="tag red">LAWYER QUESTION</span></div>
+      </div>
+    </div>
+    <div class="floaters">
+      <div class="node ghost"><div class="t">Farm</div><div class="d">Outside the group. Income + accommodation in Nick's personal name. Artists-in-residence may link to Harvest later.</div><span class="tag amber">NICK TO CONFIRM</span></div>
+      <div class="node ghost"><div class="t">Sole trader</div><div class="d">New work novates to whichever entity is chosen. Honest-delay fallback (Rule 2) stands.</div><span class="tag amber">WINDING DOWN</span></div>
+    </div>
+  </div>
+
+  <h2>The four open decisions</h2>
+  <div class="grid4">
+    <div class="card">
+      <div class="num">Decision 1 · by 19 June</div>
+      <h3>Which entity trades from 1 July?</h3>
+      <ul>
+        <li><b>A.</b> Trade from the Pty as planned; convert to holdco later at a year boundary. Cost: a second round of novations later.</li>
+        <li><b>B.</b> Incorporate ACT Projects now and trade from it; the Pty stays clean. Cost: new ABN, GST, bank, Xero in 18 days. Banking is the long pole.</li>
+        <li><b>C.</b> Honest delay (Rule 2): sole trader keeps trading until the chosen entity is genuinely live. The safety net under A or B.</li>
+      </ul>
+      <div class="who"><b>Ben + Nick</b>, with Standard Ledger's view in writing. Everything in the table below moves with this call.</div>
+    </div>
+    <div class="card">
+      <div class="num">Decision 2 · questions before 26 June, answers before August</div>
+      <h3>How does Butterfly connect?</h3>
+      <ul>
+        <li>The call sketched "wholly owned subsidiary". Butterfly is likely a company limited by guarantee: members, not shares. There is nothing to own in the share sense.</li>
+        <li>Holdco control pulls against the Indigenous-led board and the PBI + DGR standing that make Butterfly valuable.</li>
+        <li>Likely landing zone: beside the group, connected by arm's-length agreements. The DGR lawyer confirms or corrects.</li>
+      </ul>
+      <div class="who"><b>Ben</b> sends the question list before the 26 June handover.</div>
+    </div>
+    <div class="card">
+      <div class="num">Decision 3 · next founders conversation</div>
+      <h3>Farm stays personal?</h3>
+      <ul>
+        <li>Per the call: no farm entity for now. Income and accommodation run in Nick's personal name. Farm accounting stays separate.</li>
+        <li>Canon currently says "Farm entity: designing" and plans a farm lease to the Pty with Nic as landlord at arm's length.</li>
+        <li>Close it: Nick confirms, Standard Ledger confirms the lease + income treatment, canon row updates.</li>
+      </ul>
+      <div class="who"><b>Nick</b> confirms; <b>Standard Ledger</b> advises treatment.</div>
+    </div>
+    <div class="card">
+      <div class="num">Decision 4 · by 19 June, transfers before 30 June</div>
+      <h3>FY26 founder draw: final numbers</h3>
+      <ul>
+        <li>Call target: up to ~$200K each, ~$300K total working figure including the $100K already moved.</li>
+        <li>Ben's side is planned to ~$250K via Knight Photography invoices 15078 to 15081 (standing plan, Option A). Inv 15078 still not raised.</li>
+        <li>Open: each founder's final number against available cash (~$507K receivables unpaid), Nick's invoicing vehicle (PSI question), and provisioning near half for personal tax.</li>
+      </ul>
+      <div class="who"><b>Ben + Nick + Standard Ledger</b>. ATO payment plans available; PAYG instalments likely in FY27 unless payroll replaces the pattern.</div>
+    </div>
+  </div>
+
+  <h2>What moves with the operating entity</h2>
+  <p class="sub">Decision 1 is one choice that drags eight things with it. The R&amp;D row matters most: the claimant must be the company that incurs the spend, with contemporaneous records, from day one of FY27.</p>
+  <table>
+    <thead><tr><th>Item</th><th>Today points at</th><th>Under option B points at</th></tr></thead>
+    <tbody>
+      <tr><td>R&amp;D Tax Incentive FY27 registration (43.5% refundable offset)</td><td>A Curious Tractor Pty Ltd</td><td>ACT Projects</td></tr>
+      <tr><td>QBE Catalysing Impact contract</td><td>Already contracted to the Pty</td><td>Assignment, or stays in holdco (lawyer view)</td></tr>
+      <tr><td>"Goods on Country" trading name</td><td>Registered against the Pty ABN</td><td>Re-register against Projects ABN</td></tr>
+      <tr><td>Founder payroll employer ($10K/mo each + super, from FY27)</td><td>The Pty</td><td>ACT Projects</td></tr>
+      <tr><td>Knight Photography Phase 3 invoices</td><td>The Pty</td><td>ACT Projects</td></tr>
+      <tr><td>Justice + storytelling contract revenue</td><td>The Pty</td><td>ACT Projects</td></tr>
+      <tr><td>Novation letter wording (Rule 1)</td><td>"invoice to the Pty"</td><td>"invoice to ACT Projects"</td></tr>
+      <tr><td>Xero file, NAB account, Stripe</td><td>The Pty</td><td>ACT Projects (one more of each)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Founder pay, both years on one page</h2>
+  <div class="paycols">
+    <div class="card">
+      <h3>This FY <span>now to 30 June 2026 · out of the sole trader</span></h3>
+      <div class="step"><div class="dot">1</div><p><b>Raise Inv 15078 ($100K).</b> Dated 2025-09-30, matches the 6 Oct 2025 transfers. Then Phase 2 quarterly invoices. <span class="note">Already planned; just not done.</span></p></div>
+      <div class="step"><div class="dot">2</div><p><b>Set each founder's final draw</b> against available cash. Target up to ~$200K each; ~$300K total is the working figure including the $100K.</p></div>
+      <div class="step"><div class="dot">3</div><p><b>Invoice the sole trader</b> from each founder's vehicle. Income lands personally and goes on personal returns. <span class="note">Nick's vehicle to be confirmed; partnership routing carries the same PSI question that ruled out trust routing.</span></p></div>
+      <div class="step"><div class="dot">4</div><p><b>Provision near half for tax.</b> Payment plans are available. Expect the ATO to suggest quarterly instalments next year.</p></div>
+    </div>
+    <div class="card">
+      <h3>Next FY <span>from 1 July 2026 · out of the company · decided in May (D11.2)</span></h3>
+      <div class="step"><div class="dot">1</div><p><b>Payroll $10K/month each</b> ($120K/yr) + super + PAYG withholding. Tax handled along the way; payroll supports exiting the instalment regime.</p></div>
+      <div class="step"><div class="dot">2</div><p><b>Extra draws go through the director's loan account.</b> Nick's seed capital comes back first as loan repayments.</p></div>
+      <div class="step"><div class="dot">3</div><p><b>Clear or paper the loan by 30 June 2027.</b> Div 7A: an outstanding loan is treated as income unless it becomes a complying loan with interest and minimum repayments.</p></div>
+      <div class="step"><div class="dot">4</div><p><b>Settle year-end top-ups</b> as bonus salary (super applies), dividends through the family trusts, or an invoice. Reviewed every six months; default is reinvest.</p></div>
+    </div>
+  </div>
+
+  <h2>Actions, in order</h2>
+  <ol class="actions">
+    <li>Send trust documents to NAB. Blocks the bank, which blocks Xero. <span class="chip">Nick</span> <span class="due">now</span></li>
+    <li>Raise Inv 15078 ($100K), then Phase 2 invoices. <span class="chip">Ben</span> <span class="due">this week</span></li>
+    <li>Decide the operating entity (Decision 1), Standard Ledger's view in writing. <span class="chip">Ben + Nick</span> <span class="due">by 19 June</span></li>
+    <li>Agree FY26 draw totals and Nick's vehicle (Decision 4); move the cash. <span class="chip">Ben + Nick + SL</span> <span class="due">transfers before 30 June</span></li>
+    <li>Send the DGR lawyer question list (Decision 2). <span class="chip">Ben</span> <span class="due">before 26 June handover</span></li>
+    <li>Confirm farm-stays-personal (Decision 3). <span class="chip">Nick</span> <span class="due">next founders chat</span></li>
+    <li>Spin up Xero once banking is live. <span class="chip">SL + Ben</span> <span class="due">cutover week</span></li>
+    <li>Payroll setup for the FY27 start. <span class="chip">Standard Ledger</span> <span class="due">July</span></li>
+    <li>Stand up monthly reporting + forecasting cadence; sharper once Harvest trades. <span class="chip">Ben + SL</span> <span class="due">next 6 to 12 months</span></li>
+  </ol>
+
+  <footer>
+    <p>Sources: Standard Ledger call record (<code>thoughts/shared/meetings/2026-06-12-standard-ledger-structure-call.md</code>), ACT Core Facts, migration checklist §D11, Harvest subsidiary decision (2026-05-05), Knight Photography FY26 invoice plan. Full reasoning and the canon-edit map: <code>wiki/decisions/2026-06-12-holdco-structure-proposal.md</code>.</p>
+    <p style="margin-top:8px">Canon is deliberately unchanged until the four decisions land. Nothing on this page is tax, legal, or financial advice; those calls sit with Standard Ledger and the DGR lawyer.</p>
+  </footer>
+</div>
+
+<script>
+  function show(which) {
+    document.getElementById('treeA').classList.toggle('show', which === 'A');
+    document.getElementById('treeB').classList.toggle('show', which === 'B');
+    document.getElementById('btnA').classList.toggle('active', which === 'A');
+    document.getElementById('btnB').classList.toggle('active', which === 'B');
+  }
+</script>
+</body>
+</html>

@@ -71,8 +71,8 @@ Everything on this list needs one of three outcomes:
 | Final sole trader tax return FY26 | Lodge under normal schedule | Personal tax return due 31 October 2026 (or 15 May 2027 if using a registered tax agent). |
 | PAYG Instalments (sole trader) | Discontinue | Nic's PAYG instalments under sole trader cease at cutover. |
 | PAYG Instalments (Pty) | Register | ATO will set up after first tax return. Expect voluntary pre-payment Year 1. |
-| R&D Tax Incentive registration (AusIndustry) | RE-REGISTER under Pty for FY27 | Current R&D activities under Nic's sole trader are grandfathered through 30 June. For FY27, the Pty registers fresh. Standard Ledger coordinates. |
-| R&D FY26 claim (sole trader) | Lodge with sole trader tax return | Claim the FY26 activities in Nic's personal return. |
+| R&D Tax Incentive registration (AusIndustry) | FY26: Pty registers by 30 Apr 2027 for activities from 24 Apr 2026 only. FY27: register under the operating entity per §12 decision 1. | Per Path C (locked 2026-04-27): sole trader periods are not claimable; the old "grandfathered" wording here was wrong and is corrected 2026-06-12. See `rd-tax-incentive-fy2526-path-c.md`. Standard Ledger coordinates. |
+| R&D FY26 claim | Pty claims the 24 Apr to 30 Jun 2026 window only | Sole traders are not eligible R&D entities (Path C), so there is no sole-trader R&DTI claim; founder invoices to the sole trader are ordinary deductions only. Amounts owed to associates must be PAID by 30 Jun to enter the FY26 claim, otherwise they carry to the year paid. Standard Ledger confirms. |
 | Fringe Benefits Tax | Assess if applicable | Not relevant to sole trader; becomes a consideration once Pty has staff. |
 
 ---
@@ -272,6 +272,26 @@ Standard Ledger called this out as the explicit cutover artefact: a spreadsheet 
 - [x] **Generate the mapping export** — `scripts/export-sole-trader-to-pty-mapping.mjs` written 2026-05-05. Pulls FY26 YTD `xero_transactions + xero_invoices`, signs amounts by direction (income +ve / expense -ve), tags each line with reallocation decision (Y / N / REVIEW). First run: 2,879 lines, 246 REVIEW (untagged), $832K net on ACT-GD, -$63K net on ACT-FM (stays). Output: `out/sole-trader-to-pty-mapping-FY26-YTD.csv` + `-summary.csv`. Re-run after untagged queue is cleared.
 - [ ] **Standard Ledger reviews the mapping** — Week 5-6 — Standard Ledger. Confirm reallocation principle (income flow-through, expense reimbursement, asset transfer at market value).
 - [ ] **Book the journal entries** — Week 8-9 — Standard Ledger. Cross-entity journals: sole trader debit, Pty credit (or vice versa) with full audit trail.
+
+---
+
+## 12. Addendum 2026-06-12: Standard Ledger structure call
+
+A follow-up call (filed at [`thoughts/shared/meetings/2026-06-12-standard-ledger-structure-call.md`](../meetings/2026-06-12-standard-ledger-structure-call.md)) re-confirmed D11.1, D11.2, and D11.5, and opened four decisions tracked at [`wiki/decisions/2026-06-12-holdco-structure-proposal.md`](../../wiki/decisions/2026-06-12-holdco-structure-proposal.md):
+
+1. **Holdco + ACT Projects subsidiary proposal: which entity trades from 1 July.** Until decided, **hold the novation letters (§2, Week 5-6)** and any new from-1-July contract naming. If Projects is adopted: the §3 R&D FY27 re-registration row repoints to Projects, the QBE contract (held by the Pty) needs assignment or stays in the holdco, the "Goods on Country" trading name re-registers, and Knight Photography Phase 3 invoices ACT Projects.
+2. **Butterfly connection to the group.** DGR lawyer question list goes before the 26 June handover; answers expected before August. Note Butterfly is likely a CLG (members, not shares), so "wholly owned subsidiary" may not be mechanically available.
+3. **Farm.** Per the call: no farm entity for now; income and accommodation in Nick's personal name. Once Nick confirms, update the act-core-facts Farm row and revisit the §1 Farm lease row.
+4. **FY26 founder draw scale.** Up to ~$200K each before 30 June per the call (vs ~$250K Ben-side already planned in D11.5). Final totals, Nick's vehicle, and tax provisioning to be set with Standard Ledger. Mechanisms stay D11.2 + D11.5.
+
+Status from the call: NAB account still blocked on Nick's trust docs; Xero opens after banking; Inv 15078 ($100K) still not raised; trust setup is done and post-budget trust rule changes were noted with no change planned.
+
+- [ ] **Decide operating entity (decision 1)** — by 19 June — Ben + Nick + Standard Ledger (in writing)
+- [ ] **Hold novation letters until decision 1 lands** — standing — Ben
+- [ ] **DGR lawyer question list sent** — before 26 June — Ben
+- [ ] **FY26 draw totals agreed + transfers done** — before 30 June — Ben + Nick + Standard Ledger
+- [ ] **Nick confirms farm-stays-personal** — next founders conversation — Nick
+- [ ] **FY26 R&D window plan executed** (engagement papers, split Q4 invoices, pay by 30 Jun, consultant reconciliation) — see [`rd-fy26-window-and-fy27-setup.md`](rd-fy26-window-and-fy27-setup.md) — Ben + Nick + Standard Ledger
 
 ---
 
