@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EOFY 2026 alignment: the path to 30 June</title>
+<style>
+  :root{
+    --paper:#faf7f0; --card:#fffdf8; --ink:#22302a; --muted:#6b7a72;
+    --forest:#2d4a3a; --ochre:#b8742d; --terra:#a4543a; --line:#e4dccd; --soft:#f1ebdf;
+    --green:#3f7d57; --amber:#c98a2b; --red:#b4503a;
+    --greenbg:#e6efe8; --amberbg:#f6ecd8; --redbg:#f6e4dd;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.55;padding:0 0 80px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;color:var(--forest);font-weight:600}
+  h2{font-size:24px;margin:46px 0 4px}
+  h3{font-size:17px}
+  .kicker{text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--ochre);font-weight:700}
+  p.sub{color:var(--muted);max-width:760px}
+
+  header{background:var(--forest);color:#fff;padding:30px 0 26px;margin-bottom:8px}
+  header .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+  header h1{color:#fff;font-size:30px;line-height:1.12}
+  header .kicker{color:#e9c9a3}
+  .count{text-align:right;flex:none}
+  .count .big{font-family:Georgia,serif;font-size:46px;font-weight:700;line-height:1;color:#fff}
+  .count .lbl{font-size:12px;color:#cfe0d5;letter-spacing:.04em}
+
+  .banner{background:var(--greenbg);border:1px solid #cfe0d5;border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:16px 20px;margin:22px 0 8px}
+  .banner b{color:var(--forest)}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:18px 0 0;font-size:12.5px;color:var(--muted)}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:5px}
+  .dot.g{background:var(--green)} .dot.a{background:var(--amber)} .dot.r{background:var(--red)}
+
+  /* blockers */
+  .blockers{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  @media(max-width:720px){.blockers{grid-template-columns:1fr}}
+  .blk{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:16px 18px}
+  .blk h3{font-size:15.5px;margin-bottom:2px}
+  .blk .who{font-size:12px;color:var(--ochre);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+  .blk ul{margin:8px 0 0 16px;font-size:13.5px}
+  .blk li{margin-bottom:3px}
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;margin-top:10px}
+  .tag.no{background:var(--greenbg);color:var(--green)}
+  .tag.yes{background:var(--redbg);color:var(--red)}
+
+  /* money */
+  .money{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  @media(max-width:720px){.money{grid-template-columns:1fr}}
+  .mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;border-top:4px solid var(--forest)}
+  .mcard.nic{border-top-color:var(--ochre)}
+  .mcard h3{display:flex;justify-content:space-between;align-items:baseline}
+  .mcard h3 .tot{font-family:Georgia,serif;font-size:20px}
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+  td{padding:7px 6px;border-top:1px solid var(--line);vertical-align:top}
+  td.amt{font-family:Georgia,serif;font-weight:700;color:var(--forest);white-space:nowrap;text-align:right}
+  .mcard.nic td.amt{color:var(--ochre)}
+  .note{font-size:12.5px;color:var(--muted);margin-top:10px}
+  .pillrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .pill{background:var(--soft);border-radius:8px;padding:9px 13px;font-size:12.5px}
+  .pill b{font-family:Georgia,serif;color:var(--forest)}
+
+  /* loans explainer */
+  .loan{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px 22px 18px;margin-top:16px}
+  .loan .step{display:flex;gap:12px;margin-top:14px}
+  .loan .n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--ochre);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .loan .step b{color:var(--forest)}
+
+  /* timeline */
+  .phase{margin-top:26px}
+  .phase .hd{display:flex;align-items:center;gap:12px}
+  .phase .when{font-family:Georgia,serif;font-weight:700;color:var(--forest);font-size:18px}
+  .phase .rng{font-size:12.5px;color:var(--muted)}
+  .tl{border-left:2px solid var(--line);margin:12px 0 0 8px;padding-left:0}
+  .row{position:relative;padding:12px 0 12px 26px;border-bottom:1px dashed var(--line)}
+  .row::before{content:"";position:absolute;left:-7px;top:18px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid var(--paper)}
+  .row.a::before{background:var(--amber)} .row.r::before{background:var(--red)}
+  .row .t{font-weight:600}
+  .row .m{font-size:13px;color:var(--muted);margin-top:2px}
+  .row .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+  .chip{font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;background:var(--soft);color:var(--forest)}
+  .chip.$ {background:var(--greenbg);color:var(--green)}
+  .chip.blk{background:var(--amberbg);color:var(--amber)}
+  .chip.hard{background:var(--redbg);color:var(--red)}
+
+  footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+  code{background:var(--soft);padding:1px 5px;border-radius:4px;font-size:11.5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div>
+      <div class="kicker">A Curious Tractor · end of financial year</div>
+      <h1>The path to 30 June</h1>
+      <p style="color:#cfe0d5;font-size:13px;margin-top:6px">Today: Wednesday 17 June 2026 · scenario figures, Standard Ledger finalises · not tax or legal advice</p>
+    </div>
+    <div class="count"><div class="big">13</div><div class="lbl">days to 30 June</div></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="banner">
+    <b>The priority money does not need the NAB account.</b> This year's founder pay flows through the sole trader account, which already exists: Ben invoices the sole trader and it pays him; Nic draws from the same account. The NAB account is needed only for the ~$59K R&D window slice and for trading from 1 July. So the bank delay does not block the priority. It only defers the small R&D top-up, which carries to next year if it misses 30 June.
+  </div>
+
+  <div class="legend">
+    <span><span class="dot g"></span>Can do now, nothing blocking</span>
+    <span><span class="dot a"></span>Waiting on a blocker</span>
+    <span><span class="dot r"></span>Hard deadline (statutory or 30 June)</span>
+  </div>
+
+  <h2>What blocks what</h2>
+  <p class="sub">Five blockers. Only one touches the priority money, and only the small R&D slice.</p>
+  <div class="blockers">
+    <div class="blk">
+      <div class="who">Blocker 1 · Nick</div>
+      <h3>Trust documents → NAB account</h3>
+      <ul>
+        <li>Gates: Nick's seed loan, the Pty paying the R&D window slice, Pty Xero, FY27 payroll</li>
+        <li>Does <b>not</b> gate: Ben's invoices or Nic's drawings (both use the sole trader account)</li>
+      </ul>
+      <span class="tag no">Priority money: not affected</span>
+    </div>
+    <div class="blk">
+      <div class="who">Blocker 2 · Ben</div>
+      <h3>Standard Ledger answers (email now)</h3>
+      <ul>
+        <li>Gates: raising the invoices (invoice vs journal), Nic's window figure, the 24 April Q4 split, asset-transfer timing</li>
+        <li>One email, 8 questions, already drafted in the plan</li>
+      </ul>
+      <span class="tag yes">Priority money: blocks invoice timing</span>
+    </div>
+    <div class="blk">
+      <div class="who">Blocker 3 · Ben + Nick</div>
+      <h3>Decision 1: operating entity</h3>
+      <ul>
+        <li>Leaning: trade from A Curious Tractor Pty Ltd; add a holding company later only if a sale or raise needs it</li>
+        <li>Gates: novation letters, FY27 setup. Not EOFY-money-critical</li>
+      </ul>
+      <span class="tag no">Priority money: not affected</span>
+    </div>
+    <div class="blk">
+      <div class="who">Blocker 4 · Ben + Nick + lawyer</div>
+      <h3>Harvest shareholder choice</h3>
+      <ul>
+        <li>ACT Pty as parent, or the two trusts own Harvest directly (cleaner sibling)</li>
+        <li>Gates: filing Harvest with ASIC. Decide before filing (changing it later is a tax event)</li>
+      </ul>
+      <span class="tag no">Priority money: not affected</span>
+    </div>
+  </div>
+
+  <h2>The money: who moves what</h2>
+  <p class="sub">Ben and Nic are different. Ben invoices the business, which shifts income to Ben and gives Nic a deduction. Nic cannot invoice himself, so his pay is drawings: no deduction, no tax event. Final totals are set with Standard Ledger this week (these are the working plan).</p>
+
+  <div class="money">
+    <div class="mcard">
+      <h3>Ben <span class="tot">≈ $250,000</span></h3>
+      <table>
+        <tr><td class="amt">$100,000</td><td>Knight Photography Inv 15078 (Q1, dated 30 Sep 2025) to the sole trader. <b>Already moved Oct 2025</b>, the invoice just characterises it. Paper only.</td></tr>
+        <tr><td class="amt">$50,000</td><td>Inv 15079 (Oct–Dec) to the sole trader. Raise + pay by 30 June.</td></tr>
+        <tr><td class="amt">$50,000</td><td>Inv 15080 (Jan–Mar) to the sole trader. Raise + pay by 30 June.</td></tr>
+        <tr><td class="amt">~$13,000</td><td>Q4 slice for work 1–23 April, to the sole trader.</td></tr>
+        <tr><td class="amt">~$40,000</td><td>Window slice for work 24 Apr–30 Jun, invoiced to <b>the Pty</b> (not the sole trader). This is the R&D piece. Pty pays by 30 June or it carries to next year.</td></tr>
+      </table>
+      <div class="note">The sole-trader-paid portion (~$213K) gives Nic a deduction worth up to ~47c per dollar. The ~$40K window portion earns the 43.5c refundable R&D offset instead.</div>
+    </div>
+    <div class="mcard nic">
+      <h3>Nic <span class="tot">≈ $100,000</span></h3>
+      <table>
+        <tr><td class="amt">~$85,000</td><td>Drawings from the sole trader account. No invoice, no deduction, no tax event. Size it to what has actually been collected.</td></tr>
+        <tr><td class="amt">~$15,000</td><td>Window director's fees from <b>the Pty</b> for 24 Apr–30 Jun R&D work. Paid by 30 June or carries to next year.</td></tr>
+      </table>
+      <div class="note">Headroom to ~$200K if collections allow. Nic's tax sits on the sole trader's profit regardless of how much cash he draws.</div>
+    </div>
+  </div>
+
+  <div class="pillrow">
+    <div class="pill"><b>≈ $350K</b> combined founder pay (incl. the $100K already moved)</div>
+    <div class="pill"><b>~$59K</b> R&D window basis → <b>~$26K</b> refund at 43.5%, only if paid by 30 June</div>
+    <div class="pill"><b>40–45%</b> of personal receipts set aside for tax (payment plans exist)</div>
+    <div class="pill"><b>~$507K</b> receivables still uncollected: size the draws to cash on hand</div>
+  </div>
+
+  <h2>How the director loans work</h2>
+  <div class="loan">
+    <div class="step"><div class="n">1</div><div><b>Money in, before 30 June.</b> Nick lends the Pty ~$75–100K as working capital, on a written loan note. This funds the ~$59K of window payments plus a buffer for the first month of next year.</div></div>
+    <div class="step"><div class="n">2</div><div><b>Repayments out are tax-free.</b> A loan repaid by the company is not income. So the first cash the company pays out later just repays Nick's loan, before anything is called salary or dividend. This is the clean extraction lane.</div></div>
+    <div class="step"><div class="n">3</div><div><b>One account per founder.</b> If only Nick seeds the company, only Nick holds that lane, so either Ben seeds too or the imbalance is squared in the Shareholders Agreement. Asset sales next year (the HiLux, tools, gear) also get credited here instead of paid in cash, which gives Ben a lane via the Knight Photography gear.</div></div>
+    <div class="step"><div class="n">4</div><div><b>Next year, loans the other way carry a rule (Div 7A).</b> If you draw more than your pay during FY27, it is recorded as a loan from the company to you. Any such loan still owing at the company's tax-return lodgement must be repaid, or put on formal terms (written agreement, benchmark interest, minimum yearly repayments), or the tax office treats it as taxable income. Plan: clear it, or formalise it, before lodgement.</div></div>
+  </div>
+
+  <h2>The dated path</h2>
+
+  <div class="phase">
+    <div class="hd"><span class="when">Now → Fri 19 June</span><span class="rng">decisions + paperwork</span></div>
+    <div class="tl">
+      <div class="row r"><div class="t">Nick: trust documents to NAB</div><div class="m">The one blocker that gates the bank account, seed loan and FY27 setup. Start the clock today.</div><div class="meta"><span class="chip">Nick</span><span class="chip hard">critical path</span></div></div>
+      <div class="row"><div class="t">Ben: send the 8-question email to Standard Ledger + R&D consultant</div><div class="m">Invoice-vs-journal treatment, Nic's window figure, the 24 April split, asset timing, the 47c-vs-43.5c modelling. Unblocks the invoices.</div><div class="meta"><span class="chip">Ben</span><span class="chip blk">unblocks invoices</span></div></div>
+      <div class="row"><div class="t">Ben: send the DGR lawyer question list</div><div class="m">Butterfly handover is 26 June; the holdco-vs-charity connection answer is needed before August.</div><div class="meta"><span class="chip">Ben</span></div></div>
+      <div class="row a"><div class="t">Ben + Nick: Decision 1 (operating entity) + farm + Harvest shareholder</div><div class="m">Lean: trade from ACT Pty, holdco later. Confirm farm stays personal. Decide who owns Harvest before any ASIC filing.</div><div class="meta"><span class="chip">Ben + Nick + SL</span><span class="chip blk">needs SL view</span></div></div>
+      <div class="row a"><div class="t">Ben: raise Inv 15078, 15079, 15080 + the pre-24-April Q4 slice</div><div class="m">Held until Standard Ledger confirms treatment, then raise. Sole trader pays.</div><div class="meta"><span class="chip">Ben</span><span class="chip $">$213K to Ben</span><span class="chip blk">after SL answer</span></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="hd"><span class="when">Mon 23 → Fri 27 June</span><span class="rng">execution prep</span></div>
+    <div class="tl">
+      <div class="row a"><div class="t">Nick: seed loan into the Pty</div><div class="m">~$75–100K once the NAB account is open, on a written loan note. Funds the window payments.</div><div class="meta"><span class="chip">Nick + SL</span><span class="chip $">$75–100K in</span><span class="chip blk">needs NAB</span></div></div>
+      <div class="row a"><div class="t">Ben + Nick: board minute + engagement letters for the window</div><div class="m">Dated now, describing the real 24 Apr–30 Jun work. Without this paper there is no FY26 R&D claim.</div><div class="meta"><span class="chip">Ben + Nick</span></div></div>
+      <div class="row a"><div class="t">Ben: raise the window invoice to the Pty (~$40K) + Nic's ~$15K window fees</div><div class="m">Standard Ledger sets the exact figures.</div><div class="meta"><span class="chip">Ben + SL</span><span class="chip $">~$59K window</span><span class="chip blk">needs SL figure</span></div></div>
+      <div class="row"><div class="t">Sole trader pays Ben's invoices; Nic takes drawings</div><div class="m">From the existing sole trader account. Size Nic's draw to collected cash.</div><div class="meta"><span class="chip">Nick</span><span class="chip $">~$213K + ~$85K</span></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="hd"><span class="when">By Tue 30 June</span><span class="rng">hard end of financial year</span></div>
+    <div class="tl">
+      <div class="row r"><div class="t">Pty pays the window invoice + Nic's window fees</div><div class="m">Amounts owed to the founders enter this year's R&D claim only if actually PAID by 30 June. If NAB is not live, accept the carry to next year. No improvising.</div><div class="meta"><span class="chip">Ben + Nick</span><span class="chip $">~$59K → ~$26K refund</span><span class="chip hard">30 June</span></div></div>
+      <div class="row r"><div class="t">Trustee resolutions, if either family trust has any income this year</div><div class="m">Statutory 30 June deadline, no extension. Standard Ledger confirms whether needed (likely nil, the Pty has paid no dividends).</div><div class="meta"><span class="chip">Ben + Nick + SL</span><span class="chip hard">30 June</span></div></div>
+      <div class="row"><div class="t">Both: set aside 40–45% of personal receipts for tax</div><div class="m">The assessment will be close to half. Provision now beats a scramble next year.</div><div class="meta"><span class="chip">Ben + Nick</span></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="hd"><span class="when">Beyond · 1 July onward</span><span class="rng">the FY27 machine</span></div>
+    <div class="tl">
+      <div class="row"><div class="t">Operating entity starts payroll: $10K/month each + super</div><div class="m">$120K each per year, tax handled along the way. Full-year R&D-claimable wages.</div><div class="meta"><span class="chip">SL</span><span class="chip $">$10K/mo each</span></div></div>
+      <div class="row"><div class="t">Seed loan repaid first, as cash allows</div><div class="m">Tax-free, ahead of any salary or dividend.</div><div class="meta"><span class="chip">Ben + Nick</span></div></div>
+      <div class="row"><div class="t">Transfer assets to the company at market value (HiLux, tools, gear)</div><div class="m">After 1 July so the recapture lands in Nic's low-income year. Price credited to director loan accounts. HiLux is the exempt work-vehicle path.</div><div class="meta"><span class="chip">Ben + SL</span></div></div>
+      <div class="row"><div class="t">Incorporate Harvest (shareholder decided) + send novation letters</div><div class="m">Harvest trades from 1 July. Letters name the entity fixed in Decision 1.</div><div class="meta"><span class="chip">Ben + Nick</span></div></div>
+      <div class="row"><div class="t">R&D consultant cuts the pack to the 24 April window; AusIndustry registration by 30 Apr 2027</div><div class="m">FY27 full year: ~$162K base-payroll basis → ~$70K refund, scaling with the salary level you set.</div><div class="meta"><span class="chip">Ben + SL</span><span class="chip $">~$70K+ FY27 refund</span></div></div>
+      <div class="row"><div class="t">DGR lawyer answer before August; holding company only when a sale or raise needs it</div><div class="m">Butterfly connection form confirmed. A holdco drops on top of ACT Pty later (Div 615), disturbing nothing below.</div><div class="meta"><span class="chip">lawyer + SL</span></div></div>
+    </div>
+  </div>
+
+  <footer>
+    Sources: <code>thoughts/shared/runbooks/eofy-2026-run-sheet.md</code>, <code>thoughts/shared/plans/rd-fy26-window-and-fy27-setup.md</code>, <code>wiki/decisions/2026-06-12-holdco-structure-proposal.md</code>, <code>thoughts/shared/finance/asset-transfer-register-2026.md</code>, and the Notion EOFY Setup Tracker. All dollar amounts are the working plan, not final; Standard Ledger sets the figures and confirms every tax treatment. Nothing here is tax or legal advice.
+  </footer>
+</div>
+</body>
+</html>
