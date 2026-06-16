@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T21:00:02.292Z",
+  "generatedAt": "2026-06-15T21:00:02.540Z",
   "sources": {
     "wiki": {
       "path": "wiki/finance/compliance-calendar.md",
@@ -36,7 +36,7 @@
       "owner": "ben",
       "earliest_filable": null,
       "last_filed_at": null,
-      "days_until_due": 24,
+      "days_until_due": 15,
       "severity": "high",
       "at_risk": true
     },
@@ -57,7 +57,7 @@
       "owner": "ben",
       "earliest_filable": null,
       "last_filed_at": null,
-      "days_until_due": 52,
+      "days_until_due": 43,
       "severity": "medium",
       "at_risk": true
     },
@@ -78,7 +78,7 @@
       "source": "wiki",
       "owner": "ben",
       "earliest_filable": null,
-      "days_until_due": -39,
+      "days_until_due": -48,
       "severity": null,
       "at_risk": false
     },
@@ -99,7 +99,7 @@
       "owner": "ben",
       "earliest_filable": null,
       "last_filed_at": null,
-      "days_until_due": 144,
+      "days_until_due": 135,
       "severity": null,
       "at_risk": false
     },
@@ -120,7 +120,7 @@
       "owner": "ben",
       "earliest_filable": null,
       "last_filed_at": null,
-      "days_until_due": 147,
+      "days_until_due": 138,
       "severity": null,
       "at_risk": false
     },
@@ -140,7 +140,7 @@
       "owner": "ben",
       "earliest_filable": null,
       "last_filed_at": null,
-      "days_until_due": 208,
+      "days_until_due": 199,
       "severity": null,
       "at_risk": false
     },
@@ -160,7 +160,7 @@
       "owner": "ben",
       "earliest_filable": null,
       "last_filed_at": null,
-      "days_until_due": 267,
+      "days_until_due": 258,
       "severity": null,
       "at_risk": false
     },
@@ -181,7 +181,7 @@
       "owner": "ben",
       "earliest_filable": null,
       "last_filed_at": null,
-      "days_until_due": 267,
+      "days_until_due": 258,
       "severity": null,
       "at_risk": false
     },
@@ -201,7 +201,7 @@
       "owner": "ben",
       "earliest_filable": null,
       "last_filed_at": null,
-      "days_until_due": 322,
+      "days_until_due": 313,
       "severity": null,
       "at_risk": false
     },
@@ -222,7 +222,7 @@
       "source": "wiki",
       "owner": "ben",
       "last_filed_at": null,
-      "days_until_due": 328,
+      "days_until_due": 319,
       "severity": null,
       "at_risk": false
     }

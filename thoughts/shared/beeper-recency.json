@@ -1,56 +1,112 @@
 {
- "generated_at": "2026-06-06T23:24:55.114Z",
+ "generated_at": "2026-06-08T20:50:02.767Z",
  "horizon_days": 365,
  "source": "beeper-desktop-api /v1/chats (single chats, metadata only)",
  "chats": [
   {
    "title": "Dali",
    "network": "Telegram",
-   "lastActivity": "2026-06-06T23:00:06.000Z",
-   "unread": 252,
+   "lastActivity": "2026-06-08T20:35:01.000Z",
+   "unread": 277,
    "phone": ""
   },
   {
-   "title": "+61 414 185 964",
+   "title": "+1 972-884-5504",
    "network": "iMessage",
-   "lastActivity": "2026-06-06T22:42:41.359Z",
+   "lastActivity": "2026-06-08T19:32:05.015Z",
+   "unread": 0,
+   "phone": "+19728845504"
+  },
+  {
+   "title": "Maria Susette Haro",
+   "network": "LinkedIn",
+   "lastActivity": "2026-06-08T12:38:05.386Z",
    "unread": 1,
-   "phone": "+61414185964"
+   "phone": ""
   },
   {
-   "title": "+61 424 054 113",
-   "network": "iMessage",
-   "lastActivity": "2026-06-06T20:00:32.892Z",
-   "unread": 0,
-   "phone": "+61424054113"
-  },
-  {
-   "title": "Qantas",
-   "network": "iMessage",
-   "lastActivity": "2026-06-06T09:25:23.858Z",
-   "unread": 0,
+   "title": "Claudine Challita",
+   "network": "LinkedIn",
+   "lastActivity": "2026-06-08T10:16:06.833Z",
+   "unread": 1,
    "phone": ""
   },
   {
    "title": "JusticeHub Alerts",
    "network": "Telegram",
-   "lastActivity": "2026-06-06T06:48:25.000Z",
-   "unread": 315,
+   "lastActivity": "2026-06-08T08:46:45.000Z",
+   "unread": 317,
    "phone": ""
   },
   {
-   "title": "Maria Susette Haro",
-   "network": "LinkedIn",
-   "lastActivity": "2026-06-06T00:13:01.073Z",
-   "unread": 0,
-   "phone": ""
-  },
-  {
-   "title": "+61 400 059 362",
+   "title": "+61 424 054 113",
    "network": "iMessage",
-   "lastActivity": "2026-06-05T23:33:51.984Z",
+   "lastActivity": "2026-06-08T08:28:29.207Z",
    "unread": 0,
-   "phone": "+61400059362"
+   "phone": "+61424054113"
+  },
+  {
+   "title": "+61 402 678 929",
+   "network": "iMessage",
+   "lastActivity": "2026-06-08T06:49:28.576Z",
+   "unread": 0,
+   "phone": "+61402678929"
+  },
+  {
+   "title": "Facebook",
+   "network": "WhatsApp",
+   "lastActivity": "2026-06-08T03:48:00.000Z",
+   "unread": 8,
+   "phone": "+447974905007"
+  },
+  {
+   "title": "+61 418 927 502",
+   "network": "iMessage",
+   "lastActivity": "2026-06-08T02:34:45.522Z",
+   "unread": 0,
+   "phone": "+61418927502"
+  },
+  {
+   "title": "+61 3 8615 3087",
+   "network": "iMessage",
+   "lastActivity": "2026-06-08T02:32:24.867Z",
+   "unread": 0,
+   "phone": "+61386153087"
+  },
+  {
+   "title": "knight.peter@hotmail.com",
+   "network": "iMessage",
+   "lastActivity": "2026-06-08T02:07:48.608Z",
+   "unread": 0,
+   "phone": ""
+  },
+  {
+   "title": "Telstra",
+   "network": "iMessage",
+   "lastActivity": "2026-06-08T00:43:51.535Z",
+   "unread": 0,
+   "phone": ""
+  },
+  {
+   "title": "+61 2 8314 6692",
+   "network": "iMessage",
+   "lastActivity": "2026-06-08T00:43:19.339Z",
+   "unread": 0,
+   "phone": "+61283146692"
+  },
+  {
+   "title": "Nicholas Marchesi OAM ",
+   "network": "LinkedIn",
+   "lastActivity": "2026-06-07T23:49:37.033Z",
+   "unread": 18,
+   "phone": ""
+  },
+  {
+   "title": "Carla Knight",
+   "network": "WhatsApp",
+   "lastActivity": "2026-06-07T01:00:17.000Z",
+   "unread": 0,
+   "phone": "+61414185964"
   },
   {
    "title": "Ande Foster",
@@ -58,13 +114,6 @@
    "lastActivity": "2026-06-05T10:22:55.221Z",
    "unread": 0,
    "phone": ""
-  },
-  {
-   "title": "Carla Knight",
-   "network": "WhatsApp",
-   "lastActivity": "2026-06-05T07:14:43.000Z",
-   "unread": 0,
-   "phone": "+61414185964"
   },
   {
    "title": "Mark Hill",
@@ -142,13 +191,6 @@
    "lastActivity": "2026-06-01T14:55:09.104Z",
    "unread": 1,
    "phone": ""
-  },
-  {
-   "title": "Facebook",
-   "network": "WhatsApp",
-   "lastActivity": "2026-05-30T23:59:05.000Z",
-   "unread": 7,
-   "phone": "+447974905007"
   },
   {
    "title": "David Romero McGuire",
@@ -239,13 +281,6 @@
    "network": "LinkedIn",
    "lastActivity": "2026-05-18T03:16:36.852Z",
    "unread": 1,
-   "phone": ""
-  },
-  {
-   "title": "Nicholas Marchesi OAM ",
-   "network": "LinkedIn",
-   "lastActivity": "2026-05-14T20:29:37.254Z",
-   "unread": 17,
    "phone": ""
   },
   {
@@ -1470,6 +1505,13 @@
    "title": "Mike Scully",
    "network": "Twitter/X",
    "lastActivity": "2025-10-20T16:24:07.228Z",
+   "unread": 0,
+   "phone": ""
+  },
+  {
+   "title": "Melody Jarvis",
+   "network": "LinkedIn",
+   "lastActivity": "2025-10-20T04:31:55.237Z",
    "unread": 0,
    "phone": ""
   },

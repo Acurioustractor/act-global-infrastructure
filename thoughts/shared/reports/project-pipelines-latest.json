@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-06T20:10:00.637Z",
+  "generated_at": "2026-06-15T20:10:09.491Z",
   "projects": [
     {
       "project_code": "WATCH",
@@ -10,21 +10,21 @@
           "open_count": 124,
           "won_count": 0,
           "lost_count": 17,
-          "open_value_aud": 146204943,
+          "open_value_aud": 146224943,
           "won_value_aud": 0,
           "earliest_open_at": "2026-02-23T20:04:20.744+00:00",
-          "latest_activity_at": "2026-05-16T21:12:16.132+00:00",
+          "latest_activity_at": "2026-06-08T20:50:14.316+00:00",
           "stages_present": [
             "Grant Opportunity Identified",
             "Grant Declined"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 124,
       "total_won": 0,
-      "open_value": 146204943,
+      "open_value": 146224943,
       "won_value": 0
     },
     {
@@ -36,42 +36,19 @@
           "open_count": 26,
           "won_count": 11,
           "lost_count": 0,
-          "open_value_aud": 2176021,
+          "open_value_aud": 2222171,
           "won_value_aud": 426925.99,
           "earliest_open_at": "2026-01-20T22:00:51.944+00:00",
-          "latest_activity_at": "2026-05-31T22:58:44.934+00:00",
+          "latest_activity_at": "2026-06-10T19:04:43.602+00:00",
           "stages_present": [
             "Outreach Queued",
             "Paid",
             "Proposed",
             "Invoiced",
-            "Qualified",
             "In Conversation"
           ],
-          "contacts_count": 29,
-          "computed_at": "2026-06-06T20:10:00.419Z"
-        },
-        {
-          "project_code": "ACT-GD",
-          "pipeline_name": "Goods Supporter Journey",
-          "open_count": 39,
-          "won_count": 0,
-          "lost_count": 0,
-          "open_value_aud": 5213996,
-          "won_value_aud": 0,
-          "earliest_open_at": "2026-05-27T05:26:02.304+00:00",
-          "latest_activity_at": "2026-06-01T01:42:45.356+00:00",
-          "stages_present": [
-            "Stewarding / Reporting",
-            "Identified",
-            "Cultivating",
-            "Ask made",
-            "Qualified",
-            "Delivering",
-            "Renewing"
-          ],
-          "contacts_count": 38,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "contacts_count": 27,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-GD",
@@ -87,8 +64,30 @@
             "Signal",
             "Buyer Matched"
           ],
-          "contacts_count": 155,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "contacts_count": 122,
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "ACT-GD",
+          "pipeline_name": "Goods Supporter Journey",
+          "open_count": 39,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 5107846,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-27T05:26:02.304+00:00",
+          "latest_activity_at": "2026-06-10T19:02:13.329+00:00",
+          "stages_present": [
+            "Identified",
+            "Ask made",
+            "Stewarding / Reporting",
+            "Cultivating",
+            "Qualified",
+            "Delivering",
+            "Renewing"
+          ],
+          "contacts_count": 39,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-GD",
@@ -105,7 +104,7 @@
             "Grant Opportunity Identified"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-GD",
@@ -123,12 +122,12 @@
             "Growth"
           ],
           "contacts_count": 3,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 223,
       "total_won": 16,
-      "open_value": 24211717,
+      "open_value": 24151717,
       "won_value": 764157.99
     },
     {
@@ -137,36 +136,38 @@
         {
           "project_code": "ACT-HV",
           "pipeline_name": "Grants",
-          "open_count": 49,
+          "open_count": 50,
           "won_count": 0,
           "lost_count": 13,
-          "open_value_aud": 12015450,
+          "open_value_aud": 12611561,
           "won_value_aud": 0,
           "earliest_open_at": "2026-02-01T20:57:22.627+00:00",
-          "latest_activity_at": "2026-05-31T20:00:04.524+00:00",
+          "latest_activity_at": "2026-06-15T14:48:14.245+00:00",
           "stages_present": [
             "Grant Opportunity Identified",
             "Application In Progress"
           ],
-          "contacts_count": 4,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "contacts_count": 5,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-HV",
-          "pipeline_name": "The Shop pipeline",
-          "open_count": 30,
+          "pipeline_name": "Harvest Membership Journey",
+          "open_count": 100,
           "won_count": 0,
           "lost_count": 0,
           "open_value_aud": 0,
           "won_value_aud": 0,
-          "earliest_open_at": "2026-05-15T03:39:39.629+00:00",
-          "latest_activity_at": "2026-05-31T20:17:12.165+00:00",
+          "earliest_open_at": "2026-06-02T01:44:41.105+00:00",
+          "latest_activity_at": "2026-06-09T02:28:58.194+00:00",
           "stages_present": [
-            "New interest",
-            "In conversation"
+            "Curious",
+            "Active",
+            "Member",
+            "Connected"
           ],
-          "contacts_count": 30,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "contacts_count": 100,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-HV",
@@ -183,26 +184,24 @@
             "New"
           ],
           "contacts_count": 11,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-HV",
-          "pipeline_name": "Harvest Membership Journey",
-          "open_count": 100,
+          "pipeline_name": "The Shop pipeline",
+          "open_count": 30,
           "won_count": 0,
           "lost_count": 0,
           "open_value_aud": 0,
           "won_value_aud": 0,
-          "earliest_open_at": "2026-06-02T01:44:41.105+00:00",
-          "latest_activity_at": "2026-06-02T11:55:29.641+00:00",
+          "earliest_open_at": "2026-05-15T03:39:39.629+00:00",
+          "latest_activity_at": "2026-05-31T20:17:12.165+00:00",
           "stages_present": [
-            "Curious",
-            "Member",
-            "Active",
-            "Connected"
+            "New interest",
+            "In conversation"
           ],
-          "contacts_count": 100,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "contacts_count": 30,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-HV",
@@ -213,17 +212,17 @@
           "open_value_aud": 0,
           "won_value_aud": 0,
           "earliest_open_at": "2026-05-27T08:08:49.442+00:00",
-          "latest_activity_at": "2026-05-31T22:52:40.916+00:00",
+          "latest_activity_at": "2026-06-09T02:39:17.434+00:00",
           "stages_present": [
             "Ask made"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
-      "total_open": 191,
+      "total_open": 192,
       "total_won": 0,
-      "open_value": 12015450,
+      "open_value": 12611561,
       "won_value": 0
     },
     {
@@ -232,34 +231,18 @@
         {
           "project_code": "ACT-CORE",
           "pipeline_name": "Universal Inquiry",
-          "open_count": 6,
+          "open_count": 8,
           "won_count": 0,
           "lost_count": 0,
           "open_value_aud": 0,
           "won_value_aud": 0,
           "earliest_open_at": "2026-05-14T05:22:09.02+00:00",
-          "latest_activity_at": "2026-05-24T02:08:26.054+00:00",
+          "latest_activity_at": "2026-06-09T05:26:52.909+00:00",
           "stages_present": [
             "New Inquiry"
           ],
-          "contacts_count": 6,
-          "computed_at": "2026-06-06T20:10:00.419Z"
-        },
-        {
-          "project_code": "ACT-CORE",
-          "pipeline_name": "Goods Supporter Journey",
-          "open_count": 1,
-          "won_count": 0,
-          "lost_count": 0,
-          "open_value_aud": 0,
-          "won_value_aud": 0,
-          "earliest_open_at": "2026-05-29T02:35:18.208+00:00",
-          "latest_activity_at": "2026-05-31T23:10:16.465+00:00",
-          "stages_present": [
-            "Cultivating"
-          ],
-          "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "contacts_count": 8,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-CORE",
@@ -270,13 +253,46 @@
           "open_value_aud": 11376702,
           "won_value_aud": 0,
           "earliest_open_at": "2026-03-22T08:47:47.862+00:00",
-          "latest_activity_at": "2026-05-13T14:19:51.506+00:00",
+          "latest_activity_at": "2026-06-07T18:59:05.049+00:00",
           "stages_present": [
             "Grant Opportunity Identified",
             "Grant Declined"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "ACT-CORE",
+          "pipeline_name": "Goods Supporter Journey",
+          "open_count": 2,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-29T02:35:18.208+00:00",
+          "latest_activity_at": "2026-06-07T10:36:33.745+00:00",
+          "stages_present": [
+            "Identified",
+            "Cultivating"
+          ],
+          "contacts_count": 2,
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "ACT-CORE",
+          "pipeline_name": "CONTAINED Engagement",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-11T07:12:46.633+00:00",
+          "latest_activity_at": "2026-06-11T07:12:46.633+00:00",
+          "stages_present": [
+            "Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-CORE",
@@ -292,10 +308,10 @@
             "New interest"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
-      "total_open": 22,
+      "total_open": 26,
       "total_won": 0,
       "open_value": 11376702,
       "won_value": 0
@@ -318,23 +334,7 @@
             "Needs Assessment"
           ],
           "contacts_count": 20,
-          "computed_at": "2026-06-06T20:10:00.419Z"
-        },
-        {
-          "project_code": "untagged",
-          "pipeline_name": "Harvest Inbox",
-          "open_count": 2,
-          "won_count": 0,
-          "lost_count": 0,
-          "open_value_aud": 0,
-          "won_value_aud": 0,
-          "earliest_open_at": "2026-06-03T22:17:31.778+00:00",
-          "latest_activity_at": "2026-06-06T02:46:51.082+00:00",
-          "stages_present": [
-            "New"
-          ],
-          "contacts_count": 2,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "untagged",
@@ -345,15 +345,114 @@
           "open_value_aud": 4694171,
           "won_value_aud": 0,
           "earliest_open_at": "2026-05-05T22:28:02.241+00:00",
-          "latest_activity_at": "2026-05-31T20:00:02.401+00:00",
+          "latest_activity_at": "2026-06-08T23:21:10.187+00:00",
           "stages_present": [
             "Grant Opportunity Identified"
           ],
+          "contacts_count": 2,
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "untagged",
+          "pipeline_name": "Harvest Inbox",
+          "open_count": 22,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-03T22:17:31.778+00:00",
+          "latest_activity_at": "2026-06-15T08:05:29.357+00:00",
+          "stages_present": [
+            "New"
+          ],
+          "contacts_count": 22,
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "untagged",
+          "pipeline_name": "Goods Supporter Journey",
+          "open_count": 2,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-07T10:36:35.986+00:00",
+          "latest_activity_at": "2026-06-07T10:36:40.742+00:00",
+          "stages_present": [
+            "Identified"
+          ],
+          "contacts_count": 2,
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "untagged",
+          "pipeline_name": "Goods — Buyer Pipeline",
+          "open_count": 5,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-07T10:36:43.148+00:00",
+          "latest_activity_at": "2026-06-07T10:36:53.1+00:00",
+          "stages_present": [
+            "Outreach Queued"
+          ],
+          "contacts_count": 5,
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "untagged",
+          "pipeline_name": "CONTAINED Engagement",
+          "open_count": 53,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-11T07:09:21.45+00:00",
+          "latest_activity_at": "2026-06-14T02:17:28.377+00:00",
+          "stages_present": [
+            "Identified",
+            "In conversation",
+            "Personal outreach",
+            "Partner / committed"
+          ],
+          "contacts_count": 50,
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "untagged",
+          "pipeline_name": "CONTAINED Adelaide 2026",
+          "open_count": 3,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-11T20:05:19.117+00:00",
+          "latest_activity_at": "2026-06-14T02:16:42.609+00:00",
+          "stages_present": [
+            "Captured"
+          ],
           "contacts_count": 3,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "untagged",
+          "pipeline_name": "The Shop pipeline",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-08T03:54:16.365+00:00",
+          "latest_activity_at": "2026-06-08T03:54:16.365+00:00",
+          "stages_present": [
+            "New interest"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
-      "total_open": 47,
+      "total_open": 131,
       "total_won": 0,
       "open_value": 4694171,
       "won_value": 0
@@ -375,7 +474,7 @@
             "Scoping"
           ],
           "contacts_count": 0,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-MR",
@@ -386,12 +485,12 @@
           "open_value_aud": 1638692,
           "won_value_aud": 0,
           "earliest_open_at": "2026-05-13T14:19:29.606+00:00",
-          "latest_activity_at": "2026-05-13T14:19:29.606+00:00",
+          "latest_activity_at": "2026-06-07T18:55:10.554+00:00",
           "stages_present": [
             "Grant Opportunity Identified"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 5,
@@ -408,16 +507,16 @@
           "open_count": 6,
           "won_count": 0,
           "lost_count": 0,
-          "open_value_aud": 1080000,
+          "open_value_aud": 1090000,
           "won_value_aud": 0,
           "earliest_open_at": "2025-12-01T19:47:18.065+00:00",
-          "latest_activity_at": "2026-03-22T08:47:56.965+00:00",
+          "latest_activity_at": "2026-06-07T18:55:07.766+00:00",
           "stages_present": [
-            "Grant Submitted",
-            "Grant Opportunity Identified"
+            "Grant Opportunity Identified",
+            "Grant Submitted"
           ],
           "contacts_count": 2,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-JH",
@@ -433,7 +532,7 @@
             "Scoping"
           ],
           "contacts_count": 0,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-JH",
@@ -449,12 +548,12 @@
             "Composting"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 7,
       "total_won": 1,
-      "open_value": 1080000,
+      "open_value": 1090000,
       "won_value": 28000
     },
     {
@@ -477,7 +576,7 @@
             "Germination"
           ],
           "contacts_count": 7,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-CA",
@@ -488,18 +587,59 @@
           "open_value_aud": 666717,
           "won_value_aud": 0,
           "earliest_open_at": "2026-05-13T14:19:11.889+00:00",
-          "latest_activity_at": "2026-05-13T14:19:11.889+00:00",
+          "latest_activity_at": "2026-06-07T18:57:23.477+00:00",
           "stages_present": [
             "Grant Opportunity Identified"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 7,
       "total_won": 1,
       "open_value": 672151,
       "won_value": 146973.26
+    },
+    {
+      "project_code": "ACT-PI",
+      "pipelines": [
+        {
+          "project_code": "ACT-PI",
+          "pipeline_name": "A Curious Tractor",
+          "open_count": 0,
+          "won_count": 5,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 415200,
+          "earliest_open_at": null,
+          "latest_activity_at": "2026-06-09T02:28:58.194+00:00",
+          "stages_present": [
+            "Graduation"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "ACT-PI",
+          "pipeline_name": "Grants",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 100000,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": null,
+          "stages_present": [
+            "Application In Progress"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 5,
+      "open_value": 100000,
+      "won_value": 415200
     },
     {
       "project_code": "ACT-OO",
@@ -518,7 +658,7 @@
             "Grant Opportunity Identified"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-OO",
@@ -534,54 +674,13 @@
             "Graduation"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 1,
       "total_won": 1,
       "open_value": 100000,
       "won_value": 100000
-    },
-    {
-      "project_code": "ACT-PI",
-      "pipelines": [
-        {
-          "project_code": "ACT-PI",
-          "pipeline_name": "Grants",
-          "open_count": 1,
-          "won_count": 0,
-          "lost_count": 0,
-          "open_value_aud": 100000,
-          "won_value_aud": 0,
-          "earliest_open_at": null,
-          "latest_activity_at": null,
-          "stages_present": [
-            "Application In Progress"
-          ],
-          "contacts_count": 0,
-          "computed_at": "2026-06-06T20:10:00.419Z"
-        },
-        {
-          "project_code": "ACT-PI",
-          "pipeline_name": "A Curious Tractor",
-          "open_count": 0,
-          "won_count": 5,
-          "lost_count": 0,
-          "open_value_aud": 0,
-          "won_value_aud": 415200,
-          "earliest_open_at": null,
-          "latest_activity_at": "2026-05-05T22:43:29.234+00:00",
-          "stages_present": [
-            "Graduation"
-          ],
-          "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
-        }
-      ],
-      "total_open": 1,
-      "total_won": 5,
-      "open_value": 100000,
-      "won_value": 415200
     },
     {
       "project_code": "ACT-RA",
@@ -600,7 +699,7 @@
             "Grant Opportunity Identified"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 3,
@@ -625,7 +724,7 @@
             "Grant Submitted"
           ],
           "contacts_count": 0,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 1,
@@ -651,7 +750,7 @@
             "Stewarding / Reporting"
           ],
           "contacts_count": 2,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 2,
@@ -676,7 +775,7 @@
             "Graduation"
           ],
           "contacts_count": 0,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 1,
@@ -701,7 +800,7 @@
             "New Inquiry"
           ],
           "contacts_count": 0,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-SH",
@@ -717,7 +816,7 @@
             "Renewing"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 2,
@@ -742,7 +841,7 @@
             "New Lead"
           ],
           "contacts_count": 0,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-CN",
@@ -758,7 +857,7 @@
             "Grant Opportunity Identified"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-CN",
@@ -774,10 +873,29 @@
             "Composting"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "ACT-CN",
+          "pipeline_name": "CONTAINED Engagement",
+          "open_count": 98,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-11T07:12:24.073+00:00",
+          "latest_activity_at": "2026-06-12T06:39:12.238+00:00",
+          "stages_present": [
+            "Identified",
+            "Personal outreach",
+            "Partner / committed",
+            "In conversation"
+          ],
+          "contacts_count": 98,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
-      "total_open": 2,
+      "total_open": 100,
       "total_won": 1,
       "open_value": 16500,
       "won_value": 15000
@@ -794,12 +912,12 @@
           "open_value_aud": 15000,
           "won_value_aud": 0,
           "earliest_open_at": "2026-05-13T14:19:33.07+00:00",
-          "latest_activity_at": "2026-05-13T14:19:33.07+00:00",
+          "latest_activity_at": "2026-06-07T11:02:19.642+00:00",
           "stages_present": [
             "Grant Opportunity Identified"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 1,
@@ -824,7 +942,7 @@
             "Invited"
           ],
           "contacts_count": 23,
-          "computed_at": "2026-06-06T20:10:00.418Z"
+          "computed_at": "2026-06-15T20:10:05.910Z"
         },
         {
           "project_code": "ACT-CE",
@@ -842,7 +960,7 @@
             "Contacted"
           ],
           "contacts_count": 4,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 11,
@@ -867,7 +985,7 @@
             "Grant Opportunity Identified"
           ],
           "contacts_count": 0,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 1,
@@ -892,7 +1010,7 @@
             "Identified"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 22,
@@ -917,7 +1035,7 @@
             "Outreach Queued"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-FM",
@@ -933,7 +1051,7 @@
             "Signal"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         },
         {
           "project_code": "ACT-FM",
@@ -949,7 +1067,7 @@
             "New interest"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 3,
@@ -974,7 +1092,7 @@
             "New Lead"
           ],
           "contacts_count": 0,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 1,
@@ -999,7 +1117,7 @@
             "Signal"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 1,
@@ -1024,7 +1142,7 @@
             "Graduation"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 0,
@@ -1049,7 +1167,7 @@
             "Composting"
           ],
           "contacts_count": 0,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 0,
@@ -1074,7 +1192,7 @@
             "Grant Opportunity Identified"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 0,
@@ -1083,23 +1201,64 @@
       "won_value": 0
     },
     {
-      "project_code": "ACT-GL",
+      "project_code": "ACT-SM",
       "pipelines": [
         {
-          "project_code": "ACT-GL",
-          "pipeline_name": "Harvest Inbox",
+          "project_code": "ACT-SM",
+          "pipeline_name": "Goods Supporter Journey",
           "open_count": 1,
           "won_count": 0,
           "lost_count": 0,
           "open_value_aud": 0,
           "won_value_aud": 0,
-          "earliest_open_at": "2026-05-17T19:59:47.024+00:00",
-          "latest_activity_at": "2026-05-27T06:15:56.829+00:00",
+          "earliest_open_at": "2026-06-07T10:36:38.212+00:00",
+          "latest_activity_at": "2026-06-07T10:36:38.212+00:00",
           "stages_present": [
-            "Resolved"
+            "Identified"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        },
+        {
+          "project_code": "ACT-SM",
+          "pipeline_name": "CONTAINED Engagement",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-11T07:12:41.924+00:00",
+          "latest_activity_at": "2026-06-11T07:12:41.924+00:00",
+          "stages_present": [
+            "Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        }
+      ],
+      "total_open": 2,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-WE",
+      "pipelines": [
+        {
+          "project_code": "ACT-WE",
+          "pipeline_name": "Goods Supporter Journey",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-07T10:36:31.315+00:00",
+          "latest_activity_at": "2026-06-07T10:36:31.315+00:00",
+          "stages_present": [
+            "Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 1,
@@ -1124,7 +1283,32 @@
             "Buyer Matched"
           ],
           "contacts_count": 1,
-          "computed_at": "2026-06-06T20:10:00.419Z"
+          "computed_at": "2026-06-15T20:10:05.911Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-GL",
+      "pipelines": [
+        {
+          "project_code": "ACT-GL",
+          "pipeline_name": "Harvest Inbox",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-17T19:59:47.024+00:00",
+          "latest_activity_at": "2026-05-27T06:15:56.829+00:00",
+          "stages_present": [
+            "Resolved"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-15T20:10:05.911Z"
         }
       ],
       "total_open": 1,

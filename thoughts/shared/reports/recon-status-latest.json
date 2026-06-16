@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-10T20:08:01.743Z",
+  "generatedAt": "2026-06-15T21:25:02.964Z",
   "accounts": [
     "NAB Visa ACT #8815",
     "NJ Marchesi T/as ACT Everyday"
@@ -32,240 +32,31 @@
   ],
   "sections": {
     "reconcileState": {
-      "rows": [
-        {
-          "bank_account": "NAB Visa ACT #8815",
-          "quarter": "Q1",
-          "unreconciled_n": 0,
-          "unreconciled_total": "$0",
-          "reconciled_n": 420,
-          "reconciled_total": "$278,627"
-        },
-        {
-          "bank_account": "NAB Visa ACT #8815",
-          "quarter": "Q2",
-          "unreconciled_n": 124,
-          "unreconciled_total": "$138,429",
-          "reconciled_n": 532,
-          "reconciled_total": "$476,238"
-        },
-        {
-          "bank_account": "NAB Visa ACT #8815",
-          "quarter": "Q3",
-          "unreconciled_n": 68,
-          "unreconciled_total": "$41,069",
-          "reconciled_n": 521,
-          "reconciled_total": "$274,878"
-        },
-        {
-          "bank_account": "NAB Visa ACT #8815",
-          "quarter": "Q4",
-          "unreconciled_n": 51,
-          "unreconciled_total": "$28,531",
-          "reconciled_n": 320,
-          "reconciled_total": "$181,319"
-        },
-        {
-          "bank_account": "NJ Marchesi T/as ACT Everyday",
-          "quarter": "Q1",
-          "unreconciled_n": 0,
-          "unreconciled_total": "$0",
-          "reconciled_n": 84,
-          "reconciled_total": "$506,076"
-        },
-        {
-          "bank_account": "NJ Marchesi T/as ACT Everyday",
-          "quarter": "Q2",
-          "unreconciled_n": 47,
-          "unreconciled_total": "$372,517",
-          "reconciled_n": 33,
-          "reconciled_total": "$316,858"
-        },
-        {
-          "bank_account": "NJ Marchesi T/as ACT Everyday",
-          "quarter": "Q3",
-          "unreconciled_n": 39,
-          "unreconciled_total": "$243,227",
-          "reconciled_n": 0,
-          "reconciled_total": "$0"
-        },
-        {
-          "bank_account": "NJ Marchesi T/as ACT Everyday",
-          "quarter": "Q4",
-          "unreconciled_n": 22,
-          "unreconciled_total": "$129,623",
-          "reconciled_n": 0,
-          "reconciled_total": "$0"
-        }
-      ]
+      "unavailable": "permission denied for function exec_sql"
     },
     "untagged": {
-      "rows": [
-        {
-          "quarter": "Q2",
-          "n": 74,
-          "total": "$37,828"
-        },
-        {
-          "quarter": "Q3",
-          "n": 78,
-          "total": "$15,845"
-        },
-        {
-          "quarter": "Q4",
-          "n": 30,
-          "total": "$6,098"
-        }
-      ]
+      "unavailable": "permission denied for function exec_sql"
     },
     "receipts": {
       "spend": {
-        "rows": [
-          {
-            "quarter": "Q1",
-            "has_attachments": false,
-            "n": 258,
-            "total": "$169,830"
-          },
-          {
-            "quarter": "Q1",
-            "has_attachments": true,
-            "n": 149,
-            "total": "$90,128"
-          },
-          {
-            "quarter": "Q2",
-            "has_attachments": false,
-            "n": 287,
-            "total": "$104,363"
-          },
-          {
-            "quarter": "Q2",
-            "has_attachments": true,
-            "n": 340,
-            "total": "$337,139"
-          },
-          {
-            "quarter": "Q3",
-            "has_attachments": false,
-            "n": 298,
-            "total": "$32,458"
-          },
-          {
-            "quarter": "Q3",
-            "has_attachments": true,
-            "n": 268,
-            "total": "$120,112"
-          },
-          {
-            "quarter": "Q4",
-            "has_attachments": false,
-            "n": 230,
-            "total": "$32,516"
-          },
-          {
-            "quarter": "Q4",
-            "has_attachments": true,
-            "n": 129,
-            "total": "$81,535"
-          }
-        ]
+        "unavailable": "permission denied for function exec_sql"
       },
       "emailsByStatus": {
-        "rows": [
-          {
-            "status": "uploaded",
-            "n": 1920
-          },
-          {
-            "status": "review",
-            "n": 261
-          },
-          {
-            "status": "matched",
-            "n": 140
-          },
-          {
-            "status": "captured",
-            "n": 109
-          },
-          {
-            "status": "junk",
-            "n": 75
-          },
-          {
-            "status": "failed",
-            "n": 11
-          },
-          {
-            "status": "skipped",
-            "n": 8
-          }
-        ]
+        "unavailable": "permission denied for function exec_sql"
       },
       "docCounts": {
-        "finance_receipt_documents": 7172,
-        "finance_receipt_bank_line_links": 4292
+        "finance_receipt_documents": "unavailable: table absent",
+        "finance_receipt_bank_line_links": "unavailable: table absent"
       }
     },
     "duplicateRadar": {
-      "rows": [
-        {
-          "quarter": "Q1",
-          "dup_groups": 9,
-          "txns_covered": 19,
-          "total": "$6,275"
-        },
-        {
-          "quarter": "Q2",
-          "dup_groups": 24,
-          "txns_covered": 58,
-          "total": "$59,981"
-        },
-        {
-          "quarter": "Q3",
-          "dup_groups": 10,
-          "txns_covered": 24,
-          "total": "$12,760"
-        },
-        {
-          "quarter": "Q4",
-          "dup_groups": 2,
-          "txns_covered": 4,
-          "total": "$2,154"
-        }
-      ]
+      "unavailable": "permission denied for function exec_sql"
     },
     "matchTargets": {
-      "rows": [
-        {
-          "n": 311,
-          "total": "$503,119",
-          "with_receipt": 304
-        }
-      ]
+      "unavailable": "permission denied for function exec_sql"
     },
     "freshness": {
-      "rows": [
-        {
-          "bank_account": "NJ Marchesi T/as ACT Everyday",
-          "max_date": "2026-06-05",
-          "max_updated": "2026-06-10T20:01:14.054168+00:00",
-          "rows_24h": 1,
-          "rows_7d": 47,
-          "state": "fresh",
-          "hours_since": 0.1
-        },
-        {
-          "bank_account": "NAB Visa ACT #8815",
-          "max_date": "2026-06-10",
-          "max_updated": "2026-06-10T20:01:24.703892+00:00",
-          "rows_24h": 229,
-          "rows_7d": 834,
-          "state": "fresh",
-          "hours_since": 0.1
-        }
-      ]
+      "unavailable": "permission denied for function exec_sql"
     }
   }
 }
