@@ -58,7 +58,7 @@ function calculateConfidence(payments: number, gapStddev: number, amountStddev: 
 export async function POST() {
   try {
     // Find recurring vendors from Xero transactions
-    const { data: recurring, error: recurringError } = await supabase.rpc('execute_sql', {
+    const { data: recurring, error: recurringError } = await supabase.rpc('exec_sql', {
       query: `
         WITH payment_gaps AS (
           SELECT
@@ -88,7 +88,9 @@ export async function POST() {
       `
     })
 
-    // Fallback: query directly if RPC doesn't exist
+    // Fallback: compute in JS if the exec_sql RPC errors. NOTE this path is .range()-less so it
+    // caps raw txns at PostgREST's 1000-row limit before grouping — the primary exec_sql path
+    // (server-side aggregation, small grouped result) is the accurate one.
     let vendors: Array<{
       contact_name: string
       payments: number
