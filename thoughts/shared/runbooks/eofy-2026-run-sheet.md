@@ -15,6 +15,8 @@ tags: [eofy, cutover, founder-pay, rd-tax, runbook]
 >
 > **Two tracker findings folded in (2026-06-12):** (1) the tracker holds Inv 15078 pending Standard Ledger confirming invoice-vs-journal treatment (note dated 31 May), so steps #10, #11 and #14 execute after the Monday email answers that; (2) "Accept Standard Ledger proposal + clear Xero access" is an open P0 that gates SL's BAS cleanup, mapping review and R&D review: add it to Monday.
 
+> **The priority money does not need NAB (2026-06-13).** Founder pay this year flows through the sole trader account, which already exists: Ben's invoices (#10, #11, #14) are paid by the sole trader, and Nic's drawings (#19) come from it. The Pty NAB account is required only for the ~$59K R&D window slice (#17) and for FY27 trading from 1 July. The EOFY priority can complete with NAB still in progress; only the window slice waits, and it carries to FY27 if missed. So the critical-path line above is the *window* path, not the founder-pay path.
+
 ## Week of 15 to 19 June
 
 | # | Day | Step | Why | Owner |
