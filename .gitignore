@@ -172,3 +172,19 @@ thoughts/shared/.triage-story-cache.json
 
 # Codex CLI local cache
 .codex/cache/
+
+# --- Cron daily-output streams (2026-06-16) ---
+# Policy (matches the compliance-calendar rule above): track the latest.* rollups and
+# dashboards that carry current state into git; ignore the dated daily history, which
+# accumulates locally and is regenerable. [0-9]* matches YYYY-MM-DD files only; latest.* is safe.
+thoughts/shared/data/money-command-snapshots/[0-9]*.json
+thoughts/shared/cross-codebase-feed/[0-9]*.json
+thoughts/shared/reports/supporters-intelligence-[0-9]*.json
+thoughts/shared/reports/reconcile-sidecar-fy26-[0-9]*.html
+thoughts/shared/reports/reconcile-sidecar-fy26-[0-9]*.json
+thoughts/shared/cockpit/xero-ghl-reconciler/[0-9]*.md
+thoughts/shared/cockpit/procurement-analyst/[0-9]*.md
+thoughts/shared/drafts/funder-notes/[0-9]*.md
+
+# Meeting-sync cursor (machine state, like .xero-sync-state.json above)
+wiki/raw/.last-meeting-sync
