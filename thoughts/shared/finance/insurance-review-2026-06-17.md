@@ -82,6 +82,12 @@ Read the insurer schedule (QF112606330BI), the quotation, and the "What You Told
 
 This policy would not properly cover a Harvest event (Event Management excluded, performers and flame exclusions, cafe). Do not run the 20 June event assuming this is fit-for-purpose cover. Sort interim cover that actually matches the activity, or hold the event's risky elements.
 
+### Two-part approach (decided 2026-06-17)
+
+**Part 1, The Harvest, cover ASAP.** Re-rate the Witta policy for the real venue business (cafe, events, venue hire, workshops, public including children), drop performing-artist + Event Management exclusion, remove the molestation exclusion / add abuse cover, bind in A Curious Tractor Pty Ltd now and transfer to The Harvest Pty Ltd on incorporation, decide property/contents for the fit-out, confirm food cover, note the landlord, sort interim cover for 20 June, and set up WorkCover once staff start.
+
+**Part 2, other operations, over the cutover.** A Curious Tractor Pty Ltd PL (consulting + on-country), Professional Indemnity, D&O, Cyber, Goods products liability + recall + transit, abuse / sexual-misconduct liability for community and youth work, Butterfly charity cover, and motor for the HiLux. Quote as a program once Part 1 is bound.
+
 ### Instruct the broker to (before any binding)
 
 - Correct the insured to A Curious Tractor Pty Ltd, ACN 697 347 676 (and confirm the right entity given the 1 July cutover and that Harvest is not yet incorporated)
