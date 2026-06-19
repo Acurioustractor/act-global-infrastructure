@@ -258,6 +258,16 @@
       "sourceId": "eofy-money-plan"
     },
     {
+      "id": "transfer-mechanism",
+      "title": "Sole-trader → Pty transfer mechanism",
+      "decision": "Proposed call: 328-G & 122-A fail on the 50/50 two-trust cap table → market-value SALE sheltered by the 50% CGT discount + Div 152, price left as a vendor loan (tax-free founder drawdown). This is a FORK from the journal-entry/Path-C model — SL must re-open it; consider a PBR on the credit-loan-not-Div-7A point.",
+      "owner": "Standard Ledger",
+      "due": "2026-06-22",
+      "status": "Proposed - SL to rule",
+      "why": "Determines the CGT cost, the QLD duty exposure, and whether the founders get a tax-free loan. The #1 ruling.",
+      "sourceId": "eofy-money-plan"
+    },
+    {
       "id": "butterfly-dgr",
       "title": "Butterfly / DGR connection",
       "decision": "Confirm how The Butterfly Movement Ltd connects to the group without undermining DGR/PBI compliance or Indigenous-led governance.",
