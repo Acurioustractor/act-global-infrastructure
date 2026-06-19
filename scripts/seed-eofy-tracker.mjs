@@ -56,12 +56,18 @@ function buildProperties(item) {
   const props = {
     Task: { title: [{ text: { content: item.task } }] },
     Category: { select: { name: item.category } },
-    Status: { select: { name: item.status } },
+    // Status is a Notion "status"-type property (not select).
+    Status: { status: { name: item.status } },
     Priority: { select: { name: item.priority } },
-    Owner: { select: { name: item.owner } },
   }
   if (item.due) props.Due = { date: { start: item.due } }
-  if (item.note) props.Evidence = { rich_text: [{ text: { content: item.note.slice(0, 1990) } }] }
+  // Owner is a "people"-type property and can't be set from a plain name
+  // (Standard Ledger / Broker aren't Notion users), so carry the owner in the
+  // Evidence text instead of the Owner property.
+  const evidence = []
+  if (item.owner) evidence.push(`Owner: ${item.owner}`)
+  if (item.note) evidence.push(item.note)
+  if (evidence.length) props.Evidence = { rich_text: [{ text: { content: evidence.join(' — ').slice(0, 1990) } }] }
   if (item.source) props.Source = { rich_text: [{ text: { content: item.source } }] }
   return props
 }

@@ -1,62 +1,40 @@
-# DRAFT — email to Standard Ledger (EOFY cutover rulings)
+# DRAFT — email to Standard Ledger (EOFY: proposed positions to confirm)
 
-> Draft for Ben to review + send. Built from `thoughts/shared/plans/2026-06-19-eofy-money-movement-plan.md` §8. Fill the contact name. Nothing here has been sent.
+> Draft for Ben to review + send. Reframed from open questions → **proposed positions** so the meeting is "confirm or correct," not "what should we do?" Full reasoning + ATO sources in the decision pack: `thoughts/shared/plans/2026-06-19-eofy-decision-pack.md`. Fill the contact name. Nothing here has been sent.
 
 **To:** [Standard Ledger contact]
-**Subject:** ACT EOFY — sole-trader → Pty cutover: time-critical items this week + rulings to lock
+**Subject:** ACT EOFY — our proposed positions for your sign-off (time-critical items this week)
 
 ---
 
 Hi [name],
 
-We're 11 days out from 30 June and finalising the A Curious Tractor sole-trader (Nic Marchesi, ABN 21 591 780 066) → **A Curious Tractor Pty Ltd** (ACN 697 347 676, ABN 36 697 347 676) cutover. We're leaning **Option A**: trade from the Pty from 1 July, and interpose a holdco *above* it later via Div 615 only if a raise or sale needs it.
+We're 11 days from 30 June and finalising the A Curious Tractor sole-trader (Nic, ABN 21 591 780 066) → **A Curious Tractor Pty Ltd** (ACN 697 347 676, ABN 36 697 347 676) cutover. Rather than send you a list of open questions, we've done the work to land on a **proposed position** for each ruling — what we'd like you to **confirm or correct**. I've kept the detail (with ATO references) in a separate pack; below is the summary and the few things that need a call this week.
 
-Before we action anything we'd value your steer on the below — grouped, time-critical first. The items in section A involve money moving before 30 June, so a quick call this week would help.
+Could we grab 30 minutes this week? The super and R&D-payment deadlines both land before 30 June.
 
-## A. Need your call THIS WEEK (money moves before 30 June)
+## The proposed calls we most need you to confirm
 
-1. **Nic personal deductible super** — we want to contribute up to the $30K concessional cap so the fund *receives* it by 30 June (i.e. send ~23–25 Jun). Two checks: (a) Nic's available concessional cap incl. any carry-forward — is his total super balance under $500K at 30 Jun 2025? (b) does his ~$238K of FY26 drawings + any salary recharacterisation + this contribution push his Division 293 income over $250K, and is the contribution still net-worth-it after that? Same question for Ben via Knight Photography if it's structurable there.
-2. **R&D associate-payment timing** — our understanding is that to count founder R&D pay in the FY26 claim, associate amounts (s355-480) must be *physically paid* from the Pty by 30 June, not journaled or loan-credited. (a) What's the defensible R&D-eligible dollar amount to run through Pty payroll (PAYG + super) and pay by 30 June? (b) What apportionment % of each founder's time will stand up — we've modelled Ben 95% / Nic 40% but expect a haircut. (c) Is any lend-back of that paid wage acceptable without tripping round-robin / Part IVA / Div 7A? For anything we can't pay by 30 June, can you confirm we carry it to FY27 under s355-480 and do **not** s8-1 deduct it (we understand that election is irreversible).
-3. **Pre-30-June sole-trader deductions** — confirm instant asset write-off + prepaid-expense (12-month rule) treatment so we can time ~$50K of discretionary spend into FY26 at Nic's marginal rate.
+1. **Transfer mechanism — this is the big one.** With the Pty owned 50/50 by the Knight and Marchesi family trusts, our reading is that **neither standard rollover works** (Subdiv 328-G fails the ultimate-economic-ownership test across two family groups; 122-A needs 100% to one transferor). So our proposed path is a **market-value sale of the business to the Pty, with the gain sheltered by the 50% CGT discount + Division 152**, and the price left as a **vendor loan** the founders can draw down tax-free. **We recognise this is a fork away from the "journal-entry / operated on behalf" model — please tell us if you agree, and whether the credit-loan-not-Div-7A treatment warrants a private ruling.**
+2. **R&D — retract one step, run a modest evidenced claim.** We believe paying founders' R&D amounts via a journal/loan-account does **not** meet the "paid" test (s355-480) — real cash must leave the Pty by 30 June. We propose paying **~$45–60K** of genuine, apportioned window pay (and carrying anything unpaid to FY27, *not* s8-1-deducting it). We also think the **Path C wording is backwards** and should read "the Pty engages the founders to conduct R&D *for* the Pty" from 24 Apr — and that this (and the IP-transfer chain) may warrant a private ruling. Confirm the amount, the apportionment method, and the PBR call.
+3. **Knight Photography — sole trader, not partnership.** Please confirm there's no existing partnership ABN and how the Sept-2025 ~$100K was booked, then correct the record to **sole trader**; we'll register/backdate GST (a wash between two registered entities). PSI likely attributes the income to Ben; ACT's deduction is safe regardless.
+4. **Founder pay FY27 — salary-first.** $120K + 12% SG each from 1 July; top up toward ~$200K via salary/bonus, with dividends only when franking exists. Trusts stay passive shareholders. (We've noted Bendel is now settled for taxpayers and the announced 30% trust-distribution tax from 1 Jul 2028 — both point to salary-first.)
+5. **Entities:** Butterfly stays **beside** the group via arm's-length agreements (not under a holdco — CLG has members not shares); the farm stays **personal** in Nic's name; **no tax consolidation**; the holdco comes **later** via a Div 615 roll-up if a deal needs it.
 
-## B. The #1 structural ruling — the transfer mechanism
+## Need your call THIS WEEK (deadlines before 30 June)
 
-The Pty is owned 50/50 by the **Knight and Marchesi family trusts**. Our reading is that *neither* standard CGT rollover cleanly fits: Subdiv 328-G fails the no-change-in-ultimate-economic-ownership test (two different family groups), and Subdiv 122-A needs 100% to a single transferor.
+- **Nic's super (~$30K, send by ~24 Jun):** GO in principle for the FY26 deduction — but please run the **Division 293** check on his *actual* net business profit first (his ~$238K is drawings, not taxable income), and confirm we should **not** exceed $30K until we've pulled his myGov carry-forward + TSB.
+- **R&D window payment (by 30 Jun):** confirm the dollar figure and that we physically pay it from the Pty (PAYG + super), not by journal.
+- **Decision 1 (operating entity):** we're locking "trade from the Pty, holdco later" in writing this week so we can send novation letters — flag if you'd structure it differently.
 
-4. Which path do you recommend: (a) restructure the contribution so each individual's UEO is preserved; (b) interpose Nic's own family trust as transferor with family-trust elections; or (c) a market-value sale sheltered by the 50% CGT discount + Div 152 small-business concessions?
-5. **Director loan:** if we go the market-value-sale route, does that create a tax-free *credit* director-loan account the founders can draw down over time — and is it owed to them individually or to the trusts? (We understand this is incompatible with a 122-A rollover.)
-6. **Goodwill + plant valuation** you'll accept (drives the loan account, any CGT, and QLD duty).
-7. **QLD transfer duty** — full/partial small-business-restructure exemption given a new owner is introduced (ownership-continuity), or do we budget up to 5.75% on goodwill + plant? Do we need a QLD duties specialist?
-8. **Effective cutover date** — 30 June vs 1 July commencement; your preferred transfer date for the agreement.
+## Data we'll get to you (so you can finalise the numbers)
 
-## C. Founder pay structure (FY27)
+Independent goodwill + IP + plant valuation · Nic's actual FY26 net business profit · both founders' myGov TSB @ 30 Jun 2025 + carry-forward · the R&D window activity log · KP's structure + how the Sept-2025 $100K was booked · aggregated turnover across connected entities.
 
-9. We're setting both founders on **$120K salary + 12% SG from 1 July** via Pty payroll (for PSI-clean recurring income). Confirm the payday-super cadence from 1 July 2026 and the SG/PAYG setup.
-10. **Nic's fair-market FY26 director salary** for the drawings→salary recharacterisation (we've placeholdered $200K) — what's defensible, and what evidence do you need (written opinion + market data + time records)?
-11. **QLD payroll tax** — does recharacterised salary + $120K-each payroll cross the ~$1.3M grouped threshold (ACT Pty + future Harvest Pty)?
-12. **Franked dividends to the trusts** — confirm ACT Pty franks at 25% only if it qualifies as a base-rate entity for FY26 (income mix of grants/commercial/R&D vs the ≤80%-passive test). Any Bendel/UPE exposure routing trust income to the Pty as a corporate beneficiary?
-13. **Div 7A** complying-loan agreements for in-year founder draws (benchmark 8.37% FY26) — and the exact FY26 company-return lodgement day we need them in place by.
+## Two we think are worth a private ruling
 
-## D. Knight Photography (Ben)
+The **Path C R&D window attribution** (novel entity-attribution; software R&D is heavily reviewed) and the **credit-loan-is-not-Div-7A** characterisation (Part IVA exposure). Keen for your view on whether to seek them.
 
-14. **KP legal form** — sole trader vs partnership (decides who signs invoices + the PSI analysis). This blocks our invoice steps.
-15. **GST registration/backdating** to 1 July 2025 (>$75K once Phase 2 lands) and the PSI/PSB posture.
+Full pack with reasoning + ATO sources attached. Thanks — and a call this week would be ideal given the deadlines.
 
-## E. R&D claim
-
-16. **Path C** — do you accept the "sole trader operating on behalf of the Pty" mapping so AusIndustry can register the Pty for FY26 activities? (This is what saves ~$104K of refund component from the pre-incorporation exclusion.)
-17. How much of the internal FY26 R&D base sits in the Pty's ~10-week window (24 Apr–30 Jun)? We need to cut the full-year $317,500 personnel figure to the defensible window before registration.
-18. Confirm aggregated turnover **< $20M** for the refundable offset, and the family-trust grouping.
-
-## F. Entities & housekeeping
-
-19. **Butterfly (Goods on Country)** — confirm it sits beside, not under, the commercial group via arm's-length agreements (it's an endorsed DGR + PBI since 2012). Any lawyer items before the 26 June handover?
-20. **Farm** — stays personal in Nic's name; lease + accommodation income treatment.
-21. **Trust distribution resolutions** — does either family trust have FY26 income needing a resolution signed by 30 June?
-22. **Tax consolidation** for the group (Pty + future Harvest + holdco) — worth it at this scale, or stay unconsolidated?
-23. **Final sole-trader BAS** — what's the lodgement date for the cessation quarter (we've seen 28 Jul / ~25 Aug agent-lodged / 28 Oct), and the ABN/GST/PAYGW cancellation sequence after final obligations?
-
-Happy to jump on a call this week given the super + R&D-payment deadlines land before 30 June. I've got a full working doc behind all of this if it's useful.
-
-Thanks,
 Ben
