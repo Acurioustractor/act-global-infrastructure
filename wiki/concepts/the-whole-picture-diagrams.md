@@ -43,7 +43,7 @@ flowchart LR
     MI["Mount Isa"]
     BEYOND["Future nodes + licensees<br/>not ACT's to control"]
   end
-  ST -->|"328-G cutover 30 Jun"| PTY
+  ST -->|"cutover 30 Jun (mechanism TBC)"| PTY
   PTY --- EL
   PTY --- JH
   PTY --- CG

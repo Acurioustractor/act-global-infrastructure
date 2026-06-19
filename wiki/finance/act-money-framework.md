@@ -337,6 +337,8 @@ Multi-year setup — start NOW so it lands by Y2.
 
 ### E3. Subdivision 328-G rollover for cutover asset transfer
 
+> ⚠️ **RETRACTED / SUPERSEDED (2026-06-19).** 328-G does NOT work here: A Curious Tractor Pty Ltd is owned 50/50 by two *different* family groups (Knight FT + Marchesi FT), so the no-change-in-ultimate-economic-ownership test fails, and the s328-440 family-trust alternative (single family group only) can't bridge them. Subdiv 122-A also fails (100%-of-shares-to-one-transferor). **Current proposed position: a market-value SALE + 50% CGT discount + Div 152 shelter + vendor loan — a FORK from the journal-entry model, pending Standard Ledger.** Source of truth: `thoughts/shared/plans/2026-06-19-eofy-decision-pack.md` §C1. The 328-G eligibility check below — and the incidental 328-G references in the decision log and the §H1 checklist — are retained as the original 2026-05 reasoning but are superseded by this note.
+
 **Opportunity:** defer all asset-related tax events at cutover, including IP, equipment, depreciating assets, and trading stock — areas where Subdivision 122-A would leave gaps.
 
 **Action [V]:** instruct Standard Ledger to use **Subdivision 328-G** (small business restructure rollover), not 122-A. 328-G covers all asset types.
@@ -344,7 +346,7 @@ Multi-year setup — start NOW so it lands by Y2.
 **Eligibility check [V]:**
 - Both entities small business entities (aggregated turnover < $10M) — ✅ ACT well under
 - "Genuine restructure" of business — ✅ Nic's sole trader → Pty meets this
-- Same ultimate economic ownership before and after — ✅ Nic remains beneficial owner via Marchesi Trust
+- Same ultimate economic ownership before and after — ❌ **FAILS** — the Pty is 50/50 Knight FT + Marchesi FT (two family groups), not 100% Nic; this introduces a new ultimate economic owner. See the 2026-06-19 retraction above.
 - Australian residents — ✅
 - Election made by both parties before/at cutover — needs to be done formally
 

@@ -32,7 +32,7 @@ The brain's finance source-of-truth layer. Live operational data lives in the Co
 | File | What it holds |
 |---|---|
 | [act-money-thesis-discussion.md](./act-money-thesis-discussion.md) | Full discussion document — for Ben + Nic + Standard Ledger to walk through together. |
-| [act-money-thesis-rebuttal.md](./act-money-thesis-rebuttal.md) | Adversarial review of the founder-pay-and-rd thesis. Flags Subdiv 328-G, small business CGT, IPP JV, PSI/PSB, realistic R&D refund range. |
+| [act-money-thesis-rebuttal.md](./act-money-thesis-rebuttal.md) | Adversarial review of the founder-pay-and-rd thesis. Flags Subdiv 328-G (⚠️ **later RETRACTED 2026-06-19** — fails the two-trust UEO test; see the decision pack), small business CGT, IPP JV, PSI/PSB, realistic R&D refund range. |
 | [five-year-cashflow-model.md](./five-year-cashflow-model.md) | FY26 actuals + FY27-30 projections supporting the five-year plan (working draft). |
 
 ## Operational analysis

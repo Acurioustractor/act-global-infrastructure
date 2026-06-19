@@ -85,7 +85,7 @@ Five rules to never break:
 | Send Snow Foundation INV-0321 chase ($132K) | Nic | When 30d |
 | Make Standard Ledger appointment | Ben | This week |
 | Bring forward FY27 R&D-eligible spend | Ben + Nic | Next 4 weeks (per rebuttal §3.5) |
-| 328-G election forms drafted | Standard Ledger | Mid-May |
+| ~~328-G election forms drafted~~ ⚠️ **RETRACTED 2026-06-19** — transfer mechanism is now a market-value sale + Div 152, not 328-G (decision pack §C1) | Standard Ledger | — |
 | R&D consultant engaged | Standard Ledger refers | Mid-May |
 | Trust deeds reviewed for streaming permissions | Standard Ledger | Mid-May |
 
@@ -94,7 +94,7 @@ Five rules to never break:
 | Date | Action |
 |---|---|
 | 1-15 Jun | Final pre-cutover spend window — bring forward equipment/contractor/travel that's R&D-eligible |
-| 15-25 Jun | Sign Subdiv 328-G election forms (Nic's ST → ACT Pty), asset transfer scheduled |
+| 15-25 Jun | ⚠️ **328-G election RETRACTED 2026-06-19** — 328-G fails the two-trust UEO test; proposed path is a market-value sale + 50% discount + Div 152 + vendor loan. See `thoughts/shared/plans/2026-06-19-eofy-decision-pack.md` §C1 |
 | 25-29 Jun | Final invoice push from Nic's ST (catch any outstanding) |
 | **30 Jun** | **CUTOVER.** Nic's ST closes (not deregistered yet — wait Y2). ACT Pty starts trading 1 Jul. |
 | 30 Jun | Trust distribution resolutions signed — wait, this is FY27 first cycle, see July |
@@ -381,7 +381,7 @@ Three GHL pipelines that need attention this CY:
 These go on the Money Sync Page for ongoing capture:
 
 ### Standard Ledger questions
-1. Confirm 328-G election treatment for Nic's sole trader → ACT Pty, including exact list of assets transferred.
+1. ⚠️ **328-G RETRACTED 2026-06-19** — confirm the transfer MECHANISM with Standard Ledger (328-G *and* 122-A both fail on the 50/50 two-trust cap table; proposed: market-value sale + Div 152 + vendor loan), including the exact list of assets transferred. See `thoughts/shared/plans/2026-06-19-eofy-decision-pack.md` §C1.
 2. Confirm Path C R&D registration mechanic for FY26 (Pty as registrant for activities pre-incorporation).
 3. Trust deed permissions: does the Knight Family Trust deed allow streaming franked dividends and capital gains? If not, what's the cost to amend?
 4. Cameron + Pollyanna distribution treatment under s100A — what evidence do we need to maintain?
