@@ -1,0 +1,707 @@
+{
+  "title": "ACT Business Command",
+  "subtitle": "EOFY decisions, founder money movement, R&D window logic, and 1 July operating readiness.",
+  "notionUrl": "https://www.notion.so/63cbc05e64ba4203b514beb8eb4f9445",
+  "cutover": "2026-06-30",
+  "ptyStarts": "2026-07-01",
+  "disclaimer": "Scenario mechanics only. Standard Ledger, the R&D consultant, and the DGR lawyer own final tax, R&D, and legal positions.",
+  "metrics": [
+    {
+      "id": "days-to-eofy",
+      "label": "Days to EOFY",
+      "dynamic": "daysToCutover",
+      "detail": "30 Jun 2026 close. Pty target start is 1 Jul 2026.",
+      "tone": "bad",
+      "confidence": "queried",
+      "sourceId": "notion-tracker"
+    },
+    {
+      "id": "p0-open",
+      "label": "P0 open",
+      "dynamic": "p0Open",
+      "detail": "Live from the Notion EOFY tracker.",
+      "tone": "warn",
+      "confidence": "queried",
+      "sourceId": "notion-tracker"
+    },
+    {
+      "id": "ben-invoices",
+      "label": "Ben invoice route",
+      "value": "$100K",
+      "detail": "Phase 2 Knight Photography invoices to the sole trader, before the split Q4 window.",
+      "tone": "good",
+      "confidence": "needs SL confirmation",
+      "sourceId": "rd-window-plan"
+    },
+    {
+      "id": "nic-drawings",
+      "label": "Nic drawings route",
+      "value": "$100K",
+      "detail": "Scenario cash movement from the sole trader, sized against collections.",
+      "tone": "info",
+      "confidence": "scenario",
+      "sourceId": "rd-window-plan"
+    },
+    {
+      "id": "rd-window-refund",
+      "label": "R&D window refund",
+      "value": "$26-30K",
+      "detail": "24 Apr to 30 Jun Pty window only, if associate amounts are paid by 30 Jun.",
+      "tone": "good",
+      "confidence": "needs SL confirmation",
+      "sourceId": "rd-window-plan"
+    }
+  ],
+  "criticalPath": [
+    {
+      "id": "nab-docs",
+      "step": "NAB docs and Pty account live",
+      "owner": "Nic",
+      "due": "2026-06-19",
+      "why": "The Pty bank account gates seed loans, window payments, Xero, and 1 July trading readiness.",
+      "priority": "P0",
+      "category": "Banking",
+      "confidence": "queried",
+      "sourceId": "eofy-run-sheet",
+      "notionMatchers": ["NAB", "business account"]
+    },
+    {
+      "id": "sl-answers",
+      "step": "Standard Ledger answers locked",
+      "owner": "Ben + Standard Ledger",
+      "due": "2026-06-19",
+      "why": "GST, PSI, Q4 split, Nic window fee, and paid-by-30-Jun rules must be written before invoices move.",
+      "priority": "P0",
+      "category": "Advisers",
+      "confidence": "needs SL confirmation",
+      "sourceId": "eofy-run-sheet",
+      "notionMatchers": ["Standard Ledger", "R&D consultant", "email"]
+    },
+    {
+      "id": "operating-entity",
+      "step": "Decision 1: operating entity",
+      "owner": "Ben + Nic",
+      "due": "2026-06-19",
+      "why": "Sets the claimant, payroll employer, contract counterparty, QBE handling, and novation wording.",
+      "priority": "P0",
+      "category": "Decision",
+      "confidence": "scenario",
+      "sourceId": "core-facts",
+      "notionMatchers": ["operating entity", "Decision 1"]
+    },
+    {
+      "id": "kp-invoices",
+      "step": "Knight Photography invoices raised",
+      "owner": "Ben",
+      "due": "2026-06-30",
+      "why": "Ben route is the only deductible founder-pay route out of the sole trader this year.",
+      "priority": "P1",
+      "category": "Money movement",
+      "confidence": "needs SL confirmation",
+      "sourceId": "rd-window-plan",
+      "notionMatchers": ["Knight Photography", "Phase 1", "Phase 2"]
+    },
+    {
+      "id": "seed-loan",
+      "step": "Director seed loan documented",
+      "owner": "Ben + Nic + Standard Ledger",
+      "due": "2026-06-30",
+      "why": "Funds the Pty window payments and creates clean founder loan accounts for later tax-free repayments.",
+      "priority": "P1",
+      "category": "Money movement",
+      "confidence": "scenario",
+      "sourceId": "rd-window-plan",
+      "notionMatchers": ["director", "loan"]
+    },
+    {
+      "id": "window-payments",
+      "step": "Pty pays the R&D window amounts",
+      "owner": "Ben + Nic",
+      "due": "2026-06-30",
+      "why": "Associate R&D amounts enter FY26 only if paid by 30 Jun; otherwise they carry into FY27.",
+      "priority": "P0",
+      "category": "R&D",
+      "confidence": "needs SL confirmation",
+      "sourceId": "rd-window-plan",
+      "notionMatchers": ["window", "R&D", "paid"]
+    },
+    {
+      "id": "trustee-resolutions",
+      "step": "Trustee resolutions checked",
+      "owner": "Ben + Nic + Standard Ledger",
+      "due": "2026-06-30",
+      "why": "If either family trust has FY26 income, resolutions are due by 30 Jun.",
+      "priority": "P1",
+      "category": "Compliance",
+      "confidence": "needs SL confirmation",
+      "sourceId": "eofy-run-sheet",
+      "notionMatchers": ["trustee", "resolutions"]
+    },
+    {
+      "id": "transfer-mechanism",
+      "step": "Transfer mechanism ruling (50/50 two-trust)",
+      "owner": "Standard Ledger",
+      "due": "2026-06-22",
+      "why": "Neither 328-G (UEO) nor 122-A (100%) cleanly fits 50/50 two-family-trust ownership. SL picks the path; it also decides whether a tax-free credit director-loan is available.",
+      "priority": "P0",
+      "category": "Decision",
+      "confidence": "needs SL confirmation",
+      "sourceId": "eofy-money-plan",
+      "notionMatchers": ["transfer mechanism", "rollover", "328-G", "122-A"]
+    },
+    {
+      "id": "nic-super",
+      "step": "Nic personal deductible super sent",
+      "owner": "Nic",
+      "due": "2026-06-24",
+      "why": "Up to $30K concessional cap deducts at marginal rate, but the fund must RECEIVE it by 30 Jun (send ~23-25 Jun). Confirm cap headroom + Div 293 stack first.",
+      "priority": "P0",
+      "category": "Tax",
+      "confidence": "needs SL confirmation",
+      "sourceId": "eofy-money-plan",
+      "notionMatchers": ["super", "concessional", "NAT 71121", "notice of intent"]
+    },
+    {
+      "id": "pty-gst-reg",
+      "step": "Pty GST + PAYG-withholding registration live",
+      "owner": "Standard Ledger + Ben",
+      "due": "2026-06-30",
+      "why": "The GST going-concern exemption fails if the recipient Pty is not GST-registered before the transfer/settlement.",
+      "priority": "P1",
+      "category": "Tax/ABR",
+      "confidence": "needs SL confirmation",
+      "sourceId": "eofy-money-plan",
+      "notionMatchers": ["GST", "PAYG", "registration"]
+    },
+    {
+      "id": "discretionary-spend",
+      "step": "Pre-30-June sole-trader discretionary spend",
+      "owner": "Ben + Nic",
+      "due": "2026-06-30",
+      "why": "Instant asset write-off + prepaid SaaS deduct at the sole-trader marginal rate (~47%), beating the Pty 25%. One-shot FY26 lever.",
+      "priority": "P2",
+      "category": "Tax",
+      "confidence": "needs SL confirmation",
+      "sourceId": "eofy-money-plan",
+      "notionMatchers": ["instant asset", "prepaid", "discretionary spend"]
+    },
+    {
+      "id": "div7a-agreements",
+      "step": "Div 7A complying loan agreements drafted",
+      "owner": "Pty + Standard Ledger",
+      "due": "2026-06-30",
+      "why": "In-year founder draws against debit loan accounts need a written agreement (8.37% FY26 benchmark, MYR by 30 Jun) or they are deemed unfranked dividends.",
+      "priority": "P1",
+      "category": "Compliance",
+      "confidence": "scenario",
+      "sourceId": "eofy-money-plan",
+      "notionMatchers": ["Div 7A", "loan agreement"]
+    },
+    {
+      "id": "goodwill-valuation",
+      "step": "Goodwill + plant valuation obtained",
+      "owner": "Standard Ledger + valuer",
+      "due": "2026-06-30",
+      "why": "Drives the QLD dutiable value, the director-loan account, and any CGT calc on the transfer.",
+      "priority": "P1",
+      "category": "Tax",
+      "confidence": "needs SL confirmation",
+      "sourceId": "eofy-money-plan",
+      "notionMatchers": ["valuation", "goodwill"]
+    },
+    {
+      "id": "payroll-tax-check",
+      "step": "QLD payroll-tax grouping check",
+      "owner": "Standard Ledger",
+      "due": "2026-07-01",
+      "why": "Recharacterised salary + $120K-each Pty payroll may cross the ~$1.3M QLD grouped threshold (ACT Pty + future Harvest Pty).",
+      "priority": "P2",
+      "category": "Compliance",
+      "confidence": "needs SL confirmation",
+      "sourceId": "eofy-money-plan",
+      "notionMatchers": ["payroll tax"]
+    },
+    {
+      "id": "final-bas",
+      "step": "Final sole-trader BAS lodged",
+      "owner": "Nic + Standard Ledger",
+      "due": "2026-07-28",
+      "why": "Cessation-quarter BAS; cancel sole-trader ABN/GST/PAYGW only after this and all final obligations. Exact date TBC with SL (28 Jul / ~25 Aug / 28 Oct).",
+      "priority": "P1",
+      "category": "Compliance",
+      "confidence": "needs SL confirmation",
+      "sourceId": "eofy-money-plan",
+      "notionMatchers": ["final BAS", "BAS", "cancel ABN"]
+    },
+    {
+      "id": "ausindustry-reg",
+      "step": "AusIndustry FY26 R&D registration",
+      "owner": "Standard Ledger + R&D consultant",
+      "due": "2027-04-30",
+      "why": "Hard 10-month deadline. Miss it and the entire FY26 R&D claim is forfeited (the same failure that cost FY24-25).",
+      "priority": "P1",
+      "category": "R&D",
+      "confidence": "needs SL confirmation",
+      "sourceId": "eofy-money-plan",
+      "notionMatchers": ["AusIndustry", "DISR", "R&D registration"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "operating-entity",
+      "title": "Operating entity (Decision 1)",
+      "decision": "Leaning Option A: A Curious Tractor Pty Ltd trades directly as the single operating company, R&D claimant and payroll employer; interpose a holdco above later via Div 615. The 'Pty-becomes-holdco + new ACT Projects subsidiary' hive-down is rejected (forces a second contract/R&D/trading-name migration). Ratify in writing.",
+      "owner": "Ben + Nic",
+      "due": "2026-06-19",
+      "status": "Leaning Option A - ratify in writing",
+      "why": "Gates novation letters and payroll setup. Until ratified in writing, contracts cannot be re-papered to the correct entity.",
+      "sourceId": "eofy-money-plan"
+    },
+    {
+      "id": "butterfly-dgr",
+      "title": "Butterfly / DGR connection",
+      "decision": "Confirm how The Butterfly Movement Ltd connects to the group without undermining DGR/PBI compliance or Indigenous-led governance.",
+      "owner": "Ben + DGR lawyer",
+      "due": "2026-06-26",
+      "status": "Lawyer queue",
+      "why": "The handover is live and the holdco ownership idea may not fit a company limited by guarantee.",
+      "sourceId": "core-facts"
+    },
+    {
+      "id": "farm-personal",
+      "title": "Farm stays personal",
+      "decision": "Keep the farm outside the core business entity for FY26 and document any future arm's-length lease separately.",
+      "owner": "Ben + Nic + Standard Ledger",
+      "due": "2026-06-19",
+      "status": "Confirm",
+      "why": "Prevents Harvest, farm accommodation, and ACT Projects economics from being mashed together.",
+      "sourceId": "eofy-run-sheet"
+    },
+    {
+      "id": "fy26-draws",
+      "title": "FY26 draw totals",
+      "decision": "Set Ben/Nic after-tax founder cash targets before invoices, drawings, super contributions, and reserves move.",
+      "owner": "Ben + Nic + Standard Ledger",
+      "due": "2026-06-19",
+      "status": "Open",
+      "why": "The $250K/$100K routing is tax mechanics, not a pay-parity verdict.",
+      "sourceId": "rd-window-plan"
+    }
+  ],
+  "moneyRoutes": [
+    {
+      "id": "ben",
+      "founder": "Ben",
+      "route": "Knight Photography invoices to the sole trader, plus the genuine Pty window invoice for 24 Apr to 30 Jun work.",
+      "amount": "$100K Phase 2 + ~$37-44K window invoice",
+      "confidence": "needs SL confirmation",
+      "sourceId": "rd-window-plan",
+      "mechanics": [
+        "Sole trader pays Phase 2 invoices 15079 and 15080 if Standard Ledger confirms the basis.",
+        "The Q4 invoice is split at 24 Apr because the Pty did not exist before then.",
+        "The Pty window invoice must be paid by 30 Jun to enter the FY26 associate R&D claim."
+      ],
+      "cautions": [
+        "Confirm Knight Photography legal form and PSI posture.",
+        "Provision personal tax on receipts.",
+        "Do not route service income through family trusts."
+      ]
+    },
+    {
+      "id": "nic",
+      "founder": "Nic",
+      "route": "Sole trader drawings for cash, plus a small arm's-length Pty window fee if Standard Ledger sets one.",
+      "amount": "$100K drawings scenario + SL-set window fee",
+      "confidence": "scenario",
+      "sourceId": "rd-window-plan",
+      "mechanics": [
+        "Nic cannot invoice himself; sole trader cash movement is drawings.",
+        "Drawings do not create a new deduction or tax event because Nic is already taxed on the sole trader profit.",
+        "The Pty window fee can support the FY26 R&D claim only if paid by 30 Jun."
+      ],
+      "cautions": [
+        "Size drawings against collected cash, not the full receivables list.",
+        "Keep director loans into the Pty documented separately.",
+        "Do not borrow from the Pty before the Div 7A framework is ready."
+      ]
+    }
+  ],
+  "moneyRunSheet": [
+    {
+      "id": "mon-go-no-go",
+      "date": "2026-06-22",
+      "phase": "talk-through",
+      "move": "Money movement go/no-go",
+      "from": "Standard Ledger answers + current bank balances",
+      "to": "Monday decision list",
+      "amount": "No money moves",
+      "owner": "Ben + Nic + Standard Ledger",
+      "status": "Talk through",
+      "confidence": "needs SL confirmation",
+      "requiredBeforeMove": [
+        "Standard Ledger confirms cash-vs-accrual treatment for Nic's deduction.",
+        "Standard Ledger confirms Knight Photography legal form, GST, and PSI posture.",
+        "Ben and Nic set the after-tax target, not just the gross routing."
+      ],
+      "evidence": [
+        "Written Standard Ledger answer",
+        "Current sole trader cash balance",
+        "Current receivables and tax provision note"
+      ],
+      "sourceId": "eofy-run-sheet"
+    },
+    {
+      "id": "mon-ben-invoice-package",
+      "date": "2026-06-22",
+      "phase": "talk-through",
+      "move": "Lock Ben invoice package",
+      "from": "Knight Photography",
+      "to": "Nicholas Marchesi sole trader and A Curious Tractor Pty Ltd",
+      "amount": "$100K Phase 2 + ~$37-44K window invoice",
+      "owner": "Ben + Standard Ledger",
+      "status": "Draft before money moves",
+      "confidence": "needs SL confirmation",
+      "requiredBeforeMove": [
+        "Invoice 15079 and 15080 treatment confirmed.",
+        "Q4 split at 24 Apr confirmed.",
+        "Window invoice counterparty confirmed as the Pty."
+      ],
+      "evidence": [
+        "Invoice drafts",
+        "GST/PSI note",
+        "Q4 split worksheet"
+      ],
+      "sourceId": "rd-window-plan"
+    },
+    {
+      "id": "mon-nic-drawings-ceiling",
+      "date": "2026-06-22",
+      "phase": "talk-through",
+      "move": "Set Nic drawings ceiling",
+      "from": "Nicholas Marchesi sole trader",
+      "to": "Nic personal",
+      "amount": "$100K scenario",
+      "owner": "Nic + Ben",
+      "status": "Size only",
+      "confidence": "scenario",
+      "requiredBeforeMove": [
+        "Collected cash checked against receivables.",
+        "Personal tax provision agreed.",
+        "Ben/Nic after-tax target agreed."
+      ],
+      "evidence": [
+        "Bank balance screenshot/export",
+        "Receivables snapshot",
+        "Drawings decision note"
+      ],
+      "sourceId": "rd-window-plan"
+    },
+    {
+      "id": "mon-pty-seed-decision",
+      "date": "2026-06-22",
+      "phase": "talk-through",
+      "move": "Decide Pty seed and R&D window payment path",
+      "from": "Founder funds",
+      "to": "A Curious Tractor Pty Ltd NAB account",
+      "amount": "$75-100K scenario",
+      "owner": "Ben + Nic + Standard Ledger",
+      "status": "Conditional",
+      "confidence": "scenario",
+      "requiredBeforeMove": [
+        "Pty NAB account is live.",
+        "Loan note is signed.",
+        "Separate director loan accounts are opened.",
+        "Board minute and engagement letters are ready."
+      ],
+      "evidence": [
+        "NAB account confirmation",
+        "Signed loan note",
+        "Board minute",
+        "Founder engagement letters"
+      ],
+      "sourceId": "rd-window-plan"
+    },
+    {
+      "id": "tue-issue-invoices",
+      "date": "2026-06-23",
+      "phase": "actualise",
+      "move": "Issue approved invoices",
+      "from": "Knight Photography",
+      "to": "Nicholas Marchesi sole trader and A Curious Tractor Pty Ltd",
+      "amount": "$100K Phase 2 + approved Q4 split",
+      "owner": "Ben",
+      "status": "Ready after Monday go/no-go",
+      "confidence": "needs SL confirmation",
+      "requiredBeforeMove": [
+        "Monday invoice package marked green.",
+        "Invoice numbers and counterparties match the Standard Ledger answer.",
+        "No family trust service invoice is used."
+      ],
+      "evidence": [
+        "Issued invoice PDFs",
+        "Invoice register row",
+        "Notion task linked to invoice files"
+      ],
+      "sourceId": "rd-window-plan"
+    },
+    {
+      "id": "tue-sole-trader-pays-ben",
+      "date": "2026-06-23",
+      "phase": "actualise",
+      "move": "Sole trader pays approved Ben invoices",
+      "from": "Nicholas Marchesi sole trader operating account",
+      "to": "Knight Photography",
+      "amount": "$100K Phase 2, cash permitting",
+      "owner": "Nic + Ben",
+      "status": "Ready if SL confirms",
+      "confidence": "needs SL confirmation",
+      "requiredBeforeMove": [
+        "Invoices are issued.",
+        "Sole trader cash can support payment after tax provisioning.",
+        "Standard Ledger confirms payment is the safe default for FY26 treatment."
+      ],
+      "evidence": [
+        "Bank transfer receipt",
+        "Invoice marked paid",
+        "Xero payment reference or note"
+      ],
+      "sourceId": "rd-window-plan"
+    },
+    {
+      "id": "tue-nic-drawings",
+      "date": "2026-06-23",
+      "phase": "actualise",
+      "move": "Nic takes agreed drawings",
+      "from": "Nicholas Marchesi sole trader operating account",
+      "to": "Nic personal",
+      "amount": "$100K scenario, sized to cash",
+      "owner": "Nic",
+      "status": "Ready after cash ceiling",
+      "confidence": "scenario",
+      "requiredBeforeMove": [
+        "Drawings ceiling agreed Monday.",
+        "Tax provision has been separated.",
+        "Movement is recorded as drawings, not an invoice."
+      ],
+      "evidence": [
+        "Bank transfer receipt",
+        "Drawings note",
+        "Tax provision note"
+      ],
+      "sourceId": "rd-window-plan"
+    },
+    {
+      "id": "tue-seed-pty",
+      "date": "2026-06-23",
+      "phase": "actualise",
+      "move": "Seed the Pty by director loan",
+      "from": "Founder funds as approved",
+      "to": "A Curious Tractor Pty Ltd NAB account",
+      "amount": "$75-100K scenario",
+      "owner": "Nic + Ben",
+      "status": "Only if NAB and loan note are live",
+      "confidence": "scenario",
+      "requiredBeforeMove": [
+        "NAB account is live.",
+        "Loan note is signed.",
+        "Founder loan accounts are set up separately.",
+        "Shareholders Agreement imbalance handling is noted if only one founder seeds."
+      ],
+      "evidence": [
+        "Bank transfer receipt",
+        "Signed loan note",
+        "Director loan ledger entry"
+      ],
+      "sourceId": "rd-window-plan"
+    },
+    {
+      "id": "tue-pty-window-payments",
+      "date": "2026-06-23",
+      "phase": "actualise",
+      "move": "Pty pays R&D window amounts",
+      "from": "A Curious Tractor Pty Ltd NAB account",
+      "to": "Knight Photography and Nic",
+      "amount": "~$55-60K scenario",
+      "owner": "Ben + Nic",
+      "status": "Do not improvise",
+      "confidence": "needs SL confirmation",
+      "requiredBeforeMove": [
+        "Pty is funded by documented director loan.",
+        "Ben window invoice is issued to the Pty.",
+        "Nic arm's-length window figure is set by Standard Ledger.",
+        "Associate paid-by-30-Jun rule is confirmed."
+      ],
+      "evidence": [
+        "Bank transfer receipts",
+        "Paid invoice",
+        "Director fee/payment note",
+        "R&D evidence pack link"
+      ],
+      "sourceId": "rd-window-plan"
+    },
+    {
+      "id": "tue-evidence-capture",
+      "date": "2026-06-23",
+      "phase": "actualise",
+      "move": "Capture evidence immediately",
+      "from": "Bank, Xero, invoices, signed papers",
+      "to": "Notion EOFY tracker and evidence pack",
+      "amount": "No money moves",
+      "owner": "Ben + Nic",
+      "status": "Required",
+      "confidence": "queried",
+      "requiredBeforeMove": [
+        "Every actual transfer has a matching invoice, note, or signed paper.",
+        "No row is marked actualised without evidence."
+      ],
+      "evidence": [
+        "Bank receipt",
+        "Invoice PDF",
+        "Xero reference",
+        "Notion row link"
+      ],
+      "sourceId": "eofy-run-sheet"
+    }
+  ],
+  "rdWindow": {
+    "title": "FY26 R&D window",
+    "period": "24 Apr 2026 to 30 Jun 2026",
+    "basis": "~$60-70K eligible basis",
+    "refund": "~$26-30K refundable offset",
+    "confidence": "needs SL confirmation",
+    "sourceId": "rd-window-plan",
+    "timeline": [
+      {
+        "id": "pre-pty",
+        "label": "Pre-Pty work",
+        "dateRange": "1 Jul 2025 to 23 Apr 2026",
+        "status": "Sole trader period",
+        "tone": "bad",
+        "note": "Cannot be claimed by the Pty under the locked Path C mechanics."
+      },
+      {
+        "id": "window",
+        "label": "Claimable window",
+        "dateRange": "24 Apr 2026 to 30 Jun 2026",
+        "status": "Pty existed",
+        "tone": "good",
+        "note": "Founder amounts need engagement papers, evidence, arm's-length pricing, and payment by 30 Jun."
+      },
+      {
+        "id": "fy27",
+        "label": "Full-year setup",
+        "dateRange": "1 Jul 2026 to 30 Jun 2027",
+        "status": "Clean machine",
+        "tone": "info",
+        "note": "Payroll, project coding, receipts, and R&D capture start in the claimant from day one."
+      }
+    ]
+  },
+  "entityMap": {
+    "nodes": [
+      {
+        "id": "sole-trader",
+        "label": "Nicholas Marchesi sole trader",
+        "role": "Legacy trading entity until 30 Jun 2026",
+        "status": "Winding down",
+        "tone": "warn",
+        "sourceId": "core-facts"
+      },
+      {
+        "id": "act-pty",
+        "label": "A Curious Tractor Pty Ltd",
+        "role": "Registered 24 Apr 2026, owned by the two family trusts",
+        "status": "Primary structure unless Decision 1 changes it",
+        "tone": "info",
+        "sourceId": "core-facts"
+      },
+      {
+        "id": "act-projects",
+        "label": "Holdco (later, via Div 615)",
+        "role": "Optional holding company interposed ABOVE the Pty later if a raise/sale needs it. The 'operating subsidiary' hive-down is rejected.",
+        "status": "Deferred - not now",
+        "tone": "default",
+        "sourceId": "eofy-money-plan"
+      },
+      {
+        "id": "harvest",
+        "label": "Harvest entity",
+        "role": "Standalone venue, cafe, garden, events, and workshop economics",
+        "status": "Designing",
+        "tone": "warn",
+        "sourceId": "core-facts"
+      },
+      {
+        "id": "butterfly",
+        "label": "The Butterfly Movement Ltd",
+        "role": "Existing DGR/PBI charity for Goods on Country philanthropic capital",
+        "status": "Handover in progress",
+        "tone": "good",
+        "sourceId": "core-facts"
+      },
+      {
+        "id": "farm",
+        "label": "Farm / Witta land",
+        "role": "Personal or trust-held land, separate from Harvest trading",
+        "status": "Keep separate for now",
+        "tone": "default",
+        "sourceId": "eofy-run-sheet"
+      }
+    ],
+    "edges": [
+      { "from": "sole-trader", "to": "act-pty", "label": "30 Jun cutover" },
+      { "from": "act-projects", "to": "act-pty", "label": "holdco above, later (Div 615)" },
+      { "from": "act-pty", "to": "harvest", "label": "separate P&L" },
+      { "from": "act-pty", "to": "butterfly", "label": "service agreement / lawyer check" },
+      { "from": "farm", "to": "harvest", "label": "program link, not same entity" }
+    ]
+  },
+  "sources": [
+    {
+      "id": "notion-tracker",
+      "label": "Notion EOFY Setup Tracker",
+      "type": "notion",
+      "href": "https://www.notion.so/63cbc05e64ba4203b514beb8eb4f9445",
+      "note": "Live task status, owners, due dates, and blocker counts."
+    },
+    {
+      "id": "core-facts",
+      "label": "ACT Core Facts",
+      "type": "repo-doc",
+      "path": "wiki/decisions/act-core-facts.md",
+      "href": "https://github.com/Acurioustractor/act-global-infrastructure/blob/main/wiki/decisions/act-core-facts.md",
+      "note": "Canonical entity facts and pending holdco decision."
+    },
+    {
+      "id": "eofy-run-sheet",
+      "label": "EOFY 2026 run sheet",
+      "type": "repo-doc",
+      "path": "thoughts/shared/runbooks/eofy-2026-run-sheet.md",
+      "href": "https://github.com/Acurioustractor/act-global-infrastructure/blob/main/thoughts/shared/runbooks/eofy-2026-run-sheet.md",
+      "note": "Step-by-step workplan and reasons."
+    },
+    {
+      "id": "rd-window-plan",
+      "label": "R&D FY26 window and FY27 setup",
+      "type": "repo-doc",
+      "path": "thoughts/shared/plans/rd-fy26-window-and-fy27-setup.md",
+      "href": "https://github.com/Acurioustractor/act-global-infrastructure/blob/main/thoughts/shared/plans/rd-fy26-window-and-fy27-setup.md",
+      "note": "Scenario mechanics for founder pay, director loans, and R&D window claim."
+    },
+    {
+      "id": "eofy-money-plan",
+      "label": "EOFY 2026 money-movement plan + action playbook",
+      "type": "repo-doc",
+      "path": "thoughts/shared/plans/2026-06-19-eofy-money-movement-plan.md",
+      "href": "https://github.com/Acurioustractor/act-global-infrastructure/blob/main/thoughts/shared/plans/2026-06-19-eofy-money-movement-plan.md",
+      "note": "Grounded EOFY plan (cutover, founder pay, super, director loans, R&D basis cure) + dated playbook at thoughts/shared/runbooks/eofy-2026-action-playbook.md."
+    },
+    {
+      "id": "command-config",
+      "label": "Command cockpit config",
+      "type": "config",
+      "path": "config/eofy-command.json",
+      "note": "Structured cockpit copy, scenario assumptions, and source mapping."
+    }
+  ]
+}
