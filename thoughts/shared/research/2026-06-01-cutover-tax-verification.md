@@ -46,6 +46,8 @@
 
 ### 2. Subdivision 328-G Small Business Restructure Rollover — SUPPORTED-WITH-CONDITIONS
 
+> ⚠️ **UPDATE (2026-06-19): the MEDIUM-risk condition this section flagged has resolved AGAINST 328-G.** The 2026-06-19 decision pack concludes 328-G FAILS: the s328-440 family-trust alternative needs every individual with ultimate economic ownership before and after to be in the *same* family group, but A Curious Tractor Pty Ltd is 50/50 across **two different family groups** (Knight FT + Marchesi FT) — a family trust election on both trusts cannot bridge them. Proposed path is now a market-value sale + 50% CGT discount + Div 152 + vendor loan. See `thoughts/shared/plans/2026-06-19-eofy-decision-pack.md` §C1.
+
 **Primary source (Verified — ATO SBRR guidance page; conditions map to ss 328-430/435/440/445):** The rollover allows CGT-neutral (and trading-stock/depreciating-asset-neutral) transfer of **active assets** of a small business between entities, provided ALL of:
 
 1. **Genuine restructure of an ongoing business** (s328-430(1)(a)) — substance over form; the business continues to operate, not a step toward sale/winding-down. A **3-year safe-harbour** treats it as genuine if for 3 years post-rollover there's no change in ultimate economic ownership of significant assets, they're active assets, and there's no significant private use.

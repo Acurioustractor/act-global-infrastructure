@@ -17,7 +17,9 @@ tags:
 
 > **Why this doc exists.** I wrote a thesis (`act-money-thesis-discussion.md`) without fully reading the wiki's five-year plan, Goods/CivicGraph commercial detail, or current Australian tax-rule fine-print. This doc is the adversarial review of that thesis. It validates what's right, calls out what's under-played, surfaces opportunities I missed, and proposes a rebalanced strategy. Read this AFTER the main thesis, then synthesise with Nic.
 >
-> **Bottom line:** the thesis is right in shape (Knight Photography invoicing, Path C, Pty payroll, trusts as passive shareholders) but **wrong in scale (revenue is bigger than I projected), wrong in mechanism (should use Subdiv 328-G not 122-A for cutover), and missing a $4-10M lever (CivicGraph exit + small business CGT concessions)**.
+> **Bottom line:** the thesis is right in shape (Knight Photography invoicing, Path C, Pty payroll, trusts as passive shareholders) but **wrong in scale (revenue is bigger than I projected)** and **missing a $4-10M lever (CivicGraph exit + small business CGT concessions)**. ⚠️ The original "use Subdiv 328-G not 122-A" mechanism call is **RETRACTED** — see the correction below.
+>
+> ⚠️ **CORRECTION (2026-06-19) — the 328-G recommendation in §2.3 and §3.3 is WRONG and retracted.** 328-G fails the no-change-in-ultimate-economic-ownership test because A Curious Tractor Pty Ltd is owned 50/50 by **two different family groups** (Knight Family Trust + Marchesi Family Trust): pre-transfer Nic has 100% UEO of the sole trader; post-transfer the Knight side is a new ~50% owner = UEO changes. The s328-440 discretionary-trust alternative does **not** rescue it — it needs every individual with UEO before and after to be in the **same** family group, and this spans two. Subdiv 122-A also fails (needs 100% of shares to one transferor). **Current proposed position: a market-value SALE sheltered by the 50% CGT discount + Div 152, with the price left as a vendor loan (tax-free founder drawdown) — a FORK from the journal-entry model, pending Standard Ledger.** Source of truth: `thoughts/shared/plans/2026-06-19-eofy-decision-pack.md` §C1 (and `thoughts/shared/research/2026-06-01-cutover-tax-verification.md`, which already flagged the two-trust family-group condition as the risk). **Also updated 2026-06-19:** *Bendel* is now settled for taxpayers (High Court, 10 Jun 2026) — a UPE to a corporate beneficiary is **not** a Div 7A loan (s100A is the gate); and a **30% minimum tax on discretionary-trust distributions** is announced from 1 Jul 2028 (not yet law) — both reinforce the salary-first posture.
 
 ---
 
@@ -79,7 +81,7 @@ My thesis collapsed all this into "ACT Pty earns commercial revenue". That hides
 - **Empathy Ledger bespoke** needs scope-management and annual-renewal workflow.
 - **Ground** needs operational accounting separate from R&D-heavy ACT-IN.
 
-### 2.3 I used Subdivision 122-A logic when 328-G is probably better
+### 2.3 I used Subdivision 122-A logic when 328-G is probably better — ⚠️ RETRACTED 2026-06-19 (NEITHER fits the 50/50 two-trust cap table; see the correction at the top of this doc)
 
 **What I wrote:** "Equipment / hardware → Transfer at market value via journal entry. Triggers minor CGT event."
 
@@ -255,7 +257,7 @@ If KP **passes** at least one → KP is treated as a regular business, income re
 
 This is a multi-year setup but the opportunity scale is large enough to warrant Standard Ledger + lawyer time NOW.
 
-### 3.3 Subdiv 328-G rollover for cutover asset transfer
+### 3.3 Subdiv 328-G rollover for cutover asset transfer — ⚠️ RETRACTED 2026-06-19 (328-G fails the two-family UEO test; see the correction at the top of this doc)
 
 **Opportunity:** Defer all asset-related CGT events at cutover, including for IP and equipment.
 
@@ -264,7 +266,7 @@ This is a multi-year setup but the opportunity scale is large enough to warrant 
 **Eligibility check:**
 - Both entities small business entities (aggregated turnover <$10M) — ✅ ACT well under
 - "Genuine restructure" of business — ✅ sole trader → Pty meets this
-- Same ultimate economic ownership before and after — ✅ Ben + Nic via trusts
+- Same ultimate economic ownership before and after — ❌ **FAILS** — the Pty is 50/50 across two different family groups (Knight FT + Marchesi FT); Nic had 100% UEO pre-transfer, so the Knight side is a new owner. s328-440 can't bridge two families. (Retracted 2026-06-19 — see correction at top.)
 - Australian residents — ✅
 - Election made by both parties — needs to be done formally
 
