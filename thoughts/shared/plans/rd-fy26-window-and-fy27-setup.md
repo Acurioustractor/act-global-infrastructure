@@ -79,6 +79,10 @@ Read this correctly: commits evidence activity and time density, not eligibility
 
 Nic cannot invoice himself. The sole trader is Nic, so money he takes out is **drawings**: no deduction, no tax event, he is taxed on the sole trader's profit whether or not the cash moves. The only deductible founder pay this year is what flows to Ben's side (Knight Photography invoices), plus the small window amounts the Pty pays each founder. Ben's invoices do double work: each dollar shifts taxable income from Nic to Ben AND gives Nic a deduction. That is why D11.5 sets Ben's side at ~$250K; it carries the equalisation.
 
+**The ~$250K / ~$100K split is income routing for tax, not a pay verdict.** It falls out of two mechanics: only Ben has a separate entity (Knight Photography) to invoice through, so the deductible pay can only run through Ben; and Ben does ~95% R&D to Nic's 40%, so loading Ben's side also builds the larger R&D base. Whether that split matches the founders' true 50/50 economic share is a conscious call, not a default: set it as Decision 4 with Standard Ledger on **after-tax** outcomes (Ben's $250K carries a large personal tax bill; Nic's lighter cash carries the sole-trader profit tax) and on what each founder has already drawn this year, then route to hit that number. The call's figure was ~$200K each; $250K is the current R&D-plan working figure, not fixed.
+
+**Both founders hold a director loan account, not just Nick.** Ben can lend to the Pty too. If Ben has cash, he seeds alongside Nick. If not, Ben's loan lane is created from FY27 when Knight Photography gear is sold to the company at market value with the price credited to Ben's loan account (no cash needed), and whenever the company owes Ben (a booked-but-unpaid window invoice, or business costs Ben pays personally). Either route gives Ben the same tax-free repayment lane Nick gets from the seed loan, which keeps the 50/50 even. A Nick-only seed otherwise has to be squared in the Shareholders Agreement.
+
 ### What one dollar of founder pay returns, by route
 
 The receiving founder pays personal tax on the dollar under every route; that never changes. What differs is what the payer gets back:
@@ -129,6 +133,22 @@ Target shape per the Money Framework: ~$627K eligible (personnel + ACT-IN + per-
 6. **rd-capture stays the habit**: hypothesis-linked, dated entries per register, written when the work happens.
 7. **Overseas Finding** for the World Tour lodged before 30 Jun 2027 (Path C action 5).
 8. **Consultant watch items**: feedstock adjustments if Goods experimental production output gets sold; clawback applies to government recoupments only (Snow and QBE are private, but flag any government grant that funds R&D); aggregated turnover stays under $20M for the 43.5% rate.
+
+## Best-case FY26: every legitimate lever (confirm each with Standard Ledger)
+
+Ranked by dollar impact. None of these change the Path C ceiling on R&D (still the 10-week window). The gains are tax timing and structure, all before 30 June.
+
+1. **Personal deductible super contributions, with carry-forward catch-up: the biggest single lever.** Both founders declare large personal income this year (Ben ~$250K via invoices, Nic on the sole-trader profit). A personal concessional super contribution is deductible at the marginal rate (~47c) and taxed at only 15c inside super: roughly 32c net saving per dollar. The standard cap is $30K (FY26), but unused concessional cap from the prior five years carries forward if total super balance was under $500K on 30 June 2025. Founders who have run lean likely hold large unused caps, so the deductible contribution could be well above $30K each. Two caveats: it must reach the fund before 30 June and is locked until preservation age (so size it to cash you can spare after tax and living), and Division 293 adds 15% on contributions for income over $250K (Ben's likely zone), which trims but does not remove the benefit. Confirm caps, carry-forward, TSB, and Div 293 with Standard Ledger or a licensed adviser.
+
+2. **Move the maximum deductible founder pay before 30 June.** Ben's Knight Photography invoices (~$213K) are the only deductible founder pay; each dollar reduces Nic's sole-trader profit. Whether the deduction needs the invoice paid or only issued by 30 June depends on Nic's accounting basis (cash vs accruals): on accruals, issue them all by 30 June and let payment follow; on cash, they must be paid. SL confirms the basis; default to paid-by-30-June.
+
+3. **Secure the R&D window refund (~$26K) by paying it before 30 June.** Both founders co-seeding the Pty (lever 4) removes the risk that Nick's cash is tied up in the ~$507K of receivables when the ~$59K window slice falls due. Paid by 30 June it is this year's; unpaid it carries to FY27.
+
+4. **Both founders open and seed director loan accounts.** Ben lends alongside Nick (or builds the lane from the FY27 Knight Photography asset sale). Both then hold the tax-free repayment lane, the 50/50 stays even without leaning on the Shareholders Agreement, and the Pty has working capital to pay the window slice now and run payroll from 1 July.
+
+5. **Prepay deductible expenses before 30 June.** A small business can prepay and deduct up to twelve months of eligible expenses (insurance, subscriptions, rent, professional fees). Brings the deduction into FY26. Modest, but free.
+
+6. **Provision tax and set the split consciously.** Set aside 40-45% of personal receipts; arrange an ATO payment plan if needed. Set the real FY26 split (Decision 4) on after-tax outcomes, not on the routing the mechanics happen to produce.
 
 ## One email to Standard Ledger + the consultant (this week)
 

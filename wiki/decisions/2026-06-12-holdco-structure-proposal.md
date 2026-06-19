@@ -74,6 +74,18 @@ The cutover is 18 days away. The NAB account for the existing Pty is still waiti
 
 The one move that is wrong under every option: sending novation letters, or signing new from-1-July contracts, that name an entity which might change within weeks. **Hold the letters until this decision is made.** Canon Rule 1 wording ("new tranches from 1 July invoice to the Pty") gets finalised by this decision.
 
+### Leaning (2026-06-13): option A, and keep the holding company as a later layer
+
+Time pressure points at A, and a first-principles look makes A cleaner than the call framed it. The call described the Pty *becoming* the holding company with a new ACT Projects subsidiary doing the work. That version hives operations *down* into a new entity later: a second migration of contracts, R&D registration, and the trading name. (This corrects the "contracts migrate twice" cost noted in the option A row above, which assumed that hive-down.)
+
+The cleaner path: A Curious Tractor Pty Ltd is the operating company, full stop. It already is "ACT Projects" in everything but name. If a holding company is ever needed (to sell or raise on one unit), a fresh shell is inserted *above* it through a share-for-share rollover. Division 615 is built for exactly this: interpose a holdco, the two trusts swap their ACT shares for holdco shares, proportions preserved, no tax event. Because the holdco goes on top, the operating company never moves: its contracts, R&D registration, Goods on Country trading name, bank account, and Xero file all stay put. Trading from ACT Pty now therefore costs nothing toward a future holdco.
+
+And the holdco may never be needed. Harvest is already its own Pty (its risk is isolated, it can be sold or raised on its own); Butterfly is its own charity. The only thing a group holdco adds is selling or raising on the Projects business separately from the family's other holdings, which is not imminent. Build that layer when a real transaction calls for it. Confirm Div 615 and timing with Standard Ledger.
+
+### The priority money does not need the NAB account
+
+The EOFY money that *must* move before 30 June flows through the sole trader account, which already exists. Ben's invoices (15078 to 15081) are paid by the sole trader; Nic's drawings come from it. None of that touches the new Pty bank account. The NAB account is required only for the ~$59K R&D window slice (which carries to FY27 if missed, not lost) and for FY27 trading from 1 July. So the bank-account delay does not block the priority; it only defers the window R&D optimisation. This reframes the "critical path" in the run sheet: NAB is critical for the window, not for founder pay.
+
 ### What moves with the operating entity
 
 | Item | Today points at | Under option B points at |
