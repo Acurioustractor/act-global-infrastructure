@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { civicgraph } from '@/lib/supabase'
 
 /**
  * GET /api/grantscope/foundations/search
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
   const limit = Math.min(Number(params.get('limit') || 50), 200)
   const offset = Number(params.get('offset') || 0)
 
-  let query = supabase
+  let query = civicgraph
     .from('foundations')
     .select('*, foundation_programs(id, name, focus_area, grant_size_min, grant_size_max)', { count: 'exact' })
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { civicgraph } from '@/lib/supabase'
 
 interface Milestone {
   name: string
@@ -53,7 +53,7 @@ export async function GET(
   try {
     const { id } = await params
 
-    const { data, error } = await supabase
+    const { data, error } = await civicgraph
       .from('grant_applications')
       .select('id, milestones, amount_requested, opportunity_id')
       .eq('id', id)
@@ -67,7 +67,7 @@ export async function GET(
 
     // If no milestones, check if we can auto-generate
     if (milestones.length === 0 && data.opportunity_id) {
-      const { data: opp } = await supabase
+      const { data: opp } = await civicgraph
         .from('grant_opportunities')
         .select('closes_at, amount_max')
         .eq('id', data.opportunity_id)
@@ -76,7 +76,7 @@ export async function GET(
       if (opp?.closes_at) {
         milestones = generateMilestones(opp.closes_at, data.amount_requested || opp.amount_max || 50000)
         // Auto-save generated milestones
-        await supabase
+        await civicgraph
           .from('grant_applications')
           .update({ milestones })
           .eq('id', id)
@@ -112,7 +112,7 @@ export async function PATCH(
     const { index, completed, assignee } = body as { index: number; completed?: boolean; assignee?: string }
 
     // Fetch current milestones
-    const { data, error } = await supabase
+    const { data, error } = await civicgraph
       .from('grant_applications')
       .select('milestones')
       .eq('id', id)
@@ -130,7 +130,7 @@ export async function PATCH(
     if (completed !== undefined) milestones[index].completed = completed
     if (assignee !== undefined) milestones[index].assignee = assignee
 
-    const { error: updateErr } = await supabase
+    const { error: updateErr } = await civicgraph
       .from('grant_applications')
       .update({ milestones })
       .eq('id', id)

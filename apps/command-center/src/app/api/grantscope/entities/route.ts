@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { civicgraph } from '@/lib/supabase'
 
 /**
  * GET /api/grantscope/entities
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
   // ABN lookup — return single entity with relationships
   if (abn) {
     const cleanAbn = abn.replace(/\s/g, '')
-    const { data: entity, error } = await supabase
+    const { data: entity, error } = await civicgraph
       .from('gs_entities')
       .select('*')
       .eq('abn', cleanAbn)
@@ -38,21 +38,21 @@ export async function GET(request: NextRequest) {
     }
 
     // Fetch relationships for this entity
-    const { data: relationships } = await supabase
+    const { data: relationships } = await civicgraph
       .from('gs_relationships')
       .select('*')
       .or(`source_entity_id.eq.${entity.id},target_entity_id.eq.${entity.id}`)
       .limit(100)
 
     // Check ACNC data
-    const { data: acncData } = await supabase
+    const { data: acncData } = await civicgraph
       .from('acnc_charities')
       .select('*')
       .eq('abn', cleanAbn)
       .single()
 
     // Check foundation data
-    const { data: foundationData } = await supabase
+    const { data: foundationData } = await civicgraph
       .from('foundations')
       .select('*, foundation_programs(id, name, focus_area, grant_size_min, grant_size_max)')
       .eq('acnc_abn', cleanAbn)
@@ -67,7 +67,7 @@ export async function GET(request: NextRequest) {
   }
 
   // Search mode
-  let query = supabase
+  let query = civicgraph
     .from('gs_entities')
     .select('id, canonical_name, abn, entity_type, state, sector, latest_revenue, latest_assets, website, is_community_controlled, tags', { count: 'exact' })
 

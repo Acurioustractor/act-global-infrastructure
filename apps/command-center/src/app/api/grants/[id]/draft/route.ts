@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { civicgraph, supabase } from '@/lib/supabase'
 import { generateEmbedding } from '@/lib/embeddings'
 import Anthropic from '@anthropic-ai/sdk'
 import { LLMClient } from '@/lib/llm-adapter'
@@ -52,8 +52,8 @@ export async function POST(
 
     // 1. Load grant opportunity + funder documents in parallel
     const [grantResult, funderDocsResult] = await Promise.all([
-      supabase.from('grant_opportunities').select('*').eq('id', id).single(),
-      supabase.from('grant_funder_documents').select('name, doc_type, content_summary').eq('opportunity_id', id).order('sort_order'),
+      civicgraph.from('grant_opportunities').select('*').eq('id', id).single(),
+      civicgraph.from('grant_funder_documents').select('name, doc_type, content_summary').eq('opportunity_id', id).order('sort_order'),
     ])
 
     const grant = grantResult.data
@@ -231,7 +231,7 @@ Write ONLY the section content (no heading, no markdown formatting).`
 
     // 5. Optionally store drafts in grant_applications
     // Check if an application already exists for this grant + project
-    const { data: existingApp } = await supabase
+    const { data: existingApp } = await civicgraph
       .from('grant_applications')
       .select('id, documents')
       .eq('opportunity_id', id)
@@ -242,7 +242,7 @@ Write ONLY the section content (no heading, no markdown formatting).`
       // Merge new drafts into existing documents
       const existingDocs = (existingApp.documents as Record<string, unknown>) || {}
       const updatedDocs = { ...existingDocs, drafts: { ...(existingDocs.drafts as Record<string, unknown> || {}), ...drafts } }
-      await supabase
+      await civicgraph
         .from('grant_applications')
         .update({ documents: updatedDocs })
         .eq('id', existingApp.id)
