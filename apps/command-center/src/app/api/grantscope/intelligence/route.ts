@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { civicgraph, supabase } from '@/lib/supabase'
 
 /**
  * GET /api/grantscope/intelligence
@@ -21,24 +21,27 @@ export async function GET() {
     recentGrants,
     pipelineValue,
   ] = await Promise.all([
-    supabase.from('gs_entities').select('id', { count: 'exact', head: true }),
-    supabase.from('foundations').select('id', { count: 'exact', head: true }),
-    supabase.from('grant_opportunities').select('id', { count: 'exact', head: true }),
-    supabase.from('grant_opportunities').select('id', { count: 'exact', head: true })
+    civicgraph.from('gs_entities').select('id', { count: 'exact', head: true }),
+    civicgraph.from('foundations').select('id', { count: 'exact', head: true }),
+    civicgraph.from('grant_opportunities').select('id', { count: 'exact', head: true }),
+    civicgraph.from('grant_opportunities').select('id', { count: 'exact', head: true })
       .gte('closes_at', now),
-    supabase.from('grant_opportunities').select('id, title:name, close_date:closes_at, amount_max, funder_name:provider', { count: 'exact' })
+    civicgraph.from('grant_opportunities').select('id, title:name, close_date:closes_at, amount_max, funder_name:provider', { count: 'exact' })
       .gte('closes_at', now).lte('closes_at', thirtyDays)
       .order('closes_at', { ascending: true })
       .limit(10),
-    supabase.from('foundations')
+    civicgraph.from('foundations')
       .select('id, name, total_giving_annual, website')
       .not('total_giving_annual', 'is', null)
       .order('total_giving_annual', { ascending: false })
       .limit(10),
-    supabase.from('grant_opportunities')
+    civicgraph.from('grant_opportunities')
       .select('id, title:name, funder_name:provider, amount_max, close_date:closes_at, created_at')
       .order('created_at', { ascending: false })
       .limit(10),
+    // v_pipeline_value: ownership unresolved — likely aggregates grant_opportunities/applications,
+    // so at data-move time it probably travels with the grant estate (→ civicgraph). Left on the
+    // app's own client for now; resolve when CivicGraph's estate actually moves.
     supabase.from('v_pipeline_value').select('*').limit(1).single(),
   ])
 

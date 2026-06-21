@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { civicgraph } from '@/lib/supabase'
 
 export async function GET(
   request: Request,
@@ -10,12 +10,12 @@ export async function GET(
 
     // Fetch grant + funder documents in parallel
     const [grantResult, docsResult] = await Promise.all([
-      supabase
+      civicgraph
         .from('grant_opportunities')
         .select('*')
         .eq('id', id)
         .single(),
-      supabase
+      civicgraph
         .from('grant_funder_documents')
         .select('*')
         .eq('opportunity_id', id)
@@ -51,7 +51,7 @@ export async function PATCH(
       if (body.application_status) oppUpdates.application_status = body.application_status
       if (body.url !== undefined) oppUpdates.url = body.url || null
 
-      const { error } = await supabase
+      const { error } = await civicgraph
         .from('grant_opportunities')
         .update(oppUpdates)
         .eq('id', id)
@@ -66,7 +66,7 @@ export async function PATCH(
     if (body.notes !== undefined) updates.notes = body.notes
     if (body.project_code) updates.project_code = body.project_code
 
-    const { data, error } = await supabase
+    const { data, error } = await civicgraph
       .from('grant_applications')
       .update(updates)
       .eq('id', id)
@@ -88,7 +88,7 @@ export async function DELETE(
   try {
     const { id } = await params
 
-    const { error } = await supabase
+    const { error } = await civicgraph
       .from('grant_applications')
       .delete()
       .eq('id', id)
