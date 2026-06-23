@@ -1,0 +1,98 @@
+[
+  {
+    "i": 37,
+    "date": "2025-11-18",
+    "amount": 5590,
+    "particulars": "CARLA FURNISHERS P/L CICCONE | Credit Card Purchase",
+    "match": {
+      "source": "dext_receipt",
+      "vendor": "Carla Furnishers",
+      "amount": 11180,
+      "doc_date": "2025-11-17",
+      "file": "Carla Furnishers - 2025-11-17 - 25-00004816.pdf",
+      "doc_no": "25-00004816",
+      "mailbox": null,
+      "relationship": "COMBINED (this line is ½ of the receipt)"
+    }
+  },
+  {
+    "i": 38,
+    "date": "2025-11-18",
+    "amount": 5590,
+    "particulars": "CARLA FURNISHERS P/L CICCONE | Credit Card Purchase",
+    "match": {
+      "source": "dext_receipt",
+      "vendor": "Carla Furnishers",
+      "amount": 11180,
+      "doc_date": "2025-11-17",
+      "file": "Carla Furnishers - 2025-11-17 - 25-00004816.pdf",
+      "doc_no": "25-00004816",
+      "mailbox": null,
+      "relationship": "COMBINED (this line is ½ of the receipt)"
+    }
+  },
+  {
+    "i": 42,
+    "date": "2025-12-08",
+    "amount": 717.5,
+    "particulars": "CACTUS JACKS RESTAUR TOWNSVILLE | Credit Card Purchase",
+    "match": {
+      "source": "xero_transaction",
+      "vendor": "Cactus Jacks Bar and Grill",
+      "amount": 708.85,
+      "doc_date": "2025-12-03",
+      "file": null,
+      "doc_no": null,
+      "mailbox": null,
+      "relationship": "CLOSE (surcharge/tip/fx)"
+    }
+  },
+  {
+    "i": 43,
+    "date": "2025-12-09",
+    "amount": 5904.05,
+    "particulars": "CONTAINER OPTIONS STRATHFIELD S | Credit Card Purchase",
+    "match": {
+      "source": "dext_receipt",
+      "vendor": "Container Options",
+      "amount": 5802.5,
+      "doc_date": "2025-12-05",
+      "file": "Container Options - 2025-12-05 - 00066927.pdf",
+      "doc_no": "00066927",
+      "mailbox": null,
+      "relationship": "CLOSE (surcharge/tip/fx)"
+    }
+  },
+  {
+    "i": 51,
+    "date": "2026-02-13",
+    "amount": 232.96,
+    "particulars": "AUSTRALIAN TOURIST PARK MYAMBA | Credit Card Purchase",
+    "match": {
+      "source": "xero_bill",
+      "vendor": "NRMA Blue Dolphin Yamba Holiday Resort",
+      "amount": 231,
+      "doc_date": "2026-02-12",
+      "file": null,
+      "doc_no": "331654",
+      "mailbox": null,
+      "relationship": "CLOSE (surcharge/tip/fx)"
+    }
+  },
+  {
+    "i": 60,
+    "date": "2026-04-07",
+    "amount": 345.37,
+    "particulars": "Restaurace Alma Praha 1 | Credit Card Purchase",
+    "match": {
+      "source": "dext_receipt",
+      "vendor": "Alma bio s.r.o.",
+      "amount": 166,
+      "doc_date": "2026-04-03",
+      "file": "receipt.pdf",
+      "doc_no": null,
+      "mailbox": "nicholas@act.place",
+      "relationship": "SPLIT (receipt is ½ of this line)"
+    }
+  }
+]

@@ -1,0 +1,1035 @@
+[
+  {
+    "i": 12,
+    "date": "2025-12-17",
+    "amount": 32780,
+    "particulars": "Circularity Group PtA5648662938 Thanks | Transfer Debit",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": [
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "The Plasticians <info@theplasticians.com.au>",
+        "subject": "Re: New customer message on 13 December 2025 at 3:54 pm",
+        "date": "Wed, 17 Dec 2025 06:02:29 +0000",
+        "gmail_id": "19b2ae739a423860",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 5,
+    "date": "2025-11-11",
+    "amount": 20000,
+    "particulars": "Ross Built ConstructP7797582049 ACT | Transfer Debit",
+    "status": "GMAIL_CANDIDATE",
+    "candidates": [
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Ross Newell <invoicereminders@post.xero.com>",
+        "subject": "Bill INV-0146 from RNM CARPENTRY is due",
+        "date": "Sat, 15 Nov 2025 21:41:41 +0000",
+        "gmail_id": "19a897784e490498",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 47,
+    "date": "2026-01-29",
+    "amount": 4816,
+    "particulars": "CARLA FURNISHERS P/L CICCONE | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": [
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Nicholas Marchesi <nicholas@act.place>",
+        "subject": "Fwd: Receipt from The Roastery Cafe #jHtX",
+        "date": "Tue, 3 Feb 2026 09:03:28 +0930",
+        "gmail_id": "19c20b4699b345ec",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "The Roastery Cafe <messenger@messaging.squareup.com>",
+        "subject": "Receipt from The Roastery Cafe #jHtX",
+        "date": "Fri, 30 Jan 2026 07:32:39 +0000",
+        "gmail_id": "19c0dd184735748a",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "pos@retailexpress.com.au",
+        "subject": "Carla Furnishers Pty Ltd : Invoice# 26-00000151",
+        "date": "Wed, 28 Jan 2026 03:38:41 +0000 (UTC)",
+        "gmail_id": "19c02ae9b09c0009",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Adrian Venturin <adrian@carlafurnishers.com.au>",
+        "subject": "RE: Goods Project",
+        "date": "Wed, 21 Jan 2026 01:46:28 +0000",
+        "gmail_id": "19bde3b70cba0d36",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Nicholas Marchesi <nicholas@act.place>",
+        "subject": "Re: Goods Project",
+        "date": "Wed, 21 Jan 2026 07:55:43 +1000",
+        "gmail_id": "19bdd6848f1bcfa9",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Adrian Venturin <adrian@carlafurnishers.com.au>",
+        "subject": "RE: Goods Project",
+        "date": "Tue, 13 Jan 2026 23:41:25 +0000",
+        "gmail_id": "19bb9bc6c50e5993",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 56,
+    "date": "2026-03-02",
+    "amount": 4497,
+    "particulars": "SP RETRO OUTDOOR CO BAULKHAM HILL | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 16,
+    "date": "2026-01-23",
+    "amount": 4000,
+    "particulars": "little beach shacks F8216106008 Thanks | Transfer Debit",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 11,
+    "date": "2025-12-04",
+    "amount": 3000,
+    "particulars": "Thriday G3468033865 | Transfer Debit",
+    "status": "GMAIL_CANDIDATE",
+    "candidates": [
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "Nicholas Marchesi <nicholas@act.place>",
+        "subject": "Re: [Thriday Customer Care] Let's get your Xero reconciled & BAS sorted :)",
+        "date": "Sun, 14 Dec 2025 07:45:23 +0930",
+        "gmail_id": "19b19c8b26d6a0b3",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+        "subject": "[Thriday Customer Care] Re: Let's get your Xero reconciled & BAS sorted :)",
+        "date": "Thu, 11 Dec 2025 06:11:13 +0000",
+        "gmail_id": "19b0c08ff900be8c",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "Nicholas Marchesi <nicholas@act.place>",
+        "subject": "Re: [Thriday Customer Care] Let's get your Xero reconciled & BAS sorted :)",
+        "date": "Thu, 11 Dec 2025 10:40:58 +1100",
+        "gmail_id": "19b0aa415c5c2453",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+        "subject": "[Thriday Customer Care] Re: Let's get your Xero reconciled & BAS sorted :)",
+        "date": "Thu, 04 Dec 2025 00:53:30 +0000",
+        "gmail_id": "19ae6d99986961e2",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+        "subject": "[Thriday Customer Care] Re: Let's get your Xero reconciled & BAS sorted :)",
+        "date": "Thu, 20 Nov 2025 04:29:52 +0000",
+        "gmail_id": "19a9f86a632b5c96",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+        "subject": "[Thriday Customer Care] Re: Let's get your Xero reconciled & BAS sorted :)",
+        "date": "Mon, 17 Nov 2025 05:12:16 +0000",
+        "gmail_id": "19a903a64a99727f",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Thriday Accounting Support <accounting@thriday.com.au>",
+        "subject": "Request #32645: How would you rate the support you received?",
+        "date": "Tue, 16 Dec 2025 04:01:52 +0000",
+        "gmail_id": "19b25525e9ec5b08",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+        "subject": "BAS - July to Sep 2025 - lodged (copy for your record)",
+        "date": "Tue, 16 Dec 2025 03:36:59 +0000",
+        "gmail_id": "19b253b92b53306d",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Nicholas Marchesi <nicholas@act.place>",
+        "subject": "Re: Your September 2025 BAS is ready for signing and lodgment",
+        "date": "Mon, 15 Dec 2025 21:19:27 +0930",
+        "gmail_id": "19b21d8466def3bf",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+        "subject": "Your September 2025 BAS is ready for signing and lodgment",
+        "date": "Mon, 15 Dec 2025 03:14:39 +0000",
+        "gmail_id": "19b2000c2477528a",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+        "subject": "[Thriday Customer Care] Re: Let's get your Xero reconciled & BAS sorted :)",
+        "date": "Thu, 11 Dec 2025 06:11:13 +0000",
+        "gmail_id": "19b0c08ff0c543c2",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 55,
+    "date": "2026-02-26",
+    "amount": 2161.19,
+    "particulars": "ADGE Hotel OPI Surry Hills | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": [
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "Cora Briefs <briefs@cora.computer>",
+        "subject": "Morning Brief | March 30, 2026",
+        "date": "Mon, 30 Mar 2026 12:00:16 +0000",
+        "gmail_id": "19d3e9dbc59e4661",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Adge Hotel & Residences\" <concierge@adgehotel.com.au>",
+        "subject": "Hello Benjamin your booking in Adge Hotel & Residences",
+        "date": "Mon, 30 Mar 2026 01:47:14 +0000",
+        "gmail_id": "19d3c6c792bb7767",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Adge Hotel & Residences\" <concierge@adgehotel.com.au>",
+        "subject": "Booking Confirmed – See You Soon at Adge!",
+        "date": "Mon, 30 Mar 2026 01:46:22 +0000",
+        "gmail_id": "19d3c6bac1696e4f",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:50:38 +1100",
+        "gmail_id": "19d2cc59218ef38c",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:50:38 +1100",
+        "gmail_id": "19d2cc5bf93fe5f1",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 00:50:00 +0000",
+        "gmail_id": "19d2cc5176c5d14d",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:45:38 +1100",
+        "gmail_id": "19d2cc12c7192a6f",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 00:37:30 +0000",
+        "gmail_id": "19d2cb9a187a0aa1",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:50:38 +1100",
+        "gmail_id": "19d2cc5c0aeb06eb",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 00:50:00 +0000",
+        "gmail_id": "19d2cc516bff849c",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:45:38 +1100",
+        "gmail_id": "19d2cc12daab1d2e",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 00:37:30 +0000",
+        "gmail_id": "19d2cb99d77016d9",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 61,
+    "date": "2026-04-30",
+    "amount": 1495.2,
+    "particulars": "Hannah St Melbourne Melbourne | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 14,
+    "date": "2026-01-09",
+    "amount": 1439.6,
+    "particulars": "INTERNET TRANSFER Thanks | Transfer Debit",
+    "status": "GMAIL_CANDIDATE",
+    "candidates": [
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "The Substack Post <post+unstacked@substack.com>",
+        "subject": "“If you’re going to show us two freaks in love, show us two freaks in love”",
+        "date": "Mon, 16 Feb 2026 18:01:05 +0000",
+        "gmail_id": "19c6825164cbde9f",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "The Substack Post <post+the-weekender@substack.com>",
+        "subject": "“It was always the same story: eternal adolescence, sexual perversion, rampant classism”",
+        "date": "Sat, 14 Feb 2026 14:03:20 +0000",
+        "gmail_id": "19c5cfe7ab8bb98b",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "The Substack Post <post+the-weekender@substack.com>",
+        "subject": "“There must be something like the opposite of suicide, whereby a person radically and abruptly decides to start li…",
+        "date": "Sat, 7 Feb 2026 14:01:28 +0000",
+        "gmail_id": "19c38f3388a640e5",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "Substack <on+product@substack.com>",
+        "subject": "Substack is your corner of the internet",
+        "date": "Mon, 2 Feb 2026 17:30:05 +0000",
+        "gmail_id": "19c1f77c4055963b",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "AAMI <No-Reply3@aami.com.au>",
+        "subject": "AAMI Commercial Motor Insurance Cancellation SPD015748782",
+        "date": "Mon, 16 Feb 2026 11:26:08 +0000",
+        "gmail_id": "19c6633900484900",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "AAMI <No-Reply3@aami.com.au>",
+        "subject": "AAMI Commercial Motor Insurance Cancellation SPD015748782",
+        "date": "Mon, 16 Feb 2026 04:10:08 +0000",
+        "gmail_id": "19c64a4f057ea367",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Nicholas Marchesi <nicholas@act.place>",
+        "subject": "Re: << Ref:8997574 >> Re: AAMI Commercial Motor Insurance New Business Direct Debit SPD015748782",
+        "date": "Mon, 16 Feb 2026 13:32:33 +1000",
+        "gmail_id": "19c6482052599a71",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "<businessinsurance@aami.com.au>",
+        "subject": "Fw: << Ref:8997574 >> Re: AAMI Commercial Motor Insurance New Business Direct Debit SPD015748782",
+        "date": "Mon, 16 Feb 2026 10:28:54 +1000",
+        "gmail_id": "19c63da40388e3e0",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "A Curious Tractor <hi@act.place>",
+        "subject": "Fwd: AAMI Commercial Motor Insurance New Business Direct Debit SPD015748782",
+        "date": "Wed, 7 Jan 2026 07:46:09 +1000",
+        "gmail_id": "19b9842f1777c0f0",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "A Curious Tractor <hi@act.place>",
+        "subject": "Fwd: Thanks for Ordering Domino's",
+        "date": "Fri, 5 Dec 2025 15:20:58 +1000",
+        "gmail_id": "19aecf56a53a7ab3",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 40,
+    "date": "2025-12-01",
+    "amount": 998.94,
+    "particulars": "BARGAINCARRENTALS HOBART | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 41,
+    "date": "2025-12-01",
+    "amount": 809.29,
+    "particulars": "BARGAINCARRENTALS HOBART | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 58,
+    "date": "2026-03-30",
+    "amount": 598.57,
+    "particulars": "HERTZ, RA, 643314792 SOUTH MELBOUR | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 48,
+    "date": "2026-02-06",
+    "amount": 538.12,
+    "particulars": "STEELMART CALOUNDRA CALOUNDRAQLD | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 44,
+    "date": "2025-12-11",
+    "amount": 436.24,
+    "particulars": "COLYTON HOTEL COLYTON | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": [
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Nightcap at Colyton Hotel <colytonhotel@nightcaphotels.com.au>",
+        "subject": "Nightcap at Colyton Hotel - 5406236",
+        "date": "Wed, 19 Nov 2025 04:51:48 +0000",
+        "gmail_id": "19a9a74608967c99",
+        "amount_confirmed": "436.24"
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Nicholas Marchesi <nicholas@act.place>",
+        "subject": "Fwd: Qantas Hotels Booking Confirmation: QBQ4Y39HW",
+        "date": "Wed, 19 Nov 2025 13:17:22 +0800",
+        "gmail_id": "19a9a8bf91ddff26",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Qantas <qantas.booking@hooroo.com>",
+        "subject": "Qantas Hotels Booking Confirmation: QBQ4Y39HW",
+        "date": "Wed, 19 Nov 2025 04:51:32 +0000 (UTC)",
+        "gmail_id": "19a9a7423e02f1c2",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 46,
+    "date": "2026-01-15",
+    "amount": 399.45,
+    "particulars": "AIRTASKER* 19323270X HAYMARKET | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 35,
+    "date": "2025-11-17",
+    "amount": 393.72,
+    "particulars": "Indonesia Arrival ROTTERDAM | Credit Card Purchase",
+    "status": "GMAIL_CANDIDATE",
+    "candidates": [
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Indonesia Arrival <info@indonesia-arrival.com>",
+        "subject": "Your Indonesia eVOA - Ready for Travel",
+        "date": "Sat, 15 Nov 2025 10:16:56 +0000 (UTC)",
+        "gmail_id": "19a87049a3504057",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Indonesia Arrival <info@indonesia-arrival.com>",
+        "subject": "Your Indonesia eVOA - Ready for Travel",
+        "date": "Sat, 15 Nov 2025 10:13:26 +0000 (UTC)",
+        "gmail_id": "19a8701661fff2cf",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 54,
+    "date": "2026-02-25",
+    "amount": 388.2,
+    "particulars": "BIG W/OLD HUME HWY & ROSCMITTAGONG | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 53,
+    "date": "2026-02-19",
+    "amount": 374.07,
+    "particulars": "TULLAH LAKESIDE LODGE TULLAH | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": [
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Nicholas Marchesi <nicholas@act.place>",
+        "subject": "Fwd: Booking confirmation at @Tullah Lakeside Lodge",
+        "date": "Sun, 25 Jan 2026 10:50:32 +1000",
+        "gmail_id": "19bf2a1bd2d9053e",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 28,
+    "date": "2025-10-30",
+    "amount": 352.22,
+    "particulars": "SQ *VALLEY SLICE PTY LTD Mooloolah Val | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 65,
+    "date": "2026-05-21",
+    "amount": 348.9,
+    "particulars": "Alicetronics Alice Springs | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 60,
+    "date": "2026-04-07",
+    "amount": 345.37,
+    "particulars": "Restaurace Alma Praha 1 | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 49,
+    "date": "2026-02-09",
+    "amount": 326.6,
+    "particulars": "LS Esmay Adelaide Hackney | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 23,
+    "date": "2025-10-14",
+    "amount": 323.3,
+    "particulars": "BEARPEP PTY LTD LARRAKEYAH | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 26,
+    "date": "2025-10-28",
+    "amount": 314.2,
+    "particulars": "JMC No2 Pty Ltd TS Ken Kenilworth | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": [
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "YAC Admin <admin@yac.net.au>",
+        "subject": "YAC | Annual Report, 2024 AGM Minutes, 2025 Agenda",
+        "date": "Tue, 4 Nov 2025 03:22:22 +0000",
+        "gmail_id": "19a4ce3eaa7bff03",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "\"Maleny Hardware & Rural Supplies\" <andrea@malenyhardwareandrural.com.au>",
+        "subject": "Statement BCV01\\AC",
+        "date": "3 Dec 2025 15:16:44 +1000",
+        "gmail_id": "19ae2a3755a27784",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "\"Maleny Hardware & Rural Supplies\" <andrea@malenyhardwareandrural.com.au>",
+        "subject": "Transaction sent by Maleny Hardware & Rural Supplies",
+        "date": "29 Nov 2025 10:23:05 +1000",
+        "gmail_id": "19accfce438ea69d",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Nicholas Marchesi <nicholas@act.place>",
+        "subject": "Fwd: Fw: E-Receipt for Budget Rental349744231",
+        "date": "Fri, 28 Nov 2025 13:29:03 +1000",
+        "gmail_id": "19ac881d786e8ab7",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Suzie Zemek <suz.zemek@hotmail.com>",
+        "subject": "Fw: E-Receipt for Budget Rental349744231",
+        "date": "Fri, 28 Nov 2025 02:16:11 +0000",
+        "gmail_id": "19ac83f312950f3d",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "A Curious Tractor <hi@act.place>",
+        "subject": "Fwd: Statement BCV01\\AC",
+        "date": "Thu, 4 Dec 2025 19:44:40 +1000",
+        "gmail_id": "19ae8c00e628021c",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "A Curious Tractor <hi@act.place>",
+        "subject": "Fwd: Transaction sent by Maleny Hardware & Rural Supplies",
+        "date": "Sat, 29 Nov 2025 17:32:50 +1000",
+        "gmail_id": "19acea07bfd0fa57",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "A Curious Tractor <hi@act.place>",
+        "subject": "Fwd: Transaction sent by Maleny Hardware & Rural Supplies",
+        "date": "Sat, 29 Nov 2025 17:34:27 +1000",
+        "gmail_id": "19ace88dc1b07e1e",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Nicholas Marchesi <hi@act.place>",
+        "subject": "Fwd: Yandina Service Tax Invoice Attached",
+        "date": "Wed, 26 Nov 2025 15:53:32 +1000",
+        "gmail_id": "19abeb99cc3371b8",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 34,
+    "date": "2025-11-17",
+    "amount": 291.98,
+    "particulars": "Kogan.com 3BUDH9QW Melbourne | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": [
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Kogan.com\" <store-news@e.kogan.com>",
+        "subject": "ONLY $179 💥 Kogan Smart Freestyle Projector with Netflix, Disney and more + free shipping (55% OFF)",
+        "date": "Wed, 17 Dec 2025 16:20:16 -0600",
+        "gmail_id": "19b2e6664a67919f",
+        "amount_confirmed": "292"
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Kogan.com\" <store-news@e.kogan.com>",
+        "subject": "HURRY, Under the Tree Guarantee ENDS TOMORROW 🎁",
+        "date": "Sat, 20 Dec 2025 15:16:13 -0600",
+        "gmail_id": "19b3d9ec9ebf6ca2",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Kogan.com\" <store-news@e.kogan.com>",
+        "subject": "Kogan 24\" Gaming Monitor ONLY $119 and delivered in time for Christmas! (40% OFF standard retail price)",
+        "date": "Fri, 19 Dec 2025 15:19:14 -0600",
+        "gmail_id": "19b387b31c91230b",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Kogan.com\" <store-news@e.kogan.com>",
+        "subject": "TODAY ONLY  🚨 Kogan Mini Body Action Camera ONLY $49.99 (rising to $249.95 tomorrow)",
+        "date": "Thu, 18 Dec 2025 13:27:03 -0600",
+        "gmail_id": "19b32ee1c8402d08",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 64,
+    "date": "2026-05-21",
+    "amount": 240.05,
+    "particulars": "COLEMANS PRINTING ALICE SALICE SPRINGS | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": [
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "alice.office@colemanprint.com.au",
+        "subject": "Your job has been completed - Please find attached your Invoice for 120083",
+        "date": "20 May 2026 06:26:55 +0000",
+        "gmail_id": "19e44110162f5c07",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 50,
+    "date": "2026-02-09",
+    "amount": 213,
+    "particulars": "ORSO GASTRONOMIA PTY L ROSE PARK | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 57,
+    "date": "2026-03-03",
+    "amount": 209,
+    "particulars": "ADGE Hotel OPI Surry Hills | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": [
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 10 Apr 2026 02:34:28 +0000",
+        "gmail_id": "19d753dd7e1eac39",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "Cora Briefs <briefs@cora.computer>",
+        "subject": "Morning Brief | March 30, 2026",
+        "date": "Mon, 30 Mar 2026 12:00:16 +0000",
+        "gmail_id": "19d3e9dbc59e4661",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Adge Hotel & Residences\" <concierge@adgehotel.com.au>",
+        "subject": "Hello Benjamin your booking in Adge Hotel & Residences",
+        "date": "Mon, 30 Mar 2026 01:47:14 +0000",
+        "gmail_id": "19d3c6c792bb7767",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Adge Hotel & Residences\" <concierge@adgehotel.com.au>",
+        "subject": "Booking Confirmed – See You Soon at Adge!",
+        "date": "Mon, 30 Mar 2026 01:46:22 +0000",
+        "gmail_id": "19d3c6bac1696e4f",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:50:38 +1100",
+        "gmail_id": "19d2cc5bf93fe5f1",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 00:50:00 +0000",
+        "gmail_id": "19d2cc5176c5d14d",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:45:38 +1100",
+        "gmail_id": "19d2cc12c7192a6f",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 00:37:30 +0000",
+        "gmail_id": "19d2cb9a187a0aa1",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 10 Apr 2026 02:34:28 +0000",
+        "gmail_id": "19d753dd6a61b07f",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:50:38 +1100",
+        "gmail_id": "19d2cc5c0aeb06eb",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 00:50:00 +0000",
+        "gmail_id": "19d2cc516bff849c",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:45:38 +1100",
+        "gmail_id": "19d2cc12daab1d2e",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 33,
+    "date": "2025-11-17",
+    "amount": 204.55,
+    "particulars": "Indonesia Arrival ROTTERDAM | Credit Card Purchase",
+    "status": "GMAIL_CANDIDATE",
+    "candidates": [
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Indonesia Arrival <info@indonesia-arrival.com>",
+        "subject": "Your Indonesia eVOA - Ready for Travel",
+        "date": "Sat, 15 Nov 2025 10:16:56 +0000 (UTC)",
+        "gmail_id": "19a87049a3504057",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Indonesia Arrival <info@indonesia-arrival.com>",
+        "subject": "Your Indonesia eVOA - Ready for Travel",
+        "date": "Sat, 15 Nov 2025 10:13:26 +0000 (UTC)",
+        "gmail_id": "19a8701661fff2cf",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 29,
+    "date": "2025-11-03",
+    "amount": 203.23,
+    "particulars": "MAPLE STREET MEAT MERC MALENY | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 63,
+    "date": "2026-05-21",
+    "amount": 201.28,
+    "particulars": "MALL MEDICAL CENTRE Alice Springs | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 2,
+    "date": "2025-11-04",
+    "amount": 200,
+    "particulars": "Shane Bloomfield H8299013120 Bunnings thanks | Transfer Debit",
+    "status": "RECEIPT_VENDOR_MISMATCH",
+    "candidates": []
+  },
+  {
+    "i": 36,
+    "date": "2025-11-17",
+    "amount": 180,
+    "particulars": "Scopri Olo Bar Carlton | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 59,
+    "date": "2026-04-01",
+    "amount": 146.16,
+    "particulars": "ADGE Hotel OPI Surry Hills | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": [
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 10 Apr 2026 02:34:28 +0000",
+        "gmail_id": "19d753dd7e1eac39",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "Cora Briefs <briefs@cora.computer>",
+        "subject": "Morning Brief | March 30, 2026",
+        "date": "Mon, 30 Mar 2026 12:00:16 +0000",
+        "gmail_id": "19d3e9dbc59e4661",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Adge Hotel & Residences\" <concierge@adgehotel.com.au>",
+        "subject": "Hello Benjamin your booking in Adge Hotel & Residences",
+        "date": "Mon, 30 Mar 2026 01:47:14 +0000",
+        "gmail_id": "19d3c6c792bb7767",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Adge Hotel & Residences\" <concierge@adgehotel.com.au>",
+        "subject": "Booking Confirmed – See You Soon at Adge!",
+        "date": "Mon, 30 Mar 2026 01:46:22 +0000",
+        "gmail_id": "19d3c6bac1696e4f",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:50:38 +1100",
+        "gmail_id": "19d2cc5bf93fe5f1",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 00:50:00 +0000",
+        "gmail_id": "19d2cc5176c5d14d",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:45:38 +1100",
+        "gmail_id": "19d2cc12c7192a6f",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "nicholas@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 00:37:30 +0000",
+        "gmail_id": "19d2cb9a187a0aa1",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 10 Apr 2026 02:34:28 +0000",
+        "gmail_id": "19d753dd6a61b07f",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:50:38 +1100",
+        "gmail_id": "19d2cc5c0aeb06eb",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Kelly Gill <kgill@adgehotel.com.au>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 00:50:00 +0000",
+        "gmail_id": "19d2cc516bff849c",
+        "amount_confirmed": null
+      },
+      {
+        "mailbox": "hi@act.place",
+        "from": "Benjamin Knight <benjamin@act.place>",
+        "subject": "Re: A Curious Tractor X ADGE Hotel Corporate Rates",
+        "date": "Fri, 27 Mar 2026 11:45:38 +1100",
+        "gmail_id": "19d2cc12daab1d2e",
+        "amount_confirmed": null
+      }
+    ]
+  },
+  {
+    "i": 24,
+    "date": "2025-10-14",
+    "amount": 64.99,
+    "particulars": "BEARPEP PTY LTD LARRAKEYAH | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 27,
+    "date": "2025-10-29",
+    "amount": 28.1,
+    "particulars": "GUZMAN Y GOMEZ SURRY HILLS | Credit Card Purchase",
+    "status": "GAP_PLEASE_PROVIDE",
+    "candidates": []
+  },
+  {
+    "i": 39,
+    "date": "2025-11-26",
+    "amount": 16.45,
+    "particulars": "Audible Limited AU MELBOURNE | Credit Card Purchase",
+    "status": "RECEIPT_VENDOR_MISMATCH",
+    "candidates": [
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Audible.com.au\" <donotreply@audible.com.au>",
+        "subject": "Thanks, your order is complete",
+        "date": "Mon, 22 Dec 2025 11:08:34 +0000",
+        "gmail_id": "19b45bf2b1c5131a",
+        "amount_confirmed": "16"
+      }
+    ]
+  },
+  {
+    "i": 45,
+    "date": "2025-12-29",
+    "amount": 16.45,
+    "particulars": "Audible Limited AU MELBOURNE | Credit Card Purchase",
+    "status": "GMAIL_CANDIDATE",
+    "candidates": [
+      {
+        "mailbox": "benjamin@act.place",
+        "from": "\"Audible.com.au\" <donotreply@audible.com.au>",
+        "subject": "Thanks, your order is complete",
+        "date": "Mon, 22 Dec 2025 11:08:34 +0000",
+        "gmail_id": "19b45bf2b1c5131a",
+        "amount_confirmed": "16"
+      }
+    ]
+  }
+]
