@@ -9,7 +9,7 @@ const flag=v=>{const t=[];if(v.needs_ben)t.push('NEEDS YOUR CALL');if(v.receipt_
 const vByI=new Map(V.map(v=>[v.i,v]));
 const grid=parseCSV(readFileSync(ORIG,'utf8'));
 let di=0; const col=[];
-for(const row of grid){ if(isDate((row[1]||'').trim())){ const v=vByI.get(di); col.push((flag(v)+(v?.your_comment||'')).replace(/\r?\n/g,' ')); di++; } else col.push(''); }
+for(const row of grid){ if(isDate((row[1]||'').trim())){ const v=vByI.get(di); col.push((flag(v)+(v?.your_comment||'')).replace(/\r?\n/g,' ')); di++; } else col.push((row[6]||'').replace(/\r?\n/g,' ')); }
 writeFileSync(path.join(DIR,'your-comments-column.txt'), col.join('\n'));
 console.log(`Wrote ${col.length}-row column (${di} answers) → ${DIR}/your-comments-column.txt`);
 console.log('Paste it into the FIRST cell of the "Your Comments" column (top row of the sheet); it fills down row-for-row.');

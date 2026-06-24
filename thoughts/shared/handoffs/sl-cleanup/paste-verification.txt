@@ -1,0 +1,73 @@
+-- row 2: From 1 Oct 2025 to 31 May 2026 
+-- row 4: NJ Marchesi T/as ACT Everyday 
+-- row 5: 8.40E+13 
+-- row 6: Date / G=Your Comments
+G7  10/23/2025  $ 2,000.00  CHRISTOPHER DODS J70403963  | Honorarium/contributor payment to Christopher Dods for The
+G8  10/29/2025  $      360  James William V0471764749   | Labour for the Harvest build (ACT-HV) — paid to James Will
+G9  11/4/2025  $      200  Shane Bloomfield H82990131  | [no matching receipt on file; reviewer-corrected] Reimburs
+G10  11/5/2025  $ 1,150.00  HPJCFBWSB5 Humanitix Ltd A  | [reviewer-corrected] Event/ticket income via Humanitix for
+G11  11/7/2025  $      200  MR MARCUS TRAVERS COMarcus  | [no matching receipt on file] Payment for dad.lab (per Ben
+G12  11/11/2025  $20,000.00  Ross Built ConstructP77975  | [receipt likely in Gmail — confirm; reviewer-corrected] Oo
+G13  11/27/2025  $20,000.00  MARCHESI NICHOLAS JAUp      | This is Nic putting money into the business — owner funds 
+G14  11/28/2025  $   616.66  SUZANNE MARGARET ANDSecuri  | Rent received for the house on the Farm (ACT-FM), per Ben 
+G15  11/28/2025  $89,361.00  TFN Distribution The Fundi  | This is The Funding Network distributing impact funding to
+G16  11/28/2025  $    781.9  Tarik Dallinger-DimiA98385  | This is a payment to Tarik Dallinger-Dimitriou, an artist,
+G17  11/28/2025  $20,000.00  Nicholas Marchesi SuE03976  | $20,000 to Nicholas Marchesi (ref ...Su...) — Nic's own su
+G18  12/4/2025  $ 3,000.00  Thriday G3468033865         | [receipt likely in Gmail — confirm; reviewer-corrected] Wo
+G19  12/17/2025  $32,780.00  Circularity Group PtA56486  | [receipt located — forwarding; reviewer-corrected] The Pla
+G20  12/19/2025  $55,197.00  TFN Distribution The Fundi  | [reviewer-corrected] Grant — second & final distribution f
+G21  1/9/2026  $ 1,439.60  INTERNET TRANSFER Thanks    | [receipt likely in Gmail — confirm; reviewer-corrected] Tr
+G22  1/16/2026  $ 2,420.00  BIONIC GROUP PTY LTDRefund  | [receipt likely in Gmail — confirm; reviewer-corrected] Th
+G23  1/23/2026  $ 4,000.00  little beach shacks F82161  | [receipt to provide; reviewer-corrected] $4,000 to 'little
+G24  2/11/2026  $   668.37  2000004534 AGA ASSISTANCE   | This is a travel-insurance payout from Allianz Global Assi
+G25  3/4/2026  $ 3,600.00  Daniel Robinson H143915699  | This is a second-hand John Deere ride-on mower I bought pr
+G26  3/30/2026  $Catalysing Impact SOCIAL IMPACT HU A CURIOUS TRACTO | Interbank Credit  Catalysing Impact SOCIAL I  | This is the $10,000 Catalysing Impact grant (Social Impact
+G27  5/7/2026  $ 1,550.00  DANIEL ROBINSON H663462266  | Garden gear bought privately off Daniel Robinson via Faceb
+G28  5/15/2026  $      291  MR BEAU JOSEPH ANDE Y44346  | Labour for the Harvest build (ACT-HV) — paid to Beau Josep
+G29  5/25/2026  $      665  MR BEAU JOSEPH ANDE H91141  | Labour for the Harvest build (ACT-HV) — paid to Beau Josep
+-- row 31: NAB Visa ACT #8815 
+-- row 32: 8815 
+-- row 33: Date / G=Your Comments
+G34  10/14/2025  $    323.3  BEARPEP PTY LTD LARRAKEYAH  | [receipt to provide] Card purchase at Bearpep Pty Ltd in L
+G35  10/14/2025  $    64.99  BEARPEP PTY LTD LARRAKEYAH  | [receipt to provide] Second same-day Bearpep Pty Ltd (Larr
+G36  10/27/2025  $    16.45  Audible Limited AU MELBOUR  | Office expense, not Drawings — this is the Audible AU audi
+G37  10/28/2025  $    314.2  JMC No2 Pty Ltd TS Ken Ken  | [receipt to provide] Card spend at JMC No2 Pty Ltd in Keni
+G38  10/29/2025  $     28.1  GUZMAN Y GOMEZ SURRY HILLS  | [receipt to provide] Travel expense, not Drawings. This is
+G39  10/30/2025  $   352.22  SQ *VALLEY SLICE PTY LTD M  | [receipt to provide] Cafe/meal at Valley Slice in Mooloola
+G40  11/3/2025  $   203.23  MAPLE STREET MEAT MERC MAL  | [receipt to provide] Butcher (Maple St Meat, Maleny) — pro
+G41  11/4/2025  $     45.8  INTERNET BANKING TRANSFERM  | Cash spent on the Harvest (ACT-HV), per Ben. No receipt ->
+G42  11/4/2025  $   202.16  INTERNET BANKING TRANSFERM  | Cash drawn and spent on the Harvest (ACT-HV), per Ben. No 
+G43  11/4/2025  $   152.59  INTERNET BANKING TRANSFERM  | Credit-card cash advance already matched to a Xero bill an
+G44  11/17/2025  $   204.55  Indonesia Arrival ROTTERDA  | [receipt likely in Gmail — confirm] Indonesia electronic v
+G45  11/17/2025  $   291.98  Kogan.com 3BUDH9QW Melbour  | [receipt to provide] Kogan.com — domestic online retailer,
+G46  11/17/2025  $   393.72  Indonesia Arrival ROTTERDA  | [receipt likely in Gmail — confirm] Second Indonesia eVOA 
+G47  11/17/2025  $      180  Scopri Olo Bar Carlton      | [receipt to provide] Business meal at Scopri (Carlton) whi
+G48  11/18/2025  $ 5,590.00  CARLA FURNISHERS P/L CICCO  | RESOLVED (Dext): a single Dext receipt for $11,180.00 date
+G49  11/18/2025  $ 5,590.00  CARLA FURNISHERS P/L CICCO  | RESOLVED (Dext): a single Dext receipt for $11,180.00 date
+G50  11/26/2025  $    16.45  Audible Limited AU MELBOUR  | [receipt located — forwarding; reviewer-corrected] Audible
+G51  12/1/2025  $   998.94  BARGAINCARRENTALS HOBART    | [receipt to provide] Bargain Car Rentals (Hobart) - vehicl
+G52  12/1/2025  $   809.29  BARGAINCARRENTALS HOBART    | [receipt to provide] Second Bargain Car Rentals charge sam
+G53  12/8/2025  $    717.5  CACTUS JACKS RESTAUR TOWNS  | Cactus Jacks (Townsville) - business meal on a Harvest tri
+G54  12/9/2025  $ 5,904.05  CONTAINER OPTIONS STRATHFI  | Container Options - shipping container we bought and on-so
+G55  12/11/2025  $   436.24  COLYTON HOTEL COLYTON       | [receipt located — forwarding] Colyton Hotel (Colyton, Wes
+G56  12/29/2025  $    16.45  Audible Limited AU MELBOUR  | [receipt located — forwarding] Office expense, not Drawing
+G57  1/15/2026  $   399.45  AIRTASKER* 19323270X HAYMA  | [receipt to provide] This is Airtasker — I paid for an out
+G58  1/29/2026  $ 4,816.00  CARLA FURNISHERS P/L CICCO  | [receipt located — forwarding] Carla Furnishers Pty Ltd (A
+G59  2/6/2026  $   538.12  STEELMART CALOUNDRA CALOUN  | [receipt to provide] Steelmart Caloundra — steel/materials
+G60  2/9/2026  $    326.6  LS Esmay Adelaide Hackney   | [receipt to provide] Adelaide hospitality (LS Esmay, Hackn
+G61  2/9/2026  $      213  ORSO GASTRONOMIA PTY L ROS  | [receipt to provide] Orso Gastronomia (Adelaide, Rose Park
+G62  2/13/2026  $   232.96  AUSTRALIAN TOURIST PARK MY  | Australian Tourist Park (Myamba) — accommodation while tra
+G63  2/16/2026  $      260  SQ *CANDLE SUPPLIES BRISB1  | Candle Supplies (Brisbane) — candle-making materials for C
+G64  2/19/2026  $   374.07  TULLAH LAKESIDE LODGE TULL  | [booking confirmation found — folio to confirm] Tullah Lak
+G65  2/25/2026  $    388.2  BIG W/OLD HUME HWY & ROSCM  | [receipt to provide] Big W purchase in Mittagong on a NSW 
+G66  2/26/2026  $ 2,161.19  ADGE Hotel OPI Surry Hills  | [receipt to provide] ADGE Hotel, Surry Hills — accommodati
+G67  3/2/2026  $ 4,497.00  SP RETRO OUTDOOR CO BAULKH  | [receipt to provide; reviewer-corrected] $4,497 to SP Retr
+G68  3/3/2026  $      209  ADGE Hotel OPI Surry Hills  | [receipt to provide] Another ADGE Hotel charge on the same
+G69  3/30/2026  $   598.57  HERTZ, RA, 643314792 SOUTH  | [receipt to provide] Hertz rental car, South Melbourne — t
+G70  4/1/2026  $   146.16  ADGE Hotel OPI Surry Hills  | [receipt to provide] ADGE Hotel again — accommodation on t
+G71  4/7/2026  $   345.37  Restaurace Alma Praha 1     | [receipt to provide] Business overseas-travel meal on Nic'
+G72  4/30/2026  $ 1,495.20  Hannah St Melbourne Melbou  | [receipt to provide; reviewer-corrected] Melbourne hotel —
+G73  5/8/2026  $   174.65  INTERNET BANKING TRANSFERM  | Cash spent on the Harvest (ACT-HV), per Ben. No receipt ->
+G74  5/21/2026  $   201.28  MALL MEDICAL CENTRE Alice   | [receipt to provide; reviewer-corrected] Business travel-m
+G75  5/21/2026  $   240.05  COLEMANS PRINTING ALICE SA  | [receipt located — forwarding] Colemans Printing is a prin
+G76  5/21/2026  $    348.9  Alicetronics Alice Springs  | [receipt to provide] Alicetronics is an electronics shop i
