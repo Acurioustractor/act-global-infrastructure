@@ -1,0 +1,314 @@
+[
+  {
+    "i": 13,
+    "amt": 55197,
+    "particulars": "TFN Distribution The Funding Netw A Curious Tracto",
+    "verify": {
+      "i": 13,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Verified against xero_invoices (DB tednluwflfhxyucgwigh). The cited $55,197 invoice is an ACCPAY (expense BILL), VOIDED, subtotal 50179.09 + tax 5017.91, acct 429 INPUT, proj ACT-CE; companion $89,361 also VOIDED. (1) Amount tie-out: the +$55,197 bank line is INCOME and does NOT (and should not) reconcile to the voided expense bill direction — answer correctly ignores it rather than amount-matching; $55,197 = the 'second and final' TFN distribution per gmail, consistent with $89,361 first. (2) Identity: The Funding Network/TFN confirmed by gmail 'TFN FINAL GRANT DISTRIBUTION', genuine payee not a token match. (3) GST: answer explicitly declines to claim the $5,017.91 GST off the VOIDED bill (correct — voided + would be wrong-direction); on income, a TFN philanthropic grant distribution is not consideration for a taxable supply, so GST-Free Income holds even though INPUT-coded bills signal ACT IS GST-registered (registration forces GST only on actual taxable supplies e.g. Humanitix tickets, not on grants). (4) Income-vs-grant: genuine grant distribution, 'Grants Received' is the correct SL option, not trading revenue. (5) Project: ACT-CE (invoice vendor_rule) vs ACT-GD (funder GHL tag) correctly left as 'confirm', not guessed. No ACCREC income invoice exists; no bank txn row (it's the unreconciled SL line). Survives all five checks."
+    }
+  },
+  {
+    "i": 12,
+    "amt": 32780,
+    "particulars": "Circularity Group PtA5648662938 Thanks",
+    "verify": {
+      "i": 12,
+      "agree": false,
+      "severity": "major",
+      "correction": "Amount does NOT tie out and GST is overstated. Bank line = $32,780. The only matching valid tax invoice (AUTHORISED ACCPAY, The Plasticians, xero_id f6528324, acct 446, INPUT, attachment present, ACT-GD) totals $29,800 GST-INCLUSIVE (subtotal $27,090.91 + tax $2,709.09). The proposed \"29,800 ex-GST x1.1 = 32,780\" is false: the $29,800 is the GST-inclusive total, not ex-GST. Correct GST credit on the evidenced invoice = $2,709.09, NOT $2,980. There is an unresolved $2,980 gap between the $32,780 bank payment and the $29,800 bill — no bill/txn for $32,780 or $2,980 exists in the mirror. resolved=false: either the bank line is mis-stated, the bill is partial, or a second invoice is missing. Keep project=ACT-GD, account=446, gst=GST on Expenses but cap the claimed credit at $2,709.09 against the $29,800 invoice; do NOT claim GST on the unsupported $2,980 difference.",
+      "checked": "Queried xero_invoices for Plasticians/Circularity and the $32,780/$29,800/$2,980 amounts: AUTHORISED bill total=29,800 (subtotal 27,090.91, total_tax 2,709.09), DELETED dup also 29,800. Inspected line_items: single line, tax_type INPUT, line_amount 29,800 tax-inclusive, account_code 446, tracking ACT-GD. No bill or txn exists for 32,780 or 2,980. Amount tie-out FAILS (32,780 vs 29,800); GST-vs-invoice FAILS (claimed 2,980 vs invoice-supported 2,709.09). Identity (The Plasticians=Circularity) and project ACT-GD verified; valid tax invoice present but undersized vs bank line. GST-registration signal consistent (INPUT credit claimed)."
+    }
+  },
+  {
+    "i": 5,
+    "amt": 20000,
+    "particulars": "Ross Built ConstructP7797582049 ACT",
+    "verify": {
+      "i": 5,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Amount tie-out: no Ross Built invoice exists in xero_invoices (name search returns only unrelated Knotts Crossing); nothing to reconcile, nothing falsely matched. Identity: \"Ross Built Construction\" + phone P7797582049 is a genuine builder, not a street/first-name token match. GST-vs-invoice: correctly GST-free — no AUTHORISED/PAID INPUT tax bill on file, so no valid tax invoice = no input credit (the conservative, correct call). Income-vs-grant: N/A, this is a SPEND outflow not income, so the GST-registration income signal doesn't apply. Project: ACT-FM/ACT-HV is unevidenced but honestly flagged confirm()/resolved=false, not asserted off location. Verified zero Ross Built rows in xero_transactions too. Survives all five checks; the capital-WIP treatment is held open pending invoice."
+    }
+  },
+  {
+    "i": 10,
+    "amt": 20000,
+    "particulars": "Nicholas Marchesi SuE0397656597",
+    "verify": {
+      "i": 10,
+      "agree": false,
+      "severity": "major",
+      "correction": "Direction/nature wrong and amount does not tie. The cited evidence is four MAY RECEIVE txns into \"NJ Marchesi T/as ACT Everyday\" ($1,821.50 + $5,723.42 + $4,000.00 + $11,000.00 = $22,544.92) — money IN from Nic, i.e. owner CAPITAL CONTRIBUTED / Funds Introduced (Equity), NOT 880 Drawings (which is money OUT). None of these equals the SL line's -$20,000, so the match is invalid (a separate -$20,000 SPEND row exists but was not the cited evidence). The \"Nic's own super\" rationale is unverified/fabricated: no invoice, null line-item descriptions, and a self-super payment would be money OUT to a fund, not RECEIVE money IN. If the -$20,000 line is truly an outflow, classify as 880 Drawings - Nicholas Marchesi (No GST) but cite the matching SPEND row, not the RECEIVE set; if it is the RECEIVE inflow, it is Funds Introduced/Capital (Equity), No GST — do NOT call it super. Account per evidence is 881, not 880. resolved=false pending which direction the actual line is.",
+      "checked": "Amount tie-out (four cited RECEIVEs sum $22,544.92 ≠ -$20,000; a distinct $20,000 SPEND row exists), identity (genuinely Nicholas Marchesi, NJ Marchesi T/as ACT Everyday — valid), GST-vs-invoice (No GST agreed; no tax invoice so no credit — correct), income-vs-grant (RECEIVE from owner is equity contribution, not income/drawings — direction error), project (ACT-IN guessed; live rows tagged ACT-CORE/null, not evidenced as ACT-IN). GST-registration signal not in play (equity movement, no GST either way)."
+    }
+  },
+  {
+    "i": 47,
+    "amt": 4816,
+    "particulars": "CARLA FURNISHERS P/L CICCONE",
+    "verify": {
+      "i": 47,
+      "agree": false,
+      "severity": "major",
+      "correction": "gst=GST Free (claim $0, NOT $437.82) until a valid authorised/paid INPUT-coded tax invoice that reconciles to the $4,816 bank line is on file. The $437.82 is merely $4,816/11 computed off the bank amount, with no reconciling tax invoice behind it. Invoice \"26-00000151\" does NOT exist anywhere in xero_invoices; a bare gmail receipt PDF is not a valid tax invoice. The only Carla Furnishers documents in the mirror are two VOIDED $11,180 ACCPAY bills (tax $1,016.36) + one DELETED $11,180 SPEND — a VOIDED bill cannot support an input credit, and none of these tie to $4,816 (nor $4,816*1.1=$5,297.60). Keep project=ACT-GD, account=446 (defensible), but resolved=false: this line is NOT resolved — request the real $4,816 Carla tax invoice and verify INPUT coding before any GST credit. (Caution: Defy Manufacturing INV-1637 $4,812.50/tax $437.50 is a coincidental near-amount match for a DIFFERENT vendor — do not substitute it.)",
+      "checked": "amount tie-out (no Carla record at $4,816 — all are $11,180; $4,816/1.1=$5,297.60 also absent); identity validity (cited invoice 26-00000151 absent from xero_invoices; only Carla docs are 2 VOIDED bills + 1 DELETED SPEND, all $11,180); GST-vs-invoice (GST $437.82 = $4,816/11 fabricated off bank amount, no valid tax invoice; VOIDED bill ineligible for input credit → GST-free); income-vs-grant (n/a, expense); coincidental-match trap (flagged Defy INV-1637 $4,812.50 as false near-amount match). Verified live in shared DB tednluwflfhxyucgwigh."
+    }
+  },
+  {
+    "i": 56,
+    "amt": 4497,
+    "particulars": "SP RETRO OUTDOOR CO BAULKHAM HILL",
+    "verify": {
+      "i": 56,
+      "agree": true,
+      "severity": "minor",
+      "correction": "No correction to the GST/account/project decision — all sound. Minor nuance only: the \"outdoor furniture\" nature is inferred from the vendor name, not evidenced; keep it as an open question in the confirm note rather than an assumed fact (could be equipment/tools/materials, which would still be capital but might steer project). Account \"Plant & Equipment\" is reasonable for a $4,497 capital outdoor purchase but is itself contingent on what was actually bought — confirm nature before locking the account too.",
+      "checked": "Amount tie-out: no invoice or bank txn for $4,497 / $4,996.70 (incl) / $4,088.18 (ex) found in xero_invoices or xero_transactions — evidence genuinely empty, no false match made. Identity: only token match is \"Outdoor Tool Box\" (different vendor, no amount tie) — correctly NOT used; no coincidental match accepted. GST-vs-invoice: no AUTHORISED/PAID INPUT bill exists, so \"GST-free until tax invoice\" is correct and conservative — no input credit asserted without a valid tax invoice. Income/refund: outflow expense, not income/refund — N/A. Project: ACT-HV/ACT-IN explicitly marked confirm (not resolved), not asserted off Baulkham Hills location — honest. GST-registration signal not triggered (this is an expense, not Humanitix income). Survives all five."
+    }
+  },
+  {
+    "i": 16,
+    "amt": 4000,
+    "particulars": "little beach shacks F8216106008 Thanks",
+    "verify": {
+      "i": 16,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Amount: $4000 bare transfer, no invoice cited so no tie-out claimed (nothing to refute). Identity: \"little beach shacks F8216106008\" is raw narration with empty ghl/gmail/txn — booking-ref not a first-name/street coincidental match, but payee/nature unevidenced. GST: correctly GST-free — no AUTHORISED/PAID Xero INPUT bill exists, so no valid tax invoice, so no input credit; conservative call is right and the high-risk GST dimension passes. Income/refund: N/A (outflow). GST-registration signal: not engaged (this is an expense, not Humanitix-style income). Project: ACT-IN travel vs 880 Drawings left open with resolved=false — not asserted off location, defensible. Survives all five."
+    }
+  },
+  {
+    "i": 11,
+    "amt": 3000,
+    "particulars": "Thriday G3468033865",
+    "verify": {
+      "i": 11,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Amount tie-out: no invoice/txn cited; queried mirror — ZERO Thriday rows in xero_invoices and xero_transactions (confirms invoices=[]/txns=[]). Checked $3000 amount-matches Oct25-May26: only two transfers + 'Thais Pupio Design' SPEND — a coincidental amount/identity match correctly NOT used. Identity: GHL 'Sally Hurst (Thriday Accounting Support)' + Thriday Customer Care gmail re Xero recon = genuine vendor, not a token match. GST-vs-invoice: GST-free is correct — no valid tax invoice exists, so no $272.73 input credit claimed (conservative/defensible); flagged credit-if-invoice is right. No income line, so GST-on-income registration signal N/A. Income/refund: pure -$3000 expense, not a grant/refund. Project: ACT-IN correct — accounting/Xero-recon software is org-wide overhead, not project-attributable. Survives all five."
+    }
+  },
+  {
+    "i": 15,
+    "amt": 2420,
+    "particulars": "BIONIC GROUP PTY LTDRefund",
+    "verify": {
+      "i": 15,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Amount: +$2,420 ties EXACTLY to the ACCPAY $2,420 PAID ACT-IN/452/INPUT (Bionic Self Storage) bill; the other Bionic bill ($4,705, ACT-GD, 710/EXEMPTEXPENSES) is correctly excluded on amount. Identity: refund label \"Bionic Group\" vs bill \"Bionic Self Storage\" is a parent/subsidiary naming difference, not a coincidental token match — both genuine Bionic entities, resolved by the exact $2,420 tie (not amount-only-coincidental since the descriptor is also Bionic). GST: offset bill is AUTHORISED/PAID coded INPUT = valid tax invoice; refund correctly REVERSES the ~$220 input credit as GST-on-Expenses, not GST-free, not new income. Income-vs-refund: correctly booked as offset to 452, not revenue. Project: ACT-IN matches the booked bill (not the GHL act-gd supplier tag — followed the booked bill). GST-registration signal consistent (INPUT-coded bills imply registered; no income classification at stake here). Survives all five."
+    }
+  },
+  {
+    "i": 0,
+    "amt": 2000,
+    "particulars": "CHRISTOPHER DODS J7040396334 Confessional Thanks",
+    "verify": {
+      "i": 0,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Amount: $2000 flat outflow, no invoice cited so nothing to tie-out — consistent. Identity: full name \"Christopher Dods\", not a first-name/street coincidental token. GST: GST-free correctly applied (no valid tax invoice -> no input credit), no GST credit wrongly asserted. Income-vs-grant: it's an expense outflow, not income, no refund/grant mislabel. Project: ACT-CF inferred from narration \"Confessional\" — reasonable but unconfirmed by invoice/contact; answer correctly keeps resolved=false and flags honorarium-vs-personal (round $2000 to a personal name could be drawings). Survives all five; only the project/account leans on narration, already flagged."
+    }
+  },
+  {
+    "i": 61,
+    "amt": 1495.2,
+    "particulars": "Hannah St Melbourne Melbourne",
+    "verify": {
+      "i": 61,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Amount tie-out: no invoice/txn cited (invoices=[] txns=[]), so no match asserted — nothing to refute. Identity: \"Hannah St Melbourne\" is a street address; CRM Hannah Leworthy/Hannah March and the Gmail \"Hannah March/CONTAINED-Adelaide\" are first-name token matches to a street name (the exact false-match trap) and the Gmail points to Adelaide not a Melbourne vendor — correctly rejected. GST-vs-invoice: outflow with no AUTHORISED/PAID input bill → GST-free is correct; no GST credit wrongly claimed. GST-registration signal is income-side, N/A to this expense. Income/grant/refund: it's an expense, no income/refund misclassification. Project: ACT-IN is the unevidenced general default but correctly NOT pulled to ACT-JH/ACT-CE off the false Hannah hits; resolved=false + \"confirm purpose\" is the right conservative handling, not a location-guess."
+    }
+  },
+  {
+    "i": 14,
+    "amt": 1439.6,
+    "particulars": "INTERNET TRANSFER Thanks",
+    "verify": {
+      "i": 14,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Amount tie-out: queried xero_invoices and xero_transactions for total=1439.60 and GST-ex 1308.73 — zero rows, so no coincidental amount-match and the AAMI guess is rightly rejected. Identity: bare 'INTERNET TRANSFER Thanks' carries no payee token, no false name/street match asserted. GST-vs-invoice: outgoing transfer with no AUTHORISED/PAID input-tax bill = no valid tax invoice -> GST-free is correct; this is an expense-side line so the GST-on-income registration signal does not apply. Income-vs-grant: outflow not income, nothing mislabelled. Project: left as 'confirm', account ACT-IN-or-880-Drawings, resolved=false — flagged open, not guessed off a location. Note: a bare counterparty-less 'Thanks' outflow leans 880 Drawings/personal, but the answer already surfaces that and stays open. Survives all five."
+    }
+  },
+  {
+    "i": 3,
+    "amt": 1150,
+    "particulars": "HPJCFBWSB5 Humanitix Ltd A CURIOUS TRACTO",
+    "verify": {
+      "i": 3,
+      "agree": false,
+      "severity": "major",
+      "correction": "GST is wrong: the cited $1150 and $46.63 bills are coded tax_type=INPUT with GST credits claimed ($104.55 and $4.09), which proves ACT IS GST-registered this period. So event/ticket income carries GST on income (1/11th) — NOT \"GST-Free, not GST-registered\". If line #3 is ticket revenue: subtotal ~$1045.45 + GST on income ~$104.55. Also the amount match is coincidental/invalid: the only $1150 record is an ACCPAY *bill* (a Humanitix platform fee ACT PAYS, an outflow) — it does not evidence a $1150 ticket settlement RECEIVED (an inflow). No ACCREC/sales invoice for Humanitix or $1150 exists, so the inflow amount is unsourced. Account=Event/Ticket Income (Other Revenue), project=ACT-CP both plausible, but gst must be GST-on-income and resolved should be false until the actual settlement is sourced. Net-vs-gross also unconfirmed.",
+      "checked": "Queried xero_invoices for Humanitix: cited $1150 (AUTHORISED, acct 415) and $46.63 (PAID, acct 420) are both ACCPAY bills (outflows ACT pays), both with tax_type=INPUT and GST credits claimed ($104.55 / $4.09) → registration signal = ACT IS GST-registered, contradicting the proposed 'not GST-registered'. Amount tie-out: +$1150 inflow vs $1150 ACCPAY bill = same number opposite direction = coincidental, rejected per trap rule. Identity: Humanitix is the ticketing platform; bills are its fees, not ticket revenue. Income-vs-grant: not a grant. Searched ACCREC for Humanitix/$1150 → none exists, so the inflow is unsourced. Project ACT-CP consistent across all rows."
+    }
+  },
+  {
+    "i": 9,
+    "amt": 781.9,
+    "particulars": "Tarik Dallinger-DimiA9838522047",
+    "verify": {
+      "i": 9,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Amount tie-out: no invoice/txn cited (invoices=[], txns=[]) so nothing to reconcile against the $781.90 bank debit — proposed answer correctly asserts no tax invoice rather than fabricating one. Identity: Gmail thread is genuinely \"Tarik Dallinger\" discussing \"Artwork for the Container project,\" matching the payee token \"Tarik Dallinger-Dimi\" — not a coincidental first-name/street-name match; subject ties directly to ACT-CN (Contained/Container project). GST-vs-invoice: GST-free is correctly applied — outbound payment to an artist with no AUTHORISED/PAID INPUT bill, so no input credit claimed; consistent with the GST rule. This is an expense (money out), not income, so the GST-on-income registration signal does not apply. Income-vs-grant/refund: N/A — this is a contractor/artist fee paid out, not income or a refund, so no grant-as-revenue or refund-as-income risk. Project: ACT-CN is evidenced by the Gmail subject \"Artwork for the Container project,\" not guessed from a location. Survives all five checks. Caveat (not refuting): a ~$782 artist payment with no tax invoice and no AUTHORISED INPUT bill means no GST credit is available regardless — correctly handled; if SL later locates a valid tax invoice from Tarik, GST could be revisited, but on current evidence GST-free is right."
+    }
+  },
+  {
+    "i": 22,
+    "amt": 665,
+    "particulars": "MR BEAU JOSEPH ANDE H9114176985 Thanks",
+    "verify": {
+      "i": 22,
+      "agree": false,
+      "severity": "minor",
+      "correction": "Keep account=880 Drawings, gst=No GST, resolved=false. Two corrections to the reasoning/fields: (1) The cited $300 precedent does NOT amount-tie to $665 (not exact, not x1.1) and sits in NM Personal — an account EXCLUDED from ACT under the two-account rule, dated 29 Jun 2025 (outside the 1 Oct 2025-31 May 2026 period). It is a same-name precedent only, not a reconciling invoice, and not an ACT transaction. (2) Project should not default to ACT-IN: the only Anderson-surname ACT context in the mirror is SUZANNE ANDERSON house-rental income coded ACT-FM (Farm). If Beau Anderson is connected to the Farm property, ACT-FM is at least as likely as ACT-IN. Leave project unresolved pending Nic's confirmation rather than asserting ACT-IN.",
+      "checked": "Amount tie-out: $300 cited vs $665 bank line — fails exact and x1.1; name-only precedent. Identity: full name match (Beau Joseph Anderson) holds; NOT a street/first-name false match; distinct from Suzanne Anderson (same surname). GST: no tax invoice, precedent was BASEXCLUDED — No-GST posture correct, no credit wrongly claimed. Income-vs-grant: N/A (outflow). GST-registration: no income answer here, no contradiction. Project: ACT-IN is unevidenced; surname links to ACT-FM rental income. Also flagged: cited $300 precedent lives in excluded NM Personal account and predates the review period."
+    }
+  },
+  {
+    "i": 7,
+    "amt": 616.66,
+    "particulars": "SUZANNE MARGARET ANDSecurity minus Car d",
+    "verify": {
+      "i": 7,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "All evidence arrays empty (invoices/txns/ghl/gmail) — nothing to tie out, so no amount reconciliation possible and no GST credit is being asserted. (1) Amount tie-out: N/A, no cited invoice, so no false *1.0/*1.1 match risk. (2) Identity: payee \"Suzanne Margaret And...\" is an unidentified individual; no coincidental street/first-name match was used to force a vendor — the answer correctly does NOT identify her. (3) GST-vs-invoice: this is INCOME side (+$616.66 inflow) and the answer treats it as BAS Excluded with NO input credit claimed — correct, since a bare inflow from an individual is not a tax invoice; and it is NOT being booked as GST-on-income revenue either, which is the safe call given \"Security minus Card\" reads as a deposit/bond refund net of fee. The GST-registration signal only forces GST-on-income for genuine taxable supplies (e.g. Humanitix ticketing) — a deposit/bond refund is not a supply, so waiving GST here is correct, not a contradiction. (4) Income-vs-refund: the answer explicitly avoids \"Other Revenue\" and routes to BAS Excluded suspense (deposit refund offset) or 881 Owner Funds (personal repayment) — i.e. it refuses to manufacture income from an unexplained inflow, which is the conservative, correct treatment. (5) Project: ACT-IN general is the correct default with no evidence linking it to any specific project; it is not guessed off a location. resolved=false is honest given zero records. Survives all five checks — agree."
+    }
+  },
+  {
+    "i": 1,
+    "amt": 360,
+    "particulars": "James William V0471764749",
+    "verify": {
+      "i": 1,
+      "agree": false,
+      "severity": "minor",
+      "correction": "GST code is inconsistent with the offered account paths. \"BAS Excluded\" is only correct IF the line resolves to 880 Drawings. If it resolves to the answer's PRIMARY suggestion — Subcontractors (453) — the correct no-invoice code is GST Free Expenses (G11), not BAS Excluded (which wrongly drops it off the BAS). So: account=Subcontractors(453) -> gst=GST Free Expenses; account=880 Drawings -> gst=BAS Excluded. Keep resolved=false. Everything else stands.",
+      "checked": "Amount tie-out: only $360 invoice in DB is Edmonds Landscaping (ACT-MY/ACT-PI) — a DIFFERENT vendor, correctly NOT matched; no James William invoice or txn exists (xero_transactions, xero_invoices both empty for this payee). Identity: \"James William V0471764749\" matches no contact/txn; near-tokens \"James Davidson\" + \"RM Williams\" are coincidental, answer correctly relies on neither. GST-vs-invoice: no valid tax invoice so no GST credit — answer claims none, correct; but the BAS-Excluded code only fits the Drawings path, not the Subcontractor path (the flagged defect). Income-vs-grant: N/A, this is spend not income. GST-registration: no income line here, signal not triggered. Project: ACT-IN is unevidenced default, properly held resolved=false."
+    }
+  },
+  {
+    "i": 60,
+    "amt": 345.37,
+    "particulars": "Restaurace Alma Praha 1",
+    "verify": {
+      "i": 60,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Amount: no invoice cited, nothing to tie — empty evidence, correct. Identity: \"Restaurace Alma Praha 1\" is a Prague restaurant, correctly flagged as coincidental NOT linked to ALMA catalogue. GST: GST-free is correct on two grounds — no valid tax invoice AND overseas supply (no Australian GST regardless of registration); the GST-registration signal applies to income (Humanitix) not this overseas expense; no GST credit asserted, no over-claim. Income/refund: N/A, spend. Project: ACT-IN defensible default, resolved=false correctly held pending business-vs-Drawings. Minor nuance: 7-Apr-outside-World-Tour-window leans personal/Drawings (would be out-of-ACT-scope) rather than business meal, but GST=GST-free holds either way and the open item is already named — sharpening, not a refutation."
+    }
+  },
+  {
+    "i": 21,
+    "amt": 291,
+    "particulars": "MR BEAU JOSEPH ANDE Y4434637310",
+    "verify": {
+      "i": 21,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Verified against operational Supabase (tednluwflfhxyucgwigh). (1) Amount: NO $291 transaction exists in xero_transactions for this payee or in the SL period (Oct25-May26); the only record is a $300 SPEND on 2025-06-29 — a PRECEDENT, not a tie-out. $300!=$291 and $291*1.1=$320.10!=$300. Proposed answer correctly treats it as precedent (resolved=false), not a hard invoice match, so no false-match error. (2) Identity: 'MR BEAU JOSEPH ANDE' = full-name match to 'Mr Beau Joseph Anderson', not a coincidental first-name/street token — valid. (3) GST: invoices=[] -> GST-free correct; no input credit asserted; precedent was BASEXCLUDED/acct 880, consistent. No GST-on-income issue (this is a SPEND outflow). (4) Not income/grant/refund — outflow, n/a. (5) Project: precedent had project_code=null, account 880 Drawings, booked in NM Personal (an EXCLUDED account, reinforcing personal/Drawings) — default-to-880 + confirm work-vs-personal is evidenced, not guessed off location. Survives all five checks."
+    }
+  },
+  {
+    "i": 31,
+    "amt": 202.16,
+    "particulars": "INTERNET BANKING TRANSFERMELBOURNE",
+    "verify": {
+      "i": 31,
+      "agree": false,
+      "severity": "minor",
+      "correction": "account: leave as suspense / \"confirm with Nic\" rather than hard-defaulting to 880 Drawings. GST (BAS Excluded) and the no-input-credit call are correct; keep resolved=false. The only fix is not asserting a specific deductibility-relevant account (Drawings) on zero evidence for an unidentified outbound transfer that could equally be an inter-account transfer, supplier payment, or reimbursement.",
+      "checked": "Amount tie-out: no invoice cited, nothing to reconcile, no GST credit claimed — OK. Identity: no payee, no contact/token match asserted (no false street/first-name match) — OK. GST-vs-invoice: BAS Excluded with no input credit on a bare bank transfer is correct; no tax invoice so GST-free is right — OK. Income-vs-grant/refund: line is an outflow (-$202.16), not income, no grant/refund mislabel — OK. Project: genuinely ambiguous; 880 Drawings is a substantive classification guessed on zero evidence — should stay suspense. Sub-$2,000, so minor not major."
+    }
+  },
+  {
+    "i": 63,
+    "amt": 201.28,
+    "particulars": "MALL MEDICAL CENTRE Alice Springs",
+    "verify": {
+      "i": 63,
+      "agree": false,
+      "severity": "minor",
+      "correction": "account=880 Drawings (private medical) — drop the \"or ACT-OO travel-medical\" alternative. GST treatment is correct (GST-free). The ACT-OO option is inferred purely from the Alice Springs/Mparntwe location with zero supporting evidence (no Gmail, receipt, or GHL link to an Oonchiumpa trip) — that's a guess-off-location, so it should not be presented as a co-equal coding. A sole trader's medical spend defaults to private Drawings absent specific work-requirement evidence; only reclassify to ACT-OO if travel evidence surfaces. Keep resolved=false pending Nic's confirmation of whether this was a work trip.",
+      "checked": "Confirmed empty evidence is real: queried xero_transactions (by 'medical'/'mall medical' contact and ~$201.28 amount, Oct25-May26) and xero_invoices (by 'medical') on the operational DB (tednluwflfhxyucgwigh) — zero rows. So GST-free is doubly correct: no valid tax invoice AND medical is GST-free under Subdiv 38-B; no input credit wrongly claimed. GST-registration signal N/A (expense line, not Humanitix income). No amount-only or coincidental-identity match. Not income/refund. Only weak point is project: ACT-OO inferred off location only."
+    }
+  },
+  {
+    "i": 2,
+    "amt": 200,
+    "particulars": "Shane Bloomfield H8299013120 Bunnings thanks",
+    "verify": {
+      "i": 2,
+      "agree": false,
+      "severity": "minor",
+      "correction": "project=ACT-IN (not ACT-BG). The GST treatment (GST Free Expenses, account 430) and the no-invoice / no-credit call are correct and should stand. But ACT-BG is unevidenced: Shane Bloomfield in GHL is tagged storyteller / empathy-ledger / gone-from-ghl — never project:act-bg. The only project:act-bg contact is Chelsea Baker. The Bloomfield with project tags (Kristy) is act-hv/act-gd/act-jh, not act-bg. Narration \"Bunnings thanks\" gives no project signal. Default to ACT-IN general until a receipt names the project. Also: the comment's promised \"$18.18 credit once Shane provides the Bunnings tax invoice\" is wrong even as a caveat — a consumer receipt in Shane's name does not support a sole-trader input credit; the GST-Free booking is correct and final.",
+      "checked": "Amount tie-out: queried xero_invoices for Bunnings/Bloomfield/Shane and for total=200/181.82 — no $200 Bunnings bill and no Shane Bloomfield bill; nearest Bunnings bills are unrelated amounts. Identity: Shane Bloomfield is a real GHL contact (not a street/first-name false match) but tagged storyteller/empathy-ledger, gone-from-ghl. GST-vs-invoice: confirmed no valid tax invoice exists, so GST-Free is correct; no input credit asserted — survives. Income/refund: N/A (expense). Project: queried project:act-bg contacts — only Chelsea Baker; no Bloomfield tied to BG Fit anywhere, so ACT-BG is a guess."
+    }
+  },
+  {
+    "i": 4,
+    "amt": 200,
+    "particulars": "MR MARCUS TRAVERS COMarcus C thanks",
+    "verify": {
+      "i": 4,
+      "agree": false,
+      "severity": "major",
+      "correction": "gst should be \"Unresolved — contingent on nature, NOT assert GST-Free\". Given the GST-registration signal (ACT's bills coded INPUT → sole trader is registered), the answer cannot call this GST-Free while still listing \"Other Revenue\" as a live classification: if booked as income/revenue, a registered entity carries GST on income at 1/11th ($18.18), not GST-free. Only the 881 Owner Funds (capital introduced by Nic) branch is genuinely GST-Free/BAS-Excluded; the expense-offset branch inherits the original expense's GST. So the gst field is internally inconsistent with the open revenue option. Keep project=ACT-IN and resolved=false (correct — truly indeterminate), but change gst to \"depends on nature; GST-free ONLY if 881 Owner Funds; if Other Revenue then GST 1/11th applies\". Confirm nature with Nic before coding.",
+      "checked": "amount tie-out: no invoice/txn exists to tie to (verified xero_invoices + xero_transactions — zero rows for marcus/travers), so $200 has nothing to reconcile against; *1.1 N/A. Identity: no \"Marcus Travers\" in ghl_contacts (only Marcus-from-Spiral and marcus barlow, both unrelated) — no false street/first-name match made. GST-vs-invoice: no GST credit claimed (correct, no tax invoice) BUT GST-on-income wrongly waived — answer says GST-Free while leaving \"Other Revenue\" open, contradicting the GST-registration signal (registered → income carries 1/11th GST). Income-vs-grant/refund: $200 'thanks' is not a grant; refund-offset is one of three live branches, handled. Project: ACT-IN general is the right default for an unattributed receipt, not a location guess."
+    }
+  },
+  {
+    "i": 62,
+    "amt": 174.65,
+    "particulars": "INTERNET BANKING TRANSFERMELBOURNE",
+    "verify": {
+      "i": 62,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "All five refute checks pass on empty evidence. (1) Amount tie-out: no invoice cited, so no false match to reconcile — nothing to disprove. (2) Identity: payee is a bare \"INTERNET BANKING TRANSFER MELBOURNE\" with no named counterparty; no coincidental first-name/street-name token to reject. (3) GST-vs-invoice: no AUTHORISED/PAID INPUT bill on file (invoices=[]), so no GST credit is claimable — BAS Excluded is correct; no income side, so the GST-on-income/registration-signal contradiction does not arise. (4) Income-vs-grant/refund: it is an outbound -$174.65 transfer, not income or a grant, and not a refund offset — no misclassification. (5) Project: ACT-IN is the general default, not guessed off a location (\"Melbourne\" is the transfer locus, not used as project evidence). With zero evidence and no payee, 880 Drawings (default) + BAS Excluded + resolved=false is the correct conservative landing."
+    }
+  },
+  {
+    "i": 30,
+    "amt": 45.8,
+    "particulars": "INTERNET BANKING TRANSFERMELBOURNE",
+    "verify": {
+      "i": 30,
+      "agree": true,
+      "severity": "minor",
+      "correction": "No money-critical change. Optional tidy: a line coded to 880 Drawings is personal, so the ACT-IN project tag is slightly contradictory — leave project blank/null on a Drawings line rather than ACT-IN. GST=BAS Excluded, amount, and non-income treatment all stand; keep resolved=false pending Ben's business-vs-personal confirmation.",
+      "checked": "Amount tie-out: no invoice or txn in xero_invoices/xero_transactions reconciles to $45.80 (exact) or $50.38 (×1.1 GST-incl) on either ACT account in 1 Oct 2025–31 May 2026 — closest are named vendors (Webflow $46.20, Uber $46.xx, Zapier $50.17) that don't match a bare transfer. Identity: 'INTERNET BANKING TRANSFER MELBOURNE' has no payee; no coincidental token match asserted. GST-vs-invoice: no input credit claimed (correct — bare transfer, no tax invoice); BAS Excluded is right for a Drawings line. Income-vs-grant: line is a debit (money out), not booked as income/refund, so the GST-on-income registration signal doesn't apply. Project: ACT-IN is the stated default, not inferred from 'Melbourne'. Confirmed connected to operational DB tednluwflfhxyucgwigh."
+    }
+  },
+  {
+    "i": 39,
+    "amt": 16.45,
+    "particulars": "Audible Limited AU MELBOURNE",
+    "verify": {
+      "i": 39,
+      "agree": true,
+      "severity": "none",
+      "correction": "",
+      "checked": "Amount tie-out: Gmail receipt $16.45 = bank -$16.45 exact, passes. Identity: \"Audible Limited AU\" bank line matches Audible Gmail receipt in benjamin@, genuine not a token match. GST-vs-invoice: no input credit claimed (No GST); no Xero AUTHORISED/PAID bill exists, only an email receipt, so No-GST is the conservative-correct call and no credit leaks — moot anyway under Drawings. Income-vs-grant: N/A, not income. Project: ACT-IN general default, immaterial since booked to 880 Drawings (personal audiobook, no evidenced work use). Drawings classification sound for a sole trader; resolved=false correctly pending work-use confirmation."
+    }
+  }
+]
