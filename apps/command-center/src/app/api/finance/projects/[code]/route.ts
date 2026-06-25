@@ -497,22 +497,30 @@ export async function GET(
     // ---- REAL EXPENSE COMPUTATION (bills + unmatched bank spend, deduped) ----
     // The pre-existing project_monthly_financials only counts bank txns, missing
     // ACCPAY bills. Recompute from raw to give the page accurate numbers + audit alerts.
+    // Harvest (ACT-HV) spend only counts from 1 Jan 2026 — pre-Jan rows are not Harvest,
+    // and a full Xero sync re-tags them onto ACT-HV via tracking categories, so guard at read time.
+    const harvestStart = projectCode === 'ACT-HV' ? '2026-01-01' : null
+    let billsQuery = supabase
+      .from('xero_invoices')
+      .select('id, xero_id, date, contact_name, total, status, line_items, project_code_source')
+      .eq('project_code', projectCode)
+      .eq('type', 'ACCPAY')
+      .in('status', ['AUTHORISED', 'PAID'])
+    let spendsQuery = supabase
+      .from('xero_transactions')
+      .select('id, xero_transaction_id, date, contact_name, total, status, type, line_items, project_code_source, has_attachments')
+      .eq('project_code', projectCode)
+      .in('type', ['SPEND', 'SPEND-OVERPAYMENT'])
+      // Exclude deleted/voided bank txns — they are not real spend. Caught 2026-06-26 when
+      // DELETED Kennedy's ghosts inflated ACT-HV by ~$21K (bills were already status-filtered; spends weren't).
+      .not('status', 'in', '("DELETED","VOIDED")')
+    if (harvestStart) {
+      billsQuery = billsQuery.gte('date', harvestStart)
+      spendsQuery = spendsQuery.gte('date', harvestStart)
+    }
     const [realBillsRes, realSpendsRes] = await Promise.all([
-      supabase
-        .from('xero_invoices')
-        .select('id, xero_id, date, contact_name, total, status, line_items, project_code_source')
-        .eq('project_code', projectCode)
-        .eq('type', 'ACCPAY')
-        .in('status', ['AUTHORISED', 'PAID'])
-        .order('date', { ascending: false })
-        .range(0, 4999),
-      supabase
-        .from('xero_transactions')
-        .select('id, xero_transaction_id, date, contact_name, total, status, type, line_items, project_code_source, has_attachments')
-        .eq('project_code', projectCode)
-        .in('type', ['SPEND', 'SPEND-OVERPAYMENT'])
-        .order('date', { ascending: false })
-        .range(0, 4999),
+      billsQuery.order('date', { ascending: false }).range(0, 4999),
+      spendsQuery.order('date', { ascending: false }).range(0, 4999),
     ])
     const realBills = realBillsRes.data || []
     const realSpends = realSpendsRes.data || []
