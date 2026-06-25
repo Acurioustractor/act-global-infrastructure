@@ -1,0 +1,370 @@
+{
+  "total": 124077.68000000001,
+  "lines": 160,
+  "suppliers": 50,
+  "garden": 51632.29,
+  "byCat": {
+    "Design & branding": 19920,
+    "Paths & structures": 24822.48,
+    "Garden & landscaping": 26809.809999999998,
+    "Labour": 12360.29,
+    "Pavilion": 6363,
+    "Tools & equipment": 17921.69,
+    "Materials & hardware": 7182.6,
+    "Fuel & travel": 2372.67,
+    "Hospitality & meals": 5174.020000000001,
+    "Other": 1151.1200000000001
+  },
+  "rows": [
+    {
+      "supplier": "Thais Pupio Design",
+      "amount": 19920,
+      "lines": 3,
+      "category": "Design & branding",
+      "garden": false
+    },
+    {
+      "supplier": "Kennedy's",
+      "amount": 19447.11,
+      "lines": 3,
+      "category": "Paths & structures",
+      "garden": true
+    },
+    {
+      "supplier": "Sophie Deirdre Hickey",
+      "amount": 10524.5,
+      "lines": 8,
+      "category": "Garden & landscaping",
+      "garden": true
+    },
+    {
+      "supplier": "MALENY LANDSCAPING SUPPLIES",
+      "amount": 10406.1,
+      "lines": 11,
+      "category": "Garden & landscaping",
+      "garden": true
+    },
+    {
+      "supplier": "Joseph Kirmos",
+      "amount": 9000,
+      "lines": 2,
+      "category": "Labour",
+      "garden": false
+    },
+    {
+      "supplier": "Longara",
+      "amount": 6363,
+      "lines": 2,
+      "category": "Pavilion",
+      "garden": false
+    },
+    {
+      "supplier": "Savage Landscape Supplies",
+      "amount": 5579.21,
+      "lines": 5,
+      "category": "Garden & landscaping",
+      "garden": true
+    },
+    {
+      "supplier": "Smartwood",
+      "amount": 5375.37,
+      "lines": 2,
+      "category": "Paths & structures",
+      "garden": true
+    },
+    {
+      "supplier": "DNP Australia",
+      "amount": 4803.43,
+      "lines": 2,
+      "category": "Tools & equipment",
+      "garden": false
+    },
+    {
+      "supplier": "Sydney Tools",
+      "amount": 4557,
+      "lines": 1,
+      "category": "Tools & equipment",
+      "garden": false
+    },
+    {
+      "supplier": "Total Tools East Brisbane",
+      "amount": 4546.55,
+      "lines": 1,
+      "category": "Tools & equipment",
+      "garden": false
+    },
+    {
+      "supplier": "Bunnings Warehouse",
+      "amount": 4459.27,
+      "lines": 9,
+      "category": "Materials & hardware",
+      "garden": false
+    },
+    {
+      "supplier": "CHRIS W",
+      "amount": 3360.29,
+      "lines": 7,
+      "category": "Labour",
+      "garden": false
+    },
+    {
+      "supplier": "Diggermate Franchising",
+      "amount": 2413.17,
+      "lines": 1,
+      "category": "Tools & equipment",
+      "garden": false
+    },
+    {
+      "supplier": "Liberty Maleny",
+      "amount": 1868.09,
+      "lines": 9,
+      "category": "Fuel & travel",
+      "garden": false
+    },
+    {
+      "supplier": "Maleny Hardware & Rural",
+      "amount": 1865.93,
+      "lines": 10,
+      "category": "Materials & hardware",
+      "garden": false
+    },
+    {
+      "supplier": "Mapleton Public House",
+      "amount": 1400,
+      "lines": 2,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Woolworths",
+      "amount": 1297.72,
+      "lines": 16,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Hydraulink Brisbane North",
+      "amount": 883.07,
+      "lines": 1,
+      "category": "Tools & equipment",
+      "garden": false
+    },
+    {
+      "supplier": "IGA",
+      "amount": 820.63,
+      "lines": 6,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Officeworks",
+      "amount": 628.5,
+      "lines": 3,
+      "category": "Materials & hardware",
+      "garden": false
+    },
+    {
+      "supplier": "The Matnic Trust",
+      "amount": 591.28,
+      "lines": 1,
+      "category": "Other",
+      "garden": false
+    },
+    {
+      "supplier": "Maleny Hotel",
+      "amount": 514.59,
+      "lines": 5,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Kennards Hire",
+      "amount": 405,
+      "lines": 1,
+      "category": "Tools & equipment",
+      "garden": false
+    },
+    {
+      "supplier": "Nest In Witta",
+      "amount": 307.62,
+      "lines": 14,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Savage Transport Trust",
+      "amount": 300,
+      "lines": 1,
+      "category": "Garden & landscaping",
+      "garden": true
+    },
+    {
+      "supplier": "Sukhothai Authentic Thai Restaurant",
+      "amount": 268.1,
+      "lines": 1,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Salin Appliance Spares",
+      "amount": 228.9,
+      "lines": 1,
+      "category": "Materials & hardware",
+      "garden": false
+    },
+    {
+      "supplier": "Caltex Glasshouse",
+      "amount": 226.78,
+      "lines": 2,
+      "category": "Fuel & travel",
+      "garden": false
+    },
+    {
+      "supplier": "Maleny Bakery",
+      "amount": 193.74,
+      "lines": 2,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Sunshine Coast Council",
+      "amount": 148,
+      "lines": 1,
+      "category": "Other",
+      "garden": false
+    },
+    {
+      "supplier": "7-Eleven",
+      "amount": 144.96,
+      "lines": 2,
+      "category": "Fuel & travel",
+      "garden": false
+    },
+    {
+      "supplier": "BP",
+      "amount": 132.84,
+      "lines": 3,
+      "category": "Fuel & travel",
+      "garden": false
+    },
+    {
+      "supplier": "Coastal Fasteners",
+      "amount": 130.94,
+      "lines": 1,
+      "category": "Tools & equipment",
+      "garden": false
+    },
+    {
+      "supplier": "Bolt In Co Sunshine Coast",
+      "amount": 127.6,
+      "lines": 1,
+      "category": "Tools & equipment",
+      "garden": false
+    },
+    {
+      "supplier": "Flight Bar Witta",
+      "amount": 126.83,
+      "lines": 5,
+      "category": "Other",
+      "garden": false
+    },
+    {
+      "supplier": "Art Museum",
+      "amount": 120,
+      "lines": 1,
+      "category": "Other",
+      "garden": false
+    },
+    {
+      "supplier": "Coles Supermarkets",
+      "amount": 106.28,
+      "lines": 1,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Unknown Supplier",
+      "amount": 103.59,
+      "lines": 1,
+      "category": "Other",
+      "garden": false
+    },
+    {
+      "supplier": "Pocky Asian Restaurant",
+      "amount": 79.79,
+      "lines": 1,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Maleny Food Co Cafe",
+      "amount": 68.92,
+      "lines": 2,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Maleny Hot Bread Bake",
+      "amount": 54.76,
+      "lines": 1,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "The Dawn Pottery",
+      "amount": 51.92,
+      "lines": 1,
+      "category": "Other",
+      "garden": false
+    },
+    {
+      "supplier": "BCF",
+      "amount": 44.94,
+      "lines": 1,
+      "category": "Tools & equipment",
+      "garden": false
+    },
+    {
+      "supplier": "The Source Bulk Foods Maleny",
+      "amount": 24.22,
+      "lines": 1,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Frank Food & Wine",
+      "amount": 23.35,
+      "lines": 1,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "CJ's Pastries",
+      "amount": 14.3,
+      "lines": 1,
+      "category": "Hospitality & meals",
+      "garden": false
+    },
+    {
+      "supplier": "Supercheap Auto",
+      "amount": 9.99,
+      "lines": 1,
+      "category": "Tools & equipment",
+      "garden": false
+    },
+    {
+      "supplier": "Rosetta Books Maleny",
+      "amount": 5.5,
+      "lines": 1,
+      "category": "Other",
+      "garden": false
+    },
+    {
+      "supplier": "SQ *FLIGHT BAR WITTA Witta",
+      "amount": 4,
+      "lines": 1,
+      "category": "Other",
+      "garden": false
+    }
+  ]
+}

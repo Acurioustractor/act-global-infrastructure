@@ -69,12 +69,16 @@ async function fetchAll(table, query) {
 }
 
 async function main() {
+  // ACT-HV = Harvest, spend from 1 Jan 2026 only; exclude deleted/voided bank txns
+  // (DELETED ghosts inflated the total by ~$21K — caught 2026-06-26).
+  const HV_START = '2026-01-01';
   const bills = await fetchAll('xero_invoices', sb.from('xero_invoices')
     .select('xero_id, date, contact_name, total, status, invoice_number, line_items')
-    .eq('project_code', 'ACT-HV').eq('type', 'ACCPAY').in('status', ['AUTHORISED','PAID']));
+    .eq('project_code', 'ACT-HV').eq('type', 'ACCPAY').in('status', ['AUTHORISED','PAID']).gte('date', HV_START));
   const spends = await fetchAll('xero_transactions', sb.from('xero_transactions')
     .select('xero_transaction_id, date, contact_name, total, status, type, line_items')
-    .eq('project_code', 'ACT-HV').in('type', ['SPEND','SPEND-OVERPAYMENT']));
+    .eq('project_code', 'ACT-HV').in('type', ['SPEND','SPEND-OVERPAYMENT'])
+    .not('status', 'in', '("DELETED","VOIDED")').gte('date', HV_START));
 
   // build matched-payment set
   const paidBills = bills.filter(b => b.status === 'PAID');
