@@ -296,6 +296,16 @@ const cronScripts = [
     args: '',  // auto-detects current quarter
     cron_restart: '0 8 * * 1', // Weekly Monday 8am AEST — reconciliation report + Telegram
   },
+  {
+    // Weekly Monday 8:05am AEST — receipt-gap monitor: flags ACT card/bank spend with NO
+    // receipt on file (last 21 days, two-account scope) so gaps surface in days, not months
+    // later at BAS clean-up. Read-only report (logs). The "never lose a receipt again" detect-layer.
+    name: 'receipt-gap-monitor',
+    script: 'scripts/receipt-gap-monitor.mjs',
+    args: '--days 21',
+    cron_restart: '5 8 * * 1',
+    autorestart: false, // cron-only — run on schedule, don't loop-restart on exit
+  },
   // CRON ORDER (2026-05-08 reshuffle, see thoughts/shared/reviews/notion-finance-dashboard-2026-05-08.md):
   //   8:15  dashboard-hub      — full-page replace, writes nav + Right now / Quick actions
   //   8:18  daily-pulse        — adds "📡 Today's Pulse" section at top

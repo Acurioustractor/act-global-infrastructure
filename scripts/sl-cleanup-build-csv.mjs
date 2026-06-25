@@ -29,10 +29,11 @@ function comment(v){
   let c = v.your_comment || '';
   const tags = [];
   if (v.needs_ben) tags.push('NEEDS YOUR CALL');
-  if (v.receipt_status === 'GAP_PLEASE_PROVIDE') tags.push('receipt to provide');
+  if (v.receipt_status === 'GAP_PLEASE_PROVIDE') tags.push('receipt to provide — check Dext');
   if (v.receipt_status === 'GMAIL_CANDIDATE') tags.push('receipt likely in Gmail — confirm');
   if (v.receipt_status === 'GMAIL_FOUND') tags.push('receipt located — forwarding');
   if (v.receipt_status === 'GMAIL_LEAD') tags.push('booking confirmation found — folio to confirm');
+  if (v.receipt_status === 'DEXT_IN') tags.push('receipt in Dext');
   if (v.receipt_status === 'RECEIPT_VENDOR_MISMATCH') tags.push('no matching receipt on file');
   if (v.verified === false) tags.push('reviewer-corrected');
   return tags.length ? `[${tags.join('; ')}] ${c}` : c;
