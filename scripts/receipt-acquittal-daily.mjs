@@ -46,6 +46,11 @@ const SEND_TELEGRAM = APPLY && !flag('--no-telegram');
 const days = Number(arg('--days', 10));
 const since = arg('--since', null);
 const until = arg('--until', null);
+// Gate the only un-coerced SQL interpolations (all other interpolated values are number-coerced,
+// DB-sourced UUIDs, or quote-escaped). Cron uses --days, but reject a malformed explicit window.
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+if (since && !DATE_RE.test(since)) { console.error('--since must be YYYY-MM-DD'); process.exit(1); }
+if (until && !DATE_RE.test(until)) { console.error('--until must be YYYY-MM-DD'); process.exit(1); }
 const HUNT = flag('--hunt');                       // live Gmail hunt for uncovered lines (slow, needs auth)
 const HUNT_LIMIT = Number(arg('--hunt-limit', 15)); // cap Gmail calls per run
 
@@ -86,9 +91,16 @@ async function main() {
   const residue = [];
   for (const g of gaps) {
     const doc = g.best_document_id ? docById[g.best_document_id] : null;
+    const link = g.best_document_id ? linkFor(g.id, g.best_document_id) : null;
     const { autoLink, reason } = classifyAutoLink(g, doc);
-    if (autoLink) autoLinked.push({ g, doc, reason, link: linkFor(g.id, g.best_document_id) });
-    else residue.push({ g, doc, reason });
+    // Never silently override a human decision: a link a human flagged needs_review stays residue.
+    if (autoLink && link?.link_status === 'needs_review') {
+      residue.push({ g, doc, reason: 'human marked needs_review — not auto-linking' });
+    } else if (autoLink) {
+      autoLinked.push({ g, doc, reason, link });
+    } else {
+      residue.push({ g, doc, reason });
+    }
   }
 
   // ── Phase 1.5: live Gmail hunt for UNCOVERED residue (no ingested candidate). READ-ONLY. ──

@@ -11,7 +11,9 @@ export function cleanText(v) {
 }
 
 export function meaningfulTokens(v) {
-  return cleanText(v).split(' ').filter((t) => t.length >= 3 && !GENERIC_VENDOR_WORDS.has(t));
+  // >= 4 chars: aligns with the spec's auto-link bar and gmail-receipt-hunt.mjs, and shrinks
+  // the substring false-match surface (a 3-char token can match inside a longer unrelated word).
+  return cleanText(v).split(' ').filter((t) => t.length >= 4 && !GENERIC_VENDOR_WORDS.has(t));
 }
 
 /** The single strongest vendor token from a bank-line payee, or null. */
