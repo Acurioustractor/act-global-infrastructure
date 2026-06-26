@@ -297,21 +297,12 @@ const cronScripts = [
     cron_restart: '0 8 * * 1', // Weekly Monday 8am AEST — reconciliation report + Telegram
   },
   {
-    // Weekly Monday 8:05am AEST — receipt-gap monitor: flags ACT card/bank spend with NO
-    // receipt on file (last 21 days, two-account scope) so gaps surface in days, not months
-    // later at BAS clean-up. Read-only report (logs). The "never lose a receipt again" detect-layer.
-    name: 'receipt-gap-monitor',
-    script: 'scripts/receipt-gap-monitor.mjs',
-    args: '--days 21',
-    cron_restart: '5 8 * * 1',
-    autorestart: false, // cron-only — run on schedule, don't loop-restart on exit
-  },
-  {
-    // Mon–Fri 08:05am AEST — receipt ACQUITTAL: the action-layer over the gap-monitor above.
+    // Mon–Fri 08:05am AEST — receipt ACQUITTAL: the daily "never lose a receipt" loop.
     // Reads the gap view (NAB Visa #8815), strict-bar auto-links the dead-obvious matches
     // (mirror-only: finance_receipt_bank_line_links → 'approved'; READ-ONLY vs Xero), and pushes
     // ONE Telegram brief of the residue to adjudicate in /finance/receipt-evidence. Empty = silent.
-    // Spec: ~/.claude/skills/loop-me/workflows/receipt-acquittal.md. Supersedes the monitor above.
+    // Spec: ~/.claude/skills/loop-me/workflows/receipt-acquittal.md.
+    // Supersedes the retired receipt-gap-monitor cron (script kept for manual BAS-period / Everyday-acct runs).
     name: 'receipt-acquittal-daily',
     script: 'scripts/receipt-acquittal-daily.mjs',
     args: '--apply --days 10',
