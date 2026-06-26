@@ -306,6 +306,18 @@ const cronScripts = [
     cron_restart: '5 8 * * 1',
     autorestart: false, // cron-only — run on schedule, don't loop-restart on exit
   },
+  {
+    // Mon–Fri 08:05am AEST — receipt ACQUITTAL: the action-layer over the gap-monitor above.
+    // Reads the gap view (NAB Visa #8815), strict-bar auto-links the dead-obvious matches
+    // (mirror-only: finance_receipt_bank_line_links → 'approved'; READ-ONLY vs Xero), and pushes
+    // ONE Telegram brief of the residue to adjudicate in /finance/receipt-evidence. Empty = silent.
+    // Spec: ~/.claude/skills/loop-me/workflows/receipt-acquittal.md. Supersedes the monitor above.
+    name: 'receipt-acquittal-daily',
+    script: 'scripts/receipt-acquittal-daily.mjs',
+    args: '--apply --days 10',
+    cron_restart: '5 8 * * 1-5',
+    autorestart: false, // cron-only — run on schedule, don't loop-restart on exit
+  },
   // CRON ORDER (2026-05-08 reshuffle, see thoughts/shared/reviews/notion-finance-dashboard-2026-05-08.md):
   //   8:15  dashboard-hub      — full-page replace, writes nav + Right now / Quick actions
   //   8:18  daily-pulse        — adds "📡 Today's Pulse" section at top
