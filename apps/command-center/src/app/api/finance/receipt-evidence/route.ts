@@ -324,7 +324,7 @@ export async function GET(request: NextRequest) {
       const evidenceStatus = String(row.evidence_status || '')
       const bankStatus = String(row.status || '').toLowerCase()
       const isReconciled = bankStatus === 'reconciled'
-      const hasEvidence = ['covered_evidence', 'covered_legacy', 'no_receipt_needed'].includes(evidenceStatus)
+      const hasEvidence = ['covered_evidence', 'covered_legacy', 'no_receipt_needed', 'paper_on_file'].includes(evidenceStatus)
       const needsReceipt = ['uncovered', 'candidate', 'high_confidence_candidate'].includes(evidenceStatus)
 
       if (status === 'unreconciled' && isReconciled) return false
@@ -362,6 +362,8 @@ export async function GET(request: NextRequest) {
       if (String(row.status || '').toLowerCase() === 'reconciled') acc.bankReconciled = (acc.bankReconciled || 0) + 1
       else acc.bankUnreconciled = (acc.bankUnreconciled || 0) + 1
       if (['uncovered', 'candidate', 'high_confidence_candidate'].includes(key)) acc.needsReceipt = (acc.needsReceipt || 0) + 1
+      // GST forfeited on lines marked 'lost' (no receipt recoverable) — running total, est. amount/11.
+      if (key === 'lost') acc.gstLost = (acc.gstLost || 0) + Math.abs(Number(row.amount) || 0) / 11
       return acc
     }, {})
 
@@ -451,6 +453,29 @@ export async function POST(request: NextRequest) {
 
       if (error) return NextResponse.json({ error: error.message }, { status: 500 })
       return NextResponse.json({ ok: true, bankLineId, receiptStatus: 'no_receipt_needed' })
+    }
+
+    // Receipt-acquittal Phase 2 terminal states. Both suppress the line from the gap chase
+    // (see v_finance_bank_line_evidence). paper_on_file = receipt held offline, GST still
+    // claimable; lost = no receipt recoverable, GST credit forfeited.
+    if (action === 'paper_on_file' || action === 'lost') {
+      const bankLineId = body.bankLineId as string
+      if (!bankLineId) return NextResponse.json({ error: 'bankLineId required' }, { status: 400 })
+
+      const defaultNote = action === 'paper_on_file'
+        ? 'Paper receipt held offline (GST claimable) — marked via receipt evidence hub'
+        : 'No receipt recoverable — GST credit forfeited — marked via receipt evidence hub'
+
+      const { error } = await supabase
+        .from('bank_statement_lines')
+        .update({
+          receipt_match_status: action,
+          notes: body.reviewNote || defaultNote,
+        })
+        .eq('id', bankLineId)
+
+      if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ ok: true, bankLineId, receiptStatus: action })
     }
 
     return NextResponse.json({ error: 'unsupported action' }, { status: 400 })
