@@ -516,27 +516,6 @@
       ],
       "last_communicated_at": "2025-05-15"
     },
-    "qld-housing-department": {
-      "name": "QLD Department of Housing",
-      "stage": "needs-writeup",
-      "needs_writeup": true,
-      "themes": [
-        "government",
-        "housing",
-        "remote-communities"
-      ],
-      "tone": "government-formal, evidence-grounded",
-      "claims_to_lead_with": [],
-      "framing_notes": "Auto-added from xero_invoices on 2026-05-23. Three small invoices totalling $1,500 across 2025. Farm project relationship (ACT-FM). Investigate scope + further partnership potential.",
-      "projects_funded": [
-        "ACT-FM"
-      ],
-      "xero_summary": {
-        "paid_total_aud": 1500,
-        "outstanding_ar_aud": 0,
-        "last_invoice_date": "2025-09-05"
-      }
-    },
     "mrff-uom-palmer": {
       "name": "MRFF GNT2051566 via University of Melbourne (Palmer, ALIVE National Centre)",
       "stage": "warm",

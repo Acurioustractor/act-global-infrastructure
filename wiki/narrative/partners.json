@@ -201,6 +201,21 @@
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2025-07-17"
       }
+    },
+    "qld-housing-department": {
+      "name": "QLD Department of Housing",
+      "stage": "active",
+      "project_codes": [
+        "ACT-FM"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — small paid engagement (see xero_summary / Xero), a partner not a grant funder. Replace with a peer brief on the shared work + what is next on ACT-FM.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 1500,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-09-05"
+      }
     }
   }
 }
