@@ -2,7 +2,7 @@
   "$schema": "wiki/narrative/funders.schema.json",
   "description": "Active and prospect funders, with the narrative claims that should lead any pitch to them. Used by narrative-draft.mjs --funder <slug> to assemble pitch briefs targeted to the right thesis.",
   "version": 2,
-  "updated": "2026-06-05",
+  "updated": "2026-07-07",
   "funders": {
     "minderoo": {
       "name": "Minderoo Foundation",
@@ -100,7 +100,7 @@
     },
     "paul-ramsay-foundation": {
       "name": "Paul Ramsay Foundation",
-      "stage": "warm",
+      "stage": "active-partner",
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": "William Frazer (Jonas + Prebhjot + Julia CC)",
@@ -121,10 +121,11 @@
       "framing_notes": "Stage upgraded from cold 2026-04-24: Xero shows 2 paid invoices (small, $7,469 total) and William Frazer is tagged partner+justicehub in GHL — relationship is warmer than cold. Last comm 80 days ago (hello@ address, early Feb). PRF thinks deeply about systems change. Lead with the cost evidence, then the verified-intervention engine (ALMA), then the platform stack as the system-change lever. PRF will be skeptical of 'two people built it with hands' — for them, lead with infrastructure, not artisanship.",
       "primary_email": "wfrazer@paulramsayfoundation.org.au",
       "cc_email": "jonas@paulramsayfoundation.org.au, pkaur@paulramsayfoundation.org.au, jpayne@paulramsayfoundation.org.au",
-      "last_communicated_at": null,
+      "last_communicated_at": "2025-07-05",
       "projects_funded": [
         "ACT-GD",
-        "ACT-JH"
+        "ACT-JH",
+        "ACT-EL"
       ]
     },
     "tim-fairfax": {
@@ -365,24 +366,9 @@
         "ACT-GD"
       ]
     },
-    "rotary-eclub-outback": {
-      "name": "Rotary eClub of Outback Australia",
-      "stage": "ask-pending",
-      "ask_amount_aud": 82500,
-      "deadline": null,
-      "primary_contact": null,
-      "themes": [
-        "regional",
-        "community-led"
-      ],
-      "tone": "community-respectful, grassroots",
-      "claims_to_lead_with": [],
-      "claims_to_avoid": [],
-      "framing_notes": "BLOCKED awaiting only-Ben decision: INV-0222 $82,500 AUTHORISED 2025-04-10 is 380 days unpaid on the sole trader's books. No GHL comm history. Decision needed before 30 June 2026 cutover — chase for payment or write off as bad debt on sole trader's FY26 close-out BAS. GHL stub 'Invoicing Rotary eClub Outback Australia' has no named human — if someone from Rotary emails, the CRM won't route. Do not draft a fresh pitch until the payment disposition is resolved."
-    },
     "vincent-fairfax": {
       "name": "Vincent Fairfax Family Foundation",
-      "stage": "lapsed",
+      "stage": "active-partner",
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": null,
@@ -390,11 +376,15 @@
       "tone": null,
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
-      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $50,000 paid historically, no current GHL comm. Not to be confused with Tim Fairfax Family Foundation (tim-fairfax slug) — separate foundation. Needs Nic-verified narrative review before pitch-assembly. Until then, narrative-draft.mjs --funder vincent-fairfax will error — that's intentional."
+      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $50,000 paid historically, no current GHL comm. Not to be confused with Tim Fairfax Family Foundation (tim-fairfax slug) — separate foundation. Needs Nic-verified narrative review before pitch-assembly. Until then, narrative-draft.mjs --funder vincent-fairfax will error — that's intentional.",
+      "projects_funded": [
+        "ACT-GD"
+      ],
+      "last_communicated_at": "2025-07-24"
     },
     "social-impact-hub": {
       "name": "Social Impact Hub Foundation",
-      "stage": "lapsed",
+      "stage": "active-partner",
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": null,
@@ -402,7 +392,11 @@
       "tone": null,
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
-      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $26,730 paid historically, no current GHL comm. Needs Nic-verified narrative review before pitch-assembly."
+      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $26,730 paid historically, no current GHL comm. Needs Nic-verified narrative review before pitch-assembly.",
+      "projects_funded": [
+        "ACT-CP"
+      ],
+      "last_communicated_at": "2025-11-18"
     },
     "state-qld-dfsdscs": {
       "name": "State of Queensland (DFSDSCS)",
@@ -454,23 +448,31 @@
     "rotary-eclub-outback-australia-9560": {
       "name": "Rotary Eclub Outback Australia, Division 9560",
       "stage": "active-partner",
-      "ask_amount_aud": null,
+      "ask_amount_aud": 82500,
       "deadline": null,
       "primary_contact": "Pene Curtis / Greg Marlow",
-      "themes": [],
-      "tone": null,
+      "themes": [
+        "regional",
+        "community-led"
+      ],
+      "tone": "community-respectful, grassroots",
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
-      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $82,500 AUTH on INV-0222 (392 days outstanding); funder-alignment synthesis flags this as the longest-overdue live invoice on the sole trader. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly.",
+      "framing_notes": "BLOCKED awaiting only-Ben decision: INV-0222 $82,500 AUTHORISED 2025-04-10 is 380 days unpaid on the sole trader's books. No GHL comm history. Decision needed before 30 June 2026 cutover — chase for payment or write off as bad debt on sole trader's FY26 close-out BAS. GHL stub 'Invoicing Rotary eClub Outback Australia' has no named human — if someone from Rotary emails, the CRM won't route. Do not draft a fresh pitch until the payment disposition is resolved. [Merged 2026-07-07: consolidated 3 duplicate ledger stubs (ask-pending / active-partner / needs-writeup) for the single INV-0222 relationship into this canonical entry.]",
       "primary_email": "pene.curtis@bigpond.com, greg@marlowcanete.com.au",
       "last_communicated_at": "2026-04-13",
       "projects_funded": [
         "ACT-GD"
-      ]
+      ],
+      "xero_summary": {
+        "paid_total_aud": 0,
+        "outstanding_ar_aud": 82500,
+        "last_invoice_date": "2025-04-10"
+      }
     },
     "brisbane-powerhouse-foundation": {
       "name": "Brisbane Powerhouse Foundation",
-      "stage": "lapsed",
+      "stage": "active-partner",
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": null,
@@ -478,7 +480,11 @@
       "tone": null,
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
-      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $7,150 paid historically; no current GHL communication. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly."
+      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $7,150 paid historically; no current GHL communication. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly.",
+      "projects_funded": [
+        "ACT-CF"
+      ],
+      "last_communicated_at": "2025-09-25"
     },
     "the-john-villiers-trust": {
       "name": "The John Villiers Trust",
@@ -504,7 +510,11 @@
         "paid_total_aud": 436700,
         "outstanding_ar_aud": 96800,
         "last_invoice_date": "2026-04-08"
-      }
+      },
+      "projects_funded": [
+        "ACT-PI"
+      ],
+      "last_communicated_at": "2025-11-03"
     },
     "smart-recovery-australia": {
       "name": "SMART Recovery Australia",
@@ -518,21 +528,11 @@
         "paid_total_aud": 156500,
         "outstanding_ar_aud": 2200,
         "last_invoice_date": "2026-03-19"
-      }
-    },
-    "sonas-properties-pty-ltd": {
-      "name": "Sonas Properties Pty Ltd",
-      "stage": "needs-writeup",
-      "needs_writeup": true,
-      "themes": [],
-      "tone": "TBD — write narrative based on existing Xero relationship history",
-      "claims_to_lead_with": [],
-      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "xero_summary": {
-        "paid_total_aud": 81290,
-        "outstanding_ar_aud": 37290,
-        "last_invoice_date": "2026-05-06"
-      }
+      },
+      "projects_funded": [
+        "ACT-SM"
+      ],
+      "last_communicated_at": "2026-02-09"
     },
     "ingkerreke-services-aboriginal-corporation": {
       "name": "Ingkerreke Services Aboriginal Corporation",
@@ -546,21 +546,11 @@
         "paid_total_aud": 103099.7,
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2025-09-27"
-      }
-    },
-    "rotary-eclub-outback-australia-division-9560": {
-      "name": "Rotary Eclub Outback Australia, Division 9560,",
-      "stage": "needs-writeup",
-      "needs_writeup": true,
-      "themes": [],
-      "tone": "TBD — write narrative based on existing Xero relationship history",
-      "claims_to_lead_with": [],
-      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "xero_summary": {
-        "paid_total_aud": 0,
-        "outstanding_ar_aud": 82500,
-        "last_invoice_date": "2025-04-10"
-      }
+      },
+      "projects_funded": [
+        "ACT-OO"
+      ],
+      "last_communicated_at": "2025-09-27"
     },
     "regional-arts-australia": {
       "name": "Regional Arts Australia",
@@ -574,7 +564,11 @@
         "paid_total_aud": 16500,
         "outstanding_ar_aud": 33000,
         "last_invoice_date": "2025-12-16"
-      }
+      },
+      "projects_funded": [
+        "ACT-HV"
+      ],
+      "last_communicated_at": "2025-12-11"
     },
     "homeland-school-company": {
       "name": "Homeland School Company",
@@ -588,7 +582,11 @@
         "paid_total_aud": 40000,
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2026-05-18"
-      }
+      },
+      "projects_funded": [
+        "ACT-JH"
+      ],
+      "last_communicated_at": "2026-05-18"
     },
     "just-reinvest": {
       "name": "Just Reinvest",
@@ -602,7 +600,11 @@
         "paid_total_aud": 27500,
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2026-03-01"
-      }
+      },
+      "projects_funded": [
+        "ACT-JH"
+      ],
+      "last_communicated_at": "2026-03-01"
     },
     "green-fox-training-studio-limited": {
       "name": "GREEN FOX TRAINING STUDIO LIMITED",
@@ -616,7 +618,11 @@
         "paid_total_aud": 27000,
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2025-07-17"
-      }
+      },
+      "projects_funded": [
+        "ACT-JH"
+      ],
+      "last_communicated_at": "2025-07-17"
     },
     "state-of-queensland-acting-through-the-department-of-familie": {
       "name": "State of Queensland (acting through the Department of Families, Seniors, Disability Services and Child Safety)",
@@ -630,7 +636,11 @@
         "paid_total_aud": 22000,
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2025-05-15"
-      }
+      },
+      "projects_funded": [
+        "ACT-EL"
+      ],
+      "last_communicated_at": "2025-05-15"
     },
     "our-community-shed-incorporated": {
       "name": "Our Community Shed Incorporated",
@@ -644,7 +654,11 @@
         "paid_total_aud": 20265,
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2026-02-23"
-      }
+      },
+      "projects_funded": [
+        "ACT-GD"
+      ],
+      "last_communicated_at": "2026-01-20"
     },
     "julalikari-council-aboriginal-corporation": {
       "name": "Julalikari Council Aboriginal Corporation",
@@ -658,7 +672,11 @@
         "paid_total_aud": 19800,
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2025-10-21"
-      }
+      },
+      "projects_funded": [
+        "ACT-GD"
+      ],
+      "last_communicated_at": "2025-10-21"
     },
     "red-dust-role-models-limited": {
       "name": "Red Dust Role Models Limited",
@@ -672,7 +690,11 @@
         "paid_total_aud": 15950,
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2025-07-30"
-      }
+      },
+      "projects_funded": [
+        "ACT-GD"
+      ],
+      "last_communicated_at": "2025-07-30"
     },
     "brodie-germaine-fitness-aboriginal-corporation": {
       "name": "Brodie Germaine Fitness Aboriginal Corporation",
@@ -688,90 +710,6 @@
         "last_invoice_date": "2026-04-15"
       }
     },
-    "berry-obsession-pty-ltd": {
-      "name": "Berry Obsession PTY LTD",
-      "stage": "needs-writeup",
-      "needs_writeup": true,
-      "themes": [],
-      "tone": "TBD — write narrative based on existing Xero relationship history",
-      "claims_to_lead_with": [],
-      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "xero_summary": {
-        "paid_total_aud": 13000,
-        "outstanding_ar_aud": 0,
-        "last_invoice_date": "2026-02-10"
-      }
-    },
-    "aleisha-j-keating": {
-      "name": "Aleisha J Keating",
-      "stage": "needs-writeup",
-      "needs_writeup": true,
-      "themes": [],
-      "tone": "TBD — write narrative based on existing Xero relationship history",
-      "claims_to_lead_with": [],
-      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "xero_summary": {
-        "paid_total_aud": 0,
-        "outstanding_ar_aud": 12150,
-        "last_invoice_date": "2026-01-02"
-      }
-    },
-    "qic-limited": {
-      "name": "QIC LIMITED",
-      "stage": "needs-writeup",
-      "needs_writeup": true,
-      "themes": [],
-      "tone": "TBD — write narrative based on existing Xero relationship history",
-      "claims_to_lead_with": [],
-      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "xero_summary": {
-        "paid_total_aud": 12000,
-        "outstanding_ar_aud": 0,
-        "last_invoice_date": "2025-06-30"
-      }
-    },
-    "blue-gum-station": {
-      "name": "Blue Gum Station",
-      "stage": "needs-writeup",
-      "needs_writeup": true,
-      "themes": [],
-      "tone": "TBD — write narrative based on existing Xero relationship history",
-      "claims_to_lead_with": [],
-      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "xero_summary": {
-        "paid_total_aud": 6000,
-        "outstanding_ar_aud": 0,
-        "last_invoice_date": "2026-03-14"
-      }
-    },
-    "jenn-brazier": {
-      "name": "Jenn Brazier",
-      "stage": "needs-writeup",
-      "needs_writeup": true,
-      "themes": [],
-      "tone": "TBD — write narrative based on existing Xero relationship history",
-      "claims_to_lead_with": [],
-      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "xero_summary": {
-        "paid_total_aud": 5862.34,
-        "outstanding_ar_aud": 0,
-        "last_invoice_date": "2025-07-17"
-      }
-    },
-    "bigmeats-qld-pty-ltd": {
-      "name": "Bigmeats Qld Pty Ltd",
-      "stage": "needs-writeup",
-      "needs_writeup": true,
-      "themes": [],
-      "tone": "TBD — write narrative based on existing Xero relationship history",
-      "claims_to_lead_with": [],
-      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
-      "xero_summary": {
-        "paid_total_aud": 5720,
-        "outstanding_ar_aud": 0,
-        "last_invoice_date": "2025-02-09"
-      }
-    },
     "malala-health-service-aboriginal-corporation": {
       "name": "Mala’la Health Service Aboriginal Corporation",
       "stage": "needs-writeup",
@@ -784,27 +722,11 @@
         "paid_total_aud": 5434,
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2025-10-21"
-      }
-    },
-    "ufgc-gmbh": {
-      "name": "UFGC GmbH",
-      "stage": "needs-writeup",
-      "needs_writeup": true,
-      "themes": [
-        "international",
-        "technical"
-      ],
-      "tone": "international, technical",
-      "claims_to_lead_with": [],
-      "framing_notes": "Auto-added from xero_invoices on 2026-05-23. Austrian recipient of ACT-CORE work. Single invoice $3,267 paid 2026-03-17. Investigate relationship + future opportunity. Address: Grillparzerstraße 26, 8010 Graz, Austria.",
+      },
       "projects_funded": [
-        "ACT-CORE"
+        "ACT-GD"
       ],
-      "xero_summary": {
-        "paid_total_aud": 3267.48,
-        "outstanding_ar_aud": 0,
-        "last_invoice_date": "2026-03-17"
-      }
+      "last_communicated_at": "2025-10-21"
     },
     "qld-housing-department": {
       "name": "QLD Department of Housing",
