@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-28",
+  "updated": "2026-07-07",
   "description": "Per-partner config for scripts/draft-partner-newsletter.mjs. Partner editions are per-recipient (monthly, private). Bespoke entries in `partners` (keyed by slug) override everything; partners NOT listed here fall back to `_default` + a live ghl_contacts lookup for the recipient's real name/email/org. Mirrors the shape of funders.json. Add a bespoke entry only when a partner is worth a hand-tuned voice; the long tail runs on _default. See Notion: Comms & CRM Operating System > Newsletter + social audience system.",
   "_schema": {
     "name": "Partner / organisation display name (string)",
@@ -21,5 +21,201 @@
     "claims_to_lead_with": [],
     "claims_to_avoid": []
   },
-  "partners": {}
+  "partners": {
+    "palm-island-community-company-limited-picc": {
+      "name": "Palm Island Community Company Limited (PICC)",
+      "stage": "active",
+      "project_codes": [
+        "ACT-PI"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-PI.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 436700,
+        "outstanding_ar_aud": 96800,
+        "last_invoice_date": "2026-04-08"
+      }
+    },
+    "smart-recovery-australia": {
+      "name": "SMART Recovery Australia",
+      "stage": "active",
+      "project_codes": [
+        "ACT-SM"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-SM.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 156500,
+        "outstanding_ar_aud": 2200,
+        "last_invoice_date": "2026-03-19"
+      }
+    },
+    "ingkerreke-services-aboriginal-corporation": {
+      "name": "Ingkerreke Services Aboriginal Corporation",
+      "stage": "active",
+      "project_codes": [
+        "ACT-OO"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-OO.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 103099.7,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-09-27"
+      }
+    },
+    "homeland-school-company": {
+      "name": "Homeland School Company",
+      "stage": "active",
+      "project_codes": [
+        "ACT-JH"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-JH.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 40000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-05-18"
+      }
+    },
+    "just-reinvest": {
+      "name": "Just Reinvest",
+      "stage": "active",
+      "project_codes": [
+        "ACT-JH"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-JH.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 27500,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-03-01"
+      }
+    },
+    "green-fox-training-studio-limited": {
+      "name": "GREEN FOX TRAINING STUDIO LIMITED",
+      "stage": "active",
+      "project_codes": [
+        "ACT-JH"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-JH.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 27000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-17"
+      }
+    },
+    "our-community-shed-incorporated": {
+      "name": "Our Community Shed Incorporated",
+      "stage": "active",
+      "project_codes": [
+        "ACT-GD"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-GD.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 20265,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-02-23"
+      }
+    },
+    "julalikari-council-aboriginal-corporation": {
+      "name": "Julalikari Council Aboriginal Corporation",
+      "stage": "active",
+      "project_codes": [
+        "ACT-GD"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-GD.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 19800,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-10-21"
+      }
+    },
+    "regional-arts-australia": {
+      "name": "Regional Arts Australia",
+      "stage": "active",
+      "project_codes": [
+        "ACT-HV"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-HV.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 16500,
+        "outstanding_ar_aud": 33000,
+        "last_invoice_date": "2025-12-16"
+      }
+    },
+    "red-dust-role-models-limited": {
+      "name": "Red Dust Role Models Limited",
+      "stage": "active",
+      "project_codes": [
+        "ACT-GD"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-GD.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 15950,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-30"
+      }
+    },
+    "malala-health-service-aboriginal-corporation": {
+      "name": "Mala’la Health Service Aboriginal Corporation",
+      "stage": "active",
+      "project_codes": [
+        "ACT-GD"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-GD.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 5434,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-10-21"
+      }
+    },
+    "minjerribah-moorgumpin": {
+      "name": "Minjerribah Moorgumpin (Elders-In-Council) Aboriginal Corporation",
+      "stage": "active",
+      "project_codes": [
+        "ACT-JH"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — ACT has invoiced them (money IN, see xero_summary / Xero), so they are a partner, not a grant funder. Replace this with a peer brief: who they are, the shared work these invoices were for, and what's next on ACT-JH.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 1155,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-17"
+      }
+    },
+    "qld-housing-department": {
+      "name": "QLD Department of Housing",
+      "stage": "active",
+      "project_codes": [
+        "ACT-FM"
+      ],
+      "framing_notes": "Delivery/client relationship moved from the funder ledger 2026-07-07 — small paid engagement (see xero_summary / Xero), a partner not a grant funder. Replace with a peer brief on the shared work + what is next on ACT-FM.",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "xero_summary": {
+        "paid_total_aud": 1500,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-09-05"
+      }
+    }
+  }
 }
