@@ -76,6 +76,7 @@ the reference), date (±12 days), and a **shared vendor token** (amount alone ne
 
 - `workflows/weekly-triage.md`, run the cockpit → work DUPLICATES first → MATCHES → CREATES → export.
 - `workflows/tracer-bullet.md`, prove ONE line end-to-end in Xero before any batch.
+- `wiki/finance/weekly-finance-checkin.md`, the unified weekly ritual (receipts + card + deadlines). This skill is the card-line step of that pass; run the whole weekly session from there.
 
 ## References
 

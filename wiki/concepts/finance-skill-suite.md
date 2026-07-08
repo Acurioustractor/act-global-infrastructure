@@ -40,6 +40,17 @@ the **operators** that drive those surfaces with process, memory and guardrails.
 follow-up; `/finance/invoices` exists, no skill) and a month-end `close-cycle` (`/finance/close` exists,
 no skill). Runway/scenarios are already covered by Money Brain; EOFY cutover is a one-off, not skill-worthy.
 
+## The operating rhythm (how the operators run week to week)
+
+The operators aren't invoked ad-hoc — they run on a **fixed weekly cadence**. The
+canonical ritual is `wiki/finance/weekly-finance-checkin.md`: one ~30–45 min
+day-shift pass that runs `bas-cycle` (receipts/GST) then `reconcile-cycle` (card)
+back-to-back, glances the `compliance-calendar.md` deadline ladder, and logs the
+pass so the learning loops compound. It rolls up into the quarterly BAS phases
+(pre-close → close → prepare-for-accountant → retro) and the annual EOFY / R&D
+ladder. **Weekly is the floor; small batches forever is the whole point** — it's
+what stops the June-2026 heroic-backlog sprint from ever recurring.
+
 ## Suite-wide conventions (every finance skill follows these)
 
 Distilled from `bas-cycle` (the house exemplar), [garrytan/gstack](https://github.com/garrytan/gstack),
