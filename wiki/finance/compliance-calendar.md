@@ -40,12 +40,17 @@ obligations:
     type: BAS
     entity: sole-trader
     due_date: 2026-07-28
-    status: pending
+    status: filed
+    last_filed_at: 2026-07-07
     lead_times_days: [30, 7, 1]
     notes: |
-      LAST sole-trader BAS. Cutover to Pty happens 30 Jun 2026, so
-      this quarter is split: Apr-Jun sole-trader BAS, Pty Ltd starts
-      its own BAS lifecycle from Q1 FY26-27 (Jul-Sep 2026).
+      LAST sole-trader BAS. Lodged by Standard Ledger early Jul 2026
+      (per Ben, 2026-07-08 — "SL just did the last two BAS"). ⚠ CONFIRM
+      exact lodge date + that Q4 (not another quarter) is one of the two.
+      FY26 mirror is essentially reconciled (10 residual Visa lines/$2.3K).
+      Cutover to Pty: Xero still on the sole-trader org as of 2026-07-08 —
+      Pty Ltd BAS lifecycle starts Q1 FY26-27 (Jul-Sep 2026) once its org
+      is live.
 
   - id: bas-q1-fy26-27-pty
     title: BAS Q1 FY26-27 (Jul-Sep 2026) — FIRST Pty Ltd BAS
