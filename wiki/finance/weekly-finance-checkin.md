@@ -28,26 +28,33 @@ description: |
 **Financial year (live from Xero):** FY27 = **1 Jul 2026 → 30 Jun 2027**. We are
 8 days in. **FY26 (Jul 2025–Jun 2026) has CLOSED.**
 
-**The live deadline — Q4 FY26 BAS, due 28 Jul 2026 (~20 days out).**
-Per `compliance-calendar.md`: Q4 FY25-26 (Apr–Jun 2026) is `pending`. This is the
-**LAST sole-trader BAS** (cutover to A Curious Tractor Pty Ltd was scheduled
-30 Jun 2026). Q3 FY25-26 filed 2026-04-24. This quarter is the immediate focus of
-every weekly pass until it's lodged.
+**BAS through FY26 is LODGED.** Standard Ledger just lodged the last two BAS (per
+Ben, 2026-07-08) — Q4 FY25-26 (Apr–Jun 2026) marked `filed` in
+`compliance-calendar.md`. Books are clean through FY26: the mirror shows only **10
+residual unreconciled NAB Visa lines ($2.3K)** and a clean Everyday account.
+**Next deadline is Q1 FY26-27 BAS — due 28 Oct 2026** (first Pty Ltd BAS). No time
+pressure; the job now is to keep the *new* quarter clean from day one.
+
+**The new quarter is already accumulating** — 19 fresh FY27 Visa lines ($1.8K), all
+receipted, mostly the NT Empathy Ledger field trip (ACT-EL). This is exactly what
+the weekly pass is for: clear it while it's small, don't let it become a sprint.
 
 **Backlog state:** The Q2+Q3 FY26 reconciliation backlog was cleared in a June
 sprint (see `thoughts/shared/handoffs/money-state-of-play/current.md`): NAB Visa
 duplicate cleanup done via API (~$86K phantom spend deleted, ~$107K phantom AP
 voided); the reconcile-cycle cockpit + BAS automation engine shipped. **The whole
-reason this cadence exists is to make that sprint a one-off** — weekly hygiene
-keeps the pile from ever rebuilding.
+reason this cadence exists is to make that sprint a one-off.**
+
+**Receipt rails:** Dext is the healthy primary rail (99.3% linked). The parallel
+Gmail scraper is orphaning ~415 half-processed items — the fix is
+`wiki/finance/dext-xero-ai-alignment.md` (collapse three rails to one).
 
 **Open questions to confirm with Standard Ledger (don't assert — verify):**
-1. Is the Pty Ltd cutover actually complete, and is Q4 FY26 the true last
-   sole-trader BAS? (Calendar says cutover 30 Jun 2026, `pending`.)
-2. Q2 FY25-26 (Oct–Dec 2025) lodgement status — not in the calendar; confirm it
-   was lodged (due would have been 28 Feb 2026).
+1. Exact lodge date of Q4 FY26 BAS, and which two quarters SL just lodged.
+2. Is the Pty Ltd cutover complete? Xero is **still on the sole-trader org** as of
+   2026-07-08 — the Pty BAS lifecycle can't start until its Xero org is live.
 3. R&D FY25-26 claim (~$200K, Path C) — filable from 1 Jul 2026, due 30 Apr 2027.
-   Evidence pack: `thoughts/shared/rd-pack-fy26/`.
+   Evidence pack: `thoughts/shared/rd-pack-fy26/`. Worth starting assembly now.
 
 ---
 
@@ -59,8 +66,8 @@ check-in doesn't duplicate it — it *reads* it. The nearest obligations from to
 
 | Due | Obligation | Entity | Status |
 |---|---|---|---|
-| **2026-07-28** | **BAS Q4 FY25-26 (Apr-Jun 2026)** — last sole-trader BAS | sole-trader | pending |
-| 2026-10-28 | BAS Q1 FY26-27 (Jul-Sep 2026) — first Pty Ltd BAS | pty-ltd | pending |
+| 2026-07-28 | BAS Q4 FY25-26 (Apr-Jun 2026) — last sole-trader BAS | sole-trader | **filed** (SL, ~7 Jul) |
+| **2026-10-28** | **BAS Q1 FY26-27 (Jul-Sep 2026)** — first Pty Ltd BAS | pty-ltd | pending |
 | 2026-10-31 | ATO annual return FY25-26 (sole trader) | sole-trader | pending |
 | 2026-12-31 | ACNC Annual Information Statement — A Kind Tractor Ltd | charity | pending |
 | 2027-02-28 | BAS Q2 FY26-27 · ATO annual FY25-26 (Pty stub) | pty-ltd | pending |
@@ -170,6 +177,14 @@ learning loop). Keep the summary to 6 lines so the habit survives.
 ```
 
 <!-- Append new weekly entries below this line, most recent first -->
+
+## Week of 2026-07-08
+- **Nearest deadline + movement:** Q1 FY27 BAS due 28 Oct (T-112). FY26 BAS lodged by SL → nothing at risk.
+- **Receipts:** Dext 99.3% linked (1,539/1,550); ~415 orphaned Gmail/Dext review items identified → pipeline fix in `dext-xero-ai-alignment.md`.
+- **Card:** 29 open NAB Visa lines (10 FY26 residual + 19 FY27), **all receipted** → reconcile clicks queued in Xero UI (~15 min); 4 need a project code first (Apple, Hugging Face, 2× Qantas). Full worklist: `thoughts/shared/reports/weekly-checkin-2026-07-08.md`.
+- **Mirror lies caught:** none this pass; `is_reconciled` counts are mirror-side (single-GET is truth) — small drift expected.
+- **One thing learned / filed:** built the Dext→Xero AI alignment strategy (three rails → one); Q4 FY26 BAS marked filed in the compliance calendar.
+- **Human minutes:** ~0 (agent status pass); ~20 min of Ben/SL clicks queued.
 
 ---
 
