@@ -1,0 +1,30 @@
+{
+  "snapshotAt": "2026-07-12",
+  "locationId": "agzsSZWgovjwgpcoASWG",
+  "published": [
+    {"id": "f0c1f3db-8809-4283-ba91-907626ac0bb7", "name": "Contact Form to Universal Inquiry", "version": 7, "updatedAt": "2026-06-11T02:50:13.639Z"},
+    {"id": "b5063826-f1b1-49a8-bfd2-937165daa366", "name": "Gmail Email to Contact", "version": 12, "updatedAt": "2026-06-02T02:07:04.202Z"},
+    {"id": "93596cb4-f100-4961-b9c3-759313827b8d", "name": "Harvest - Contact Form Receipt", "version": 4, "updatedAt": "2026-07-03T09:56:58.347Z"},
+    {"id": "0cf2479e-791c-43ac-a8cd-a3395a03cdaa", "name": "Harvest - Follow Welcome", "version": 6, "updatedAt": "2026-06-02T21:28:04.848Z"},
+    {"id": "95d515a6-10ec-4506-8d5d-b14727b1bafb", "name": "Harvest - June 20 RSVP Receipt", "version": 3, "updatedAt": "2026-06-11T04:13:05.830Z"},
+    {"id": "62aa2b50-c4f3-4564-84c3-3aa81c0c36f8", "name": "Harvest - Member Question Receipt", "version": 6, "updatedAt": "2026-06-02T21:28:23.772Z"},
+    {"id": "19cc358a-05f6-4d99-8e6b-91b31c63e8c4", "name": "Harvest - Member Welcome", "version": 6, "updatedAt": "2026-06-02T21:01:55.329Z"},
+    {"id": "ff4ff43e-0174-415d-828e-3610f5386de5", "name": "Harvest - Shop Interest Receipt", "version": 6, "updatedAt": "2026-06-11T02:53:59.181Z"},
+    {"id": "cadc781e-f1c5-4c2a-9568-0f2fd93daef6", "name": "Harvest Membership Journey", "version": 4, "updatedAt": "2026-06-02T11:14:08.580Z"},
+    {"id": "399cb23b-e5ca-413d-85ae-2e19729f8396", "name": "Sync to Supabase - Contact Updated", "version": 8, "updatedAt": "2026-06-02T03:01:14.453Z"},
+    {"id": "a2c5a0a0-782b-4f4a-8019-df3536340d29", "name": "Sync to Supabase - New Contact", "version": 8, "updatedAt": "2026-06-02T03:14:34.819Z"}
+  ],
+  "draft": [
+    {"id": "06b7de2a-39a6-4643-b767-a4202c6c0615", "name": "ACT Core — Newsletter Signup", "version": 2, "updatedAt": "2026-06-02T03:51:24.971Z"},
+    {"id": "cc1f5a5b-a9f7-46a6-a407-510efbf3de02", "name": "Contact → Universal Inquiry", "version": 11, "updatedAt": "2026-06-02T02:03:17.619Z"},
+    {"id": "7836d973-7594-4cd3-b948-5a1151a5a091", "name": "Contained launch 2025", "version": 5, "updatedAt": "2026-06-02T02:03:27.730Z"},
+    {"id": "88d1c074-906b-49a3-b7bc-0d0af5d4a794", "name": "Goods Inquiry → Acknowledge", "version": 5, "updatedAt": "2026-06-02T02:03:56.820Z"},
+    {"id": "46596b67-c443-4a5c-ada6-004c5e3ecd67", "name": "Goods media form submission", "version": 8, "updatedAt": "2026-06-02T02:03:56.820Z"},
+    {"id": "b3111434-5c96-4875-969e-da56d6fd8186", "name": "Grant Deadline - 7 Day Reminder", "version": 4, "updatedAt": "2026-06-02T02:07:17.719Z"},
+    {"id": "c03f016c-935f-417f-aa01-df906c84a27b", "name": "Harvest - RSVP Pizza Dinner (tag)", "version": 2, "updatedAt": "2026-06-02T22:08:46.138Z"},
+    {"id": "33354d14-c4e9-465c-aad2-6d95c060d696", "name": "New Order Notification", "version": 19, "updatedAt": "2026-06-02T02:03:56.820Z"},
+    {"id": "0c61347a-b59b-4de5-ae90-32a59c8e4805", "name": "Newsletter Signup", "version": 4, "updatedAt": "2026-06-02T02:03:17.619Z"},
+    {"id": "570b1e7a-a6c3-49f5-8989-dca0eee5dbfa", "name": "Shop prospect → create card", "version": 4, "updatedAt": "2026-06-02T02:04:25.351Z"}
+  ],
+  "note": "12 drafts reported by count in audit; two of them (Contact Form to Universal Inquiry vs Contact → Universal Inquiry, Newsletter Signup vs ACT Core — Newsletter Signup) are name-level duplicates of published/each other. Published count 9 excludes the two Sync-to-Supabase infra workflows in some tallies; list above is the API's status field verbatim: 11 published, 10 draft."
+}

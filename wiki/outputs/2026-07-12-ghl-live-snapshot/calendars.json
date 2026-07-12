@@ -1,0 +1,13 @@
+{
+  "snapshotAt": "2026-07-12",
+  "locationId": "agzsSZWgovjwgpcoASWG",
+  "calendars": [
+    {"id": "3DljXKbz8LhyIIAxjUAC", "name": "Benjamin's Calendar", "type": "personal", "slug": "benjamins-calendar", "isActive": true},
+    {"id": "4IpU9GnzAChTMkKFJPWi", "name": "RSVP: Afternoon + pizza, Sat 20 June", "type": "event", "slug": "harvest-2026-06-20-afternoon-pizza", "isActive": true, "capacityPerSlot": 40, "note": "past event 2026-06-20 — retire candidate"},
+    {"id": "FCBxJtNpMRaTaRh4idBu", "name": "Harvest Events", "type": "event", "slug": "harvest-events", "isActive": true},
+    {"id": "KZ8VIsllbeYOxiBJxy0G", "name": "Joey Steward's Personal Calendar", "type": "personal", "slug": "joey-steward-personal-calendar-rbfic-e_y", "isActive": true},
+    {"id": "L8gT4A6mFJ2qBwhUi3dz", "name": "Suzie zemek's Personal Calendar", "type": "personal", "slug": "suzie-zemek-personal-calendar-lhpjbq0fw", "isActive": true},
+    {"id": "M0KzSu7Bo3jJ3ZQta3ag", "name": "RSVP: Maker session, Sat 20 June", "type": "event", "slug": "harvest-2026-06-20-maker-session", "isActive": true, "capacityPerSlot": 18, "note": "past event 2026-06-20 — retire candidate"},
+    {"id": "viM1BRnHG9gwpIEZd4HM", "name": "Book a chat about the shop", "type": "round_robin", "slug": "harvest-shop-chat", "isActive": true}
+  ]
+}

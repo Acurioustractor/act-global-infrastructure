@@ -1,0 +1,121 @@
+{
+  "snapshotAt": "2026-07-12",
+  "locationId": "agzsSZWgovjwgpcoASWG",
+  "pipelines": [
+    {"id": "BvrCPnOcpPxIgpgrMbFF", "name": "A Curious Tractor", "dateAdded": "2025-11-25", "stages": [
+      {"id": "9a4702b4-00c4-499c-b43a-7c0a37179fd3", "name": "Germination"},
+      {"id": "fdd6d9d6-7317-4887-9717-bfa0069b7222", "name": "Growth"},
+      {"id": "a37f6292-7147-4b0e-bd5b-d1a6bd18daa8", "name": "Harvest"},
+      {"id": "7506fa36-fba3-4cdc-bbe8-a8542acea604", "name": "Composting"},
+      {"id": "d63cdc6b-59a7-4cc0-8436-479d9762e0da", "name": "Graduation"},
+      {"id": "fb2cd2a2-4e33-4172-beed-dda6ee61f2fa", "name": "Not Yet"}
+    ]},
+    {"id": "aRGmSaMh62wPO2R0Bt4g", "name": "Empathy Ledger", "dateAdded": "2026-02-26", "stages": [
+      {"id": "5c73d63e-619f-465a-90bb-151ea20351d7", "name": "Identified"},
+      {"id": "f54541f5-3ce8-4b82-b371-eee51e6beb46", "name": "Outreach Sent"},
+      {"id": "e37ba26a-c0ea-43ab-9c7a-9e43f0b91ec0", "name": "In Conversation"},
+      {"id": "612abcb4-b8ec-4cdd-aa8d-479775e93cb6", "name": "Confirmed Partner"},
+      {"id": "499570d8-00f6-4cfd-b873-ab73eba97436", "name": "Planning"},
+      {"id": "5e0f1746-af0e-4f9f-890c-7e975c5eb7c3", "name": "Active"},
+      {"id": "5a48dc24-155d-4214-ac5a-de964809e44a", "name": "Not Yet"}
+    ]},
+    {"id": "FjMyJM3YzWQFmKqR9fur", "name": "Goods — Buyer Pipeline", "dateAdded": "2026-01-20", "stages": [
+      {"id": "e5220eb2-be40-4e79-9571-6acae12285c7", "name": "Outreach Queued"},
+      {"id": "1fd317ec-f8f1-4837-b324-e48c22956cdd", "name": "First Contact"},
+      {"id": "8da22920-c295-4358-be58-c4c69f372890", "name": "In Conversation"},
+      {"id": "c3e5e7c5-c5cf-4541-86ef-6eaf256aac54", "name": "Qualified"},
+      {"id": "27085dfa-23bf-4e6d-90ea-483bf44ab5b6", "name": "Scoped"},
+      {"id": "e23847c3-5f74-4da6-a907-6c3d6d45008c", "name": "Proposed"},
+      {"id": "a5222f0c-380b-4866-8cef-80cbae08189c", "name": "Negotiating"},
+      {"id": "809f1a7a-0082-40fc-8e78-b51bde71a741", "name": "Committed"},
+      {"id": "dc6cf017-325a-4040-beb1-76f2cffba02c", "name": "In Delivery"},
+      {"id": "80be941e-86b6-41d1-857f-7865f66692f7", "name": "Delivered"},
+      {"id": "835065e8-c952-4cfe-9228-5e8625d100ae", "name": "Invoiced"},
+      {"id": "0100d504-3108-415c-82fd-85a66192ef1c", "name": "Paid"}
+    ]},
+    {"id": "UQsrmuqzxMSdCTklxEcG", "name": "Goods — Demand Register", "dateAdded": "2026-04-23", "stages": [
+      {"id": "0c5ed787-2015-4af0-b2ad-a916e40879db", "name": "Signal"},
+      {"id": "02502aa3-9a0d-4ddd-b1f0-c1e836838426", "name": "Buyer Matched"},
+      {"id": "13958a71-9f0e-468a-afc0-663c53d4220c", "name": "Converted"},
+      {"id": "a0cb12c7-63b4-4709-8418-310ae330bb26", "name": "Dormant"}
+    ]},
+    {"id": "JvBFYpVpyKsw899lkFgj", "name": "Goods Supporter Journey", "dateAdded": "2026-05-27", "stages": [
+      {"id": "cf8d31d2-73be-4119-b56b-7b0334254197", "name": "Identified"},
+      {"id": "a84114da-8888-4357-a2df-01b29f37209d", "name": "Qualified"},
+      {"id": "524aca71-287d-4eeb-a53a-66ff3a7aede5", "name": "Cultivating"},
+      {"id": "a23b26b4-ace3-4199-8a14-b65ed888aa52", "name": "Ask made"},
+      {"id": "c6369cf9-80f6-4680-9249-acc1c861022d", "name": "Committed"},
+      {"id": "15b7b876-16e3-4c57-84e6-7c09d703888e", "name": "Delivering"},
+      {"id": "3e38f65b-a515-4e32-9fc9-57ea1531edc6", "name": "Stewarding / Reporting"},
+      {"id": "ff90ea45-2196-4a7a-a311-8f27c3c7cda6", "name": "Renewing"},
+      {"id": "0c86ee48-1ef2-4b85-a39f-9c467a61f5f8", "name": "Lapsed"},
+      {"id": "fcf23a69-bae4-4465-b3f0-d933bc9d709c", "name": "Declined / Parked"}
+    ]},
+    {"id": "scom3L0kNwA1W0zPIzMe", "name": "Grants", "dateAdded": "2025-11-27", "stages": [
+      {"id": "8124c61a-1175-461e-be5d-1fa64ef6dd65", "name": "Grant Opportunity Identified"},
+      {"id": "3eb617e6-5635-4091-bd04-acc72d2ae5b0", "name": "Application In Progress"},
+      {"id": "8b0818ce-3fe8-4aae-97ab-905366fdd5ee", "name": "Grant Submitted"},
+      {"id": "438c68ab-5a83-49f1-a4f7-efd6d68f25af", "name": "Grant Awarded"},
+      {"id": "c43bbabf-b259-4382-9940-7d8f1223a164", "name": "Grant Reporting Due"},
+      {"id": "8b62f71c-17b9-4a69-9ff8-23b4262c2c38", "name": "Grant Report Submitted"},
+      {"id": "6c81a3e7-6382-4dcd-af63-03279045ef97", "name": "Grant Declined"}
+    ]},
+    {"id": "5ZqAuFokM4LsNqMCMPmY", "name": "Harvest Inbox", "dateAdded": "2026-05-27", "stages": [
+      {"id": "aafc9a01-1ad6-42c8-8c47-69a74cf1141d", "name": "New"},
+      {"id": "b72b1b9d-0e1a-495d-9b81-e1df4c9cdd09", "name": "In progress"},
+      {"id": "b09e201d-bd10-4e84-b501-ca6a25fb1a94", "name": "Waiting on them"},
+      {"id": "c343a664-7e10-4f96-b62d-8eda57748036", "name": "Resolved"}
+    ]},
+    {"id": "ijPN2jEoEuMshXXKbQ4z", "name": "Harvest Membership Journey", "dateAdded": "2026-06-02", "stages": [
+      {"id": "85da97c5-7cdc-4500-95d7-7dbdaea0ee5c", "name": "Curious"},
+      {"id": "571c3eab-ecca-47e6-a746-cafc04cd7c1c", "name": "Connected"},
+      {"id": "21e1dcb8-d674-4724-a8b0-5cb4cafba635", "name": "Member"},
+      {"id": "6173b52b-3396-4431-9f87-ba73f20e0e27", "name": "Active"},
+      {"id": "ea084ff5-607e-49a8-a6d2-d087cec57c5d", "name": "Steward"}
+    ]},
+    {"id": "QiK57emft8v05hxylmwA", "name": "Supporters & Donors", "dateAdded": "2026-01-05", "stages": [
+      {"id": "95326b9e-0f6c-41bc-b3c0-8b8f8c8a52a4", "name": "First Donation"},
+      {"id": "359c56ba-7648-47bd-bf48-0a9b8e1c23bb", "name": "Second Donation"},
+      {"id": "0ff1d2a6-ad30-4f8a-9112-660857248640", "name": "Legacy Donor ($5000+)"},
+      {"id": "46c5f1b6-bb7c-4b94-8456-ecd2d5221880", "name": "Lapsed Donor (12+ months)"}
+    ]},
+    {"id": "Pdtr1ZIOvg3LrMSeNvHe", "name": "The Shop pipeline", "dateAdded": "2026-05-27", "stages": [
+      {"id": "a8194a2f-7abf-483e-9922-6e6c3ebfd363", "name": "New interest"},
+      {"id": "9bffbf3b-848b-43e5-9512-709e916ed9df", "name": "In conversation"},
+      {"id": "62bd4666-d1d3-42ef-b91b-fbd1b34a4f0d", "name": "Sampling / trial shelf"},
+      {"id": "2c1f01c9-8003-48e3-a558-42abfdeafce0", "name": "On the shelf"},
+      {"id": "695ff077-9052-4c5e-bf0d-24bcee2b5941", "name": "Not now"},
+      {"id": "6ec452eb-fcc8-4318-adb4-89b70e1a332d", "name": "Parked"}
+    ]},
+    {"id": "ggQw10DuH0XRji6keimS", "name": "Universal Inquiry", "dateAdded": "2026-01-05", "stages": [
+      {"id": "2eded979-7439-407d-89b6-762499b56658", "name": "New Inquiry"},
+      {"id": "11ade77e-d420-49bc-ac8d-a24cf46d2b76", "name": "Needs Assessment"},
+      {"id": "6f3cee39-d15e-412a-9d76-b90707b83d84", "name": "Routed to Project"},
+      {"id": "0c4302da-1301-4b09-b9a3-e83fa9c3e117", "name": "Out of Scope"}
+    ]},
+    {"id": "SxzINmfZMjvqAMPmFCKa", "name": "CONTAINED Adelaide 2026", "dateAdded": "2026-06-11", "stages": [
+      {"id": "f8d2acd7-8ced-43c7-a485-3950d190bbc9", "name": "Captured"},
+      {"id": "9b0d68a5-35e6-4885-96bb-17dc9feff1fe", "name": "Needs enrichment"},
+      {"id": "07942700-ea35-4bc4-b1ba-fa7c84093faa", "name": "Warm - review"},
+      {"id": "d98cb7a7-64ee-44f8-aeff-1bb5e20eda0b", "name": "Personal invite"},
+      {"id": "bc4251de-61f3-477f-b00e-606368154e1f", "name": "Booking link sent"},
+      {"id": "db5d37e7-35c5-4161-ab5b-780c08ab9af6", "name": "Booked"},
+      {"id": "acbdf4cd-ba6a-41ac-ac52-2e5508b0c8f6", "name": "Experienced"},
+      {"id": "f9365cf1-5cf8-4976-8ee8-96fc52678251", "name": "Activated"},
+      {"id": "76a5ba5a-aa3d-4919-be1f-ca0c4bad7052", "name": "Post-week nurture"},
+      {"id": "7dee91e5-11f3-432c-9e39-0cc41a5c190c", "name": "Future city / partner"},
+      {"id": "2db54fe2-9051-4411-a0ba-220e31f43dd9", "name": "Closed / no contact"}
+    ]},
+    {"id": "vzatUY4dwN8t63ZoFIpH", "name": "CONTAINED Engagement", "dateAdded": "2026-06-11", "stages": [
+      {"id": "e0fdce64-5102-458c-95b5-6ab6629f5296", "name": "Identified"},
+      {"id": "78090229-0c6b-4d41-abae-78879a5a35c7", "name": "Personal outreach"},
+      {"id": "e3aa0ddf-4dac-4fba-a02f-c6afb54cce5d", "name": "In conversation"},
+      {"id": "be9e4be0-69da-4517-af52-370b70f4d2de", "name": "Invited to experience"},
+      {"id": "0e001622-b333-4990-b004-da0c655cb892", "name": "Experienced"},
+      {"id": "0825728b-fb20-4c91-a9c3-9c5b69e114e1", "name": "Follow-up / debrief"},
+      {"id": "92737d7b-7258-45f0-a717-44c45a168b99", "name": "Partner / committed"},
+      {"id": "2f647634-79c7-49f5-aec0-561b233b1834", "name": "Future city"},
+      {"id": "bd33b9c4-51c1-4912-97cc-11a50bd78fab", "name": "Parked / closed"}
+    ]}
+  ]
+}
