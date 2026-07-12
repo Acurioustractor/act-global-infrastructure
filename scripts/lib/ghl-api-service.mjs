@@ -305,15 +305,39 @@ export class GHLService {
    * @returns {Promise<Array>} Opportunities in this pipeline
    */
   async getOpportunities(pipelineId, params = {}) {
-    const queryParams = new URLSearchParams({
-      location_id: this.locationId,
-      pipeline_id: pipelineId,  // v2 API uses snake_case
-      limit: params.limit || 100,
-      ...(params.cursor && { startAfter: params.cursor })
-    });
+    // Paginates through ALL opportunities in the pipeline. Before 2026-07-12
+    // this made a single request capped at 100 rows/pipeline and silently
+    // dropped the rest — which turned the mirror's deletion reconciliation
+    // into a wrong-delete path (PR #211 review B1). GHL v2 pagination:
+    // meta.startAfter (epoch ms) + meta.startAfterId.
+    const pageSize = params.limit || 100;
+    const all = [];
+    let startAfter = params.cursor || null;
+    let startAfterId = params.cursorId || null;
 
-    const data = await this.request(`/opportunities/search?${queryParams}`);
-    return data.opportunities || [];
+    for (;;) {
+      const queryParams = new URLSearchParams({
+        location_id: this.locationId,
+        pipeline_id: pipelineId,  // v2 API uses snake_case
+        limit: pageSize,
+        ...(startAfter && { startAfter }),
+        ...(startAfterId && { startAfterId })
+      });
+
+      const data = await this.request(`/opportunities/search?${queryParams}`);
+      const page = data.opportunities || [];
+      all.push(...page);
+
+      const meta = data.meta || {};
+      // Stop on short page, missing cursor, or non-advancing cursor (loop guard)
+      if (page.length < pageSize || !meta.startAfterId || meta.startAfterId === startAfterId) {
+        break;
+      }
+      startAfter = meta.startAfter;
+      startAfterId = meta.startAfterId;
+    }
+
+    return all;
   }
 
   /**

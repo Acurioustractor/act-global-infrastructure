@@ -25,7 +25,8 @@ const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.SUPABASE_URL
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 const tolIdx = process.argv.indexOf('--tolerance');
-const TOLERANCE = tolIdx > -1 ? parseFloat(process.argv[tolIdx + 1]) : 0.02;
+const tolParsed = tolIdx > -1 ? parseFloat(process.argv[tolIdx + 1]) : 0.02;
+const TOLERANCE = Number.isFinite(tolParsed) && tolParsed >= 0 ? tolParsed : 0.02;
 
 async function countMirrorActive(supabase, table) {
   const { count, error } = await supabase

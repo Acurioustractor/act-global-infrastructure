@@ -57,7 +57,7 @@ const stats = {
 // implausibly small vs the mirror (indicates broken pagination / partial fetch,
 // not real deletions). See 2026-07-12 incident: 1,000-row default cap made the
 // script blind to 3,861 mirror rows.
-const RECONCILE_MIN_LIVE_RATIO = 0.5;
+const RECONCILE_MIN_LIVE_RATIO = 0.8;
 
 /**
  * Load ALL rows from a Supabase table, paginating past the 1,000-row default cap.
@@ -66,7 +66,9 @@ async function loadAllRows(supabase, table, columns, filter = null) {
   const rows = [];
   const PAGE = 1000;
   for (let from = 0; ; from += PAGE) {
-    let query = supabase.from(table).select(columns).range(from, from + PAGE - 1);
+    // Explicit order: PostgREST row order without .order() is unspecified, and
+    // concurrent webhook writes could destabilize pages (PR #211 review nit 1).
+    let query = supabase.from(table).select(columns).order('ghl_id').range(from, from + PAGE - 1);
     if (filter) query = filter(query);
     const { data, error } = await query;
     if (error) throw error;
@@ -375,7 +377,10 @@ async function syncOpportunities(supabase, ghl) {
           ghl_updated_at: opp.updatedAt || opp.dateUpdated || null,
           last_stage_change_at: opp.lastStageChangeAt || null,
           last_status_change_at: opp.lastStatusChangeAt || null,
-          last_synced_at: new Date().toISOString()
+          last_synced_at: new Date().toISOString(),
+          // Resurrection path (PR #211 review B2): an opp present in live GHL is
+          // never left soft-deleted — upsert always restores 'synced'.
+          sync_status: 'synced'
         };
 
         const { error } = await supabase
