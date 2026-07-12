@@ -47,11 +47,77 @@ const BLOCKED_FIELDS_TO_GHL = [
 
 // Stats tracking
 const stats = {
-  contacts: { created: 0, updated: 0, skipped: 0, errors: 0 },
-  opportunities: { created: 0, updated: 0, skipped: 0, errors: 0 },
+  contacts: { created: 0, updated: 0, skipped: 0, errors: 0, deleted: 0 },
+  opportunities: { created: 0, updated: 0, skipped: 0, errors: 0, deleted: 0 },
   pipelines: { created: 0, updated: 0, skipped: 0, errors: 0 },
   startTime: Date.now()
 };
+
+// Reconciliation safety: never mass-soft-delete when the live fetch looks
+// implausibly small vs the mirror (indicates broken pagination / partial fetch,
+// not real deletions). See 2026-07-12 incident: 1,000-row default cap made the
+// script blind to 3,861 mirror rows.
+const RECONCILE_MIN_LIVE_RATIO = 0.5;
+
+/**
+ * Load ALL rows from a Supabase table, paginating past the 1,000-row default cap.
+ */
+async function loadAllRows(supabase, table, columns, filter = null) {
+  const rows = [];
+  const PAGE = 1000;
+  for (let from = 0; ; from += PAGE) {
+    let query = supabase.from(table).select(columns).range(from, from + PAGE - 1);
+    if (filter) query = filter(query);
+    const { data, error } = await query;
+    if (error) throw error;
+    rows.push(...data);
+    if (data.length < PAGE) break;
+  }
+  return rows;
+}
+
+/**
+ * Soft-delete mirror rows whose ghl_id no longer exists in the live GHL set.
+ * Returns count marked. Chunked .in() updates; attempted-vs-actual is compared
+ * by the caller via the returned count.
+ */
+async function reconcileDeletions(supabase, table, liveIds, activeFilter) {
+  const mirrorRows = await loadAllRows(
+    supabase, table, 'ghl_id',
+    q => activeFilter ? q.neq('sync_status', 'deleted') : q
+  );
+  const staleIds = mirrorRows.map(r => r.ghl_id).filter(id => !liveIds.has(id));
+
+  if (staleIds.length === 0) return 0;
+
+  // Safety guard against partial live fetches
+  const activeCount = mirrorRows.length;
+  if (liveIds.size < activeCount * RECONCILE_MIN_LIVE_RATIO) {
+    console.warn(
+      `\n   ⚠️  Reconciliation SKIPPED for ${table}: live count ${liveIds.size} < ` +
+      `${RECONCILE_MIN_LIVE_RATIO * 100}% of mirror active ${activeCount}. ` +
+      `Likely partial fetch — investigate before trusting deletions.`
+    );
+    return 0;
+  }
+
+  let marked = 0;
+  const CHUNK = 200;
+  for (let i = 0; i < staleIds.length; i += CHUNK) {
+    const chunk = staleIds.slice(i, i + CHUNK);
+    const { data, error } = await supabase
+      .from(table)
+      .update({ sync_status: 'deleted', updated_at: new Date().toISOString() })
+      .in('ghl_id', chunk)
+      .select('ghl_id');
+    if (error) throw error;
+    marked += (data || []).length;
+    if ((data || []).length !== chunk.length) {
+      console.warn(`\n   ⚠️  ${table} reconciliation chunk: attempted ${chunk.length}, actual ${(data || []).length}`);
+    }
+  }
+  return marked;
+}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // INITIALIZATION
@@ -128,12 +194,8 @@ async function syncContacts(supabase, ghl) {
     const ghlContacts = await getAllGHLContacts(ghl);
     console.log(`   Found ${ghlContacts.length} contacts in GHL`);
 
-    // Get existing contacts from Supabase
-    const { data: existingContacts, error: fetchError } = await supabase
-      .from('ghl_contacts')
-      .select('ghl_id, updated_at');
-
-    if (fetchError) throw fetchError;
+    // Get ALL existing contacts from Supabase (paginated past the 1,000-row cap)
+    const existingContacts = await loadAllRows(supabase, 'ghl_contacts', 'ghl_id, updated_at');
 
     const existingMap = new Map(
       existingContacts.map(c => [c.ghl_id, c.updated_at])
@@ -167,6 +229,16 @@ async function syncContacts(supabase, ghl) {
         console.error(`\n   Error syncing contact ${ghlContact.email}: ${error.message}`);
         stats.contacts.errors++;
         process.stdout.write('!');
+      }
+    }
+
+    // Deletion reconciliation: contacts in mirror but absent from live GHL
+    // were deleted/merged in GHL — soft-delete them (sync_status = 'deleted').
+    const liveIds = new Set(ghlContacts.map(c => c.id));
+    if (liveIds.size > 0) {
+      stats.contacts.deleted = await reconcileDeletions(supabase, 'ghl_contacts', liveIds, true);
+      if (stats.contacts.deleted > 0) {
+        console.log(`   🗑️  Soft-deleted ${stats.contacts.deleted} contacts no longer in GHL`);
       }
     }
 
@@ -323,6 +395,25 @@ async function syncOpportunities(supabase, ghl) {
       }
     }
 
+    // Deletion reconciliation: opportunities in mirror but absent from live GHL.
+    // Requires ghl_opportunities.sync_status (migration 2026-07-12). Guarded so
+    // the sync still works if the column is missing.
+    const liveOppIds = new Set(allOpportunities.map(o => o.id));
+    if (liveOppIds.size > 0) {
+      try {
+        stats.opportunities.deleted = await reconcileDeletions(supabase, 'ghl_opportunities', liveOppIds, true);
+        if (stats.opportunities.deleted > 0) {
+          console.log(`   🗑️  Soft-deleted ${stats.opportunities.deleted} opportunities no longer in GHL`);
+        }
+      } catch (error) {
+        if (/sync_status/.test(error.message)) {
+          console.warn('   ⚠️  ghl_opportunities.sync_status missing — apply migration 20260712 to enable deletion reconciliation');
+        } else {
+          throw error;
+        }
+      }
+    }
+
     console.log('\n   ✅ Opportunities sync complete');
 
   } catch (error) {
@@ -413,10 +504,12 @@ async function main() {
     console.log('Contacts:');
     console.log(`   Created: ${stats.contacts.created}`);
     console.log(`   Updated: ${stats.contacts.updated}`);
+    console.log(`   Deleted: ${stats.contacts.deleted}`);
     console.log(`   Errors:  ${stats.contacts.errors}\n`);
 
     console.log('Opportunities:');
     console.log(`   Updated: ${stats.opportunities.updated}`);
+    console.log(`   Deleted: ${stats.opportunities.deleted}`);
     console.log(`   Errors:  ${stats.opportunities.errors}\n`);
 
     console.log(`⏱️  Duration: ${duration}s\n`);
