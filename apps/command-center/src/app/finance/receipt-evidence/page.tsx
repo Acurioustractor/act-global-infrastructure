@@ -115,6 +115,8 @@ const STATUSES = [
   { value: 'covered_evidence', label: 'Evidence covered' },
   { value: 'covered_legacy', label: 'Legacy covered' },
   { value: 'no_receipt_needed', label: 'No receipt needed' },
+  { value: 'paper_on_file', label: 'Paper on file' },
+  { value: 'lost', label: 'Lost (GST forfeited)' },
   { value: 'all', label: 'All' },
 ]
 
@@ -128,11 +130,12 @@ function statusLabel(value: string) {
 }
 
 function statusClass(value: string) {
-  if (value === 'covered_evidence' || value === 'covered_legacy' || value === 'no_receipt_needed') {
+  if (value === 'covered_evidence' || value === 'covered_legacy' || value === 'no_receipt_needed' || value === 'paper_on_file') {
     return 'bg-emerald-500/10 text-emerald-300'
   }
   if (value === 'high_confidence_candidate') return 'bg-amber-500/10 text-amber-300'
   if (value === 'candidate') return 'bg-blue-500/10 text-blue-300'
+  if (value === 'lost') return 'bg-slate-500/15 text-slate-300'
   return 'bg-red-500/10 text-red-300'
 }
 
@@ -852,7 +855,7 @@ export default function ReceiptEvidencePage() {
   const rows = data?.rows || []
   const stats = data?.stats || {}
   const totalSpend = Number(stats.spend || 0)
-  const covered = Number(stats.covered_evidence || 0) + Number(stats.covered_legacy || 0) + Number(stats.no_receipt_needed || 0)
+  const covered = Number(stats.covered_evidence || 0) + Number(stats.covered_legacy || 0) + Number(stats.no_receipt_needed || 0) + Number(stats.paper_on_file || 0)
   const total = Number(stats.total || 0)
   const coveragePct = total ? Math.round((covered / total) * 100) : 0
 
@@ -1202,14 +1205,34 @@ export default function ReceiptEvidencePage() {
                   </Link>
                 </div>
 
-                <button
-                  disabled={busyId === selected.id}
-                  onClick={() => action('no_receipt_needed', { bankLineId: selected.id })}
-                  className="mt-3 inline-flex items-center gap-1 rounded-md bg-white/10 px-3 py-1.5 text-xs font-medium text-white/60 hover:bg-white/15 disabled:opacity-40"
-                >
-                  <CheckCircle2 className="h-3.5 w-3.5" />
-                  Mark no receipt needed
-                </button>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <button
+                    disabled={busyId === selected.id}
+                    onClick={() => action('no_receipt_needed', { bankLineId: selected.id })}
+                    className="inline-flex items-center gap-1 rounded-md bg-white/10 px-3 py-1.5 text-xs font-medium text-white/60 hover:bg-white/15 disabled:opacity-40"
+                  >
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    Mark no receipt needed
+                  </button>
+                  <button
+                    disabled={busyId === selected.id}
+                    onClick={() => action('paper_on_file', { bankLineId: selected.id })}
+                    title="I physically hold this receipt — GST stays claimable. Stops re-surfacing."
+                    className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-300 hover:bg-emerald-500/20 disabled:opacity-40"
+                  >
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    Paper — have it
+                  </button>
+                  <button
+                    disabled={busyId === selected.id}
+                    onClick={() => action('lost', { bankLineId: selected.id })}
+                    title="No receipt recoverable — GST credit forfeited. Stops re-surfacing."
+                    className="inline-flex items-center gap-1 rounded-md bg-slate-500/15 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-slate-500/25 disabled:opacity-40"
+                  >
+                    <XCircle className="h-3.5 w-3.5" />
+                    Lost — GST forfeited
+                  </button>
+                </div>
               </div>
 
               <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">

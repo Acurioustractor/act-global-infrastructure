@@ -1,0 +1,1598 @@
+{
+  "generated_at_note": "run date stamped by caller",
+  "source_csv": "/Users/benknight/Downloads/Clean up_ ACT_Nicholas Marchesi  - Unreconciled Transactions.csv",
+  "count": 66,
+  "lines": [
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-10-23",
+      "particulars": "CHRISTOPHER DODS J7040396334 Confessional Thanks | Transfer Debit",
+      "direction": "spent",
+      "amount": 2000,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": {
+        "vendor": null,
+        "source": "xero_transaction",
+        "mailbox": null,
+        "from": null,
+        "subject": null,
+        "file": null,
+        "date": "2025-10-24"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-10-29",
+      "particulars": "James William V0471764749 | Transfer Debit",
+      "direction": "spent",
+      "amount": 360,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": {
+        "vendor": null,
+        "source": "xero_transaction",
+        "mailbox": null,
+        "from": null,
+        "subject": null,
+        "file": null,
+        "date": "2025-10-30"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-11-04",
+      "particulars": "Shane Bloomfield H8299013120 Bunnings thanks | Transfer Debit",
+      "direction": "spent",
+      "amount": 200,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": {
+        "number": "4616",
+        "contact": "Woolworths",
+        "status": "PAID",
+        "has_attachments": true,
+        "project_code": "ACT-BG",
+        "acct": "430",
+        "tax": "EXEMPTEXPENSES",
+        "desc": "."
+      },
+      "receipt_doc": {
+        "vendor": "Woolworths",
+        "source": "dext_receipt",
+        "mailbox": "benjamin@act.place",
+        "from": null,
+        "subject": "Receipt from Woolworths",
+        "file": "Woolworths-receipt.pdf",
+        "date": "2025-11-12"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-11-05",
+      "particulars": "HPJCFBWSB5 Humanitix Ltd A CURIOUS TRACTO | Interbank Credit",
+      "direction": "received",
+      "amount": 1150,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": {
+        "vendor": "Humanitix",
+        "source": "dext_receipt",
+        "mailbox": null,
+        "from": null,
+        "subject": "Dext export receipt from Humanitix",
+        "file": "Humanitix - 2025-11-05 - HPJCFBWSB5.pdf",
+        "date": "2025-11-05"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-11-07",
+      "particulars": "MR MARCUS TRAVERS COMarcus C thanks | Money Transfer",
+      "direction": "received",
+      "amount": 200,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": {
+        "vendor": "Woolworths",
+        "source": "dext_receipt",
+        "mailbox": "benjamin@act.place",
+        "from": null,
+        "subject": "Receipt from Woolworths",
+        "file": "Woolworths-receipt.pdf",
+        "date": "2025-11-12"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-11-11",
+      "particulars": "Ross Built ConstructP7797582049 ACT | Transfer Debit",
+      "direction": "spent",
+      "amount": 20000,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": [
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Ross Newell <invoicereminders@post.xero.com>",
+          "subject": "Bill INV-0146 from RNM CARPENTRY is due",
+          "date": "Sat, 15 Nov 2025 21:41:41 +0000",
+          "gmail_id": "19a897784e490498"
+        }
+      ]
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-11-27",
+      "particulars": "MARCHESI NICHOLAS JAUp | Money Transfer",
+      "direction": "received",
+      "amount": 20000,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": [
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Agreement",
+          "date": "Mon, 8 Dec 2025 14:28:28 +1000",
+          "gmail_id": "19afc38233cdf84a"
+        },
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: The Centre - Review and website",
+          "date": "Mon, 8 Dec 2025 13:45:32 +1000",
+          "gmail_id": "19afc10c1e44335d"
+        },
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Centrecorp Social Impact",
+          "date": "Wed, 26 Nov 2025 18:17:33 +1000",
+          "gmail_id": "19abf3d81207e903"
+        },
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: RNM CARPENTRY.",
+          "date": "Wed, 26 Nov 2025 17:49:32 +1000",
+          "gmail_id": "19abf23c93405f45"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Agreement",
+          "date": "Mon, 8 Dec 2025 14:28:28 +1000",
+          "gmail_id": "19afc381b3179c5f"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: The Centre - Review and website",
+          "date": "Mon, 8 Dec 2025 13:45:32 +1000",
+          "gmail_id": "19afc10bd131a959"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Goods Project",
+          "date": "Mon, 8 Dec 2025 08:28:22 +1100",
+          "gmail_id": "19afab7a460ce442"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Order 00066927; Invoice From Container Options Pty Ltd",
+          "date": "Fri, 5 Dec 2025 16:20:01 +1000",
+          "gmail_id": "19aed2b213275771"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Nicholas Marchesi <hi@act.place>",
+          "subject": "Fwd: Confirmed: Your Nov 29 – Dec 4 trip, here’s your Airbnb receipt",
+          "date": "Thu, 27 Nov 2025 16:03:11 +1000",
+          "gmail_id": "19ac3e8ca263506a"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Nicholas Marchesi <hi@act.place>",
+          "subject": "Fwd: Invoice INV-6798 from Ausmetal Recycling Equipment Pty Ltd for Nic Marchesi",
+          "date": "Thu, 27 Nov 2025 15:54:00 +1000",
+          "gmail_id": "19ac3e065df39421"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Nicholas Marchesi <hi@act.place>",
+          "subject": "Fwd: Your receipt from Airbnb",
+          "date": "Wed, 26 Nov 2025 18:32:21 +1000",
+          "gmail_id": "19abf4aec2dbeb56"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Nicholas Marchesi <hi@act.place>",
+          "subject": "Fwd: Your receipt from Airbnb",
+          "date": "Wed, 26 Nov 2025 18:32:13 +1000",
+          "gmail_id": "19abf4ae03b6899a"
+        }
+      ]
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-11-28",
+      "particulars": "SUZANNE MARGARET ANDSecurity minus Car d | Money Transfer",
+      "direction": "received",
+      "amount": 616.66,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-11-28",
+      "particulars": "TFN Distribution The Funding Netw A Curious Tracto | Interbank Credit",
+      "direction": "received",
+      "amount": 89361,
+      "slComment": "Kindly confirm if Other Revenue or Grants Received account",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": {
+        "vendor": "The Funding Network",
+        "source": "dext_receipt",
+        "mailbox": null,
+        "from": null,
+        "subject": "Dext export receipt from The Funding Network",
+        "file": "The Funding Network - 2025-11-28 - 18920458380.pdf",
+        "date": "2025-11-28"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-11-28",
+      "particulars": "Tarik Dallinger-DimiA9838522047 | Transfer Debit",
+      "direction": "spent",
+      "amount": 781.9,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-11-28",
+      "particulars": "Nicholas Marchesi SuE0397656597 | Transfer Debit",
+      "direction": "spent",
+      "amount": 20000,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": {
+        "contact": "Nicholas Marchesi",
+        "status": "AUTHORISED",
+        "is_reconciled": true,
+        "has_attachments": false,
+        "project_code": null,
+        "acct": "880",
+        "tax": "BASEXCLUDED",
+        "desc": "NM UP X4780122536"
+      },
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": [
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Agreement",
+          "date": "Mon, 8 Dec 2025 14:28:28 +1000",
+          "gmail_id": "19afc38233cdf84a"
+        },
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: The Centre - Review and website",
+          "date": "Mon, 8 Dec 2025 13:45:32 +1000",
+          "gmail_id": "19afc10c1e44335d"
+        },
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Centrecorp Social Impact",
+          "date": "Wed, 26 Nov 2025 18:17:33 +1000",
+          "gmail_id": "19abf3d81207e903"
+        },
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: RNM CARPENTRY.",
+          "date": "Wed, 26 Nov 2025 17:49:32 +1000",
+          "gmail_id": "19abf23c93405f45"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Agreement",
+          "date": "Mon, 8 Dec 2025 14:28:28 +1000",
+          "gmail_id": "19afc381b3179c5f"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: The Centre - Review and website",
+          "date": "Mon, 8 Dec 2025 13:45:32 +1000",
+          "gmail_id": "19afc10bd131a959"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Goods Project",
+          "date": "Mon, 8 Dec 2025 08:28:22 +1100",
+          "gmail_id": "19afab7a460ce442"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Order 00066927; Invoice From Container Options Pty Ltd",
+          "date": "Fri, 5 Dec 2025 16:20:01 +1000",
+          "gmail_id": "19aed2b213275771"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Nicholas Marchesi <hi@act.place>",
+          "subject": "Fwd: Confirmed: Your Nov 29 – Dec 4 trip, here’s your Airbnb receipt",
+          "date": "Thu, 27 Nov 2025 16:03:11 +1000",
+          "gmail_id": "19ac3e8ca263506a"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Nicholas Marchesi <hi@act.place>",
+          "subject": "Fwd: Invoice INV-6798 from Ausmetal Recycling Equipment Pty Ltd for Nic Marchesi",
+          "date": "Thu, 27 Nov 2025 15:54:00 +1000",
+          "gmail_id": "19ac3e065df39421"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Nicholas Marchesi <hi@act.place>",
+          "subject": "Fwd: Your receipt from Airbnb",
+          "date": "Wed, 26 Nov 2025 18:32:21 +1000",
+          "gmail_id": "19abf4aec2dbeb56"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Nicholas Marchesi <hi@act.place>",
+          "subject": "Fwd: Your receipt from Airbnb",
+          "date": "Wed, 26 Nov 2025 18:32:13 +1000",
+          "gmail_id": "19abf4ae03b6899a"
+        }
+      ]
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-12-04",
+      "particulars": "Thriday G3468033865 | Transfer Debit",
+      "direction": "spent",
+      "amount": 3000,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": [
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: [Thriday Customer Care] Let's get your Xero reconciled & BAS sorted :)",
+          "date": "Sun, 14 Dec 2025 07:45:23 +0930",
+          "gmail_id": "19b19c8b26d6a0b3"
+        },
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+          "subject": "[Thriday Customer Care] Re: Let's get your Xero reconciled & BAS sorted :)",
+          "date": "Thu, 11 Dec 2025 06:11:13 +0000",
+          "gmail_id": "19b0c08ff900be8c"
+        },
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: [Thriday Customer Care] Let's get your Xero reconciled & BAS sorted :)",
+          "date": "Thu, 11 Dec 2025 10:40:58 +1100",
+          "gmail_id": "19b0aa415c5c2453"
+        },
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+          "subject": "[Thriday Customer Care] Re: Let's get your Xero reconciled & BAS sorted :)",
+          "date": "Thu, 04 Dec 2025 00:53:30 +0000",
+          "gmail_id": "19ae6d99986961e2"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Your September 2025 BAS is ready for signing and lodgment",
+          "date": "Mon, 15 Dec 2025 21:19:27 +0930",
+          "gmail_id": "19b21d8466def3bf"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+          "subject": "Your September 2025 BAS is ready for signing and lodgment",
+          "date": "Mon, 15 Dec 2025 03:14:39 +0000",
+          "gmail_id": "19b2000c2477528a"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: [Thriday Customer Care] Let's get your Xero reconciled & BAS sorted :)",
+          "date": "Sun, 14 Dec 2025 07:45:23 +0930",
+          "gmail_id": "19b19c8afb4774a8"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+          "subject": "[Thriday Customer Care] Re: Let's get your Xero reconciled & BAS sorted :)",
+          "date": "Thu, 11 Dec 2025 06:11:13 +0000",
+          "gmail_id": "19b0c08ff0c543c2"
+        }
+      ]
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-12-17",
+      "particulars": "Circularity Group PtA5648662938 Thanks | Transfer Debit",
+      "direction": "spent",
+      "amount": 32780,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2025-12-19",
+      "particulars": "TFN Distribution The Funding Netw A Curious Tracto | Interbank Credit",
+      "direction": "received",
+      "amount": 55197,
+      "slComment": "Kindly confirm if Other Revenue or Grants Received account",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": {
+        "vendor": "The Funding Network",
+        "source": "dext_receipt",
+        "mailbox": null,
+        "from": null,
+        "subject": "Dext export receipt from The Funding Network",
+        "file": "The Funding Network - 2025-12-18 - 19064068550.pdf",
+        "date": "2025-12-18"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2026-01-09",
+      "particulars": "INTERNET TRANSFER Thanks | Transfer Debit",
+      "direction": "spent",
+      "amount": 1439.6,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": [
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "Systematic Long Short from SysLS <sysls@substack.com>",
+          "subject": "Are You A Deserter Or A Mercenary?",
+          "date": "Mon, 19 Jan 2026 13:53:51 +0000",
+          "gmail_id": "19bd688b6c89f026"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "A Curious Tractor <hi@act.place>",
+          "subject": "Fwd: AAMI Commercial Motor Insurance New Business Direct Debit SPD015748782",
+          "date": "Wed, 7 Jan 2026 07:46:09 +1000",
+          "gmail_id": "19b9842f1777c0f0"
+        }
+      ]
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2026-01-16",
+      "particulars": "BIONIC GROUP PTY LTDRefund | Money Transfer",
+      "direction": "received",
+      "amount": 2420,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": [
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Bionic Group <messaging-service@post.xero.com>",
+          "subject": "Receipt for Nick Marcaesi for AUD 4,705.00 from Bionic Group",
+          "date": "Tue, 20 Jan 2026 23:48:19 +0000",
+          "gmail_id": "19bddcf290396cd3"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Bionic Storage <info@bionicgroup.com.au>",
+          "subject": "Re: Invoice INV-5040 from The Trustee for The Steve Austin Trust for Nick Marcaesi",
+          "date": "Fri, 16 Jan 2026 20:59:51 +1000",
+          "gmail_id": "19bc676d4fe6625e"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Bionic Storage <info@bionicgroup.com.au>",
+          "subject": "Re: Invoice INV-5040 from The Trustee for The Steve Austin Trust for Nick Marcaesi",
+          "date": "Fri, 16 Jan 2026 20:55:39 +1000",
+          "gmail_id": "19bc672fb4de092a"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Bionic Storage <info@bionicgroup.com.au>",
+          "subject": "Re: Invoice INV-5040 from The Trustee for The Steve Austin Trust for Nick Marcaesi",
+          "date": "Fri, 16 Jan 2026 15:46:09 +1000",
+          "gmail_id": "19bc5578b29a3104"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Bionic Storage <info@bionicgroup.com.au>",
+          "subject": "Re: Invoice INV-5040 from The Trustee for The Steve Austin Trust for Nick Marcaesi",
+          "date": "Fri, 16 Jan 2026 20:59:51 +1000",
+          "gmail_id": "19bc676d08d71a92"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Bionic Storage <info@bionicgroup.com.au>",
+          "subject": "Re: Invoice INV-5040 from The Trustee for The Steve Austin Trust for Nick Marcaesi",
+          "date": "Fri, 16 Jan 2026 20:55:39 +1000",
+          "gmail_id": "19bc672f9064b049"
+        },
+        {
+          "mailbox": "hi@act.place",
+          "from": "Bionic Storage <info@bionicgroup.com.au>",
+          "subject": "Re: Invoice INV-5040 from The Trustee for The Steve Austin Trust for Nick Marcaesi",
+          "date": "Fri, 16 Jan 2026 15:46:09 +1000",
+          "gmail_id": "19bc55789ec6e341"
+        }
+      ]
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2026-01-23",
+      "particulars": "little beach shacks F8216106008 Thanks | Transfer Debit",
+      "direction": "spent",
+      "amount": 4000,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2026-02-11",
+      "particulars": "2000004534 AGA ASSISTANCE Mr Nicholas Marc | Interbank Credit",
+      "direction": "received",
+      "amount": 668.37,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2026-03-04",
+      "particulars": "Daniel Robinson H1439156991 John deer mower | Transfer Debit",
+      "direction": "spent",
+      "amount": 3600,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2026-03-30",
+      "particulars": "Catalysing Impact SOCIAL IMPACT HU A CURIOUS TRACTO | Interbank Credit",
+      "direction": "received",
+      "amount": 10000,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": {
+        "vendor": "Social Impact Hub",
+        "source": "receipt_email",
+        "mailbox": "nicholas@act.place",
+        "from": null,
+        "subject": "Receipt (imported from Dext)",
+        "file": "receipt.pdf",
+        "date": "2026-03-30"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2026-05-07",
+      "particulars": "DANIEL ROBINSON H6634622661 Marketplace - Gard | Transfer Debit",
+      "direction": "spent",
+      "amount": 1550,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2026-05-15",
+      "particulars": "MR BEAU JOSEPH ANDE Y4434637310 | Transfer Debit",
+      "direction": "spent",
+      "amount": 291,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NJ Marchesi T/as ACT Everyday",
+      "date": "2026-05-25",
+      "particulars": "MR BEAU JOSEPH ANDE H9114176985 Thanks | Transfer Debit",
+      "direction": "spent",
+      "amount": 665,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-10-14",
+      "particulars": "BEARPEP PTY LTD LARRAKEYAH | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 323.3,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-GD",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "unmatched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-10-14",
+      "particulars": "BEARPEP PTY LTD LARRAKEYAH | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 64.99,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-GD",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-10-27",
+      "particulars": "Audible Limited AU MELBOURNE | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 16.45,
+      "slComment": "Is this an office expense or Drawings - Nicholas Marchesi?",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": {
+        "vendor": "Audible",
+        "source": "xero_transaction",
+        "mailbox": null,
+        "from": null,
+        "subject": null,
+        "file": null,
+        "date": "2025-10-27"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-10-28",
+      "particulars": "JMC No2 Pty Ltd TS Ken Kenilworth | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 314.2,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-FM",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-10-29",
+      "particulars": "GUZMAN Y GOMEZ SURRY HILLS | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 28.1,
+      "slComment": "Is this a travel expense or Drawings - Nicholas Marchesi?",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-10-30",
+      "particulars": "SQ *VALLEY SLICE PTY LTD Mooloolah Val | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 352.22,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-FM",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-03",
+      "particulars": "MAPLE STREET MEAT MERC MALENY | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 203.23,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-FM",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-04",
+      "particulars": "INTERNET BANKING TRANSFERMELBOURNE | Credit Card Cash Advance",
+      "direction": "spent",
+      "amount": 45.8,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-04",
+      "particulars": "INTERNET BANKING TRANSFERMELBOURNE | Credit Card Cash Advance",
+      "direction": "spent",
+      "amount": 202.16,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-04",
+      "particulars": "INTERNET BANKING TRANSFERMELBOURNE | Credit Card Cash Advance",
+      "direction": "spent",
+      "amount": 152.59,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": {
+        "number": "58975172-0021",
+        "contact": "Cognition AI",
+        "status": "AUTHORISED",
+        "has_attachments": true,
+        "project_code": "ACT-DO",
+        "acct": "485",
+        "tax": "EXEMPTEXPENSES",
+        "desc": "."
+      },
+      "receipt_doc": {
+        "vendor": "Cognition AI",
+        "source": "xero_bill",
+        "mailbox": null,
+        "from": null,
+        "subject": null,
+        "file": null,
+        "date": "2025-11-02"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-17",
+      "particulars": "Indonesia Arrival ROTTERDAM | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 204.55,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": [
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Indonesia Arrival <info@indonesia-arrival.com>",
+          "subject": "Your Indonesia eVOA - Ready for Travel",
+          "date": "Sat, 15 Nov 2025 10:16:56 +0000 (UTC)",
+          "gmail_id": "19a87049a3504057"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Indonesia Arrival <info@indonesia-arrival.com>",
+          "subject": "Your Indonesia eVOA - Ready for Travel",
+          "date": "Sat, 15 Nov 2025 10:13:26 +0000 (UTC)",
+          "gmail_id": "19a8701661fff2cf"
+        }
+      ]
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-17",
+      "particulars": "Kogan.com 3BUDH9QW Melbourne | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 291.98,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-17",
+      "particulars": "Indonesia Arrival ROTTERDAM | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 393.72,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": [
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Indonesia Arrival <info@indonesia-arrival.com>",
+          "subject": "Your Indonesia eVOA - Ready for Travel",
+          "date": "Sat, 15 Nov 2025 10:16:56 +0000 (UTC)",
+          "gmail_id": "19a87049a3504057"
+        },
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Indonesia Arrival <info@indonesia-arrival.com>",
+          "subject": "Your Indonesia eVOA - Ready for Travel",
+          "date": "Sat, 15 Nov 2025 10:13:26 +0000 (UTC)",
+          "gmail_id": "19a8701661fff2cf"
+        }
+      ]
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-17",
+      "particulars": "Scopri Olo Bar Carlton | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 180,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-18",
+      "particulars": "CARLA FURNISHERS P/L CICCONE | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 5590,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-GD",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "unmatched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-18",
+      "particulars": "CARLA FURNISHERS P/L CICCONE | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 5590,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-GD",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "unmatched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-11-26",
+      "particulars": "Audible Limited AU MELBOURNE | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 16.45,
+      "slComment": "Is this an office expense or Drawings - Nicholas Marchesi?",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": {
+        "vendor": "Amazon",
+        "source": "dext_receipt",
+        "mailbox": "benjamin@act.place",
+        "from": null,
+        "subject": "Receipt from Amazon",
+        "file": "Amazon-receipt.jpg",
+        "date": "2025-12-05"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-12-01",
+      "particulars": "BARGAINCARRENTALS HOBART | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 998.94,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-GD",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "unmatched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-12-01",
+      "particulars": "BARGAINCARRENTALS HOBART | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 809.29,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-GD",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "unmatched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-12-08",
+      "particulars": "CACTUS JACKS RESTAUR TOWNSVILLE | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 717.5,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-HV",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "matched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-12-09",
+      "particulars": "CONTAINER OPTIONS STRATHFIELD S | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 5904.05,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-MY",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "matched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": [
+        {
+          "mailbox": "nicholas@act.place",
+          "from": "Container Options Pty Ltd <AccountRight@apps.myob.com>",
+          "subject": "Order 00066927; Invoice From Container Options Pty Ltd",
+          "date": "Fri, 05 Dec 2025 03:58:02 +0000",
+          "gmail_id": "19aeca8e538f0274"
+        }
+      ]
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-12-11",
+      "particulars": "COLYTON HOTEL COLYTON | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 436.24,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-MY",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2025-12-29",
+      "particulars": "Audible Limited AU MELBOURNE | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 16.45,
+      "slComment": "Is this an office expense or Drawings - Nicholas Marchesi?",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "no_receipt_needed"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": [
+        {
+          "mailbox": "benjamin@act.place",
+          "from": "\"Audible.com.au\" <donotreply@audible.com.au>",
+          "subject": "Thanks, your order is complete",
+          "date": "Mon, 22 Dec 2025 11:08:34 +0000",
+          "gmail_id": "19b45bf2b1c5131a"
+        }
+      ]
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-01-15",
+      "particulars": "AIRTASKER* 19323270X HAYMARKET | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 399.45,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "matched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-01-29",
+      "particulars": "CARLA FURNISHERS P/L CICCONE | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 4816,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-GD",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "unmatched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-02-06",
+      "particulars": "STEELMART CALOUNDRA CALOUNDRAQLD | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 538.12,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-HV",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "unmatched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-02-09",
+      "particulars": "LS Esmay Adelaide Hackney | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 326.6,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "matched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-02-09",
+      "particulars": "ORSO GASTRONOMIA PTY L ROSE PARK | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 213,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "unmatched"
+      },
+      "xero_txn": {
+        "contact": "Liberty Maleny",
+        "status": "AUTHORISED",
+        "is_reconciled": true,
+        "has_attachments": false,
+        "project_code": "ACT-HV",
+        "acct": "449",
+        "tax": "INPUT",
+        "desc": "Fuel - Diesel"
+      },
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-02-13",
+      "particulars": "AUSTRALIAN TOURIST PARK MYAMBA | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 232.96,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-CP",
+        "matched_txn": null,
+        "matched_receipt": "d4eb3ddc-d1c7-405f-b283-ca91876db675",
+        "receipt_status": "matched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-02-16",
+      "particulars": "SQ *CANDLE SUPPLIES BRISB1800595310 | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 260,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-HV",
+        "matched_txn": null,
+        "matched_receipt": "ff5f3a08-6263-490f-b114-b37c6286e404",
+        "receipt_status": "matched"
+      },
+      "xero_txn": null,
+      "xero_bill": {
+        "number": "1891627127",
+        "contact": "Candle Supplies Brisbane",
+        "status": "PAID",
+        "has_attachments": true,
+        "project_code": "ACT-CP",
+        "acct": "447",
+        "tax": "EXEMPTEXPENSES",
+        "desc": "Soy Coconut Wax - 10kg* × 2"
+      },
+      "receipt_doc": {
+        "vendor": "Candle Supplies Brisbane",
+        "source": "xero_bill",
+        "mailbox": null,
+        "from": null,
+        "subject": null,
+        "file": null,
+        "date": "2026-02-14"
+      },
+      "has_receipt": true,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-02-19",
+      "particulars": "TULLAH LAKESIDE LODGE TULLAH | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 374.07,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "matched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-02-25",
+      "particulars": "BIG W/OLD HUME HWY & ROSCMITTAGONG | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 388.2,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "unmatched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-02-26",
+      "particulars": "ADGE Hotel OPI Surry Hills | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 2161.19,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "matched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-03-02",
+      "particulars": "SP RETRO OUTDOOR CO BAULKHAM HILL | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 4497,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-HV",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "unmatched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-03-03",
+      "particulars": "ADGE Hotel OPI Surry Hills | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 209,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "matched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-03-30",
+      "particulars": "HERTZ, RA, 643314792 SOUTH MELBOUR | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 598.57,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": {
+        "project_code": "ACT-IN",
+        "matched_txn": null,
+        "matched_receipt": null,
+        "receipt_status": "matched"
+      },
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-04-01",
+      "particulars": "ADGE Hotel OPI Surry Hills | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 146.16,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-04-07",
+      "particulars": "Restaurace Alma Praha 1 | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 345.37,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-04-30",
+      "particulars": "Hannah St Melbourne Melbourne | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 1495.2,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-05-08",
+      "particulars": "INTERNET BANKING TRANSFERMELBOURNE | Credit Card Cash Advance",
+      "direction": "spent",
+      "amount": 174.65,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-05-21",
+      "particulars": "MALL MEDICAL CENTRE Alice Springs | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 201.28,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-05-21",
+      "particulars": "COLEMANS PRINTING ALICE SALICE SPRINGS | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 240.05,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    },
+    {
+      "account": "NAB Visa ACT #8815",
+      "date": "2026-05-21",
+      "particulars": "Alicetronics Alice Springs | Credit Card Purchase",
+      "direction": "spent",
+      "amount": 348.9,
+      "slComment": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+      "bank_line": null,
+      "xero_txn": null,
+      "xero_bill": null,
+      "receipt_doc": null,
+      "has_receipt": false,
+      "gmail_candidates": []
+    }
+  ]
+}

@@ -1,0 +1,508 @@
+[
+  {
+    "i": 13,
+    "amt": 55197,
+    "dir": "received",
+    "particulars": "TFN Distribution The Funding Netw A Curious Tracto",
+    "answer": {
+      "i": 13,
+      "final_comment": "This is the second and final grant distribution from The Funding Network (TFN) to us (A Curious Tractor) — confirmed by the bank particulars \"TFN Distribution The Funding Netw\" and the TFN \"FINAL GRANT DISTRIBUTION\" emails. Code it to Grants Received as GST-free income (it's grant funding, not a sale, so no GST on income, and definitely NOT Other Revenue). Please ignore the matching $55,197 VOIDED bill on this contact in Xero — that was a payable raised in error; this is money received by us, so do not claim any GST input credit off it. The only thing I need confirmed is the project: TFN funds a specific ACT project, our funder contact is tagged to Goods (ACT-GD) but the related TFN invoices are coded to Custodian First Economy (ACT-CE) — please tell me which project this grant belongs to.",
+      "project": "confirm",
+      "account": "Grants Received",
+      "gst": "GST Free Income",
+      "confidence": "high",
+      "resolved_by_evidence": true,
+      "still_needs_ben": true,
+      "ben_question": "Which project does this $55,197 TFN grant fund — Goods (ACT-GD, per the funder contact tag) or Custodian First Economy (ACT-CE, per the existing TFN invoices)?",
+      "evidence_basis": "KNOWN FACT: TFN = The Funding Network grant distribution -> Grants Received, GST-free income. Confirmed by Gmail subject \"[benjamin] TFN FINAL GRANT DISTRIBUTION :: We are pleased to make a second and final grant distribution from the TF[N]\" and bank particulars \"TFN Distribution The Funding Netw A Curious Tracto\". Amount ties to the $55197 VOIDED ACCPAY (payable raised in error). Project conflict: GHL funder tag kristen lark [project:act-gd] vs Xero invoices proj:ACT-CE.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 12,
+    "amt": 32780,
+    "dir": "spent",
+    "particulars": "Circularity Group PtA5648662938 Thanks",
+    "answer": {
+      "i": 12,
+      "final_comment": "This is the payment for The Plasticians (trading as Circularity Group) — George's invoice for the Goods work. It's the GST-inclusive settlement of their $29,800 ex-GST bill ($29,800 x 1.1 = $32,780, ties exactly). Code it to the live AUTHORISED bill: project ACT-GD (Goods), account 446, GST on Expenses (INPUT) — claim the $2,980 GST credit. The invoice is on file (AUTHORISED Xero bill + George's email \"have attached invoice for you\"), so the credit is supported. Note: ignore the second $29,800 bill coded ACT-IN/429 — it's a DELETED duplicate, not a real second expense.",
+      "project": "ACT-GD",
+      "account": "446",
+      "gst": "GST on Expenses",
+      "confidence": "high",
+      "resolved_by_evidence": true,
+      "still_needs_ben": false,
+      "ben_question": "",
+      "evidence_basis": "Known fact: The Plasticians = trading entity behind Circularity Group. AUTHORISED Xero ACCPAY $29,800 proj ACT-GD acct 446 INPUT (The Plasticians) — $29,800 x 1.1 = $32,780 ties to the bank payment exactly, giving a $2,980 GST credit on a valid tax invoice. Corroborated by Gmail \"Have attached invoice for you. George. The Plasticians\" + pickup address, and GHL tag \"the plasticians\". The duplicate $29,800 bill (ACT-IN/429/INPUT) is DELETED, so the live ACT-GD/446 coding governs.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 5,
+    "amt": 20000,
+    "dir": "spent",
+    "particulars": "Ross Built ConstructP7797582049 ACT",
+    "answer": {
+      "i": 5,
+      "final_comment": "This is a $20,000 payment to Ross Built Construct — reads as a builder/construction payment, but we have nothing on file: no invoice, no prior payments, no contact record, no email context. Because there's no valid tax invoice, I can't claim a GST credit on it — code it GST-free for now and we'll reverse to claim the input credit once the builder's tax invoice is on file. A $20k builder bill is capital in nature, so I've put it to Building / Construction (capital WIP), not a general expense. I can't tell which site it relates to — Farm (ACT-FM) or Harvest Witta (ACT-HV) — so I've parked it on ACT-FM pending Ben confirming. Two things needed from Ben: the tax invoice (to unlock the GST credit) and which project/site this build was for.",
+      "project": "confirm",
+      "account": "Building / Construction (capital WIP)",
+      "gst": "GST-free (no tax invoice on file — reverse to claim input credit once invoice received)",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "This $20,000 to Ross Built Construct — which site was the build for (Farm / ACT-FM or Harvest Witta / ACT-HV), and can you dig out the tax invoice so we can claim the GST credit?",
+      "evidence_basis": "No supporting evidence in any source — zero Xero invoices, zero prior transactions to this payee, no GHL tag, no person page, no Gmail context. Classification rests only on the payee name (\"Ross Built Construct\" = builder) and the round $20k capital amount. GST treatment driven by the no-valid-tax-invoice rule; project genuinely undetermined (Farm vs Harvest Witta fork with no token to disambiguate).",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 10,
+    "amt": 20000,
+    "dir": "spent",
+    "particulars": "Nicholas Marchesi SuE0397656597",
+    "answer": {
+      "i": 10,
+      "final_comment": "This is Nic's own superannuation contribution (the \"Su\" + reference E0397656597 matches his personal super). As a sole trader, super paid for yourself isn't a business expense — code it to 880 Drawings - Nicholas Marchesi, No GST. (Any personal tax deduction is claimed by Nic via a notice-of-intent on his own return, not here.)",
+      "project": "ACT-IN",
+      "account": "880 Drawings - Nicholas Marchesi",
+      "gst": "No GST",
+      "confidence": "high",
+      "resolved_by_evidence": true,
+      "still_needs_ben": false,
+      "ben_question": "",
+      "evidence_basis": "Particulars \"Nicholas Marchesi SuE0397656597\" matches the known fact \"Nicholas Marchesi Su... = Nic's own super -> 880 Drawings, no GST\"; sole-trader super for self is drawings, not a deductible business expense. Prior $11k RECEIVE to acct 881 is opposite-direction owner funds and doesn't contradict.",
+      "money_critical": false
+    },
+    "verify": null
+  },
+  {
+    "i": 47,
+    "amt": 4816,
+    "dir": "spent",
+    "particulars": "CARLA FURNISHERS P/L CICCONE",
+    "answer": {
+      "i": 47,
+      "final_comment": "This is a purchase from Carla Furnishers Pty Ltd (Ciccone), a furniture supplier for Goods (ACT-GD) — confirmed by our GHL supplier record (project:act-gd, role:supplier). I've got the tax invoice on file: Carla Furnishers Invoice 26-00000151 (28 Jan 2026), sitting in the nicholas@ mailbox, paid the next day (29 Jan) for $4,816. Code it to ACT-GD, account 446 (the account our existing Carla Furnishers bill used), GST on Expenses — GST credit $437.82. Note: there's an older $11,180 Carla Furnishers bill in Xero that is VOIDED and does NOT match this amount, so don't reconcile against that one — attach invoice 26-00000151 to this $4,816 line instead.",
+      "project": "ACT-GD",
+      "account": "446",
+      "gst": "GST on Expenses (INPUT) — $437.82",
+      "confidence": "high",
+      "resolved_by_evidence": true,
+      "still_needs_ben": false,
+      "ben_question": "",
+      "evidence_basis": "Receipt: Carla Furnishers Invoice 26-00000151 PDF in nicholas@ mailbox dated 28 Jan 2026 (valid tax invoice, paid 29 Jan, $4,816). GHL contact \"carla furnishers\" tagged project:act-gd + role:supplier. Existing Xero ACCPAY bill (Carla Furnishers) coded proj ACT-GD / acct 446 / INPUT — but that bill is the $11,180 VOIDED one, amount mismatch, so used only as the account/project precedent, not as the tax-invoice basis. GST credit valid because a real tax invoice (26-00000151) is on file, not the voided bill.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 56,
+    "amt": 4497,
+    "dir": "spent",
+    "particulars": "SP RETRO OUTDOOR CO BAULKHAM HILL",
+    "answer": {
+      "i": 56,
+      "final_comment": "This is a $4,497 card payment to \"SP Retro Outdoor Co\" (Baulkham Hills NSW) - \"SP\" is a Shopify storefront prefix, so this is an online order from an Australian outdoor-furniture retailer. We have no invoice or receipt on file and no prior dealings with this vendor in our records, so I can't confirm what it was for or which project it belongs to. The amount is large enough to be a capital item (outdoor furniture/equipment). Please code provisionally to ACT-IN, Plant & Equipment (or Furniture & Fittings), NO GST claimed until the tax invoice is on file - do NOT claim the ~$408.82 input credit on a bare bank line. If Ben confirms it was Harvest Witta outdoor furniture, move to ACT-HV. Once the receipt arrives and shows valid ABN + GST, switch the line tax to INPUT and claim the credit.",
+      "project": "confirm",
+      "account": "Plant & Equipment",
+      "gst": "GST-free / no credit until valid tax invoice on file (then INPUT, capital so CAPEXINPUT if treated as asset)",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "What was the $4,497 to SP Retro Outdoor Co (an outdoor-furniture retailer) for, and which project - is this Harvest Witta (ACT-HV) furniture or general (ACT-IN)? And is there a tax invoice we can get for the GST credit?",
+      "evidence_basis": "No Xero invoice, no prior transaction to this payee, no GHL tag, no person page, no Gmail context. Vendor name \"SP Retro Outdoor Co Baulkham Hill\" parsed as a Shopify (\"SP\") outdoor retailer in NSW; first-pass Harvest-Witta guess is unconfirmed - no evidence ties it to ACT-HV. No tax invoice on file so no GST credit can be asserted per the GST rule.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 16,
+    "amt": 4000,
+    "dir": "spent",
+    "particulars": "little beach shacks F8216106008 Thanks",
+    "answer": {
+      "i": 16,
+      "final_comment": "This is a $4,000 round bank transfer on 23 Jan 2026 to \"little beach shacks\" (ref F8216106008) — a holiday-accommodation host, paid by direct transfer (\"Thanks\" suffix), so there's no tax invoice on file. We hold NOTHING on this payee: no Xero invoice or bill, no prior payments, no contact, no email context. Two things follow. (1) GST: with no valid tax invoice, code this GST-free (GAP) — do NOT claim a GST credit on it. (2) Business vs personal is the open question: a $4k beach-shack booking could be a legit team/business-trip stay or it could be Nic's personal holiday. If it's a genuine business trip, code it ACT-IN, Travel & accommodation, GST-free. If it's personal, it's 880 Drawings, no GST. I've defaulted to Travel & accommodation (GST-free) pending Ben confirming the business purpose — please don't leave GST on Expenses on it.",
+      "project": "ACT-IN",
+      "account": "Travel & accommodation (GST-free) if business; else 880 Drawings",
+      "gst": "GST-free (no tax invoice on file) — NOT GST on Expenses",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "Was this $4,000 \"little beach shacks\" booking a business trip (code Travel & accommodation, ACT-IN) or Nic's personal holiday (code 880 Drawings)?",
+      "evidence_basis": "No evidence on file for this payee — Xero invoices/transactions, GHL, person page, and Gmail all empty. Payee name \"little beach shacks\" + round $4,000 transfer with a payment reference and \"Thanks\" suffix indicates a direct-transfer accommodation payment with no tax invoice, which forces GST-free per the no-invoice rule and leaves business-vs-personal as a Ben judgment call.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 11,
+    "amt": 3000,
+    "dir": "spent",
+    "particulars": "Thriday G3468033865",
+    "answer": {
+      "i": 11,
+      "final_comment": "This $3,000 is the Thriday subscription/service fee — Thriday is the accounting/banking platform and the Gmail thread confirms it's for getting our Xero reconciliation sorted (\"Let's get your Xero reconciliation\"). Code it to ACT-IN, Accounting/software. NOTE on GST: we have NO tax invoice on file for this — no Xero bill, no receipt — so per our rule, treat it GST-free / no input credit for now (do NOT claim the GST). If Thriday emails a tax invoice (they should — domestic SaaS, normally GST-inclusive), code it GST on Expenses and we recover the ~$272.73 credit. Also the Gmail note says \"we paid on cc and there is bank\" — flag a possible duplicate: this $3,000 may already appear on the NAB Visa #8815, so check it isn't double-counted across the card and the bank.",
+      "project": "ACT-IN",
+      "account": "Accounting / software",
+      "gst": "GST-free (no tax invoice on file) — switch to GST on Expenses if Thriday tax invoice obtained",
+      "confidence": "medium",
+      "resolved_by_evidence": true,
+      "still_needs_ben": true,
+      "ben_question": "Did Thriday issue a tax invoice for this $3,000 (so we can claim the ~$272.73 GST credit), and is this the same payment that also shows on the NAB Visa #8815 (possible duplicate)?",
+      "evidence_basis": "Gmail [benjamin] thread \"[Thriday Customer Care] Let's get your Xero reconciliation\" confirms nature = Thriday Xero-reconciliation/accounting service; GHL tag \"Sally Hurst (Thriday Accounting Support)\" + person page \"thriday lane:supporter\" confirm Thriday is the payee. No Xero invoice and no Xero transaction history for this entity = no valid tax invoice on file, so GST credit cannot be asserted. Gmail note \"we paid on cc and there is bank\" flags a possible NAB Visa #8815 duplicate.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 15,
+    "amt": 2420,
+    "dir": "received",
+    "particulars": "BIONIC GROUP PTY LTDRefund",
+    "answer": {
+      "i": 15,
+      "final_comment": "This is a refund of the Bionic Self Storage bill, not new income. We have the matching PAID Xero bill on file: ACCPAY $2,420 to Bionic, coded ACT-IN, account 452, tax INPUT. The refund amount ties to it exactly ($2,420 in = $2,420 out). So code this refund AGAINST account 452 (Bionic Self Storage, ACT-IN) and reverse the GST — i.e. GST on Expenses, which backs out the ~$220 input credit we'd claimed on that bill. Do NOT book it as income, and don't confuse it with the separate $4,705 Bionic Group bill (that one is ACT-GD / EXEMPTEXPENSES).",
+      "project": "ACT-IN",
+      "account": "452 (offset the original Bionic Self Storage bill)",
+      "gst": "GST on Expenses (reverses the input credit claimed on the matching PAID bill)",
+      "confidence": "high",
+      "resolved_by_evidence": true,
+      "still_needs_ben": false,
+      "ben_question": "",
+      "evidence_basis": "Exact-amount tie to Xero invoice \"ACCPAY $2420 PAID proj:ACT-IN acct:452/INPUT (Bionic Self Storage)\" — same payee group, same $2,420, valid PAID bill carrying INPUT so the GST reversal on the refund is legitimate. Distinguished from the separate $4,705 Bionic Group bill (ACT-GD/EXEMPTEXPENSES) referenced in the Gmail receipt.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 0,
+    "amt": 2000,
+    "dir": "spent",
+    "particulars": "CHRISTOPHER DODS J7040396334 Confessional Thanks",
+    "answer": {
+      "i": 0,
+      "final_comment": "This is a $2,000 P2P bank transfer to Christopher Dods (\"Confessional Thanks\") — a contributor/honorarium payment for The Confessional (ACT-CF). Code it to Subcontractors / Honorarium against project ACT-CF. There's no tax invoice on file (a bare bank transfer to an individual doesn't carry one), so treat it as GST Free Expenses — do NOT claim a GST input credit. If Christopher Dods is GST-registered and gives us a valid tax invoice, we can revisit the GST then. Confirm with me this is a genuine business contribution to The Confessional (not a personal/Drawings item) before locking it in.",
+      "project": "ACT-CF",
+      "account": "Subcontractors / Honorarium",
+      "gst": "GST Free Expenses",
+      "confidence": "medium",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "Is the $2,000 to Christopher Dods a business contribution/honorarium for The Confessional (code GST-free, no invoice on file), or something personal that should sit in Drawings?",
+      "evidence_basis": "Particulars token \"Confessional\" maps to The Confessional = ACT-CF (known fact). No Xero invoice, no Xero bill, no prior payments, no GHL/person-page/Gmail context for \"Christopher Dods\" — so no valid tax invoice exists → GST-free. P2P \"Thanks\" transfer to an individual = answer the nature, not a receipt.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 61,
+    "amt": 1495.2,
+    "dir": "spent",
+    "particulars": "Hannah St Melbourne Melbourne",
+    "answer": {
+      "i": 61,
+      "final_comment": "This is a card payment to a Melbourne business located on Hannah Street (the particulars are the merchant's street address, not a person). I checked our records: no invoice, no prior payments to this payee, and no tax invoice on file. The \"Hannah\" people in our CRM/Gmail (Hannah Leworthy, Hannah March, Hannah Durack) are first-name coincidences to a street-address vendor, so I've rejected them - they're not the payee. Because we have no valid tax invoice, do NOT claim a GST credit on this - code it GST-free until a tax invoice turns up. I've parked it to ACT-IN (general) pending the receipt. Ben: can you confirm which Hannah St Melbourne business this $1,495.20 was, and what it was for, so I can set the right account and project?",
+      "project": "ACT-IN",
+      "account": "To confirm",
+      "gst": "GST-free (no tax invoice on file)",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "What is the \"Hannah St Melbourne\" business and what did this $1,495.20 buy (so I can set account + project)?",
+      "evidence_basis": "Particulars \"Hannah St Melbourne Melbourne\" is a street-address merchant string; Xero shows no invoices and no prior payments for this payee; the GHL tags (hannah leworthy/march) and person page (Hannah Durack) and the Gmail \"From: Hannah March\" are all first-name-only collisions to a street-address vendor, rejected per the receipt/identity trap rule. No valid tax invoice = no GST credit.",
+      "money_critical": true
+    },
+    "verify": {
+      "i": 61,
+      "agree": true,
+      "severity": "minor",
+      "correction": "",
+      "checked": "Amount tie-out: no invoice/txn cited (invoices=[], txns=[]) so nothing to reconcile — the $1,495.20 stands alone, consistent with \"need invoice.\" Identity: \"Hannah St Melbourne\" is a street-address merchant descriptor; the GHL/Gmail Hannahs (Leworthy/March) are first-name token collisions with the street name — the RECEIPT/IDENTITY TRAP explicitly says reject these, and the gmail \"Hannah March / CONTAINED in Adelaide\" hit is Adelaide not a Melbourne card payment, no shared specific token, correctly rejected. GST-vs-invoice: no tax invoice on file, so GST-free/no credit is the correct conservative call for a $1,495.20 domestic card payment. Income-vs-grant/refund: N/A, this is an expense not income or refund. Project code: ACT-IN is an explicit holding/parking code with resolved:false and an open question to Ben, not a location-guessed attribution. Minor flaw only: comment names \"Hannah Durack\" who is not in the cited evidence (evidence lists only Leworthy and March) — an unsupported extra CRM name, but immaterial since all Hannahs are rejected anyway. Survives all five checks."
+    }
+  },
+  {
+    "i": 14,
+    "amt": 1439.6,
+    "dir": "spent",
+    "particulars": "INTERNET TRANSFER Thanks",
+    "answer": {
+      "i": 14,
+      "final_comment": "This is an outbound internet transfer of $1,439.60 labelled only \"Thanks\" — a bank transfer, not a card payment to a named supplier. Nothing in our records ties it to AAMI or any insurer: no Xero bill, no prior payment, no email. The first-pass \"AAMI insurance\" guess is an amount-only coincidence and I'm rejecting it (no shared token, no invoice). A bare \"Thanks\" transfer with no tax invoice on file means no GST credit can be claimed. I can't tell from our data whether this was a business cost or a personal/private transfer. Default coding: if Ben confirms it's a business reimbursement/payment, code ACT-IN, GST-free (no tax invoice on file); if it's private, code 880 Drawings, no GST. Please confirm who it went to and what for.",
+      "project": "confirm",
+      "account": "ACT-IN General/admin (or 880 Drawings if private) — GST-free pending invoice",
+      "gst": "GST-free (no valid tax invoice on file — no input credit)",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "Who did this $1,439.60 \"Thanks\" transfer on 9 Jan go to, and what was it for — a business cost (which project?) or a personal/private payment?",
+      "evidence_basis": "No supporting evidence in our records: no Xero invoice, no prior Xero transaction to this payee, no GHL tag, no person page, no Gmail context. Particulars are a bare \"INTERNET TRANSFER Thanks\" P2P-style transfer carrying no tax invoice. The first-pass AAMI proposal is an amount-only/coincidental match with no shared identity token, so rejected per the identity-trap rule; and no invoice means no GST credit per the GST rule.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 3,
+    "amt": 1150,
+    "dir": "received",
+    "particulars": "HPJCFBWSB5 Humanitix Ltd A CURIOUS TRACTO",
+    "answer": {
+      "i": 3,
+      "final_comment": "This $1,150 IN from Humanitix is the platform remitting ticket income from one of our events — not a grant, and not Other Revenue in the usual sense. Code it to Event/Ticket Income (Other Revenue), project ACT-CP (Community Capital), where our Humanitix bills are also coded. GST: as a sole trader we are not GST-registered this period, so treat as GST-Free on income — do NOT remit 1/11th. Note the net-vs-gross caveat: Humanitix deducts its booking fee before remitting, so the $1,150 is likely net of their fee; the corresponding $1,150 Humanitix ACCPAY bill (acct 415, ACT-CP) and the $46.63 bill (acct 420) are the platform/fee side — don't double-count. Net effect is event ticket income to ACT-CP. Confirm with me only whether this event was Community Capital or another project.",
+      "project": "ACT-CP",
+      "account": "Other Revenue / Event Income",
+      "gst": "GST-Free on income (sole trader not GST-registered this period; net-vs-gross caveat)",
+      "confidence": "medium",
+      "resolved_by_evidence": true,
+      "still_needs_ben": false,
+      "ben_question": "",
+      "evidence_basis": "Humanitix is a known ticket-platform remitter (KNOWN FACTS) → Other Revenue not Grants. Two Xero Humanitix ACCPAY bills both coded proj:ACT-CP (the $1,150 AUTHORISED at acct 415 and $46.63 PAID at acct 420) anchor the project to ACT-CP and signal an event-fee relationship. GST-Free flows from sole-trader registration status per the Humanitix known-fact caveat; the matching $1,150 bill is the platform/fee side, hence the net-vs-gross flag against double-counting.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 9,
+    "amt": 781.9,
+    "dir": "spent",
+    "particulars": "Tarik Dallinger-DimiA9838522047",
+    "answer": {
+      "i": 9,
+      "final_comment": "This is a payment to Tarik Dallinger-Dimitriou, an artist, for artwork on our Container project (Contained, ACT-CN) — confirmed by two Gmail threads \"Artwork for the Container project\" arranging him to come up and do the work Friday/Saturday. Code it to ACT-CN as an artist/contractor fee. It's a bare bank transfer with no tax invoice on file, so claim NO GST — treat GST-free/GAP. If Tarik is GST-registered and sends a proper tax invoice, we can then claim the ~$71.08 GST credit; until that invoice is on file, leave it GST-free.",
+      "project": "ACT-CN",
+      "account": "Contractor / artist fee",
+      "gst": "GST-free (no tax invoice on file)",
+      "confidence": "high",
+      "resolved_by_evidence": true,
+      "still_needs_ben": false,
+      "ben_question": "",
+      "evidence_basis": "Two Gmail threads [benjamin] \"Re: Artwork for the Container project :: Tarik Dallinger ... I can come up Friday\" and \"...how you placed this Friday and Saturday\" — establishes the payment is an artist fee for the Container (Contained / ACT-CN) project. No Xero invoice, no prior transactions, no GHL/person page — so it's a bare P2P transfer with no tax invoice, hence no GST credit.",
+      "money_critical": false
+    },
+    "verify": null
+  },
+  {
+    "i": 22,
+    "amt": 665,
+    "dir": "spent",
+    "particulars": "MR BEAU JOSEPH ANDE H9114176985 Thanks",
+    "answer": {
+      "i": 22,
+      "final_comment": "This is a $665 P2P bank transfer to Beau Joseph Anderson (the \"ANDE\" / H9114176985 is the same person we paid $300 on 29 Jun 2025). No tax invoice is on file, so no GST applies either way. Last time we paid him it went to 880 Drawings, so my default is the same: code to 880 Drawings, no GST, ACT-IN. One thing to confirm: if Beau was actually doing paid ACT work this time (a contractor fee / honorarium rather than a personal transfer), recode to Contractors — but still GST-free unless he gives us a tax invoice. Absent that confirmation, treat as Drawings.",
+      "project": "ACT-IN",
+      "account": "880 Drawings",
+      "gst": "No GST (N/A — bare bank transfer, no tax invoice)",
+      "confidence": "medium",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "Was this $665 to Beau Joseph Anderson a personal transfer (code to 880 Drawings) or payment for ACT work / a contractor honorarium (code to Contractors)? Last time we paid him it went to Drawings.",
+      "evidence_basis": "Identity ties on full name (prior Xero SPEND 29 Jun 2025 $300 to \"Mr Beau Joseph Anderson\", coded acct 880 Drawings). No Xero invoice, no Gmail context, no person page. GST default driven by the no-tax-invoice rule for bank transfers.",
+      "money_critical": false
+    },
+    "verify": null
+  },
+  {
+    "i": 7,
+    "amt": 616.66,
+    "dir": "received",
+    "particulars": "SUZANNE MARGARET ANDSecurity minus Car d",
+    "answer": {
+      "i": 7,
+      "final_comment": "This is +$616.66 IN on 28 Nov 2025 from an individual whose name truncates as \"Suzanne Margaret AND...\" (looks like a joint personal account), with a payment reference that reads \"Security minus Card\" — i.e. a security deposit / bond being returned net of a card or admin fee. I have no tax invoice and no record of this person anywhere in our books (no Xero invoice or prior transaction, no GHL contact, no Gmail). So I can't claim it as ACT trading income on the evidence. Code it BAS Excluded (no GST in or out — money from an individual with no invoice never carries a GST input credit, and a returned security deposit isn't sales income). Park it to ACT-IN. Most likely it's either (a) the return of a security/bond ACT paid out earlier net of a card fee, which should OFFSET the original deposit account rather than be booked as new income, or (b) a personal repayment to Nic — in which case it's Owner Funds Introduced (881), not revenue. I've left it BAS Excluded / ACT-IN pending your call on which it is.",
+      "project": "ACT-IN",
+      "account": "BAS Excluded suspense — likely security/bond refund (offset original deposit) OR Owner Funds Introduced (881); not Other Revenue",
+      "gst": "BAS Excluded (no GST — no tax invoice; deposit refund / owner funds is not taxable supply)",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "This $616.66 came in from \"Suzanne Margaret AND...\" with reference \"Security minus Card\" — is it (a) the return of a security deposit/bond ACT paid out earlier (so I offset the original deposit, net of a card fee), or (b) a personal repayment to Nic (Owner Funds 881), or (c) genuine ACT income?",
+      "evidence_basis": "Bank particulars only — \"SUZANNE MARGARET AND...Security minus Car d\". Every internal source returned nothing: no Xero invoices, no prior Xero transactions to/from this payee, no GHL contact, no person page, no Gmail context. So the nature cannot be resolved from our records — no false match was accepted.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 1,
+    "amt": 360,
+    "dir": "spent",
+    "particulars": "James William V0471764749",
+    "answer": {
+      "i": 1,
+      "final_comment": "$360 bank transfer out to an individual \"James William\" (ref V0471764749) on 29 Oct 2025. I've checked all our records — no Xero invoice or prior payment to this payee, no CRM contact, no person page, no email naming what it was for — so the nature isn't established from our side. It's a one-off P2P transfer to a person, so there's no tax invoice and no GST to claim: code it BAS Excluded (no GST). If this was a contractor/casual payment for work, code it to Subcontractors against ACT-IN; if it was a personal payment of Nic's, code it to 880 Drawings. I can't tell which from here — need Ben to confirm.",
+      "project": "ACT-IN",
+      "account": "Subcontractors (453) — or 880 Drawings if personal",
+      "gst": "BAS Excluded (no tax invoice on a bank transfer — no GST credit)",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "Who is \"James William\" and what was this $360 transfer on 29 Oct for — a contractor/work payment (Subcontractors, ACT-IN) or a personal payment (880 Drawings)?",
+      "evidence_basis": "All five of our own sources returned nothing for \"James William V0471764749\": no Xero invoice, no prior Xero transaction to this payee, no GHL contact tags, no person page, no Gmail nature-context. Treated as a bare P2P bank transfer per the GST rules (no invoice -> no GST credit).",
+      "money_critical": false
+    },
+    "verify": null
+  },
+  {
+    "i": 60,
+    "amt": 345.37,
+    "dir": "spent",
+    "particulars": "Restaurace Alma Praha 1",
+    "answer": {
+      "i": 60,
+      "final_comment": "This is a meal at \"Restaurace Alma\" in Prague 1, Czech Republic (\"Restaurace\" = Czech for restaurant; \"Praha 1\" = central Prague) — an overseas restaurant charge, not anything to do with our ALMA catalogue (the name match is coincidental). Code it as overseas travel meals, GST Free Expenses — an overseas supplier carries no Australian GST and there's no tax invoice on file, so no GST credit either way. I've put it to ACT-IN (general/admin) as there's no project signal. One thing to confirm: was this a legitimate business overseas-travel meal, or a private/personal meal? If personal, recode to 880 Drawings (no GST). Note: dated 7 Apr 2026, which is before our main World Tour window (27 Jun–7 Aug 2026), so this looks like a separate earlier overseas trip rather than the World Tour.",
+      "project": "ACT-IN",
+      "account": "Travel - Overseas (Meals)",
+      "gst": "GST Free Expenses",
+      "confidence": "medium",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "Was this $345.37 meal at Restaurace Alma in Prague a business overseas-travel meal (keep as ACT-IN travel meals), or a private/personal meal (recode to 880 Drawings)?",
+      "evidence_basis": "No internal evidence exists (no Xero invoice/transaction, no GHL tag, no person page, no Gmail context). Nature derived from the particulars alone: \"Restaurace Alma Praha 1\" = a restaurant in Prague 1, Czech Republic — overseas vendor. GST treatment follows the overseas-vendor rule and the no-tax-invoice rule (both -> GST-free). The only judgment requiring Ben is business-vs-personal, which no record resolves.",
+      "money_critical": false
+    },
+    "verify": null
+  },
+  {
+    "i": 21,
+    "amt": 291,
+    "dir": "spent",
+    "particulars": "MR BEAU JOSEPH ANDE Y4434637310",
+    "answer": {
+      "i": 21,
+      "final_comment": "This is a $291 outgoing P2P bank transfer to an individual, Mr Beau Joseph Anderson (the bank truncates the name to \"MR BEAU JOSEPH ANDE\"). We have no tax invoice on file and no Gmail context, so there's no GST credit to claim - code it GST-free. We have paid this same person once before (29 Jun 2025, $300), and that prior payment was coded to 880 Drawings. That prior coding is a placeholder/default for an unexplained personal-looking transfer, not proof of nature - but absent any work-related document, the safe default here is the same: a personal drawing unless Ben confirms it was a contractor payment for a specific project. If Ben confirms it was for work (e.g. casual labour/contracting), recode to Contractor expense under the relevant project; otherwise leave it as 880 Drawings, no GST. Paired with line #22.",
+      "project": "confirm",
+      "account": "880 Drawings",
+      "gst": "GST-free (no tax invoice on file)",
+      "confidence": "medium",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "Was the $291 to Beau Joseph Anderson a work payment (contractor/labour - if so, which project?), or a personal drawing? Prior $300 payment to him was parked in 880 Drawings.",
+      "evidence_basis": "Prior Xero SPEND 2025-06-29 $300 to \"Mr Beau Joseph Anderson\" coded acct 880 Drawings (name token \"Beau Joseph Ande[rson]\" matches the bank particulars exactly); GHL tag \"mr beau joseph anderson\"; no Xero invoice, no Gmail context, no person page - so no tax invoice exists to support any GST credit.",
+      "money_critical": false
+    },
+    "verify": null
+  },
+  {
+    "i": 31,
+    "amt": 202.16,
+    "dir": "spent",
+    "particulars": "INTERNET BANKING TRANSFERMELBOURNE",
+    "answer": {
+      "i": 31,
+      "final_comment": "This is an outbound internet-banking transfer of $202.16, but the bank line carries no payee name — just \"INTERNET BANKING TRANSFER MELBOURNE\" — and we have nothing on file to identify it: no Xero bill or invoice, no prior payment to this counterparty, no email, no contact record. I can't confirm what it was for or who it went to. Note the first-pass \"credit-card cash advance\" guess doesn't hold — this descriptor is a normal online funds transfer out, not a Visa cash advance. On GST: with no tax invoice on file this transfer can't support a GST input credit, so code it BAS Excluded / no GST regardless of where it lands. Nic, can you confirm who this $202.16 transfer on 4 Nov went to and what it was for? If it's a business cost, tell me the project and supplier and I'll recode it; if it was personal or you can't place it, I'll park it to 880 Drawings (BAS Excluded). Defaulting to ACT-IN / 880 Drawings as the holding code until you confirm.",
+      "project": "confirm",
+      "account": "880 Drawings",
+      "gst": "BAS Excluded",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "Who did this $202.16 internet-banking transfer on 4 Nov go to and what was it for — a business cost (which project/supplier?) or personal/Drawings?",
+      "evidence_basis": "No Xero invoice, no prior payment to this payee, no GHL contact, no person page, no Gmail context — and the bank particulars (\"INTERNET BANKING TRANSFER MELBOURNE\") carry no counterparty name, so nothing in our records identifies the nature or recipient.",
+      "money_critical": false
+    },
+    "verify": null
+  },
+  {
+    "i": 63,
+    "amt": 201.28,
+    "dir": "spent",
+    "particulars": "MALL MEDICAL CENTRE Alice Springs",
+    "answer": {
+      "i": 63,
+      "final_comment": "This is a charge from Mall Medical Centre in Alice Springs (Mparntwe) on 21 May 2026. Medical/health services are GST-free under Subdivision 38-B, so there is NO GST to claim here regardless of whether we hold an invoice — please code it GST-free, not GST on Expenses. The business-vs-personal nature isn't something our records can settle: we hold no invoice, no prior payment to this clinic, and no email or person-page context tying it to ACT work. My default treatment, absent a work purpose, is 880 Drawings (private health expense, no GST). If instead this was a work-required medical tied to the Alice Springs / Oonchiumpa (ACT-OO) fieldwork (e.g. a travel vaccination or a required pre-trip medical), code it to a staff/travel-medical expense under ACT-OO, still GST-free. I'd hold this as Drawings unless Nic confirms a specific business reason.",
+      "project": "confirm",
+      "account": "880 Drawings (default, private medical) — or a travel/staff-medical expense under ACT-OO if Nic confirms work-required",
+      "gst": "GST-free (medical, Subdiv 38-B) — no GST credit either way",
+      "confidence": "medium",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "Was the $201.28 Mall Medical Centre (Alice Springs) charge on 21 May a private medical for Nic (code 880 Drawings, GST-free) or a work-required medical tied to the Oonchiumpa/ACT-OO trip (code travel-medical under ACT-OO, GST-free)?",
+      "evidence_basis": "No Xero invoice, no prior Xero transaction to this payee, no GHL/person/Gmail context. Classification rests on two known rules: medical/health services are GST-free (Subdiv 38-B), and an Alice Springs location aligns geographically with ACT-OO (Oonchiumpa, Mparntwe) but does not establish a business purpose.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 2,
+    "amt": 200,
+    "dir": "spent",
+    "particulars": "Shane Bloomfield H8299013120 Bunnings thanks",
+    "answer": {
+      "i": 2,
+      "final_comment": "This is a $200 reimbursement to Shane Bloomfield for a Bunnings purchase for BG Fit (\"Bunnings thanks\" is our standing pattern for an individual buying program materials and being paid back). Code it to ACT-BG, account 430 (supplies/materials). Treat it GST-free: it's a bare bank transfer to an individual with no tax invoice on file, so there's no valid tax invoice to support a GST input credit. If Shane forwards the Bunnings tax invoice we can recode to GST on Expenses and claim the ~$18.18 credit, but until then it stays GST-free.",
+      "project": "ACT-BG",
+      "account": "430",
+      "gst": "GST Free Expenses",
+      "confidence": "high",
+      "resolved_by_evidence": true,
+      "still_needs_ben": false,
+      "ben_question": "",
+      "evidence_basis": "Particulars \"Shane Bloomfield ... Bunnings thanks\" matches the known-fact pattern: \"Bunnings thanks\" = reimbursement to an individual for BG Fit (ACT-BG). GHL contact \"shane bloomfield\" confirms he's a real contact (specific-token match, not a coincidental street-address/first-name match). No Xero invoices, no Xero transactions, no person page, no Gmail context, no receipt on file -> bare P2P transfer with no valid tax invoice -> GST-free per the no-invoice rule.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 4,
+    "amt": 200,
+    "dir": "received",
+    "particulars": "MR MARCUS TRAVERS COMarcus C thanks",
+    "answer": {
+      "i": 4,
+      "final_comment": "This is a $200 incoming bank transfer from Marcus Travers labelled \"thanks\" into the ACT Everyday account on 7 Nov 2025. I've got nothing on file for him — no invoice, no prior payment, no contact record, no email — so I can't confirm what it was for. A \"thanks\" transfer from an individual won't carry a tax invoice, so GST is GST-Free / BAS Excluded either way. I can't tell from here whether it's (a) someone reimbursing ACT for something we paid on their behalf — in which case it should OFFSET the original expense account, not be treated as new income; (b) a genuine contribution toward our work — Other Revenue; or (c) Marcus repaying Nic for something personal — in which case it's 881 Owner Funds Introduced, not business income at all. Default placeholder: ACT-IN, GST-Free. Please tell me what the $200 from Marcus Travers was for so I can code the account correctly.",
+      "project": "ACT-IN",
+      "account": "Other Revenue (placeholder — confirm vs expense-offset vs 881 Owner Funds Introduced)",
+      "gst": "GST-Free / BAS Excluded",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "What was the $200 \"thanks\" transfer from Marcus Travers for — reimbursement of an ACT expense, a contribution to our work, or Nic personal (repayment)?",
+      "evidence_basis": "No corroborating evidence in any source: no Xero invoice or prior payment for Marcus Travers, no GHL contact, no person page, no Gmail context. Classification rests only on the bank particulars \"MR MARCUS TRAVERS ... thanks\" — a named-individual P2P \"thanks\" transfer, which per known facts rarely carries a tax invoice (hence GST-Free). Marcus Travers is a real full-name token, not a coincidental/first-name match, so attributing the transfer to that named person is valid; but who he is to ACT and the purpose of the $200 are genuinely unknown.",
+      "money_critical": true
+    },
+    "verify": null
+  },
+  {
+    "i": 62,
+    "amt": 174.65,
+    "dir": "spent",
+    "particulars": "INTERNET BANKING TRANSFERMELBOURNE",
+    "answer": {
+      "i": 62,
+      "final_comment": "This is a $174.65 outbound internet banking transfer (Melbourne) on 8 May 2026 with no payee name on the line. We have nothing in our records identifying it — no Xero bill, no prior payment to a matching payee, no contact, no email context — so I can't tell you who it went to or what it was for. A bare bank transfer like this carries no tax invoice, so there's no GST to claim either way: code it BAS Excluded (no GST). If it's a business expense you can name, please tell me the supplier/purpose and I'll recode it; otherwise my default is 880 Drawings (Nic's personal), project ACT-IN. Note: I do NOT think this is a \"credit card cash advance\" — the description is a normal bank transfer, not a card advance, so please disregard that earlier guess.",
+      "project": "ACT-IN",
+      "account": "880 Drawings (default until identified)",
+      "gst": "BAS Excluded (no GST — bare bank transfer, no tax invoice)",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "Who did this $174.65 internet banking transfer on 8 May go to, and was it business or personal? If business, name the supplier/purpose so I can code it; otherwise I'll book it to 880 Drawings.",
+      "evidence_basis": "All our own records returned empty for this line — no Xero invoice, no prior payment to a matching payee, no GHL contact, no person page, no Gmail nature-context. The particulars are a generic \"INTERNET BANKING TRANSFER MELBOURNE\" with no payee, so nature/recipient is genuinely unidentifiable from our data. GST default driven by the no-tax-invoice-on-a-bank-transfer rule.",
+      "money_critical": false
+    },
+    "verify": null
+  },
+  {
+    "i": 30,
+    "amt": 45.8,
+    "dir": "spent",
+    "particulars": "INTERNET BANKING TRANSFERMELBOURNE",
+    "answer": {
+      "i": 30,
+      "final_comment": "This is an outbound internet-banking transfer of $45.80 on 4 Nov 2025 — \"INTERNET BANKING TRANSFER MELBOURNE\" with no payee name, no invoice, and no prior matching payment in our records. A bare bank transfer like this carries no tax invoice, so there's no GST credit to claim. I can't tell from the bank line alone whether this was a small business expense or a personal/owner transfer. My default coding: if it relates to a business cost, code it to that expense account; otherwise it's 880 Drawings. Either way GST = BAS Excluded (it's a bank transfer, not a GST-bearing supply). Ben to confirm the nature — most likely a small personal transfer given the round-ish amount and no payee/invoice trail.",
+      "project": "ACT-IN",
+      "account": "880 Drawings (default — recode to the relevant expense account if a business cost is confirmed)",
+      "gst": "BAS Excluded",
+      "confidence": "low",
+      "resolved_by_evidence": false,
+      "still_needs_ben": true,
+      "ben_question": "What was this $45.80 internet-banking transfer on 4 Nov 2025 for — a business cost (and which project) or a personal/owner transfer (code to 880 Drawings)?",
+      "evidence_basis": "Particulars \"INTERNET BANKING TRANSFER MELBOURNE\" with no payee; zero corroborating evidence (no Xero invoice/transaction, no GHL tag, no person page, no Gmail context). GST treatment fixed by the \"bare bank transfer = no tax invoice = no GST credit\" rule.",
+      "money_critical": false
+    },
+    "verify": null
+  }
+]

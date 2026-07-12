@@ -1,0 +1,1790 @@
+[
+  {
+    "i": 13,
+    "date": "2025-12-19",
+    "dir": "received",
+    "amount": 55197,
+    "particulars": "TFN Distribution The Funding Netw A Curious Tracto | Interbank Credit",
+    "sl_question": "Kindly confirm if Other Revenue or Grants Received account",
+    "search_tokens": [
+      "funding",
+      "network"
+    ],
+    "current_verdict": {
+      "nature": "+$55,197 'TFN Distribution The Funding Network' — impact-funding distribution from The Funding Network to ACT.",
+      "project": "ACT-IN",
+      "account": "Grants Received",
+      "gst": "GST Free Income",
+      "receipt_status": "ON_FILE_CONFIRMED",
+      "your_comment": "Grants Received + GST Free Income is correct (The Funding Network impact-funding distribution = grant income, GST-free per known facts — confirm funder GST status). The only issue: receipt_status should be ON_FILE_UNVERIFIED, not ON_FILE_CONFIRMED. The Dext document is a TFN remittance advice (file \"The Funding Network - 2025-12-18 - ...\"), not a tax invoice, dated 2025-12-18 vs the 2025-12-19 bank line. There are TWO TFN distributions in this batch (+$89,361 at i=8 and +$55,197 here), so the receipt must be confirmed to tie to the $55,197 amount specifically before claiming it as confirmed."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [
+        {
+          "number": null,
+          "contact": "The Funding Network",
+          "type": "ACCPAY",
+          "total": 55197,
+          "date": "2025-12-17",
+          "status": "VOIDED",
+          "project": "ACT-CE",
+          "acct": "429",
+          "tax": "INPUT",
+          "desc": "The Funding Network — Operations — ACT-CE"
+        },
+        {
+          "number": null,
+          "contact": "The Funding Network",
+          "type": "ACCPAY",
+          "total": 89361,
+          "date": "2025-11-27",
+          "status": "VOIDED",
+          "project": "ACT-CE",
+          "acct": "429",
+          "tax": "INPUT",
+          "desc": "The Funding Network — Operations — ACT-CE"
+        },
+        {
+          "number": "R-8469621",
+          "contact": "The Funding Network",
+          "type": "ACCPAY",
+          "total": 6000,
+          "date": "2025-09-03",
+          "status": "PAID",
+          "project": "ACT-CE",
+          "acct": "417",
+          "tax": "EXEMPTEXPENSES",
+          "desc": "."
+        },
+        {
+          "number": "R-8469458",
+          "contact": "The Funding Network",
+          "type": "ACCPAY",
+          "total": 500,
+          "date": "2025-09-03",
+          "status": "PAID",
+          "project": "ACT-CE",
+          "acct": "417",
+          "tax": "EXEMPTEXPENSES",
+          "desc": "."
+        }
+      ],
+      "ghl_identity": [
+        {
+          "name": "the funding network",
+          "company": null,
+          "email": null,
+          "tags": []
+        },
+        {
+          "name": "The Funding Network",
+          "company": null,
+          "email": "info@thefundingnetwork.com.au",
+          "tags": []
+        },
+        {
+          "name": "kristen lark",
+          "company": "The Funding Network",
+          "email": "kristen.lark@thefundingnetwork.com.au",
+          "tags": [
+            "role:funder",
+            "project:act-gd",
+            "comms:goods-newsletter",
+            "comms:funder-drip",
+            "comms:act-newsletter"
+          ]
+        },
+        {
+          "name": "maddi alderuccio",
+          "company": "The Funding Network",
+          "email": "madeline.alderuccio@thefundingnetwork.com.au",
+          "tags": [
+            "project:act-ca",
+            "project:act-gd",
+            "role:supporter",
+            "comms:goods-newsletter",
+            "role:funder",
+            "role:partner",
+            "comms:newsletter",
+            "comms:funder-drip",
+            "comms:supporter-drip",
+            "comms:partner-drip",
+            "comms:act-newsletter"
+          ]
+        }
+      ],
+      "people_page": null,
+      "gmail_nature": [
+        {
+          "mailbox": "benjamin",
+          "from": "Farm My School <hello@farmmyschool.com.au>",
+          "subject": "What a Year, Nourish Workshops, Ket Baker Stall, Veggie Boxes and more",
+          "date": "Sun, 21 Dec 2025 19:32:04 +0000",
+          "snippet": "Reflecting on 2025, visit our pop-up stall at Ket Baker Wallington on Thursday and book into an upcoming workshop ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ "
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: TFN FINAL GRANT DISTRIBUTION",
+          "date": "Thu, 18 Dec 2025 20:27:04 +1000",
+          "snippet": "HI Friend, Wow so quick! Thank you so much for your incredible support - I hope you and the team have the most amazing break. Excited to see what we can do together next year! Plea"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "Madeline Alderuccio <madeline.alderuccio@thefundingnetwork.com.au>",
+          "subject": "TFN FINAL GRANT DISTRIBUTION",
+          "date": "Thu, 18 Dec 2025 14:11:30 +1100",
+          "snippet": "Hi Nic, We are pleased to make a second and final grant distribution from the TFN Healthy People Healthy Planet event 2 September 2025. The funds will reach your account today or t"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Farm My School <hello@farmmyschool.com.au>",
+          "subject": "What a Year, Nourish Workshops, Ket Baker Stall, Veggie Boxes and more",
+          "date": "Sun, 21 Dec 2025 19:31:22 +0000",
+          "snippet": "Reflecting on 2025, visit our pop-up stall at Ket Baker Wallington on Thursday and book into an upcoming workshop ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ "
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: TFN FINAL GRANT DISTRIBUTION",
+          "date": "Thu, 18 Dec 2025 20:27:04 +1000",
+          "snippet": "HI Friend, Wow so quick! Thank you so much for your incredible support - I hope you and the team have the most amazing break. Excited to see what we can do together next year! Plea"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Madeline Alderuccio <madeline.alderuccio@thefundingnetwork.com.au>",
+          "subject": "TFN FINAL GRANT DISTRIBUTION",
+          "date": "Thu, 18 Dec 2025 14:11:30 +1100",
+          "snippet": "Hi Nic, We are pleased to make a second and final grant distribution from the TFN Healthy People Healthy Planet event 2 September 2025. The funds will reach your account today or t"
+        },
+        {
+          "mailbox": "hi",
+          "from": "A Curious Tractor <hi@act.place>",
+          "subject": "Fwd: TFN FINAL GRANT DISTRIBUTION",
+          "date": "Thu, 18 Dec 2025 20:26:10 +1000",
+          "snippet": "&gt; Begin forwarded message: &gt; &gt; From: Madeline Alderuccio &gt; Subject: TFN FINAL GRANT DISTRIBUTION &gt; Date: 18 December 2025 at 1:11:30 pm AEST &gt; To: Nicholas Marche"
+        },
+        {
+          "mailbox": "hi",
+          "from": "A Curious Tractor <hi@act.place>",
+          "subject": "Fwd: TFN GRANT DISTRIBUTION",
+          "date": "Fri, 5 Dec 2025 16:18:51 +1000",
+          "snippet": "&gt; Begin forwarded message: &gt; &gt; From: Madeline Alderuccio &gt; Subject: TFN GRANT DISTRIBUTION &gt; Date: 28 November 2025 at 8:54:27 am AEST &gt; To: Nicholas Marchesi , B"
+        }
+      ]
+    }
+  },
+  {
+    "i": 12,
+    "date": "2025-12-17",
+    "dir": "spent",
+    "amount": 32780,
+    "particulars": "Circularity Group PtA5648662938 Thanks | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "plasticians"
+    ],
+    "current_verdict": {
+      "nature": "$32,780 to Circularity Group Pty — large vendor payment; specific deliverable/project not yet confirmed.",
+      "project": "ACT-IN",
+      "account": "Ask Ben — depends on what was supplied (likely materials/build or consulting)",
+      "gst": "GST on Expenses",
+      "receipt_status": "GAP_PLEASE_PROVIDE",
+      "your_comment": "$32,780 to \"Circularity Group\" out of the ACT Everyday bank account on 17 Dec 2025. The bank line reads \"Transfer Debit ... Thanks\" — that is the signature of a bank P2P transfer/honorarium, not a verified EFT vendor-invoice payment, so I will NOT assert it is a \"genuine supplier payment, not a transfer.\" There is no receipt on file (has_receipt=false, no Gmail match), so I cannot pre-commit the GST treatment to \"GST on Expenses\": a domestic supplier only attracts a GST claim once a valid tax invoice is held, and none exists yet. SL asked me to \"confirm the nature\" — so the honest answer is that the nature is unconfirmed. Please pull the invoice/agreement: if it's a supply from Circularity Group Pty Ltd with a tax invoice, code to the relevant project (likely materials/build or consulting, ACT-IN until confirmed) at GST on Expenses; if it turns out to be a transfer to an individual or a non-invoiced payment, it stays GST Free pending the nature. Holding GST as TBD, not GST on Expenses, until the tax invoice is sighted."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [
+        {
+          "number": null,
+          "contact": "The Plasticians",
+          "type": "ACCPAY",
+          "total": 29800,
+          "date": "2025-12-17",
+          "status": "AUTHORISED",
+          "project": "ACT-GD",
+          "acct": "446",
+          "tax": "INPUT",
+          "desc": "The Plasticians — Other — ACT-IN"
+        },
+        {
+          "number": null,
+          "contact": "The Plasticians",
+          "type": "ACCPAY",
+          "total": 29800,
+          "date": "2025-12-17",
+          "status": "DELETED",
+          "project": "ACT-IN",
+          "acct": "429",
+          "tax": "INPUT",
+          "desc": "Receipt auto-imported from dext_import (Dext 19046"
+        }
+      ],
+      "ghl_identity": [
+        {
+          "name": "the plasticians",
+          "company": null,
+          "email": null,
+          "tags": []
+        }
+      ],
+      "people_page": null,
+      "gmail_nature": [
+        {
+          "mailbox": "nicholas",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: New customer message on 13 December 2025 at 3:54 pm",
+          "date": "Mon, 22 Dec 2025 11:16:47 +1100",
+          "snippet": "Hey Friend, we&#39;re on our way. Will be there between 1230 and one. On Sun, 21 Dec 2025 at 7:15 pm, The Plasticians &lt;info@theplasticians.com.au&gt; wrote: Hi Nic, Sounds good."
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "The Plasticians <info@theplasticians.com.au>",
+          "subject": "Re: New customer message on 13 December 2025 at 3:54 pm",
+          "date": "Sun, 21 Dec 2025 08:15:36 +0000",
+          "snippet": "Hi Nic, Sounds good. Will see you then! Address is 979 Hensley Park Rd, Hensley Park VIC 3301. Safe travels. George. Get Outlook for iOS From: Nicholas Marchesi &lt;nicholas@act.pl"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: New customer message on 13 December 2025 at 3:54 pm",
+          "date": "Sun, 21 Dec 2025 19:13:59 +1100",
+          "snippet": "Might need to confirm pickup address too? On Sun, 21 Dec 2025 at 7:12 pm, Nicholas Marchesi &lt;nicholas@act.place&gt; wrote: Epic friends thanks for the hustle this weekend! We wi"
+        }
+      ]
+    }
+  },
+  {
+    "i": 5,
+    "date": "2025-11-11",
+    "dir": "spent",
+    "amount": 20000,
+    "particulars": "Ross Built ConstructP7797582049 ACT | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "Ross",
+      "Built",
+      "Construct"
+    ],
+    "current_verdict": {
+      "nature": "$20,000 construction payment to Ross Built Construct. A related Xero bill INV-0146 from RNM Carpentry surfaced in nicholas@ mailbox — likely the matching tax invoice. Construction is for a Farm or Harvest build; project to be confirmed.",
+      "project": "ACT-FM",
+      "account": "Building / Construction Work in Progress",
+      "gst": "GST on Expenses",
+      "receipt_status": "GMAIL_CANDIDATE",
+      "your_comment": "$20,000 bank transfer to Ross Built Construct (ref P7797582049), dated 11 Nov 2025 — a construction payment, almost certainly a Farm or Harvest build (project to be confirmed, possibly ACT-FM). This is a 'Transfer Debit' with NO tax invoice on file yet, so I'm treating it as a GAP — please provide the Ross Built tax invoice so we can confirm GST. IMPORTANT: the 'Bill INV-0146 from RNM CARPENTRY' in Nic's mailbox is a DIFFERENT vendor (RNM Carpentry, not Ross Built) — do not use it as the supporting invoice for this payment; it does not match. Until a genuine Ross Built tax invoice is produced I'm leaving GST treatment open (likely GST on Expenses if it's a domestic builder with a valid invoice, but unconfirmed). Account likely Building/Construction Work in Progress if this is capital building works rather than a repair — confirm scope. Confirm whether the build is The Farm (ACT-FM) or The Harvest (ACT-HV)."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 10,
+    "date": "2025-11-28",
+    "dir": "spent",
+    "amount": 20000,
+    "particulars": "Nicholas Marchesi SuE0397656597 | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "Nicholas",
+      "Marchesi"
+    ],
+    "current_verdict": {
+      "nature": "$20,000 transfer to 'Nicholas Marchesi Su' — superannuation contribution for Nic (sole trader's own super).",
+      "project": "ACT-IN",
+      "account": "880 Drawings - Nicholas Marchesi",
+      "gst": "No GST (transfer/drawings)",
+      "receipt_status": "NO_RECEIPT_EXPECTED",
+      "your_comment": "This is Nic's own superannuation contribution. As a sole trader his personal super isn't a business wage expense — please code it to 880 Drawings - Nicholas Marchesi (no GST). Nic claims the super as a personal deduction in his own return. Flagging for confirmation of the amount/fund."
+    },
+    "evidence": {
+      "xero_history": [
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "RECEIVE",
+          "total": 11000,
+          "date": "2026-05-11",
+          "project": null,
+          "proj_src": null,
+          "acct": "881",
+          "tax": "BASEXCLUDED",
+          "desc": "N J MARCHESIUp"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "RECEIVE",
+          "total": 4000,
+          "date": "2026-05-08",
+          "project": null,
+          "proj_src": null,
+          "acct": "881",
+          "tax": "BASEXCLUDED",
+          "desc": "N J MARCHESIUp"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "RECEIVE",
+          "total": 5723.42,
+          "date": "2026-05-07",
+          "project": null,
+          "proj_src": null,
+          "acct": "881",
+          "tax": "BASEXCLUDED",
+          "desc": "N J MARCHESIUp"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "RECEIVE",
+          "total": 1821.5,
+          "date": "2026-05-06",
+          "project": null,
+          "proj_src": null,
+          "acct": "881",
+          "tax": "BASEXCLUDED",
+          "desc": "N J MARCHESIUp"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "RECEIVE",
+          "total": 6000,
+          "date": "2026-03-20",
+          "project": null,
+          "proj_src": null,
+          "acct": "881",
+          "tax": "BASEXCLUDED",
+          "desc": "N J MARCHESIUp"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "RECEIVE",
+          "total": 6000,
+          "date": "2026-03-12",
+          "project": null,
+          "proj_src": null,
+          "acct": "881",
+          "tax": "BASEXCLUDED",
+          "desc": "N J MARCHESIUp"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "RECEIVE",
+          "total": 9000,
+          "date": "2026-03-09",
+          "project": null,
+          "proj_src": null,
+          "acct": "881",
+          "tax": "BASEXCLUDED",
+          "desc": "N J MARCHESIUp"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "RECEIVE",
+          "total": 5000,
+          "date": "2026-03-09",
+          "project": null,
+          "proj_src": null,
+          "acct": "881",
+          "tax": "BASEXCLUDED",
+          "desc": "N J MARCHESIUp"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "SPEND",
+          "total": 15000,
+          "date": "2026-02-09",
+          "project": null,
+          "proj_src": null,
+          "acct": "880",
+          "tax": "BASEXCLUDED",
+          "desc": "NM UP P0461754695 Up"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "RECEIVE",
+          "total": 10000,
+          "date": "2026-02-02",
+          "project": null,
+          "proj_src": null,
+          "acct": "881",
+          "tax": "BASEXCLUDED",
+          "desc": "N J MARCHESIUp"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "RECEIVE",
+          "total": 30000,
+          "date": "2025-12-17",
+          "project": null,
+          "proj_src": null,
+          "acct": "881",
+          "tax": "BASEXCLUDED",
+          "desc": "N J MARCHESIUp"
+        },
+        {
+          "contact": "Nicholas Marchesi",
+          "type": "SPEND",
+          "total": 60000,
+          "date": "2025-12-11",
+          "project": null,
+          "proj_src": null,
+          "acct": "880",
+          "tax": "BASEXCLUDED",
+          "desc": "NM UP X4780122536"
+        }
+      ],
+      "xero_invoices": [
+        {
+          "number": null,
+          "contact": "Nicholas Marchesi",
+          "type": "ACCPAY",
+          "total": 1974.5,
+          "date": "2025-11-24",
+          "status": "VOIDED",
+          "project": "ACT-IN",
+          "acct": "429",
+          "tax": "INPUT",
+          "desc": "Receipt auto-imported from dext_import (Dext 18813"
+        },
+        {
+          "number": null,
+          "contact": "Nicholas Marchesi",
+          "type": "ACCPAY",
+          "total": 1974.5,
+          "date": "2025-11-24",
+          "status": "AUTHORISED",
+          "project": "ACT-IN",
+          "acct": "429",
+          "tax": "INPUT",
+          "desc": "Nicholas Marchesi — Income — ACT-IN"
+        },
+        {
+          "number": null,
+          "contact": "Nicholas Marchesi",
+          "type": "ACCPAY",
+          "total": 1200,
+          "date": "2025-11-06",
+          "status": "VOIDED",
+          "project": "ACT-IN",
+          "acct": "429",
+          "tax": "INPUT",
+          "desc": "Nicholas Marchesi — Income — ACT-IN"
+        }
+      ],
+      "ghl_identity": [
+        {
+          "name": "Nicholas Marchesi",
+          "company": null,
+          "email": "nicholas@act.place",
+          "tags": []
+        },
+        {
+          "name": "nicholas marchesi",
+          "company": null,
+          "email": null,
+          "tags": []
+        },
+        {
+          "name": "Nicholas Marchesi",
+          "company": "orangesky.org",
+          "email": "nicholas@act.place",
+          "tags": []
+        },
+        {
+          "name": "nicholas marchesi oam",
+          "company": null,
+          "email": "nicholas@act.place",
+          "tags": [
+            "project:act-gd",
+            "interest:bulk-order",
+            "role:buyer",
+            "comms:harvest-newsletter",
+            "interest:membership",
+            "interest:events",
+            "interest:community",
+            "interest:workshops",
+            "interest:markets",
+            "interest:venue",
+            "interest:volunteer",
+            "interest:food",
+            "interest:sustainability",
+            "interest:garden",
+            "project:act-hv",
+            "tier:member",
+            "comms:act-newsletter",
+            "lane:community",
+            "role:storyteller"
+          ]
+        },
+        {
+          "name": "Nicholas Marchesi",
+          "company": null,
+          "email": "nicholas.marchesi@storyteller.local",
+          "tags": []
+        },
+        {
+          "name": "nicholas marchesi",
+          "company": null,
+          "email": "nicholas@orangesky.org.au",
+          "tags": [
+            "comms:goods-newsletter",
+            "project:act-gd",
+            "role:supporter"
+          ]
+        }
+      ],
+      "people_page": null,
+      "gmail_nature": [
+        {
+          "mailbox": "benjamin",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: The Harvest",
+          "date": "Sat, 27 Dec 2025 12:59:04 +1000",
+          "snippet": "Hey Grant and Michelle, I hope you both had a wonderful Christmas with the family. Ben and I are really excited and thankful for the opportunity to take on this project. Per our ch"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "Benjamin Knight <benjamin@act.place>",
+          "subject": "Fwd: Your Webflow receipt",
+          "date": "Wed, 24 Dec 2025 17:56:35 +1000",
+          "snippet": "---------- Forwarded message --------- From: Webflow &lt;billing@webflow.com&gt; Date: Wed, 24 Dec 2025 at 12:30 Subject: Your Webflow receipt To: &lt;benjamin@act.place&gt; Please"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "Susan from DTF Direct <system@fera.ai>",
+          "subject": "We'd love to hear from you.",
+          "date": "Wed, 24 Dec 2025 07:41:26 +0000",
+          "snippet": "Hi Nicholas, Thanks again for ordering from DTF Direct! We have a quick question... how was your last order? Product Image UV DTF Gang Sheet Builder - 5... 1 star 2 stars 3 stars 4"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Apple <no_reply@email.apple.com>",
+          "subject": "Your tax invoice from Apple.",
+          "date": "Sat, 27 Dec 2025 04:00:33 +0000 (GMT)",
+          "snippet": "Tax Invoice 26 December 2025 Order ID: MNMSJLVT0B Document: 750068242670 Apple Account: nicholas@ffproductions.com.au ChatGPT ChatGPT Plus (Monthly) Renews 17 January 2026 iPhone ("
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: The Harvest",
+          "date": "Sat, 27 Dec 2025 12:59:04 +1000",
+          "snippet": "Hey Grant and Michelle, I hope you both had a wonderful Christmas with the family. Ben and I are really excited and thankful for the opportunity to take on this project. Per our ch"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "AAMI <No-Reply3@aami.com.au>",
+          "subject": "AAMI Commercial Motor Insurance New Business Direct Debit SPD015748782",
+          "date": "Fri, 26 Dec 2025 21:35:07 +0000",
+          "snippet": ". HERE&#39;S YOUR POLICY Dear Sir/Madam, Thank you for choosing to insure with AAMI. Please find attached your Policy Schedule, Tax Invoice, a copy of our Product Disclosure Statem"
+        },
+        {
+          "mailbox": "hi",
+          "from": "A Curious Tractor <hi@act.place>",
+          "subject": "Fwd: INV-0113",
+          "date": "Wed, 24 Dec 2025 14:41:56 +1000",
+          "snippet": "---------- Forwarded message --------- From: Magnus Murray-Douglass &lt;magnus@boedesign.com.au&gt; Date: Wed, 24 Dec 2025 at 1:14 pm Subject: INV-0113 To: Nicholas Marchesi &lt;hi"
+        },
+        {
+          "mailbox": "hi",
+          "from": "Magnus Murray-Douglass <magnus@boedesign.com.au>",
+          "subject": "INV-0113",
+          "date": "Wed, 24 Dec 2025 13:14:24 +1000",
+          "snippet": "Hi mate, Please find the invoice for the Defy panels attached. Cheers, MMD -- Magnus Murray-Douglass Founder Book a meeting with me M. 0431 407 722 E. magnus@boedesign.com.au W. ww"
+        },
+        {
+          "mailbox": "hi",
+          "from": "A Curious Tractor <hi@act.place>",
+          "subject": "Fwd: 2025 Close out",
+          "date": "Fri, 19 Dec 2025 15:59:37 +1000",
+          "snippet": "&gt; Begin forwarded message: &gt; &gt; From: Sam Davies &gt; Subject: Re: 2025 Close out &gt; Date: 19 December 2025 at 2:59:02 pm AEST &gt; To: Nicholas Marchesi &gt; Cc: Todd Si"
+        },
+        {
+          "mailbox": "accounts",
+          "from": "Gmail Team <mail-noreply@google.com>",
+          "subject": "Tips for using your new inbox",
+          "date": "Sun, 21 Dec 2025 16:24:41 -0800",
+          "snippet": "Welcome to your inbox Find emails fast With the power of Google Search in your inbox, you can archive all your email and find it later in a flash. Your inbox stays tidy, and you ne"
+        },
+        {
+          "mailbox": "accounts",
+          "from": "Gmail Team <mail-noreply@google.com>",
+          "subject": "Get the official Gmail app",
+          "date": "Sun, 21 Dec 2025 16:24:41 -0800",
+          "snippet": "Get the official Gmail app The best features of Nicholas Marchesi Mail are only available on your phone and tablet with the official Gmail app. Download the app or go to gmail.com "
+        }
+      ]
+    }
+  },
+  {
+    "i": 47,
+    "date": "2026-01-29",
+    "dir": "spent",
+    "amount": 4816,
+    "particulars": "CARLA FURNISHERS P/L CICCONE | Credit Card Purchase",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "CARLA",
+      "FURNISHERS",
+      "CICCONE"
+    ],
+    "current_verdict": {
+      "nature": "Carla Furnishers — furniture/furnishings supplier for the Goods project (same vendor as the two $5,590 lines earlier). Likely capital/inventory furnishings rather than a consumable expense.",
+      "project": "ACT-GD",
+      "account": "Goods - Inventory / Furnishings",
+      "gst": "GST on Expenses",
+      "receipt_status": "GMAIL_FOUND",
+      "your_comment": "Carla Furnishers is our furniture supplier for Goods (ACT-GD) — same vendor as the earlier $5,590 purchases. These are furnishings for the project (treat as inventory/capital, not a running expense). AU domestic supplier, GST on Expenses. No invoice on file — I'll get the Carla Furnishers tax invoice and provide it. RECEIPT FOUND: matching tax invoice located — 'Carla Furnishers Pty Ltd : Invoice# 26-00000151' (PDF 26-00000151.pdf) in nicholas@act.place, 28 Jan 2026 (also attached to Adrian Venturin's 'Goods Project' thread). This is the tax invoice for the $4,816 card charge — GST is now claimable. Forwarding to SL."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [
+        {
+          "number": null,
+          "contact": "Carla Furnishers",
+          "type": "ACCPAY",
+          "total": 11180,
+          "date": "2025-11-16",
+          "status": "VOIDED",
+          "project": "ACT-GD",
+          "acct": "446",
+          "tax": "INPUT",
+          "desc": "Receipt auto-imported from dext_import (Dext 18710"
+        },
+        {
+          "number": null,
+          "contact": "Carla Furnishers",
+          "type": "ACCPAY",
+          "total": 11180,
+          "date": "2025-11-16",
+          "status": "VOIDED",
+          "project": "ACT-GD",
+          "acct": "446",
+          "tax": "INPUT",
+          "desc": "Carla Furnishers — Materials & Equipment — ACT-GD"
+        }
+      ],
+      "ghl_identity": [
+        {
+          "name": "carla furnishers",
+          "company": null,
+          "email": null,
+          "tags": []
+        },
+        {
+          "name": "carla furnishers",
+          "company": null,
+          "email": null,
+          "tags": [
+            "project:act-gd",
+            "role:supplier",
+            "comms:buyer-drip"
+          ]
+        }
+      ],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 56,
+    "date": "2026-03-02",
+    "dir": "spent",
+    "amount": 4497,
+    "particulars": "SP RETRO OUTDOOR CO BAULKHAM HILL | Credit Card Purchase",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "RETRO",
+      "OUTDOOR",
+      "BAULKHAM",
+      "HILL"
+    ],
+    "current_verdict": {
+      "nature": "SP Retro Outdoor Co (Baulkham Hills) — outdoor furniture/equipment for The Harvest Witta.",
+      "project": "ACT-HV",
+      "account": "Plant & Equipment / Garden materials",
+      "gst": "GST on Expenses",
+      "receipt_status": "GAP_PLEASE_PROVIDE",
+      "your_comment": "SP Retro Outdoor Co (Baulkham Hills NSW) is NOT in our known-facts list and the \"outdoor furniture for The Harvest\" nature is an unverified guess. The SL question literally asks to confirm the nature — so we should not assert one. Two problems with the proposed line: (1) project ACT-HV (The Harvest is in Witta QLD) is assigned off a guessed nature from a Sydney retailer — no basis; (2) suggested_account mixes \"Plant & Equipment\" (capital) with \"Garden materials\" (consumable) — internally inconsistent. GST on Expenses is only correct IF a valid AU tax invoice arrives; none is on file. Hold this for Ben."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 16,
+    "date": "2026-01-23",
+    "dir": "spent",
+    "amount": 4000,
+    "particulars": "little beach shacks F8216106008 Thanks | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "little",
+      "beach",
+      "shacks"
+    ],
+    "current_verdict": {
+      "nature": "$4,000 to 'little beach shacks' — accommodation booking on a business trip.",
+      "project": "ACT-IN",
+      "account": "Travel & accommodation",
+      "gst": "GST on Expenses",
+      "receipt_status": "GAP_PLEASE_PROVIDE",
+      "your_comment": "Nature: $4,000 accommodation payment to 'little beach shacks' — but the particulars read 'Transfer Debit' with reference F8216106008 and 'Thanks', i.e. a direct bank transfer to the host, not a card/merchant booking. Treat as a business-trip accommodation cost, project ACT-IN, account Travel & accommodation. GST: a P2P transfer to a small/private accommodation host very likely has NO tax invoice (many such hosts are not GST-registered), so default to GST Free Expenses pending the host's tax invoice — do NOT claim GST on Expenses on the strength of a booking confirmation that may not be a valid tax invoice. SL asked us to confirm the nature: please confirm (a) this was an ACT business trip (not private), and (b) whether the host issued a tax invoice showing GST. If a valid tax invoice is provided, switch to GST on Expenses; if private/non-registered host, it stays GST Free; if the stay was personal it is Drawings (880). No receipt on file — receipt_status is a genuine GAP, not a confirmed business booking."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 11,
+    "date": "2025-12-04",
+    "dir": "spent",
+    "amount": 3000,
+    "particulars": "Thriday G3468033865 | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "Thriday"
+    ],
+    "current_verdict": {
+      "nature": "$3,000 to Thriday — Thriday is the accounting/banking + BAS/Xero reconciliation platform (confirmed by the Thriday Customer Care thread); software/accounting service fee.",
+      "project": "ACT-IN",
+      "account": "Accounting / software subscription (e.g. 408 or your accounting-fees code)",
+      "gst": "GST on Expenses",
+      "receipt_status": "GMAIL_CANDIDATE",
+      "your_comment": "$3,000 to Thriday — Thriday is a banking + accounting/BAS platform. Particulars are a round-number \"Transfer Debit\", not a subscription charge, and a Thriday SaaS fee would be ~$0–50/mo, so $3,000 is out of band for a software fee. No tax invoice is on file (the Thriday support email is not an invoice). CONFIRM NATURE with Nic: is this own funds moved into a Thriday transaction account (an inter-account/own-funds transfer — no expense, BAS Excluded, no GST), or a genuine accounting service fee? Project ACT-IN if a genuine service. Do NOT claim GST on Expenses until a valid tax invoice is provided — the billing-thread email does not qualify (RECEIPT_VENDOR matched to an email, not an invoice). GAP: tax invoice to be provided if confirmed as a service."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [
+        {
+          "name": "Sally Hurst (Thriday Accounting Support)",
+          "company": null,
+          "email": "accounting@thriday.com.au",
+          "tags": []
+        },
+        {
+          "name": "thriday ",
+          "company": null,
+          "email": "wecare@thriday.com.au",
+          "tags": []
+        },
+        {
+          "name": "Thriday ",
+          "company": null,
+          "email": "wecare@thriday.com.au",
+          "tags": []
+        },
+        {
+          "name": "thriday accounting",
+          "company": null,
+          "email": "accounting@thriday.com.au",
+          "tags": []
+        },
+        {
+          "name": "thriday ",
+          "company": null,
+          "email": "contact@thriday.com.au",
+          "tags": []
+        }
+      ],
+      "people_page": {
+        "file": "thriday.md",
+        "snippet": "--- name: thriday lane: supporter warmth: 0 updated: 2026-06-06 --- # thriday ## Soil — institutional ground (CivicGraph) - **Org:** — - **Connected orgs:** — - **Boards / roles:** — - **Government influence:** — · **Indigenous affiliation:** — - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._ ## Web & work — public read Thriday helps business owners streamline their admin. Employees value their work environment. Thriday focuses on enhancing work-life balance through supportive supervisors. - [Thriday's Post](https://www.linkedin.com/posts/thriday_tha"
+      },
+      "gmail_nature": [
+        {
+          "mailbox": "benjamin",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: [Thriday Customer Care] Let's get your Xero reconciled & BAS sorted :)",
+          "date": "Sun, 14 Dec 2025 07:45:23 +0930",
+          "snippet": "Hey Sally, Thanks for your help with this! It might be as we paid on cc and there is bank fees? Re uploaded and attached here. Ben has uploaded all the amazon ones - we are struggl"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+          "subject": "[Thriday Customer Care] Re: Let's get your Xero reconciled & BAS sorted :)",
+          "date": "Thu, 11 Dec 2025 06:11:13 +0000",
+          "snippet": "Your request (30722) has been updated. To add additional comments, reply to this email. Sally Hurst (Thriday Accounting) 11 Dec 2025, 17:11 AEDT Hi Nicholas, Thank you for uploadin"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: [Thriday Customer Care] Let's get your Xero reconciled & BAS sorted :)",
+          "date": "Thu, 11 Dec 2025 10:40:58 +1100",
+          "snippet": "Hey Sally, Thanks so much for your help with this - Ben and I have done a good pass on these - let his know if we have missed anything, and we will go on a treasure hunt again- tha"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Thriday Accounting Support <accounting@thriday.com.au>",
+          "subject": "Request #32645: How would you rate the support you received?",
+          "date": "Tue, 16 Dec 2025 04:01:52 +0000",
+          "snippet": "Hello Nicholas Marchesi, We&#39;d love to hear what you think of our customer service. Please take a moment to answer one simple question by clicking either link below: How would y"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "\"Sally Hurst (Thriday Accounting Support)\" <accounting@thriday.com.au>",
+          "subject": "BAS - July to Sep 2025 - lodged (copy for your record)",
+          "date": "Tue, 16 Dec 2025 03:36:59 +0000",
+          "snippet": "Sally Hurst (Thriday Accounting) 16 Dec 2025, 14:36 AEDT Hi Nicholas, Please find attached a copy of your Sep 2025 BAS lodgment for your records. The amount payable of $13219 is du"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Your September 2025 BAS is ready for signing and lodgment",
+          "date": "Mon, 15 Dec 2025 21:19:27 +0930",
+          "snippet": "Wonderful thanks friend - appreciate your support. All signed. This would have been the highest BAS I have paid - I presume all expenses UP, NAB etc were reconciled? Thanks for you"
+        },
+        {
+          "mailbox": "hi",
+          "from": "Thriday <wecare@thriday.com.au>",
+          "subject": "[Thriday] Product update - 23 Oct. 2025",
+          "date": "Thu, 23 Oct 2025 02:03:18 +0000 (UTC)",
+          "snippet": "Financial peace of mind in a fraction of the time Time to Thrive Time to Thrive Hey A Curious, This is our second big product update for October! The Thriday app just got faster an"
+        }
+      ]
+    }
+  },
+  {
+    "i": 15,
+    "date": "2026-01-16",
+    "dir": "received",
+    "amount": 2420,
+    "particulars": "BIONIC GROUP PTY LTDRefund | Money Transfer",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "bionic"
+    ],
+    "current_verdict": {
+      "nature": "+$2,420 'BIONIC GROUP PTY LTD Refund' — refund of a prior Bionic Group payment (Bionic INV-5040 / $4,705 receipt in Nic's inbox), not new income.",
+      "project": "ACT-IN",
+      "account": "Offset/credit the original Bionic Group expense account",
+      "gst": "GST on Expenses",
+      "receipt_status": "GMAIL_CANDIDATE",
+      "your_comment": "This is a refund from Bionic Group of a prior payment, so please offset it against the original Bionic Group expense account rather than booking it as new income, which reverses the GST on the same account it was originally claimed (GST on Expenses, domestic AU vendor). One caution before we tie it off: the refund is $2,420, but the Bionic Group document in Nic's inbox (receipt / invoice INV-5040, from The Trustee for The Steve Austin Trust) is for $4,705.00, so it does NOT match this amount and I can't confirm it's the related charge. Treat that email as a lead, not a match. Could you confirm which original Bionic Group payment this $2,420 refund relates to so we offset the correct expense line, or let me know if it's a partial refund of INV-5040?"
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [
+        {
+          "number": "RB20383392160",
+          "contact": "Bionic Group",
+          "type": "ACCPAY",
+          "total": 3320,
+          "date": "2026-04-29",
+          "status": "VOIDED",
+          "project": "ACT-HV",
+          "acct": "710",
+          "tax": "EXEMPTEXPENSES",
+          "desc": "Storage rental"
+        },
+        {
+          "number": "INV-5377",
+          "contact": "Bionic Self Storage",
+          "type": "ACCPAY",
+          "total": 3320,
+          "date": "2026-04-29",
+          "status": "PAID",
+          "project": "ACT-FM",
+          "acct": "750",
+          "tax": "CAPEXINPUT",
+          "desc": "20ft Shipping Container- 3660445 - Monument Grey"
+        },
+        {
+          "number": "INV-5102",
+          "contact": "Bionic Group",
+          "type": "ACCPAY",
+          "total": 4705,
+          "date": "2026-01-21",
+          "status": "PAID",
+          "project": "ACT-GD",
+          "acct": "710",
+          "tax": "EXEMPTEXPENSES",
+          "desc": "Bionic Group"
+        },
+        {
+          "number": null,
+          "contact": "Bionic Self Storage",
+          "type": "ACCPAY",
+          "total": 2420,
+          "date": "2025-12-29",
+          "status": "PAID",
+          "project": "ACT-IN",
+          "acct": "452",
+          "tax": "INPUT",
+          "desc": "Bionic Self Storage — Storage — ACT-IN"
+        },
+        {
+          "number": null,
+          "contact": "Bionic Self Storage",
+          "type": "ACCPAY",
+          "total": 12375,
+          "date": "2025-12-28",
+          "status": "PAID",
+          "project": "ACT-IN",
+          "acct": "452",
+          "tax": "INPUT",
+          "desc": "Bionic Self Storage — Storage — ACT-IN"
+        }
+      ],
+      "ghl_identity": [
+        {
+          "name": "bionic storage",
+          "company": null,
+          "email": "info@bionicgroup.com.au",
+          "tags": []
+        },
+        {
+          "name": "bionic group",
+          "company": null,
+          "email": null,
+          "tags": []
+        },
+        {
+          "name": "bionic self storage",
+          "company": null,
+          "email": null,
+          "tags": []
+        },
+        {
+          "name": "bionic self storage",
+          "company": null,
+          "email": null,
+          "tags": [
+            "project:act-gd",
+            "role:supplier",
+            "comms:buyer-drip"
+          ]
+        }
+      ],
+      "people_page": {
+        "file": "bionic-storage.md",
+        "snippet": "--- name: bionic storage lane: supporter warmth: 0 updated: 2026-06-06 --- # bionic storage ## Soil — institutional ground (CivicGraph) - **Org:** — - **Connected orgs:** — - **Boards / roles:** — - **Government influence:** — · **Indigenous affiliation:** — - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._ ## Web & work — public read _(no web key / no results)_ ## Shared history — from the spine _(no linked email record)_ ## Understanding — drafted The provided context for \"bionic storage\" is quite limited, making it challenging to paint a comprehens"
+      },
+      "gmail_nature": [
+        {
+          "mailbox": "benjamin",
+          "from": "JB Hi-Fi <deals@email.jbhifi.com.au>",
+          "subject": "Cracking Xmas Deals on Health & Wellness",
+          "date": "Sat, 20 Dec 2025 21:30:41 +0000 (UTC)",
+          "snippet": "WAHL, Dyson, Dreame, Therobody + Stacks More! ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ "
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "JB Hi-Fi <deals@email.jbhifi.com.au>",
+          "subject": "$509 Ultrahuman Ring Air + Stacks More!",
+          "date": "Mon, 08 Dec 2025 01:14:08 +0000 (UTC)",
+          "snippet": "Power up your health &amp; fitness this Christmas! ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Fwd: Receipt for Nick Marcaesi for AUD 4,705.00 from Bionic Group",
+          "date": "Wed, 21 Jan 2026 15:31:36 +1000",
+          "snippet": "&gt; Begin forwarded message: &gt; &gt; From: Bionic Group &gt; Subject: Receipt for Nick Marcaesi for AUD 4705.00 from Bionic Group &gt; Date: 21 January 2026 at 9:48:19 am AEST &"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Bionic Group <messaging-service@post.xero.com>",
+          "subject": "Receipt for Nick Marcaesi for AUD 4,705.00 from Bionic Group",
+          "date": "Tue, 20 Jan 2026 23:48:19 +0000",
+          "snippet": "Bionic Group Hi, Attached is a receipt for your payment of AUD 4705.00. If you have any questions, please let us know. Thanks, Bionic Group"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "\"Steve Kristianto | 4Front\" <steve.kristianto@4front.net.au>",
+          "subject": "RE: Nick Marchesi - 2024 tax",
+          "date": "Tue, 20 Jan 2026 00:27:43 +0000",
+          "snippet": "Hi Nick, Thanks again for your time on the phone. As discussed, please see below our discussion points and list of info we still need: 47 Scott Rd – thanks for sending the statemen"
+        },
+        {
+          "mailbox": "hi",
+          "from": "Bionic Storage <info@bionicgroup.com.au>",
+          "subject": "Re: Invoice INV-5040 from The Trustee for The Steve Austin Trust for Nick Marcaesi",
+          "date": "Fri, 16 Jan 2026 20:59:51 +1000",
+          "snippet": "Payment submitted Payment submitted for processing This is not a payment confirmation. The money will be received when the status in your Payment list changes to &#39;Paid&#39;. Ni"
+        },
+        {
+          "mailbox": "hi",
+          "from": "A Curious Tractor <hi@act.place>",
+          "subject": "Re: Invoice INV-5040 from The Trustee for The Steve Austin Trust for Nick Marcaesi",
+          "date": "Fri, 16 Jan 2026 20:58:02 +1000",
+          "snippet": "Nicholas Marchesi - thank you On Fri, 16 Jan 2026 at 8:56 pm, Bionic Storage &lt;info@bionicgroup.com.au&gt; wrote: Hi, To make the refund, I will need the exact name for the bank "
+        },
+        {
+          "mailbox": "hi",
+          "from": "Bionic Storage <info@bionicgroup.com.au>",
+          "subject": "Re: Invoice INV-5040 from The Trustee for The Steve Austin Trust for Nick Marcaesi",
+          "date": "Fri, 16 Jan 2026 20:55:39 +1000",
+          "snippet": "Hi, To make the refund, I will need the exact name for the bank account. Kind regards Merryn On Fri, 16 Jan 2026 at 15:49, A Curious Tractor &lt;hi@act.place&gt; wrote: Thanks frie"
+        }
+      ]
+    }
+  },
+  {
+    "i": 0,
+    "date": "2025-10-23",
+    "dir": "spent",
+    "amount": 2000,
+    "particulars": "CHRISTOPHER DODS J7040396334 Confessional Thanks | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "christopher",
+      "dods"
+    ],
+    "current_verdict": {
+      "nature": "P2P bank transfer to Christopher Dods for The Confessional project (note: 'Confessional Thanks'). This is a payment for his involvement in the project — honorarium/contractor fee. No tax invoice exists for a person-to-person transfer; please confirm with me whether to treat as honorarium or contractor.",
+      "project": "ACT-CF",
+      "account": "Subcontractors / Honorarium",
+      "gst": "GST Free Expenses",
+      "receipt_status": "NO_RECEIPT_EXPECTED",
+      "your_comment": "This is a $2,000 transfer to Christopher Dods for his involvement in The Confessional (ACT-CF) — an honorarium/thank-you payment, not a goods/services invoice. It's a personal bank transfer so there's no tax invoice; treat as GST-free contractor/honorarium against The Confessional. Happy to confirm whether he invoiced us or it was a flat thank-you. The 'receipt' you may see is just the bank transaction record, not a tax invoice."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 61,
+    "date": "2026-04-30",
+    "dir": "spent",
+    "amount": 1495.2,
+    "particulars": "Hannah St Melbourne Melbourne | Credit Card Purchase",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "Hannah"
+    ],
+    "current_verdict": {
+      "nature": "Hannah St, Melbourne — vendor/nature unclear (~$1,495).",
+      "project": "ACT-IN",
+      "account": "To confirm",
+      "gst": "GST on Expenses",
+      "receipt_status": "GAP_PLEASE_PROVIDE",
+      "your_comment": "Hannah St, Melbourne (~$1,495.20 on the NAB Visa, 30 Apr 2026) — I can't tell yet what this was. \"Hannah St Melbourne\" is just a location string, not an identified vendor, there's no receipt on file and no matching email, so I can't confirm whether it was a business cost or personal. I'm holding the account AND the GST treatment until I find what I bought. If it turns out to be a domestic AU business supply with a valid tax invoice I'll code GST on Expenses; if it's overseas/private/no-invoice it'll be GST Free, and if it was personal it goes to 880 Drawings - Nicholas Marchesi (no GST). I'll dig out the tax invoice and confirm the nature before anything is coded."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [
+        {
+          "name": "Hannah Durack",
+          "company": null,
+          "email": "hannah@goodwolf.com.au",
+          "tags": []
+        },
+        {
+          "name": "hannah leworthy",
+          "company": null,
+          "email": "hleworthy@junctionaustralia.org.au",
+          "tags": [
+            "project:act-jh",
+            "interest:justice-reform",
+            "role:community",
+            "comms:justicehub-newsletter"
+          ]
+        },
+        {
+          "name": "hannah march",
+          "company": "justicereforminitiative.org",
+          "email": "hannah@justicereforminitiative.org.au",
+          "tags": [
+            "project:act-ce",
+            "project:act-jh",
+            "interest:justice-reform",
+            "role:partner",
+            "interest:container",
+            "project:act-cn",
+            "comms:justicehub-newsletter",
+            "interest:venue",
+            "project:contained",
+            "project:contained-adelaide-2026"
+          ]
+        }
+      ],
+      "people_page": {
+        "file": "hannah-durack.md",
+        "snippet": "--- name: Hannah Durack lane: supporter warmth: 2 updated: 2026-06-06 --- # Hannah Durack *Senior Consultant, GoodWolf Partners* ## Soil — institutional ground (CivicGraph) - **Org:** GoodWolf Partners (Senior Consultant) - **Connected orgs:** — - **Boards / roles:** — - **Government influence:** — · **Indigenous affiliation:** — - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._ ## Web & work — public read Hannah Durack is a senior consultant at GoodWolf Partners, focusing on grantmaking and strategic development. GoodWolf Partners aims to enhance soc"
+      },
+      "gmail_nature": [
+        {
+          "mailbox": "benjamin",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Arts and Culture Stream at Conference",
+          "date": "Fri, 29 May 2026 10:02:53 +1000",
+          "snippet": "Hey Friend, Lovely to connect for pasta night! I was just reviewing my cal for next week and could not remember the time we confirmed. I am free from 9-11 on Friday before the awar"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Fwd: CONTAINED in Adelaide",
+          "date": "Thu, 28 May 2026 19:32:11 +1000",
+          "snippet": "&gt; Begin forwarded message: &gt; &gt; From: Hannah March &gt; Subject: Re: CONTAINED in Adelaide &gt; Date: 28 May 2026 at 1:44:28 pm AEST &gt; To: Benjamin Knight &gt; Cc: David"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "Hannah March <Hannah@justicereforminitiative.org.au>",
+          "subject": "Re: CONTAINED in Adelaide",
+          "date": "Thu, 28 May 2026 03:44:28 +0000",
+          "snippet": "Afternoon all, I have spoken on the phone to DW and BK just now. We&#39;re still aiming for VIC Square, hopefully with an official request from Tandanya (with DDF/JRI if required) "
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Arts and Culture Stream at Conference",
+          "date": "Fri, 29 May 2026 10:02:53 +1000",
+          "snippet": "Hey Friend, Lovely to connect for pasta night! I was just reviewing my cal for next week and could not remember the time we confirmed. I am free from 9-11 on Friday before the awar"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Fwd: CONTAINED in Adelaide",
+          "date": "Thu, 28 May 2026 19:32:11 +1000",
+          "snippet": "&gt; Begin forwarded message: &gt; &gt; From: Hannah March &gt; Subject: Re: CONTAINED in Adelaide &gt; Date: 28 May 2026 at 1:44:28 pm AEST &gt; To: Benjamin Knight &gt; Cc: David"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Hannah March <Hannah@justicereforminitiative.org.au>",
+          "subject": "Re: CONTAINED in Adelaide",
+          "date": "Thu, 28 May 2026 03:44:28 +0000",
+          "snippet": "Afternoon all, I have spoken on the phone to DW and BK just now. We&#39;re still aiming for VIC Square, hopefully with an official request from Tandanya (with DDF/JRI if required) "
+        }
+      ]
+    }
+  },
+  {
+    "i": 14,
+    "date": "2026-01-09",
+    "dir": "spent",
+    "amount": 1439.6,
+    "particulars": "INTERNET TRANSFER Thanks | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [],
+    "current_verdict": {
+      "nature": "$1,439.60 'INTERNET TRANSFER' — likely the AAMI Commercial Motor insurance direct debit (a forwarded AAMI Commercial Motor New Business Direct Debit email exists in hi@).",
+      "project": "ACT-IN",
+      "account": "Motor vehicle / insurance expense",
+      "gst": "GST on Expenses",
+      "receipt_status": "GMAIL_CANDIDATE",
+      "your_comment": "This line is a bare 'INTERNET TRANSFER Thanks | Transfer Debit' for $1,439.60 — the wording 'INTERNET TRANSFER ... Thanks' reads as a person-to-person bank transfer (a 'thanks' payment to an individual), not a direct debit to AAMI. The 'AAMI Commercial Motor Insurance' email is an amount/inference match only: it shares NO word with the particulars, so per the receipt-trap rule it is a RECEIPT_VENDOR_MISMATCH, not a real document for this line. A genuine AAMI debit would carry an AAMI/Suncorp/DIRECT DEBIT descriptor, not 'INTERNET TRANSFER Thanks'. I'm therefore NOT treating this as insurance and NOT applying GST on Expenses. Confirming the nature: who was this $1,439.60 transfer paid to and what for? If it's a P2P transfer to an individual there's no tax invoice (GST Free, confirm nature); if it genuinely turns out to be the AAMI premium, note that the stamp-duty portion is GST-free so GST on Expenses can't apply to the full amount. Please confirm the payee/purpose before I code it — do not assume AAMI."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 3,
+    "date": "2025-11-05",
+    "dir": "received",
+    "amount": 1150,
+    "particulars": "HPJCFBWSB5 Humanitix Ltd A CURIOUS TRACTO | Interbank Credit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "humanitix"
+    ],
+    "current_verdict": {
+      "nature": "Humanitix remittance of $1,150 — event-ticketing platform paying through ticket sales to ACT. This is event/ticket income (fee-for-service), not a grant.",
+      "project": "ACT-IN",
+      "account": "Other Revenue / Event Income",
+      "gst": "GST on Income",
+      "receipt_status": "ON_FILE_CONFIRMED",
+      "your_comment": "Humanitix $1,150 Interbank Credit = event-ticketing platform remitting ticket-sales income to ACT — this is event/ticket revenue (fee-for-service), NOT a grant. Code as Other Revenue (event income), project ACT-IN as the general bucket pending event confirmation. The Dext \"Humanitix - 2025-11-05 - HPJCFBWSB5.pdf\" receipt is a GENUINE match (ref code HPJCFBWSB5 ties to the line particulars), so receipt is supported — but it is a platform remittance statement, treat as nature-confirmation evidence, not a clean per-ticket tax invoice. TWO things to confirm before locking GST: (1) Net-vs-gross — Humanitix usually remits ticket sales NET of its booking/platform fee, so $1,150 is likely the net figure. Income GST should be 1/11th of the GROSS ticket sales, with the Humanitix fee booked separately (its own GST), NOT simply 1/11th of $1,150. Pull the Humanitix settlement statement to split gross sales vs fee before posting. (2) GST on Income only applies if the sole trader was GST-registered and the event was a taxable supply at the time — confirm registration status for the period. If both confirmed, GST on Income is correct; otherwise GST-free. Grant-vs-revenue call and GST direction (on income) are right; the open item is the gross/net treatment and the registration check."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [
+        {
+          "number": "YNU4EUTK",
+          "contact": "Humanitix",
+          "type": "ACCPAY",
+          "total": 46.63,
+          "date": "2026-02-27",
+          "status": "PAID",
+          "project": "ACT-CP",
+          "acct": "420",
+          "tax": "INPUT",
+          "desc": "."
+        },
+        {
+          "number": "KLDGEDQD",
+          "contact": "Humanitix",
+          "type": "ACCPAY",
+          "total": 165,
+          "date": "2026-02-19",
+          "status": "PAID",
+          "project": "ACT-CP",
+          "acct": "420",
+          "tax": "EXEMPTEXPENSES",
+          "desc": "."
+        },
+        {
+          "number": null,
+          "contact": "Humanitix",
+          "type": "ACCPAY",
+          "total": 1150,
+          "date": "2025-11-04",
+          "status": "AUTHORISED",
+          "project": "ACT-CP",
+          "acct": "415",
+          "tax": "INPUT",
+          "desc": "Humanitix — event-ticketing — ACT-CP"
+        },
+        {
+          "number": null,
+          "contact": "Humanitix",
+          "type": "ACCPAY",
+          "total": 240,
+          "date": "2025-06-19",
+          "status": "DRAFT",
+          "project": "ACT-CP",
+          "acct": "429",
+          "tax": "INPUT",
+          "desc": "Receipt auto-imported from dext_import (Dext 19874"
+        },
+        {
+          "number": "RB16483509130",
+          "contact": "Humanitix",
+          "type": "ACCPAY",
+          "total": 103,
+          "date": "2025-04-06",
+          "status": "PAID",
+          "project": "ACT-CP",
+          "acct": "417",
+          "tax": "BASEXCLUDED",
+          "desc": "Donate to attend 10x10 Philanthrophy"
+        }
+      ],
+      "ghl_identity": [
+        {
+          "name": "Humanitix ",
+          "company": null,
+          "email": "info@humanitix.com",
+          "tags": []
+        },
+        {
+          "name": "humanitix ",
+          "company": null,
+          "email": "hello@humanitix.com",
+          "tags": []
+        },
+        {
+          "name": "humanitix ",
+          "company": null,
+          "email": null,
+          "tags": []
+        },
+        {
+          "name": "West from Humanitix",
+          "company": null,
+          "email": "west@marketing.humanitix.com",
+          "tags": []
+        },
+        {
+          "name": "west from humanitix",
+          "company": null,
+          "email": "west@marketing.humanitix.com",
+          "tags": []
+        }
+      ],
+      "people_page": null,
+      "gmail_nature": [
+        {
+          "mailbox": "benjamin",
+          "from": "NIYEC <campaigns@humanitix.com>",
+          "subject": "National Indigenous Youth Education Coalition (NIYEC) Deep Dive Yarn with Eru Kapa-Kingi Zoom Link",
+          "date": "Wed, 26 Nov 2025 07:49:15 +0000",
+          "snippet": "Hello Benjamin, This is a friendly reminder that National Indigenous Youth Education Coalition (NIYEC) Deep Dive Yarn with Eru Kapa-Kingi is happening now. Please see zoom link for"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "NIYEC <campaigns@humanitix.com>",
+          "subject": "National Indigenous Youth Education Coalition (NIYEC) Deep Dive Yarn with Eru Kapa-Kingi Happening Tonight!",
+          "date": "Wed, 26 Nov 2025 01:31:15 +0000",
+          "snippet": "Hello Benjamin, This is a friendly reminder that National Indigenous Youth Education Coalition (NIYEC) Deep Dive Yarn with Eru Kapa-Kingi is tonight. We are excited for you to join"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "NIYEC <campaigns@humanitix.com>",
+          "subject": "National Indigenous Youth Education Coalition (NIYEC) Deep Dive Yarn with Eru Kapa-Kingi is coming up soon (Order: 2QNJA9TB)",
+          "date": "Tue, 25 Nov 2025 01:13:14 +0000",
+          "snippet": "Hello Benjamin, This is a friendly reminder that National Indigenous Youth Education Coalition (NIYEC) Deep Dive Yarn with Eru Kapa-Kingi is coming up soon! We&#39;re excited to ha"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Honor White <honor@socialimpacthub.org>",
+          "subject": "Re: Brisbane end of year event - opportunity",
+          "date": "Mon, 01 Dec 2025 12:15:55 +1000",
+          "snippet": "Thanks Nic, Gave you a call, just checking in re next Monday, confirming the following - 5 minute lightning talk - short authentic personal story telling - I have (for now) called "
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "Nicholas Marchesi <nicholas@act.place>",
+          "subject": "Re: Introductions to FMS",
+          "date": "Thu, 20 Nov 2025 21:35:03 +0800",
+          "snippet": "No worries at all friend we will motel it :) so excited and thankful! See you Saturday On Thu, 20 Nov 2025 at 11:21 am, James McLennan &lt;james@farmmyschool.com.au&gt; wrote: Woul"
+        },
+        {
+          "mailbox": "nicholas",
+          "from": "James McLennan <james@farmmyschool.com.au>",
+          "subject": "Re: Introductions to FMS",
+          "date": "Thu, 20 Nov 2025 14:19:54 +1100",
+          "snippet": "Would you have access to sleeping gear? I can provide a tent, but that&#39;s likely all... given your fresh back from OS, you may prefer a nearby motel! Warm Regards, James McLenna"
+        },
+        {
+          "mailbox": "hi",
+          "from": "West from Humanitix <west@marketing.humanitix.com>",
+          "subject": "Control your ticketing like a pro - October updates from Humanitix!",
+          "date": "Fri, 03 Oct 2025 00:07:54 +0000",
+          "snippet": "Humanitix product spotlight This month&#39;s Humanitix product spotlight Control the the visibility of resale for your event Control your resale messaging We&#39;ve added new tools"
+        },
+        {
+          "mailbox": "hi",
+          "from": "West from Humanitix <west@marketing.humanitix.com>",
+          "subject": "Ticket to Read: these libraries have our names on them (literally) 🥺💖",
+          "date": "Wed, 10 Sep 2025 01:16:27 +0000",
+          "snippet": "Upcoming events this Spring | Libraries dedicated to Humanitix (and you!) Humanitix logo in white and peach 💌 What&#39;s in this issue: Libraries dedicated to Humanitix (and you!)"
+        }
+      ]
+    }
+  },
+  {
+    "i": 9,
+    "date": "2025-11-28",
+    "dir": "spent",
+    "amount": 781.9,
+    "particulars": "Tarik Dallinger-DimiA9838522047 | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "tarik",
+      "dallinger"
+    ],
+    "current_verdict": {
+      "nature": "P2P bank transfer to an individual (Tarik Dallinger-Dimitriou) of $781.90 — nature not evident from the line; no tax invoice on file.",
+      "project": "ACT-IN",
+      "account": "Ask Ben — likely contractor/honorarium or reimbursement",
+      "gst": "N/A",
+      "receipt_status": "NO_RECEIPT_EXPECTED",
+      "your_comment": "This is a direct bank transfer to Tarik Dallinger-Dimitriou — a P2P transfer with no tax invoice attached. I can't confirm what it was for from the line alone; I'll check whether it was a contractor payment, honorarium or reimbursement and come back. Treat as business pending confirmation; GST treatment depends on the nature."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": [
+        {
+          "mailbox": "benjamin",
+          "from": "Benjamin Knight <benjamin@act.place>",
+          "subject": "Re: Artwork for the Container project",
+          "date": "Tue, 30 Sep 2025 11:00:43 +1000",
+          "snippet": "Rad - will call ya later today. On Tue, 30 Sep 2025 at 10:42 am, Tarik Dallinger-Dimizio &lt;tarikdallingerdimizio@gmail.com&gt; wrote: Morning Benjamin, Sick! I can come up on Fri"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "Tarik Dallinger-Dimizio <tarikdallingerdimizio@gmail.com>",
+          "subject": "Re: Artwork for the Container project",
+          "date": "Tue, 30 Sep 2025 10:42:15 +1000",
+          "snippet": "Morning Benjamin, Sick! I can come up on Friday, Saturday is no good though. I tried giving you a call yesterday afternoon and I had no luck. Enjoy your day, Tarik On Mon, 29 Sep 2"
+        },
+        {
+          "mailbox": "benjamin",
+          "from": "Benjamin Knight <benjamin@act.place>",
+          "subject": "Re: Artwork for the Container project",
+          "date": "Mon, 29 Sep 2025 13:37:53 +1000",
+          "snippet": "Wicked - how you placed this Friday and Saturday. Give me a call later if you have a window. On Fri, 26 Sep 2025 at 11:47 am, Tarik Dallinger-Dimizio &lt;tarikdallingerdimizio@gmai"
+        }
+      ]
+    }
+  },
+  {
+    "i": 22,
+    "date": "2026-05-25",
+    "dir": "spent",
+    "amount": 665,
+    "particulars": "MR BEAU JOSEPH ANDE H9114176985 Thanks | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "BEAU",
+      "JOSEPH",
+      "ANDE"
+    ],
+    "current_verdict": {
+      "nature": "Bank P2P transfer of $665 to an individual (Mr Beau Joseph Ande), 'Thanks'. No tax invoice; nature needs Ben to confirm (likely contractor/honorarium, paired with i=21).",
+      "project": "ACT-IN",
+      "account": "Contractor/Reimbursement (confirm)",
+      "gst": "N/A",
+      "receipt_status": "NO_RECEIPT_EXPECTED",
+      "your_comment": "Second transfer to Beau Joseph ($665, 'Thanks') — same payee as the $291 on 15 May. P2P transfer to an individual, no tax invoice. I'll confirm whether this is a contractor payment/honorarium or a reimbursement and the right project; GST treatment follows from that."
+    },
+    "evidence": {
+      "xero_history": [
+        {
+          "contact": "Mr Beau Joseph Anderson",
+          "type": "SPEND",
+          "total": 300,
+          "date": "2025-06-29",
+          "project": null,
+          "proj_src": null,
+          "acct": "880",
+          "tax": "BASEXCLUDED",
+          "desc": ""
+        }
+      ],
+      "xero_invoices": [],
+      "ghl_identity": [
+        {
+          "name": "mr beau joseph anderson",
+          "company": null,
+          "email": null,
+          "tags": []
+        }
+      ],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 7,
+    "date": "2025-11-28",
+    "dir": "received",
+    "amount": 616.66,
+    "particulars": "SUZANNE MARGARET ANDSecurity minus Car d | Money Transfer",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "suzanne",
+      "margaret"
+    ],
+    "current_verdict": {
+      "nature": "Incoming $616.66 from Suzanne Margaret (note 'Security minus Card'). Appears to be a bond/security deposit refund net of a card charge — nature unclear. No tax invoice for an individual's transfer.",
+      "project": "ACT-IN",
+      "account": "Other Revenue / Deposit Refund (TBC)",
+      "gst": "BAS Excluded",
+      "receipt_status": "NO_RECEIPT_EXPECTED",
+      "your_comment": "$616.66 in from Suzanne Margaret with the note 'Security minus Card' — reads like a security/bond deposit being returned to us net of a card fee. I need to confirm the exact nature before coding. No tax invoice for a personal transfer. Hold as BAS-excluded; if it's a refund of a deposit we paid it should offset that original account rather than be new income."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 1,
+    "date": "2025-10-29",
+    "dir": "spent",
+    "amount": 360,
+    "particulars": "James William V0471764749 | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "james",
+      "william"
+    ],
+    "current_verdict": {
+      "nature": "P2P bank transfer of $360 to an individual (James William). Nature not established from particulars — could be a reimbursement, contractor payment, or personal. No tax invoice for a P2P transfer.",
+      "project": "ACT-IN",
+      "account": "Subcontractors / Reimbursement (TBC)",
+      "gst": "BAS Excluded",
+      "receipt_status": "NO_RECEIPT_EXPECTED",
+      "your_comment": "$360 transfer to an individual, James William — I need to confirm what this was for before we code it. It's a person-to-person bank transfer so there's no tax invoice. Likely a reimbursement or small contractor payment; I'll confirm the nature and project. Hold as BAS-excluded until I get back to you — don't claim GST on a bare transfer."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 60,
+    "date": "2026-04-07",
+    "dir": "spent",
+    "amount": 345.37,
+    "particulars": "Restaurace Alma Praha 1 | Credit Card Purchase",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "Restaurace",
+      "Alma",
+      "Praha"
+    ],
+    "current_verdict": {
+      "nature": "Restaurace Alma Praha (Prague) — restaurant meal during the overseas World Tour trip.",
+      "project": "ACT-IN",
+      "account": "Travel - Meals (overseas)",
+      "gst": "GST Free Expenses",
+      "receipt_status": "GAP_PLEASE_PROVIDE",
+      "your_comment": "Restaurant meal in Prague during the overseas trip. Overseas vendor so GST Free Expenses. If it was a business meal on the trip, code to Travel-Meals under ACT-IN; if personal, treat as Drawings — flagging for me to confirm. I'll provide the receipt if it was business. — possible receipt lead: dext_receipt \"Alma bio s.r.o.\" $166.00 2026-04-03 (SPLIT (receipt is ½ of this line)) — VERIFY it's the same purchase before relying."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 21,
+    "date": "2026-05-15",
+    "dir": "spent",
+    "amount": 291,
+    "particulars": "MR BEAU JOSEPH ANDE Y4434637310 | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "BEAU",
+      "JOSEPH",
+      "ANDE"
+    ],
+    "current_verdict": {
+      "nature": "Bank P2P transfer of $291 to an individual (Mr Beau Joseph Ande). No tax invoice and the nature is not derivable from the particulars — needs Ben to confirm (likely a contractor/reimbursement). Paired with i=22 to the same person.",
+      "project": "ACT-IN",
+      "account": "Contractor/Reimbursement (confirm)",
+      "gst": "N/A",
+      "receipt_status": "NO_RECEIPT_EXPECTED",
+      "your_comment": "Bank transfer to Beau Joseph — same payee as the $665 on 25 May. I'll confirm the nature (looks like a contractor payment or reimbursement). P2P transfer to an individual so there's no tax invoice; GST depends on what it's for. Will confirm project and whether GST applies once I check what this covered."
+    },
+    "evidence": {
+      "xero_history": [
+        {
+          "contact": "Mr Beau Joseph Anderson",
+          "type": "SPEND",
+          "total": 300,
+          "date": "2025-06-29",
+          "project": null,
+          "proj_src": null,
+          "acct": "880",
+          "tax": "BASEXCLUDED",
+          "desc": ""
+        }
+      ],
+      "xero_invoices": [],
+      "ghl_identity": [
+        {
+          "name": "mr beau joseph anderson",
+          "company": null,
+          "email": null,
+          "tags": []
+        }
+      ],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 31,
+    "date": "2025-11-04",
+    "dir": "spent",
+    "amount": 202.16,
+    "particulars": "INTERNET BANKING TRANSFERMELBOURNE | Credit Card Cash Advance",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "TRANSFERMELBOURNE"
+    ],
+    "current_verdict": {
+      "nature": "Credit card cash advance ('Internet Banking Transfer') — a cash draw off the NAB Visa, not a vendor purchase. No goods/services, no tax invoice.",
+      "project": "ACT-IN",
+      "account": "Transfer / clearing — code to wherever the drawn cash was actually spent (confirm with Ben)",
+      "gst": "BAS Excluded",
+      "receipt_status": "NO_RECEIPT_EXPECTED",
+      "your_comment": "Same as the other cash advances — a credit-card cash advance (internet banking transfer), not a purchase, so no tax invoice and no GST on the advance. BAS-excluded as a transfer; GST attaches to whatever the cash was actually spent on. Need to confirm the end use before final coding."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 63,
+    "date": "2026-05-21",
+    "dir": "spent",
+    "amount": 201.28,
+    "particulars": "MALL MEDICAL CENTRE Alice Springs | Credit Card Purchase",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "MALL",
+      "MEDICAL",
+      "CENTRE",
+      "Alice",
+      "Springs"
+    ],
+    "current_verdict": {
+      "nature": "Mall Medical Centre, Alice Springs (Mparntwe) — medical/clinic charge on the ACT business card while on the ground in Alice Springs. Likely a travel-related medical or staff/contractor health expense tied to the Oonchiumpa work. Need to confirm whether it was a genuine business medical cost (e.g. travel-required check/treatment for someone working on the trip) or a personal medical visit.",
+      "project": "ACT-OO",
+      "account": "Travel - National (or Drawings if personal medical)",
+      "gst": "GST on Expenses",
+      "receipt_status": "GAP_PLEASE_PROVIDE",
+      "your_comment": "This is a charge from Mall Medical Centre in Alice Springs (Mparntwe) on the ACT business card on 21 May 2026 for $201.28. A doctor/clinic visit is a personal health service in nature, so my default is to code it to my Drawings (880 - Nicholas Marchesi), not a business travel expense — being on a business trip doesn't make a personal medical visit deductible. If it turns out this was a genuinely business-required medical cost (e.g. a mandated check tied to the work up there), let me know and we can revisit. Either way the GST treatment is GST-Free, not GST on Expenses: medical and health services are GST-free supplies in Australia (Subdiv 38-B), so there's no GST credit to claim even with an invoice. I haven't tied this to any specific project — please don't assume Oonchiumpa (ACT-OO) just from the Alice Springs location; if it's coded to a project at all it would be ACT-IN. No tax invoice on file; I can request a receipt from the clinic if you need it on record, but it won't change the GST-free treatment. Please confirm with me before finalising."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 2,
+    "date": "2025-11-04",
+    "dir": "spent",
+    "amount": 200,
+    "particulars": "Shane Bloomfield H8299013120 Bunnings thanks | Transfer Debit",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "Shane",
+      "Bloomfield",
+      "Bunnings"
+    ],
+    "current_verdict": {
+      "nature": "Reimbursement of $200 to Shane Bloomfield for a Bunnings purchase for BG Fit (note: 'Bunnings thanks'). The matched receipt is a Woolworths receipt — does NOT share any word with this Bunnings reimbursement, so it's a false amount-only match.",
+      "project": "ACT-BG",
+      "account": "430",
+      "gst": "GST on Expenses",
+      "receipt_status": "RECEIPT_VENDOR_MISMATCH",
+      "your_comment": "This is a $200 reimbursement to Shane Bloomfield for a Bunnings purchase he made for BG Fit (ACT-BG) — particulars 'Bunnings thanks', and it's a bank Transfer Debit (P2P to an individual), so there is no tax invoice attached to the transfer itself. The receipt currently on file is a Woolworths receipt (Woolworths-receipt.pdf) — that is a wrong amount-only match (RECEIPT_VENDOR_MISMATCH), please ignore it; it does not substantiate this line. IMPORTANT on GST: with no valid tax invoice on file, no GST is claimable right now — code this GST Free / treat as a receipt GAP, NOT 'GST on Expenses'. Bunnings is a domestic supplier, so ONCE Shane provides the actual Bunnings tax invoice we can switch it to GST on Expenses and claim the 1/11th. Until that invoice is produced it stays GST Free. Project ACT-BG, account 430 (subject to project confirmation)."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [
+        {
+          "name": "shane bloomfield",
+          "company": null,
+          "email": "shane.bloomfield@storyteller.local",
+          "tags": []
+        }
+      ],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 4,
+    "date": "2025-11-07",
+    "dir": "received",
+    "amount": 200,
+    "particulars": "MR MARCUS TRAVERS COMarcus C thanks | Money Transfer",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "marcus",
+      "travers"
+    ],
+    "current_verdict": {
+      "nature": "Incoming $200 from an individual (Marcus Travers, note 'Marcus C thanks'). The matched receipt is a Woolworths receipt — does NOT relate to this incoming transfer, so it's a false amount-only match. Nature of income unknown — likely a contribution/reimbursement back to ACT.",
+      "project": "ACT-IN",
+      "account": "Other Revenue (TBC)",
+      "gst": "BAS Excluded",
+      "receipt_status": "RECEIPT_VENDOR_MISMATCH",
+      "your_comment": "$200 received from Marcus Travers ('thanks') — I need to confirm what this is for. The Woolworths receipt attached is a wrong amount-only match, please ignore it. It's a bank transfer in from an individual so there's no tax invoice; likely a contribution or a reimbursement of something we paid for. Hold as BAS-excluded until I confirm — don't book GST on income on a bare transfer."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 62,
+    "date": "2026-05-08",
+    "dir": "spent",
+    "amount": 174.65,
+    "particulars": "INTERNET BANKING TRANSFERMELBOURNE | Credit Card Cash Advance",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "TRANSFERMELBOURNE"
+    ],
+    "current_verdict": {
+      "nature": "Credit-card cash advance via internet banking transfer — not a vendor purchase; nature to confirm.",
+      "project": "ACT-IN",
+      "account": "To confirm (cash advance — likely Drawings or reimbursement of a cash spend)",
+      "gst": "BAS Excluded",
+      "receipt_status": "NO_RECEIPT_EXPECTED",
+      "your_comment": "This is a credit-card cash advance (internet banking transfer), not a purchase, so there's no tax invoice. BAS Excluded. I need to confirm what the cash was used for — if it was a private withdrawal it's Drawings, if it funded a business spend I'll provide that receipt. Flagging for me to confirm."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 30,
+    "date": "2025-11-04",
+    "dir": "spent",
+    "amount": 45.8,
+    "particulars": "INTERNET BANKING TRANSFERMELBOURNE | Credit Card Cash Advance",
+    "sl_question": "Need invoice for proper GST treatment or kindly confirm the nature of this transaction",
+    "search_tokens": [
+      "TRANSFERMELBOURNE"
+    ],
+    "current_verdict": {
+      "nature": "Credit card cash advance ('Internet Banking Transfer') — a cash draw off the NAB Visa, not a vendor purchase. No goods/services, no tax invoice.",
+      "project": "ACT-IN",
+      "account": "Transfer / clearing — code to wherever the drawn cash was actually spent (confirm with Ben)",
+      "gst": "BAS Excluded",
+      "receipt_status": "NO_RECEIPT_EXPECTED",
+      "your_comment": "This is a credit-card cash advance (internet banking transfer off the card), not a purchase — no tax invoice exists and there's no GST on the advance itself. It's BAS-excluded as a transfer; GST only applies to whatever the cash was then spent on. Need to confirm what this cash was used for before final coding."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  },
+  {
+    "i": 39,
+    "date": "2025-11-26",
+    "dir": "spent",
+    "amount": 16.45,
+    "particulars": "Audible Limited AU MELBOURNE | Credit Card Purchase",
+    "sl_question": "Is this an office expense or Drawings - Nicholas Marchesi?",
+    "search_tokens": [
+      "Audible",
+      "Limited"
+    ],
+    "current_verdict": {
+      "nature": "Audible audiobook subscription",
+      "project": "ACT-IN",
+      "account": "485 Subscriptions (office expense) - or 880 Drawings if personal",
+      "gst": "GST on Expenses",
+      "receipt_status": "GMAIL_FOUND",
+      "your_comment": "Audible Limited AU ($16.45, NAB Visa #8815). SL asked one thing — office expense or Drawings — so decide it, don't punt. An audiobook subscription is presumptively personal/lifestyle; unless Ben confirms specific work use, code 880 Drawings - Nicholas Marchesi with NO GST claimed. Only if Ben confirms it is genuinely for work does it become 485 Subscriptions with GST on Expenses (Audible AU is GST-registered, the $16.45 is GST-inclusive — but you cannot assert GST on Expenses while the item may be Drawings; the two are mutually exclusive and the proposal states both). On the receipt: the on-file receipt is 'Receipt from Amazon / Amazon-receipt.jpg' — no shared word with 'Audible', so RECEIPT_VENDOR_MISMATCH stands and we do not rely on it (correct call; Audible bills via Amazon so the monthly Audible email is the real record if business use is confirmed). Net: do not default to claiming GST — default to Drawings/no-GST and let Ben upgrade it to a business subscription. RECEIPT FOUND: Audible order receipt (donotreply@audible.com.au, 'your order is complete', $16.45 confirmed) in benjamin@act.place — so a receipt does exist. The remaining call is still office-expense vs Drawings (an audiobook sub is presumptively personal)."
+    },
+    "evidence": {
+      "xero_history": [],
+      "xero_invoices": [],
+      "ghl_identity": [],
+      "people_page": null,
+      "gmail_nature": []
+    }
+  }
+]
