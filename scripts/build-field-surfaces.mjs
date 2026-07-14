@@ -22,20 +22,34 @@ const CWD = '/Users/benknight/Code/act-global-infrastructure';
 dotenv.config({ path: `${CWD}/.env.local` });
 try {
   const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-  const { data } = await sb.from('communications_history').select('created_at')
+  const { data, error } = await sb.from('communications_history').select('created_at')
     .eq('source_system', 'gmail').order('created_at', { ascending: false }).limit(1);
+  // supabase-js reports failures via `error`, not throw — unchecked, a dead key or pooler blip
+  // wrote {stale_days:null} that read as "unknown" instead of "broken" (seen 2026-07-15)
+  if (error) throw new Error(error.message);
   const last = data?.[0]?.created_at || null;
   const staleDays = last ? Math.round((Date.now() - Date.parse(last)) / 864e5) : null;
   writeFileSync(`${CWD}/thoughts/shared/field-freshness.json`,
-    JSON.stringify({ gmail_max_created: last, checked_at: new Date().toISOString(), stale_days: staleDays }, null, 1));
+    JSON.stringify({ gmail_max_created: last, checked_at: new Date().toISOString(), stale_days: staleDays, error: null }, null, 1));
   if (staleDays == null || staleDays > 2)
     console.error(`⚠ SPINE CANARY: gmail ingest ${staleDays ?? '??'} days stale — check sync-gmail-to-supabase + trigger errors (see migration 20260606000000)`);
-} catch (e) { console.error(`spine canary failed (surfaces still build): ${e.message}`); }
+} catch (e) {
+  try { writeFileSync(`${CWD}/thoughts/shared/field-freshness.json`,
+    JSON.stringify({ gmail_max_created: null, checked_at: new Date().toISOString(), stale_days: null, error: e.message }, null, 1)); } catch {}
+  console.error(`spine canary failed (surfaces still build): ${e.message}`);
+}
 
 // beeper recency first — surfaces fold it into last_contact. Failure-soft: if the
 // Beeper app is down, surfaces still build on the last snapshot (clock just staler).
 try { execSync('node scripts/build-beeper-recency.mjs', { stdio: 'inherit', cwd: CWD }); }
 catch { console.error('⚠ beeper recency pull failed (Beeper Desktop running?) — surfaces use the previous snapshot'); }
+
+// owes-ledger refresh — the morning read's Sun items + constellation line read this CSV;
+// without this step it silently serves the last manual run (5.5 weeks stale on 2026-07-15).
+// Failure-soft: EL instance rejects legacy keys since the 2026-06-29 remediation — until
+// EL_SUPABASE_SERVICE_KEY is re-issued this warns daily and the read shows the ledger's age.
+try { execSync('node scripts/build-contributor-constellation.mjs', { stdio: 'inherit', cwd: CWD }); }
+catch { console.error('⚠ owes-ledger refresh failed — morning read uses the previous CSV (check EL_SUPABASE_* keys in .env.local)'); }
 
 let failed = 0;
 for (const s of ['build-morning-read.mjs', 'build-scope-board.mjs', 'build-orbit-viz.mjs']) {

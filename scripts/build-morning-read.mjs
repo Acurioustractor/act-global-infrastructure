@@ -14,7 +14,7 @@
  * Read-only. Run each morning (or cron it):  node scripts/build-morning-read.mjs
  * Out: thoughts/shared/the-field-morning.html
  */
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 
 function parseCSV(t){const R=[];let r=[],f='',Q=false;for(let i=0;i<t.length;i++){const c=t[i];if(Q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else Q=false;}else f+=c;}else if(c==='"')Q=true;else if(c===',')(r.push(f),f='');else if(c==='\n')(r.push(f),R.push(r),r=[],f='');else if(c!=='\r')f+=c;}if(f||r.length){r.push(f);R.push(r);}return R;}
 const rd=p=>{const R=parseCSV(readFileSync(p,'utf8'));const h=R[0];return R.slice(1).filter(x=>x.length===h.length).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]])));};
@@ -63,8 +63,15 @@ const used=new Set();
 const take=(arr,n)=>arr.filter(p=>!used.has(norm(p.name||p.need||''))).slice(0,n).map(p=>{used.add(norm(p.name||p.need||''));return p;});
 // tend: RINGED people overdue vs their ring's rhythm (or their own stated cadence)
 const cooling=take(ringed.filter(p=>p.cad?.state==='overdue').sort((a,b)=>(b.cad.ratio??0)-(a.cad.ratio??0)),2);
-const owedAll=rd('thoughts/shared/el-contributor-constellation.csv').map(r=>({name:r.name,owes:+r.owes_gap,live:+r.live,tx:+r.transcripts,consent:+r.consent_required})).filter(r=>!isUuid(r.name)&&r.owes>0).sort((a,b)=>b.owes-a.owes);
+const constPath='thoughts/shared/el-contributor-constellation.csv';
+const constRows=rd(constPath).filter(r=>!isUuid(r.name));                          // phantom/UUID rows out of counts too
+const owedAll=constRows.map(r=>({name:r.name,owes:+r.owes_gap,live:+r.live,tx:+r.transcripts,consent:+r.consent_required})).filter(r=>r.owes>0).sort((a,b)=>b.owes-a.owes);
 const owed=owedAll.slice(0,2);
+// constellation aggregate — the whole debt, not just today's two Sun items
+const owesTotal=constRows.reduce((s,r)=>s+(+r.owes_gap||0),0);
+const consentTotal=constRows.reduce((s,r)=>s+(+r.consent_required||0),0);
+const owesPeople=constRows.filter(r=>+r.owes_gap>0).length;
+const ledgerAge=daysSince(statSync(constPath).mtime.toISOString());
 // gaps: thin needs (no warm candidate) from catalog+matches
 const catalog=JSON.parse(readFileSync('thoughts/shared/project-needs-catalog.json','utf8'));
 const matches=rd('thoughts/shared/project-needs-match.csv');
@@ -106,14 +113,20 @@ h1{font-size:21px;margin:0}.date{color:#8b98a9;font-size:13px;margin:2px 0 4px}
 .layers{color:#6b7a8d;font-size:12px;margin-top:6px}
 </style></head><body><div class=wrap>
 <h1>The Field — morning read</h1><div class=date>${today}</div>
-${(()=>{try{const f=JSON.parse(readFileSync('thoughts/shared/field-freshness.json','utf8'));const d=f.stale_days;return(d==null||d>2)?`<div class=state><span class=warn>⚠ Email spine is ${d??'??'} days stale (last gmail ingest ${(f.gmail_max_created||'never').slice(0,10)}) — warmth/cooling below may be wrong. Run sync-gmail-to-supabase + check trigger errors.</span></div>`:'';}catch{return'';}})()}
+<div id=stale-note class=state style="display:none"></div>
+${(()=>{try{const f=JSON.parse(readFileSync('thoughts/shared/field-freshness.json','utf8'));if(f.error)return`<div class=state><span class=warn>⚠ Spine canary FAILED (${f.error}) — warmth/cooling below may be wrong. Check SUPABASE keys / pooler.</span></div>`;const d=f.stale_days;return(d==null||d>2)?`<div class=state><span class=warn>⚠ Email spine is ${d??'??'} days stale (last gmail ingest ${(f.gmail_max_created||'never').slice(0,10)}) — warmth/cooling below may be wrong. Run sync-gmail-to-supabase + check trigger errors.</span></div>`:'';}catch{return'';}})()}
 <div class=state>
 <b>Energy check.</b> Your inner 5: ${inner5.map(p=>p.name).join(' · ')||'—'}.
 ${coreStale.length?`<span class=warn>${coreStale.length} of your core are past their rhythm (${coreStale.slice(0,3).map(p=>`${p.name} ${p.cad.days}d/${p.cad.expected}d`).join(', ')}${coreStale.length>3?'…':''}) — the core is going untended.</span>`:`<span class=ok>The core is tended — everyone inside their rhythm.</span>`}
 <div class=layers>Your read layers: ${inner5.length} / ${l15.length} / ${l50.length} / ${l150.length} of 5/15/50/150 · rings are yours alone — the machine only keeps time. ${people.filter(p=>!p.ring).length} unread in the field.</div>
 </div>
+<div class=state>
+<b>The constellation.</b> ACT holds ${owesTotal} unhonoured transcript${owesTotal===1?'':'s'} across ${owesPeople} storyteller${owesPeople===1?'':'s'} · ${consentTotal} consent conversation${consentTotal===1?'':'s'} owed.
+${ledgerAge!=null&&ledgerAge>2?`<span class=warn>Owes ledger last refreshed ${ledgerAge}d ago — counts are stale until the EL key is fixed.</span>`:`<span class=ok>Ledger fresh.</span>`}
+</div>
 ${actions.join('')}
 <div class=foot>Tend, then close the tab. Deeper looks: <a href="project-scope-board.html">scope board</a> · <a href="orbit-viz.html">the orbit</a> · person pages in <code>people/</code>. Regenerate: <code>node scripts/build-morning-read.mjs</code></div>
+<script>(function(){var b=Date.parse('${NOW.toISOString()}');var d=Math.round((Date.now()-b)/864e5);if(d>=2){var el=document.getElementById('stale-note');el.style.display='block';el.innerHTML='<span class=warn>⚠ This read was built '+d+' days ago — the field-surfaces cron is not running. Revive: <code>pm2 start ecosystem.config.cjs --only field-surfaces && pm2 save</code></span>';}})();</script>
 </div></body></html>`;
 
 writeFileSync('thoughts/shared/the-field-morning.html',html);
