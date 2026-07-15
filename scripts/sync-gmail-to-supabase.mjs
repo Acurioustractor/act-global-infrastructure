@@ -718,7 +718,16 @@ async function syncGmail(options = {}) {
     success: stats.errors === 0,
     recordCount: stats.inserted,
     durationMs: Date.now() - stats.startTime,
+    error: stats.errors > 0 ? `${stats.errors} errors, ${stats.inserted}/${stats.fetched} inserted` : undefined,
   });
+
+  // Total-write failure must crash loudly. On 2026-07-15 a disabled key produced
+  // 1,449 fetched / 0 inserted / 1,450 errors and this function still printed
+  // "[OK] Sync complete!" and exited 0 — invisible to cron monitoring for 16 days.
+  if (stats.fetched > 0 && stats.inserted === 0 && stats.skipped === 0 && stats.errors > 0) {
+    console.error('[FATAL] Fetched messages but wrote none — credentials or schema are broken. Exiting non-zero.');
+    process.exit(1);
+  }
 }
 
 // Parse CLI arguments

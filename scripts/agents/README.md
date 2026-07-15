@@ -153,3 +153,15 @@ As of 2026-04-23:
 - `thoughts/shared/plans/goods-ceo-6-month-plan.md` — operating plan (Layer 5 = agents)
 - `~/.claude/rules/opus-4-7-prompting.md` — prompt contract rules
 - `~/.claude/rules/context-efficiency.md` — required agent contract (budget/stop/fallback/scoped files)
+
+---
+
+## Status vs disk (2026-07-15 field-desk alignment audit)
+
+The layout above lists 8 agents; only 5 exist on disk: `agent-funder-cadence` (A2),
+`agent-procurement-analyst` (A1), `agent-invoice-drift-detector`, `agent-narrative-gatekeeper`
+(A6), and `agent-xero-ghl-reconciler` (present on disk but not in the layout above — Xero
+ACCREC vs GHL opportunity drift; note it creates GHL opps mechanically and predates the
+2026-07-12 pipeline ADR, so check pipeline assumptions before scheduling). Not yet built:
+`agent-capital-stack-brief` (A5), `agent-field-insight` (A3), `agent-story-cascade` (A4),
+`agent-data-room-builder` (A7).

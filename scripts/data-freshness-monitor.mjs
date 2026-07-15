@@ -49,7 +49,38 @@ const THRESHOLDS = {
   subscriptions:       { warn: 168, critical: 720, column: 'updated_at', label: 'Subscriptions' },
   api_usage:           { warn: 24, critical: 72,  column: 'created_at', label: 'API Usage' },
   site_health_checks:  { warn: 24, critical: 72,  column: 'checked_at', label: 'Site Health Checks' },
+  // Xero mirrors were the biggest unmonitored source (field-desk alignment 2026-07-15):
+  // sync runs 6-hourly, so 12h without a synced row = a missed cycle, 48h = broken.
+  xero_invoices:       { warn: 12, critical: 48,  column: 'synced_at', label: 'Xero Invoices' },
+  xero_transactions:   { warn: 12, critical: 48,  column: 'synced_at', label: 'Xero Transactions' },
 };
+
+// Table recency alone misses a sync that runs but errors on every row (the 699/699
+// gmail-trigger case; the 1,449-fetched/0-inserted stale-BWS-key case). Read sync_status
+// directly: recently-attempted error rows are critical; old error rows are a warn note.
+async function checkSyncStatusErrors(now) {
+  const result = { table: 'sync_status', label: 'Sync job errors', status: 'ok', age_hours: null, row_count: null, last_updated: null, note: '' };
+  try {
+    const { data, error } = await supabase
+      .from('sync_status')
+      .select('integration_name,last_error,last_attempt_at')
+      .eq('status', 'error');
+    if (error) { result.status = 'warn'; result.note = `sync_status unreadable: ${error.message}`; return result; }
+    const rows = data || [];
+    result.row_count = rows.length;
+    const recent = rows.filter(r => r.last_attempt_at && (now - new Date(r.last_attempt_at)) < 72 * 3600e3);
+    if (recent.length) {
+      result.status = 'critical';
+      result.note = `${recent.length} sync(s) actively failing: ${recent.map(r => r.integration_name).join(', ')}`;
+    } else if (rows.length) {
+      result.status = 'warn';
+      result.note = `${rows.length} sync(s) in stale error state (no attempt in 72h): ${rows.map(r => r.integration_name).join(', ')}`;
+    } else {
+      result.note = 'no sync_status errors';
+    }
+  } catch (e) { result.status = 'warn'; result.note = `check failed: ${e.message}`; }
+  return result;
+}
 
 async function main() {
   const start = Date.now();
@@ -75,6 +106,9 @@ async function main() {
   // Check knowledge pipeline health
   const pipelineResult = await checkPipelineHealth();
   results.push(pipelineResult);
+
+  // Check sync JOB failures, not just table staleness
+  results.push(await checkSyncStatusErrors(now));
 
   // Summary
   const stale = results.filter(r => r.status === 'critical');

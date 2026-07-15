@@ -101,3 +101,19 @@ PM2 cron one-shots (`autorestart:false` + `cron_restart`), no message queue; the
 - UNVERIFIED and flagged: `pg_trgm` extension presence; `opportunity_context_events` writer jobs; live contents of `sync_status`/`gmail_sync_status`/`knowledge_source_sync`; the ~70 finance route bodies; Vercel-hosted env for command-center.
 
 *Provenance: agent briefs in workflow journal wf_fc84a6ba-f3d; cron classifications from wf_0eaddb07-e1d; live-state facts from this session's Supabase probes and PM2 operations (see `thoughts/shared/plans/cron-fleet-revival-2026-07-15.md`).*
+
+## 6. Fix log (same day, Ben's "fix all")
+
+| Gap | Fix | Verified |
+|---|---|---|
+| §2.1 opportunity_context_events writers | Live query: gmail + notion sweeps writing as of 2026-07-13 — spine ALIVE; gap closes as verified-healthy | live SQL |
+| pg_trgm unverified | Installed (pg_extension query) | live SQL |
+| §2.2 xero/ghl syncs silent | recordSyncStatus added to both (sync_xero, sync_ghl_contacts/_opportunities rows); zero-write runs now exit non-zero (xero + gmail) | GHL sync ran through the new path: sync_status rows updated with real counts at 01:32Z |
+| §2.2 Xero absent from freshness thresholds | xero_invoices + xero_transactions added (warn 12h / critical 48h, synced_at) | monitor run: both healthy, 9h |
+| Monitor blind to job failure | checkSyncStatusErrors() added: recent-error = critical, stale-error = warn | monitor run: 9 stale-error syncs surfaced as warn, no false alert storm |
+| §2.3 Discord dead | Fallback chain to DISCORD_WEBHOOK_URL / DISCORD_ALERTS_WEBHOOK in discord-notify.mjs; per-channel names still win when defined | node --check; live send deliberately untested |
+| §2.4 env name drift | .env.local aliases added: EL_SUPABASE_SERVICE_ROLE_KEY, NOTION_API_KEY (local file, gitignored) | file check |
+| §2.4 Google client dupes | NOT identical — two different OAuth pairs, dotenv last-wins. Left alone; Ben picks the live one | compared programmatically, values unprinted |
+| §5 GHL mirror drift 2.08% | Full sync ran reconcileDeletions: 68 ghosts soft-deleted; drift now 0.00% on contacts AND opportunities | verify-ghl-mirror re-run |
+| §2.8 agents README/disk drift | Status-vs-disk section appended to scripts/agents/README.md | file check |
+| Still open (not mechanical fixes) | GMAIL_PUBSUB_TOPIC (needs a GCP topic), PM2 daemon env bounce (maintenance window), batch B/C cron revival (decisions), sync_xero status-row refresh (next 6-hourly cron fire proves the new path) | — |

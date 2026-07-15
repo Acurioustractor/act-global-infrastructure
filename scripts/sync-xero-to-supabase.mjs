@@ -29,6 +29,7 @@ import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
+import { recordSyncStatus } from './lib/sync-status.mjs';
 import path from 'path';
 
 // ============================================================================
@@ -1156,22 +1157,44 @@ async function main() {
     console.log('   Configuration OK');
   }
 
+  // sync_status row 'sync_xero' feeds the freshness monitor's job-failure check —
+  // previously this script recorded only to its own log table, which nothing monitors,
+  // and a run erroring on every record still exited 0 (2026-07-15 alignment fix).
+  async function finishRun() {
+    if (!supabase) return;
+    const synced = stats.invoices.synced + stats.transactions.synced;
+    const errors = stats.invoices.errors + stats.transactions.errors;
+    await recordSyncStatus(supabase, 'sync_xero', {
+      success: errors === 0,
+      recordCount: synced,
+      error: errors ? `${errors} errors, ${synced} synced` : undefined,
+      durationMs: Date.now() - Date.parse(runStartIso),
+    });
+    if (synced === 0 && errors > 0) {
+      console.error('\n[FATAL] Xero sync wrote nothing and errored — exiting non-zero.');
+      process.exit(1);
+    }
+  }
+
   switch (command) {
     case 'invoices':
       await syncInvoices(syncOptions);
       await logSync('invoices', { invoices: stats.invoices });
       if (!days) writeSyncState(runStartIso);
+      await finishRun();
       break;
 
     case 'transactions':
       await syncTransactions(syncOptions);
       await logSync('transactions', { transactions: stats.transactions });
       if (!days) writeSyncState(runStartIso);
+      await finishRun();
       break;
 
     case 'full':
       await fullSync(syncOptions);
       if (!days) writeSyncState(runStartIso);
+      await finishRun();
       break;
 
     case 'setup':

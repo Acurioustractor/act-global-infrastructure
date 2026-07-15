@@ -21,6 +21,7 @@
 import { createGHLService } from './lib/ghl-api-service.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { buildProjectTagMap, deriveProjectCodes } from './lib/project-code-resolver.mjs';
+import { recordSyncStatus } from './lib/sync-status.mjs';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONFIGURATION
@@ -519,6 +520,21 @@ async function main() {
 
     console.log(`⏱️  Duration: ${duration}s\n`);
 
+    // sync_status rows feed the freshness monitor's job-failure check — this sync
+    // previously recorded only to ghl_sync_log, which nothing monitors (2026-07-15).
+    await recordSyncStatus(supabase, 'sync_ghl_contacts', {
+      success: stats.contacts.errors === 0,
+      recordCount: stats.contacts.created + stats.contacts.updated,
+      error: stats.contacts.errors ? `${stats.contacts.errors} errors` : undefined,
+      durationMs: Date.now() - stats.startTime,
+    });
+    await recordSyncStatus(supabase, 'sync_ghl_opportunities', {
+      success: stats.opportunities.errors === 0,
+      recordCount: stats.opportunities.updated,
+      error: stats.opportunities.errors ? `${stats.opportunities.errors} errors` : undefined,
+      durationMs: Date.now() - stats.startTime,
+    });
+
     const totalErrors = stats.contacts.errors + stats.opportunities.errors + stats.pipelines.errors;
     if (totalErrors > 0) {
       console.log('⚠️  Sync completed with errors (see above)');
@@ -531,6 +547,8 @@ async function main() {
     // Log failure
     if (supabase) {
       await logSyncOperation(supabase, 'full_sync', 'error', { error: error.message });
+      await recordSyncStatus(supabase, 'sync_ghl_contacts', { success: false, error: error.message });
+      await recordSyncStatus(supabase, 'sync_ghl_opportunities', { success: false, error: error.message });
     }
 
     console.error('\nCheck:');

@@ -29,18 +29,23 @@
 import '../lib/load-env.mjs';
 import { fileURLToPath } from 'url';
 
-// Channel webhook mappings
+// Channel webhook mappings.
+// Fallback chain fixed 2026-07-15: .env.local only defines DISCORD_WEBHOOK_URL /
+// DISCORD_ALERTS_WEBHOOK (naming inversion vs the per-channel names below), so every
+// channel resolved undefined and Discord alerting was silently dead. Per-channel env
+// still wins when defined; otherwise everything lands on the single configured webhook.
+const FALLBACK_WEBHOOK = process.env.DISCORD_WEBHOOK_URL || process.env.DISCORD_ALERTS_WEBHOOK;
 const CHANNELS = {
-    alerts: process.env.DISCORD_WEBHOOK_ALERTS,
-    enrichment: process.env.DISCORD_WEBHOOK_ENRICHMENT,
-    ralph: process.env.DISCORD_WEBHOOK_RALPH,
-    morning: process.env.DISCORD_WEBHOOK_MORNING,
-    errors: process.env.DISCORD_WEBHOOK_ERRORS,
-    general: process.env.DISCORD_WEBHOOK_GENERAL,
-    tasks: process.env.DISCORD_WEBHOOK_TASKS,
-    voice: process.env.DISCORD_WEBHOOK_VOICE,
+    alerts: process.env.DISCORD_WEBHOOK_ALERTS || FALLBACK_WEBHOOK,
+    enrichment: process.env.DISCORD_WEBHOOK_ENRICHMENT || FALLBACK_WEBHOOK,
+    ralph: process.env.DISCORD_WEBHOOK_RALPH || FALLBACK_WEBHOOK,
+    morning: process.env.DISCORD_WEBHOOK_MORNING || FALLBACK_WEBHOOK,
+    errors: process.env.DISCORD_WEBHOOK_ERRORS || FALLBACK_WEBHOOK,
+    general: process.env.DISCORD_WEBHOOK_GENERAL || FALLBACK_WEBHOOK,
+    tasks: process.env.DISCORD_WEBHOOK_TASKS || FALLBACK_WEBHOOK,
+    voice: process.env.DISCORD_WEBHOOK_VOICE || FALLBACK_WEBHOOK,
     // Fallback - use general for any undefined channel
-    default: process.env.DISCORD_WEBHOOK_GENERAL
+    default: process.env.DISCORD_WEBHOOK_GENERAL || FALLBACK_WEBHOOK
 };
 
 // Agent avatars and names
