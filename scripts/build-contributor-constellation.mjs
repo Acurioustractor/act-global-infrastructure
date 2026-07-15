@@ -37,7 +37,9 @@ import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 import { writeFileSync } from 'node:fs';
 
-dotenv.config({ path: '.env.local' });
+// override: the PM2 daemon env carries a pre-rotation EL key (snapshotted before the
+// 2026-06-29 re-key); .env.local is this script's only intended config source, so it wins.
+dotenv.config({ path: '.env.local', override: true });
 const URL = process.env.EL_SUPABASE_URL || process.env.STORY_SUPABASE_URL;
 const KEY = process.env.EL_SUPABASE_SERVICE_KEY || process.env.STORY_SUPABASE_SERVICE_KEY;
 if (!URL || !KEY) { console.error('Missing EL_SUPABASE_URL / EL_SUPABASE_SERVICE_KEY in .env.local'); process.exit(1); }
