@@ -974,6 +974,16 @@ const cronScripts = [
     cron_restart: '50 6 * * *',
   },
 
+  // field-desk: Sources — live-GHL vs Supabase-mirror drift check (2% tolerance, exit 1 on
+  // drift → visible via pm2_cron_status on the health dashboard). Read-only against GHL.
+  // The script header has always said "wire into cron"; scheduled 2026-07-15 so the
+  // 48%-drift incident class is no longer unmonitored between manual runs.
+  {
+    name: 'verify-ghl-mirror',
+    script: 'scripts/verify-ghl-mirror.mjs',
+    cron_restart: '5 7 * * *',
+  },
+
   // === The Whole Picture (founders' OS) ===
   // Plan: 2026-06-10-whole-picture-visualization-recommendation
   // Gated money sidecars (v1.5 phases 2/3) — built BEFORE every surface that reads them (founders

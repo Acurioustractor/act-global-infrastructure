@@ -378,3 +378,36 @@ Create `.env.shared` in infrastructure repo, symlink to projects.
 **Status**: Ready to implement
 **Priority**: High (security + consistency)
 **Effort**: 2-3 hours across all projects
+
+---
+
+## Addendum 2026-07-15 — BWS precedence and the stale-key incident class
+
+This document predates Bitwarden Secrets Manager (BWS) adoption. The reality since:
+
+**Two credential paths coexist, and BWS wins.** ~37 scripts use the `getSecret(name)` pattern
+(`scripts/lib/gmail-receipt-hunt.mjs` is canonical): BWS value first, `process.env` fallback.
+`.env.local` (loaded via `scripts/lib/load-env.mjs`, `override: true`) is the fallback, not the
+source of truth, for those scripts. Any secret present in BOTH places can go stale in one place
+silently.
+
+**Incident 2026-07-15 (this class realised):** the post-incident Supabase key rotation updated
+`.env.local` but left `SUPABASE_SHARED_SERVICE_ROLE_KEY` in BWS as a disabled legacy JWT.
+gmail-sync fetched 1,449 messages and inserted 0, printing "[OK] Sync complete!". Same day:
+`.env.local` carried a dead `EL_SUPABASE_SERVICE_KEY` while the valid re-keyed value sat in BWS
+under `EL_SUPABASE_SERVICE_ROLE_KEY`. Rules going forward:
+
+1. When rotating any secret, update BOTH stores in the same sitting, or delete the BWS entry so
+   the env fallback is authoritative.
+2. A sync that writes 0 of N fetched records must exit non-zero (see field-desk alignment report
+   `thoughts/shared/analysis/field-desk-infra-alignment-2026-07-15.md` §3).
+3. The PM2 daemon snapshots env at daemon start; after any rotation, either `pm2 kill && pm2
+   resurrect` from a fresh shell or ensure the script loads `.env.local` with `override: true`.
+
+**Known name drift (unresolved as of 2026-07-15):** scripts reference
+`EL_SUPABASE_SERVICE_ROLE_KEY` (env has `EL_SUPABASE_SERVICE_KEY`), `NOTION_API_KEY` (env has
+`NOTION_TOKEN`), `DISCORD_WEBHOOK_ALERTS/_ERRORS/_ENRICHMENT/...` (env has
+`DISCORD_ALERTS_WEBHOOK`/`DISCORD_WEBHOOK_URL` — Discord alerting is entirely dead),
+`GMAIL_PUBSUB_TOPIC` (absent — Gmail real-time push off), duplicate `GOOGLE_CLIENT_ID/SECRET`
+lines (dotenv last-wins), and `GOOGLE_SERVICE_ACCOUNT_KEY` existing ONLY in BWS while
+command-center code reads it from `process.env`.
