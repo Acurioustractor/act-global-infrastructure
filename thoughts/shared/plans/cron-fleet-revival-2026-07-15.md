@@ -1,5 +1,11 @@
 # Cron fleet revival
 
+> **FROZEN 2026-07-15 (same day, Ben's call): batches B and C are ON HOLD.** No further
+> registrations until the brand/system/overview layer is agreed. See
+> `wiki/decisions/2026-07-15-automation-freeze-design-first.md` for the freeze, the baseline
+> that keeps running, and the "earn your cron" bar for anything returning. Frozen items may
+> still be run MANUALLY when a live commitment needs them.
+
 *2026-07-15. Context: `thoughts/shared/strategy/the-relationship-spine-2026-07-15.md`. The PM2 fleet lost ~131 of ~150 configured crons around 29 Jun (the incident window); the reduced state was cemented by a `pm2 save` on 12 Jul. This plan classifies all 131 by blast radius (7 classifier agents + 1 adversarial verifier, workflow run wf_0eaddb07-e1d) and sequences the revival.*
 
 ## State after today
