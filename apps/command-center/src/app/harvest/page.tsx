@@ -461,15 +461,28 @@ function BudgetTab() {
   const drawdowns = data?.drawdowns || []
   const expenses = data?.expenses || []
   const lease = data?.lease || {}
+  const sourceStatus = data?.sourceStatus || {}
 
   return (
     <div className="space-y-6">
       {/* Budget overview cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
         <MetricCard icon={Hammer} label="Total Fund" value={`$${(summary.totalBudget || 0).toLocaleString()}`} color="text-amber-400" />
-        <MetricCard icon={ArrowDownRight} label="Drawn from Fund" value={`$${(summary.totalDrawn || 0).toLocaleString()}`} color="text-emerald-400" />
-        <MetricCard icon={ArrowUpRight} label="Spent" value={`$${(summary.totalExpensed || 0).toLocaleString()}`} color="text-red-400" />
-        <MetricCard icon={DollarSign} label="Cash Available" value={`$${(summary.cashAvailable || 0).toLocaleString()}`} color="text-blue-400" />
+        <MetricCard icon={Receipt} label="Invoiced ex GST" value={`$${(summary.totalInvoiced || 0).toLocaleString()}`} color="text-blue-400" />
+        <MetricCard icon={ArrowDownRight} label="Received ex GST" value={`$${(summary.totalDrawn || 0).toLocaleString()}`} color="text-emerald-400" />
+        <MetricCard icon={DollarSign} label="Still to invoice" value={`$${(summary.remainingToInvoice || 0).toLocaleString()}`} color="text-purple-400" />
+        <MetricCard icon={ArrowUpRight} label="ACT-HV spend" value={`$${(summary.totalExpensed || 0).toLocaleString()}`} color="text-red-400" />
+        <MetricCard icon={Hammer} label="Notion plan" value={`$${(summary.plannedTotal || 0).toLocaleString()}`} color="text-amber-300" />
+      </div>
+
+      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 space-y-2">
+        <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs text-zinc-400">
+          <span>Xero: {sourceStatus.xero?.status || 'unknown'}{sourceStatus.xero?.syncedAt ? ` · synced ${new Date(sourceStatus.xero.syncedAt).toLocaleString('en-AU')}` : ''}</span>
+          <span>Notion: {sourceStatus.notion?.status || 'unknown'}{sourceStatus.notion?.lineCount ? ` · ${sourceStatus.notion.lineCount} lines` : ''}</span>
+        </div>
+        {(sourceStatus.caveats || []).map((caveat: string) => (
+          <div key={caveat} className="text-xs text-amber-300">{caveat}</div>
+        ))}
       </div>
 
       {/* Fund progress — drawn vs total */}
@@ -493,20 +506,20 @@ function BudgetTab() {
           </div>
           <div>
             <div className="flex justify-between text-xs text-zinc-500 mb-1">
-              <span>Spent (paid to contractors/suppliers)</span>
-              <span>${(summary.totalExpensed || 0).toLocaleString()} of ${(summary.totalBudget || 0).toLocaleString()}</span>
+              <span>Notion working plan</span>
+              <span>${(summary.plannedTotal || 0).toLocaleString()} against ${(summary.totalBudget || 0).toLocaleString()} fund</span>
             </div>
             <div className="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-red-600 to-red-400 rounded-full transition-all"
-                style={{ width: `${Math.min(Number(summary.pctSpent) || 0, 100)}%` }}
+                className="h-full bg-gradient-to-r from-amber-600 to-amber-400 rounded-full transition-all"
+                style={{ width: `${Math.min(((summary.plannedTotal || 0) / (summary.totalBudget || 1)) * 100, 100)}%` }}
               />
             </div>
           </div>
         </div>
         <div className="flex justify-between mt-3 text-xs text-zinc-500">
           <span>Phase 1: ${(summary.phase1Budget || 0).toLocaleString()}</span>
-          <span>Still to draw: ${(summary.remainingToDraw || 0).toLocaleString()}</span>
+          <span className={(summary.planVariance || 0) > 0 ? 'text-amber-300' : ''}>Plan variance: ${(summary.planVariance || 0).toLocaleString()}</span>
           <span>Phase 2: ${(summary.phase2Budget || 0).toLocaleString()}</span>
         </div>
       </div>
@@ -532,7 +545,7 @@ function BudgetTab() {
                 <div className="text-xs text-zinc-500">{d.pctOfFund}% of fund</div>
                 <span className={cn(
                   'text-xs px-1.5 py-0.5 rounded mt-0.5 inline-block',
-                  d.status === 'paid' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'
+                  String(d.status).toUpperCase() === 'PAID' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'
                 )}>
                   {d.status}
                 </span>
@@ -550,7 +563,7 @@ function BudgetTab() {
         <div className="p-4 border-b border-zinc-800">
           <h3 className="text-sm font-medium text-zinc-300 flex items-center gap-2">
             <ArrowUpRight className="h-4 w-4 text-red-400" />
-            Expenses (Money Out to Contractors &amp; Suppliers)
+            Latest ACT-HV spend from Xero (capital and operating combined)
           </h3>
         </div>
         <div className="divide-y divide-zinc-800">
@@ -561,8 +574,7 @@ function BudgetTab() {
                 <div className="text-xs text-zinc-500 max-w-md truncate">{exp.description}</div>
                 <div className="flex items-center gap-2 mt-0.5">
                   <span className="text-xs text-zinc-600">{exp.date}</span>
-                  {exp.cost_centre && <span className="text-xs px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded">{exp.cost_centre}</span>}
-                  {exp.total_hours && <span className="text-xs text-zinc-600">{exp.total_hours}hrs</span>}
+                  {exp.account && <span className="text-xs px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded">Account {exp.account}</span>}
                 </div>
               </div>
               <div className="text-right flex-shrink-0">
@@ -570,7 +582,7 @@ function BudgetTab() {
                 <div className="text-xs text-zinc-500">{exp.pctOfFund}% of fund</div>
                 <span className={cn(
                   'text-xs px-1.5 py-0.5 rounded mt-0.5 inline-block',
-                  exp.status === 'paid' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'
+                  String(exp.status).toUpperCase() === 'PAID' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'
                 )}>
                   {exp.status}
                 </span>
@@ -610,8 +622,9 @@ function BudgetTab() {
                   <div className="min-w-0 flex-1">
                     <div className="text-sm text-zinc-200 truncate">{item.name}</div>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className="text-xs px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded">{item.cost_centre}</span>
+                      <span className="text-xs px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded">{item.category}</span>
                       <span className="text-xs text-zinc-600">{item.zone}</span>
+                      <span className="text-xs text-zinc-600">{item.status}</span>
                     </div>
                   </div>
                   <div className="text-right flex-shrink-0 ml-4">
@@ -625,7 +638,7 @@ function BudgetTab() {
       ))}
 
       {/* Cost centres summary */}
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg">
+      {costCentres.length > 0 && <div className="bg-zinc-900 border border-zinc-800 rounded-lg">
         <div className="p-4 border-b border-zinc-800">
           <h3 className="text-sm font-medium text-zinc-300 flex items-center gap-2">
             <Leaf className="h-4 w-4 text-green-400" />
@@ -643,10 +656,10 @@ function BudgetTab() {
             </div>
           ))}
         </div>
-      </div>
+      </div>}
 
       {/* Lease summary */}
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg">
+      {lease?.landlord && <div className="bg-zinc-900 border border-zinc-800 rounded-lg">
         <div className="p-4 border-b border-zinc-800">
           <h3 className="text-sm font-medium text-zinc-300 flex items-center gap-2">
             <Building2 className="h-4 w-4 text-purple-400" />
@@ -711,7 +724,7 @@ function BudgetTab() {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
     </div>
   )
 }
