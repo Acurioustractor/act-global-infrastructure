@@ -17,6 +17,7 @@ export async function GET() {
       emails,
       resources,
       health,
+      socialPosts,
     ] = await Promise.all([
       // Xero transactions
       supabase
@@ -78,6 +79,14 @@ export async function GET() {
         .select('*')
         .eq('project_code', PROJECT_CODE)
         .maybeSingle(),
+
+      // Read-only social post ledger
+      supabase
+        .from('social_posts')
+        .select('id, platform, account_name, status, post_type, message, permalink, published_at, media, metrics, source')
+        .eq('project_code', PROJECT_CODE)
+        .order('published_at', { ascending: false, nullsFirst: false })
+        .limit(100),
     ])
 
     const txData = transactions.data || []
@@ -87,6 +96,7 @@ export async function GET() {
     const grantData = grants.data || []
     const subData = subscriptions.data || []
     const resourceData = resources.data || []
+    const socialData = socialPosts.data || []
 
     // Calculate financials
     let totalIncome = 0, totalExpenses = 0
@@ -172,6 +182,13 @@ export async function GET() {
         emailCount: emails.count || 0,
         healthScore: health.data?.health_score || null,
         subscriptionMonthly: Math.round(subMonthly),
+        socialPostCount: socialData.length,
+      },
+      socialQuality: {
+        published: socialData.filter((post: any) => post.status === 'published').length,
+        failed: socialData.filter((post: any) => post.status === 'failed').length,
+        draft: socialData.filter((post: any) => post.status === 'draft').length,
+        uniqueMessages: new Set(socialData.map((post: any) => post.message || '')).size,
       },
       monthlyTrend,
       topVendors,
@@ -230,6 +247,19 @@ export async function GET() {
         role: r.role,
         allocation: r.allocation_percentage,
         annualCost: r.annual_cost,
+      })),
+      socialPosts: socialData.map((post: any) => ({
+        id: post.id,
+        platform: post.platform,
+        accountName: post.account_name,
+        status: post.status,
+        type: post.post_type,
+        message: post.message,
+        permalink: post.permalink,
+        publishedAt: post.published_at,
+        media: post.media || [],
+        metrics: post.metrics || {},
+        source: post.source,
       })),
     })
   } catch (error) {
