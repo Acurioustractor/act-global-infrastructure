@@ -86,7 +86,7 @@ export class GHLSocialService {
     const data = await this.request(
       `/social-media-posting/${this.locationId}/accounts`
     );
-    return data.accounts || [];
+    return data.results?.accounts || data.accounts || [];
   }
 
   /**
@@ -271,8 +271,9 @@ export class GHLSocialService {
     if (filters.status) body.status = filters.status;
     if (filters.fromDate) body.fromDate = filters.fromDate;
     if (filters.toDate) body.toDate = filters.toDate;
-    if (filters.limit) body.limit = filters.limit;
-    if (filters.skip) body.skip = filters.skip;
+    // GHL validates these pagination values as numeric strings.
+    if (filters.limit != null) body.limit = String(filters.limit);
+    if (filters.skip != null) body.skip = String(filters.skip);
 
     const data = await this.request(
       `/social-media-posting/${this.locationId}/posts/list`,
@@ -283,8 +284,8 @@ export class GHLSocialService {
     );
 
     return {
-      posts: data.posts || [],
-      total: data.total || 0
+      posts: data.results?.posts || data.posts || [],
+      total: data.results?.count || data.total || 0
     };
   }
 
