@@ -99,7 +99,10 @@ export async function GET() {
       !terminalInvoiceStatuses.has(String(invoice.status || '').toUpperCase())
     )
 
-    const spendTransactions = transactions.filter((transaction: any) => transaction.type === 'SPEND')
+    const spendTransactions = transactions.filter((transaction: any) =>
+      transaction.type === 'SPEND'
+      && !['DELETED', 'VOIDED'].includes(String(transaction.status || '').toUpperCase())
+    )
     const receiptTransactions = transactions.filter((transaction: any) =>
       transaction.type === 'RECEIVE' && /sonas|luff/i.test(transaction.contact_name || '')
     )
