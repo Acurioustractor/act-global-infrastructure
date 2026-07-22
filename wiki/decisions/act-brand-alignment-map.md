@@ -116,6 +116,8 @@ ACT has one parent identity (regenerative innovation; PTO metaphor; LCAA method;
 - **Inherits:** ACT brand-core identity (consent + sovereignty values particularly load-bearing here).
 - **Intentional deviation from parent visual:**
   - Color: **Ochre `#96643a`** + **Terracotta `#b84a32`** + **Sage `#5c6d51`** + **Charcoal `#42291a`** + **Cream `#faf6f1`**. Earth tones, but a different palette than parent's forest green.
+  - Semantic status tokens (never raw Tailwind red/green/blue): **danger `#9c2f27`** (muted, never alarm-red) · **warning `#9a5a22`** · **sage** (ok) · **river `#315c8c`** (informational/flow) · **focus `#285f8f`** (rings). Admin status surfaces map to these, not stock status colours (audit + sweep 2026-07-22, empathy-ledger PR #380).
+  - Type: **Newsreader** (headings — the serif; NOT Georgia, NOT Fraunces) + **Inter** (body/UI) + **Geist Mono** (eyebrow labels + data). The mono eyebrow (small, letterspaced, uppercase section labels above a serif heading) is an **intentional, blessed device**, inheriting the parent's Geist Mono "data" role (see line 92). It is Editorial Warmth's version of a filing-label: it reads as archival/record, not as SaaS. Do not "fix" it to serif or sans — it is decided (Ben, 2026-07-22).
   - Logo: two open semicircular arcs facing each other (the space between = empathy). Custom mark.
   - Why: explicitly multi-tenant. Cannot be "ACT-coded" because it serves non-ACT orgs. Earth-tone family signals shared values; specific palette signals independence.
 - **DESIGN.md:** `empathy-ledger-v2/DESIGN.md` (265 lines)
