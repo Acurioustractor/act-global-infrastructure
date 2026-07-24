@@ -23,12 +23,14 @@ import {
   Share2,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { HarvestCommercialModel } from '@/components/harvest/HarvestCommercialModel'
 
-type TabId = 'overview' | 'budget' | 'financials' | 'pipeline' | 'grants' | 'team' | 'social'
+type TabId = 'overview' | 'budget' | 'model' | 'financials' | 'pipeline' | 'grants' | 'team' | 'social'
 
 const tabs: { id: TabId; label: string }[] = [
   { id: 'overview', label: 'Overview' },
   { id: 'budget', label: 'Budget' },
+  { id: 'model', label: 'Commercial model' },
   { id: 'financials', label: 'Financials' },
   { id: 'pipeline', label: 'Pipeline' },
   { id: 'grants', label: 'Grants' },
@@ -99,6 +101,7 @@ export default function HarvestPage() {
       {/* Tab content */}
       {activeTab === 'overview' && <OverviewTab data={data} />}
       {activeTab === 'budget' && <BudgetTab />}
+      {activeTab === 'model' && <HarvestCommercialModel />}
       {activeTab === 'financials' && <FinancialsTab data={data} />}
       {activeTab === 'pipeline' && <PipelineTab data={data} />}
       {activeTab === 'grants' && <GrantsTab data={data} />}
