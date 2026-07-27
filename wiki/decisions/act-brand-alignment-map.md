@@ -122,6 +122,16 @@ ACT has one parent identity (regenerative innovation; PTO metaphor; LCAA method;
   - Why: explicitly multi-tenant. Cannot be "ACT-coded" because it serves non-ACT orgs. Earth-tone family signals shared values; specific palette signals independence.
 - **DESIGN.md:** `empathy-ledger-v2/DESIGN.md` (265 lines)
 - **Use it when:** designing EL platform surfaces (storyteller portal, org dashboards, public story pages).
+- **PUBLIC-SURFACE SUBFAMILY — "Theatrical" (ruled by Ben, 2026-07-28):** EL's *public-facing*
+  routes (homepage, About, Share Your Story, public case studies, design prototypes) run a
+  second, sanctioned system: **Instrument Serif** (display) + **DM Mono** (documentary) with an
+  ink/paper/thread/acid palette (`ink #171817 · charcoal #242724 · brown #47352D · quiet
+  #6F625A · paper #EEE9DF · bright #F8F4EB · thread #C95736 · coral #EF8D65 · acid #D8DC74`).
+  Canonical doc: `empathy-ledger-v2/docs/12-design/EMPATHY_LEDGER_BRAND_SYSTEM.md`; tokens live
+  in `tailwind.config.ts` under `theatrical.*` (namespaced — theatrical charcoal `#242724` is a
+  different colour from Editorial Warmth charcoal). **Admin and storyteller-portal surfaces stay
+  Editorial Warmth on `src/components/admin/kit`** — the boundary is public vs operational, and
+  the sweep that introduced Theatrical deliberately never touched the kit.
 - **Drift to fix:** DESIGN.md silent on parent inheritance; add the "shared identity, independent palette" rationale.
 
 ### CivicGraph (grantscope)
