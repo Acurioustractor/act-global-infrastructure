@@ -24,6 +24,14 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
+- [[alignment-loop-drift-2026-07-23-to-2026-07-30|Alignment Loop drift — 2026-07-23 to 2026-07-30]] — 2026-07-30 · 7-day drift. $53,950 cleared (Homeland + Sonas 2nd invoice PAID). BAS Q4 FY26 2 days overdue. Xero frozen at 2,293 invoices.
+
+- [[entity-migration-truth-state-2026-07-30|Entity migration truth-state — 30 days post-cutover, BAS 2 days overdue, receivables drop $53,950]] — 2026-07-30 · Q3 fifth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[project-truth-state-2026-07-30|Project truth-state — 74 codes × 4 sources, fifth pass (zero Xero growth, static across all dimensions)]] — 2026-07-30 · Q2 fifth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[funder-alignment-2026-07-30|Funder alignment — $53,950 cleared, BAS now 2 days overdue, Rotary enters 5th year unpaid]] — 2026-07-30 · Q1 fifth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
 - [[alignment-loop-drift-2026-07-16-to-2026-07-23|Alignment Loop drift — 2026-07-16 to 2026-07-23]] — 2026-07-23 · 7-day drift. Receivables frozen at $471K. BAS due in 5 days. MRFF-Palmer added to funders.json.
 
 - [[entity-migration-truth-state-2026-07-23|Entity migration truth-state — 23 days post-cutover, BAS in 5 days, Pty stack still unconfirmed]] — 2026-07-23 · Q3 fourth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
