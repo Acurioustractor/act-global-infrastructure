@@ -12,7 +12,7 @@ date: 2026-07-30
 
 ## Headline findings
 
-1. **BAS Q4 FY26 (sole-trader) was due 2026-07-28 and is now 2 days overdue.** There is no lodgement artefact visible in Supabase. Rotary INV-0222 remains AUTHORISED at $82,500 — if it was written off as a bad debt before BAS lodgement, a VOIDED status would be expected; it is not present. Standard Ledger confirmation is required immediately.
+1. **BAS Q4 FY26 (sole-trader) standard due date 2026-07-28 has passed — lodgement status unknown.** There is no lodgement artefact visible in Supabase. Note: Standard Ledger is ACT's registered tax agent and may hold a lodgement concession beyond 28 July — the applicable deadline must be confirmed with them directly. Rotary INV-0222 remains AUTHORISED at $82,500 — if written off before lodgement, a VOIDED status would be expected in Xero/DB; it is not present.
 
 2. **$53,950 cleared — Homeland School ($44K) and Sonas second invoice ($9.95K) both PAID.** Outstanding ACCREC drops from $471,717.84 to $417,767.84 (14 → 12 invoices). This is the first receivable movement in two weeks and the most concrete positive data point in this pass.
 
@@ -57,11 +57,11 @@ Days past 30 June 2026 cutover: **+30 days**.
 |---|---|---|---|
 | Pty Xero file opens | 1 xero_tenant_id in DB (2,293 inv); may be open but unsynced | ❓ UNCONFIRMED | → |
 | $1 test invoice run | Runbook exists; no pass evidence in DB | ❓ UNCONFIRMED | → |
-| **Final sole trader BAS (Q4 FY26)** | **Due 2026-07-28 — NOW 2 DAYS OVERDUE** | **🚨 OVERDUE** | 🆕 escalated from "5 days" |
+| **Final sole trader BAS (Q4 FY26)** | **Standard due date 2026-07-28 passed — agent concession may apply; confirm with Standard Ledger** | **🚨 CONFIRM STATUS** | 🆕 escalated from "5 days" |
 | Rotary write-off for BAS | INV-0222 still AUTHORISED at $82,500 | ❓ OUTCOME UNKNOWN | → |
 | Post-cutover invoice treatment (Rule 2) | 3 invoices $189.2K, null project_code | ❓ UNCONFIRMED | → |
 | Pty payroll | Blocked on Pty Xero + salary determination | ❓ UNCONFIRMED | → |
-| R&D FY27 re-registration (AusIndustry) | Should have started 1 July | 🔴 OPEN, **30d overdue** | ↓ +7d overdue |
+| R&D FY27 entity designation (AusIndustry) | Determine which Pty entity registers for FY27 (§12 decision). AusIndustry filing not due until ~Apr 2028 (10mo post-FY27-end). Internal milestone of 1 Jul for entity decision. | 🟡 PENDING ENTITY DECISION | → |
 
 ### Section 4 — Grants and funders
 
@@ -139,7 +139,7 @@ No new information on D11.2 (payroll), D11.3 (Dext emails), D11.5 (Knight Photog
 1. **Final sole trader BAS overdue as of 2026-07-28.** Whether lodged or genuinely late is not visible in DB. Standard Ledger must confirm immediately. If late, ATO late-lodgement penalties apply.
 2. **Rotary INV-0222 ($82,500, 476 days) — write-off outcome unknown.** This should have been resolved before BAS. INV-0222 is still AUTHORISED in DB. If not written off, the bad-debt deduction was not taken. If written off in Xero but not yet synced to DB, the DB lags reality.
 3. **EOFY strategic fork unresolved.** No Standard Ledger ruling on journal-entry vs market-value sale. Until resolved, cross-entity journals should not be booked. R&D FY27 structure is unclear.
-4. **AusIndustry R&D re-registration (FY27) — 30 days overdue.** Should have started 1 July. Each day of delay extends the period where ACT's FY27 R&D activity is unregistered.
+4. **AusIndustry R&D FY27 entity designation pending.** The internal milestone of 1 July was for deciding which Pty entity registers as the FY27 R&D registrant (§12 decision). The actual AusIndustry filing is not due until ~April 2028 (10 months after FY27 year-end). No ATO deadline is overdue — but the entity decision needs to be made before meaningful FY27 R&D records can be attributed.
 
 ### 🟠 Amber (this week)
 

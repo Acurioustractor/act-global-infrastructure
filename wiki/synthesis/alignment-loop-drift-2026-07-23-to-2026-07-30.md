@@ -16,7 +16,7 @@ date: 2026-07-30
 
 1. **$53,950 cleared — Homeland School ($44K) and Sonas second invoice ($9.95K) both PAID. Outstanding ACCREC drops from $471,717.84 to $417,767.84 (14→12 invoices).** First receivable movement in two weeks. The rest of the receivable book (Rotary $82.5K, ALIVE $167.2K, Mounty $22K, and 8 others) is unchanged.
 
-2. **BAS Q4 FY26 (sole-trader) was due 2026-07-28 and is now 2 days overdue. Lodgement status is unknown from the DB.** Rotary INV-0222 remains AUTHORISED at $82,500 — no write-off is visible in Xero/DB. If the BAS was lodged and Rotary was written off, the DB has not yet reflected it. If neither happened, there are active compliance penalties accruing.
+2. **BAS Q4 FY26 standard due date (28 July) has passed — lodgement status is unknown from the DB.** Standard Ledger is ACT's registered tax agent and may hold a concession date; confirm the applicable deadline with them directly. Rotary INV-0222 remains AUTHORISED at $82,500 — no write-off is visible in Xero/DB. If lodged and written off, the DB has not yet reflected it.
 
 3. **Everything else is static.** Xero invoice count frozen at 2,293 (zero growth vs +46 last week). Wiki at 98 articles. Config at 74 codes (97 days without update). Pty Xero still unconfirmed. EOFY strategic fork still unresolved. ACT-PS wiki gap enters fifth pass. D&O now 106 days past deadline.
 
@@ -90,7 +90,7 @@ The dominant event this week is the BAS deadline crossing. Everything else is fr
 | Metric | 2026-07-23 | 2026-07-30 | Direction |
 |---|---|---|---|
 | Days past cutover | +23 | **+30** | ↓ |
-| **BAS Q4 FY26 status** | **Due in 5 days** | **2 DAYS OVERDUE** | 🚨 crossed deadline |
+| **BAS Q4 FY26 status** | **Due in 5 days** | **Standard 28 Jul date passed — agent concession may apply** | 🚨 confirm with SL |
 | Rotary INV-0222 write-off outcome | Decision should precede BAS | INV-0222 still AUTHORISED in DB | ❓ outcome unknown |
 | Xero tenant count | 1 (sole trader, 2,293 inv) | 1 (sole trader, **2,293 inv**) | → no Pty Xero in DB |
 | Xero invoice growth (7d) | +46 | **+0** | ↓ |
@@ -104,17 +104,17 @@ The dominant event this week is the BAS deadline crossing. Everything else is fr
 | Pty Xero file confirmed | ❓ | ❓ | → |
 | $1 test invoice runbook executed | ❓ | ❓ | → |
 | Shareholders Agreement signed | 🔴 NOT CONFIRMED | 🔴 NOT CONFIRMED | → |
-| AusIndustry R&D re-registration (FY27) | 🔴 OPEN, 23d overdue | 🔴 OPEN, **30d overdue** | ↓ +7d |
+| AusIndustry R&D FY27 entity designation | Internal milestone 1 Jul | Internal milestone 30d past; ATO filing not due until ~Apr 2028 | → clarified |
 
 **Material changes:**
 
-**BAS deadline crossed — this is the only material status change.** $53,950 cleared is a positive data point but not an entity migration event (both invoices were on the sole-trader legacy book). Everything else is static. D&O is now 106 days past its nominal binding deadline. AusIndustry R&D registration is 30 days overdue.
+**BAS standard deadline crossed — this is the only material status change.** Standard Ledger as registered agent may hold a concession date — confirm lodgement status directly. $53,950 cleared is a positive data point but not an entity migration event (both invoices were on the sole-trader legacy book). D&O is now 106 days past its nominal binding deadline. AusIndustry R&D entity designation is an internal milestone; no ATO filing is due until ~April 2028.
 
 ### Specific items (Q3 watch list)
 
 | Item | 2026-07-23 | 2026-07-30 | Change |
 |---|---|---|---|
-| BAS Q4 FY26 status | Due in 5 days | **2 days OVERDUE** | 🚨 |
+| BAS Q4 FY26 status | Due in 5 days | **Standard 28 Jul date passed — agent concession may apply** | 🚨 confirm with SL |
 | Rotary INV-0222 write-off | Decision required before BAS | Still AUTHORISED in DB | ❓ |
 | Director IDs confirmation | ⚠️ ASSUMED OK | ⚠️ ASSUMED OK | → |
 | NAB Pty account | ❓ UNCONFIRMED | ❓ UNCONFIRMED | → |
@@ -123,14 +123,14 @@ The dominant event this week is the BAS deadline crossing. Everything else is fr
 | Novation letter template | ✅ DRAFTED | ✅ DRAFTED | → |
 | Shareholders Agreement | 🔴 NOT CONFIRMED | 🔴 NOT CONFIRMED | → |
 | Migration draft count | 1 (`novation-letter-templates.md`) | 1 | → |
-| R&D re-registration (FY27) | 23d overdue | **30d overdue** | ↓ |
+| R&D FY27 entity designation | Internal milestone 1 Jul | 30d past internal milestone; ATO filing ~Apr 2028 | → clarified |
 | EOFY fork (journal vs sale) | 🔴 UNRESOLVED | 🔴 UNRESOLVED | → |
 
 ---
 
 ## Summary: what the 7-day window reveals
 
-Two payments confirmed is the week's signal. Everything else — the BAS crossed, the Pty Xero unknown, D&O aging, R&D overdue — continued moving in the wrong direction without any visible resolution. The zero Xero growth is unusual and worth monitoring; it either reflects a genuinely quiet week or invoices being raised without DB visibility.
+Two payments confirmed is the week's signal. Everything else — the BAS standard deadline crossed, the Pty Xero unknown, D&O aging, R&D entity decision pending — continued without visible resolution. The zero Xero growth is unusual and worth monitoring; it either reflects a genuinely quiet week or invoices being raised without DB visibility.
 
 The single most important unknown: **has the Q4 FY26 BAS been lodged?** That question cannot be answered from DB data and must be confirmed directly with Standard Ledger.
 

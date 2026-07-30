@@ -14,7 +14,7 @@ date: 2026-07-30
 
 1. **$53,950 cleared since the 2026-07-23 pass — the first receivable movement in two weeks.** Two invoices reached PAID status: INV-0303 Homeland School Company ($44,000) and INV-0337 Sonas Properties second invoice ($9,950). Outstanding ACCREC drops to $417,767.84 across 12 invoices.
 
-2. **BAS Q4 FY26 (sole-trader) was due 2026-07-28 and is now 2 days overdue.** The last pass flagged this deadline as 5 days away and urgent. There is no DB-visible evidence of lodgement. Standard Ledger lodgement status is unknown from Supabase alone. If not yet lodged, this is an active compliance risk.
+2. **BAS Q4 FY26 (sole-trader) standard due date 2026-07-28 has passed — lodgement status unknown from DB.** Standard Ledger is ACT's registered tax agent and may hold a concession date beyond 28 July; the applicable deadline must be confirmed with them. There is no DB-visible evidence of lodgement either way.
 
 3. **Rotary eClub INV-0222 ($82,500) is now 476 days unpaid.** Every pass since 2026-04-24 has flagged this. The write-off decision should have been made before the BAS deadline. The outcome of that decision is not visible in the DB — INV-0222 remains AUTHORISED with full amount_due.
 
@@ -100,7 +100,7 @@ The Q4 FY26 sole-trader BAS was due 2026-07-28. As of 2026-07-30:
 
 ## Open actions — priority order
 
-1. **Confirm BAS Q4 FY26 lodgement status** — due 2026-07-28, now 2 days past due. If not lodged, act immediately.
+1. **Confirm BAS Q4 FY26 lodgement status with Standard Ledger** — standard due date 2026-07-28 has passed; agent concession may apply. Confirm the actual deadline and whether lodgement has been submitted.
 2. **Rotary INV-0222 write-off outcome** — 476 days. BAS write-off decision should be resolved. Confirm with Standard Ledger what was done.
 3. **Tag the 3 untagged post-cutover invoices** (INV-0334, INV-0341, INV-0342) with project codes — $189,200 untracked.
 4. **Add 5 missing counterparties to `funders.json`** as stubs: Social Impact Hub, Tandanya, Brodie Germaine Fitness, Julalikari, Berry Obsession.
