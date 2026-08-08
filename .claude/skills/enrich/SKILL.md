@@ -1,3 +1,8 @@
+---
+name: enrich
+description: Runs the contact enrichment cycle over ACT relationship data: links communications to contacts, consolidates duplicate identity records, refreshes last-contact dates, raises relationship alerts, and reports data quality. Use when the user wants contact data refreshed, stale relationships surfaced, duplicate contacts merged, or CRM data quality checked. Also use on /enrich. Do not use for project enrichment, which is a separate pipeline.
+---
+
 # /enrich - Contact Enrichment Cycle
 
 Run the full contact enrichment pipeline to keep relationship data fresh.

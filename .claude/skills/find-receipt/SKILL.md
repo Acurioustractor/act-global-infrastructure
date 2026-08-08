@@ -1,3 +1,8 @@
+---
+name: find-receipt
+description: Hunts missing receipts across ACT finance data through the Finance Workbench and the unified receipt search, applying the rules for which rows genuinely need one. Use when the user asks to find a receipt, chase receipt gaps, or reconcile spend with no documentation. Carries the guards that matter: internal transfers, credit-card payoffs, bank fees and sub-$75 no-GST items never need a receipt; DELETED rows are not real spend; only NAB Visa ACT #8815 and NJ Marchesi T/as ACT Everyday count as ACT accounts. Also use on /find-receipt.
+---
+
 # /find-receipt
 
 Intelligent receipt hunting across all data sources.

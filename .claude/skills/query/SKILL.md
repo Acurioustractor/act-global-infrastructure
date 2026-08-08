@@ -1,3 +1,8 @@
+---
+name: query
+description: Answers data questions against the ACT Supabase database, turning a plain-language question into the right query so the user does not write SQL. Use when the user asks how many, show me, or what is the status of something whose answer lives in the ACT database. Also use on /query. Read and analysis only; do not use for migrations, writes, or schema changes.
+---
+
 # /query — Supabase Analytics Skill
 
 Run analytics queries against the ACT Supabase database without writing SQL manually.

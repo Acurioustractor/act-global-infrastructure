@@ -1,3 +1,8 @@
+---
+name: sync-storytellers
+description: Syncs storyteller records from Empathy Ledger v2 into GoHighLevel as tagged contacts, then links them back with story counts and storyteller and elder flags. Use when the user wants storytellers pushed into GHL, GHL contacts refreshed from Empathy Ledger, or the two systems brought back into step. Also use on /sync-storytellers. This writes to GHL, so treat it as a change to an external system of record.
+---
+
 # /sync-storytellers - Empathy Ledger v2 → GHL Sync
 
 Sync storyteller data from Empathy Ledger v2 to GHL contacts.
