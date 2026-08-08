@@ -1,3 +1,8 @@
+---
+name: enrich-project
+description: Enriches ACT projects with intelligence drawn from every connected knowledge source, and builds the project and frontends dashboards. Use when the user wants a project enriched by its code, project intelligence refreshed across the ecosystem, or a combined project or frontends dashboard. Also use on /enrich-project. Do not use for contact or relationship enrichment, which is a separate pipeline.
+---
+
 # /enrich-project - Deep Project Intelligence
 
 Enrich ACT projects with intelligence from ALL knowledge sources.

@@ -1,3 +1,8 @@
+---
+name: agent-kanban
+description: Orchestrates parallel Claude Code agents through Vibe Kanban, giving each task its own git worktree, a diff viewer before merge, and live monitoring of agent reasoning. Use when the user wants several coding agents running at once, work fanned out across isolated worktrees, or a review step before agent work is merged. Do not use for a single sequential task or for ordinary git branching.
+---
+
 # Vibe Kanban - ACT Ecosystem Task Orchestration
 
 ## Overview

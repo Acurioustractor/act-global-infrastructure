@@ -1,3 +1,8 @@
+---
+name: scan-subscriptions
+description: Discovers and reconciles recurring software subscriptions by pulling Xero repeating invoices and detecting recurring bank-transaction patterns, then surfacing untracked subscriptions, price rises beyond a small variance, and cancellation candidates. Use when the user asks what are we paying for, wants a subscription audit or reconciliation, or suspects a price increase. Also use on /scan-subscriptions.
+---
+
 # /scan-subscriptions
 
 Discover and reconcile software subscriptions from multiple sources.
