@@ -24,6 +24,14 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
+- [[alignment-loop-drift-2026-08-06-to-2026-08-13|Alignment Loop drift — 2026-08-06 to 2026-08-13]] — 2026-08-13 · 7-day drift. Xero sync resumed (+39 invoices). Two cleared (Mounty $22K + Julalikari $15K); new Oonchiumpa INV-0344 $41,250. BAS 16 days past due. D&O 120 days past deadline. Q2 frozen (6th pass).
+
+- [[entity-migration-truth-state-2026-08-13|Entity migration truth-state — 44 days post-cutover, BAS 16 days overdue, D&O 120 days past deadline]] — 2026-08-13 · Q3 sixth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[project-truth-state-2026-08-13|Project truth-state — 74 codes × 4 sources, sixth pass (Xero sync resumed, +39 invoices)]] — 2026-08-13 · Q2 sixth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[funder-alignment-2026-08-13|Funder alignment — Oonchiumpa $41K new receivable, BAS 16 days overdue, Rotary enters 490th day]] — 2026-08-13 · Q1 sixth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
 - [[alignment-loop-drift-2026-07-23-to-2026-08-06|Alignment Loop drift — 2026-07-23 to 2026-08-06]] — 2026-08-06 · 14-day drift. $53,950 cleared (Jul 30). BAS now 9 days past standard due date. Q2 entirely static (5th consecutive pass). D&O 113 days past deadline.
 
 - [[entity-migration-truth-state-2026-08-06|Entity migration truth-state — 37 days post-cutover, BAS 9 days overdue, D&O 113 days past deadline]] — 2026-08-06 · Q3 fifth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
