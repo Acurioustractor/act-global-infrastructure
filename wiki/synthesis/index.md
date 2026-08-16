@@ -24,6 +24,14 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
+- [[alignment-loop-drift-2026-05-14-to-2026-07-09|Alignment Loop drift — 2026-05-14 to 2026-07-09]] — 2026-07-09 · 56-day drift. Rule 2 in effect post-cutover; ALIVE/MRFF $167.2K; D&O 46 days overdue; BAS due July 28.
+
+- [[entity-migration-truth-state-2026-07-09|Entity migration truth-state — 9 days post-cutover, Rule 2 in effect, Pty Xero still unopened]] — 2026-07-09 · Q3 fourth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[project-truth-state-2026-07-09|Project truth-state — 74 codes × 4 sources, post-cutover pass]] — 2026-07-09 · Q2 fourth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[funder-alignment-2026-07-09|Funder alignment — post-cutover, ALIVE MRFF grant landed, Snow paid, Minderoo paused]] — 2026-07-09 · Q1 fourth pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
 - [[alignment-loop-drift-2026-04-24-to-2026-05-14|Alignment Loop drift — 2026-04-24 to 2026-05-14]] — 2026-05-14 · 20-day drift summary, all three questions. D&O deadline 10 days away.
 
 - [[entity-migration-truth-state-2026-05-14|Entity migration truth-state — 47 days to cutover, decision-making accelerated, execution still light]] — 2026-05-14 · Q3 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
