@@ -2,18 +2,9 @@
 /**
  * sync-act-context.mjs: distribute ACT core facts to every active codebase
  *
- * Reads `wiki/decisions/act-context-downstream-block.md` verbatim and injects it
- * into the CLAUDE.md of every active ACT codebase listed in TARGET_REPOS.
- *
- * That projection file IS the block. Editing it is the only way to change what
- * downstream sessions see. (Until 2026-07-25 this script read act-core-facts.md
- * into a variable and then never used it, so the block was a hardcoded constant
- * and the "edit the upstream file and re-run" instruction carried in 12 repos had
- * never actually worked.)
- *
- * act-core-facts.md remains the canon: longer, and holding detail that deliberately
- * does not ship downstream. The script warns when the canon has a newer commit than
- * the projection, which is the signal to reconcile them by hand.
+ * Reads `wiki/decisions/act-core-facts.md` (the upstream source of truth) and
+ * generates a compact "ACT Context" block, then injects it into the CLAUDE.md
+ * of every active ACT codebase listed in TARGET_REPOS.
  *
  * The block is delimited by HTML comment markers; the script replaces only the
  * delimited section, preserving everything else in each repo's CLAUDE.md.
@@ -28,14 +19,10 @@
  * Downstream edits to the ACT Context block will be overwritten.
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
-import { execFileSync } from 'node:child_process'
 import { join } from 'node:path'
 
 const REPO_ROOT = process.cwd()
-// The canon. Not injected downstream — only used for the staleness warning below.
-const CANON = join(REPO_ROOT, 'wiki/decisions/act-core-facts.md')
-// The projection. THIS is what gets written into every downstream CLAUDE.md.
-const SOURCE = join(REPO_ROOT, 'wiki/decisions/act-context-downstream-block.md')
+const SOURCE = join(REPO_ROOT, 'wiki/decisions/act-core-facts.md')
 
 const TARGET_REPOS = [
   '/Users/benknight/Code/act-regenerative-studio',
@@ -58,71 +45,75 @@ const ONLY = ONLY_FLAG >= 0 ? argv[ONLY_FLAG + 1] : null
 
 function generateContextBlock() {
   if (!existsSync(SOURCE)) {
-    console.error(`Projection not found: ${SOURCE}`)
-    console.error('This file IS the downstream block. Create it before syncing.')
+    console.error(`Source not found: ${SOURCE}`)
     process.exit(1)
   }
-
-  // The file has three `---` lines: frontmatter open, frontmatter close, and the
-  // divider that ends the human-facing preamble. Split therefore yields four parts
-  // and the block body is parts[3] onward. The preamble explains the file to whoever
-  // is editing it and must NOT ship into eight CLAUDE.md files.
-  const raw = readFileSync(SOURCE, 'utf8')
-  const parts = raw.split(/^---$/m)
-  if (parts.length < 4) {
-    console.error(`Projection malformed: ${SOURCE}`)
-    console.error('Expected frontmatter, a preamble, a --- divider, then the block body.')
-    process.exit(1)
-  }
-  const body = parts.slice(3).join('---').trim()
-  if (!body) {
-    console.error(`Projection body is empty: ${SOURCE}`)
-    process.exit(1)
-  }
-
-  warnIfCanonIsNewer()
-
+  const src = readFileSync(SOURCE, 'utf8')
+  // Extract key facts for the compact block. Full file lives in act-global-infrastructure.
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Australia/Brisbane' }).format(new Date())
-  return `${BEGIN}
+  const block = `${BEGIN}
 
-## ACT Context (auto-synced from \`act-global-infrastructure/wiki/decisions/act-context-downstream-block.md\`)
+## ACT Context (auto-synced from \`act-global-infrastructure/wiki/decisions/act-core-facts.md\`)
 
 > Source upstream of this file: \`act-global-infrastructure/wiki/concepts/soul.md\`. The two humans and the why behind everything below.
 
-> Last synced: ${today}. **Do not edit this section directly.** Edit the projection file above, then run \`node scripts/sync-act-context.mjs --apply\` **from the act-global-infrastructure repo** (it resolves paths relative to cwd). Downstream edits get overwritten.
+> Last synced: ${today}. **Do not edit this section directly.** Edit the upstream file and run \`node scripts/sync-act-context.mjs --apply\`. Downstream edits get overwritten.
 
-${body}
+### Entities (as of 2026-06-08)
+- **A Curious Tractor Pty Ltd** (ACN 697 347 676; **ABN 36 697 347 676, issued with GST 2026-06-01**). Registered ASIC 2026-04-24. Primary trading entity from 1 July 2026; **trades as "Goods on Country"** for the Goods commercial arm (contracting, product sales, R&D claimant). Shareholders: Knight Family Trust 50 + Marchesi Family Trust 50. Directors: Ben Knight + Nicholas Marchesi. Bank: NAB. Accountant: Standard Ledger.
+- **Nicholas Marchesi sole trader** (ABN 21 591 780 066). Currently trading; hard cutover to Pty 30 June 2026.
+- **The Butterfly Movement Ltd** (ACN 155 132 684; ABN 22 155 132 684, verified ABR 2026-06-02). **The Goods charity + DGR home: endorsed Item 1 DGR + PBI since 17 Jan 2012**, ACNC-registered since Dec 2012 — can auspice/receipt NOW. "TABOO Foundation" is a business name on the same ACN. Stewardship handover 26 Jun 2026; Indigenous-led board being installed. DGR runs ONLY through Butterfly — never ACT Pty or AKT.
+- **A Kind Tractor Ltd** (ACN 669 029 341, ABN 73 669 029 341). Charitable CLG, ACNC-registered, **NOT DGR**, dormant. **NOT the Goods vehicle** — that is Butterfly.
+- **Harvest entity** + **Farm entity**. Being designed pending Standard Ledger advice.
+
+**Do NOT** use "ACT Foundation" or "ACT Ventures" as legal entity names. They are conceptual labels in older docs, not real entities.
+
+### Why this structure
+
+Three trading entities, one charity, one winding-down sole trader. The point is not bureaucracy. Each project earns the right to grow on its own revenue. The Harvest's money funds The Harvest's growth. Farm money funds Farm growth. A Curious Tractor Pty Ltd is the holding muscle that carries the founder relationship and the cross-cutting work.
+
+If we ran a single Pty Ltd with three project codes, the financial story would mash. Founders would have no clean way to see whether each project pays its way. The structure costs more in compliance and saves more in legibility. Legibility is what makes the soul able to read its own body.
+
+For how money flows through these entities into the four lanes (To Us, To Down, To Grow, To Others), see \`act-global-infrastructure/wiki/concepts/four-lanes.md\`.
+
+### Cutover (30 June 2026)
+- **Rule 1.** Pre-cutover invoices stay with sole trader (no re-issue, no inter-entity loan). Novation letters say "existing invoices pay as normal; new tranches from 1 July to Pty".
+- **Rule 2.** Honest-delay fallback: if Pty not invoice-ready 1 July, sole trader continues trading until Pty is genuinely live (no retroactive invoicing, no silent mis-attribution).
+- **Rule 3.** Rotary INV-0222 ($82.5K, 380d) is a recovery problem, not a novation one.
+- **Rule 4.** Shareholders Agreement is Week 1-2 (drafted by Standard Ledger's lawyer), not Week 4-5.
+
+### Active receivables on sole trader (~$507K total)
+Snow $132K · Centrecorp DRAFT $84.7K · Rotary $82.5K · PICC $113.3K · Regional Arts $33K · Just Reinvest $27.5K · BG Fit $15.4K · Aleisha Keating $11.7K · Homeland $5K · SMART Recovery $2.2K
+
+### Naming + voice
+- "Australian Living Map of Alternatives" (never bare "ALMA")
+- "Listen · Curiosity · Action · Art" (never bare "LCAA")
+- Indigenous place names always; colonial in brackets
+- No em-dashes in any ACT-facing writing
+- For ANY public-facing copy, load \`act-global-infrastructure/.claude/skills/act-brand-alignment/references/writing-voice.md\`
+
+### Cross-repo sources
+- **Entity facts (source-of-truth)**: \`act-global-infrastructure/wiki/decisions/act-core-facts.md\`
+- **Brand alignment map (READ BEFORE DESIGNING ANYTHING)**: \`act-global-infrastructure/wiki/decisions/act-brand-alignment-map.md\`
+- **Parent brand identity**: \`act-global-infrastructure/.claude/skills/act-brand-alignment/references/brand-core.md\`
+- **Parent writing voice (Curtis method, AI-tells blocklist)**: \`act-global-infrastructure/.claude/skills/act-brand-alignment/references/writing-voice.md\`
+- **Migration plan**: \`act-global-infrastructure/thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md\`
+- **Alignment Loop syntheses (weekly drift signal)**: \`act-global-infrastructure/wiki/synthesis/\`
+- **CEO daily cockpit**: \`act-global-infrastructure/wiki/cockpit/today.md\` (refreshed daily 07:00 Brisbane)
+- **Project codes (72 codes, all canonical)**: \`act-global-infrastructure/config/project-codes.json\`
+- **Funder ledger**: \`act-global-infrastructure/wiki/narrative/funders.json\`
+
+### Visual family (before designing anything in this repo)
+This repo's cluster: see brand alignment map. The map says:
+- **Editorial Warmth** parent: act-regenerative-studio (Fraunces + forest green + warm white)
+- **Editorial Warmth** subfamily: JusticeHub (STAY journal heritage), empathy-ledger-v2 (multi-tenant earth-tone)
+- **Civic Bauhaus**: CivicGraph / grantscope (Satoshi + black + signal red, intentional break)
+- **Unscoped (need decision)**: goods, act-farm, The Harvest Website
+
+**Rule**: read the map before designing. Update the map BEFORE shipping a new design. Never re-decide what's already decided.
 
 ${END}`
-}
-
-/**
- * The projection can drift behind the canon. We cannot merge them automatically —
- * the projection is a curated subset, not an extract — but we can refuse to be
- * silent about it. A sync that stamps a fresh "Last synced" date onto a projection
- * older than the canon is how stale facts start looking current.
- */
-function warnIfCanonIsNewer() {
-  if (!existsSync(CANON)) return
-  const lastCommit = (path) => {
-    try {
-      return execFileSync('git', ['log', '-1', '--format=%ct', '--', path], {
-        cwd: REPO_ROOT,
-        encoding: 'utf8',
-        stdio: ['ignore', 'pipe', 'ignore'],
-      }).trim()
-    } catch {
-      return ''
-    }
-  }
-  const canonAt = Number(lastCommit(CANON))
-  const projAt = Number(lastCommit(SOURCE))
-  if (!canonAt || !projAt) return
-  if (canonAt > projAt) {
-    const days = Math.round((canonAt - projAt) / 86400)
-    console.warn(`[sync-act-context] WARNING: act-core-facts.md is ${days} day(s) newer than the projection.`)
-    console.warn('[sync-act-context] Reconcile them by hand before syncing, or downstream repos get stale facts with a fresh date.')
-  }
+  return block
 }
 
 function injectIntoClaudeMd(claudeMdPath, block) {

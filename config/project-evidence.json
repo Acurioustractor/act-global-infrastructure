@@ -3,13 +3,17 @@
     "description": "Which CivicGraph data objects evidence each ACT project. Declared FROM THE PROJECT SIDE: the claim 'these tables evidence Goods' is a statement about the work, so it lives here under version control next to project-codes.json, and is mirrored onto CivicGraph's clarity_object.project_codes for fast filtering (same edge, stored once, written from the end that owns the meaning).",
     "rules": [
       "Keys must be codes from project-codes.json; values are CivicGraph clarity_object object_keys.",
-      "Declare only what you can defend — a wrong declaration pollutes the zero-evidence report, which is the metric this file exists to make honest: of 74 project codes, how many can the data not speak about at all?",
-      "Mirror with: node --env-file=.env scripts/sync-project-evidence.mjs (run from the grantscope repo). The sync validates both ends and refuses unknown codes or unknown objects rather than skipping them silently."
+      "Declare only what you can defend \u2014 a wrong declaration pollutes the zero-evidence report, which is the metric this file exists to make honest: of 74 project codes, how many can the data not speak about at all?",
+      "Mirror with: node --env-file=.env scripts/sync-project-evidence.mjs (run from the grantscope repo). The sync validates both ends and refuses unknown codes or unknown objects rather than skipping them silently.",
+      "The optional 'repos' map declares each code's primary codebase (a directory name under ~/Code on the machine running the sync). Repo freshness is MEASURED at sync time, never declared. Declare only repos you are sure of \u2014 a wrong repo link makes a dormant project look alive."
     ],
     "created": "2026-08-17"
   },
   "declarations": {
-    "ACT-JH": ["state_tenders", "organizations"],
+    "ACT-JH": [
+      "state_tenders",
+      "organizations"
+    ],
     "ACT-GD": [
       "org_pipeline",
       "v_goods_relationship_power",
@@ -26,6 +30,23 @@
       "political_donations",
       "grant_opportunities"
     ],
-    "ACT-EL": ["transcripts", "quotes"]
+    "ACT-EL": [
+      "transcripts",
+      "quotes"
+    ]
+  },
+  "repos": {
+    "ACT-JH": "JusticeHub",
+    "ACT-GD": "Goods Asset Register",
+    "ACT-EL": "empathy-ledger-v2",
+    "ACT-GS": "grantscope",
+    "ACT-CORE": "act-regenerative-studio",
+    "ACT-FM": "act-farm",
+    "ACT-HV": "The Harvest Website",
+    "ACT-CN": "Contained",
+    "ACT-FO": "fishers-oysters",
+    "ACT-CM": "Campfire website",
+    "ACT-OO": "Oochiumpa",
+    "ACT-SM": "SMART Connect Interviews"
   }
 }
