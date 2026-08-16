@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "description": "Which CivicGraph data objects evidence each ACT project. Declared FROM THE PROJECT SIDE: the claim 'these tables evidence Goods' is a statement about the work, so it lives here under version control next to project-codes.json, and is mirrored onto CivicGraph's clarity_object.project_codes for fast filtering (same edge, stored once, written from the end that owns the meaning).",
+    "rules": [
+      "Keys must be codes from project-codes.json; values are CivicGraph clarity_object object_keys.",
+      "Declare only what you can defend — a wrong declaration pollutes the zero-evidence report, which is the metric this file exists to make honest: of 74 project codes, how many can the data not speak about at all?",
+      "Mirror with: node --env-file=.env scripts/sync-project-evidence.mjs (run from the grantscope repo). The sync validates both ends and refuses unknown codes or unknown objects rather than skipping them silently."
+    ],
+    "created": "2026-08-17"
+  },
+  "declarations": {
+    "ACT-JH": ["state_tenders", "organizations"],
+    "ACT-GD": [
+      "org_pipeline",
+      "v_goods_relationship_power",
+      "v_goods_relationship_funding",
+      "v_goods_life_events",
+      "v_goods_foundation_targets",
+      "v_goods_warm_intros"
+    ],
+    "ACT-GS": [
+      "justice_funding",
+      "gs_entities",
+      "gs_relationships",
+      "austender_contracts",
+      "political_donations",
+      "grant_opportunities"
+    ],
+    "ACT-EL": ["transcripts", "quotes"]
+  }
+}
