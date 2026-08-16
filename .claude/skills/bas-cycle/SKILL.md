@@ -93,7 +93,8 @@ node scripts/sync-bill-attachments-to-txns.mjs --apply  # Copy bill receipts
 - `references/quarterly-learnings.md` — patterns accumulated across quarters
 - `references/q1-fy26-retro.md` — baseline retrospective
 - `workflows/quarterly-checklist.md` — step-by-step BAS prep runbook
-- `workflows/weekly-hygiene.md` — routine maintenance
+- `workflows/weekly-hygiene.md` — routine maintenance (the receipts half of the weekly check-in)
+- `wiki/finance/weekly-finance-checkin.md` — the unified weekly ritual (receipts + card + deadlines); run the weekly pass from here
 
 ## How this skill learns
 
