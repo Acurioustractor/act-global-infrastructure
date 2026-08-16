@@ -24,6 +24,14 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
+- [[alignment-loop-drift-2026-05-14-to-2026-07-16|Alignment Loop drift — 2026-05-14 to 2026-07-16]] — 2026-07-16 · 63-day drift, first post-cutover pass. Sole trader still invoicing. ABN cleared. Minderoo paused. EOFY fork.
+
+- [[entity-migration-truth-state-2026-07-16|Entity migration truth-state — 16 days post-cutover, sole trader still invoicing]] — 2026-07-16 · Q3 third pass. ABN issued 2026-06-01. No Pty Xero in DB. $189.2K post-cutover on sole trader.
+
+- [[project-truth-state-2026-07-16|Project truth-state — 74 codes × 4 sources, third pass (post-cutover)]] — 2026-07-16 · Q2 third pass. Config frozen at v1.8.0. ACT-PS gap persists. 4 DB codes not in config.
+
+- [[funder-alignment-2026-07-16|Funder alignment — post-cutover, sole trader still trading, new $189K on books]] — 2026-07-16 · Q1 third pass. Snow paid $132K. Centrecorp voided. Minderoo paused. Rotary 462d.
+
 - [[alignment-loop-drift-2026-04-24-to-2026-05-14|Alignment Loop drift — 2026-04-24 to 2026-05-14]] — 2026-05-14 · 20-day drift summary, all three questions. D&O deadline 10 days away.
 
 - [[entity-migration-truth-state-2026-05-14|Entity migration truth-state — 47 days to cutover, decision-making accelerated, execution still light]] — 2026-05-14 · Q3 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
