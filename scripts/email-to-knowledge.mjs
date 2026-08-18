@@ -338,10 +338,15 @@ async function isAlreadyProcessed(gmailId) {
 function initSupabase() {
   if (supabase) return supabase;
 
-  // Use ACT main Supabase (tednluwflfhxyucgwigh) - need the matching anon key
-  // The Bitwarden secrets may point to a different project, so we use env or hardcoded
+  // Use ACT main Supabase (tednluwflfhxyucgwigh) - need the matching key.
+  // The Bitwarden secrets may point to a different project, so we use env or hardcoded.
+  // Service role first: this script WRITES to project_knowledge, and the anon key is
+  // refused by that table's RLS policy (silent per-row failure, exit 1, 2026-08-19).
   const url = process.env.SUPABASE_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
-  const key = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_ANON_KEY ||
+    process.env.VITE_SUPABASE_ANON_KEY;
 
   if (!key) {
     // Try loading from .env file

@@ -1025,8 +1025,7 @@ module.exports = {
       env: {
         NODE_ENV: 'development'
       },
-      error_file: '/tmp/act-frontend-error.log',
-      out_file: '/tmp/act-frontend-out.log',
+      // Default pm2 paths (~/.pm2/logs) — see note on the scheduled scripts below.
       log_date_format: 'YYYY-MM-DD HH:mm:ss',
     },
 
@@ -1042,8 +1041,9 @@ module.exports = {
       env: {
         NODE_ENV: 'production'
       },
-      error_file: `/tmp/${s.name}-error.log`,
-      out_file: `/tmp/${s.name}-out.log`,
+      // Default pm2 paths (~/.pm2/logs) on purpose: macOS purges /tmp, so a reboot
+      // destroyed the diagnostics for any job that failed before it. pm2-logrotate
+      // only manages ~/.pm2/logs too. (2026-08-19)
       log_date_format: 'YYYY-MM-DD HH:mm:ss',
     })),
   ]
