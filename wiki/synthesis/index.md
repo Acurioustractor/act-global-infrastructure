@@ -24,6 +24,14 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
+- [[alignment-loop-drift-2026-08-20-to-2026-08-27|Alignment Loop drift — 2026-08-20 to 2026-08-27]] — 2026-08-27 · 7-day drift. Oonchiumpa $41K paid; Tanya Turner $7K new; ACCREC at $287K (lowest in loop). BAS 30d overdue. D&O 134d past deadline. Eighth pass.
+
+- [[entity-migration-truth-state-2026-08-27|Entity migration truth-state — 58 days post-cutover, BAS 30 days overdue, D&O 134 days past deadline]] — 2026-08-27 · Q3 eighth pass of the ACT Alignment Loop
+
+- [[project-truth-state-2026-08-27|Project truth-state — 74 codes × 4 sources, eighth pass (Xero +11, ACT-GD +1, ACT-PS gap eighth consecutive)]] — 2026-08-27 · Q2 eighth pass of the ACT Alignment Loop
+
+- [[funder-alignment-2026-08-27|Funder alignment — Oonchiumpa cleared, Tanya Turner new, outstanding at $287K]] — 2026-08-27 · Q1 eighth pass of the ACT Alignment Loop
+
 - [[alignment-loop-drift-2026-08-13-to-2026-08-20|Alignment Loop drift — 2026-08-13 to 2026-08-20]] — 2026-08-20 · 7-day drift. ALIVE $101K paid; ACCREC at $320K (lowest since baseline). BAS 23d overdue. D&O 127d past deadline. Seventh pass.
 
 - [[entity-migration-truth-state-2026-08-20|Entity migration truth-state — 51 days post-cutover, BAS 23 days overdue, D&O 127 days past deadline]] — 2026-08-20 · Q3 seventh pass of the ACT Alignment Loop
