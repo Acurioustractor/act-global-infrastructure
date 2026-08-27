@@ -14,7 +14,7 @@ date: 2026-08-27
 
 1. **Oonchiumpa INV-0344 ($41,250) PAID — outstanding ACCREC falls to $286,520.84, the lowest level in the alignment loop.** Net movement: −$34,297 from Aug 20 after Oonchiumpa cleared and a new invoice was raised. Outstanding now sits below $300K for the first time since the April baseline.
 
-2. **New invoice INV-0345 (Tanya Turner, $6,953, raised 2026-08-22) — 5 days old, no project_code.** This is a new counterparty not present in prior passes. No `funders.json` stub. Identity unclear — could be a community partner or individual contractor.
+2. **New invoice INV-0345 (Tanya Turner, $6,953, raised 2026-08-22) — 5 days old, no project_code.** Tanya Turner is Oonchiumpa's Co-Director (Eastern Arrernte; former Supreme Court associate — per `wiki/projects/oonchiumpa.md:32`). This invoice is likely ACT-OO. No `funders.json` stub for her individually; the Oonchiumpa relationship stub should cover it. Project_code needs tagging.
 
 3. **Rotary eClub INV-0222 ($82,500) is now 504 days unpaid** — over 16.5 months since it was raised (2025-04-10). Invoice remains AUTHORISED with full amount_due. The sole-trader tax return is due 31 October 2026 — 65 days away. Write-off or formal chase decision cannot be deferred much longer without affecting the FY26 tax return.
 
@@ -69,9 +69,9 @@ ALIVE National Centre INV-0341 ($66,000) remains outstanding and untagged at 56 
 
 1. **Confirm BAS Q4 FY26 status with Standard Ledger** — 30 days past standard due date. What is the concession deadline?
 2. **Resolve Rotary INV-0222 ($82,500, 504d)** — must resolve before FY26 sole-trader tax return (65 days). Write off or chase?
-3. **Identify Tanya Turner (INV-0345, $6,953)** — new counterparty, no project_code, no funders.json stub.
+3. **Tag INV-0345 Tanya Turner ($6,953) with project_code ACT-OO** — she is Oonchiumpa's Co-Director; invoice is almost certainly Oonchiumpa-related.
 4. **Tag INV-0341 ALIVE ($66,000) with project_code** — untagged since 2026-07-02.
-5. **Add missing counterparties to `funders.json`** — Sonas, Tandanya, Berry Obsession, Brodie Germaine, SIHF, Tanya Turner.
+5. **Add missing counterparties to `funders.json`** — Sonas, Tandanya, Berry Obsession, Brodie Germaine, SIHF; check whether an Oonchiumpa stub covers Tanya Turner.
 6. **Confirm Oonchiumpa INV-0344 payment** — was it tagged before payment? INV-0344 was flagged untagged in Aug 20 pass.
 
 ---

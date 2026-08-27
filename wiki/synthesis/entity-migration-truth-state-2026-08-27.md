@@ -1,6 +1,6 @@
 ---
-title: Entity migration truth-state — 58 days post-cutover, BAS 30 days overdue, D&O 134 days past deadline
-summary: Eighth pass of the ACT Alignment Loop (Q3), 2026-08-27. 58 days post-cutover. Xero +11 invoices (2,362 total). Outstanding ACCREC falls to $286,520.84 (−$34,297 — Oonchiumpa INV-0344 paid, Tanya Turner INV-0345 new). BAS Q4 FY26 now 30 days past standard due date (was 23). D&O insurance now 134 days past deadline. Sole-trader tax return due 65 days. Still 1 Xero tenant. Bank data still ends 2026-03-31. No new migration artefacts.
+title: Entity migration truth-state — 58 days post-cutover, BAS 30 days overdue, D&O 95 days past stated deadline
+summary: Eighth pass of the ACT Alignment Loop (Q3), 2026-08-27. 58 days post-cutover. Xero +11 invoices (2,362 total). Outstanding ACCREC falls to $286,520.84 (−$34,297 — Oonchiumpa INV-0344 paid, Tanya Turner INV-0345 new). BAS Q4 FY26 now 30 days past standard due date (was 23). D&O insurance: 95 days past the stated ~2026-05-24 deadline (prior passes used a different reference — see note). Sole-trader tax return due 65 days. Still 1 Xero tenant. Bank data still ends 2026-03-31. No new migration artefacts.
 tags: [synthesis, entity-migration, alignment-loop, pty-ltd, cutover, post-cutover, bas]
 status: active
 date: 2026-08-27
@@ -16,7 +16,7 @@ date: 2026-08-27
 
 2. **BAS Q4 FY26 (sole-trader) is now 30 days past the standard due date** (2026-07-28). Was 23 days at Aug 20. Standard Ledger holds registered tax agent status and likely has a concession date — but no lodgement evidence is visible in any data source. The sole-trader tax return is due 31 October 2026 — **65 days away**. The BAS must precede the tax return.
 
-3. **D&O insurance is now 134 days past the ~2026-05-24 deadline.** Up from 127 days at Aug 20. No binding evidence in any pass since the 2026-04-24 baseline. Over four months of potential uninsured director liability with no resolution signal visible in any source.
+3. **D&O insurance: 95 days past the stated ~2026-05-24 deadline** (May 24 → Aug 27 = 95 days). Prior passes showed 120d at Aug 13 and 127d at Aug 20, which implies a different reference date (~April 15) was used in the running count — the exact registration date is unverified in this loop. Regardless of the reference, D&O remains unconfirmed across all eight passes with no binding evidence visible.
 
 4. **Xero: still 1 tenant, now 2,362 invoices (+11 from Aug 20).** Sync is running consistently. No second (Pty) tenant visible in DB. Whether the Pty Xero file exists but is unsynced remains unconfirmable from DB alone.
 
@@ -84,7 +84,7 @@ All items remain NOT STARTED or UNCONFIRMED per available evidence. No changes s
 
 | Item | Required by | Status | Change |
 |---|---|---|---|
-| D&O insurance | ~2026-05-24 (30d from registration) | ❓ UNCONFIRMED — **134 days past deadline** | ↑ was 127d at Aug 20, now 134d |
+| D&O insurance | ~2026-05-24 (30d from registration) | ❓ UNCONFIRMED — **95 days past stated deadline** (prior count ~134d — reference date unclear; see headline finding 3) | → |
 | Public Liability $20M | Before Harvest lease | ❓ in progress per 2026-06-01 evidence | → |
 | Professional Indemnity | 1 July 2026 | ❓ UNCONFIRMED | → |
 
@@ -143,7 +143,7 @@ All SaaS transfers NOT STARTED per available evidence. Sole trader still the onl
 
 1. **BAS Q4 FY26 — 30 days past standard due date.** Confirm with Standard Ledger: lodged or concession deadline? The sole-trader tax return (31 Oct 2026) is 65 days away and requires BAS to be complete first.
 2. **Rotary INV-0222 ($82,500, 504 days)** — write-off window for BAS purposes is long past. Invoice still AUTHORISED. Formal resolution required before the sole-trader tax return (65 days).
-3. **D&O insurance — 134 days past the ~2026-05-24 deadline.** 4+ months of potential uninsured director liability. No binding evidence in any of the eight passes.
+3. **D&O insurance — 95 days past the stated ~2026-05-24 deadline** (prior passes counted from a different reference point; see headline finding 3). No binding evidence in any of the eight passes. Regardless of exact count, D&O remains unconfirmed.
 4. **EOFY strategic fork (journal vs market-value sale)** — no Standard Ledger ruling visible; blocking clean R&D claim structuring and sole-trader tax return.
 
 ### 🟠 Amber (this week)

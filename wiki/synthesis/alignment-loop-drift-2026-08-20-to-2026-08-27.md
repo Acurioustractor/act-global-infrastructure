@@ -1,6 +1,6 @@
 ---
 title: Alignment Loop drift — 2026-08-20 to 2026-08-27
-summary: 7-day drift summary (Aug 20 → Aug 27). Oonchiumpa INV-0344 ($41,250) paid — ACCREC falls to $286,520.84 (lowest in loop history). New invoice INV-0345 Tanya Turner ($6,953) raised Aug 22, untagged. BAS now 30 days past standard due date (was 23). D&O now 134 days past deadline (was 127). Sole-trader tax return 65 days away. Xero +11. All migration structure items unchanged.
+summary: 7-day drift summary (Aug 20 → Aug 27). Oonchiumpa INV-0344 ($41,250) paid — ACCREC falls to $286,520.84 (lowest in loop history). New invoice INV-0345 Tanya Turner / Oonchiumpa Co-Director ($6,953) raised Aug 22, untagged (likely ACT-OO). BAS now 30 days past standard due date (was 23). D&O: 95 days past stated May 24 deadline (prior pass count corrected — reference date uncertain). Sole-trader tax return 65 days away. Xero +11. All migration structure items unchanged.
 tags: [synthesis, alignment-loop, drift]
 status: active
 date: 2026-08-27
@@ -12,8 +12,8 @@ date: 2026-08-27
 
 ## TL;DR — what moved since 20 August
 
-- **Oonchiumpa INV-0344 ($41,250) paid and a new invoice raised: Tanya Turner INV-0345 ($6,953, Aug 22), untagged.** Outstanding ACCREC drops to $286,520.84 — the lowest in the loop's history. The Tanya Turner invoice is a new counterparty not in `funders.json` and has no project_code.
-- **BAS Q4 FY26 now 30 days past standard due date (was 23); D&O now 134 days past deadline (was 127); sole-trader tax return is 65 days away (31 Oct 2026).** The three critical compliance unknowns continue accumulating with no resolution signal visible in DB, plans, or drafts.
+- **Oonchiumpa INV-0344 ($41,250) paid and a new invoice raised: Tanya Turner INV-0345 ($6,953, Aug 22), untagged.** Outstanding ACCREC drops to $286,520.84 — the lowest in the loop's history. Tanya Turner is Oonchiumpa's Co-Director (per `wiki/projects/oonchiumpa.md`) — invoice is likely ACT-OO; still needs project_code tag.
+- **BAS Q4 FY26 now 30 days past standard due date (was 23). D&O: 95 days past stated May 24 deadline (prior pass count corrected — prior passes showed 127d at Aug 20, but May 24 → Aug 27 = 95 days; reference date for prior count unclear). Sole-trader tax return 65 days away (31 Oct 2026).** No resolution signal visible in any source.
 - **Everything structural frozen again:** config v1.8.0 (126 days stale), wiki 98 articles (eighth consecutive pass), no Pty Xero tenant, no NAB Pty, same 7 migration plans, same 1 draft.
 
 ---
@@ -35,7 +35,7 @@ date: 2026-08-27
 | BAS status | 23 days past standard due date | **30 days past standard due date** | ↑ escalated |
 | GHL comms data | sparse (query error) | **sparse (same error)** | → |
 
-**Material changes:** Oonchiumpa INV-0344 ($41,250) cleared — the only new positive movement. New invoice INV-0345 Tanya Turner ($6,953, Aug 22) is a fresh gap: no project_code, no funders.json stub, identity unclear. Outstanding ACCREC at $286,520.84 is the lowest in the loop's history. No new invoices raised to known funders. All other outstanding invoices are +7 days older.
+**Material changes:** Oonchiumpa INV-0344 ($41,250) cleared — the only new positive movement. New invoice INV-0345 Tanya Turner ($6,953, Aug 22) — Tanya Turner is Oonchiumpa's Co-Director per wiki; invoice likely ACT-OO and should be tagged accordingly. Outstanding ACCREC at $286,520.84 is the lowest in the loop's history. No new invoices raised to other known funders. All other outstanding invoices are +7 days older.
 
 ---
 
@@ -73,7 +73,7 @@ date: 2026-08-27
 | ACCREC invoice count | 10 | **10** | → |
 | DRAFT ACCREC count | 1 ($0) | **1 ($0)** | → |
 | BAS Q4 FY26 | 23 days past standard due date | **30 days past standard due date** | ↑ 🚨 |
-| D&O insurance | 127 days past deadline | **134 days past deadline** | ↑ +7d 🔴 |
+| D&O insurance | 127 days past deadline (prior count) | **95 days past stated May 24 deadline (recalculated — prior reference date unclear)** | ↓ corrected 🔴 |
 | Sole-trader tax return due | 72 days away | **65 days away (31 Oct 2026)** | ↑ approaching |
 | Pty Xero file status | UNCONFIRMED | **UNCONFIRMED** | → |
 | NAB Pty account status | UNCONFIRMED | **UNCONFIRMED** | → |
@@ -87,7 +87,7 @@ date: 2026-08-27
 - 🟢 **Oonchiumpa INV-0344 ($41,250) paid** — outstanding ACCREC falls to $286,520.84, lowest in loop history.
 - 🟡 **Tanya Turner INV-0345 ($6,953, Aug 22) — new sole-trader invoice, untagged.** A new post-cutover gap: sole-trader entity but raised after cutover. Whether this should be on the Pty is unresolved.
 - 🔴 **BAS Q4 FY26 now 30 days past standard due date** (was 23 days at Aug 20). Sole-trader tax return due 31 October 2026 — 65 days away. The BAS must be resolved before lodging the tax return.
-- 🔴 **D&O insurance now 134 days past deadline** — up from 127. No binding evidence in eight consecutive passes.
+- 🔴 **D&O insurance: 95 days past stated May 24 deadline** (prior passes showed 127d based on a different reference date — see headline note). No binding evidence in eight consecutive passes regardless of count.
 - → **No new migration artefacts** — same 7 migration plans, same 1 draft. The EOFY Decision Pack items (strategic fork, Nic super, Knight Photography) remain unresolved.
 
 ---

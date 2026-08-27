@@ -1,6 +1,6 @@
 ---
 title: Project truth-state — 74 codes × 4 sources, eighth pass (Xero +11, ACT-GD +1, ACT-PS gap eighth consecutive pass)
-summary: Eighth pass of the ACT Alignment Loop (Q2), 2026-08-27. Config still 74 codes (v1.8.0, 126 days stale). Wiki still 98 articles (eighth consecutive pass unchanged). ACT-PS wiki gap now eight consecutive passes. Xero +11 invoices (2,362 total), ACT-GD +1, ACT-HV +1. Four DB-only codes persist unresolved. Untagged post-cutover: $73,953 (INV-0341 $66K + INV-0345 $6,953). Acceptance criterion still met.
+summary: Eighth pass of the ACT Alignment Loop (Q2), 2026-08-27. Config still 74 codes (v1.8.0, 126 days stale). Wiki still 98 articles (eighth consecutive pass unchanged). ACT-PS wiki gap now eight consecutive passes. Xero +11 invoices (2,362 total), ACT-GD +1, ACT-HV +1. Four DB-only codes persist unresolved. Untagged post-cutover: $72,953 (INV-0341 $66K + INV-0345 $6,953). Acceptance criterion still met.
 tags: [synthesis, projects, alignment-loop, project-codes]
 status: active
 date: 2026-08-27
