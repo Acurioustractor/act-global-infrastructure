@@ -25,6 +25,7 @@ import {
   resolveLane,
 } from './lanes.ts';
 import { isKnownProjectCode, PROJECT_CODES, projectTag } from './project-codes.ts';
+import { pipelineFor } from './pipelines.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -40,6 +41,10 @@ const FIELD_MESSAGE = 'ceJz9FUf8dE4fmvnPDKd';
 
 const GHL_API = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
+// The opportunities endpoint is the one call that will not answer on 2021-07-28. It
+// wants the trailing slash and this version, or it 404s. Proven in
+// act-regenerative-studio src/lib/ghl/client.ts:232.
+const GHL_OPPORTUNITY_VERSION = '2023-02-21';
 const INBOX_ADDRESS = 'hi@act.place';
 
 // Per-form identity tags, lifted verbatim from act-regenerative-studio
@@ -330,10 +335,14 @@ async function deliverToGhl(
   id: string | undefined,
   ctx: DeliveryContext,
 ): Promise<void> {
-  const token = Deno.env.get('GHL_API_TOKEN');
+  // GHL_API_KEY, not GHL_API_TOKEN. The name here was wrong at deploy, so every
+  // submission would have stuck at pending with 'GHL_API_TOKEN is not set'. The
+  // secret on this project is GHL_API_KEY, which is also what every other GHL
+  // caller in the ecosystem reads.
+  const token = Deno.env.get('GHL_API_KEY');
   const locationId = Deno.env.get('GHL_LOCATION_ID') ?? 'agzsSZWgovjwgpcoASWG';
   if (!token) {
-    await markFailed(supabase, id, 'GHL_API_TOKEN is not set');
+    await markFailed(supabase, id, 'GHL_API_KEY is not set');
     return;
   }
 
@@ -451,23 +460,20 @@ async function deliverToGhl(
     }
 
     // ---- 11. Opportunity only for a genuine prospect.
-    if (mayCreateOpportunity(lane)) {
-      const pipelineId = Deno.env.get('GHL_PIPELINE_ID');
-      const stageId = Deno.env.get('GHL_PIPELINE_STAGE_ID');
-      if (pipelineId && stageId) {
-        await fetch(`${GHL_API}/opportunities/`, {
-          method: 'POST',
-          headers,
-          body: JSON.stringify({
-            locationId,
-            contactId,
-            pipelineId,
-            pipelineStageId: stageId,
-            name: `${entry.name} — ${formType}`,
-            status: 'open',
-          }),
-        }).catch((e) => console.warn('opportunity create failed', e));
-      }
+    const route = mayCreateOpportunity(lane) ? pipelineFor(projectCode, formType) : null;
+    if (route) {
+      await fetch(`${GHL_API}/opportunities/`, {
+        method: 'POST',
+        headers: { ...headers, Version: GHL_OPPORTUNITY_VERSION },
+        body: JSON.stringify({
+          locationId,
+          contactId,
+          pipelineId: route.pipelineId,
+          pipelineStageId: route.stageId,
+          name: `${entry.name} — ${formType}`,
+          status: 'open',
+        }),
+      }).catch((e) => console.warn('opportunity create failed', e));
     }
 
     // ---- 12. Delivered.
