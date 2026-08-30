@@ -28,8 +28,11 @@ import { isKnownProjectCode, PROJECT_CODES, projectTag } from './project-codes.t
 import { pipelineFor } from './pipelines.ts';
 import {
   ackChannelFor,
+  audienceTagsOn,
   buildAcknowledgement,
   buildNotification,
+  DESK_ADDRESS,
+  DESK_TAGS,
   NOTIFY_INBOX,
   type SubmissionSummary,
 } from './notify.ts';
@@ -52,7 +55,6 @@ const GHL_VERSION = '2021-07-28';
 // wants the trailing slash and this version, or it 404s. Proven in
 // act-regenerative-studio src/lib/ghl/client.ts:232.
 const GHL_OPPORTUNITY_VERSION = '2023-02-21';
-const INBOX_ADDRESS = 'hi@act.place';
 
 // Per-form identity tags, lifted verbatim from act-regenerative-studio
 // src/app/api/forms/submit/route.ts:256. Colon-namespaced only — see the guard below.
@@ -294,7 +296,7 @@ Deno.serve(async (req) => {
   // submission is notified even when the spam heuristic fired: a false alert costs a
   // glance, a missed person costs much more.
   if (!spam || decision.lane === 'duty_of_care') {
-    queueMicrotaskSafe(() => notifyInbox(decision.lane, summary));
+    queueMicrotaskSafe(() => notifyDesk(decision.lane, summary));
   }
 
   // ---- 6. Duty of care: stop here. No GHL call is made. ------------------------
@@ -351,19 +353,6 @@ async function notifyDutyOfCare(
   if (error) console.error('duty-of-care register write failed', error);
 }
 
-/**
- * Email NOTIFY_INBOX about a submission, in every lane.
- *
- * Sent outside GHL on purpose. Duty of care must never produce a CRM record, so the
- * one notification path that covers all four lanes cannot be a GHL call. It is also
- * the backstop for the CRM itself: the row is already written before this runs, and
- * this runs before any GHL call, so a GHL outage costs delivery, not awareness.
- *
- * hi@act.place is the only published address in the estate verified to receive.
- * `scripts/check-estate.mjs` proves that on every run, and the other four published
- * addresses have no MX at all, which is why this constant is tested rather than typed
- * at each call site.
- */
 /** One Resend call. Returns false and says so loudly rather than throwing. */
 async function sendDirect(to: string, subject: string, text: string, tag: string): Promise<boolean> {
   const apiKey = Deno.env.get('RESEND_API_KEY');
@@ -411,9 +400,83 @@ async function acknowledgeDirect(lane: Lane, summary: SubmissionSummary): Promis
   await sendDirect(to, subject, text, 'DUTY-OF-CARE ACK');
 }
 
-async function notifyInbox(lane: Lane, summary: SubmissionSummary): Promise<void> {
+/**
+ * Tell the desk, in every lane, through GHL.
+ *
+ * The desk is a GHL contact, so GHL sends this and it arrives in the Google mailbox
+ * behind DESK_ADDRESS *and* stands as a conversation in the CRM. Two places, one call,
+ * no new secret and no sending domain to verify.
+ *
+ * This does not violate the duty-of-care rule, and the distinction is the whole of #90:
+ * the message is addressed to US, about them. They never become a contact. What the
+ * desk receives about a duty-of-care submission is identity and route, never the body,
+ * which `buildNotification` enforces and `notify.test.ts` guards with a control.
+ */
+async function notifyDesk(lane: Lane, summary: SubmissionSummary): Promise<void> {
+  const tag = `NOTIFY[${lane} ${summary.id ?? '?'}]`;
+  const token = Deno.env.get('GHL_API_KEY');
+  const locationId = Deno.env.get('GHL_LOCATION_ID') ?? 'agzsSZWgovjwgpcoASWG';
+  const deskEmail = Deno.env.get('NOTIFY_DESK_EMAIL') ?? DESK_ADDRESS;
   const { subject, text } = buildNotification(lane, summary);
-  await sendDirect(NOTIFY_INBOX, subject, text, `NOTIFY[${lane} ${summary.id ?? '?'}]`);
+
+  if (!token) {
+    console.error(`${tag} DROPPED: no GHL_API_KEY. subject="${subject}"`);
+    return;
+  }
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    Version: GHL_VERSION,
+    'Content-Type': 'application/json',
+  };
+
+  try {
+    const upsertRes = await fetch(`${GHL_API}/contacts/upsert`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        locationId,
+        email: deskEmail,
+        firstName: 'ACT',
+        lastName: 'Desk',
+        tags: [...DESK_TAGS],
+      }),
+    });
+    if (!upsertRes.ok) {
+      console.error(`${tag} desk upsert ${upsertRes.status}: ${await safeText(upsertRes)}`);
+      return;
+    }
+    const upserted = await upsertRes.json().catch(() => null);
+    const contact = upserted?.contact ?? upserted;
+    const contactId = contact?.id;
+    if (!contactId) {
+      console.error(`${tag} desk upsert returned no contact id`);
+      return;
+    }
+
+    // The desk must not sit inside a sending audience. Checked rather than assumed:
+    // the pollution on hi@act.place arrived through a Gmail import and a contact
+    // merge, neither of which reviewed anything. Loud, and does not block the send,
+    // because a notification that arrives beats a notification withheld on principle.
+    const stray = audienceTagsOn(contact?.tags ?? []);
+    if (stray.length > 0) {
+      console.error(
+        `${tag} DESK CONTACT IS IN AUDIENCES: ${deskEmail} carries ${stray.join(', ')}. ` +
+          'It can be swept into a campaign send. See #99.',
+      );
+    }
+
+    const sendRes = await fetch(`${GHL_API}/conversations/messages`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ type: 'Email', contactId, subject, message: text }),
+    });
+    if (!sendRes.ok) {
+      console.error(`${tag} FAILED ${sendRes.status}: ${await safeText(sendRes)}`);
+    }
+  } catch (err) {
+    console.error(`${tag} FAILED`, err);
+  }
 }
 
 interface DeliveryContext {
@@ -536,8 +599,8 @@ async function deliverToGhl(
         subject: str(fields.subject) ?? `${formType} via ${ctx.site}`,
         html: buildInboundBody(ctx),
         direction: 'inbound',
-        emailFrom: email ?? INBOX_ADDRESS,
-        emailTo: INBOX_ADDRESS,
+        emailFrom: email ?? NOTIFY_INBOX,
+        emailTo: NOTIFY_INBOX,
       }),
     });
     if (inboundRes.ok) {

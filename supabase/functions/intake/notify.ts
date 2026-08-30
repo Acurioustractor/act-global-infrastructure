@@ -138,3 +138,53 @@ export function buildAcknowledgement(lane: Lane, s: SubmissionSummary): Message 
     text: body.join('\n'),
   };
 }
+
+// ---------------------------------------------------------------------------
+// The desk.
+// ---------------------------------------------------------------------------
+//
+// #90 settled the shape: GHL cannot notify about a person without creating them as a
+// contact, so the notification is addressed to US, about them, with the register row
+// as the pointer. The person is never a GHL contact.
+//
+// Applying that to the inbox removes the whole Resend dependency for notification. The
+// desk is itself a GHL contact, GHL emails it, and the message arrives in the Google
+// mailbox AND is visible in GHL. No new secret, no sending domain to verify.
+
+/**
+ * The desk's own address, deliberately NOT hi@act.place.
+ *
+ * hi@act.place already exists in GHL as x9ppRP5MZJnF6v01DgWj carrying role:storyteller,
+ * lane:community, tier:curious, goods-partner-lead, goods-segment-plastic-supply and
+ * several event tags, from a Gmail import and the LGANT delivery checks. Notifying
+ * through that contact would put the desk inside sending audiences, which is the open
+ * question on #99. A dedicated address starts clean and can be kept clean.
+ *
+ * Expected to be a Google Workspace alias delivering to hi@act.place.
+ */
+export const DESK_ADDRESS = 'desk@act.place';
+
+/** The only tags the desk contact may carry. Identity, never audience. */
+export const DESK_TAGS: readonly string[] = ['act-internal-desk'] as const;
+
+/**
+ * Tag prefixes that can put a contact into a sending audience, a lane, or a campaign.
+ * The desk must never carry one. Checked at run time rather than assumed, because the
+ * pollution on hi@act.place arrived through a Gmail import and a contact merge, not
+ * through anything that reviewed it.
+ */
+export const AUDIENCE_TAG_PREFIXES: readonly string[] = [
+  'lane:',
+  'comms:',
+  'tier:',
+  'role:',
+  'goods-segment-',
+  'goods-partner-',
+] as const;
+
+/** Any tag on this contact that could sweep it into a send. Empty is the good answer. */
+export function audienceTagsOn(tags: readonly string[]): string[] {
+  return tags.filter((t) =>
+    AUDIENCE_TAG_PREFIXES.some((p) => t.toLowerCase().startsWith(p))
+  );
+}
