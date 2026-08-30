@@ -23,6 +23,7 @@
  */
 
 import { resolveMx } from 'node:dns/promises';
+import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -114,6 +115,58 @@ const DATABASES = {
   el:    { ref: 'yvnuayzslukamizrlhwb', url: 'EL_SUPABASE_URL',    key: 'EL_SUPABASE_SERVICE_ROLE_KEY' },
   goods: { ref: 'cwsyhpiuepvdjtxaozwf', url: 'GOODS_SUPABASE_URL', key: 'GOODS_SUPABASE_SERVICE_ROLE_KEY' },
 };
+
+
+/**
+ * Regression gate on the 2026-08-30 exposure sweep.
+ *
+ * Every `closed` table was readable by the project's public key that morning and must
+ * not be again. Every `control` table must still answer 200 — without it a wholesale
+ * key failure reads as a clean pass, which happened three times during the sweep and
+ * is the reason this shape exists.
+ *
+ * Keys come from the Supabase CLI at run time rather than from env, because publishable
+ * keys rotate and a stale copy here would fail closed for the wrong reason.
+ */
+const EXPOSURE = [
+  { label: 'Goods', ref: 'cwsyhpiuepvdjtxaozwf', control: 'assets',
+    closed: ['crm_activities', 'webhook_receipts', 'engagement_scores', 'crm_deals',
+             'machine_commentary', 'admin_kv_state', 'linkedin_posts'] },
+  { label: 'Palm Island', ref: 'uaxhjzqrdotoahjnxmbj', control: 'stories',
+    closed: ['story_captures', 'service_notes', 'notifications', 'chat_messages', 'documents'] },
+  { label: 'Empathy Ledger Enhanced', ref: 'yvnuayzslukamizrlhwb', control: 'stories',
+    closed: ['_bio_backup_20260723', '_storyteller_bio_backup_20260723',
+             'data_migration_20260806_story_import_consent_backup',
+             '_clear_20260810_false_elder_reviewed', 'archived_collective_access_tokens'] },
+  { label: 'Empathy Ledger main', ref: 'tednluwflfhxyucgwigh', control: 'phidu_lga_health',
+    closed: [] },
+  { label: 'ACT Farmhand', ref: 'bhwyqqbovcjoefezgfnq', control: null,
+    closed: ['contact_review_decisions', 'contact_communications', 'knowledge_chunks'] },
+  { label: 'Barkly Backbone', ref: 'gkwzdnzwpfpkvgpcbeeq', control: null,
+    closed: ['document_themes', 'documents', 'referral_submissions'] },
+];
+
+function publicKey(ref) {
+  try {
+    const raw = execFileSync('supabase',
+      ['projects', 'api-keys', '--project-ref', ref, '--reveal', '-o', 'json'],
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], timeout: 30000 });
+    const keys = JSON.parse(raw);
+    const pub = keys.find((k) => k.type === 'publishable');
+    if (pub) return pub.api_key;
+    const legacy = keys.find((k) => k.id === 'anon');
+    return legacy ? legacy.api_key : null;
+  } catch {
+    return null;
+  }
+}
+
+async function reachable(ref, key, table) {
+  const r = await fetch(`https://${ref}.supabase.co/rest/v1/${table}?select=*&limit=1`, {
+    headers: { apikey: key, Authorization: `Bearer ${key}` },
+  });
+  return r.status;
+}
 
 // ---------------------------------------------------------------- plumbing
 
@@ -222,6 +275,30 @@ if (!WEB_ONLY) {
     if (r.n === 0) line('PASS', q.label, 'empty');
     else if (q.critical) line('FAIL', q.label, `${r.n} waiting · a person is owed a reply`);
     else line('WARN', q.label, `${r.n} waiting`);
+  }
+}
+
+
+if (!WEB_ONLY) {
+  console.log('\n\x1b[1mExposure\x1b[0m  is anything open again that we closed');
+  for (const e of EXPOSURE) {
+    const key = publicKey(e.ref);
+    if (!key) { line('WARN', e.label, 'no public key (is the Supabase CLI logged in?)'); continue; }
+
+    if (e.control) {
+      const c = await reachable(e.ref, key, e.control);
+      if (c !== 200) {
+        line('WARN', e.label, `control ${e.control} returned ${c}, so a pass here would be meaningless`);
+        continue;
+      }
+    }
+    let open = [];
+    for (const t of e.closed) {
+      const st = await reachable(e.ref, key, t);
+      if (st === 200) open.push(t);
+    }
+    if (open.length) line('FAIL', e.label, `REOPENED to the public key: ${open.join(', ')}`);
+    else line('PASS', e.label, `${e.closed.length} closed table(s) still shut${e.control ? `, ${e.control} still serving` : ''}`);
   }
 }
 
