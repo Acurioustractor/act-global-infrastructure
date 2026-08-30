@@ -26,6 +26,13 @@ import {
 } from './lanes.ts';
 import { isKnownProjectCode, PROJECT_CODES, projectTag } from './project-codes.ts';
 import { pipelineFor } from './pipelines.ts';
+import {
+  ackChannelFor,
+  buildAcknowledgement,
+  buildNotification,
+  NOTIFY_INBOX,
+  type SubmissionSummary,
+} from './notify.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -270,11 +277,34 @@ Deno.serve(async (req) => {
     });
   }
 
+  const summary: SubmissionSummary = {
+    id,
+    site,
+    projectCode,
+    formType,
+    submitterName: str(fields.name) ?? null,
+    submitterEmail: str(fields.email) ?? null,
+    body: str(fields.message) ?? null,
+    laneReason: decision.reason,
+  };
+
+  // ---- 5b. Tell the humans, whatever the lane. -------------------------------
+  // This is the only path that does not run through the CRM, which is exactly why it
+  // is the one that still works when the CRM is deliberately bypassed. A duty-of-care
+  // submission is notified even when the spam heuristic fired: a false alert costs a
+  // glance, a missed person costs much more.
+  if (!spam || decision.lane === 'duty_of_care') {
+    queueMicrotaskSafe(() => notifyInbox(decision.lane, summary));
+  }
+
   // ---- 6. Duty of care: stop here. No GHL call is made. ------------------------
   if (decision.lane === 'duty_of_care') {
     // Delivery to the register and the named human happens out of band, but the
     // exclusion itself is already durable on the row above.
     queueMicrotaskSafe(() => notifyDutyOfCare(supabase, id, row, decision.reason));
+    if (ackChannelFor(decision.lane) === 'direct') {
+      queueMicrotaskSafe(() => acknowledgeDirect(decision.lane, summary));
+    }
     return json({ ok: true, id, lane: decision.lane, received: true }, 202);
   }
 
@@ -285,7 +315,7 @@ Deno.serve(async (req) => {
   // ---- 4. Return 202 immediately; deliver out of band --------------------------
   // The visitor never waits on GHL and never sees a 503 because GHL was slow. The
   // 5-minute retry job re-drives anything left pending.
-  queueMicrotaskSafe(() => deliverToGhl(supabase, id, { site, projectCode, formType, fields, body, lane: decision.lane }));
+  queueMicrotaskSafe(() => deliverToGhl(supabase, id, { site, projectCode, formType, fields, body, lane: decision.lane, summary }));
 
   return json({ ok: true, id, lane: decision.lane, received: true }, 202);
 });
@@ -321,6 +351,71 @@ async function notifyDutyOfCare(
   if (error) console.error('duty-of-care register write failed', error);
 }
 
+/**
+ * Email NOTIFY_INBOX about a submission, in every lane.
+ *
+ * Sent outside GHL on purpose. Duty of care must never produce a CRM record, so the
+ * one notification path that covers all four lanes cannot be a GHL call. It is also
+ * the backstop for the CRM itself: the row is already written before this runs, and
+ * this runs before any GHL call, so a GHL outage costs delivery, not awareness.
+ *
+ * hi@act.place is the only published address in the estate verified to receive.
+ * `scripts/check-estate.mjs` proves that on every run, and the other four published
+ * addresses have no MX at all, which is why this constant is tested rather than typed
+ * at each call site.
+ */
+/** One Resend call. Returns false and says so loudly rather than throwing. */
+async function sendDirect(to: string, subject: string, text: string, tag: string): Promise<boolean> {
+  const apiKey = Deno.env.get('RESEND_API_KEY');
+  const from = Deno.env.get('NOTIFY_FROM') ?? 'ACT intake <intake@act.place>';
+
+  if (!apiKey) {
+    // Loud rather than silent. The defect this project already hit once was a write
+    // path that could not work and said nothing; mail nobody receives is the same
+    // shape, and the whole point of these two functions is that someone finds out.
+    console.error(`${tag} DROPPED: no RESEND_API_KEY. to=${to} subject="${subject}"`);
+    return false;
+  }
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from, to: [to], subject, text }),
+    });
+    if (!res.ok) {
+      console.error(`${tag} FAILED ${res.status}: ${await safeText(res)}`);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error(`${tag} FAILED`, err);
+    return false;
+  }
+}
+
+/**
+ * Acknowledge a duty-of-care submitter without touching GHL.
+ *
+ * The other three lanes acknowledge through GHL, which threads their reply back into
+ * the conversation. This lane cannot: acknowledging through GHL needs a contactId, and
+ * creating that contact is the exact thing the lane exists to prevent (#90). So the ack
+ * goes direct, and their reply goes to NOTIFY_INBOX where a human works it. That is a
+ * worse loop than the CRM one, and it is the correct trade: a person in trouble should
+ * be told a human has their message, and should not become a marketing record to get it.
+ */
+async function acknowledgeDirect(lane: Lane, summary: SubmissionSummary): Promise<void> {
+  const to = summary.submitterEmail?.trim();
+  if (!to) return; // Nothing to reply to. The notification above still went out.
+  const { subject, text } = buildAcknowledgement(lane, summary);
+  await sendDirect(to, subject, text, 'DUTY-OF-CARE ACK');
+}
+
+async function notifyInbox(lane: Lane, summary: SubmissionSummary): Promise<void> {
+  const { subject, text } = buildNotification(lane, summary);
+  await sendDirect(NOTIFY_INBOX, subject, text, `NOTIFY[${lane} ${summary.id ?? '?'}]`);
+}
+
 interface DeliveryContext {
   site: string;
   projectCode: string;
@@ -328,6 +423,7 @@ interface DeliveryContext {
   fields: Record<string, unknown>;
   body: IntakeBody;
   lane: Lane;
+  summary: SubmissionSummary;
 }
 
 async function deliverToGhl(
@@ -476,7 +572,30 @@ async function deliverToGhl(
       }).catch((e) => console.warn('opportunity create failed', e));
     }
 
-    // ---- 12. Delivered.
+    // ---- 12. Acknowledge THROUGH GHL, never around it.
+    // This is the step that closes the loop. Because GHL sends it, GHL owns the
+    // Reply-To, so when they answer, the answer threads back into the conversation
+    // above instead of landing in a mailbox that the CRM never hears about. Sending
+    // the same words through Resend would look identical to the recipient and lose
+    // the reply.
+    if (email && ackChannelFor(lane) === 'ghl') {
+      const ack = buildAcknowledgement(lane, ctx.summary);
+      const ackRes = await fetch(`${GHL_API}/conversations/messages`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          type: 'Email',
+          contactId,
+          subject: ack.subject,
+          message: ack.text,
+        }),
+      });
+      if (!ackRes.ok) {
+        console.warn(`acknowledgement ${ackRes.status}: ${await safeText(ackRes)}`);
+      }
+    }
+
+    // ---- 13. Delivered.
     await supabase
       .from('act_intake')
       .update({
