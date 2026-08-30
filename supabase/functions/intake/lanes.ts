@@ -176,3 +176,38 @@ export function mayWriteConsent(lane: Lane): boolean {
 export function mayCreateOpportunity(lane: Lane): boolean {
   return lane === 'commerce';
 }
+
+/**
+ * How protective each lane is, ascending. `commerce` does the most to a person
+ * (consent write, comms: tag, opportunity, workflow); `duty_of_care` does nothing to
+ * them at all and routes to a human instead.
+ *
+ * This exists so the invariant below can be stated as one comparison rather than as a
+ * growing list of special cases.
+ */
+export const LANE_PROTECTION: Readonly<Record<Lane, number>> = {
+  commerce: 0,
+  transactional: 1,
+  community: 2,
+  duty_of_care: 3,
+};
+
+/**
+ * THE INVARIANT, decided across #92 and #95: any input beyond `(projectCode, formType)`,
+ * caller-supplied or not, may only demote a submission toward `duty_of_care`. It may
+ * never promote one toward `commerce`.
+ *
+ * `safetyRisk` already obeys it. `sourcePath` (#95) and the org test (#92) must obey it
+ * when they land, and `lanes.test.ts` fails if they do not: the extras table there is a
+ * mapped type over the optional fields of `LaneInput`, so adding a field without adding
+ * its cases is a type error rather than a field that quietly goes untested.
+ *
+ * Why it has to be a guard and not a habit: every one of those inputs arrives from
+ * somewhere less trustworthy than this file. `sourcePath` is sent by the posting site.
+ * The org test reads a CRM that four divergent clients write to. If any of them could
+ * promote, the default-deny allowlist above would stop being the floor and become a
+ * suggestion, which is the exact failure the tag-based approach kept producing.
+ */
+export function isAtLeastAsProtective(candidate: Lane, baseline: Lane): boolean {
+  return LANE_PROTECTION[candidate] >= LANE_PROTECTION[baseline];
+}
