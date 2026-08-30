@@ -91,8 +91,10 @@ const QUEUES = [
   { db: 'main', table: 'event_feedback',          filter: null,                  label: 'Harvest event feedback' },
   { db: 'main', table: 'place_corrections',       filter: 'status=eq.new',       label: 'CivicGraph place corrections' },
   { db: 'main', table: 'report_leads',            filter: null,                  label: 'CivicGraph report leads (no path can send one)' },
-  { db: 'main', table: 'act_intake',              filter: 'ghl_status=eq.pending', label: 'Spine outbox, undelivered' },
-  { db: 'main', table: 'act_duty_of_care_register', filter: 'acknowledged_at=is.null', label: 'DUTY OF CARE, unacknowledged', critical: true },
+  { db: 'main', table: 'act_intake',              filter: 'ghl_status=eq.pending', label: 'Spine outbox, undelivered',
+    on403: 'service_role has no grant. Apply 20260830010000_act_intake_service_role_grants.sql' },
+  { db: 'main', table: 'act_duty_of_care_register', filter: 'acknowledged_at=is.null', label: 'DUTY OF CARE, unacknowledged', critical: true,
+    on403: 'service_role has no grant. Apply 20260830010000_act_intake_service_role_grants.sql' },
   { db: 'goods', table: 'partnership_inquiries',  filter: 'status=eq.new',       label: 'Goods partnership inquiries' },
   { db: 'goods', table: 'bed_signals',            filter: null,                  label: 'Goods bed signals (notifies nobody)' },
   { db: 'el',   table: 'contact_submissions',     filter: null,                  label: 'Empathy Ledger contact' },
@@ -210,6 +212,7 @@ if (!WEB_ONLY) {
   for (const q of QUEUES) {
     const r = await count(q.db, q.table, q.filter);
     if (r.missingCreds) { line('WARN', q.label, `no credentials for ${DATABASES[q.db].ref} (set ${DATABASES[q.db].key})`); continue; }
+    if (r.error === '403' && q.on403) { line('FAIL', q.label, q.on403); continue; }
     if (r.error) { line('WARN', q.label, `query failed ${r.error}`); continue; }
     if (r.n === 0) line('PASS', q.label, 'empty');
     else if (q.critical) line('FAIL', q.label, `${r.n} waiting · a person is owed a reply`);
