@@ -37,6 +37,8 @@ const ORIGINS = [
   { name: 'The Harvest Witta',       url: 'https://www.theharvestwitta.com.au', expect: 200, forms: 16 },
   { name: 'Empathy Ledger',          url: 'https://empathyledger.com', expect: 200, forms: 6 },
   { name: 'Oonchiumpa',              url: 'https://oonchiumpa.com.au', expect: 200, lands: 'https://www.oonchiumpa.com.au/', forms: null, note: 'ACT-OO is a duty-of-care code. Forms never surveyed' },
+  { name: 'Mounty Yarns',            url: 'https://mounty-yarns.vercel.app', expect: 200, forms: null, note: 'ACT-MY is a duty-of-care code. Next.js, no forms in the initial HTML, never crawled' },
+  { name: 'PICC (Great Palm Island)', url: 'https://great-palm-island-picc.vercel.app', expect: 200, forms: null, note: 'ACT-PI is a duty-of-care code. Live behind a domain that does not resolve' },
   { name: 'CivicGraph / GrantScope', url: 'https://civicgraph.app', expect: 200, warnOn: [429], forms: 8, note: '429 is Vercel challenge mode, not an outage' },
   { name: 'ACT Farm / BCV',          url: 'https://act-farm.vercel.app', expect: 200, forms: 5, note: 'No working branded domain' },
   { name: 'ACT Regenerative Studio', url: 'https://act-regenerative-studio.vercel.app', expect: 200, forms: 5 },
@@ -70,6 +72,9 @@ const MAILBOXES = [
   { address: '@theharvestwitta.com.au', domain: 'theharvestwitta.com.au', mustReceive: true },
   { address: '@oonchiumpa.com.au', domain: 'oonchiumpa.com.au', mustReceive: true },
   { address: 'hello@acurioustractor.com', domain: 'acurioustractor.com', mustReceive: true, published: 'act-farm /connect, footer, submit-success message' },
+  // The site sits on oonchiumpa.com.au, which HAS mail. The address it prints is on a
+  // different domain that does not. It is the only contact route on the whole site.
+  { address: 'admin@oonchiumpaconsultancy.com.au', domain: 'oonchiumpaconsultancy.com.au', mustReceive: true, published: 'oonchiumpa.com.au, the only contact route on the site' },
 ];
 
 /**
