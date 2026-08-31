@@ -531,16 +531,34 @@ async function deliverToGhl(
 
   try {
     // ---- 7. Contact upsert. NEVER send tags here: it overwrites every existing tag.
-    const customField: Record<string, unknown> = {};
-    if (str(fields.message)) customField[FIELD_MESSAGE] = str(fields.message);
+    //
+    // customFieldS, plural, as an ARRAY of { id, field_value }. This was an object
+    // named `customField`, which GHL rejects outright:
+    //   422 {"message":["property customField should not exist"]}
+    // and it was sent even when empty, so EVERY submission 422'd and the spine's GHL
+    // delivery had never once succeeded. Found on 2026-08-31 by the first real form
+    // put through it, not by the suite, which cannot reach this call. The correct
+    // shape was already proven next door in act-regenerative-studio
+    // src/app/api/forms/submit/route.ts.
+    //
+    // Omitted entirely when empty rather than sent as [], because there is nothing to
+    // say and a property GHL can have opinions about is a property worth not sending.
+    const customFields: Array<{ id: string; field_value: string }> = [];
+    const message = str(fields.message);
+    if (message) customFields.push({ id: FIELD_MESSAGE, field_value: message });
 
     // ---- 9. Consent only on an explicit ticked box, and only in a lane that may.
     const consented = body.consent?.newsletter === true && mayWriteConsent(lane);
     if (consented) {
-      customField[FIELD_NEWSLETTER_CONSENT] = 'Yes';
-      customField[FIELD_CONSENT_SOURCE] = str(body.consent?.sourceUrl) ?? ctx.site;
-      customField[FIELD_CONSENT_TIMESTAMP] =
-        str(body.consent?.timestamp) ?? new Date().toISOString();
+      customFields.push({ id: FIELD_NEWSLETTER_CONSENT, field_value: 'Yes' });
+      customFields.push({
+        id: FIELD_CONSENT_SOURCE,
+        field_value: str(body.consent?.sourceUrl) ?? ctx.site,
+      });
+      customFields.push({
+        id: FIELD_CONSENT_TIMESTAMP,
+        field_value: str(body.consent?.timestamp) ?? new Date().toISOString(),
+      });
     }
 
     const upsertRes = await fetch(`${GHL_API}/contacts/upsert`, {
@@ -555,7 +573,7 @@ async function deliverToGhl(
         name: str(fields.name),
         companyName: str(fields.organisation),
         source: `intake:${ctx.site}`,
-        customField,
+        ...(customFields.length > 0 ? { customFields } : {}),
       }),
     });
 
