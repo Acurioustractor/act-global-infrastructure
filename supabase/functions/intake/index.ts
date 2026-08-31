@@ -106,6 +106,30 @@ interface IntakeBody {
   safetyRisk?: boolean;
 }
 
+/**
+ * GHL's outbound email endpoint wants `html`. It does NOT accept `message`, and it
+ * does not say so usefully: a payload with `message` returns
+ *   422 CONVERSATIONS_MSG_NO_CONTENT "There is no message or attachments"
+ * which reads like an empty body rather than a wrong field name.
+ *
+ * That is exactly how this went unnoticed. Both outbound legs, the desk
+ * notification and the sender's acknowledgement, used `message` and had NEVER
+ * once succeeded. The inbound leg uses a different endpoint and worked, so the
+ * row said `delivered` while no email had left the building. Found 2026-08-31 by
+ * reading the edge function logs after a real submission, because the CRM record
+ * looked perfect from every other angle.
+ */
+function asEmailHtml(text: string): string {
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  return escaped
+    .split(/\n{2,}/)
+    .map((para) => `<p>${para.replace(/\n/g, '<br>')}</p>`)
+    .join('\n');
+}
+
 function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
     status,
@@ -482,7 +506,7 @@ async function notifyDesk(lane: Lane, summary: SubmissionSummary): Promise<void>
     const sendRes = await fetch(`${GHL_API}/conversations/messages`, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ type: 'Email', contactId, subject, message: text }),
+      body: JSON.stringify({ type: 'Email', contactId, subject, html: asEmailHtml(text) }),
     });
     if (!sendRes.ok) {
       console.error(`${tag} FAILED ${sendRes.status}: ${await safeText(sendRes)}`);
@@ -672,6 +696,7 @@ async function deliverToGhl(
     // above instead of landing in a mailbox that the CRM never hears about. Sending
     // the same words through Resend would look identical to the recipient and lose
     // the reply.
+    let ackError: string | null = null;
     if (email && ackChannelFor(lane) === 'ghl') {
       const ack = buildAcknowledgement(lane, ctx.summary);
       const ackRes = await fetch(`${GHL_API}/conversations/messages`, {
@@ -681,11 +706,15 @@ async function deliverToGhl(
           type: 'Email',
           contactId,
           subject: ack.subject,
-          message: ack.text,
+          html: asEmailHtml(ack.text),
         }),
       });
       if (!ackRes.ok) {
-        console.warn(`acknowledgement ${ackRes.status}: ${await safeText(ackRes)}`);
+        // Recorded on the row, not just logged. The previous version logged and
+        // then wrote `last_error: null` three lines later, so a permanently
+        // broken acknowledgement left no trace anywhere a human looks.
+        ackError = `acknowledgement ${ackRes.status}: ${await safeText(ackRes)}`;
+        console.warn(ackError);
       }
     }
 
@@ -697,7 +726,7 @@ async function deliverToGhl(
         ghl_contact_id: contactId,
         inbox_status: inboxStatus,
         delivered_at: new Date().toISOString(),
-        last_error: null,
+        last_error: ackError,
       })
       .eq('id', id);
   } catch (err) {
