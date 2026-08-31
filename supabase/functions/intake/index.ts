@@ -707,6 +707,25 @@ async function deliverToGhl(
           contactId,
           subject: ack.subject,
           html: asEmailHtml(ack.text),
+          // The desk is CC'd so this email doubles as the reply handle.
+          //
+          // GHL's send API has NO replyTo field (checked against the full parameter
+          // list on 2026-08-31). The only way to answer someone from Gmail and have
+          // the answer tracked is to be ON an email that is genuinely addressed to
+          // them. So: they are the To, the desk is the CC.
+          //
+          // Reply-all from the desk copy then goes to hi@ghl.act.place AND the person.
+          // That first address is GHL's own inbound subdomain, verified by opening a
+          // real reply-all in Gmail, so the reply reaches them AND lands back in their
+          // conversation. Reply in Gmail, tracked in the CRM, never open GHL.
+          //
+          // This does NOT replace the desk notification, and the two cannot be merged.
+          // The notification carries what the person actually wrote; an acknowledgement
+          // must never quote the message back, because a duty-of-care ack can be read
+          // over someone's shoulder and a commerce ack gets forwarded (see
+          // notify.test.ts). Two emails, because they do two jobs and one of them is a
+          // safety rule.
+          emailCc: [Deno.env.get('NOTIFY_DESK_EMAIL') ?? DESK_ADDRESS],
         }),
       });
       if (!ackRes.ok) {
