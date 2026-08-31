@@ -73,6 +73,15 @@ export const DUTY_OF_CARE_FORM_TYPES: ReadonlySet<string> = new Set([
   'storyteller', // Empathy Ledger storyteller / Elder / knowledge-keeper
   'elder',
   'knowledge-keeper',
+
+  // JusticeHub, added 2026-08-31 when its sixteen intake routes were surveyed.
+  // `tour-story` collects { name, email, tour_stop, story }: a person's own account of
+  // walking through CONTAINED, a replica youth detention cell. Default-deny already
+  // covered it, because an unlisted form type falls to this lane anyway. It is named
+  // here so that protection is a decision rather than an accident, and so that anyone
+  // later tempted to allowlist it has to delete this line and read why.
+  'tour-story',
+  'tour-stories',
 ]);
 
 /**
@@ -113,6 +122,39 @@ export const FORM_TYPE_LANE: ReadonlyMap<string, Lane> = new Map<string, Lane>([
   ['contact', 'community'],
   ['volunteer', 'community'],
   ['payout-wall-contest', 'community'],
+
+  // ---- JusticeHub, classified 2026-08-31 -------------------------------------
+  // Its sixteen public intake routes each rolled their own GHL call and none of their
+  // form types were named here, so every one of them default-denied to duty_of_care.
+  // That failed safe and it also meant JusticeHub could never route at all. Each line
+  // below is a judgement about whether the person on the other end is a prospect.
+  //
+  // The line worth arguing with is `host`. Someone offering a venue for the CONTAINED
+  // tour is doing us a favour, which does not feel like commerce. It sits there because
+  // commerce is the lane with the machinery a partner conversation needs: an
+  // opportunity, a pipeline, a named owner. The lane names what we do about a person,
+  // not what we think of them.
+  //
+  // Anything JusticeHub adds later and does not name here still default-denies, which
+  // is the behaviour to keep rather than to work around.
+
+  // Civic action. A person acting on the world, not asking us for anything, and not
+  // handing us their own story either. Contact upsert and a conversation, nothing more.
+  ['nomination', 'community'],       // naming a decision-maker who should see CONTAINED
+  ['reaction', 'community'],         // a response left at the exhibit
+  ['mp-letter', 'community'],        // writing to their member
+  ['connect', 'community'],          // CONTAINED connect
+  ['action', 'community'],           // hub actions
+  ['follow', 'community'],           // following a Justice Matrix entry
+  ['watch', 'community'],
+  ['contribute', 'community'],       // contributing a correction to the Matrix
+
+  // Prospect-shaped: there is a conversation to have and someone should own it.
+  ['host', 'commerce'],              // offering a site for the tour
+  ['backer', 'commerce'],            // backing a project financially
+
+  // Took an action, expects a receipt.
+  ['brisbane-interest', 'transactional'],
 ]);
 
 export interface LaneInput {

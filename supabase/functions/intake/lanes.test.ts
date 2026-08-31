@@ -205,3 +205,55 @@ Deno.test('safetyRisk demotes every lane it can reach, and demotes nothing furth
     assertEquals(withoutRisk, expected, `${formType} was demoted by safetyRisk: false`);
   }
 });
+
+// ---------------------------------------------------------------------------
+// JusticeHub, classified 2026-08-31.
+//
+// Its sixteen public intake routes each rolled their own GHL call, and not one of
+// their form types was named in the allowlist, so all sixteen default-denied. These
+// guard the classification that replaced that.
+// ---------------------------------------------------------------------------
+
+Deno.test('JusticeHub: a tour story is duty of care, by name and not by omission', () => {
+  // CONTAINED is a replica youth detention cell. `tour-story` collects the visitor's
+  // own account of walking through it. If this ever resolves anywhere else, someone
+  // has put a person's account of detention into a marketing audience.
+  assertEquals(resolveLane({ projectCode: 'ACT-JH', formType: 'tour-story' }).lane, 'duty_of_care');
+  assertEquals(resolveLane({ projectCode: 'ACT-JH', formType: 'tour-stories' }).lane, 'duty_of_care');
+});
+
+Deno.test('JusticeHub: naming it did not rely on the default, so removing the default keeps it safe', () => {
+  // The control. `tour-story` is now in DUTY_OF_CARE_FORM_TYPES rather than merely
+  // absent from FORM_TYPE_LANE, so the protection survives someone allowlisting it.
+  assertEquals(DUTY_OF_CARE_FORM_TYPES.has('tour-story'), true);
+  assertEquals(FORM_TYPE_LANE.has('tour-story'), false, 'a duty-of-care form must never be allowlisted');
+});
+
+Deno.test('JusticeHub: civic action reaches the CRM as a person, not a prospect', () => {
+  for (const formType of ['nomination', 'reaction', 'mp-letter', 'connect', 'action', 'follow', 'watch', 'contribute']) {
+    const decision = resolveLane({ projectCode: 'ACT-JH', formType });
+    assertEquals(decision.lane, 'community', `${formType} should be community`);
+    assertEquals(mayCreateOpportunity(decision.lane), false, `${formType} must not open an opportunity`);
+    assertEquals(mayWriteConsent(decision.lane), false, `${formType} must not write consent`);
+  }
+});
+
+Deno.test('JusticeHub: hosting and backing are the two that get an owner', () => {
+  for (const formType of ['host', 'backer']) {
+    assertEquals(resolveLane({ projectCode: 'ACT-JH', formType }).lane, 'commerce');
+  }
+  assertEquals(resolveLane({ projectCode: 'ACT-JH', formType: 'brisbane-interest' }).lane, 'transactional');
+});
+
+Deno.test('POSITIVE CONTROL: an unnamed JusticeHub form still default-denies', () => {
+  // Without this, the four tests above pass just as well against an allowlist that
+  // waves everything through. Adding a route to JusticeHub must keep failing closed.
+  const decision = resolveLane({ projectCode: 'ACT-JH', formType: 'some-form-added-next-tuesday' });
+  assertEquals(decision.lane, 'duty_of_care');
+  assertEquals(reachesGhl(decision.lane), false);
+});
+
+Deno.test('a duty-of-care project still overrides a JusticeHub-shaped commerce form', () => {
+  // Lane inputs may only demote. ACT-PI + host must not become commerce.
+  assertEquals(resolveLane({ projectCode: 'ACT-PI', formType: 'host' }).lane, 'duty_of_care');
+});
