@@ -26,6 +26,7 @@ import {
 } from './lanes.ts';
 import { isKnownProjectCode, PROJECT_CODES, projectTag } from './project-codes.ts';
 import { pipelineFor } from './pipelines.ts';
+import { idempotencySeed } from './idempotency.ts';
 import {
   ackChannelFor,
   audienceTagsOn,
@@ -199,18 +200,30 @@ Deno.serve(async (req) => {
     return json({ error: 'dryRun is not permitted in production' }, 403);
   }
 
-  // ---- 2. Idempotency key ------------------------------------------------------
-  const day = new Date().toISOString().slice(0, 10);
-  const idempotencyKey =
-    str(body.idempotencyKey) ??
-    (await sha256Hex(`${site}|${formType}|${(email ?? phone ?? '').toLowerCase()}|${day}`));
-
   // ---- 6 (computed early, because it decides everything downstream) ------------
   const decision = resolveLane({
     projectCode,
     formType,
     safetyRisk: body.safetyRisk === true,
   });
+
+  // ---- 2. Idempotency key ------------------------------------------------------
+  // The seed lives in idempotency.ts, with the reasoning and its regression tests. It
+  // is computed AFTER the lane, because the resolved lane is part of it: a submission
+  // may only ever dedupe against one that was routed the same way. See that file for
+  // the 2026-08-31 defect this shape exists to close.
+  const idempotencyKey =
+    str(body.idempotencyKey) ??
+    (await sha256Hex(
+      idempotencySeed({
+        site,
+        projectCode,
+        formType,
+        lane: decision.lane,
+        contact: email ?? phone ?? '',
+        day: new Date().toISOString().slice(0, 10),
+      }),
+    ));
 
   // ---- 5. Spam gate ------------------------------------------------------------
   // Applied after lane resolution but before any delivery: a duty-of-care submission
