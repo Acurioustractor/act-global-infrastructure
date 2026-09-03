@@ -24,6 +24,14 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
+- [[alignment-loop-drift-2026-08-20-to-2026-09-03|Alignment Loop drift — 2026-08-20 to 2026-09-03]] — 2026-09-03 · 14-day drift. Oonchiumpa $41K cleared; ACCREC at $286K (lowest since baseline). BAS 37d overdue. D&O 141d past deadline. Tax return 58 days away. Eighth pass.
+
+- [[entity-migration-truth-state-2026-09-03|Entity migration truth-state — 65 days post-cutover, BAS 37 days overdue, D&O 141 days past deadline]] — 2026-09-03 · Q3 eighth pass of the ACT Alignment Loop
+
+- [[project-truth-state-2026-09-03|Project truth-state — 74 codes × 4 sources, eighth pass (Xero +40, ACT-GD +2, ACT-PS gap eighth consecutive)]] — 2026-09-03 · Q2 eighth pass of the ACT Alignment Loop
+
+- [[funder-alignment-2026-09-03|Funder alignment — Oonchiumpa cleared, ACCREC at $286K; BAS now 37 days past standard due date]] — 2026-09-03 · Q1 eighth pass of the ACT Alignment Loop
+
 - [[alignment-loop-drift-2026-08-13-to-2026-08-20|Alignment Loop drift — 2026-08-13 to 2026-08-20]] — 2026-08-20 · 7-day drift. ALIVE $101K paid; ACCREC at $320K (lowest since baseline). BAS 23d overdue. D&O 127d past deadline. Seventh pass.
 
 - [[entity-migration-truth-state-2026-08-20|Entity migration truth-state — 51 days post-cutover, BAS 23 days overdue, D&O 127 days past deadline]] — 2026-08-20 · Q3 seventh pass of the ACT Alignment Loop
