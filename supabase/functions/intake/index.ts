@@ -59,17 +59,25 @@ const GHL_OPPORTUNITY_VERSION = '2023-02-21';
 
 // Per-form identity tags, lifted verbatim from act-regenerative-studio
 // src/app/api/forms/submit/route.ts:256. Colon-namespaced only — see the guard below.
+// `act-inquiry` is the one deliberately un-namespaced tag: it predates the
+// colon convention, the ACT notification workflow keys on it, and it means
+// exactly one thing everywhere: a person owes this contact a reply. It is what
+// puts someone on the waiting list (The Harvest playbook, "How to get back to
+// people"). Forms where nobody owes a reply (newsletter, rsvp, donation, event)
+// must not carry it, or the list fills with people who asked for nothing.
+const NEEDS_HUMAN = 'act-inquiry';
+
 const FORM_RULES: Record<string, string[]> = {
   newsletter: ['source:website', 'role:supporter'],
-  contact: ['source:website'],
+  contact: ['source:website', NEEDS_HUMAN],
   donation: ['source:website', 'role:supporter', 'action:contributed'],
-  volunteer: ['source:website', 'role:supporter', 'interest:volunteer'],
+  volunteer: ['source:website', 'role:supporter', 'interest:volunteer', NEEDS_HUMAN],
   event: ['source:event-signup', 'interest:events', 'action:attended'],
-  csa: ['source:website', 'role:supporter', 'interest:membership'],
-  'farm-stay': ['source:website', 'role:supporter', 'interest:farm-stay'],
-  residency: ['source:website', 'role:supporter', 'interest:residency'],
+  csa: ['source:website', 'role:supporter', 'interest:membership', NEEDS_HUMAN],
+  'farm-stay': ['source:website', 'role:supporter', 'interest:farm-stay', NEEDS_HUMAN],
+  residency: ['source:website', 'role:supporter', 'interest:residency', NEEDS_HUMAN],
   'payout-wall-contest': ['source:website', 'role:supporter', 'interest:justice-reform'],
-  'flagship-inquiry': ['source:website', 'role:supporter'],
+  'flagship-inquiry': ['source:website', 'role:supporter', NEEDS_HUMAN],
   rsvp: ['source:website', 'interest:events', 'action:rsvped'],
 };
 
@@ -617,8 +625,9 @@ async function deliverToGhl(
     const raw = Array.isArray(body.additionalTags)
       ? (body.additionalTags as unknown[]).filter((t): t is string => typeof t === 'string')
       : [];
-    const namespaced = raw.map((t) => t.trim()).filter((t) => t.includes(':'));
-    const dropped = raw.map((t) => t.trim()).filter((t) => t.length > 0 && !t.includes(':'));
+    const allowed = (t: string) => t.includes(':') || t === NEEDS_HUMAN;
+    const namespaced = raw.map((t) => t.trim()).filter(allowed);
+    const dropped = raw.map((t) => t.trim()).filter((t) => t.length > 0 && !allowed(t));
     if (dropped.length > 0) {
       console.warn(`Dropped ${dropped.length} non-namespaced tag(s) before GHL: ${dropped.join(', ')}`);
     }
