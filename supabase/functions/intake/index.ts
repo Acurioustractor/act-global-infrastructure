@@ -64,7 +64,8 @@ const GHL_OPPORTUNITY_VERSION = '2023-02-21';
 // exactly one thing everywhere: a person owes this contact a reply. It is what
 // puts someone on the waiting list (The Harvest playbook, "How to get back to
 // people"). Forms where nobody owes a reply (newsletter, rsvp, donation, event)
-// must not carry it, or the list fills with people who asked for nothing.
+// must not carry it, or the list fills with people who asked for nothing. It is
+// applied here and only here; the additionalTags guard below drops it on purpose.
 const NEEDS_HUMAN = 'act-inquiry';
 
 const FORM_RULES: Record<string, string[]> = {
@@ -79,6 +80,15 @@ const FORM_RULES: Record<string, string[]> = {
   'payout-wall-contest': ['source:website', 'role:supporter', 'interest:justice-reform'],
   'flagship-inquiry': ['source:website', 'role:supporter', NEEDS_HUMAN],
   rsvp: ['source:website', 'interest:events', 'action:rsvped'],
+  // The other commerce-lane forms (lanes.ts): each is a prospect who expects an
+  // owned conversation, so each owes a reply. Role tags are the site's to send.
+  partnership: ['source:website', NEEDS_HUMAN],
+  sponsor: ['source:website', NEEDS_HUMAN],
+  'media-pack': ['source:website', NEEDS_HUMAN],
+  'bulk-order': ['source:website', NEEDS_HUMAN],
+  funder: ['source:website', NEEDS_HUMAN],
+  host: ['source:website', NEEDS_HUMAN],
+  backer: ['source:website', NEEDS_HUMAN],
 };
 
 // Spam signatures. Roughly 75-80% of the ~2.7 Webflow submissions a week are SEO spam
@@ -625,9 +635,10 @@ async function deliverToGhl(
     const raw = Array.isArray(body.additionalTags)
       ? (body.additionalTags as unknown[]).filter((t): t is string => typeof t === 'string')
       : [];
-    const allowed = (t: string) => t.includes(':') || t === NEEDS_HUMAN;
-    const namespaced = raw.map((t) => t.trim()).filter(allowed);
-    const dropped = raw.map((t) => t.trim()).filter((t) => t.length > 0 && !allowed(t));
+    // act-inquiry is never accepted from the caller: it comes only from FORM_RULES,
+    // so a newsletter or rsvp submission cannot talk its way onto the waiting list.
+    const namespaced = raw.map((t) => t.trim()).filter((t) => t.includes(':'));
+    const dropped = raw.map((t) => t.trim()).filter((t) => t.length > 0 && !t.includes(':'));
     if (dropped.length > 0) {
       console.warn(`Dropped ${dropped.length} non-namespaced tag(s) before GHL: ${dropped.join(', ')}`);
     }
