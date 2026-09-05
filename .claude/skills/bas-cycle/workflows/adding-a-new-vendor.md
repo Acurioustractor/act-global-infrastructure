@@ -29,21 +29,21 @@ The query format is a Gmail search string. Common patterns:
 // Multiple from: addresses (vendor has alias)
 'example vendor': '(from:example.com OR from:billing.example.com) (receipt OR invoice)',
 
-// Vendor billed via Stripe — search both the vendor domain AND Stripe
+// Vendor billed via Stripe, search both the vendor domain AND Stripe
 'example vendor': '(from:example.com OR from:stripe.com) example (receipt OR invoice)',
 
 // Vendor with a unique product name in the subject
 'example vendor': 'from:example.com ("product-name" OR receipt OR invoice)',
 
-// Bank fees / accounts where no receipt exists — use empty string to skip
+// Bank fees / accounts where no receipt exists, use empty string to skip
 'example bank fee': '',
 ```
 
 **Tips for writing good queries:**
 
-- Use `from:domain.com` rather than `from:"Full Vendor Name"` — vendors often send from multiple human-readable names
+- Use `from:domain.com` rather than `from:"Full Vendor Name"`, vendors often send from multiple human-readable names
 - Include `(receipt OR invoice)` or `(receipt OR invoice OR tax)` to filter noise
-- Date window is added automatically by `buildGmailQuery()` — don't include `after:` or `before:` in your base query
+- Date window is added automatically by `buildGmailQuery()`, don't include `after:` or `before:` in your base query
 - Test queries in Gmail's search box first. If you can find the receipt manually, the query is right.
 - Keep keys lowercase and matched to the Xero contact_name exactly
 
@@ -126,7 +126,7 @@ node scripts/bas-completeness.mjs Q2 Q3
 
 ## Adding a vendor that bills via Stripe
 
-Many SaaS vendors don't send receipts themselves — they use Stripe. If the vendor's own domain doesn't return results, try querying Stripe with the vendor name in the subject:
+Many SaaS vendors don't send receipts themselves, they use Stripe. If the vendor's own domain doesn't return results, try querying Stripe with the vendor name in the subject:
 
 ```javascript
 'example vendor': '(from:example.com OR from:stripe.com) example (receipt OR invoice)',
@@ -138,9 +138,9 @@ This catches both cases: receipts the vendor sends directly and receipts Stripe 
 
 If Gmail deep search returns nothing for a vendor even after query tuning, the receipt probably lives somewhere the pipeline can't reach:
 
-- **Vendor portal only** (Anthropic, some Apple subs) — document this as a known limitation, not a pipeline failure. These need manual export from the vendor's billing dashboard.
-- **Personal email** — check if the vendor account was started with a personal email before the business inbox existed. Forward old receipts to the business inbox.
-- **Physical receipt only** — cash/in-store. Use Xero ME mobile app going forward; accept historical loss.
+- **Vendor portal only** (Anthropic, some Apple subs): document this as a known limitation, not a pipeline failure. These need manual export from the vendor's billing dashboard.
+- **Personal email**: check if the vendor account was started with a personal email before the business inbox existed. Forward old receipts to the business inbox.
+- **Physical receipt only**: cash/in-store. Use Xero ME mobile app going forward; accept historical loss.
 
 Log these as `NO_RECEIPT_NEEDED` with a documented reason, or accept them as part of the ~5% residual gap.
 

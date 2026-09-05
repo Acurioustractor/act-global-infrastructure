@@ -3,7 +3,7 @@ name: query
 description: Answers data questions against the ACT Supabase database, turning a plain-language question into the right query so the user does not write SQL. Use when the user asks how many, show me, or what is the status of something whose answer lives in the ACT database. Also use on /query. Read and analysis only; do not use for migrations, writes, or schema changes.
 ---
 
-# /query — Supabase Analytics Skill
+# /query: Supabase Analytics Skill
 
 Run analytics queries against the ACT Supabase database without writing SQL manually.
 
@@ -16,10 +16,10 @@ When user says `/query` or asks data questions like:
 
 ## Workflow
 
-1. **Understand the question** — Parse what data the user needs
-2. **Find the right tables** — Use `mcp__supabase__list_tables` if unsure
-3. **Write and execute SQL** — Use `mcp__supabase__execute_sql` to query
-4. **Format results** — Present as a clean table or summary
+1. **Understand the question**, Parse what data the user needs
+2. **Find the right tables**, Use `mcp__supabase__list_tables` if unsure
+3. **Write and execute SQL**, Use `mcp__supabase__execute_sql` to query
+4. **Format results**, Present as a clean table or summary
 
 ## Common Queries
 
@@ -46,7 +46,7 @@ SELECT type, count(*) FROM learnings GROUP BY type ORDER BY count DESC;
 
 ## Rules
 
-- Always use `mcp__supabase__execute_sql` for queries — never shell out to psql
+- Always use `mcp__supabase__execute_sql` for queries, never shell out to psql
 - For write operations (INSERT/UPDATE/DELETE), confirm with user first
 - Present results as markdown tables when there are <20 rows
 - Summarize with counts/aggregates when there are many rows

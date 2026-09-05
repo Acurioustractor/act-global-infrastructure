@@ -10,13 +10,13 @@ No plans. No discovery phases. Build immediately.
 ## Rules
 
 1. **Do NOT write a plan document.** Do NOT enter plan mode. Start coding.
-2. **If you need schema**, query it — then start coding immediately:
+2. **If you need schema**, query it, then start coding immediately:
    ```sql
    SELECT column_name, data_type FROM information_schema.columns
    WHERE table_name = '<relevant_table>' ORDER BY ordinal_position;
    ```
-3. **If you need to understand existing code**, read 1-2 files — then start coding immediately.
-4. **If unsure about ONE thing**, ask ONE question — then start coding immediately.
+3. **If you need to understand existing code**, read 1-2 files, then start coding immediately.
+4. **If unsure about ONE thing**, ask ONE question, then start coding immediately.
 5. **Build in small increments**: implement → type-check → implement → type-check.
 6. **Run `npx tsc --noEmit`** after each file change in the relevant app directory.
 

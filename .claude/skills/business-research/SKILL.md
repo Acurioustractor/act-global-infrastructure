@@ -1,6 +1,6 @@
 ---
 name: business-research
-description: Research advisor for ACT business setup — Pty Ltd registration, accountants, insurance, R&D tax incentive, family trusts, compliance, and migration. Use when the user asks about any business setup topic, costs, providers, or next steps.
+description: Research advisor for ACT business setup, Pty Ltd registration, accountants, insurance, R&D tax incentive, family trusts, compliance, and migration. Use when the user asks about any business setup topic, costs, providers, or next steps.
 ---
 
 # Business Setup Research Advisor
@@ -129,7 +129,7 @@ description: Research advisor for ACT business setup — Pty Ltd registration, a
 Research outputs should follow this structure:
 
 ```markdown
-# [Topic] Research — [Date]
+# [Topic] Research: [Date]
 
 ## Summary
 [2-3 sentence overview]
@@ -172,23 +172,23 @@ Save research to: `.claude/cache/agents/scout/business-[topic]-[date].md`
 | Privacy policy | `docs/privacy/empathy-ledger-privacy-policy.md` |
 | Grant acquittal | `docs/finance/grant-acquittal-template.md` |
 | Accountant comparison | `references/accountant-comparison.md` |
-| Setup costs | Business page — Accountant & Costs section |
+| Setup costs | Business page: Accountant & Costs section |
 
 ## Entity Context (Quick Reference)
 
 ```
 EXISTING:
-  Sole Trader (ABN 21 591 780 066) — WINDING DOWN
-  A Kind Tractor LTD (ABN 73 669 029 341) — DORMANT CHARITY
+  Sole Trader (ABN 21 591 780 066), WINDING DOWN
+  A Kind Tractor LTD (ABN 73 669 029 341), DORMANT CHARITY
 
 TO CREATE:
-  A Curious Tractor Pty Ltd — MAIN OPERATING ENTITY
-  Ben's Family Trust — TAX-EFFICIENT DISTRIBUTIONS
-  Nic's Family Trust — TAX-EFFICIENT DISTRIBUTIONS
+  A Curious Tractor Pty Ltd, MAIN OPERATING ENTITY
+  Ben's Family Trust, TAX-EFFICIENT DISTRIBUTIONS
+  Nic's Family Trust, TAX-EFFICIENT DISTRIBUTIONS
 
 SITES:
-  The Harvest — leased from philanthropist, $20M PL required
-  The Farm — leased from Nic, R&D site
+  The Harvest, leased from philanthropist, $20M PL required
+  The Farm, leased from Nic, R&D site
 
 REVENUE:
   Innovation Studio, JusticeHub, Harvest, Goods, Grants, Empathy Ledger

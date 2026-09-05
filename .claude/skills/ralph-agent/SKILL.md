@@ -1,6 +1,6 @@
 ---
-name: ralph
-description: Ralph - Long-Running Task Agent. Autonomous AI that works through PRD tasks iteratively, with access to full ACT ecosystem knowledge across all 7 codebases.
+name: ralph-agent
+description: Ralph, the long-running task agent that works through a PRD iteratively with access to all ACT codebases. Use for large multi-step features, batch work across repos, overnight or background task completion, content generation from ecosystem activity, or cross-project migrations; also on /ralph or when the user says run ralph, ralph loop, overnight this.
 ---
 
 # Ralph Agent - Ecosystem-Wide Task Automation

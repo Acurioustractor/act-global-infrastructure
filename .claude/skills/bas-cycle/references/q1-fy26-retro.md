@@ -1,4 +1,4 @@
-# Q1 FY26 — BAS Retrospective
+# Q1 FY26: BAS Retrospective
 **Generated:** 2026-04-09T02:56:09.325Z
 **Quarter range:** 2025-07-01 → 2025-09-30
 
@@ -24,14 +24,14 @@
 
 | Vendor | Txns | Value | Pattern | Next-time action |
 |---|---:|---:|---|---|
-| Samuel Hafer | 1 | $19500.00 | one-off large payment | Contractor — chase invoice PDF |
+| Samuel Hafer | 1 | $19500.00 | one-off large payment | Contractor: chase invoice PDF |
 | Chris Witta | 6 | $2939.00 | recurring small | Chase vendor |
-| DIY Blinds | 1 | $2935.85 | one-off large payment | Contractor — chase invoice PDF |
+| DIY Blinds | 1 | $2935.85 | one-off large payment | Contractor: chase invoice PDF |
 | Flight Bar Witta | 23 | $2400.97 | recurring small | Chase vendor |
 | Qantas | 11 | $1965.88 | avg $178.72, connector bill exists | Xero UI Find & Match |
-| Booking.com | 1 | $1632.33 | one-off large payment | Contractor — chase invoice PDF |
+| Booking.com | 1 | $1632.33 | one-off large payment | Contractor: chase invoice PDF |
 | Webflow | 18 | $1489.99 | SaaS, avg $82.78 | Gmail deep search |
-| Izzy Mobile | 1 | $1485.47 | one-off large payment | Contractor — chase invoice PDF |
+| Izzy Mobile | 1 | $1485.47 | one-off large payment | Contractor: chase invoice PDF |
 | Uber | 39 | $1165.63 | avg $29.89, frequent small | Bulk bill-to-txn sync; enable Uber Business |
 | Ruma Films | 1 | $1000.00 | mixed | Chase vendor |
 | Amazon | 11 | $792.89 | recurring small | Chase vendor |
@@ -59,14 +59,14 @@
 
 ## Patterns the next quarter should apply
 
-- 15 DELETED/VOIDED txns were in the mirror — ensure status filter is applied in every downstream query
-- Largest vendor gap: Samuel Hafer ($19500.00) — targeted chase
-- Connector vendors with unreceipted bank txns: 4 vendors, $6253.83 — run sync-bill-attachments-to-txns.mjs next quarter earlier in the cycle
-- 88 bank-fee txns were correctly excluded — classification rules working
-- 32 owner-drawing txns excluded (BASEXCLUDED) — filter working correctly
-- 3 txns had a matching bill but weren't auto-copied — run sync-bill-attachments-to-txns.mjs --apply to close the loop
+- 15 DELETED/VOIDED txns were in the mirror, ensure status filter is applied in every downstream query
+- Largest vendor gap: Samuel Hafer ($19500.00), targeted chase
+- Connector vendors with unreceipted bank txns: 4 vendors, $6253.83, run sync-bill-attachments-to-txns.mjs next quarter earlier in the cycle
+- 88 bank-fee txns were correctly excluded, classification rules working
+- 32 owner-drawing txns excluded (BASEXCLUDED), filter working correctly
+- 3 txns had a matching bill but weren't auto-copied, run sync-bill-attachments-to-txns.mjs --apply to close the loop
 
-## Appendix — full MISSING chase list
+## Appendix: full MISSING chase list
 
 | Date | Vendor | Amount | Bank |
 |---|---|---:|---|

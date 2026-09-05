@@ -1,4 +1,4 @@
-# Q2 FY26 — BAS Retrospective
+# Q2 FY26: BAS Retrospective
 **Generated:** 2026-04-09T01:20:12.039Z
 **Quarter range:** 2025-10-01 → 2025-12-31
 
@@ -39,13 +39,13 @@
 
 ## Patterns the next quarter should apply
 
-- 258 DELETED/VOIDED txns were in the mirror — ensure status filter is applied in every downstream query
-- Largest vendor gap: Qantas ($19016.35) — bulk reconciliation pattern needed
-- Connector vendors with unreceipted bank txns: 2 vendors, $22460.21 — run sync-bill-attachments-to-txns.mjs next quarter earlier in the cycle
-- 109 bank-fee txns were correctly excluded — classification rules working
-- 3 owner-drawing txns excluded (BASEXCLUDED) — filter working correctly
+- 258 DELETED/VOIDED txns were in the mirror, ensure status filter is applied in every downstream query
+- Largest vendor gap: Qantas ($19016.35), bulk reconciliation pattern needed
+- Connector vendors with unreceipted bank txns: 2 vendors, $22460.21, run sync-bill-attachments-to-txns.mjs next quarter earlier in the cycle
+- 109 bank-fee txns were correctly excluded, classification rules working
+- 3 owner-drawing txns excluded (BASEXCLUDED), filter working correctly
 
-## Appendix — full MISSING chase list
+## Appendix: full MISSING chase list
 
 | Date | Vendor | Amount | Bank |
 |---|---|---:|---|

@@ -1,4 +1,4 @@
-# Reconciliation Rules — When a Transaction Doesn't Need a Receipt
+# Reconciliation Rules: When a Transaction Doesn't Need a Receipt
 
 This is the rulebook the completeness classifier uses to decide when a SPEND transaction falls into `NO_RECEIPT_NEEDED`. Update as new rules become clear.
 
@@ -59,7 +59,7 @@ This is the rulebook the completeness classifier uses to decide when a SPEND tra
 
 **Match pattern:** `type='RECEIVE'` AND `contact_name` matches a recent `SPEND`
 
-**Reason:** A refund reverses a prior expense. No separate receipt needed — the ORIGINAL receipt is what documented the transaction.
+**Reason:** A refund reverses a prior expense. No separate receipt needed, the ORIGINAL receipt is what documented the transaction.
 
 **Action:** Link the refund to the original charge via a note in the reference field.
 
@@ -71,7 +71,7 @@ This is the rulebook the completeness classifier uses to decide when a SPEND tra
 
 **Example:** $100 meal with 10% tip = one $110 receipt, but the bank shows $100 + $10 as two lines.
 
-**Action:** Use the same receipt for both lines in Xero — the idempotency check in `upload-receipts-to-xero.mjs` allows this via explicit filename override. Mark both lines as covered by one receipt.
+**Action:** Use the same receipt for both lines in Xero, the idempotency check in `upload-receipts-to-xero.mjs` allows this via explicit filename override. Mark both lines as covered by one receipt.
 
 ---
 
@@ -79,7 +79,7 @@ This is the rulebook the completeness classifier uses to decide when a SPEND tra
 
 **Match pattern:** `type='SPEND'`, large amount (>$500), vendor is a known contractor/person
 
-**Reason:** Contractor payments don't have a "receipt" — they have an invoice. The invoice PDF should be attached to the corresponding ACCPAY bill, and the bank SPEND reconciles against that bill.
+**Reason:** Contractor payments don't have a "receipt", they have an invoice. The invoice PDF should be attached to the corresponding ACCPAY bill, and the bank SPEND reconciles against that bill.
 
 **Action:** Check that an ACCPAY bill exists for the contractor at the right amount. If not, ask the contractor for their invoice PDF.
 
@@ -101,13 +101,13 @@ This is the rulebook the completeness classifier uses to decide when a SPEND tra
 
 **Scenario:** Nic or the accountant has decided that certain categories of small losses are accepted as unclaimed.
 
-**Pattern:** Lives in the retro file for each quarter. Example: "Q1 FY26 — accepted loss on <$10 Uber rides without Uber Business — 12 txns, total $87".
+**Pattern:** Lives in the retro file for each quarter. Example: "Q1 FY26, accepted loss on <$10 Uber rides without Uber Business, 12 txns, total $87".
 
 **Action:** Manually tag these in the completeness classifier. Add to the quarter's retro.
 
 ---
 
-## The 7th path — genuinely missing
+## The 7th path: genuinely missing
 
 Anything that doesn't match rules 1-9 and isn't covered by paths 1-5 in the completeness model is **genuinely missing**. These go on the chase list:
 
@@ -126,4 +126,4 @@ When you discover a new edge case:
 3. Re-run the classifier and verify the edge case is handled
 4. Document in the next quarter's retro
 
-Rules should never be invented during BAS prep to make the numbers look better — they should reflect the ATO's actual substantiation requirements and be defensible in audit.
+Rules should never be invented during BAS prep to make the numbers look better, they should reflect the ATO's actual substantiation requirements and be defensible in audit.

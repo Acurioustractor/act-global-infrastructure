@@ -1,4 +1,4 @@
-# Quarterly Learnings — Accumulated Knowledge
+# Quarterly Learnings: Accumulated Knowledge
 
 This file accumulates patterns, discoveries, and lessons across every BAS quarter. Each entry should be small, specific, and actionable.
 
@@ -6,7 +6,7 @@ This file accumulates patterns, discoveries, and lessons across every BAS quarte
 
 ---
 
-## 2026-04-09 — Q2+Q3 FY26 session (live working)
+## 2026-04-09: Q2+Q3 FY26 session (live working)
 
 ### The mirror has 342 DELETED SPEND shadows that pollute every downstream report
 - Discovered: `sync-xero-to-supabase.mjs` pulls the `Status` column correctly but no consumer filters on it
@@ -17,13 +17,13 @@ This file accumulates patterns, discoveries, and lessons across every BAS quarte
 
 ### 903 dext_import receipts were stranded with `status='uploaded'` but zero Xero linkage
 - Cause: Dext's direct-to-Xero integration pushed receipts before `receipt_emails` tracking existed, so the linkage column was never populated
-- Fix: `scripts/backfill-stranded-dext-links.mjs` — matches by vendor + amount + date ±3d, found 706/903 (78%) clean matches
+- Fix: `scripts/backfill-stranded-dext-links.mjs`, matches by vendor + amount + date ±3d, found 706/903 (78%) clean matches
 - Principle: **before assuming receipts are missing, check if they're already in Xero but unlinked in our tracking**
 
 ### The matcher's scoring was naive to three failure modes
-1. **No amount disqualifier** — $148 receipt happily matching $-228 txn via vendor+date alone
-2. **No sign check** — negative receipts (refunds) matching positive charges
-3. **No exact-match promotion** — a $4,500 exact-amount exact-vendor pair scored only 76% because dates were 23 days apart
+1. **No amount disqualifier**, $148 receipt happily matching $-228 txn via vendor+date alone
+2. **No sign check**, negative receipts (refunds) matching positive charges
+3. **No exact-match promotion**, a $4,500 exact-amount exact-vendor pair scored only 76% because dates were 23 days apart
 - Fix: hard disqualifiers added + exact-match-promotion path (vendor ≥ 0.9, amount within $1 or 1%, date within 60d → auto-promote to 90)
 
 ### The "43 drifted bills" hypothesis was wrong
@@ -48,8 +48,8 @@ This file accumulates patterns, discoveries, and lessons across every BAS quarte
 - 18+ bank transfer pairs require manual "Transfer money" in Xero UI
 
 ### Xero rejects attachments on DELETED transactions with opaque 500 errors
-- Not 4xx, not "entity deleted" — just `{"Title":"An error occurred","Detail":"An error occurred in Xero"}`
-- Root cause of 30 "failed" receipts this session — all pointed to deleted-shadow txns
+- Not 4xx, not "entity deleted", just `{"Title":"An error occurred","Detail":"An error occurred in Xero"}`
+- Root cause of 30 "failed" receipts this session, all pointed to deleted-shadow txns
 - Fix: upload script now pre-flights `Status` check before PUT
 
 ### Gemini 2.5 Flash Lite is 10x cheaper than Claude Haiku for receipt OCR
@@ -59,15 +59,15 @@ This file accumulates patterns, discoveries, and lessons across every BAS quarte
 
 ---
 
-## 2026-04-08 — BAS FY26 Q2+Q3 assembly session (prior)
+## 2026-04-08: BAS FY26 Q2+Q3 assembly session (prior)
 
 ### Qantas/Uber/Webflow/Virgin/Booking.com connectors all work 100%
 - They create ACCPAY bills with PDFs attached
-- Bills and bank-side SPEND txns are NOT auto-reconciled — need Find & Match or sync-bill-attachments script
-- **Do not attempt vendor portal downloads — receipts are already in Xero, just on the wrong side**
+- Bills and bank-side SPEND txns are NOT auto-reconciled, need Find & Match or sync-bill-attachments script
+- **Do not attempt vendor portal downloads: receipts are already in Xero, just on the wrong side**
 
 ### `receipt_emails` has NO `metadata` JSONB column
-- Script attempted to store EXIF + suggestion metadata — silently dropped
+- Script attempted to store EXIF + suggestion metadata, silently dropped
 - TODO: add the column, or store in a side table
 
 ### Three Xero token stores drift
@@ -80,7 +80,7 @@ This file accumulates patterns, discoveries, and lessons across every BAS quarte
 ## Template for future entries
 
 ```
-## YYYY-MM-DD — Q{N} FY{YY} session title
+## YYYY-MM-DD: Q{N} FY{YY} session title
 
 ### [Specific pattern or discovery]
 - What was observed
@@ -92,9 +92,9 @@ This file accumulates patterns, discoveries, and lessons across every BAS quarte
 Keep entries under ~150 words each. If you need more space, create a separate file in `references/` and link to it.
 
 
-## 2026-06-01 — Q2+Q3 FY26 push to 100% (reconcile cockpit session)
+## 2026-06-01: Q2+Q3 FY26 push to 100% (reconcile cockpit session)
 
-### Receipts are NOT the BAS blocker — reconciliation is
+### Receipts are NOT the BAS blocker: reconciliation is
 - Three threads (completeness, pool matcher, bill→txn copy) all landed here: coverage already ~94%, gaps all sub-$82.50 or receipt-less (fees/transfers/drawings). Pool matcher: 0 confident auto-matches left; bill→txn: 1 pair left.
 - The real lever to 100% + GST confidence: **bank reconciliation** (Q2 72% / Q3 67%), **clearing duplicates**, **DRAFT payables**, then GST verify.
 - Lesson: don't spend the session chasing receipts when the GST/confidence gap is reconciliation. Check coverage % first; if >90% and gaps sub-threshold, pivot to reconciliation.
@@ -107,7 +107,7 @@ Keep entries under ~150 words each. If you need more space, create a separate fi
 - A card surcharge makes bank >= bill. A bank line LESS than the bill (Bitwarden USD $17.75 vs $17.87) is FX/rounding, NOT a duplicate surcharge → do not auto-delete. Added to reconcile-cycle/references/confirmed-duplicates.md.
 
 ### Duplicate → 1B GST exposure (cash basis)
-- A duplicate (bill + card txn) can double-count GST-paid (1B) if both are counted. Q2: up to ~$1,651. Clearing dups raises net payable slightly. Verify per-line in Xero (cash basis counts the payment side) — don't auto-adjust.
+- A duplicate (bill + card txn) can double-count GST-paid (1B) if both are counted. Q2: up to ~$1,651. Clearing dups raises net payable slightly. Verify per-line in Xero (cash basis counts the payment side), don't auto-adjust.
 
 ### Dext CSV: 100% account + receipt image, but maps to dup/match lines, NOT creates
 - The Dext export (Category=real Xero account, Project 2=ACT code ~36%, Image=rbnk.me 100%) corresponds to Dext-PUSHED receipts → now the dup/match lines. The CREATE lines are precisely what Dext did NOT push → they don't match the CSV. Use Dext for receipt-attach + account-confirm on dup/match lines, heuristic+agent for creates.

@@ -10,8 +10,8 @@ Sync storyteller data from Empathy Ledger v2 to GHL contacts.
 ## Description
 
 Two-step sync:
-1. **Sync** — Push EL v2 storytellers into GHL as contacts with tags
-2. **Link** — Update `ghl_contacts` table with stories_count, is_storyteller, is_elder fields
+1. **Sync**, Push EL v2 storytellers into GHL as contacts with tags
+2. **Link**, Update `ghl_contacts` table with stories_count, is_storyteller, is_elder fields
 
 ## Usage
 
@@ -42,10 +42,10 @@ node scripts/link-storytellers-to-contacts.mjs
 ## Environment
 
 Requires:
-- `EL_SUPABASE_URL` — Empathy Ledger v2 Supabase URL
-- `EL_SUPABASE_SERVICE_KEY` — EL v2 service role key
-- `GHL_API_KEY` — GoHighLevel API key
-- `GHL_LOCATION_ID` — GoHighLevel location ID
+- `EL_SUPABASE_URL`, Empathy Ledger v2 Supabase URL
+- `EL_SUPABASE_SERVICE_KEY`, EL v2 service role key
+- `GHL_API_KEY`, GoHighLevel API key
+- `GHL_LOCATION_ID`, GoHighLevel location ID
 
 ## Schedule
 
@@ -60,6 +60,6 @@ current storyteller engagement (stories_count, elder status, etc).
 
 ## Related
 
-- `/enrich` — Full contact enrichment cycle
-- `scripts/sync-storytellers-to-ghl.mjs` — GHL push script
-- `scripts/link-storytellers-to-contacts.mjs` — Database link script
+- `/enrich`, Full contact enrichment cycle
+- `scripts/sync-storytellers-to-ghl.mjs`, GHL push script
+- `scripts/link-storytellers-to-contacts.mjs`, Database link script

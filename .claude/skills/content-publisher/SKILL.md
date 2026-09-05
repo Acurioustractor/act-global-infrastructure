@@ -1,6 +1,6 @@
 ---
 name: content-publisher
-description: Autonomous content creation, review, and multi-platform publishing for ACT ecosystem. Includes Empathy Ledger Content Hub for photography, videography, and storytelling with AI-powered tagging and ecosystem syndication.
+description: Autonomous content creation, review and multi-platform publishing for the ACT ecosystem, with Empathy Ledger as the content hub for photography, video and stories. Use when the user wants content generated from ecosystem activity, a post drafted and syndicated, media tagged, or the content pipeline run or debugged. Run consent-check before anything storyteller-related goes public.
 ---
 
 # Content Publisher - ACT Communications Automation

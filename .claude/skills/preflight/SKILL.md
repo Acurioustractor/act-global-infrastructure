@@ -15,9 +15,9 @@ mcp__supabase__get_project_url
 ```
 
 Cross-reference with expected projects (refs verified 2026-06-01 against codebase + memory `command-center-finance-truth`):
-- **Shared ACT/GS**: `tednluwflfhxyucgwigh` — Command Center, Telegram bot, GrantScope, scripts (operational DB; all money/finance work)
-- **EL v2**: `yvnuayzslukamizrlhwb` — Empathy Ledger v2 storyteller content
-- **Media storage**: `uaxhjzqrdotoahjnxmbj` — media-only public storage; serves the `story-media/` gallery image URLs in `minderoo-gallery.json` (NOT unused — don't deprovision without rehosting)
+- **Shared ACT/GS**: `tednluwflfhxyucgwigh`: Command Center, Telegram bot, GrantScope, scripts (operational DB; all money/finance work)
+- **EL v2**: `yvnuayzslukamizrlhwb`: Empathy Ledger v2 storyteller content
+- **Media storage**: `uaxhjzqrdotoahjnxmbj`: media-only public storage; serves the `story-media/` gallery image URLs in `minderoo-gallery.json` (NOT unused: don't deprovision without rehosting)
 
 If the URL doesn't match the project you need, STOP and tell the user.
 
@@ -52,7 +52,7 @@ ORDER BY ordinal_position;
 
 Keep this in context and reference it when writing queries or migrations.
 
-For **finance/money tables**, also load the money guards before any dollar-emitting query — see the `db-check` skill's "Money tables" section + memory `command-center-finance-truth.md` (exclude DELETED, never SUM via supabase-js, two-account rule, verify vs `project_monthly_financials`).
+For **finance/money tables**, also load the money guards before any dollar-emitting query, see the `db-check` skill's "Money tables" section + memory `command-center-finance-truth.md` (exclude DELETED, never SUM via supabase-js, two-account rule, verify vs `project_monthly_financials`).
 
 ## Step 5: Report
 

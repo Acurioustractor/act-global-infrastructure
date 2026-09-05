@@ -1,8 +1,8 @@
-# Vendor aliases — the learning loop for matching
+# Vendor aliases: the learning loop for matching
 
 > **What this is:** bank-statement descriptors → the real vendor name, so the matching engine connects
 > a messy card line to the right Xero bill / receipt. The engine matches on shared *tokens* after
-> normalisation, so most names work without help — this file is for the ones that DON'T (heavy
+> normalisation, so most names work without help, this file is for the ones that DON'T (heavy
 > abbreviation, no shared token, a processor name instead of the merchant).
 >
 > Append a row whenever you hit a line the cockpit mis-matched or failed to match because the descriptor
@@ -20,7 +20,7 @@
 
 ## Heuristic hints already built into the engine (for CREATE lines)
 
-These are guesses the engine makes for vendors never seen in the receipt pipeline — confirm, don't trust:
+These are guesses the engine makes for vendors never seen in the receipt pipeline, confirm, don't trust:
 
 - Account by keyword: `UBER/CAB/TAXI`→Taxis · `HOTEL/NOVOTEL/BOOKING/QANTAS/VIRGIN/AVIS`→Travel ·
   `XERO/SQUARESPACE/OPENAI/ADOBE`→Subscriptions · `AMZNPRIME/AUDIBLE`→**Drawings (personal?)** ·
@@ -35,7 +35,7 @@ These are guesses the engine makes for vendors never seen in the receipt pipelin
   `reconcile.ts` instead, and note it here so the next person knows it's handled in code.
 
 
-## Q2 FY26 aliases (added 2026-06-01 — bank descriptor → Xero bill contact)
+## Q2 FY26 aliases (added 2026-06-01: bank descriptor → Xero bill contact)
 
 | Bank descriptor | Xero contact |
 |---|---|

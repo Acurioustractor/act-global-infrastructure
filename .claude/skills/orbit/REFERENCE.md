@@ -1,4 +1,4 @@
-# /orbit — command catalog, playbooks, gotchas
+# /orbit: command catalog, playbooks, gotchas
 
 All commands run from the `act-global-infrastructure` repo root. Read-only commands are safe anytime;
 `apply`/write commands are Tier-2 (day-shift, explicit verb). Every script logs writes with undo.
@@ -14,7 +14,7 @@ node scripts/orbit-community-line-sweep.mjs prep # classify community-line viola
 node scripts/orbit-dedup.mjs prep <email|name>   # dry-run dedup plan for one person (or: prep community)
 ```
 
-### Act (Tier-2 — only after Ben's explicit verb; show before→after first)
+### Act (Tier-2: only after Ben's explicit verb; show before→after first)
 ```bash
 node scripts/orbit-tracer.mjs croft   # promote a known uncaptured ally → circle:gsd-alliance (template)
 node scripts/orbit-tracer.mjs kristy  # community-line fix across a person's dupes (tags only, no merge)
@@ -23,18 +23,18 @@ node scripts/orbit-community-line-sweep.mjs apply A   # genuine community indivi
 node scripts/orbit-community-line-sweep.mjs apply B   # mis-tagged team: remove erroneous role:storyteller
 node scripts/orbit-dedup.mjs apply <email|name>       # union tags onto richest primary + delete verified-empty dupes
 ```
-The tracer subjects (croft/kristy/allan) are templates — to act on a *new* person, copy the matching
+The tracer subjects (croft/kristy/allan) are templates, to act on a *new* person, copy the matching
 branch and resolve the target live by email (never paste a contact ID).
 
 ## Tag namespaces
-- `tier:` — supporter ring (curious/connected/member/active/steward). **Supporter lane only.**
-- `circle:gsd-alliance` — hand-picked inner circle (orthogonal to `tier:`).
-- `lane:community` — the constellation marker (community lane).
-- `role:` — storyteller / elder / partner / funder / buyer / supplier / advisory / media / corporate…
+- `tier:`, supporter ring (curious/connected/member/active/steward). **Supporter lane only.**
+- `circle:gsd-alliance`, hand-picked inner circle (orthogonal to `tier:`).
+- `lane:community`, the constellation marker (community lane).
+- `role:`, storyteller / elder / partner / funder / buyer / supplier / advisory / media / corporate…
   `role:storyteller` / `role:elder` = community-individual signals. `role:community` / `role:community-controlled`
-  are **segment/org markers, NOT individual signals** — they must not trigger a community-line violation.
-- `comms:*-drip` / `comms:*-newsletter` — funnels/audiences. Drips on a community individual = violation.
-- `project:` `place:` `source:` — affinity / provenance.
+  are **segment/org markers, NOT individual signals**, they must not trigger a community-line violation.
+- `comms:*-drip` / `comms:*-newsletter`, funnels/audiences. Drips on a community individual = violation.
+- `project:` `place:` `source:`, affinity / provenance.
 
 ## Playbooks
 
@@ -45,7 +45,7 @@ branch and resolve the target live by email (never paste a contact ID).
 ### Fix a community-line violation
 A genuine community individual on `tier:`/drips → strip `tier:*` + `comms:*drip*`, add `lane:community`,
 keep `role:*` and newsletters. Use the sweep: `prep` (classify A/B/C) → review → `apply A`. Bucket C (orgs in
-B2B drips, funder staff) are **not** violations — held, never auto-fixed.
+B2B drips, funder staff) are **not** violations, held, never auto-fixed.
 
 ### Dedup (no native merge)
 `orbit-dedup.mjs prep` picks the richest record as primary, unions tags, and flags only **verified-empty**
@@ -58,10 +58,10 @@ records are **kept** (they need a GHL UI "Manage Duplicates" merge to consolidat
 raw + in-draft transcripts not yet brought to life. NEVER an energy score.
 
 ## Gotchas (learned 2026-06-03)
-- **exec_sql / PostgREST 1000-row cap** — paginate or aggregate; never trust an unpaginated bulk count.
-- **GHL search lags after writes/deletes** — verify via direct `getContactById` (404 = gone), not search.
+- **exec_sql / PostgREST 1000-row cap**: paginate or aggregate; never trust an unpaginated bulk count.
+- **GHL search lags after writes/deletes**: verify via direct `getContactById` (404 = gone), not search.
 - **`/contacts/merge` = 403** for the private token; **MCP has no merge or delete tool**. Merge is UI-only.
-- **`deleteContact` IS permitted** — but only delete verified-empty records; log tags for recovery.
-- **Mirror staleness** — `build-unified-orbit.mjs` reads the Supabase mirror, which trails live GHL until
+- **`deleteContact` IS permitted**: but only delete verified-empty records; log tags for recovery.
+- **Mirror staleness**: `build-unified-orbit.mjs` reads the Supabase mirror, which trails live GHL until
   the `sync-ghl` job runs; a freshly-fixed person can still show as a violation in a regenerated worklist.
-- **Hard-coded contact IDs are blocked** by the auto-mode classifier — always resolve live by email.
+- **Hard-coded contact IDs are blocked** by the auto-mode classifier: always resolve live by email.
