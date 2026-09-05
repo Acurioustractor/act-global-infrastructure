@@ -1,4 +1,4 @@
-# Phase 2 — Xero write-back runbook (NOT yet wired)
+# Phase 2: Xero write-back runbook (NOT yet wired)
 
 > **Status: documented, not implemented.** Phase 1 (the cockpit + this skill) is read-only. This runbook
 > describes how the Xero write-back *will* work and the guardrails that MUST hold before it does. Do not
@@ -7,16 +7,16 @@
 ## What Phase 2 adds (and what it still can't do)
 
 From a CREATE verdict, the only two safe writes:
-1. **Create a coded bill / spend-money** — account + project + contact, from the line's suggested coding.
-2. **Attach the receipt image** — download the `receipt-attachments` storage object, upload to Xero
+1. **Create a coded bill / spend-money**, account + project + contact, from the line's suggested coding.
+2. **Attach the receipt image**, download the `receipt-attachments` storage object, upload to Xero
    Attachments on the new transaction (the "add receipt to Xero" ask).
 
 It **still cannot reconcile.** The Xero API has no way to set `IsReconciled`. Output is "ready to
-reconcile in Xero" — Ben/SL press the button. This boundary does not change in Phase 2.
+reconcile in Xero", Ben/SL press the button. This boundary does not change in Phase 2.
 
 ## Tier classification (from ~/.claude/rules/workflow.md)
 
-Creating/attaching in Xero is **Tier 3** — shared-state, hard-to-reverse, external system-of-record.
+Creating/attaching in Xero is **Tier 3**, shared-state, hard-to-reverse, external system-of-record.
 Per the AFK boundary it is **day-shift, human-in-loop, standard mode (no /fast)**. It requires the
 **explicit verb** in the user's message ("create the bills", "push to Xero", "attach the receipts").
 Never queue a Xero write into an unattended/AFK backlog.
@@ -32,18 +32,18 @@ Never queue a Xero write into an unattended/AFK backlog.
    NM Personal or ACT Maximiser.
 5. **Tracer-bullet first.** Prove ONE create+attach end-to-end (see `workflows/tracer-bullet.md`) and
    eyeball it in Xero before any batch run.
-6. **Rate limits.** Xero is 60 req/min/tenant — sleep ~1100ms between calls (memory: Xero auth/rate trap).
+6. **Rate limits.** Xero is 60 req/min/tenant, sleep ~1100ms between calls (memory: Xero auth/rate trap).
 7. **Auth.** On `invalid_grant`: `node scripts/sync-xero-tokens.mjs`. Max 3 retries, exponential backoff,
    never infinite-retry on auth.
 
 ## Implementation pointers (when we build it)
 
 - OAuth client + token rotation: the codebase OAuth in `scripts/sync-xero-to-supabase.mjs` (the Xero MCP
-  is unreliable for this — memory `xero-q2q3-recon-recode`).
+  is unreliable for this, memory `xero-q2q3-recon-recode`).
 - Create: `create-bank-transaction` (spend-money) or the bill API; attach via the Xero Attachments API.
 - Receipt source: sign the `receipt-attachments` storage path (same `createSignedUrl` the cockpit uses),
   download, then upload to Xero.
-- Surcharge: when matching a bill with a surcharge, the bank line needs an Adjustment line for the Δ — the
+- Surcharge: when matching a bill with a surcharge, the bank line needs an Adjustment line for the Δ, the
   API can't add it to a reconcile, so this stays a UI step (note it in the worklist).
 
 ## Before turning it on

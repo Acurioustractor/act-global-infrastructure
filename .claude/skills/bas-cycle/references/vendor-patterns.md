@@ -1,4 +1,4 @@
-# Vendor Patterns — Per-Vendor Receipt Playbook
+# Vendor Patterns: Per-Vendor Receipt Playbook
 
 How each vendor flows into Xero and where their receipts actually live. Update when you discover a new pattern.
 
@@ -11,7 +11,7 @@ Format: each vendor has a **flow**, **receipt location**, **quirks**, and **acti
 **Flow:**
 - Qantas Business Rewards connector → ACCPAY bill in Xero with PDF receipt attached
 - Bank feed creates a separate SPEND transaction on NAB Visa 1-3 days later
-- Bill and SPEND are NOT auto-reconciled — require manual "Find & Match" in Xero UI OR our `sync-bill-attachments-to-txns.mjs` script
+- Bill and SPEND are NOT auto-reconciled, require manual "Find & Match" in Xero UI OR our `sync-bill-attachments-to-txns.mjs` script
 
 **Receipt lives on:** bill side (`xero_invoices`), NOT bank txn side
 
@@ -19,12 +19,12 @@ Format: each vendor has a **flow**, **receipt location**, **quirks**, and **acti
 - ~97% of Qantas bills have receipts via the connector
 - Many Qantas bank txns show as "unreceipted" even though the receipt exists on a matching bill
 - Amounts between bill and bank txn often match exactly but can differ by a few dollars (FX rounding, change fees)
-- 40+ unreceipted Qantas SPEND txns in Q2+Q3 FY26 are waiting for manual Find & Match — the bills have receipts, the bank txns don't
+- 40+ unreceipted Qantas SPEND txns in Q2+Q3 FY26 are waiting for manual Find & Match, the bills have receipts, the bank txns don't
 
 **Action:**
 - Run `sync-bill-attachments-to-txns.mjs Q2 Q3 --apply` to auto-copy exact matches
 - For the rest, Nic or accountant needs to run Find & Match in Xero UI
-- Do NOT attempt Qantas portal downloads — the receipts are already in Xero, just in the wrong place
+- Do NOT attempt Qantas portal downloads, the receipts are already in Xero, just in the wrong place
 
 ---
 
@@ -35,15 +35,15 @@ Format: each vendor has a **flow**, **receipt location**, **quirks**, and **acti
 - Dext captures via inbox rules → ACCPAY bill in Xero with PDF
 - Bank feed creates SPEND txn on NAB Visa
 
-**Receipt lives on:** bill side (mostly — Dext captures it)
+**Receipt lives on:** bill side (mostly, Dext captures it)
 
 **Quirks:**
 - Personal Uber rides bypass the Business account and only appear on NAB Visa statement. No receipt anywhere.
 - Amounts under $5-10 often don't make it to Dext (unclear filter rule)
-- 147 unreceipted Uber SPEND in Q2+Q3 FY26 — most are <$50
+- 147 unreceipted Uber SPEND in Q2+Q3 FY26, most are <$50
 
 **Action:**
-- Encourage using Uber Business for ALL rides (even personal — they're tagged and filtered)
+- Encourage using Uber Business for ALL rides (even personal, they're tagged and filtered)
 - Copy from bill via sync script where possible
 - For truly unreceipted small ones: journal entry or accept as small cash/no-GST expense
 
@@ -72,7 +72,7 @@ Format: each vendor has a **flow**, **receipt location**, **quirks**, and **acti
 **Quirks:**
 - Contact name varies: "Apple", "Apple Pty Ltd", "Apple Australia", "Apple Inc"
 - Subscription receipts arrive up to 2-4 weeks AFTER the bank charge
-- Some subscriptions are personal (Apple Music) vs business (iCloud+) — needs classification
+- Some subscriptions are personal (Apple Music) vs business (iCloud+), needs classification
 
 **Action:**
 - Vendor aliases in matcher: "apple", "apple pty ltd", "apple australia", "apple inc"
@@ -92,7 +92,7 @@ Format: each vendor has a **flow**, **receipt location**, **quirks**, and **acti
 
 ## NAB / NAB Fee / NAB International Fee
 
-**Flow:** Bank fees — no receipt, ever.
+**Flow:** Bank fees, no receipt, ever.
 
 **Action:** `NO_RECEIPT_NEEDED` classification. Auto-mark in completeness report.
 
@@ -110,9 +110,9 @@ Format: each vendor has a **flow**, **receipt location**, **quirks**, and **acti
 
 **Flow:** Owner drawings from the business account to Nic's personal account.
 
-**Receipt lives on:** N/A — owner drawings don't have receipts
+**Receipt lives on:** N/A, owner drawings don't have receipts
 
-**Action:** Already tagged as `BASEXCLUDED` in Xero — filter excludes from BAS reports. Should not appear as "missing receipts".
+**Action:** Already tagged as `BASEXCLUDED` in Xero, filter excludes from BAS reports. Should not appear as "missing receipts".
 
 ---
 
@@ -155,4 +155,4 @@ When a new vendor shows up that's not documented here:
 
 ---
 
-*This file is the institutional memory for vendor handling. Every new quirk discovered belongs here. Keep it up to date — future-Ben/Nic will thank you.*
+*This file is the institutional memory for vendor handling. Every new quirk discovered belongs here. Keep it up to date, future-Ben/Nic will thank you.*

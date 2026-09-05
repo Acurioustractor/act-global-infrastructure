@@ -11,7 +11,7 @@ Standardised deployment workflow that catches issues BEFORE they hit production.
 
 Execute these steps sequentially. Stop and report if any step fails.
 
-### Step 1: Pre-flight — Build Check
+### Step 1: Pre-flight: Build Check
 
 ```bash
 cd apps/command-center && npx tsc --noEmit 2>&1 | head -30
@@ -19,7 +19,7 @@ cd apps/command-center && npx tsc --noEmit 2>&1 | head -30
 
 If there are TypeScript errors, fix them before proceeding. Do NOT skip this step.
 
-### Step 2: Pre-flight — Git Status
+### Step 2: Pre-flight: Git Status
 
 ```bash
 git status
@@ -30,7 +30,7 @@ git log --oneline -5
 - Confirm we're on the right branch
 - If there are unstaged changes, ask the user if they want to commit first
 
-### Step 3: Pre-flight — Env Var Parity
+### Step 3: Pre-flight: Env Var Parity
 
 Compare local `.env.local` keys against Vercel environment variables:
 
@@ -65,7 +65,7 @@ npx vercel --prod
 
 Capture the deployment URL from the output.
 
-### Step 6: Post-deploy — Health Checks
+### Step 6: Post-deploy: Health Checks
 
 Hit key endpoints to verify the deployment:
 

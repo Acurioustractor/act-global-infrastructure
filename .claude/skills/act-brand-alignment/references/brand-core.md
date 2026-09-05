@@ -1,13 +1,13 @@
 # ACT Brand Core
 
 ## Identity
-- ACT is a regenerative innovation ecosystem partnering with marginalised—especially First Nations—communities to dismantle extractive systems.
+- ACT is a regenerative innovation ecosystem partnering with marginalised, especially First Nations, communities to dismantle extractive systems.
 - Legal structure: Dual-entity (charitable CLG + mission-locked trading arm) for grant eligibility and equitable profit-sharing.
-- Core metaphor: Like a tractor's power take-off (PTO), we transfer resources, knowledge, and capacity to community-led initiatives—we hand over the keys.
+- Core metaphor: Like a tractor's power take-off (PTO), we transfer resources, knowledge, and capacity to community-led initiatives, we hand over the keys.
 - North star: Communities own their narratives, land, and economic futures. We design for our own obsolescence.
 
 ## Method (LCAA - Listen, Curiosity, Action, Art)
-- **Listen**: Sit in silence to take in knowledge. Deep listening to place, people, history, and community voice—especially those often ignored. Pay attention to ancestral teachers.
+- **Listen**: Sit in silence to take in knowledge. Deep listening to place, people, history, and community voice: especially those often ignored. Pay attention to ancestral teachers.
 - **Curiosity**: Think deeply, listen deeply, try to understand. Ask better questions, prototype, test, learn. Lean into the unknown with open minds and hearts.
 - **Action**: We are makers who play and take chances, radically prototyping to form seedlings. Build, partner, deliver tangible outputs through innovative technologies, compelling stories, and immersive art.
 - **Art**: Recognize art as the first form of revolution. Translate change into culture, meaning, and storytelling. Challenge the status quo, provoke critical thinking, inspire collective action.
@@ -54,7 +54,7 @@
 - A regenerative innovation studio stewarding a working farm on Jinibara Country.
 - Cultivating seeds of justice, art, and shared governance from a working farm.
 - An innovation studio growing co-stewardship through land, story, and action.
-- Like a tractor sharing its power take-off—we transfer resources, knowledge, and capacity to community-led initiatives.
+- Like a tractor sharing its power take-off, we transfer resources, knowledge, and capacity to community-led initiatives.
 
 ## Farm Metaphor System
 - **Seeds**: Active projects that need time, water, and attention
@@ -62,7 +62,7 @@
 - **Seasons**: Natural cycles of growth, harvest, and rest
 - **Harvest**: Shared value that feeds the community
 - **Fields**: Domains where we cultivate change (justice innovation, storytelling, land care, art, shared governance)
-- **Tractor/PTO**: We provide capacity-building, knowledge-sharing, flexible resourcing, and network weaving—then communities drive forward
+- **Tractor/PTO**: We provide capacity-building, knowledge-sharing, flexible resourcing, and network weaving: then communities drive forward
 
 ## Visual Language (if designing)
 - **Color Palette**: Earthy greens and browns, warm neutrals, off-white backgrounds (Stone 50-900 + Emerald for conservation themes)

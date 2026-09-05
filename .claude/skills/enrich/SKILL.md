@@ -47,10 +47,10 @@ node scripts/contact-enrichment-cycle.mjs --brief-only
 ## Schedule
 
 Runs weekly via Ralph agent, or manually via this skill.
-Also available as PM2 cron — see `ecosystem.config.cjs`.
+Also available as PM2 cron, see `ecosystem.config.cjs`.
 
 ## Related
 
-- `/enrich-project` — Deep enrichment for a specific project
-- `/sync-storytellers` — Sync Empathy Ledger storytellers to GHL
-- `scripts/contact-enrichment-cycle.mjs` — Source script
+- `/enrich-project`, Deep enrichment for a specific project
+- `/sync-storytellers`, Sync Empathy Ledger storytellers to GHL
+- `scripts/contact-enrichment-cycle.mjs`, Source script

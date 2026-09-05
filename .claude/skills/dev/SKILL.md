@@ -1,6 +1,6 @@
 ---
 name: dev
-description: Start local development environment — dev servers, tunnels for webhook testing, health checks, and log tailing. Use when user says "start dev", "local dev", "spin up", "test locally", "tunnel", or wants to test webhooks.
+description: Start local development environment, dev servers, tunnels for webhook testing, health checks, and log tailing. Use when user says "start dev", "local dev", "spin up", "test locally", "tunnel", or wants to test webhooks.
 ---
 
 # Local Dev Skill
@@ -128,11 +128,11 @@ cd /Users/benknight/Code/act-global-infrastructure
 ```
 
 This starts PM2 cron jobs:
-- `notion-sync` — every 5 min
-- `imessage-sync` — every 15 min
-- `daily-briefing` — 7am AEST
-- `knowledge-pipeline` — 8am AEST
-- `data-freshness` — every 6h
+- `notion-sync`, every 5 min
+- `imessage-sync`, every 15 min
+- `daily-briefing`, 7am AEST
+- `knowledge-pipeline`, 8am AEST
+- `data-freshness`, every 6h
 - Plus: storyteller sync/link, embed-imessages, detect-episodes, agent-learning, meeting-sync
 
 ## Workflow: Status & Logs

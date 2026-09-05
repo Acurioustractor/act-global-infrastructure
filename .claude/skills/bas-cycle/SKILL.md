@@ -20,29 +20,29 @@ A long-memory assistant for the BAS quarter. Knows how Xero + Dext + bank feeds 
 
 ## What this skill is for
 
-- **Preparing a BAS quarter** — end-to-end workflow from "new quarter starts" to "BAS lodged"
-- **Hunting missing receipts** — using all six coverage paths, not just direct attachments
-- **Running a retrospective** — after a quarter is lodged, extract what worked and feed it back into the skill's own knowledge
-- **Building vendor-specific playbooks** — "Qantas does X, Uber does Y, small SaaS does Z"
+- **Preparing a BAS quarter**: end-to-end workflow from "new quarter starts" to "BAS lodged"
+- **Hunting missing receipts**: using all six coverage paths, not just direct attachments
+- **Running a retrospective**: after a quarter is lodged, extract what worked and feed it back into the skill's own knowledge
+- **Building vendor-specific playbooks**: "Qantas does X, Uber does Y, small SaaS does Z"
 
 ## The 6 coverage paths (the model for "receipt is there to click on")
 
 When you ask "does this bank transaction have a receipt?" the answer can come through any of:
 
-1. **DIRECT** — Attachment on the bank transaction itself (`has_attachments=true`)
-2. **BILL_LINKED** — Transaction is linked (Xero Find & Match) to an ACCPAY bill that has an attachment
-3. **FILES_LIBRARY** — Receipt exists in Xero's Files library and references this txn
-4. **POOL_MATCH** — Receipt exists in our `receipt_emails` pool and is plausibly this txn
-5. **GMAIL_RAW** — Receipt exists in raw Gmail (missed by Dext) and is plausibly this txn
-6. **NO_RECEIPT_NEEDED** — Bank fee, bank transfer, owner drawing, below-$75 no-GST, write-off-accepted
+1. **DIRECT**, Attachment on the bank transaction itself (`has_attachments=true`)
+2. **BILL_LINKED**, Transaction is linked (Xero Find & Match) to an ACCPAY bill that has an attachment
+3. **FILES_LIBRARY**, Receipt exists in Xero's Files library and references this txn
+4. **POOL_MATCH**, Receipt exists in our `receipt_emails` pool and is plausibly this txn
+5. **GMAIL_RAW**, Receipt exists in raw Gmail (missed by Dext) and is plausibly this txn
+6. **NO_RECEIPT_NEEDED**, Bank fee, bank transfer, owner drawing, below-$75 no-GST, write-off-accepted
 
 **Anything not in paths 1-6 is a genuine missing receipt and needs chasing.**
 
-## Money guards (BAS scoping) — read before computing any GST/coverage total
+## Money guards (BAS scoping): read before computing any GST/coverage total
 
 1. **Two-account rule.** ACT business money lives only in **NAB Visa ACT #8815** + **NJ Marchesi T/as ACT Everyday**. Exclude `NM Personal` and `NJ Marchesi T/as ACT Maximiser` from BAS coverage and GST totals.
-2. **DELETED/voided rows don't count.** Every GST/coverage sum over `xero_invoices` / `xero_transactions` must exclude `status='DELETED'` (NULL-safe `IS DISTINCT FROM 'DELETED'`) — a voided row is neither a supply nor an acquisition.
-3. **Sum GST in raw SQL, not supabase-js.** A quarter is >1000 rows; supabase-js `.select()` silently truncates at 1000 (PostgREST cap). `execute_sql` / `psql` `SUM()` is not capped — use it for any GST figure.
+2. **DELETED/voided rows don't count.** Every GST/coverage sum over `xero_invoices` / `xero_transactions` must exclude `status='DELETED'` (NULL-safe `IS DISTINCT FROM 'DELETED'`), a voided row is neither a supply nor an acquisition.
+3. **Sum GST in raw SQL, not supabase-js.** A quarter is >1000 rows; supabase-js `.select()` silently truncates at 1000 (PostgREST cap). `execute_sql` / `psql` `SUM()` is not capped, use it for any GST figure.
 4. **Per-row review is the workbench.** `bas-completeness.mjs` classifies the quarter; per-row receipt/project assignment happens on `/finance/workbench` (Receipt gaps card), which stamps `manual_workbench` so the nightly auto-taggers don't overwrite the call.
 
 **Verify:** reconcile any GST-collected / GST-paid figure against the canonical accrual P&L (`project_monthly_financials`) before it goes near a lodgement. A silent wrong number is the expensive BAS failure.
@@ -54,7 +54,7 @@ When you ask "does this bank transaction have a receipt?" the answer can come th
 # Full picture for any quarter (uses the 6-path classifier)
 node scripts/bas-completeness.mjs Q2
 
-# Only the genuine missing receipts (path 7 — chase list)
+# Only the genuine missing receipts (path 7: chase list)
 node scripts/bas-completeness.mjs Q2 --gap-only
 ```
 
@@ -88,12 +88,12 @@ node scripts/sync-bill-attachments-to-txns.mjs --apply  # Copy bill receipts
 
 ## References
 
-- `references/vendor-patterns.md` — per-vendor playbook (Qantas, Uber, Apple, etc.)
-- `references/reconciliation-rules.md` — when a txn doesn't need a receipt
-- `references/quarterly-learnings.md` — patterns accumulated across quarters
-- `references/q1-fy26-retro.md` — baseline retrospective
-- `workflows/quarterly-checklist.md` — step-by-step BAS prep runbook
-- `workflows/weekly-hygiene.md` — routine maintenance
+- `references/vendor-patterns.md`, per-vendor playbook (Qantas, Uber, Apple, etc.)
+- `references/reconciliation-rules.md`, when a txn doesn't need a receipt
+- `references/quarterly-learnings.md`, patterns accumulated across quarters
+- `references/q1-fy26-retro.md`, baseline retrospective
+- `workflows/quarterly-checklist.md`, step-by-step BAS prep runbook
+- `workflows/weekly-hygiene.md`, routine maintenance
 
 ## How this skill learns
 
@@ -103,7 +103,7 @@ node scripts/sync-bill-attachments-to-txns.mjs --apply  # Copy bill receipts
 3. It writes: a new retro file in `references/` + appends new patterns to `vendor-patterns.md`
 4. Next quarter's prep starts by reading the accumulated `quarterly-learnings.md`
 
-Over time, this skill becomes the institutional memory of ACT's bookkeeping — every edge case, every vendor quirk, every hard-won lesson codified.
+Over time, this skill becomes the institutional memory of ACT's bookkeeping, every edge case, every vendor quirk, every hard-won lesson codified.
 
 ## Current state snapshot
 

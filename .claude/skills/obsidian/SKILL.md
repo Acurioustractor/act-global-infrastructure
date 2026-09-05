@@ -38,7 +38,7 @@ Key rules:
 - Tags in frontmatter use `tags:` array (no `#` prefix)
 - Inline tags in body text use `#tag` syntax
 - Date format: `YYYY-MM-DD` (Obsidian standard)
-- Keep frontmatter clean — only include fields that are actually used
+- Keep frontmatter clean, only include fields that are actually used
 
 ### Wiki-Links (NOT standard markdown links)
 
@@ -211,7 +211,7 @@ Brief description of the project.
 
 ```markdown
 ---
-title: Meeting — Topic
+title: Meeting, Topic
 created: YYYY-MM-DD
 type: meeting
 attendees:
@@ -221,7 +221,7 @@ tags:
   - project/relevant-project
 ---
 
-# Meeting — Topic
+# Meeting: Topic
 
 **Date:** YYYY-MM-DD
 **Attendees:** [[Person 1]], [[Person 2]]
@@ -236,7 +236,7 @@ tags:
 -
 
 ## Actions
-- [ ] @[[Person]] — Action item — Due: YYYY-MM-DD
+- [ ] @[[Person]], Action item, Due: YYYY-MM-DD
 
 ## Follow-up
 - Next meeting:
@@ -264,7 +264,7 @@ relationship: partner | funder | advisor | storyteller | team
 How we know them, what they care about.
 
 ## Interactions
-- **YYYY-MM-DD** — [[Meeting Note]] — Summary
+- **YYYY-MM-DD**: [[Meeting Note]]: Summary
 
 ## Related
 - [[Organisation]]
@@ -289,8 +289,8 @@ tags:
 Brief description of this knowledge area.
 
 ## Key Notes
-- [[Note 1]] — brief description
-- [[Note 2]] — brief description
+- [[Note 1]], brief description
+- [[Note 2]], brief description
 
 ## Sub-Topics
 ### Sub-Topic A
@@ -358,6 +358,6 @@ vault/
 3. Use callouts `> [!type]` for structured information blocks
 4. Include a `## Related` section with wiki-links at the bottom
 5. Use Dataview-compatible frontmatter fields so notes are queryable
-6. Link generously — Obsidian's graph view rewards dense linking
+6. Link generously, Obsidian's graph view rewards dense linking
 7. Use `#tag/subtag` for hierarchical categorisation
 8. Write the `.md` file to the workspace folder and provide a `computer://` link

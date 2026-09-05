@@ -15,7 +15,7 @@ description: ACT brand alignment for all ecosystem projects. Use for ANY work on
 ## Quick Reference
 
 ### Identity
-A Curious Tractor is a regenerative innovation ecosystem partnering with marginalised—especially First Nations—communities to dismantle extractive systems. Like a tractor's power take-off, we transfer resources to community-led initiatives. We hand over the keys.
+A Curious Tractor is a regenerative innovation ecosystem partnering with marginalised, especially First Nations, communities to dismantle extractive systems. Like a tractor's power take-off, we transfer resources to community-led initiatives. We hand over the keys.
 
 ### Method (LCAA)
 Listen → Curiosity → Action → Art
@@ -59,7 +59,7 @@ node scripts/grade-voice.mjs --file <path> --project <slug> --genre <slug>
 Verdict semantics:
 - **`pass`** → safe to send (all four Curtis moves landed, no AI tells, plainness clean)
 - **`warn`** → operational sections may carry technical register (acceptable for working drafts; tighten the cover/exec-summary/email opener before submission)
-- **`fail`** → at least one Tier 1 hard rule tripped (em-dash, forbidden vocab, negative parallelism, etc.) — do not send until fixed
+- **`fail`** → at least one Tier 1 hard rule tripped (em-dash, forbidden vocab, negative parallelism, etc.): do not send until fixed
 
 The grader writes its full output to stdout and exits non-zero on `fail`. Capture grades to `thoughts/shared/reviews/<slug>.voice-grade.md` for any artefact going to a funder.
 
