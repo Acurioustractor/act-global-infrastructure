@@ -2,7 +2,7 @@
 
 ## Identity
 - ACT is a regenerative innovation ecosystem partnering with marginalised, especially First Nations, communities to dismantle extractive systems.
-- Legal structure: Dual-entity (charitable CLG + mission-locked trading arm) for grant eligibility and equitable profit-sharing.
+- Legal structure: five entities, listed in `wiki/decisions/act-core-facts.md`. Read that file before naming one; the old dual-entity summary is retired.
 - Core metaphor: Like a tractor's power take-off (PTO), we transfer resources, knowledge, and capacity to community-led initiatives, we hand over the keys.
 - North star: Communities own their narratives, land, and economic futures. We design for our own obsolescence.
 
@@ -21,7 +21,7 @@
 ## Promise
 - Move toward shared governance and co-stewardship with community and partners.
 - Social, cultural, environmental and economic value remains in community hands.
-- 40% of profits flow to community ownership.
+- Profit share: no percentage is citable until a decision record carries one (checked 2026-09-06).
 - The farm is a commons; the studio is the toolkit to practice care, accountability, and collective power.
 
 ## Outputs (Active "Seeds")
@@ -65,9 +65,9 @@
 - **Tractor/PTO**: We provide capacity-building, knowledge-sharing, flexible resourcing, and network weaving: then communities drive forward
 
 ## Visual Language (if designing)
-- **Color Palette**: Earthy greens and browns, warm neutrals, off-white backgrounds (Stone 50-900 + Emerald for conservation themes)
+- **Color Palette**: per visual family in `wiki/decisions/act-brand-alignment-map.md`. Parent (Editorial Warmth): forest green `#2D5A3D`, clay `#C4845C`, warm white `#FAFAF7`, dark `#1A1F1A`.
 - **Imagery**: Organic textures, farm or valley imagery, seedbed/field motifs, Black Cockatoo Valley drone photos, threatened species habitat
-- **Typography**: Clean, readable (Geist Sans for digital), clear hierarchy
+- **Typography**: per the map. Parent: Fraunces display, Source Serif 4 body, Work Sans labels, Geist Mono data.
 - **Layout Style**: Clean, quiet, spacious layouts; avoid glossy or corporate aesthetics. Conservation-first framing.
 - **Motifs**: Seeds, hands in soil, collaborative gathering, Country, cockatoos, regenerative farming visuals
 

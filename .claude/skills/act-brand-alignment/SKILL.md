@@ -1,6 +1,6 @@
 ---
 name: act-brand-alignment
-description: ACT brand alignment for all ecosystem projects. Use for ANY work on ACT sites, projects, content, design, or strategy. Understands ACT identity, LCAA method, dual-entity structure, all projects, voice/tone, and visual language.
+description: ACT brand alignment for all ecosystem projects. Use for ANY work on ACT sites, projects, content, design, or strategy. Understands ACT identity, the Listen, Curiosity, Action, Art method, all projects, voice/tone, and which visual family each repo belongs to. Entity facts come from wiki/decisions/act-core-facts.md, never from this skill.
 ---
 
 # ACT Brand Alignment
@@ -27,7 +27,12 @@ Listen → Curiosity → Action → Art
 - Truth-telling (name extractive systems)
 
 ### Promise
-40% of profits flow to community ownership. We design for our own obsolescence.
+Value stays in community hands. We design for our own obsolescence.
+
+Do not quote a profit-share percentage from memory. The only citable figure is whatever `wiki/decisions/act-core-facts.md` says today, and on 2026-09-06 it says nothing, so the older "40%" line is retired until a decision record carries it.
+
+### Entities
+Five of them, not two. The dual-entity picture (CLG plus trading arm) is out of date. Read `wiki/decisions/act-core-facts.md` before naming a legal entity, and never write "ACT Foundation" or "ACT Ventures" as if they were real.
 
 ## Project Scope Mapping
 
@@ -43,9 +48,11 @@ Listen → Curiosity → Action → Art
 
 ## Voice Guardrails
 
-**Writing voice (load `references/writing-voice.md` for ANY public-facing writing).** ACT voice uses Ian Curtis's method of compression: name the room, name the body, load the abstract noun, stop the line before the explanation. Forbidden AI tells (delve, crucial, pivotal, tapestry, underscore, em dashes, negative parallelisms, superficial -ing tails, "challenges and future prospects" formulas) are listed in that file and must be rejected on sight.
+**Writing voice.** For any prose a human will read, load the global `act-voice` skill first; it carries the gate and the never-list. `references/writing-voice.md` is the reference behind it, and the two must agree. ACT voice uses Ian Curtis's method of compression: name the room, name the body, load the abstract noun, stop the line before the explanation. Forbidden AI tells (delve, crucial, pivotal, tapestry, underscore, em dashes, negative parallelisms, superficial -ing tails, "challenges and future prospects" formulas) are listed in that file and must be rejected on sight.
 
 ### Auto-grade before sending
+
+The graders and rubrics below live in `act-global-infrastructure`. Run them from that repo's root. A downstream repo that carries a synced copy of this skill does not carry the scripts.
 
 **For any pitch, grant, web copy, board report, donor letter, journal spread, caption, or essay**, run the voice grader before declaring the draft ready:
 
@@ -94,7 +101,6 @@ Auto-applied by the three `scripts/synthesize-*.mjs` Phase-1 cycle scripts (`pro
 - Community ownership, co-stewardship, Indigenous sovereignty
 - "Designing for obsolescence" / "handing over the keys"
 - Name Jinibara Country when referencing the land
-- 40% profit-sharing commitment
 - Concrete rooms. Concrete bodies. Stopped lines.
 
 **DON'T:**
@@ -106,9 +112,16 @@ Auto-applied by the three `scripts/synthesize-*.mjs` Phase-1 cycle scripts (`pro
 - AI register (puffery, rule of three, elegant variation, em dashes, significance claims)
 
 ## Visual Language
-- Palette: Stone 50-900 + Emerald accents
-- Typography: Geist Sans
-- Motifs: Seeds, cockatoos, regenerative farming
+There is no single ACT palette. Each repo belongs to a family decided in
+`wiki/decisions/act-brand-alignment-map.md`. Read the map before designing anything and
+update it before shipping a new look.
+
+- **Editorial Warmth** (parent, act-regenerative-studio): Fraunces display, Source Serif 4 body, Work Sans labels, Geist Mono data. Forest green `#2D5A3D`, clay `#C4845C`, warm white `#FAFAF7`, dark `#1A1F1A`.
+- **Editorial Warmth subfamily**: JusticeHub, empathy-ledger-v2, each with its own type pairing in the map.
+- **Civic Bauhaus** (CivicGraph / grantscope): Satoshi, black, signal red. An intentional break.
+- **Unscoped**: goods, act-farm, The Harvest Website. Decide in the map first.
+
+Motifs across families: seeds, cockatoos, Country, hands in soil, regenerative farming.
 
 ## File References
 
