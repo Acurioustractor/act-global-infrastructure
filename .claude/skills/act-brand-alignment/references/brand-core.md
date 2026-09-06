@@ -6,7 +6,7 @@
 - Core metaphor: Like a tractor's power take-off (PTO), we transfer resources, knowledge, and capacity to community-led initiatives, we hand over the keys.
 - North star: Communities own their narratives, land, and economic futures. We design for our own obsolescence.
 
-## Method (LCAA - Listen, Curiosity, Action, Art)
+## Method: Listen · Curiosity · Action · Art
 - **Listen**: Sit in silence to take in knowledge. Deep listening to place, people, history, and community voice: especially those often ignored. Pay attention to ancestral teachers.
 - **Curiosity**: Think deeply, listen deeply, try to understand. Ask better questions, prototype, test, learn. Lean into the unknown with open minds and hearts.
 - **Action**: We are makers who play and take chances, radically prototyping to form seedlings. Build, partner, deliver tangible outputs through innovative technologies, compelling stories, and immersive art.

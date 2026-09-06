@@ -2,7 +2,7 @@
 
 ## Hub homepage
 - Hero: identity one-liner + farm metaphor.
-- Method: LCAA (Listen, Curiosity, Action, Art).
+- Method: Listen · Curiosity · Action · Art, always the full name.
 - Outputs grid: projects and initiatives (Active Seeds).
 - Expressions: residencies, events, artworks, harvest shares.
 - Fields of work: justice innovation, storytelling, land care, art, shared governance.
@@ -12,7 +12,7 @@
 ## Project page
 - Immersive hero + short tagline.
 - What it is + who it serves.
-- How it ties to LCAA.
+- How it ties to the method (Listen · Curiosity · Action · Art).
 - Impact or proof points.
 - Clear CTA to the project site or form.
 
