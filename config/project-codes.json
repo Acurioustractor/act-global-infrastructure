@@ -1112,7 +1112,7 @@
       "tier": "satellite",
       "priority": "medium",
       "status": "active",
-      "description": "Cultural immersion, fitness, and mentorship program for Indigenous youth in Mount Isa",
+      "description": "CAMPFIRE is the programme name for BG Fit (ACT-BG), Brodie Germaine's Mount Isa program. Kept as a code for Xero and Notion history; the project record is ACT-BG.",
       "leads": [
         "Brodie Germaine"
       ],
@@ -1155,7 +1155,8 @@
       },
       "notion": {
         "page_id": "3d3ebcf9-81cf-81b2-afad-cf4ab729bce4"
-      }
+      },
+      "parent_project": "ACT-BG"
     },
     "ACT-GP": {
       "name": "Gold Phone",
@@ -1483,7 +1484,7 @@
       "tier": "satellite",
       "priority": "medium",
       "status": "active",
-      "description": "Fitness and wellbeing program",
+      "description": "Culturally grounded fitness, healing and mentorship for Indigenous youth in Mount Isa and Doomadgee, run by Brodie Germaine. CAMPFIRE is the programme name.",
       "notion_pages": [
         "BG Fit"
       ],
@@ -1498,7 +1499,14 @@
       "dext_category": "Health",
       "alma_program": "fitness",
       "syndication_slug": "act_bg",
-      "sites": [],
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://campfire-website-amber.vercel.app",
+          "vercel_project_id": "prj_Hyt4NsVrxaoIIpibDobx76FvAGwL",
+          "vercel_project_name": "campfire-website"
+        }
+      ],
       "ghl": {
         "tags": [
           "bg-fit",
@@ -1513,7 +1521,11 @@
       },
       "notion": {
         "page_id": "18febcf9-81cf-80fe-a738-fe374e01cd08"
-      }
+      },
+      "slug_aliases": [
+        "campfire",
+        "brodie-germaine-fit"
+      ]
     },
     "ACT-CS": {
       "name": "Civic Scope",
