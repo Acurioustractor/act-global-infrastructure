@@ -15,6 +15,12 @@ empathy_ledger_key: picc-photo
 art_medium: [photography, installation]
 quote: |
   A portrait studio that travels to Palm Island, run on community terms
+summary: |
+  A mobile portrait and documentary studio for Bwgcolman (Palm Island). It sets up where people already are and makes formal photographs the way a town studio once did: lit, considered, printed, handed over. The first sittings in September 2025 produced 501 photographs, held in Empathy Ledger and published only when the people in them say yes.
+philosophy: |
+  Photographs of Palm Island have mostly been taken by people passing through, for uses the community did not choose. The studio inverts that. Community members sit for a portrait because they want one, the file belongs to them, and consent is a decision they make per image, revocable and recorded.
+art_year: "2025 to present"
+art_location: "Bwgcolman (Palm Island), Queensland"
 ---
 
 # PICC On Country Photo Studio
