@@ -10,17 +10,17 @@ tags:
 raw_source: raw/2026-04-07-cc-place-black-cockatoo-valley.md
 source_system: ACT raw capture
 source_kind: raw_capture
-summary: "Black Cockatoo Valley is a 150-acre property on Jinibara Country near Witta, Queensland. Conservation-first, we work with Country, not on it. The land sets the pace; we do not scale beyond what the l..."
+summary: "Black Cockatoo Valley is a 138-acre property on Jinibara Country near Witta, Queensland. Conservation-first, we work with Country, not on it. The land sets the pace; we do not scale beyond what the l..."
 ---
 
 # Source Summary — Black Cockatoo Valley
 
-> Black Cockatoo Valley is a 150-acre property on Jinibara Country near Witta, Queensland. Conservation-first, we work with Country, not on it. The land sets the pace; we do not scale beyond what the l...
+> Black Cockatoo Valley is a 138-acre property on Jinibara Country near Witta, Queensland. Conservation-first, we work with Country, not on it. The land sets the pace; we do not scale beyond what the l...
 
 ## What This Source Contains
 
 - Captured from `ACT raw capture` and last updated 2026-02-04.
-- Lead frame: Black Cockatoo Valley is a 150-acre property on Jinibara Country near Witta, Queensland. Conservation-first, we work with Country, not on it. The land sets the pace; we do not scale beyond what the land and community ca...
+- Lead frame: Black Cockatoo Valley is a 138-acre property on Jinibara Country near Witta, Queensland. Conservation-first, we work with Country, not on it. The land sets the pace; we do not scale beyond what the land and community ca...
 - Structured around: Land Practice Philosophy; Conservation-First; Key Commitments.
 - Most relevant canonical pages: JusticeHub, Goods on Country, The Harvest, Empathy Ledger, Black Cockatoo Valley, ACT Farm, ACT Regenerative Studio.
 

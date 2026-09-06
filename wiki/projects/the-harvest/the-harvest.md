@@ -149,7 +149,7 @@ Platform routes cover both public visitors and community members:
 
 ## Pairings with BCV
 
-The Harvest and [[black-cockatoo-valley|Black Cockatoo Valley]] — 150 acres up the road on Jinibara Country — are a pair, not two venues. Programs run across both sites deliberately, using the Witta kitchen and public hours here and the land, residency, and retreat infrastructure there.
+The Harvest and [[black-cockatoo-valley|Black Cockatoo Valley]] — 138 acres up the road on Jinibara Country — are a pair, not two venues. Programs run across both sites deliberately, using the Witta kitchen and public hours here and the land, residency, and retreat infrastructure there.
 
 The pairings we run include **monthly dinners at BCV** (Harvest kitchen, BCV table), **paired workshops** that split across the two sites (a preserving workshop growing food at BCV and preserving it in the Harvest kitchen is a canonical example), the **CSA program** using produce from BCV, Witta Farm, and partner farms, and **retreat meal extensions** for groups booked into BCV who want catered meals, a kitchen day, or a workshop series that uses both sites.
 

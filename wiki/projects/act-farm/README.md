@@ -6,9 +6,9 @@ updated: 2026-04-09
 
 # ACT Farm
 
-> *Regenerative agriculture, creative practice, therapeutic landscapes — on 150 acres of Jinibara Country.*
+> *Regenerative agriculture, creative practice, therapeutic landscapes — on 138 acres of Jinibara Country.*
 
-The farm cluster has two files because the work has two layers: the **program** (act-farm.md, the methodology and the practice) and the **place** (black-cockatoo-valley.md, the 150-acre property where the program lives). Both belong in the same folder because neither one stands alone — the program needs the land, and the land needs the program.
+The farm cluster has two files because the work has two layers: the **program** (act-farm.md, the methodology and the practice) and the **place** (black-cockatoo-valley.md, the 138-acre property where the program lives). Both belong in the same folder because neither one stands alone — the program needs the land, and the land needs the program.
 
 The canonical title for the cluster is **act-farm** (matching the project filename).
 
@@ -27,7 +27,7 @@ The important rule is that the land story is written once in the wiki, then refr
 | File | What it is |
 |---|---|
 | [[act-farm|ACT Farm]] | **The program** — Regenerative Agriculture, Creative Practice, Therapeutic Landscapes. The methodology and the practice. |
-| [[black-cockatoo-valley|Black Cockatoo Valley]] | **The place** — 150-acre Jinibara Country property, conservation-first land practice. The site where act-farm operates. |
+| [[black-cockatoo-valley|Black Cockatoo Valley]] | **The place** — 138-acre Jinibara Country property, conservation-first land practice. The site where act-farm operates. |
 
 ## Where this sits in the ecosystem
 

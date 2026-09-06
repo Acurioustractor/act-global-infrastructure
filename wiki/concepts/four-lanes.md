@@ -64,7 +64,7 @@ Standalone P&L for The Harvest. Lease, cafe, garden, table, events, retreats. Ea
 The reason Harvest gets its own entity is so its story is legible. We can see what The Harvest cost, what it earned, what it bought, and what it gave away, without it mashing into a single ACT ledger that makes none of it readable.
 
 ### ACT Farm (program, not a Pty)
-ACT Farm runs as a program (code ACT-FM). The 150-acre Black Cockatoo Valley land is held in Nic's family trust and leased to ACT; conservation work, land practice, residencies and the BCV arc run on it. A Farm Pty Ltd only forms if and when the Farm earns enough to stand on its own P&L.
+ACT Farm runs as a program (code ACT-FM). The 138-acre Black Cockatoo Valley land is held in Nic's family trust and leased to ACT; conservation work, land practice, residencies and the BCV arc run on it. A Farm Pty Ltd only forms if and when the Farm earns enough to stand on its own P&L.
 
 ### A Kind Tractor Ltd
 ACN 669 029 341. Company Limited by Guarantee. ACNC-registered. Currently dormant. Not yet DGR-endorsed.

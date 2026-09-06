@@ -9,7 +9,7 @@ last_updated: 2026-04-14
 
 # Stays at Black Cockatoo Valley
 
-> Two cabins, 150 acres of Jinibara Country, and room to be quiet. The Pink Cabin and the Train Carriage are bookable directly. This is the self-guided end of the farm — you're on the land, we're light-touch hosts.
+> Two cabins, 138 acres of Jinibara Country, and room to be quiet. The Pink Cabin and the Train Carriage are bookable directly. This is the self-guided end of the farm — you're on the land, we're light-touch hosts.
 
 **Status:** Active | **Code:** ACT-FM-EXP-stays | **Cluster:** [[act-farm|ACT Farm]]
 

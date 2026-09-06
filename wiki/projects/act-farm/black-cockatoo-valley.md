@@ -22,7 +22,7 @@ empathy_ledger_key: black-cockatoo-valley
 
 ## What It Is
 
-Black Cockatoo Valley is a 150-acre property on Jinibara Country near Witta, Queensland. It is the land holding that grounds ACT's entire physical practice — the site where residencies, R&D, habitat restoration, and community programs take place.
+Black Cockatoo Valley is a 138-acre property on Jinibara Country near Witta, Queensland. It is the land holding that grounds ACT's entire physical practice — the site where residencies, R&D, habitat restoration, and community programs take place.
 
 Together with [[the-harvest|The Harvest]] (the former nursery in Witta town), Black Cockatoo Valley forms ACT's "Place" cluster — the land base that makes all the digital and social enterprise work legible.
 
@@ -47,7 +47,7 @@ The land is the teacher and the limiter. Conservation-first is the baseline, alw
 
 | Aspect | Detail |
 |--------|--------|
-| **Size** | 150 acres |
+| **Size** | 138 acres (55.8 ha; title land size 557,803 m², PropTrack via realestate.com.au, 601 Maleny-Kenilworth Rd, read 2026-09-07) |
 | **Country** | Jinibara |
 | **Location** | Near Witta, Queensland |
 | **Focus** | Conservation, land practice, R&D, residencies |
@@ -141,7 +141,7 @@ This matters because the land layer is not backdrop. It is part of the same oper
 
 ## LCAA Phase
 
-In the [[lcaa-method|LCAA Method]], Black Cockatoo Valley sits primarily in the **Listen** phase — the 150 acres on Jinibara Country are the land that grounds ACT's entire physical practice, and the conservation-first principle is *the land sets the pace*. Listening to Country is not metaphor here; capacity is a land decision before it is a calendar decision.
+In the [[lcaa-method|LCAA Method]], Black Cockatoo Valley sits primarily in the **Listen** phase — the 138 acres on Jinibara Country are the land that grounds ACT's entire physical practice, and the conservation-first principle is *the land sets the pace*. Listening to Country is not metaphor here; capacity is a land decision before it is a calendar decision.
 
 LCAA arc for Black Cockatoo Valley:
 - **Listen** — *"The creek tells us more than the calendar."* When the creek is low or the grass is tired, work slows; activities are scaled to land capacity and community readiness, not to demand

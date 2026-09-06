@@ -41,7 +41,7 @@ The gap between the two phases is intentional. Relational capital does not sign 
 
 ## The Caravan at Black Cockatoo Valley
 
-After Bowral, Community Capital funded a year of accommodation at [[black-cockatoo-valley|Black Cockatoo Valley]] — ACT Farm's 150-acre land holding on Jinibara Country. [[the-caravan|The Caravan]], built for Phase 1, now lives there too, at a notional $550/month that is unbilled. This is documented in two case studies in the ACT Farm cluster:
+After Bowral, Community Capital funded a year of accommodation at [[black-cockatoo-valley|Black Cockatoo Valley]] — ACT Farm's 138-acre land holding on Jinibara Country. [[the-caravan|The Caravan]], built for Phase 1, now lives there too, at a notional $550/month that is unbilled. This is documented in two case studies in the ACT Farm cluster:
 
 - [[case-studies/community-capital-at-bcv|Community Capital at BCV]] — the year-in-the-valley case study
 - [[case-studies/the-caravan-at-bcv|The Caravan at BCV]] — the studio object in residence
