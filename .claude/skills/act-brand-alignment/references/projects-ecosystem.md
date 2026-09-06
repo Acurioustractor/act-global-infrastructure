@@ -108,13 +108,11 @@
 ## Revenue & Sustainability Model
 
 ### Entity structure
-Five entities, not two. The dual-entity picture (a not-for-profit CLG plus a trading arm called
-"ACT Foundation" / "ACT Ventures") is retired; those were conceptual labels, never legal entities.
-Read `wiki/decisions/act-core-facts.md` for the current structure before writing anything about
-who trades, who holds DGR, or how money flows. In one line: A Curious Tractor Pty Ltd is the
-trading entity from 1 July 2026 (trading as Goods on Country for the Goods arm); The Butterfly
-Movement Ltd holds DGR and PBI status; Nicholas Marchesi's sole trader winds down; A Kind Tractor
-Ltd is dormant and not DGR; Harvest and Farm entities are being designed.
+Do not describe ACT's legal structure from this file. The dual-entity picture (a not-for-profit
+CLG plus a trading arm called "ACT Foundation" / "ACT Ventures") is retired; those were
+conceptual labels, never legal entities. `wiki/decisions/act-core-facts.md` holds the current
+table of entities, which trades, which holds DGR, and how money flows, and it changes; read it
+each time and do not restate a count or a list here.
 
 ### Funding Streams
 - Government contracts (40-50%): Fee-for-service programs, research partnerships
