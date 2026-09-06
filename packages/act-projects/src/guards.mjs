@@ -32,7 +32,7 @@ export function runGuards(projects, { repoRoot, wikiIndex }) {
     }
 
     if (p.tier === 'ecosystem' && live) {
-      if (p.sites.length === 0) fail('gap', p, 'sites', 'ecosystem project has no site');
+      if (p.sites.length === 0 && !p.internal) fail('gap', p, 'sites', 'ecosystem project has no site');
       if (!p.notion.page_id && !p.notion_page_id) fail('gap', p, 'notion.page_id', 'ecosystem project has no Notion page');
     }
 

@@ -118,7 +118,9 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_jh"
+        "syndication_slug": "act_jh",
+        "project_id": "2e774118-471c-450b-a6bc-41467a43c0cf",
+        "project_key": "justicehub"
       }
     },
     "ACT-DG": {
@@ -151,6 +153,10 @@
         "tags": [
           "diagrama"
         ]
+      },
+      "empathy_ledger": {
+        "project_id": "6bf76333-81c7-4cb6-866e-b629d62e26b8",
+        "project_key": "diagrama"
       }
     },
     "ACT-GD": {
@@ -201,7 +207,9 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_gd"
+        "syndication_slug": "act_gd",
+        "project_id": "6bd47c8a-e676-456f-aa25-ddcbb5a31047",
+        "project_key": "goods"
       }
     },
     "ACT-EL": {
@@ -261,7 +269,9 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_el"
+        "syndication_slug": "act_el",
+        "project_id": "a2e50220-b02a-445c-9b7b-b354b34e3429",
+        "project_key": "empathy-ledger"
       }
     },
     "ACT-CORE": {
@@ -322,6 +332,9 @@
       },
       "empathy_ledger": {
         "syndication_slug": "act_core"
+      },
+      "notion": {
+        "page_id": "204ebcf9-81cf-80f4-a3c9-fb18b904b2cb"
       }
     },
     "ACT-PI": {
@@ -381,6 +394,9 @@
       },
       "empathy_ledger": {
         "syndication_slug": "act_pi"
+      },
+      "notion": {
+        "page_id": "22eebcf9-81cf-8002-abe6-d81960ea19da"
       }
     },
     "ACT-ER": {
@@ -440,6 +456,13 @@
           "hull-river",
           "annual-report"
         ]
+      },
+      "notion": {
+        "page_id": "22eebcf9-81cf-808f-bad4-f9e0a6640252"
+      },
+      "empathy_ledger": {
+        "project_id": "25f71589-461d-466a-a0ab-cc1f03d6cebf",
+        "project_key": "picc-elders"
       }
     },
     "ACT-PS": {
@@ -498,6 +521,10 @@
           "participatory"
         ],
         "piece_slug": "picc-on-country-photo-studio"
+      },
+      "empathy_ledger": {
+        "project_id": "9bca5d4d-11bb-439c-8a01-9ab05f8f8ff0",
+        "project_key": "picc-photo"
       }
     },
     "ACT-SS": {
@@ -540,6 +567,9 @@
           "palm-island",
           "storm-stories"
         ]
+      },
+      "notion": {
+        "page_id": "178ebcf9-81cf-801c-8815-fb32a9259a1c"
       }
     },
     "ACT-MR": {
@@ -570,6 +600,13 @@
           "mingaminga",
           "rangers"
         ]
+      },
+      "notion": {
+        "page_id": "23cebcf9-81cf-8007-bcd2-ca49d1256719"
+      },
+      "empathy_ledger": {
+        "project_id": "56d7583f-4689-46cc-8adb-314bd0f75995",
+        "project_key": "mingaminga"
       }
     },
     "ACT-UA": {
@@ -617,6 +654,13 @@
           "documentary"
         ],
         "piece_slug": "uncle-allan-palm-island-art"
+      },
+      "notion": {
+        "page_id": "261ebcf9-81cf-807c-a602-c1fb446853ff"
+      },
+      "empathy_ledger": {
+        "project_id": "48e059c0-9278-4aeb-bd09-eb64689d4e5c",
+        "project_key": "uncle-allan"
       }
     },
     "ACT-MN": {
@@ -733,6 +777,13 @@
           "bcv",
           "black-cockatoo"
         ]
+      },
+      "empathy_ledger": {
+        "project_id": "f2f111a8-9f3d-4ae0-8f86-6d01fe4e0d90",
+        "project_key": "black-cockatoo-valley"
+      },
+      "notion": {
+        "page_id": "334ebcf9-81cf-8078-b3f2-e59bb7c2c7b2"
       }
     },
     "ACT-HV": {
@@ -806,7 +857,12 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_hv"
+        "syndication_slug": "act_hv",
+        "project_id": "0584b447-57a8-4c85-bc3e-5cd97511b7e4",
+        "project_key": "the-harvest"
+      },
+      "notion": {
+        "page_id": "11debcf9-81cf-8082-8fd0-d6031a9709f2"
       }
     },
     "ACT-CN": {
@@ -850,6 +906,10 @@
           "public-art"
         ],
         "piece_slug": "contained"
+      },
+      "empathy_ledger": {
+        "project_id": "9b90b47c-2a4c-409c-97d5-3718aaf8c30c",
+        "project_key": "contained"
       }
     },
     "ACT-FO": {
@@ -890,6 +950,9 @@
       },
       "empathy_ledger": {
         "syndication_slug": "act_fo"
+      },
+      "notion": {
+        "page_id": "17bebcf9-81cf-801b-9a06-edf3f35bf7f4"
       }
     },
     "ACT-SM": {
@@ -980,6 +1043,10 @@
           "social-practice"
         ],
         "piece_slug": "the-confessional"
+      },
+      "empathy_ledger": {
+        "project_id": "24307c30-644e-4aa9-a37d-b583bca8c3b0",
+        "project_key": "the-confessional"
       }
     },
     "ACT-CM": {
@@ -1024,6 +1091,10 @@
           "campfire",
           "mount-isa"
         ]
+      },
+      "empathy_ledger": {
+        "project_id": "b5aeb09c-55e2-44a9-966c-660d6c5d3719",
+        "project_key": "campfire"
       }
     },
     "ACT-GP": {
@@ -1079,6 +1150,13 @@
           "social-practice"
         ],
         "piece_slug": "gold-phone"
+      },
+      "notion": {
+        "page_id": "41aea25e-f717-48d0-8338-1e7c42d9e797"
+      },
+      "empathy_ledger": {
+        "project_id": "461644e3-cfbe-4708-972c-ba49d4261c2c",
+        "project_key": "goldphone"
       }
     },
     "ACT-MD": {
@@ -1111,6 +1189,9 @@
           "act-monthly",
           "dinners"
         ]
+      },
+      "notion": {
+        "page_id": "8d710c7b-4ba2-43c5-ac2f-88b5abe8d82c"
       }
     },
     "ACT-QF": {
@@ -1194,6 +1275,9 @@
         "tags": [
           "bimberi"
         ]
+      },
+      "notion": {
+        "page_id": "18febcf9-81cf-80f5-bb14-dc8229b66f4e"
       }
     },
     "ACT-AI": {
@@ -1218,6 +1302,9 @@
         "tags": [
           "aime"
         ]
+      },
+      "notion": {
+        "page_id": "1daebcf9-81cf-809f-b0fa-f297c464e192"
       }
     },
     "ACT-JP": {
@@ -1252,6 +1339,13 @@
           "junes-patch",
           "patch"
         ]
+      },
+      "notion": {
+        "page_id": "228ebcf9-81cf-8041-9b47-ff1845d97e43"
+      },
+      "empathy_ledger": {
+        "project_id": "b42eb7de-67ab-4817-9202-4d3ad629eb06",
+        "project_key": "junes-patch"
       }
     },
     "ACT-RT": {
@@ -1309,6 +1403,10 @@
           "social-practice"
         ],
         "piece_slug": "redtape"
+      },
+      "empathy_ledger": {
+        "project_id": "45e0c5de-902a-41a0-be32-8ef781eda0e7",
+        "project_key": "redtape"
       }
     },
     "ACT-BG": {
@@ -1349,6 +1447,9 @@
       },
       "empathy_ledger": {
         "syndication_slug": "act_bg"
+      },
+      "notion": {
+        "page_id": "18febcf9-81cf-80fe-a738-fe374e01cd08"
       }
     },
     "ACT-CS": {
@@ -1402,7 +1503,9 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_cs"
+        "syndication_slug": "act_cs",
+        "project_id": "ec2ad2d8-13d6-4488-87ae-5385ddf73394",
+        "project_key": "civicgraph"
       }
     },
     "ACT-MY": {
@@ -1435,6 +1538,13 @@
         "tags": [
           "mounty-yarns"
         ]
+      },
+      "notion": {
+        "page_id": "2a0ebcf9-81cf-8018-8a77-f7675f67c21f"
+      },
+      "empathy_ledger": {
+        "project_id": "4f4a4eda-82ee-4042-8786-1563adf11dc9",
+        "project_key": "mounty-yarns"
       }
     },
     "ACT-TN": {
@@ -1459,6 +1569,9 @@
         "tags": [
           "tomnet"
         ]
+      },
+      "notion": {
+        "page_id": "18febcf9-81cf-807c-b66c-c16f0a000a93"
       }
     },
     "ACT-10": {
@@ -1489,6 +1602,9 @@
           "10x10",
           "retreat"
         ]
+      },
+      "notion": {
+        "page_id": "267ebcf9-81cf-80b8-ad56-d7c0ee509fcf"
       }
     },
     "ACT-CP": {
@@ -1527,6 +1643,13 @@
           "10x10",
           "community capital"
         ]
+      },
+      "notion": {
+        "page_id": "267ebcf9-81cf-80b8-ad56-d7c0ee509fcf"
+      },
+      "empathy_ledger": {
+        "project_id": "f7f046d1-75ff-4e6c-889d-270b9526ee30",
+        "project_key": "community-capital"
       }
     },
     "ACT-CT": {
@@ -1596,6 +1719,13 @@
         "tags": [
           "dadlab"
         ]
+      },
+      "notion": {
+        "page_id": "205ebcf9-81cf-80af-b1e6-e00d58785606"
+      },
+      "empathy_ledger": {
+        "project_id": "250856a9-4472-40e0-92c9-7aebb294e636",
+        "project_key": "dadlab25"
       }
     },
     "ACT-SH": {
@@ -1651,6 +1781,9 @@
         "tags": [
           "sefa"
         ]
+      },
+      "notion": {
+        "page_id": "186ebcf9-81cf-8013-acae-d006836d094c"
       }
     },
     "ACT-CE": {
@@ -1675,6 +1808,10 @@
         "tags": [
           "custodian-first-economy"
         ]
+      },
+      "empathy_ledger": {
+        "project_id": "e7439838-23a6-4dff-83a2-f570328aa41a",
+        "project_key": "custodian-economy"
       }
     },
     "ACT-AS": {
@@ -1749,6 +1886,10 @@
           "social-practice"
         ],
         "piece_slug": "regional-arts-fellowship"
+      },
+      "empathy_ledger": {
+        "project_id": "32cbfb59-028e-4c4d-a37b-6b51c56dac48",
+        "project_key": "regional-arts-fellowship"
       }
     },
     "ACT-WJ": {
@@ -1774,6 +1915,9 @@
         "tags": [
           "wilya-janta"
         ]
+      },
+      "notion": {
+        "page_id": "1f4ebcf9-81cf-80c5-9b67-de30812aeee4"
       }
     },
     "ACT-YC": {
@@ -1801,6 +1945,9 @@
         "tags": [
           "yac"
         ]
+      },
+      "notion": {
+        "page_id": "1d8ebcf9-81cf-8048-b850-c088451f2aed"
       }
     },
     "ACT-TW": {
@@ -1856,6 +2003,9 @@
         "tags": [
           "project-herself"
         ]
+      },
+      "notion": {
+        "page_id": "202ebcf9-81cf-8063-8125-f6c0b23e22ed"
       }
     },
     "ACT-DH": {
@@ -1884,6 +2034,9 @@
         "tags": [
           "deadly-homes"
         ]
+      },
+      "notion": {
+        "page_id": "17bebcf9-81cf-8099-bd1b-e0a57351a5b7"
       }
     },
     "ACT-MM": {
@@ -1911,6 +2064,9 @@
         "tags": [
           "mmeic"
         ]
+      },
+      "notion": {
+        "page_id": "179ebcf9-81cf-80be-a071-d6a6d13c821a"
       }
     },
     "ACT-MU": {
@@ -1939,6 +2095,9 @@
         "tags": [
           "murrup"
         ]
+      },
+      "notion": {
+        "page_id": "278ebcf9-81cf-8065-a0e5-cbbd65d3e8d1"
       }
     },
     "ACT-OO": {
@@ -1975,6 +2134,9 @@
       },
       "empathy_ledger": {
         "syndication_slug": "act_oo"
+      },
+      "notion": {
+        "page_id": "1d4ebcf9-81cf-80a2-8c12-e5c56d78de10"
       }
     },
     "ACT-CA": {
@@ -2025,6 +2187,13 @@
           "community-portrait"
         ],
         "piece_slug": "caring-for-those-who-care"
+      },
+      "notion": {
+        "page_id": "235ebcf9-81cf-8172-b0ee-ccf0ebb01fd3"
+      },
+      "empathy_ledger": {
+        "project_id": "9517ec24-9b86-4872-95a7-6f16da4d69a9",
+        "project_key": "caring-for-those-who-care"
       }
     },
     "ACT-MC": {
@@ -2071,6 +2240,13 @@
           "participatory"
         ],
         "piece_slug": "cars-and-microcontrollers"
+      },
+      "notion": {
+        "page_id": "2b1ebcf9-81cf-8049-a70e-efee9b45c143"
+      },
+      "empathy_ledger": {
+        "project_id": "8f04a678-b1cd-4a80-9bfd-d62c35ad2b3e",
+        "project_key": "cars-and-microcontrollers"
       }
     },
     "ACT-BR": {
@@ -2100,6 +2276,9 @@
           "bali",
           "retreat"
         ]
+      },
+      "notion": {
+        "page_id": "293ebcf9-81cf-80ba-91f0-df938854052b"
       }
     },
     "ACT-BB": {
@@ -2128,6 +2307,9 @@
         "tags": [
           "barkly"
         ]
+      },
+      "notion": {
+        "page_id": "229ebcf9-81cf-80f1-a053-e6b8cd3b0362"
       }
     },
     "ACT-JC": {
@@ -2155,6 +2337,9 @@
           "justicehub",
           "coe"
         ]
+      },
+      "notion": {
+        "page_id": "1a0ebcf9-81cf-8016-859c-dc3443aed8d5"
       }
     },
     "ACT-TR": {
@@ -2196,6 +2381,13 @@
           "justice-art"
         ],
         "piece_slug": "treacher"
+      },
+      "notion": {
+        "page_id": "c55b578a-e7d9-42d3-a31c-79d791ebe16b"
+      },
+      "empathy_ledger": {
+        "project_id": "bae0cd0d-60ac-4eaa-b425-f99db1da49e1",
+        "project_key": "treacher"
       }
     },
     "ACT-DO": {
@@ -2223,6 +2415,9 @@
         "tags": [
           "obsolescence"
         ]
+      },
+      "notion": {
+        "page_id": "22febcf9-81cf-800a-b4a5-ce2fa870a03d"
       }
     },
     "ACT-GL": {
@@ -2252,6 +2447,9 @@
           "gla",
           "global-laundry"
         ]
+      },
+      "notion": {
+        "page_id": "1beebcf9-81cf-8084-a98b-f35cd859f20b"
       }
     },
     "ACT-CC": {
@@ -2276,6 +2474,9 @@
         "tags": [
           "conservation-collective"
         ]
+      },
+      "notion": {
+        "page_id": "1f5ebcf9-81cf-8096-a353-fd4d60bfd3d9"
       }
     },
     "ACT-FP": {
@@ -2305,6 +2506,9 @@
           "fairfax",
           "place-tech"
         ]
+      },
+      "notion": {
+        "page_id": "279ebcf9-81cf-8040-9e15-ee19c87d04d9"
       }
     },
     "ACT-FA": {
@@ -2331,6 +2535,9 @@
           "festivals",
           "activations"
         ]
+      },
+      "notion": {
+        "page_id": "2b7ebcf9-81cf-8029-bfb2-c69c6d967957"
       }
     },
     "ACT-SF": {
@@ -2355,6 +2562,9 @@
         "tags": [
           "saf-foundation"
         ]
+      },
+      "notion": {
+        "page_id": "193ebcf9-81cf-803b-9654-d30f06ef0c63"
       }
     },
     "ACT-SX": {
@@ -2384,6 +2594,9 @@
           "sxsw",
           "sxsw-2025"
         ]
+      },
+      "notion": {
+        "page_id": "1afebcf9-81cf-80fd-9595-f8b28698e128"
       }
     },
     "ACT-WE": {
@@ -2413,6 +2626,9 @@
           "westpac",
           "summit"
         ]
+      },
+      "notion": {
+        "page_id": "1c0ebcf9-81cf-809c-bb26-de8700c2e190"
       }
     },
     "ACT-RP": {
@@ -2443,6 +2659,9 @@
           "rppp",
           "precinct"
         ]
+      },
+      "notion": {
+        "page_id": "252ebcf9-81cf-80c9-9d3f-cc1d2d507982"
       }
     },
     "ACT-OE": {
@@ -2467,6 +2686,9 @@
         "tags": [
           "olive-express"
         ]
+      },
+      "notion": {
+        "page_id": "4084d267-0c66-409e-8b7b-51b043be0036"
       }
     },
     "ACT-OS": {
@@ -2494,6 +2716,13 @@
         "tags": [
           "orange-sky"
         ]
+      },
+      "notion": {
+        "page_id": "219ebcf9-81cf-8049-9bff-e17b58792c96"
+      },
+      "empathy_ledger": {
+        "project_id": "2e5f2b39-1707-4b60-8e54-967eec910ca8",
+        "project_key": "orange-sky"
       }
     },
     "ACT-IN": {
@@ -2524,7 +2753,11 @@
           "infrastructure",
           "operations"
         ]
-      }
+      },
+      "notion": {
+        "page_id": "211ebcf9-81cf-807b-a02f-cc3ea9711c05"
+      },
+      "internal": true
     },
     "ACT-GCC": {
       "name": "Global Community Connections",
@@ -2563,7 +2796,11 @@
       "xero_tracking_aliases": [
         "Feel Good Project"
       ],
-      "dext_category": "Community"
+      "dext_category": "Community",
+      "empathy_ledger": {
+        "project_id": "f7c66657-4d91-45ec-86a4-3091812ee91c",
+        "project_key": "feel-good-project"
+      }
     },
     "ACT-CB": {
       "name": "Marriage Celebrant",
@@ -2578,7 +2815,11 @@
       "xero_tracking_aliases": [
         "Marriage Celebrant"
       ],
-      "dext_category": "Community"
+      "dext_category": "Community",
+      "empathy_ledger": {
+        "project_id": "49f88946-ded0-4a80-abc5-b2ec96baf90d",
+        "project_key": "marriage-celebrant"
+      }
     },
     "ACT-GS": {
       "name": "GrantScope (CivicGraph)",

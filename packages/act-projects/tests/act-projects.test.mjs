@@ -92,3 +92,17 @@ test('art pieces and sites come out of the migrated record', () => {
   const sites = allSites(projects);
   assert.ok(sites.some((s) => s.project_code === 'ACT-JH' && s.production_url === 'https://www.justicehub.com.au'));
 });
+
+test('internal: true exempts an ecosystem project from the site guard, and only that guard', () => {
+  const f = base();
+  delete f.projects['ACT-AA'].production_url;
+  f.projects['ACT-AA'].sites = [];
+  f.projects['ACT-AA'].internal = true;
+  const { gaps } = loadProjects({ path: writeFixture(f), repoRoot: REPO_ROOT });
+  assert.deepEqual(gaps, []);
+  // control: drop the Notion page too and the notion gap must still fire
+  delete f.projects['ACT-AA'].notion;
+  const again = loadProjects({ path: writeFixture(f), repoRoot: REPO_ROOT }).gaps;
+  assert.equal(again.length, 1);
+  assert.equal(again[0].field, 'notion.page_id');
+});
