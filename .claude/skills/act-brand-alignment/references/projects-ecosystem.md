@@ -25,7 +25,7 @@
 ### Goods (Goods on Country)
 **Circular Economy Venture**
 - Objects and offerings that fund the commons; curated public listings only.
-- Co-designing essential products (beds, mattresses, washing machines) for remote communities while converting local waste into manufacturing inputs.
+- Designing essential products (beds, mattresses, washing machines) in community, with community and for community, for remote communities while converting local waste into manufacturing inputs.
 - Tagline: "Your waste, your wealth"
 - Registry: Public feed includes title, summary, image, link, price range
 - Key features: designed in community, with community, for community; circular manufacturing, waste-to-product conversion, community ownership of production
