@@ -32,7 +32,7 @@ Value stays in community hands. We design for our own obsolescence.
 Do not quote a profit-share percentage from memory. The only citable figure is whatever `wiki/decisions/act-core-facts.md` says today, and on 2026-09-06 it says nothing, so the older "40%" line is retired until a decision record carries it.
 
 ### Entities
-Five of them, not two. The dual-entity picture (CLG plus trading arm) is out of date. Read `wiki/decisions/act-core-facts.md` before naming a legal entity, and never write "ACT Foundation" or "ACT Ventures" as if they were real.
+Not two. The dual-entity picture (CLG plus trading arm) is out of date. Read `wiki/decisions/act-core-facts.md` before naming a legal entity, and never write "ACT Foundation" or "ACT Ventures" as if they were real.
 
 ## Project Scope Mapping
 
