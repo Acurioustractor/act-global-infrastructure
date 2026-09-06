@@ -394,7 +394,13 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_pi"
+        "syndication_slug": "act_pi",
+        "partner_codes": [
+          "PICC-CP",
+          "PICC-AR",
+          "PICC-CV",
+          "PICC-MOV"
+        ]
       },
       "notion": {
         "page_id": "22eebcf9-81cf-8002-abe6-d81960ea19da"
@@ -956,7 +962,10 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_fo"
+        "syndication_slug": "act_fo",
+        "partner_codes": [
+          "FO-FO"
+        ]
       },
       "notion": {
         "page_id": "17bebcf9-81cf-801b-9a06-edf3f35bf7f4"
@@ -992,6 +1001,15 @@
           "smart",
           "smart-connect"
         ]
+      },
+      "empathy_ledger": {
+        "partner_codes": [
+          "SMART-SC",
+          "SMART-GP"
+        ]
+      },
+      "notion": {
+        "page_id": "18febcf9-81cf-800c-9f79-e44c2e9728ba"
       }
     },
     "ACT-CF": {
@@ -1462,7 +1480,10 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_bg"
+        "syndication_slug": "act_bg",
+        "partner_codes": [
+          "BG-FIT"
+        ]
       },
       "notion": {
         "page_id": "18febcf9-81cf-80fe-a738-fe374e01cd08"
@@ -1591,6 +1612,11 @@
       },
       "notion": {
         "page_id": "18febcf9-81cf-807c-b66c-c16f0a000a93"
+      },
+      "empathy_ledger": {
+        "partner_codes": [
+          "TOM-TOM"
+        ]
       }
     },
     "ACT-10": {
@@ -1713,6 +1739,11 @@
       },
       "notion": {
         "page_id": "3d3ebcf9-81cf-814d-a5f9-ca21638f7228"
+      },
+      "empathy_ledger": {
+        "partner_codes": [
+          "CONFIT-CORE"
+        ]
       }
     },
     "ACT-DL": {
@@ -2491,6 +2522,11 @@
       },
       "notion": {
         "page_id": "1beebcf9-81cf-8084-a98b-f35cd859f20b"
+      },
+      "empathy_ledger": {
+        "partner_codes": [
+          "GLA-GLA"
+        ]
       }
     },
     "ACT-CC": {

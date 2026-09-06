@@ -111,6 +111,16 @@ for (const p of Object.values(projects)) {
   N.exact.set(p.code, [row]); N.byName.delete(p.code); N.unmatched = N.unmatched.filter((r) => r.id !== row.id);
 }
 const E = match(el, (r) => r.act_project_code, (r) => r.name, (r) => r.id, null);
+// partner tenants keep their own codes; the registry lists them per project
+for (const p of Object.values(projects)) {
+  const codes = p.empathy_ledger?.partner_codes || [];
+  if (!codes.length) continue;
+  const rows = el.filter((r) => codes.includes(r.act_project_code));
+  if (!rows.length) continue;
+  E.exact.set(p.code, [...(E.exact.get(p.code) || []), ...rows]);
+  E.byName.delete(p.code);
+  E.unmatched = E.unmatched.filter((r) => !rows.includes(r));
+}
 for (const p of Object.values(projects)) {
   const eid = p.empathy_ledger?.project_id;
   if (!eid) continue;
@@ -130,8 +140,10 @@ for (const p of Object.values(projects)) {
   if (n.length === 1 && n[0].code && !codeOf(p).has(n[0].code)) flags.push(`notion:code=${n[0].code}`);
   if (n.length === 1 && !n[0].code) flags.push('notion:no-code');
   if (e.length === 0 && p.empathy_ledger?.tracked !== false) flags.push('el:missing');
-  if (e.length > 1) flags.push(`el:ambiguous(${e.length})`);
-  if (e.length === 1 && e[0].act_project_code && !codeOf(p).has(e[0].act_project_code)) flags.push(`el:code=${e[0].act_project_code}`);
+  const partner = new Set(p.empathy_ledger?.partner_codes || []);
+  const foreign = e.filter((r) => r.act_project_code && !codeOf(p).has(r.act_project_code) && !partner.has(r.act_project_code));
+  if (e.length > 1 && !partner.size) flags.push(`el:ambiguous(${e.length})`);
+  for (const r of foreign) flags.push(`el:code=${r.act_project_code}`);
   report.push({ code: p.code, name: p.name, status: p.status, tier: p.tier, notion: n.map((r) => ({ id: r.id, name: r.name, code: r.code })), el: e.map((r) => ({ id: r.id, slug: r.slug, code: r.act_project_code })), flags });
 }
 
@@ -158,7 +170,7 @@ if (args.has('--write-registry')) {
     const p = file.projects[r.code];
     const pr = projects[r.code];
     if (safe(r.notion, 'code', pr) && !(p.notion?.page_id)) { p.notion = { ...(p.notion || {}), page_id: r.notion[0].id }; changed++; }
-    if (safe(r.el, 'code', pr)) {
+    if (!(pr.empathy_ledger?.partner_codes || []).length && safe(r.el, 'code', pr)) {
       const cur = p.empathy_ledger || {};
       if (!cur.project_id || (!cur.project_key && r.el[0].slug)) {
         p.empathy_ledger = { ...cur, project_id: r.el[0].id, ...(r.el[0].slug ? { project_key: r.el[0].slug } : {}) };

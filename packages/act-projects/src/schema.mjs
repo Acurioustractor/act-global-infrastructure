@@ -39,6 +39,9 @@ export const EmpathyLedger = z
     // false: this project keeps no stories or media in Empathy Ledger (admin codes,
     // or a partner that runs its own EL organisation). align.mjs stops asking.
     tracked: z.boolean().default(true),
+    // Codes a partner tenant uses for this work inside its own EL organisation
+    // (PICC-CP, BG-FIT, CONFIT-CORE, SMART-SC). align.mjs counts them as matches.
+    partner_codes: z.array(z.string().min(1)).default([]),
     project_id: z.string().uuid().optional(),
     project_key: slug.optional(),
     syndication_slug: z.string().regex(/^[a-z0-9_]+$/).optional(),
