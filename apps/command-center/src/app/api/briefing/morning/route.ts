@@ -253,7 +253,10 @@ async function fetchGrantsSection() {
       .from('grant_opportunities')
       .select('id, name, provider, fit_score, relevance_score, aligned_projects, amount_max, closes_at')
       .gte('created_at', yesterday)
-      .order('relevance_score', { ascending: false })
+      // Not by relevance_score: it is the column default 50 on 26,659 of 26,698 rows (measured on the shared
+      // project 2026-09-05), so ordering by it returned yesterday's new grants in arbitrary order while looking
+      // ranked. Closing soonest first is the order that changes what someone does this morning; undated rounds last.
+      .order('closes_at', { ascending: true, nullsFirst: false })
       .limit(5),
 
     supabase
