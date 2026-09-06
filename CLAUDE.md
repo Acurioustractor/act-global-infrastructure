@@ -18,6 +18,13 @@ Do not describe ALMA as:
 Describe ALMA as:
 ACT's catalogue of community-led alternatives, evidence-graded with cultural authority.
 
+## Shared Claude skills
+
+`.claude/skills/` here is canonical for the skills listed in `config/shared-skills.json`. Downstream repos
+carry synced copies: edit here, then `node scripts/sync-skills.mjs --all --apply` and commit in each repo.
+`--all` without `--apply` is the check. Copies under a repo's `.claude/skills/global/` are the retired
+2026-05 mechanism and count as stale.
+
 ## Database & Environment
 
 - **Verify which Supabase instance is connected** before debugging. Run `mcp__supabase__get_project_url` and confirm it matches the expected project ref.
