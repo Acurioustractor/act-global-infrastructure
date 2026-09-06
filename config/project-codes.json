@@ -103,7 +103,9 @@
         {
           "role": "primary",
           "production_url": "https://www.justicehub.com.au",
-          "github_repo": "Acurioustractor/justicehub-platform"
+          "github_repo": "Acurioustractor/justicehub-platform",
+          "vercel_project_id": "prj_2uPH01Sb3qxVYa5ORyFSph6oxXoY",
+          "vercel_project_name": "justicehub"
         }
       ],
       "notion": {
@@ -157,7 +159,14 @@
       "empathy_ledger": {
         "project_id": "6bf76333-81c7-4cb6-866e-b629d62e26b8",
         "project_key": "diagrama"
-      }
+      },
+      "sites": [
+        {
+          "role": "primary",
+          "vercel_project_name": "diagrama-australia",
+          "vercel_project_id": "prj_0RGK4ukpiyAwkDN03GhaMRkEM00H"
+        }
+      ]
     },
     "ACT-GD": {
       "name": "Goods",
@@ -195,7 +204,9 @@
         {
           "role": "primary",
           "production_url": "https://www.goodsoncountry.com",
-          "github_repo": "Acurioustractor/goods-asset-tracker"
+          "github_repo": "Acurioustractor/goods-asset-tracker",
+          "vercel_project_id": "prj_9XDLD6G1yMhvYdJXtS6jYm62q2dc",
+          "vercel_project_name": "goods-on-country"
         }
       ],
       "notion": {
@@ -253,7 +264,9 @@
         {
           "role": "primary",
           "production_url": "https://www.empathyledger.com",
-          "github_repo": "Acurioustractor/empathy-ledger-v2"
+          "github_repo": "Acurioustractor/empathy-ledger-v2",
+          "vercel_project_name": "empathy-ledger-v2",
+          "vercel_project_id": "prj_rXbKKGm2PiEZHc2fQKl1gpA9j2ds"
         }
       ],
       "notion": {
@@ -320,7 +333,9 @@
         {
           "role": "primary",
           "production_url": "https://act.place",
-          "github_repo": "Acurioustractor/act-regenerative-studio"
+          "github_repo": "Acurioustractor/act-regenerative-studio",
+          "vercel_project_id": "prj_Hz7eQOE4Zh1Dw9O6OZDn6ExRuWuk",
+          "vercel_project_name": "act-regenerative-studio"
         }
       ],
       "ghl": {
@@ -384,7 +399,9 @@
         {
           "role": "primary",
           "production_url": "https://picc.studio",
-          "github_repo": "Acurioustractor/palm-island-repository"
+          "github_repo": "Acurioustractor/palm-island-repository",
+          "vercel_project_id": "prj_kSo6989AUcGml7Yihca1ca4PYiqE",
+          "vercel_project_name": "palm-island-repository"
         }
       ],
       "ghl": {
@@ -777,7 +794,9 @@
         {
           "role": "primary",
           "production_url": "https://act-farm.vercel.app",
-          "github_repo": "Acurioustractor/act-farm"
+          "github_repo": "Acurioustractor/act-farm",
+          "vercel_project_id": "prj_kjaiWk4A6mvC6NCut8pfdhvRTqJx",
+          "vercel_project_name": "act-farm"
         }
       ],
       "ghl": {
@@ -856,7 +875,9 @@
         {
           "role": "primary",
           "production_url": "https://www.theharvestwitta.com.au",
-          "github_repo": "Acurioustractor/theharvest"
+          "github_repo": "Acurioustractor/theharvest",
+          "vercel_project_id": "prj_keWe0zABA9pjApRWXssQjxG1qOfF",
+          "vercel_project_name": "the-harvest"
         }
       ],
       "ghl": {
@@ -923,7 +944,14 @@
       },
       "notion": {
         "page_id": "228ebcf9-81cf-809e-8368-f9dae2a41129"
-      }
+      },
+      "sites": [
+        {
+          "role": "primary",
+          "vercel_project_name": "contained-tv-site",
+          "vercel_project_id": "prj_aDxG2tsTuVXDMOTnXHJA6IYYVzcp"
+        }
+      ]
     },
     "ACT-FO": {
       "name": "Fishers Oysters",
@@ -952,7 +980,9 @@
       "sites": [
         {
           "role": "primary",
-          "production_url": "https://www.fishersoysters.com"
+          "production_url": "https://www.fishersoysters.com",
+          "vercel_project_name": "fishers-oysters",
+          "vercel_project_id": "prj_ejaoRou2HAxznjCyKD4vjtJhX2lq"
         }
       ],
       "ghl": {
@@ -1108,7 +1138,9 @@
       "sites": [
         {
           "role": "primary",
-          "production_url": "https://campfire-website-amber.vercel.app"
+          "production_url": "https://campfire-website-amber.vercel.app",
+          "vercel_project_id": "prj_Hyt4NsVrxaoIIpibDobx76FvAGwL",
+          "vercel_project_name": "campfire-website"
         }
       ],
       "ghl": {
@@ -1466,13 +1498,7 @@
       "dext_category": "Health",
       "alma_program": "fitness",
       "syndication_slug": "act_bg",
-      "production_url": "https://campfire-website-amber.vercel.app",
-      "sites": [
-        {
-          "role": "primary",
-          "production_url": "https://campfire-website-amber.vercel.app"
-        }
-      ],
+      "sites": [],
       "ghl": {
         "tags": [
           "bg-fit",
@@ -1530,7 +1556,9 @@
         {
           "role": "primary",
           "production_url": "https://civicgraph.app",
-          "github_repo": "Acurioustractor/grantscope"
+          "github_repo": "Acurioustractor/grantscope",
+          "vercel_project_id": "prj_BFQcUhajUO5R1cocWJQhjgIzZn5S",
+          "vercel_project_name": "grantscope"
         }
       ],
       "ghl": {
@@ -1585,7 +1613,14 @@
       "empathy_ledger": {
         "project_id": "4f4a4eda-82ee-4042-8786-1563adf11dc9",
         "project_key": "mounty-yarns"
-      }
+      },
+      "sites": [
+        {
+          "role": "primary",
+          "vercel_project_name": "mounty-yarns",
+          "vercel_project_id": "prj_kCsxXKym0DNAeZDkJbLpVAu7da25"
+        }
+      ]
     },
     "ACT-TN": {
       "name": "TOMNET",
@@ -1871,7 +1906,14 @@
       ],
       "notion": {
         "page_id": "1d7ebcf9-81cf-808b-a394-f2e547d6ee6c"
-      }
+      },
+      "sites": [
+        {
+          "role": "primary",
+          "vercel_project_name": "custodian-economy-platform",
+          "vercel_project_id": "prj_7hjoVC1DCDGcVjRRrCCTAhvmDfb5"
+        }
+      ]
     },
     "ACT-AS": {
       "name": "Art for Social Change",
@@ -2186,7 +2228,9 @@
       "sites": [
         {
           "role": "primary",
-          "production_url": "https://oonchiumpa-app.vercel.app"
+          "production_url": "https://oonchiumpa-app.vercel.app",
+          "vercel_project_id": "prj_DDYGh8RjuXsmxMhAAqeBMEhgrv09",
+          "vercel_project_name": "oonchiumpa"
         }
       ],
       "ghl": {
@@ -2257,7 +2301,14 @@
       "empathy_ledger": {
         "project_id": "9517ec24-9b86-4872-95a7-6f16da4d69a9",
         "project_key": "caring-for-those-who-care"
-      }
+      },
+      "sites": [
+        {
+          "role": "primary",
+          "vercel_project_name": "caring-for-those-who-care",
+          "vercel_project_id": "prj_xm3czrVHlLRcA95jozIy8DOCYP7a"
+        }
+      ]
     },
     "ACT-MC": {
       "name": "Cars and Microcontrollers",
@@ -2376,7 +2427,14 @@
       },
       "empathy_ledger": {
         "tracked": false
-      }
+      },
+      "sites": [
+        {
+          "role": "primary",
+          "vercel_project_name": "barkly-research-platform",
+          "vercel_project_id": "prj_RwGB1XfyB5uYPYN9DgZ34mj84yAj"
+        }
+      ]
     },
     "ACT-JC": {
       "name": "JusticeHub Centre of Excellence",
@@ -2837,7 +2895,14 @@
       "internal": true,
       "empathy_ledger": {
         "tracked": false
-      }
+      },
+      "sites": [
+        {
+          "role": "primary",
+          "vercel_project_name": "act-command-center",
+          "vercel_project_id": "prj_0aywu3Quj2hPxF3hQg1KyDeoyoMX"
+        }
+      ]
     },
     "ACT-GCC": {
       "name": "Global Community Connections",

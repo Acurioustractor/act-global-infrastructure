@@ -53,8 +53,12 @@ async function allVercelProjects() {
 
 async function latestProductionDeployment(projectId) {
   try {
-    const j = await vercel(`/v6/deployments?projectId=${projectId}&target=production&limit=1`);
-    return j.deployments?.[0] || null;
+    // Newest first. A CANCELED deployment is usually a build superseded by a
+    // newer push, not the site's state, so take the newest one that was not
+    // cancelled and fall back to the newest of any state.
+    const j = await vercel(`/v6/deployments?projectId=${projectId}&target=production&limit=20`);
+    const list = j.deployments || [];
+    return list.find((d) => (d.readyState || d.state) !== 'CANCELED') || list[0] || null;
   } catch (err) {
     console.warn(`  deployments for ${projectId}: ${err.message.split('\n')[0]}`);
     return null;

@@ -51,8 +51,8 @@ export function runGuards(projects, { repoRoot, wikiIndex }) {
     }
 
     for (const s of p.sites) {
-      if (!s.production_url && !s.vercel_project_id && !s.github_repo) {
-        fail('error', p, 'sites', 'a site needs at least one of production_url, vercel_project_id, github_repo');
+      if (!s.production_url && !s.vercel_project_id && !s.vercel_project_name && !s.github_repo) {
+        fail('error', p, 'sites', 'a site needs at least one of production_url, vercel_project_id, vercel_project_name, github_repo');
       }
     }
   }
