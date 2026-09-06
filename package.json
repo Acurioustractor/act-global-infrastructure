@@ -149,7 +149,8 @@
     "contact:sync": "node scripts/contact-manager.mjs sync",
     "contact:add-advisory": "node scripts/contact-manager.mjs add-advisory",
     "projects:check": "node packages/act-projects/bin/check.mjs",
-    "projects:test": "node --test packages/act-projects/tests/*.test.mjs"
+    "projects:test": "node --test packages/act-projects/tests/*.test.mjs",
+    "projects:art-index": "node packages/act-projects/bin/art-index.mjs"
   },
   "keywords": [],
   "author": "",

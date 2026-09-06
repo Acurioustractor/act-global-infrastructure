@@ -12,6 +12,16 @@ public_surface: work
 cluster: act-studio
 parent_project: act-studio
 empathy_ledger_key: redtape
+quote: |
+  Making the weight of paperwork impossible to ignore
+summary: |
+  Forms, compliance demands and reporting requirements fall hardest on the people least equipped to absorb them. Redtape turns that invisible administrative burden into sculpture you cannot walk past, asking who carries the cost of red tape and why. Twenty-nine documentary photographs trace the work, shown alongside community sector practitioners who live it.
+philosophy: |
+  Every form is a power relationship. Every compliance framework carries an assumption about who is trustworthy and who must prove themselves. Redtape makes that architecture visible, not as metaphor, but as material.
+impact: |
+  29 documentary photographs. Exhibited alongside community sector practitioners. Opened conversation about administrative burden as a justice issue.
+art_year: "2023"
+art_location: "Gallery and public contexts"
 ---
 
 # Redtape

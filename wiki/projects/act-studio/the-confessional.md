@@ -12,6 +12,16 @@ public_surface: work
 cluster: act-studio
 parent_project: act-studio
 empathy_ledger_key: the-confessional
+quote: |
+  A portable room where honesty becomes possible
+summary: |
+  A decommissioned horse trailer, rebuilt into a mobile space for anonymous truth-telling. The Confessional sets up at festivals, community events and institutional foyers, creating a temporary room where people can say what systems teach them to hide. It is not therapy and not art for art's sake; it is a pressure valve that travels.
+philosophy: |
+  Some truths only emerge when the architecture of a space grants permission. The Confessional is not therapy. It is not art for art's sake. It is a pressure valve, a portable room where honesty becomes possible.
+impact: |
+  Deployed at multiple events and community gatherings. Stories captured under consent protocols. Demonstrated model for mobile truth-telling infrastructure.
+art_year: "2023–present"
+art_location: "Mobile / touring"
 ---
 
 # The Confessional

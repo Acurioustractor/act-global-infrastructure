@@ -37,6 +37,18 @@ high-level list people edit; Empathy Ledger `projects` holds stories, media and 
 the match is exact by code or the other side carries no code at all. It never writes to
 Empathy Ledger; `scripts/sync-projects-to-el.mjs --fix` owns that.
 
+## Art index
+
+```bash
+pnpm projects:art-index            # regenerate the table in wiki/art/art-projects.md
+pnpm projects:art-index -- --check # CI: exit 1 when the table is behind
+```
+
+Identity (code, media, status, connected project) comes from the record; the one-line
+quote, summary, philosophy and impact live in each piece's wiki page frontmatter
+(`quote`, `summary`, `philosophy`, `impact`, `art_year`, `art_location`). The studio
+reads both; nothing about a piece is typed into TypeScript.
+
 ## Record shape
 
 Required: `code`, `name`, `canonical_slug`, `category`, `tier`, `status`, `description`.

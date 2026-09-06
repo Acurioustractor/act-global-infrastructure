@@ -12,6 +12,16 @@ public_surface: project
 cluster: picc
 parent_project: picc
 empathy_ledger_key: picc-photo-kiosk
+quote: |
+  The shutter belongs to the subject
+summary: |
+  On Palm Island (Bwgcolman), a self-service photo station at the Palm Island Community Company shifted who holds the camera. Families, elders, young people and visitors documented their own stories on their own terms, and more than 2,491 photographs now live in a community-owned archive that no outsider can open without consent.
+philosophy: |
+  Cameras have a long, difficult history in First Nations communities. The kiosk inverts that dynamic. It sits in a trusted space. The shutter belongs to the subject. The archive belongs to community.
+impact: |
+  2,491 self-directed portraits captured. 32 storytellers documented. Community-owned visual archive established. No external access without community consent.
+art_year: "2023–2025"
+art_location: "Palm Island, Queensland"
 ---
 
 # PICC Photo Kiosk

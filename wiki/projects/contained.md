@@ -12,6 +12,16 @@ date: 2026-04-11
 entity_type: work
 tagging_mode: own-code
 empathy_ledger_key: contained
+quote: |
+  Step inside what we are choosing to fund
+summary: |
+  CONTAINED is an immersive installation that places visitors inside a simulated youth detention environment, not to shock but to ask how this system feels from the inside and what we choose when we fund it. Shaped with two people who have lived experience of detention, it has been shown alongside justice reform campaigns and advocacy work.
+philosophy: |
+  Policy documents flatten human experience into statistics. CONTAINED works in the opposite direction: it uses sensory experience to restore the weight of what a system does to a person. When a visitor walks out, the abstraction of "youth detention" is harder to sustain.
+impact: |
+  Exhibited in justice reform contexts. 2 storytellers contributed lived experience. Connected to JusticeHub evidence platform. Cited in advocacy submissions.
+art_year: "2022–present"
+art_location: "Justice and public-space contexts"
 ---
 
 # CONTAINED

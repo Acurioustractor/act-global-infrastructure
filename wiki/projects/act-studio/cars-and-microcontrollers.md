@@ -12,6 +12,14 @@ public_surface: project
 cluster: act-studio
 parent_project: act-studio
 empathy_ledger_key: cars-and-microcontrollers
+quote: |
+  Engines, wires and the dignity of real tools
+summary: |
+  For young people who learn by doing, making something real with their hands can be the first time their intelligence is recognised. This program uses car repair and microcontroller projects as the way in: no classrooms, no coding bootcamps, just engines, soldering irons and the trust that comes with real tools. It honours a kind of intelligence that school systems routinely miss.
+philosophy: |
+  Intelligence shows up in many forms. Some people think best with their hands. This program does not "engage youth", it recognises a kind of intelligence that school systems routinely miss.
+art_year: "In development"
+art_location: "Regional Queensland"
 ---
 
 # Cars and Microcontrollers
