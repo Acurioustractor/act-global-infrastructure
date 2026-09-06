@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, existsSync, readFileSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { diffSkill, findStale, syncRepo } from '../sync-skills.mjs';
@@ -61,4 +61,12 @@ test('control: check mode changes nothing on disk', () => {
   assert.equal(r.drift, 2);
   assert.equal(readFileSync(join(repo, '.claude/skills/brand/SKILL.md'), 'utf8'), 'v1');
   assert.ok(existsSync(join(repo, '.claude/skills/sprint')));
+});
+
+// Control: a dangling symlink inside infra's _archive (the real checkout has them) must not crash the walk.
+test('control: dangling symlink in _archive is skipped, stale detection still works', () => {
+  const { infra, repo } = fixture();
+  symlinkSync('/nowhere/at/all', join(infra, '.claude/skills/_archive/2026-06/gone'));
+  const stale = findStale(infra, repo).map((s) => s.path.split('/').pop()).sort();
+  assert.deepEqual(stale, ['global', 'sprint']);
 });
