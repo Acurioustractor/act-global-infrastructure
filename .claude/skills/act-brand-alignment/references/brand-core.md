@@ -28,7 +28,7 @@
 - **Empathy Ledger**: Ethical storytelling platform with consent frameworks and blockchain. Storytellers retain control and share in value created.
 - **JusticeHub**: Open-source justice network where grassroots programs "fork" proven models, access AI insights, co-create governance.
 - **Goods (Goods on Country)**: Circular-economy venture co-designing beds, mattresses, washing machines for remote communities while converting local waste.
-- **Black Cockatoo Valley**: 150-acre (117 ha) regeneration estate combining eco-cottages, Indigenous land-care jobs, biodiversity credits to finance habitat restoration.
+- **Black Cockatoo Valley**: 150-acre (about 61 ha) regeneration estate combining eco-cottages, Indigenous land-care jobs, biodiversity credits to finance habitat restoration.
 - **Harvest Shares / The Harvest**: CSA program and seasonal gatherings connected to the valley.
 - **ACT Farm**: Home base where land care, learning, and art-making meet on Jinibara Country.
 - **Art**: Artworks, exhibitions, residencies, artist profiles, commissions.

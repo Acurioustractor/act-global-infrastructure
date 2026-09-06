@@ -29,11 +29,11 @@
 - Tagline: "Your waste, your wealth"
 - Registry: Public feed includes title, summary, image, link, price range
 - Key features: Remote community co-design, circular manufacturing, waste-to-product conversion, community ownership of production
-- Revenue model: Communities own production and profits; 40% profit-sharing to source communities
+- Revenue model: communities own production and profits. Do not quote a profit-share percentage; the only citable figure is whatever `wiki/decisions/act-core-facts.md` records, and today it records none.
 
 ### Black Cockatoo Valley (BCV)
 **Regeneration Estate & Living Lab**
-- 150-acre (117 ha) property on Jinibara lands near Witta, Queensland
+- 150-acre (about 61 ha) property on Jinibara lands near Witta, Queensland
 - Working farm and living lab for R&D, residencies, accommodation, CSA exploration
 - Views to Mary River; creeks and forest down to Elaman Creek
 - Threatened species habitat (Glossy Black Cockatoo); conservation comes first
@@ -107,18 +107,14 @@
 
 ## Revenue & Sustainability Model
 
-### Dual-Entity Structure
-**ACT Foundation (Not-for-profit CLG)**
-- Charitable status for grants and donations
-- Mission-locked governance
-- Owns majority of ventures
-- Protects community interests
-
-**ACT Ventures (Mission-locked Trading Company)**
-- Generates sustainable revenue through Goods, BCV eco-cottages, Art sales
-- Enables 40% profit-sharing to communities
-- Attracts impact investment
-- Creates jobs and opportunities
+### Entity structure
+Five entities, not two. The dual-entity picture (a not-for-profit CLG plus a trading arm called
+"ACT Foundation" / "ACT Ventures") is retired; those were conceptual labels, never legal entities.
+Read `wiki/decisions/act-core-facts.md` for the current structure before writing anything about
+who trades, who holds DGR, or how money flows. In one line: A Curious Tractor Pty Ltd is the
+trading entity from 1 July 2026 (trading as Goods on Country for the Goods arm); The Butterfly
+Movement Ltd holds DGR and PBI status; Nicholas Marchesi's sole trader winds down; A Kind Tractor
+Ltd is dormant and not DGR; Harvest and Farm entities are being designed.
 
 ### Funding Streams
 - Government contracts (40-50%): Fee-for-service programs, research partnerships
@@ -131,11 +127,11 @@
 
 ### Community Ownership
 - 3+ communities independently replicating ACT models
-- 40% of profits flowing to community hands
+- Profits flowing to community hands (no percentage is citable; see act-core-facts.md)
 - Indigenous-majority governance on place-based projects
 
 ### Regenerative Outcomes
-- 117+ hectares of land under conservation
+- 150 acres (about 61 ha) of land under conservation-first management
 - 50+ jobs created in marginalised communities
 - 70% reduction in waste through circular economy
 
