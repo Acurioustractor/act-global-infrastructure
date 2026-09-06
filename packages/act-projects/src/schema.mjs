@@ -42,6 +42,8 @@ export const EmpathyLedger = z
     // Codes a partner tenant uses for this work inside its own EL organisation
     // (PICC-CP, BG-FIT, CONFIT-CORE, SMART-SC). align.mjs counts them as matches.
     partner_codes: z.array(z.string().min(1)).default([]),
+    /** Empathy Ledger syndication_sites.slug for the site that consumes this project's stories. */
+    site_slug: z.string().regex(/^[a-z0-9-]+$/).optional(),
     project_id: z.string().uuid().optional(),
     project_key: slug.optional(),
     syndication_slug: z.string().regex(/^[a-z0-9_]+$/).optional(),
