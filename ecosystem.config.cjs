@@ -1012,6 +1012,13 @@ const cronScripts = [
 
 module.exports = {
   apps: [
+    {
+      name: 'vercel-sites-reconcile',
+      script: 'scripts/vercel-sync.mjs',
+      cron_restart: '50 6 * * *', // Daily 6:50am AEST, before the 7am briefing. Vercel -> ecosystem_sites from the typed project record; the command-center webhook (api/webhooks/vercel) keeps status live between runs.
+      autorestart: false,
+      watch: false,
+    },
     // === Dev Servers ===
     {
       name: 'act-frontend',
