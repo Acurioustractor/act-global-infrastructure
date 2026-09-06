@@ -1,7 +1,7 @@
 # Land and Practice (Black Cockatoo Valley)
 
 ## Land
-- Black Cockatoo Valley is a property on Jinibara lands near Witta (size: `wiki/projects/act-farm/black-cockatoo-valley.md`), Queensland.
+- Black Cockatoo Valley is a property on Jinibara Country (Witta, Queensland) (size: `act-global-infrastructure/wiki/projects/act-farm/black-cockatoo-valley.md`).
 - Views to the Mary River; creeks and forest down to Elaman Creek.
 - Threatened species habitat; conservation comes first.
 

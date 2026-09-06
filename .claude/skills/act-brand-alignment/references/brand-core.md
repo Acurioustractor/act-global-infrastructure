@@ -2,7 +2,7 @@
 
 ## Identity
 - ACT is a regenerative innovation ecosystem partnering with marginalised, especially First Nations, communities to dismantle extractive systems.
-- Legal structure: listed in `wiki/decisions/act-core-facts.md`, which changes. Read that file before naming an entity or counting them; the old dual-entity summary is retired.
+- Legal structure: listed in `act-global-infrastructure/wiki/decisions/act-core-facts.md`, which changes. Read that file before naming an entity or counting them; the old dual-entity summary is retired.
 - Core metaphor: Like a tractor's power take-off (PTO), we transfer resources, knowledge, and capacity to community-led initiatives, we hand over the keys.
 - North star: Communities own their narratives, land, and economic futures. We design for our own obsolescence.
 
@@ -27,8 +27,8 @@
 ## Outputs (Active "Seeds")
 - **Empathy Ledger**: Ethical storytelling platform with consent frameworks and blockchain. Storytellers retain control and share in value created.
 - **JusticeHub**: Open-source justice network where grassroots programs "fork" proven models, access AI insights, co-create governance.
-- **Goods (Goods on Country)**: Circular-economy venture co-designing beds, mattresses, washing machines for remote communities while converting local waste.
-- **Black Cockatoo Valley**: regeneration estate (size and boundaries: `wiki/projects/act-farm/black-cockatoo-valley.md`, do not quote a figure from here) combining eco-cottages, Indigenous land-care jobs, biodiversity credits to finance habitat restoration.
+- **Goods (Goods on Country)**: Circular-economy venture designing beds, mattresses and washing machines in community, with community and for community, for remote communities while converting local waste.
+- **Black Cockatoo Valley**: regeneration estate (size and boundaries: `act-global-infrastructure/wiki/projects/act-farm/black-cockatoo-valley.md`, do not quote a figure from here) combining eco-cottages, Indigenous land-care jobs, biodiversity credits to finance habitat restoration.
 - **Harvest Shares / The Harvest**: CSA program and seasonal gatherings connected to the valley.
 - **ACT Farm**: Home base where land care, learning, and art-making meet on Jinibara Country.
 - **Art**: Artworks, exhibitions, residencies, artist profiles, commissions.
@@ -65,7 +65,7 @@
 - **Tractor/PTO**: We provide capacity-building, knowledge-sharing, flexible resourcing, and network weaving: then communities drive forward
 
 ## Visual Language (if designing)
-- **Color Palette**: per visual family in `wiki/decisions/act-brand-alignment-map.md`. Parent (Editorial Warmth): forest green `#2D5A3D`, clay `#C4845C`, warm white `#FAFAF7`, dark `#1A1F1A`.
+- **Color Palette**: per visual family in `act-global-infrastructure/wiki/decisions/act-brand-alignment-map.md`. Parent (Editorial Warmth): forest green `#2D5A3D`, clay `#C4845C`, warm white `#FAFAF7`, dark `#1A1F1A`.
 - **Imagery**: Organic textures, farm or valley imagery, seedbed/field motifs, Black Cockatoo Valley drone photos, threatened species habitat
 - **Typography**: per the map. Parent: Fraunces display, Source Serif 4 body, Work Sans labels, Geist Mono data.
 - **Layout Style**: Clean, quiet, spacious layouts; avoid glossy or corporate aesthetics. Conservation-first framing.

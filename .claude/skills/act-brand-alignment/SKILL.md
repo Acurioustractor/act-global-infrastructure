@@ -1,6 +1,6 @@
 ---
 name: act-brand-alignment
-description: ACT brand alignment for all ecosystem projects. Use for ANY work on ACT sites, projects, content, design, or strategy. Understands ACT identity, the Listen, Curiosity, Action, Art method, all projects, voice/tone, and which visual family each repo belongs to. Entity facts come from wiki/decisions/act-core-facts.md, never from this skill.
+description: ACT brand alignment for all ecosystem projects. Use for ANY work on ACT sites, projects, content, design, or strategy. Understands ACT identity, the Listen, Curiosity, Action, Art method, all projects, voice/tone, and which visual family each repo belongs to. Entity facts come from act-global-infrastructure/wiki/decisions/act-core-facts.md, never from this skill.
 ---
 
 # ACT Brand Alignment
@@ -17,8 +17,8 @@ description: ACT brand alignment for all ecosystem projects. Use for ANY work on
 ### Identity
 A Curious Tractor is a regenerative innovation ecosystem partnering with marginalised, especially First Nations, communities to dismantle extractive systems. Like a tractor's power take-off, we transfer resources to community-led initiatives. We hand over the keys.
 
-### Method (LCAA)
-Listen → Curiosity → Action → Art
+### Method: Listen · Curiosity · Action · Art
+Always the full name on first use; never the bare acronym in copy. Listen, then Curiosity, then Action, then Art.
 
 ### Values
 - Radical Humility (no saviors)
@@ -29,16 +29,16 @@ Listen → Curiosity → Action → Art
 ### Promise
 Value stays in community hands. We design for our own obsolescence.
 
-Do not quote a profit-share percentage from memory. The only citable figure is whatever `wiki/decisions/act-core-facts.md` says today, and on 2026-09-06 it says nothing, so the older "40%" line is retired until a decision record carries it.
+Do not quote a profit-share percentage from memory. The only citable figure is whatever `act-global-infrastructure/wiki/decisions/act-core-facts.md` says today, and on 2026-09-06 it says nothing, so the older "40%" line is retired until a decision record carries it.
 
 ### Entities
-Not two. The dual-entity picture (CLG plus trading arm) is out of date. Read `wiki/decisions/act-core-facts.md` before naming a legal entity, and never write "ACT Foundation" or "ACT Ventures" as if they were real.
+Not two. The dual-entity picture (CLG plus trading arm) is out of date. Read `act-global-infrastructure/wiki/decisions/act-core-facts.md` before naming a legal entity, and never write "ACT Foundation" or "ACT Ventures" as if they were real.
 
 ## Project Scope Mapping
 
 | Project | Focus | Load |
 |---------|-------|------|
-| Hub (act.place) | ACT as ecosystem, LCAA, partnerships | `brand-core.md` |
+| Hub (act.place) | ACT as a whole, the method, partnerships | `brand-core.md` |
 | ACT Farm / BCV | Land practice, conservation, residencies | `land-practice.md` |
 | JusticeHub | Justice innovation, forkable models | `projects-ecosystem.md` |
 | Empathy Ledger | Ethical storytelling, consent, sovereignty | `projects-ecosystem.md` |
@@ -57,7 +57,7 @@ The graders and rubrics below live in `act-global-infrastructure`. Run them from
 **For any pitch, grant, web copy, board report, donor letter, journal spread, caption, or essay**, run the voice grader before declaring the draft ready:
 
 ```bash
-node scripts/grade-voice.mjs --file <path> --project <slug> --genre <slug>
+node act-global-infrastructure/scripts/grade-voice.mjs --file <path> --project <slug> --genre <slug>
 ```
 
 - `--project` slugs: `hub`, `justicehub`, `empathy-ledger`, `goods`, `bcv`, `harvest`, `farm`, `art`, `oonchiumpa`, `bg-fit`, `mounty-yarns`, `picc`
@@ -79,10 +79,10 @@ Cost: ~$0.02 per grade (Sonnet 4.6, ~3K tokens). Use `--tier1-only` for a free d
 **For any pitch, term-sheet response, renewal, follow-up, or report addressed to a specific funder**, also run the funder-cadence grader. Layered on top of the voice grade: voice-curtis catches AI-tells, funder-cadence catches funder-specific cadence misses (wrong opener for the relationship stage, leading with a `claims_to_avoid` claim, dollars cited without an invoice or signed-letter row, primary-contact name out of date).
 
 ```bash
-node scripts/grade-funder-cadence.mjs --file <path> --funder <slug> [--cycle <slug>]
+node act-global-infrastructure/scripts/grade-funder-cadence.mjs --file <path> --funder <slug> [--cycle <slug>]
 ```
 
-- `--funder` slugs (resolved against `wiki/narrative/funders.json`): `minderoo`, `qbe-catalysing-impact`, `dusseldorp-forum`, `paul-ramsay-foundation`, `tim-fairfax`, `smith-family`, `amnesty-australia`, `niaa`, `jcf`, `atlassian-foundation`, `snow-foundation`, `patagonia`, `allbirds`, `who-gives-a-crap`, `centrecorp`, `rotary-eclub-outback`, `vincent-fairfax`, `social-impact-hub`, `state-qld-dfsdscs`, `streetsmart-australia`, `westpac-scholars-trust`
+- `--funder` slugs (resolved against `act-global-infrastructure/wiki/narrative/funders.json`): `minderoo`, `qbe-catalysing-impact`, `dusseldorp-forum`, `paul-ramsay-foundation`, `tim-fairfax`, `smith-family`, `amnesty-australia`, `niaa`, `jcf`, `atlassian-foundation`, `snow-foundation`, `patagonia`, `allbirds`, `who-gives-a-crap`, `centrecorp`, `rotary-eclub-outback`, `vincent-fairfax`, `social-impact-hub`, `state-qld-dfsdscs`, `streetsmart-australia`, `westpac-scholars-trust`
 - `--cycle` slugs (optional): `intro`, `pitch`, `renewal`, `report`, `followup`, `term-sheet`. Skip if the cycle isn't yet defined in funders.json.
 - `--tier1-only` for a free deterministic pass (skips the Sonnet 4.6 call but keeps every dollar-citation, forbidden-claim, and canonical-name check).
 
@@ -94,7 +94,7 @@ Rubric source of truth: `thoughts/shared/rubrics/funder-cadence.md` v0.1 (calibr
 
 ### Alignment-loop self-grade (for synthesis docs only)
 
-Auto-applied by the three `scripts/synthesize-*.mjs` Phase-1 cycle scripts (`project-truth-state`, `funder-alignment`, `entity-migration-truth-state`). Grades the synthesis against `thoughts/shared/rubrics/alignment-loop-synthesis.md` v0.1 via `scripts/lib/alignment-loop-grade.mjs`. On `pass` the synthesis commits clean; on `warn`/`fail` a triage report lands at `wiki/output/lint-loop-YYYY-MM-DD.md`. Pass `--no-grade` only when running in environments without `ANTHROPIC_API_KEY` (cron stubs, CI without secrets).
+Auto-applied by the three `act-global-infrastructure/scripts/synthesize-*.mjs` Phase-1 cycle scripts (`project-truth-state`, `funder-alignment`, `entity-migration-truth-state`). Grades the synthesis against `thoughts/shared/rubrics/alignment-loop-synthesis.md` v0.1 via `act-global-infrastructure/scripts/lib/alignment-loop-grade.mjs`. On `pass` the synthesis commits clean; on `warn`/`fail` a triage report lands at `act-global-infrastructure/wiki/output/lint-loop-YYYY-MM-DD.md`. Pass `--no-grade` only when running in environments without `ANTHROPIC_API_KEY` (cron stubs, CI without secrets).
 
 **DO:**
 - Farm metaphor: seeds, harvest, cultivating, soil, seasons, fields
@@ -113,7 +113,7 @@ Auto-applied by the three `scripts/synthesize-*.mjs` Phase-1 cycle scripts (`pro
 
 ## Visual Language
 There is no single ACT palette. Each repo belongs to a family decided in
-`wiki/decisions/act-brand-alignment-map.md`. Read the map before designing anything and
+`act-global-infrastructure/wiki/decisions/act-brand-alignment-map.md`. Read the map before designing anything and
 update it before shipping a new look.
 
 - **Editorial Warmth** (parent, act-regenerative-studio): Fraunces display, Source Serif 4 body, Work Sans labels, Geist Mono data. Forest green `#2D5A3D`, clay `#C4845C`, warm white `#FAFAF7`, dark `#1A1F1A`.
@@ -127,7 +127,7 @@ Motifs across families: seeds, cockatoos, Country, hands in soil, regenerative f
 
 | Need | Reference |
 |------|-----------|
-| Identity, LCAA, values, voice | `references/brand-core.md` |
+| Identity, the method, values, voice | `references/brand-core.md` |
 | **Writing voice (Curtis method + AI tells to avoid)** | **`references/writing-voice.md`** |
 | Land details, conservation | `references/land-practice.md` |
 | All projects/seeds, revenue | `references/projects-ecosystem.md` |
