@@ -52,12 +52,12 @@ Not two. The dual-entity picture (CLG plus trading arm) is out of date. Read `ac
 
 ### Auto-grade before sending
 
-The graders and rubrics below live in `act-global-infrastructure`. Run them from that repo's root. A downstream repo that carries a synced copy of this skill does not carry the scripts.
+The graders and rubrics below live in `act-global-infrastructure`, found through `ACT_INFRA_DIR`, else as the checkout beside the current repo's root (the same layout `sync-skills` uses). Run them from anywhere inside the repo that holds the draft. A downstream repo that carries a synced copy of this skill does not carry the scripts.
 
 **For any pitch, grant, web copy, board report, donor letter, journal spread, caption, or essay**, run the voice grader before declaring the draft ready:
 
 ```bash
-node ~/Code/act-global-infrastructure/scripts/grade-voice.mjs --file <path> --project <slug> --genre <slug>
+node "${ACT_INFRA_DIR:-$(git rev-parse --show-toplevel)/../act-global-infrastructure}/scripts/grade-voice.mjs" --file <path> --project <slug> --genre <slug>
 ```
 
 - `--project` slugs: `hub`, `justicehub`, `empathy-ledger`, `goods`, `bcv`, `harvest`, `farm`, `art`, `oonchiumpa`, `bg-fit`, `mounty-yarns`, `picc`
@@ -79,7 +79,7 @@ Cost: ~$0.02 per grade (Sonnet 4.6, ~3K tokens). Use `--tier1-only` for a free d
 **For any pitch, term-sheet response, renewal, follow-up, or report addressed to a specific funder**, also run the funder-cadence grader. Layered on top of the voice grade: voice-curtis catches AI-tells, funder-cadence catches funder-specific cadence misses (wrong opener for the relationship stage, leading with a `claims_to_avoid` claim, dollars cited without an invoice or signed-letter row, primary-contact name out of date).
 
 ```bash
-node ~/Code/act-global-infrastructure/scripts/grade-funder-cadence.mjs --file <path> --funder <slug> [--cycle <slug>]
+node "${ACT_INFRA_DIR:-$(git rev-parse --show-toplevel)/../act-global-infrastructure}/scripts/grade-funder-cadence.mjs" --file <path> --funder <slug> [--cycle <slug>]
 ```
 
 - `--funder` slugs (resolved against `act-global-infrastructure/wiki/narrative/funders.json`): `minderoo`, `qbe-catalysing-impact`, `dusseldorp-forum`, `paul-ramsay-foundation`, `tim-fairfax`, `smith-family`, `amnesty-australia`, `niaa`, `jcf`, `atlassian-foundation`, `snow-foundation`, `patagonia`, `allbirds`, `who-gives-a-crap`, `centrecorp`, `rotary-eclub-outback`, `vincent-fairfax`, `social-impact-hub`, `state-qld-dfsdscs`, `streetsmart-australia`, `westpac-scholars-trust`
