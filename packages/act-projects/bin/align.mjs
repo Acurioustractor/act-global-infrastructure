@@ -7,7 +7,8 @@
 //        fill notion.page_id, empathy_ledger.project_id/project_key into project-codes.json
 //        for matches that are exact by code, or unambiguous by name. Local file only.
 //   node packages/act-projects/bin/align.mjs --write-notion
-//        set "ACT Project Code" on matched Notion rows that lack it (Tier 2: ask first)
+//        set "ACT Project Code" on matched Notion rows that lack it, and overwrite a
+//        single matched row whose code disagrees with the registry (Tier 2: ask first)
 //
 // Env: NOTION_API_KEY (or NOTION_TOKEN), NOTION_PROJECTS_DATABASE_ID,
 //      EL_SUPABASE_URL, EL_SUPABASE_SERVICE_ROLE_KEY. Run with node --env-file=.env.local.
@@ -118,7 +119,7 @@ for (const p of Object.values(projects)) {
   if (n.length > 1) flags.push(`notion:ambiguous(${n.length})`);
   if (n.length === 1 && n[0].code && !codeOf(p).has(n[0].code)) flags.push(`notion:code=${n[0].code}`);
   if (n.length === 1 && !n[0].code) flags.push('notion:no-code');
-  if (e.length === 0) flags.push('el:missing');
+  if (e.length === 0 && p.empathy_ledger?.tracked !== false) flags.push('el:missing');
   if (e.length > 1) flags.push(`el:ambiguous(${e.length})`);
   if (e.length === 1 && e[0].act_project_code && !codeOf(p).has(e[0].act_project_code)) flags.push(`el:code=${e[0].act_project_code}`);
   report.push({ code: p.code, name: p.name, status: p.status, tier: p.tier, notion: n.map((r) => ({ id: r.id, name: r.name, code: r.code })), el: e.map((r) => ({ id: r.id, slug: r.slug, code: r.act_project_code })), flags });
@@ -162,7 +163,10 @@ if (args.has('--write-registry')) {
 if (args.has('--write-notion')) {
   let n = 0;
   for (const r of report) {
-    if (r.notion.length !== 1 || r.notion[0].code) continue;
+    if (r.notion.length !== 1) continue;
+    const pr = projects[r.code];
+    if (r.notion[0].code && codeOf(pr).has(r.notion[0].code)) continue;
+    if (r.notion[0].code) console.log(`  ${r.notion[0].name}: ${r.notion[0].code} -> ${r.code}`);
     const res = await fetch(`https://api.notion.com/v1/pages/${r.notion[0].id}`, {
       method: 'PATCH',
       headers: { Authorization: `Bearer ${NOTION_KEY}`, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' },

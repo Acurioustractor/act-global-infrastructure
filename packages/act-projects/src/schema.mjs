@@ -36,6 +36,9 @@ export const Ghl = z
 
 export const EmpathyLedger = z
   .object({
+    // false: this project keeps no stories or media in Empathy Ledger (admin codes,
+    // or a partner that runs its own EL organisation). align.mjs stops asking.
+    tracked: z.boolean().default(true),
     project_id: z.string().uuid().optional(),
     project_key: slug.optional(),
     syndication_slug: z.string().regex(/^[a-z0-9_]+$/).optional(),

@@ -331,7 +331,8 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_core"
+        "syndication_slug": "act_core",
+        "tracked": false
       },
       "notion": {
         "page_id": "204ebcf9-81cf-80f4-a3c9-fb18b904b2cb"
@@ -910,6 +911,9 @@
       "empathy_ledger": {
         "project_id": "9b90b47c-2a4c-409c-97d5-3718aaf8c30c",
         "project_key": "contained"
+      },
+      "notion": {
+        "page_id": "228ebcf9-81cf-809e-8368-f9dae2a41129"
       }
     },
     "ACT-FO": {
@@ -1192,6 +1196,9 @@
       },
       "notion": {
         "page_id": "8d710c7b-4ba2-43c5-ac2f-88b5abe8d82c"
+      },
+      "empathy_ledger": {
+        "tracked": false
       }
     },
     "ACT-QF": {
@@ -1506,6 +1513,9 @@
         "syndication_slug": "act_cs",
         "project_id": "ec2ad2d8-13d6-4488-87ae-5385ddf73394",
         "project_key": "civicgraph"
+      },
+      "notion": {
+        "page_id": "32eebcf9-81cf-808b-8ecb-cec3fcfb544d"
       }
     },
     "ACT-MY": {
@@ -1812,6 +1822,12 @@
       "empathy_ledger": {
         "project_id": "e7439838-23a6-4dff-83a2-f570328aa41a",
         "project_key": "custodian-economy"
+      },
+      "slug_aliases": [
+        "custodian-economy"
+      ],
+      "notion": {
+        "page_id": "1d7ebcf9-81cf-808b-a394-f2e547d6ee6c"
       }
     },
     "ACT-AS": {
@@ -2133,7 +2149,8 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_oo"
+        "syndication_slug": "act_oo",
+        "tracked": false
       },
       "notion": {
         "page_id": "1d4ebcf9-81cf-80a2-8c12-e5c56d78de10"
@@ -2310,6 +2327,9 @@
       },
       "notion": {
         "page_id": "229ebcf9-81cf-80f1-a053-e6b8cd3b0362"
+      },
+      "empathy_ledger": {
+        "tracked": false
       }
     },
     "ACT-JC": {
@@ -2340,6 +2360,9 @@
       },
       "notion": {
         "page_id": "1a0ebcf9-81cf-8016-859c-dc3443aed8d5"
+      },
+      "empathy_ledger": {
+        "tracked": false
       }
     },
     "ACT-TR": {
@@ -2418,6 +2441,9 @@
       },
       "notion": {
         "page_id": "22febcf9-81cf-800a-b4a5-ce2fa870a03d"
+      },
+      "empathy_ledger": {
+        "tracked": false
       }
     },
     "ACT-GL": {
@@ -2757,7 +2783,10 @@
       "notion": {
         "page_id": "211ebcf9-81cf-807b-a02f-cc3ea9711c05"
       },
-      "internal": true
+      "internal": true,
+      "empathy_ledger": {
+        "tracked": false
+      }
     },
     "ACT-GCC": {
       "name": "Global Community Connections",
@@ -2828,7 +2857,10 @@
       "category": "background",
       "status": "active",
       "description": "GrantScope tool / CivicGraph reference. Wiki page at wiki/projects/grantscope.md. Lives in separate repo at /Users/benknight/Code/grantscope.",
-      "tier": "background"
+      "tier": "background",
+      "empathy_ledger": {
+        "tracked": false
+      }
     },
     "ACT-PB": {
       "name": "Place-Based Policy Lab",
@@ -2837,7 +2869,10 @@
       "category": "background",
       "status": "active",
       "description": "Background record (added 2026-05-09 cleanup) — wiki page exists at wiki/projects/place-based-policy-lab.md.",
-      "tier": "background"
+      "tier": "background",
+      "empathy_ledger": {
+        "tracked": false
+      }
     },
     "ACT-DLB": {
       "name": "Deadly Labs",
@@ -2846,7 +2881,10 @@
       "category": "background",
       "status": "active",
       "description": "Background record (added 2026-05-09 cleanup) — wiki page exists at wiki/projects/deadlylabs.md.",
-      "tier": "background"
+      "tier": "background",
+      "empathy_ledger": {
+        "tracked": false
+      }
     }
   },
   "categories": {
