@@ -23,9 +23,24 @@ not exist, a site with no identifier, an unknown key. Gaps: a live ecosystem
 project with no site or Notion page, a live project with no wiki page, an art
 piece with no `art` block or wiki page. Gaps are the to-do list; errors are bugs.
 
+## Align with Notion and Empathy Ledger
+
+```bash
+node --env-file=.env.local packages/act-projects/bin/align.mjs                   # report drift
+node --env-file=.env.local packages/act-projects/bin/align.mjs --write-registry  # fill notion/EL ids locally
+node --env-file=.env.local packages/act-projects/bin/align.mjs --write-notion    # stamp ACT Project Code in Notion (ask first)
+```
+
+The ACT code is the id. The Notion Projects database (`NOTION_PROJECTS_DATABASE_ID`) is the
+high-level list people edit; Empathy Ledger `projects` holds stories, media and artefacts.
+`align` matches all three by code, then by name, and only writes an id into the registry when
+the match is exact by code or the other side carries no code at all. It never writes to
+Empathy Ledger; `scripts/sync-projects-to-el.mjs --fix` owns that.
+
 ## Record shape
 
 Required: `code`, `name`, `canonical_slug`, `category`, `tier`, `status`, `description`.
+`internal: true` marks an admin code with no public face (ACT-IN); the site guard skips it.
 Typed blocks: `sites[]` (Vercel id and name, production URL, GitHub repo, role),
 `notion` (page id, database ids), `ghl` (tags, pipeline), `empathy_ledger`
 (project key, syndication slug), `art` (media, tags, piece slug, wiki path), `wiki_path`.

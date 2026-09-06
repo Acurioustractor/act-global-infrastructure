@@ -36,6 +36,7 @@ export const Ghl = z
 
 export const EmpathyLedger = z
   .object({
+    project_id: z.string().uuid().optional(),
     project_key: slug.optional(),
     syndication_slug: z.string().regex(/^[a-z0-9_]+$/).optional(),
   })
@@ -100,6 +101,9 @@ export const ProjectRecord = z
     status: z.enum(STATUSES),
     description: z.string().min(1),
     wiki_path: z.string().min(1).optional(),
+    // An admin or cost-centre code with no public face (ACT-IN). Exempt from the
+    // site guard; still needs a Notion page so the work is visible.
+    internal: z.boolean().default(false),
     sites: z.array(Site).default([]),
     notion: Notion.default({}),
     ghl: Ghl.default({}),
