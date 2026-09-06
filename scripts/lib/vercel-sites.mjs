@@ -69,8 +69,10 @@ export function matchVercelProject(site, vercelProjects) {
   return { project: null, via: 'unmatched' };
 }
 
+/** Row identity. A retired primary site keeps its slug; only extra sites get a suffix. */
 export function siteSlug(project, site) {
-  return site.role && site.role !== 'primary' ? `${project.canonical_slug}-${site.role}` : project.canonical_slug;
+  const role = site.role || 'primary';
+  return role === 'primary' || role === 'archive' ? project.canonical_slug : `${project.canonical_slug}-${role}`;
 }
 
 /** The row we write. Never touches columns the health checker owns (health_score, response_time_ms, ssl_expires_at). */
@@ -78,7 +80,7 @@ export function buildSiteRow({ project, site, vercelProject, deployment, now = n
   const { status, last_deployment_at } = deploymentState(deployment);
   return {
     slug: siteSlug(project, site),
-    name: site.role && site.role !== 'primary' ? `${project.name} (${site.role})` : project.name,
+    name: !site.role || site.role === 'primary' || site.role === 'archive' ? project.name : `${project.name} (${site.role})`,
     url: site.production_url || (vercelProject ? `https://${vercelProject.name}.vercel.app` : null),
     description: project.description || null,
     category: project.category || null,
@@ -86,7 +88,9 @@ export function buildSiteRow({ project, site, vercelProject, deployment, now = n
     vercel_project_id: vercelProject?.id || null,
     vercel_project_name: vercelProject?.name || null,
     github_repo: site.github_repo || (vercelProject?.link?.type === 'github' ? `${vercelProject.link.org}/${vercelProject.link.repo}` : null),
-    status: vercelProject ? status : 'external',
+    // An archive-role site is kept for the record, not watched: its last build
+    // may be red forever and that is not news.
+    status: site.role === 'archive' ? 'archived' : vercelProject ? status : 'external',
     last_deployment_at,
     last_check_at: now.toISOString(),
     updated_at: now.toISOString(),

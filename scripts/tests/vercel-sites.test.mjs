@@ -48,3 +48,11 @@ test('webhook: production deployment events map to status; preview and unknown e
   assert.equal(rowFromWebhook({ type: 'project.created', payload: { project: { id: 'prj_a' } } }), null);
   assert.equal(rowFromWebhook({ type: 'deployment.succeeded', payload: {} }), null);
 });
+
+test('archive-role sites read archived even when the last build was broken', () => {
+  const row = buildSiteRow({ project, site: { role: 'archive', vercel_project_name: 'old' }, vercelProject: { id: 'prj_z', name: 'old', link: null }, deployment: { state: 'ERROR', createdAt: 1700000000000 } });
+  assert.equal(row.status, 'archived');
+  assert.equal(row.slug, 'justicehub'); // retired sites keep their row
+  // control: the same broken build on a primary site still reads broken
+  assert.equal(buildSiteRow({ project, site: { role: 'primary', vercel_project_name: 'old' }, vercelProject: { id: 'prj_z', name: 'old', link: null }, deployment: { state: 'ERROR', createdAt: 1700000000000 } }).status, 'broken');
+});
