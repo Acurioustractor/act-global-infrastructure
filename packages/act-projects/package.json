@@ -1,0 +1,25 @@
+{
+  "name": "@act/projects",
+  "version": "0.1.0",
+  "description": "The one typed record for every ACT project: code, sites, Notion, GHL, Empathy Ledger, art, wiki. Parses config/project-codes.json and refuses to load it when the guards fail.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./schema": "./src/schema.mjs",
+    "./guards": "./src/guards.mjs"
+  },
+  "bin": {
+    "act-projects-check": "./bin/check.mjs"
+  },
+  "files": [
+    "src",
+    "bin"
+  ],
+  "scripts": {
+    "check": "node bin/check.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "zod": "^3.25.0"
+  }
+}

@@ -147,7 +147,9 @@
     "contact:lookup": "node scripts/contact-manager.mjs lookup",
     "contact:tag": "node scripts/contact-manager.mjs tag",
     "contact:sync": "node scripts/contact-manager.mjs sync",
-    "contact:add-advisory": "node scripts/contact-manager.mjs add-advisory"
+    "contact:add-advisory": "node scripts/contact-manager.mjs add-advisory",
+    "projects:check": "node packages/act-projects/bin/check.mjs",
+    "projects:test": "node --test packages/act-projects/tests/*.test.mjs"
   },
   "keywords": [],
   "author": "",

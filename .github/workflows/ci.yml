@@ -34,3 +34,6 @@ jobs:
 
       - name: Lint
         run: pnpm --filter @act/command-center lint
+
+      - name: Project record (config/project-codes.json)
+        run: pnpm projects:check && pnpm projects:test
