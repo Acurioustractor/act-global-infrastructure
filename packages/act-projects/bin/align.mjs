@@ -10,6 +10,10 @@
 //        set "ACT Project Code" on matched Notion rows that lack it, and overwrite a
 //        single matched row whose code disagrees with the registry (Tier 2: ask first)
 //
+//   node packages/act-projects/bin/align.mjs --create-notion
+//        create a Notion row for every live registry project with no match at all
+//        (Tier 2: ask first), then pin the new page id into the registry
+//
 // Env: NOTION_API_KEY (or NOTION_TOKEN), NOTION_PROJECTS_DATABASE_ID,
 //      EL_SUPABASE_URL, EL_SUPABASE_SERVICE_ROLE_KEY. Run with node --env-file=.env.local.
 // EL rows are never written here; scripts/sync-projects-to-el.mjs owns that.
@@ -86,7 +90,7 @@ function match(list, getCode, getName, getId, idField) {
   for (const p of Object.values(projects)) {
     if (exact.has(p.code)) continue;
     const names = namesOf(p);
-    const hits = list.filter((r) => !claimed.has(getId(r)) && names.has(norm(getName(r))));
+    const hits = list.filter((r) => !claimed.has(getId(r)) && !getCode(r) && names.has(norm(getName(r))));
     if (hits.length) byName.set(p.code, hits);
   }
   for (const rows of byName.values()) if (rows.length === 1) claimed.add(getId(rows[0]));
@@ -94,13 +98,17 @@ function match(list, getCode, getName, getId, idField) {
   return { exact, byName, unmatched };
 }
 
+const pinConflicts = [];
 const N = match(notion, (r) => r.code, (r) => r.name, (r) => r.id, null);
 // pin by stored page id too
 for (const p of Object.values(projects)) {
   const pid = p.notion?.page_id || p.notion_page_id;
   if (!pid) continue;
   const row = notion.find((r) => r.id.replace(/-/g, '') === pid.replace(/-/g, ''));
-  if (row && !N.exact.has(p.code)) { N.exact.set(p.code, [row]); N.byName.delete(p.code); N.unmatched = N.unmatched.filter((r) => r.id !== row.id); }
+  if (!row || N.exact.has(p.code)) continue;
+  // a pinned row that now carries another project's code belongs to that project
+  if (row.code && !codeOf(p).has(row.code)) { pinConflicts.push({ code: p.code, page_id: row.id, owner: row.code }); continue; }
+  N.exact.set(p.code, [row]); N.byName.delete(p.code); N.unmatched = N.unmatched.filter((r) => r.id !== row.id);
 }
 const E = match(el, (r) => r.act_project_code, (r) => r.name, (r) => r.id, null);
 for (const p of Object.values(projects)) {
@@ -112,10 +120,12 @@ for (const p of Object.values(projects)) {
 
 const report = [];
 for (const p of Object.values(projects)) {
-  const n = N.exact.get(p.code) || N.byName.get(p.code) || [];
+  const pinned = pinConflicts.find((c) => c.code === p.code);
+  const n = pinned ? [] : (N.exact.get(p.code) || N.byName.get(p.code) || []);
   const e = E.exact.get(p.code) || E.byName.get(p.code) || [];
   const flags = [];
-  if (n.length === 0) flags.push('notion:missing');
+  if (pinned) flags.push(`notion:pin-conflict(page owned by ${pinned.owner})`);
+  else if (n.length === 0) flags.push('notion:missing');
   if (n.length > 1) flags.push(`notion:ambiguous(${n.length})`);
   if (n.length === 1 && n[0].code && !codeOf(p).has(n[0].code)) flags.push(`notion:code=${n[0].code}`);
   if (n.length === 1 && !n[0].code) flags.push('notion:no-code');
@@ -176,4 +186,33 @@ if (args.has('--write-notion')) {
     else n++;
   }
   console.log(`\nset ACT Project Code on ${n} Notion rows`);
+}
+
+if (args.has('--create-notion')) {
+  const STATUS = { active: 'Active 🔥', ideation: 'Ideation 🌀', sunsetting: 'Sunsetting 🌅', archived: 'Archived 📦', transferred: 'Transferred ✅' };
+  const file = JSON.parse(readFileSync(PROJECT_CODES_PATH, 'utf8'));
+  let n = 0;
+  for (const r of report) {
+    const pr = projects[r.code];
+    if (r.notion.length || !['active', 'ideation', 'sunsetting'].includes(pr.status)) continue;
+    const props = {
+      Name: { title: [{ text: { content: pr.name } }] },
+      'ACT Project Code': { rich_text: [{ text: { content: pr.code } }] },
+      Status: { select: { name: STATUS[pr.status] } },
+    };
+    if (pr.art) props['Project Type'] = { select: { name: 'Art' } };
+    else if (pr.tier === 'ecosystem') props['Project Type'] = { select: { name: 'Core Project' } };
+    const res = await fetch('https://api.notion.com/v1/pages', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${NOTION_KEY}`, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ parent: { database_id: NOTION_DB }, properties: props, children: [{ object: 'block', type: 'paragraph', paragraph: { rich_text: [{ text: { content: pr.description } }] } }] }),
+    });
+    if (!res.ok) { console.error(`  create failed for ${r.code}: ${res.status} ${await res.text()}`); continue; }
+    const page = await res.json();
+    file.projects[r.code].notion = { ...(file.projects[r.code].notion || {}), page_id: page.id };
+    console.log(`  created ${r.code} ${pr.name} -> ${page.id}`);
+    n++;
+  }
+  writeFileSync(PROJECT_CODES_PATH, JSON.stringify(file, null, 2) + '\n');
+  console.log(`\ncreated ${n} Notion rows, page ids pinned in registry`);
 }
