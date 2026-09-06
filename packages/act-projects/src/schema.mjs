@@ -48,11 +48,22 @@ export const EmpathyLedger = z
   })
   .strict();
 
+export const ART_STATUSES = ['exhibited', 'active', 'ideation', 'concept', 'retired'];
+
 export const Art = z
   .object({
     media: z.array(z.string().min(1)).min(1),
     tags: z.array(z.string().min(1)).default([]),
     piece_slug: slug,
+    /** Where the piece is in its life, in the studio line's own vocabulary. */
+    status: z.enum(ART_STATUSES).default('active'),
+    year: z.string().min(1).optional(),
+    location: z.string().min(1).optional(),
+    /** The ACT project this work sits inside, rendered as "Part of X". */
+    connected_code: code.optional(),
+    lcaa_stages: z.array(z.enum(['Listen', 'Curiosity', 'Action', 'Art'])).default([]),
+    /** Studio slugs the piece has been published under before. */
+    slug_aliases: z.array(slug).default([]),
     wiki_path: z.string().min(1).optional(),
   })
   .strict();

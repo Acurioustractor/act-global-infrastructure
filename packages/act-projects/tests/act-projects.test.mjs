@@ -106,3 +106,15 @@ test('internal: true exempts an ecosystem project from the site guard, and only 
   assert.equal(again.length, 1);
   assert.equal(again[0].field, 'notion.page_id');
 });
+
+test('art block: status defaults to active, connected_code must be a real project', () => {
+  const f = base();
+  f.projects['ACT-AA'].art = { media: ['installation'], piece_slug: 'alpha', connected_code: 'ACT-ZZ' };
+  f.projects['ACT-AA'].art.wiki_path = 'wiki/projects/goods.md';
+  assert.throws(() => loadProjects({ path: writeFixture(f), repoRoot: REPO_ROOT }), /not a project code/);
+  // control: a real connected_code loads, status defaulted, EL gap reported
+  f.projects['ACT-AA'].art.connected_code = 'ACT-AA';
+  const { projects, gaps } = loadProjects({ path: writeFixture(f), repoRoot: REPO_ROOT });
+  assert.equal(projects['ACT-AA'].art.status, 'active');
+  assert.ok(gaps.some((g) => g.field === 'empathy_ledger.project_id'));
+});

@@ -544,7 +544,13 @@
           "cultural-preservation",
           "participatory"
         ],
-        "piece_slug": "picc-on-country-photo-studio"
+        "piece_slug": "picc-on-country-photo-studio",
+        "status": "active",
+        "lcaa_stages": [
+          "Action",
+          "Art"
+        ],
+        "connected_code": "ACT-PI"
       },
       "empathy_ledger": {
         "project_id": "9bca5d4d-11bb-439c-8a01-9ab05f8f8ff0",
@@ -680,7 +686,16 @@
           "cultural-preservation",
           "documentary"
         ],
-        "piece_slug": "uncle-allan-palm-island-art"
+        "piece_slug": "uncle-allan-palm-island-art",
+        "status": "active",
+        "year": "2023–present",
+        "location": "Palm Island, Queensland",
+        "lcaa_stages": [
+          "Art"
+        ],
+        "slug_aliases": [
+          "uncle-allan"
+        ]
       },
       "notion": {
         "page_id": "261ebcf9-81cf-807c-a602-c1fb446853ff"
@@ -936,7 +951,14 @@
           "justice-art",
           "public-art"
         ],
-        "piece_slug": "contained"
+        "piece_slug": "contained",
+        "status": "active",
+        "year": "2022–present",
+        "location": "Justice and public-space contexts",
+        "connected_code": "ACT-JH",
+        "lcaa_stages": [
+          "Art"
+        ]
       },
       "empathy_ledger": {
         "project_id": "9b90b47c-2a4c-409c-97d5-3718aaf8c30c",
@@ -1097,7 +1119,13 @@
           "participatory",
           "social-practice"
         ],
-        "piece_slug": "the-confessional"
+        "piece_slug": "the-confessional",
+        "status": "active",
+        "year": "2023–present",
+        "location": "Mobile / touring",
+        "lcaa_stages": [
+          "Listen"
+        ]
       },
       "empathy_ledger": {
         "project_id": "24307c30-644e-4aa9-a37d-b583bca8c3b0",
@@ -1210,7 +1238,15 @@
           "public-art",
           "social-practice"
         ],
-        "piece_slug": "gold-phone"
+        "piece_slug": "gold-phone",
+        "status": "active",
+        "year": "2024–present",
+        "location": "Distributed / digital",
+        "connected_code": "ACT-EL",
+        "lcaa_stages": [
+          "Listen",
+          "Art"
+        ]
       },
       "notion": {
         "page_id": "41aea25e-f717-48d0-8338-1e7c42d9e797"
@@ -1466,7 +1502,13 @@
           "public-art",
           "social-practice"
         ],
-        "piece_slug": "redtape"
+        "piece_slug": "redtape",
+        "status": "active",
+        "year": "2023",
+        "location": "Gallery and public contexts",
+        "lcaa_stages": [
+          "Art"
+        ]
       },
       "empathy_ledger": {
         "project_id": "45e0c5de-902a-41a0-be32-8ef781eda0e7",
@@ -1998,7 +2040,14 @@
         "tags": [
           "social-practice"
         ],
-        "piece_slug": "regional-arts-fellowship"
+        "piece_slug": "regional-arts-fellowship",
+        "status": "concept",
+        "location": "Regional Australia",
+        "connected_code": "ACT-FM",
+        "lcaa_stages": [
+          "Listen",
+          "Curiosity"
+        ]
       },
       "empathy_ledger": {
         "project_id": "32cbfb59-028e-4c4d-a37b-6b51c56dac48",
@@ -2305,7 +2354,14 @@
           "social-practice",
           "community-portrait"
         ],
-        "piece_slug": "caring-for-those-who-care"
+        "piece_slug": "caring-for-those-who-care",
+        "status": "active",
+        "year": "2025 to 2026",
+        "location": "Sunshine Coast, Mount Isa, Sydney, Gold Coast and the Atherton Tablelands",
+        "lcaa_stages": [
+          "Listen",
+          "Art"
+        ]
       },
       "notion": {
         "page_id": "235ebcf9-81cf-8172-b0ee-ccf0ebb01fd3"
@@ -2365,7 +2421,12 @@
           "digital",
           "participatory"
         ],
-        "piece_slug": "cars-and-microcontrollers"
+        "piece_slug": "cars-and-microcontrollers",
+        "status": "concept",
+        "location": "Regional Queensland",
+        "lcaa_stages": [
+          "Action"
+        ]
       },
       "notion": {
         "page_id": "2b1ebcf9-81cf-8049-a70e-efee9b45c143"
@@ -2519,7 +2580,12 @@
           "documentary",
           "justice-art"
         ],
-        "piece_slug": "treacher"
+        "piece_slug": "treacher",
+        "status": "ideation",
+        "location": "TBC",
+        "lcaa_stages": [
+          "Listen"
+        ]
       },
       "notion": {
         "page_id": "c55b578a-e7d9-42d3-a31c-79d791ebe16b"
@@ -3027,6 +3093,153 @@
       },
       "notion": {
         "page_id": "3d3ebcf9-81cf-810a-a1e8-e3e099cbc3ac"
+      }
+    },
+    "ACT-CVN": {
+      "name": "The Caravan",
+      "code": "ACT-CVN",
+      "canonical_slug": "the-caravan",
+      "category": "arts",
+      "tier": "studio",
+      "status": "active",
+      "description": "Born at the 10x10 Community Capital Leadership Retreat, The Caravan is a hand-built room on wheels that travels between communities for leadership gatherings, listening sessions and on-Country convers",
+      "empathy_ledger": {
+        "partner_codes": [
+          "ACT-CVN"
+        ]
+      },
+      "notion_pages": [
+        "The Caravan"
+      ],
+      "parent_project": "ACT-CP",
+      "art": {
+        "media": [
+          "installation",
+          "making"
+        ],
+        "tags": [
+          "community-portrait",
+          "public-art",
+          "social-practice"
+        ],
+        "piece_slug": "the-caravan",
+        "status": "active",
+        "year": "2024–present",
+        "location": "Mobile, Australia",
+        "connected_code": "ACT-CP",
+        "lcaa_stages": [
+          "Action",
+          "Art"
+        ]
+      }
+    },
+    "ACT-TV": {
+      "name": "The Vagina",
+      "code": "ACT-TV",
+      "canonical_slug": "the-vagina",
+      "category": "arts",
+      "tier": "studio",
+      "status": "ideation",
+      "description": "An ACT Studio piece in early development. The working title is public, but its question, materials, collaborators and exhibition context are not yet documented. This page holds its place without prete",
+      "empathy_ledger": {
+        "tracked": false
+      },
+      "notion_pages": [
+        "The Vagina"
+      ],
+      "art": {
+        "media": [
+          "installation"
+        ],
+        "tags": [
+          "social-practice"
+        ],
+        "piece_slug": "the-vagina",
+        "status": "concept",
+        "location": "TBC",
+        "lcaa_stages": [
+          "Art"
+        ]
+      }
+    },
+    "ACT-PK": {
+      "name": "PICC Photo Kiosk",
+      "code": "ACT-PK",
+      "canonical_slug": "picc-photo-kiosk",
+      "category": "indigenous",
+      "tier": "studio",
+      "status": "active",
+      "description": "On Palm Island (Bwgcolman), a self-service photo station at the Palm Island Community Company shifted who holds the camera. Families, elders, young people and visitors documented their own stories on ",
+      "parent_project": "ACT-PI",
+      "empathy_ledger": {
+        "partner_codes": [
+          "PICC-CV"
+        ]
+      },
+      "notion_pages": [
+        "PICC Photo Kiosk / Server"
+      ],
+      "notion": {
+        "page_id": "22eebcf9-81cf-8002-abe6-d81960ea19da"
+      },
+      "art": {
+        "media": [
+          "photography",
+          "installation"
+        ],
+        "tags": [
+          "community-portrait",
+          "cultural-preservation",
+          "participatory"
+        ],
+        "piece_slug": "picc-photo-kiosk",
+        "status": "active",
+        "year": "2023–2025",
+        "location": "Palm Island, Queensland",
+        "connected_code": "ACT-PI",
+        "lcaa_stages": [
+          "Action",
+          "Art"
+        ]
+      }
+    },
+    "ACT-CTP": {
+      "name": "Confessions to Philanthropy",
+      "code": "ACT-CTP",
+      "canonical_slug": "confessions-to-philanthropy",
+      "category": "arts",
+      "tier": "studio",
+      "status": "active",
+      "description": "Confessions to Philanthropy is a gold phone and an anonymous voicemail for the sector that funds change. Callers leave unscripted messages about giving and power, the awkward and hopeful and unsaid, a",
+      "parent_project": "ACT-CS",
+      "empathy_ledger": {
+        "tracked": false
+      },
+      "sites": [
+        {
+          "role": "campaign",
+          "production_url": "https://act-regenerative-studio.vercel.app/confessions"
+        }
+      ],
+      "art": {
+        "media": [
+          "interactive",
+          "performance"
+        ],
+        "tags": [
+          "participatory",
+          "social-practice",
+          "public-art"
+        ],
+        "piece_slug": "confessions-to-philanthropy",
+        "status": "active",
+        "year": "2026",
+        "location": "Distributed / digital",
+        "lcaa_stages": [
+          "Listen",
+          "Art"
+        ],
+        "connected_code": "ACT-CS"
       }
     }
   },
