@@ -12,6 +12,14 @@ public_surface: work
 cluster: act-studio
 parent_project: act-studio
 empathy_ledger_key: the-vagina
+quote: |
+  A work has a home before it has a finished form
+summary: |
+  An ACT Studio piece in early development. The working title is public, but its question, materials, collaborators and exhibition context are not yet documented. This page holds its place without pretending the work is finished.
+philosophy: |
+  An emerging work should be visible as emerging. Its public record can grow as the question, authority, collaborators and material become clear.
+art_year: "In development"
+art_location: "TBC"
 ---
 
 # The Vagina

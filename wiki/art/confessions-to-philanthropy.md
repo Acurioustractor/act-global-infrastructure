@@ -13,6 +13,12 @@ public_surface: art
 cluster: art
 art_medium: [interactive, performance]
 quote: "Say the quiet bit out loud"
+summary: |
+  Confessions to Philanthropy is a gold phone and an anonymous voicemail for the sector that funds change. Callers leave unscripted messages about giving and power, the awkward and hopeful and unsaid, and the inbox becomes a public record you can listen to. It is not anti-philanthropy. It is a place to say the quiet bit out loud.
+philosophy: |
+  The word philanthropy first described Prometheus, who stole fire from the gods and gave it to people. It began as defiance of power, not a tool of it. The gold phone returns philanthropy to honesty: anonymous, unscripted, and unafraid of the quiet bit.
+art_year: "2026"
+art_location: "Distributed / digital"
 ---
 
 # Confessions to Philanthropy

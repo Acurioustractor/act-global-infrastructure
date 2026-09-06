@@ -12,6 +12,14 @@ public_surface: work
 cluster: act-studio
 parent_project: act-studio
 empathy_ledger_key: treacher
+quote: |
+  What remains when a tree leaves its ground
+summary: |
+  A tree pulled from its ground still carries the voice of where it came from. Treacher works with found objects and natural materials to sit with displacement: of trees, of languages, of the feeling of a place. The work holds what survives after removal, the root structure and the soil memory of something that was here.
+philosophy: |
+  Displacement is not just a political event. It happens to trees, to languages, to the feeling of a place. Treacher sits with what remains after removal, the root structure, the soil memory, the ghost of something that was here.
+art_year: "In development"
+art_location: "TBC"
 ---
 
 # Treacher

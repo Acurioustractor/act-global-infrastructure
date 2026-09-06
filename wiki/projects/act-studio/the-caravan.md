@@ -12,6 +12,14 @@ public_surface: work
 cluster: act-studio
 parent_project: community-capital
 empathy_ledger_key: the-caravan
+quote: |
+  A room with wheels that goes to the conversation
+summary: |
+  Born at the 10x10 Community Capital Leadership Retreat, The Caravan is a hand-built room on wheels that travels between communities for leadership gatherings, listening sessions and on-Country conversations. The table is always set, the kettle is always on, and the meeting comes to the people rather than asking the people to come to it.
+philosophy: |
+  The most important spaces are the ones that show up when and where they are needed. The Caravan is a room with wheels. It goes to the conversation rather than asking the conversation to come to it.
+art_year: "2024–present"
+art_location: "Mobile, Australia"
 ---
 
 # The Caravan

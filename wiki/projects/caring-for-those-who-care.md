@@ -8,6 +8,14 @@ website_slug: caring-for-those-who-care
 website_path: /projects/caring-for-those-who-care
 public_surface: project
 cluster: caring-for-those-who-care
+quote: |
+  The people who hold everyone else, and who holds them
+summary: |
+  Seven people built not-for-profits out of the hardest thing that ever happened to them, and the sector then asked each of them to keep telling that story, on stage and on demand, for as long as the support keeps coming. This work sits down with them, photographs them, and puts what the telling costs into their own words on a public wall and in an exhibition. It runs alongside a pilot study into the wellbeing of not-for-profit leaders and social entrepreneurs in Australia.
+philosophy: |
+  A founder is not their worst day. The sector meets these seven mid-performance and keeps rewarding them for staying there. The work is to let them be met as people first, with every word their own, and every word removable by them at any time.
+art_year: "2025 to 2026"
+art_location: "Sunshine Coast, Mount Isa, Sydney, Gold Coast and the Atherton Tablelands"
 ---
 
 # Caring for Those Who Care

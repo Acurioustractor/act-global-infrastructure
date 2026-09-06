@@ -13,6 +13,8 @@ cluster: picc
 parent_project: picc
 empathy_ledger_key: picc-photo
 art_medium: [photography, installation]
+quote: |
+  A portrait studio that travels to Palm Island, run on community terms
 ---
 
 # PICC On Country Photo Studio

@@ -12,6 +12,16 @@ public_surface: work
 cluster: act-studio
 parent_project: act-studio
 empathy_ledger_key: uncle-allan-palm-island-art
+quote: |
+  Reef life and Dreaming, painted on Bwgcolman
+summary: |
+  Uncle Allan paints reef ecology and Dreaming stories on Palm Island (Bwgcolman), a practice that long predates any partnership with ACT. Creative authority stays entirely with him; ACT contributes materials, documentation and pathways to market that respect cultural sovereignty. Seventeen works are documented so the knowledge held in them travels on the artist's terms.
+philosophy: |
+  Supporting an artist is not the same as commissioning one. Uncle Allan's practice existed before ACT. What ACT provides is infrastructure: materials, documentation, exhibition pathways, and economic channels that respect cultural authority.
+impact: |
+  17 works documented. 1 storyteller. Cultural knowledge preserved through art practice. Economic pathway established for artist.
+art_year: "2023–present"
+art_location: "Palm Island, Queensland"
 ---
 
 # Uncle Allan Palm Island Art

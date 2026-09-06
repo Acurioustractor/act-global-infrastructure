@@ -12,6 +12,16 @@ public_surface: work
 cluster: act-studio
 parent_project: act-studio
 empathy_ledger_key: gold-phone
+quote: |
+  Two strangers, one phone, whatever they choose to say
+summary: |
+  Gold.Phone is a sculptural phone booth that connects strangers through unscripted, anonymous voice calls. No screens, no filters, no swiping: just two people and whatever they choose to say to each other. Placed in public space, it treats voice as the simplest technology we have for being present to one another.
+philosophy: |
+  Social isolation is a design failure, not a personal one. Gold.Phone treats voice as the simplest technology for connection. Two strangers. No screens. No filters. Just presence.
+impact: |
+  Prototype deployed. Voice connection platform built. Partnering with councils and public space curators for permanent installations.
+art_year: "2024–present"
+art_location: "Distributed / digital"
 ---
 
 # Gold.Phone

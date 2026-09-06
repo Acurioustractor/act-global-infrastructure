@@ -12,6 +12,14 @@ public_surface: work
 cluster: act-studio
 parent_project: act-studio
 empathy_ledger_key: regional-arts-fellowship
+quote: |
+  Where art, technology and land meet in the regions
+summary: |
+  Across regional Australia, practitioners are doing extraordinary work at the edges of art, technology and agriculture, where the most urgent problems refuse to stay inside one field. This fellowship gives them residency time, mentorship and exhibition pathways so cross-disciplinary work can be seen, resourced and connected. Developed in connection with Black Cockatoo Valley.
+philosophy: |
+  Regional Australia is full of practitioners doing extraordinary work at the edges of art, technology, and land. This fellowship creates a frame for that work to be seen, resourced, and connected.
+art_year: "In development"
+art_location: "Regional Australia"
 ---
 
 # Regional Arts Fellowship
