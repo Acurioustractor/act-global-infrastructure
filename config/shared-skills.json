@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "description": "Which Claude skills this repo is canonical for, and which sibling repos take a synced copy. Edit skills here, never downstream. Sync: node scripts/sync-skills.mjs --all (check) / --all --apply.",
+    "repos": {
+      "act-regenerative-studio": "../act-regenerative-studio",
+      "act-farm": "../act-farm",
+      "JusticeHub": "../JusticeHub",
+      "empathy-ledger-v2": "../empathy-ledger-v2",
+      "The Harvest Website": "../The Harvest Website",
+      "Goods Asset Register": "../Goods Asset Register",
+      "grantscope": "../grantscope"
+    },
+    "stale_sources": [
+      "Copies under .claude/skills/global/ (the 2026-05 act-global-skills mechanism) and any skill whose name sits in this repo's .claude/skills/_archive are stale; --apply moves them to .claude/skills/_archive/<date>-stale/ in that repo."
+    ]
+  },
+  "skills": {
+    "act-brand-alignment": {
+      "repos": ["act-regenerative-studio", "act-farm", "JusticeHub", "The Harvest Website", "Goods Asset Register"],
+      "overlays": {
+        "act-regenerative-studio": ["references/public-copy-checklist.md"]
+      }
+    }
+  }
+}
