@@ -33,7 +33,7 @@
 
 ### Black Cockatoo Valley (BCV)
 **Regeneration Estate & Living Lab**
-- 150-acre (about 61 ha) property on Jinibara lands near Witta, Queensland
+- Property on Jinibara lands near Witta, Queensland (size: see `wiki/projects/black-cockatoo-valley.md`; sources have disagreed, do not quote a figure from here)
 - Working farm and living lab for R&D, residencies, accommodation, CSA exploration
 - Views to Mary River; creeks and forest down to Elaman Creek
 - Threatened species habitat (Glossy Black Cockatoo); conservation comes first
@@ -129,7 +129,7 @@ each time and do not restate a count or a list here.
 - Indigenous-majority governance on place-based projects
 
 ### Regenerative Outcomes
-- 150 acres (about 61 ha) of land under conservation-first management
+- The whole property under conservation-first management (size from the wiki page, not from here)
 - 50+ jobs created in marginalised communities
 - 70% reduction in waste through circular economy
 
