@@ -28,12 +28,12 @@
 - Co-designing essential products (beds, mattresses, washing machines) for remote communities while converting local waste into manufacturing inputs.
 - Tagline: "Your waste, your wealth"
 - Registry: Public feed includes title, summary, image, link, price range
-- Key features: Remote community co-design, circular manufacturing, waste-to-product conversion, community ownership of production
-- Revenue model: communities own production and profits. Do not quote a profit-share percentage; the only citable figure is whatever `wiki/decisions/act-core-facts.md` records, and today it records none.
+- Key features: designed in community, with community, for community; circular manufacturing, waste-to-product conversion, community ownership of production
+- Revenue model: communities own production and profits. Do not quote a profit-share percentage; the only citable figure is whatever `act-global-infrastructure/wiki/decisions/act-core-facts.md` records, and today it records none.
 
 ### Black Cockatoo Valley (BCV)
 **Regeneration Estate & Living Lab**
-- Property on Jinibara lands near Witta, Queensland (size: see `wiki/projects/act-farm/black-cockatoo-valley.md`; sources have disagreed, do not quote a figure from here)
+- Property on Jinibara Country (Witta, Queensland) (size: see `act-global-infrastructure/wiki/projects/act-farm/black-cockatoo-valley.md`; sources have disagreed, do not quote a figure from here)
 - Working farm and living lab for R&D, residencies, accommodation, CSA exploration
 - Views to Mary River; creeks and forest down to Elaman Creek
 - Threatened species habitat (Glossy Black Cockatoo); conservation comes first
@@ -110,7 +110,7 @@
 ### Entity structure
 Do not describe ACT's legal structure from this file. The dual-entity picture (a not-for-profit
 CLG plus a trading arm called "ACT Foundation" / "ACT Ventures") is retired; those were
-conceptual labels, never legal entities. `wiki/decisions/act-core-facts.md` holds the current
+conceptual labels, never legal entities. `act-global-infrastructure/wiki/decisions/act-core-facts.md` holds the current
 table of entities, which trades, which holds DGR, and how money flows, and it changes; read it
 each time and do not restate a count or a list here.
 
