@@ -86,7 +86,9 @@ export function buildSiteRow({ project, site, vercelProject, deployment, now = n
     vercel_project_id: vercelProject?.id || null,
     vercel_project_name: vercelProject?.name || null,
     github_repo: site.github_repo || (vercelProject?.link?.type === 'github' ? `${vercelProject.link.org}/${vercelProject.link.repo}` : null),
-    status: vercelProject ? status : 'external',
+    // An archive-role site is kept for the record, not watched: its last build
+    // may be red forever and that is not news.
+    status: site.role === 'archive' ? 'archived' : vercelProject ? status : 'external',
     last_deployment_at,
     last_check_at: now.toISOString(),
     updated_at: now.toISOString(),

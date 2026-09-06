@@ -2430,7 +2430,7 @@
       },
       "sites": [
         {
-          "role": "primary",
+          "role": "archive",
           "vercel_project_name": "barkly-research-platform",
           "vercel_project_id": "prj_RwGB1XfyB5uYPYN9DgZ34mj84yAj"
         }
