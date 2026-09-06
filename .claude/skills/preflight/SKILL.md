@@ -40,6 +40,14 @@ cd apps/command-center && npx tsc --noEmit 2>&1 | head -20
 
 Report: clean or number of errors found.
 
+## Step 3b: Project record
+
+```bash
+pnpm projects:check
+```
+
+Errors exit 1 and mean `config/project-codes.json` is malformed. Gaps are listed, not fatal, and are the fields a live project still needs (see `packages/act-projects/README.md`).
+
 ## Step 4: Schema Cache (if doing DB work)
 
 For any tables you'll be working with, query the actual schema:

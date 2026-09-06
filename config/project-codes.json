@@ -98,7 +98,28 @@
         "Amplify"
       ],
       "syndication_slug": "act_jh",
-      "production_url": "https://www.justicehub.com.au"
+      "production_url": "https://www.justicehub.com.au",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://www.justicehub.com.au",
+          "github_repo": "Acurioustractor/justicehub-platform"
+        }
+      ],
+      "notion": {
+        "page_id": "179ebcf9-81cf-8005-ad63-d2a736280011"
+      },
+      "ghl": {
+        "tags": [
+          "justicehub",
+          "justice",
+          "youth justice",
+          "youth-justice"
+        ]
+      },
+      "empathy_ledger": {
+        "syndication_slug": "act_jh"
+      }
     },
     "ACT-DG": {
       "name": "Diagrama",
@@ -122,7 +143,15 @@
       "xero_tracking": "ACT-DG — Diagrama",
       "dext_category": "Justice Projects",
       "alma_program": "education-rehab",
-      "tier": "background"
+      "tier": "background",
+      "notion": {
+        "page_id": "179ebcf9-81cf-8076-95f2-e39db7b980a5"
+      },
+      "ghl": {
+        "tags": [
+          "diagrama"
+        ]
+      }
     },
     "ACT-GD": {
       "name": "Goods",
@@ -155,7 +184,25 @@
       "alma_program": "economic-empowerment",
       "github_repo": "Acurioustractor/goods-asset-tracker",
       "syndication_slug": "act_gd",
-      "production_url": "https://www.goodsoncountry.com"
+      "production_url": "https://www.goodsoncountry.com",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://www.goodsoncountry.com",
+          "github_repo": "Acurioustractor/goods-asset-tracker"
+        }
+      ],
+      "notion": {
+        "page_id": "177ebcf9-81cf-805f-b111-f407079f9794"
+      },
+      "ghl": {
+        "tags": [
+          "goods"
+        ]
+      },
+      "empathy_ledger": {
+        "syndication_slug": "act_gd"
+      }
     },
     "ACT-EL": {
       "name": "Empathy Ledger",
@@ -193,7 +240,29 @@
         "Amplify"
       ],
       "syndication_slug": "act_el",
-      "production_url": "https://www.empathyledger.com"
+      "production_url": "https://www.empathyledger.com",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://www.empathyledger.com",
+          "github_repo": "Acurioustractor/empathy-ledger-v2"
+        }
+      ],
+      "notion": {
+        "page_id": "187ebcf9-81cf-8032-a28f-db8b76442ecd"
+      },
+      "ghl": {
+        "tags": [
+          "empathy-ledger",
+          "empathy ledger",
+          "empathy",
+          "storytelling",
+          "storyteller"
+        ]
+      },
+      "empathy_ledger": {
+        "syndication_slug": "act_el"
+      }
     },
     "ACT-CORE": {
       "name": "ACT Regenerative Studio",
@@ -236,7 +305,24 @@
         "Amplify"
       ],
       "syndication_slug": "act_core",
-      "production_url": "https://act.place"
+      "production_url": "https://act.place",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://act.place",
+          "github_repo": "Acurioustractor/act-regenerative-studio"
+        }
+      ],
+      "ghl": {
+        "tags": [
+          "act",
+          "studio",
+          "act-studio"
+        ]
+      },
+      "empathy_ledger": {
+        "syndication_slug": "act_core"
+      }
     },
     "ACT-PI": {
       "name": "PICC",
@@ -279,7 +365,23 @@
         "ACT-ER"
       ],
       "syndication_slug": "act_pi",
-      "production_url": "https://picc.studio"
+      "production_url": "https://picc.studio",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://picc.studio",
+          "github_repo": "Acurioustractor/palm-island-repository"
+        }
+      ],
+      "ghl": {
+        "tags": [
+          "picc",
+          "palm-island"
+        ]
+      },
+      "empathy_ledger": {
+        "syndication_slug": "act_pi"
+      }
     },
     "ACT-ER": {
       "name": "PICC Elders Room",
@@ -329,7 +431,16 @@
         "Elder quotes collection",
         "PICC Annual Report connection"
       ],
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "picc",
+          "palm-island",
+          "elders-room",
+          "hull-river",
+          "annual-report"
+        ]
+      }
     },
     "ACT-PS": {
       "name": "PICC On Country Photo Studio",
@@ -368,7 +479,26 @@
       "lcaa_themes": [
         "Listen",
         "Amplify"
-      ]
+      ],
+      "ghl": {
+        "tags": [
+          "picc",
+          "palm-island",
+          "photo-studio"
+        ]
+      },
+      "art": {
+        "media": [
+          "photography",
+          "installation"
+        ],
+        "tags": [
+          "community-portrait",
+          "cultural-preservation",
+          "participatory"
+        ],
+        "piece_slug": "picc-on-country-photo-studio"
+      }
     },
     "ACT-SS": {
       "name": "Storm Stories",
@@ -403,7 +533,14 @@
         "Listen",
         "Amplify"
       ],
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "picc",
+          "palm-island",
+          "storm-stories"
+        ]
+      }
     },
     "ACT-MR": {
       "name": "MingaMinga Rangers",
@@ -427,7 +564,13 @@
       "dext_category": "Indigenous Projects",
       "alma_program": "land-management",
       "cultural_protocols": true,
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "mingaminga",
+          "rangers"
+        ]
+      }
     },
     "ACT-UA": {
       "name": "Uncle Allan Palm Island Art",
@@ -458,7 +601,23 @@
       ],
       "dext_category": "Indigenous Projects",
       "alma_program": "cultural-arts",
-      "cultural_protocols": true
+      "cultural_protocols": true,
+      "ghl": {
+        "tags": [
+          "uncle-allan",
+          "palm-island-art"
+        ]
+      },
+      "art": {
+        "media": [
+          "painting"
+        ],
+        "tags": [
+          "cultural-preservation",
+          "documentary"
+        ],
+        "piece_slug": "uncle-allan-palm-island-art"
+      }
     },
     "ACT-MN": {
       "name": "Maningrida",
@@ -479,7 +638,15 @@
       "dext_category": "Justice Projects",
       "alma_program": "justice-reinvestment",
       "cultural_protocols": true,
-      "tier": "background"
+      "tier": "background",
+      "notion": {
+        "page_id": "1e7ebcf9-81cf-8038-9969-ccc7fb897b43"
+      },
+      "ghl": {
+        "tags": [
+          "maningrida"
+        ]
+      }
     },
     "ACT-FN": {
       "name": "First Nations Youth Advocacy",
@@ -503,7 +670,13 @@
       "dext_category": "Justice Projects",
       "alma_program": "youth-advocacy",
       "cultural_protocols": true,
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "first-nations",
+          "youth-advocacy"
+        ]
+      }
     },
     "ACT-FM": {
       "name": "The Farm",
@@ -545,7 +718,22 @@
       "dext_category": "Regenerative",
       "alma_program": "land-healing",
       "github_repo": "Acurioustractor/act-farm",
-      "production_url": "https://act-farm.vercel.app"
+      "production_url": "https://act-farm.vercel.app",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://act-farm.vercel.app",
+          "github_repo": "Acurioustractor/act-farm"
+        }
+      ],
+      "ghl": {
+        "tags": [
+          "farm",
+          "the-farm",
+          "bcv",
+          "black-cockatoo"
+        ]
+      }
     },
     "ACT-HV": {
       "name": "The Harvest Witta",
@@ -602,7 +790,24 @@
         "HV-Design",
         "HV-Contingency",
         "HV-Ops"
-      ]
+      ],
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://www.theharvestwitta.com.au",
+          "github_repo": "Acurioustractor/theharvest"
+        }
+      ],
+      "ghl": {
+        "tags": [
+          "harvest",
+          "the-harvest",
+          "witta"
+        ]
+      },
+      "empathy_ledger": {
+        "syndication_slug": "act_hv"
+      }
     },
     "ACT-CN": {
       "name": "Contained",
@@ -629,7 +834,23 @@
       ],
       "xero_tracking": "ACT-CN — Contained",
       "dext_category": "Social Enterprise",
-      "alma_program": "community-spaces"
+      "alma_program": "community-spaces",
+      "ghl": {
+        "tags": [
+          "contained"
+        ]
+      },
+      "art": {
+        "media": [
+          "installation"
+        ],
+        "tags": [
+          "immersive",
+          "justice-art",
+          "public-art"
+        ],
+        "piece_slug": "contained"
+      }
     },
     "ACT-FO": {
       "name": "Fishers Oysters",
@@ -654,7 +875,22 @@
       "dext_category": "Regenerative",
       "alma_program": "aquaculture",
       "syndication_slug": "act_fo",
-      "production_url": "https://www.fishersoysters.com"
+      "production_url": "https://www.fishersoysters.com",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://www.fishersoysters.com"
+        }
+      ],
+      "ghl": {
+        "tags": [
+          "fishers-oysters",
+          "fishers"
+        ]
+      },
+      "empathy_ledger": {
+        "syndication_slug": "act_fo"
+      }
     },
     "ACT-SM": {
       "name": "SMART",
@@ -680,7 +916,13 @@
         "Smart Stories"
       ],
       "dext_category": "Health",
-      "alma_program": "health-wellbeing"
+      "alma_program": "health-wellbeing",
+      "ghl": {
+        "tags": [
+          "smart",
+          "smart-connect"
+        ]
+      }
     },
     "ACT-CF": {
       "name": "The Confessional",
@@ -718,7 +960,27 @@
       "alma_program": "storytelling",
       "lcaa_themes": [
         "Listen"
-      ]
+      ],
+      "notion": {
+        "page_id": "229ebcf9-81cf-8004-b7ee-fe9a9683c75a"
+      },
+      "ghl": {
+        "tags": [
+          "confessional"
+        ]
+      },
+      "art": {
+        "media": [
+          "installation",
+          "performance"
+        ],
+        "tags": [
+          "immersive",
+          "participatory",
+          "social-practice"
+        ],
+        "piece_slug": "the-confessional"
+      }
     },
     "ACT-CM": {
       "name": "CAMPFIRE",
@@ -750,7 +1012,19 @@
         "Listen",
         "Act"
       ],
-      "production_url": "https://campfire-website-amber.vercel.app"
+      "production_url": "https://campfire-website-amber.vercel.app",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://campfire-website-amber.vercel.app"
+        }
+      ],
+      "ghl": {
+        "tags": [
+          "campfire",
+          "mount-isa"
+        ]
+      }
     },
     "ACT-GP": {
       "name": "Gold Phone",
@@ -787,7 +1061,25 @@
       "lcaa_themes": [
         "Listen",
         "Connect"
-      ]
+      ],
+      "ghl": {
+        "tags": [
+          "gold-phone",
+          "goldphone"
+        ]
+      },
+      "art": {
+        "media": [
+          "interactive",
+          "installation"
+        ],
+        "tags": [
+          "participatory",
+          "public-art",
+          "social-practice"
+        ],
+        "piece_slug": "gold-phone"
+      }
     },
     "ACT-MD": {
       "name": "ACT Monthly Dinners",
@@ -813,7 +1105,13 @@
       "alma_program": "community-building",
       "lcaa_themes": [
         "Connect"
-      ]
+      ],
+      "ghl": {
+        "tags": [
+          "act-monthly",
+          "dinners"
+        ]
+      }
     },
     "ACT-QF": {
       "name": "QFCC Empathy Ledger",
@@ -836,7 +1134,15 @@
       ],
       "dext_category": "Stories",
       "alma_program": "child-wellbeing",
-      "tier": "background"
+      "tier": "background",
+      "notion": {
+        "page_id": "1d7ebcf9-81cf-8075-8112-d0809ea7b64c"
+      },
+      "ghl": {
+        "tags": [
+          "qfcc"
+        ]
+      }
     },
     "ACT-DD": {
       "name": "Double Disadvantage",
@@ -856,7 +1162,15 @@
       "xero_tracking": "ACT-DD — Double Disadvantage",
       "dext_category": "Justice Projects",
       "alma_program": "disability-justice",
-      "tier": "background"
+      "tier": "background",
+      "notion": {
+        "page_id": "1f8ebcf9-81cf-8070-a502-c5e9059a3c67"
+      },
+      "ghl": {
+        "tags": [
+          "double-disadvantage"
+        ]
+      }
     },
     "ACT-BM": {
       "name": "Bimberi",
@@ -875,7 +1189,12 @@
       "xero_tracking": "ACT-BM — Bimberi",
       "dext_category": "Justice Projects",
       "alma_program": "youth-detention",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "bimberi"
+        ]
+      }
     },
     "ACT-AI": {
       "name": "AIME",
@@ -894,7 +1213,12 @@
       "xero_tracking": "ACT-AI — AIME",
       "dext_category": "Indigenous Projects",
       "alma_program": "mentoring",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "aime"
+        ]
+      }
     },
     "ACT-JP": {
       "name": "June's Patch",
@@ -922,7 +1246,13 @@
         "June's Patch"
       ],
       "dext_category": "Regenerative",
-      "alma_program": "community-gardens"
+      "alma_program": "community-gardens",
+      "ghl": {
+        "tags": [
+          "junes-patch",
+          "patch"
+        ]
+      }
     },
     "ACT-RT": {
       "name": "Redtape",
@@ -961,7 +1291,25 @@
       "alma_program": "cultural-arts",
       "lcaa_themes": [
         "Art"
-      ]
+      ],
+      "ghl": {
+        "tags": [
+          "redtape",
+          "red-tape"
+        ]
+      },
+      "art": {
+        "media": [
+          "installation",
+          "sculpture"
+        ],
+        "tags": [
+          "justice-art",
+          "public-art",
+          "social-practice"
+        ],
+        "piece_slug": "redtape"
+      }
     },
     "ACT-BG": {
       "name": "BG Fit",
@@ -986,7 +1334,22 @@
       "dext_category": "Health",
       "alma_program": "fitness",
       "syndication_slug": "act_bg",
-      "production_url": "https://campfire-website-amber.vercel.app"
+      "production_url": "https://campfire-website-amber.vercel.app",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://campfire-website-amber.vercel.app"
+        }
+      ],
+      "ghl": {
+        "tags": [
+          "bg-fit",
+          "bgfit"
+        ]
+      },
+      "empathy_ledger": {
+        "syndication_slug": "act_bg"
+      }
     },
     "ACT-CS": {
       "name": "Civic Scope",
@@ -1024,7 +1387,23 @@
       "alma_program": "civic-engagement",
       "github_repo": "Acurioustractor/grantscope",
       "syndication_slug": "act_cs",
-      "production_url": "https://civicgraph.app"
+      "production_url": "https://civicgraph.app",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://civicgraph.app",
+          "github_repo": "Acurioustractor/grantscope"
+        }
+      ],
+      "ghl": {
+        "tags": [
+          "civic-scope",
+          "grantscope"
+        ]
+      },
+      "empathy_ledger": {
+        "syndication_slug": "act_cs"
+      }
     },
     "ACT-MY": {
       "name": "Mounty Yarns",
@@ -1051,7 +1430,12 @@
       "lcaa_themes": [
         "Listen",
         "Amplify"
-      ]
+      ],
+      "ghl": {
+        "tags": [
+          "mounty-yarns"
+        ]
+      }
     },
     "ACT-TN": {
       "name": "TOMNET",
@@ -1070,7 +1454,12 @@
       "xero_tracking": "ACT-TN — TOMNET",
       "dext_category": "Community",
       "alma_program": "network-building",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "tomnet"
+        ]
+      }
     },
     "ACT-10": {
       "name": "10x10 Retreat",
@@ -1094,7 +1483,13 @@
       ],
       "dext_category": "Events",
       "alma_program": "leadership",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "10x10",
+          "retreat"
+        ]
+      }
     },
     "ACT-CP": {
       "name": "Community Capital",
@@ -1125,7 +1520,14 @@
         "Community Capital Retreat"
       ],
       "dext_category": "Funding",
-      "alma_program": "leadership"
+      "alma_program": "leadership",
+      "ghl": {
+        "tags": [
+          "community-capital",
+          "10x10",
+          "community capital"
+        ]
+      }
     },
     "ACT-CT": {
       "name": "ConFit Pathways",
@@ -1159,7 +1561,14 @@
       "alma_program": "youth-justice",
       "lcaa_themes": [
         "Act"
-      ]
+      ],
+      "ghl": {
+        "tags": [
+          "confit",
+          "confit-pathways",
+          "joe-kwon"
+        ]
+      }
     },
     "ACT-DL": {
       "name": "DadLab",
@@ -1182,7 +1591,12 @@
       ],
       "xero_tracking": "ACT-DL — DadLab",
       "dext_category": "Community",
-      "alma_program": "parenting"
+      "alma_program": "parenting",
+      "ghl": {
+        "tags": [
+          "dadlab"
+        ]
+      }
     },
     "ACT-SH": {
       "name": "The Shed",
@@ -1202,7 +1616,15 @@
       "xero_tracking": "ACT-SH — The Shed",
       "dext_category": "Technology",
       "alma_program": "maker-spaces",
-      "tier": "background"
+      "tier": "background",
+      "notion": {
+        "page_id": "215ebcf9-81cf-8086-a781-fa9df2559a13"
+      },
+      "ghl": {
+        "tags": [
+          "shed"
+        ]
+      }
     },
     "ACT-SE": {
       "name": "SEFA Partnership",
@@ -1224,7 +1646,12 @@
         "SEFA"
       ],
       "dext_category": "Funding",
-      "alma_program": "social-finance"
+      "alma_program": "social-finance",
+      "ghl": {
+        "tags": [
+          "sefa"
+        ]
+      }
     },
     "ACT-CE": {
       "name": "Custodian First Economy",
@@ -1243,7 +1670,12 @@
       ],
       "xero_tracking": "ACT-CE — Custodian Economy",
       "dext_category": "Social Enterprise",
-      "alma_program": "economic-models"
+      "alma_program": "economic-models",
+      "ghl": {
+        "tags": [
+          "custodian-first-economy"
+        ]
+      }
     },
     "ACT-AS": {
       "name": "Art for Social Change",
@@ -1269,7 +1701,12 @@
         "Act",
         "Amplify"
       ],
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "art-social-change"
+        ]
+      }
     },
     "ACT-RA": {
       "name": "Regional Arts Fellowship",
@@ -1298,7 +1735,21 @@
         "Radical Scoops"
       ],
       "dext_category": "Arts",
-      "alma_program": "regional-arts"
+      "alma_program": "regional-arts",
+      "ghl": {
+        "tags": [
+          "regional-arts"
+        ]
+      },
+      "art": {
+        "media": [
+          "residency"
+        ],
+        "tags": [
+          "social-practice"
+        ],
+        "piece_slug": "regional-arts-fellowship"
+      }
     },
     "ACT-WJ": {
       "name": "Wilya Janta",
@@ -1318,7 +1769,12 @@
       "dext_category": "Indigenous Projects",
       "alma_program": "indigenous-comms",
       "cultural_protocols": true,
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "wilya-janta"
+        ]
+      }
     },
     "ACT-YC": {
       "name": "YAC Story and Action",
@@ -1340,7 +1796,12 @@
       ],
       "dext_category": "Justice Projects",
       "alma_program": "youth-voice",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "yac"
+        ]
+      }
     },
     "ACT-TW": {
       "name": "Travelling Women's Car",
@@ -1363,7 +1824,12 @@
       "dext_category": "Indigenous Projects",
       "alma_program": "cultural-preservation",
       "cultural_protocols": true,
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "travelling-womens-car"
+        ]
+      }
     },
     "ACT-HS": {
       "name": "Project Her-Self",
@@ -1385,7 +1851,12 @@
       ],
       "dext_category": "Community",
       "alma_program": "womens-empowerment",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "project-herself"
+        ]
+      }
     },
     "ACT-DH": {
       "name": "Deadly Homes and Gardens",
@@ -1408,7 +1879,12 @@
       "dext_category": "Indigenous Projects",
       "alma_program": "housing",
       "cultural_protocols": true,
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "deadly-homes"
+        ]
+      }
     },
     "ACT-MM": {
       "name": "MMEIC Justice",
@@ -1430,7 +1906,12 @@
       ],
       "dext_category": "Justice Projects",
       "alma_program": "justice-reform",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "mmeic"
+        ]
+      }
     },
     "ACT-MU": {
       "name": "Murrup + ACT",
@@ -1453,7 +1934,12 @@
       "dext_category": "Indigenous Projects",
       "alma_program": "first-nations",
       "cultural_protocols": true,
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "murrup"
+        ]
+      }
     },
     "ACT-OO": {
       "name": "Oonchiumpa",
@@ -1475,7 +1961,21 @@
       "alma_program": "first-nations",
       "cultural_protocols": true,
       "syndication_slug": "act_oo",
-      "production_url": "https://oonchiumpa-app.vercel.app"
+      "production_url": "https://oonchiumpa-app.vercel.app",
+      "sites": [
+        {
+          "role": "primary",
+          "production_url": "https://oonchiumpa-app.vercel.app"
+        }
+      ],
+      "ghl": {
+        "tags": [
+          "oonchiumpa"
+        ]
+      },
+      "empathy_ledger": {
+        "syndication_slug": "act_oo"
+      }
     },
     "ACT-CA": {
       "name": "Caring for those who care",
@@ -1509,7 +2009,23 @@
       "lcaa_themes": [
         "Listen",
         "Amplify"
-      ]
+      ],
+      "ghl": {
+        "tags": [
+          "caring"
+        ]
+      },
+      "art": {
+        "media": [
+          "exhibition",
+          "performance"
+        ],
+        "tags": [
+          "social-practice",
+          "community-portrait"
+        ],
+        "piece_slug": "caring-for-those-who-care"
+      }
     },
     "ACT-MC": {
       "name": "Cars and Microcontrollers",
@@ -1539,7 +2055,23 @@
         "Cars Micro"
       ],
       "dext_category": "Arts",
-      "alma_program": "arts-impact"
+      "alma_program": "arts-impact",
+      "ghl": {
+        "tags": [
+          "cars-microcontrollers"
+        ]
+      },
+      "art": {
+        "media": [
+          "interactive",
+          "making"
+        ],
+        "tags": [
+          "digital",
+          "participatory"
+        ],
+        "piece_slug": "cars-and-microcontrollers"
+      }
     },
     "ACT-BR": {
       "name": "ACT Bali Retreat",
@@ -1562,7 +2094,13 @@
       ],
       "dext_category": "Events",
       "alma_program": "leadership",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "bali",
+          "retreat"
+        ]
+      }
     },
     "ACT-BB": {
       "name": "Barkly Backbone",
@@ -1585,7 +2123,12 @@
       ],
       "dext_category": "Indigenous Projects",
       "alma_program": "first-nations",
-      "cultural_protocols": true
+      "cultural_protocols": true,
+      "ghl": {
+        "tags": [
+          "barkly"
+        ]
+      }
     },
     "ACT-JC": {
       "name": "JusticeHub Centre of Excellence",
@@ -1606,7 +2149,13 @@
       ],
       "xero_tracking": "ACT-JC — JusticeHub Centre of Excellence",
       "dext_category": "Justice Projects",
-      "alma_program": "justice-reform"
+      "alma_program": "justice-reform",
+      "ghl": {
+        "tags": [
+          "justicehub",
+          "coe"
+        ]
+      }
     },
     "ACT-TR": {
       "name": "Treacher",
@@ -1632,7 +2181,22 @@
       ],
       "xero_tracking": "ACT-TR — Treacher",
       "dext_category": "Arts",
-      "alma_program": "arts-impact"
+      "alma_program": "arts-impact",
+      "ghl": {
+        "tags": [
+          "treacher"
+        ]
+      },
+      "art": {
+        "media": [
+          "film"
+        ],
+        "tags": [
+          "documentary",
+          "justice-art"
+        ],
+        "piece_slug": "treacher"
+      }
     },
     "ACT-DO": {
       "name": "Designing for Obsolescence",
@@ -1654,7 +2218,12 @@
         "Design Obs"
       ],
       "dext_category": "Technology",
-      "alma_program": "economic-models"
+      "alma_program": "economic-models",
+      "ghl": {
+        "tags": [
+          "obsolescence"
+        ]
+      }
     },
     "ACT-GL": {
       "name": "Global Laundry Alliance",
@@ -1677,7 +2246,13 @@
         "GLA"
       ],
       "dext_category": "Social Enterprise",
-      "alma_program": "economic-empowerment"
+      "alma_program": "economic-empowerment",
+      "ghl": {
+        "tags": [
+          "gla",
+          "global-laundry"
+        ]
+      }
     },
     "ACT-CC": {
       "name": "ACT Conservation Collective",
@@ -1696,7 +2271,12 @@
       "xero_tracking": "ACT-CC — Conservation Collective",
       "dext_category": "Regenerative",
       "alma_program": "conservation",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "conservation-collective"
+        ]
+      }
     },
     "ACT-FP": {
       "name": "Fairfax PLACE Tech",
@@ -1719,7 +2299,13 @@
       ],
       "dext_category": "Technology",
       "alma_program": "economic-models",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "fairfax",
+          "place-tech"
+        ]
+      }
     },
     "ACT-FA": {
       "name": "Festival Activations",
@@ -1739,7 +2325,13 @@
       "xero_tracking": "ACT-FA — Festival Activations",
       "dext_category": "Events",
       "alma_program": "community-building",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "festivals",
+          "activations"
+        ]
+      }
     },
     "ACT-SF": {
       "name": "SAF Foundation",
@@ -1758,7 +2350,12 @@
       "xero_tracking": "ACT-SF — SAF Foundation",
       "dext_category": "Funding",
       "alma_program": "social-finance",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "saf-foundation"
+        ]
+      }
     },
     "ACT-SX": {
       "name": "SXSW 2025",
@@ -1781,7 +2378,13 @@
       ],
       "dext_category": "Events",
       "alma_program": "leadership",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "sxsw",
+          "sxsw-2025"
+        ]
+      }
     },
     "ACT-WE": {
       "name": "Westpac Summit 2025",
@@ -1804,7 +2407,13 @@
       ],
       "dext_category": "Events",
       "alma_program": "leadership",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "westpac",
+          "summit"
+        ]
+      }
     },
     "ACT-RP": {
       "name": "RPPP Stream Two",
@@ -1828,7 +2437,13 @@
       "dext_category": "Indigenous Projects",
       "alma_program": "first-nations",
       "cultural_protocols": true,
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "rppp",
+          "precinct"
+        ]
+      }
     },
     "ACT-OE": {
       "name": "Olive Express",
@@ -1847,7 +2462,12 @@
       "xero_tracking": "ACT-OE — Olive Express",
       "dext_category": "Regenerative",
       "alma_program": "food-systems",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "olive-express"
+        ]
+      }
     },
     "ACT-OS": {
       "name": "Orange Sky EL",
@@ -1869,7 +2489,12 @@
       ],
       "dext_category": "Stories",
       "alma_program": "storytelling",
-      "tier": "background"
+      "tier": "background",
+      "ghl": {
+        "tags": [
+          "orange-sky"
+        ]
+      }
     },
     "ACT-IN": {
       "name": "ACT Infrastructure",
@@ -1893,7 +2518,13 @@
         "Operations"
       ],
       "dext_category": "Technology",
-      "alma_program": "economic-models"
+      "alma_program": "economic-models",
+      "ghl": {
+        "tags": [
+          "infrastructure",
+          "operations"
+        ]
+      }
     },
     "ACT-GCC": {
       "name": "Global Community Connections",
