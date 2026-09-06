@@ -44,6 +44,10 @@ export function runGuards(projects, { repoRoot, wikiIndex }) {
     if (hasArt) {
       if (!p.art) fail('gap', p, 'art', 'art_medium set but no art block');
       else {
+        if (p.art.connected_code && !projects[p.art.connected_code]) fail('error', p, 'art.connected_code', `${p.art.connected_code} is not a project code`);
+        if (p.empathy_ledger?.tracked !== false && !p.empathy_ledger?.project_id && !(p.empathy_ledger?.partner_codes || []).length) {
+          fail('gap', p, 'empathy_ledger.project_id', 'art piece has no Empathy Ledger project');
+        }
         const wikiHit = p.art.wiki_path || (wikiIndex.get(p.art.piece_slug) || [])[0];
         if (!wikiHit) fail('gap', p, 'art.wiki_path', `no wiki page for piece ${p.art.piece_slug}`);
         else if (!existsSync(join(repoRoot, wikiHit))) fail('error', p, 'art.wiki_path', `${wikiHit} does not exist`);
