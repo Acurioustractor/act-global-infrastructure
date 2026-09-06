@@ -36,6 +36,9 @@ export function walk(dir, base = dir) {
   const out = [];
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
+    // A dangling symlink is not a file to sync or to count; the real infra
+    // checkout has a few in _archive from the 2026-05 mechanism.
+    if (lstatSync(p).isSymbolicLink() && !existsSync(p)) continue;
     if (statSync(p).isDirectory()) out.push(...walk(p, base));
     else out.push(relative(base, p));
   }
