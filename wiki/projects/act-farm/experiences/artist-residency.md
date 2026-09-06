@@ -15,7 +15,7 @@ last_updated: 2026-04-14
 
 ## What it is
 
-We run an artist residency at [[black-cockatoo-valley|Black Cockatoo Valley]] — 150 acres of Jinibara Country in the Sunshine Coast hinterland. We invite artists to live and work here for a defined stretch of time, with accommodation, studio space, meals from the garden, and honest time with the land.
+We run an artist residency at [[black-cockatoo-valley|Black Cockatoo Valley]] — 138 acres of Jinibara Country in the Sunshine Coast hinterland. We invite artists to live and work here for a defined stretch of time, with accommodation, studio space, meals from the garden, and honest time with the land.
 
 We don't treat the residency as a gallery pipeline. We treat it as a placement on Country. What the artist makes, whether they finish it here, and where it ends up — those are their decisions. What we ask for in return is presence: that the artist actually spends time with this place, not just on it.
 

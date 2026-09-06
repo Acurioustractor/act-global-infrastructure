@@ -21,9 +21,9 @@ This language is philosophically consistent with [[beautiful-obsolescence|Beauti
 
 But it is now growth-limiting for the specific products where ACT needs capital to compound:
 
-1. **Act-Farm needs investment to build more accommodation.** The 150-acre property on Jinibara Country has capacity for eco-cottages, artist studios, and workshop spaces that don't yet exist. Capital investors and philanthropy partners won't fund infrastructure they're told will be handed away.
+1. **Act-Farm needs investment to build more accommodation.** The 138-acre property on Jinibara Country has capacity for eco-cottages, artist studios, and workshop spaces that don't yet exist. Capital investors and philanthropy partners won't fund infrastructure they're told will be handed away.
 2. **The Harvest needs a revenue-generating model, not a cost centre.** At $550–900K capex to build the physical site, it needs to demonstrate returning capital, not promising obsolescence.
-3. **Residency networks scale.** A single 150-acre site has a revenue ceiling (~$600–900K gross). A portfolio of 3–5 sites operated or co-managed by ACT breaks that ceiling. That requires reinvestment, not distribution.
+3. **Residency networks scale.** A single 138-acre site has a revenue ceiling (~$600–900K gross). A portfolio of 3–5 sites operated or co-managed by ACT breaks that ceiling. That requires reinvestment, not distribution.
 
 ## What changes
 

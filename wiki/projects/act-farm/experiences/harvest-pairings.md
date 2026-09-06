@@ -15,7 +15,7 @@ last_updated: 2026-04-14
 
 ## What it is
 
-Harvest Pairings is the program strand that runs between [[the-harvest|The Harvest]] — the regenerative community hub on the former Green Harvest site in Witta — and [[black-cockatoo-valley|Black Cockatoo Valley]], the 150-acre land holding up the road. They're both on Jinibara Country, operated by the same ecosystem, and the food and program loop between them is deliberate.
+Harvest Pairings is the program strand that runs between [[the-harvest|The Harvest]] — the regenerative community hub on the former Green Harvest site in Witta — and [[black-cockatoo-valley|Black Cockatoo Valley]], the 138-acre land holding up the road. They're both on Jinibara Country, operated by the same ecosystem, and the food and program loop between them is deliberate.
 
 Some things happen at BCV because the land makes them possible. Some things happen at Harvest because the kitchen and the public-facing hours make them possible. Pairings are the format that uses both.
 

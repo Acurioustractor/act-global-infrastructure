@@ -13,7 +13,7 @@ project_code: ACT-BV
 
 # Black Cockatoo Valley
 
-> A 150-acre property on Jinibara Country near Witta, Queensland. Conservation-first. The land sets the pace, not the calendar.
+> A 138-acre property on Jinibara Country near Witta, Queensland. Conservation-first. The land sets the pace, not the calendar.
 
 **Status:** Active | **Code:** ACT-BV | **Tier:** Satellite | **Country:** Jinibara
 
@@ -27,7 +27,7 @@ BCV is the quiet anchor of the ACT ecosystem. It is where residencies, workshops
 
 - **Country:** Jinibara
 - **Location:** Near Witta, Queensland
-- **Size:** 150 acres
+- **Size:** 138 acres (55.8 ha, title land size 557,803 m²; canonical note: act-farm/black-cockatoo-valley.md)
 - **Focus:** Conservation, land practice, R&D, residencies
 - **Model:** Revenue reinvested into restoration and stewardship
 

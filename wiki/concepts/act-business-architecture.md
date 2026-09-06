@@ -33,7 +33,7 @@ FY26 actuals are from the Xero mirror (cash basis, voided excluded). **Caveat:**
 | **JusticeHub** | ACT-JH | +$120K ($122K / $1K) | Youth-justice evidence platform; grant-funded | Core program | A Curious Tractor Pty Ltd |
 | **CivicGraph** | (no code) | not in ACT books | Civic-intelligence SaaS; built to stand alone | Future spinout (deferred) | ACT Pty IP for now; own entity at raise/revenue |
 | **The Harvest** | ACT-HV | +$92K ($187K / $95K) | Regenerative community hub, Witta | Commercial subsidiary | The Harvest Pty Ltd (ACT majority + landlord minority) |
-| **ACT Farm / Black Cockatoo Valley** | ACT-FM | −$101K ($7K / $108K) | 150-acre conservation + practice land | Land + program | Land in Nic's trust (leased to ACT); programs run as ACT-FM. Farm Pty only if/when it earns |
+| **ACT Farm / Black Cockatoo Valley** | ACT-FM | −$101K ($7K / $108K) | 138-acre conservation + practice land | Land + program | Land in Nic's trust (leased to ACT); programs run as ACT-FM. Farm Pty only if/when it earns |
 | **Goods on Country** | ACT-GD | +$14K ($484K / $469K) | Recycled-plastic essential goods with remote communities | Country / DGR charity + commercial arm | **The Butterfly Movement Ltd** (charity, grants/DGR) + **ACT Pty** (commercial) + community production entities |
 | **PICC** | ACT-PI | +$323K ($365K / $43K) | Palm Island, 100% community-controlled | Partnership | PICC (ACT is supplier/supporter) |
 | **Oonchiumpa** | ACT-OO | +$26K ($103K / $77K) | Mparntwe, Aboriginal-led (Kristy Bloomfield, Tanya Turner) | Partnership | Oonchiumpa |

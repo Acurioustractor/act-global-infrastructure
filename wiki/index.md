@@ -326,7 +326,7 @@ wiki/
 - [[tomnet|TOMNET]] — Community Network, Elder Support
 - [[uncle-allan-palm-island-art|Uncle Allan Palm Island Art]] — Indigenous Art, Cultural Sovereignty, Digital Storytelling
 - [[act-studio|ACT Regenerative Studio]] — ecosystem hub at act.place, Compendium, the connective storefront
-- [[black-cockatoo-valley|Black Cockatoo Valley]] — 150-acre Jinibara Country property, conservation-first land practice
+- [[black-cockatoo-valley|Black Cockatoo Valley]] — 138-acre Jinibara Country property, conservation-first land practice
 - [[campfire|CAMPFIRE]] — community gathering, Mount Isa, Brodie Germaine
 - [[confit-pathways|Confit Pathways]] — gym, mentorship, post-release reintegration (Joe Kwon)
 - [[diagrama|Diagrama]] — Spanish youth justice precedent, Murcia model, the Olga trip

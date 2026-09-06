@@ -72,7 +72,7 @@ Technical and governance measures preventing sacred or culturally sensitive cont
 ## Places
 
 ### Black Cockatoo Valley (BCV)
-150-acre property on Jinibara Country near Witta, Queensland. Conservation-first land practice, Nature Refuge designation. Home to residencies, workshops, and habitat restoration.
+138-acre property on Jinibara Country near Witta, Queensland. Conservation-first land practice, Nature Refuge designation. Home to residencies, workshops, and habitat restoration.
 
 ### The Harvest
 Enterprise hub in Witta supporting local makers, therapeutic horticulture, and community-led business. Tests sustainable enterprise models at human scale.

@@ -76,7 +76,7 @@ Pairings with [[the-harvest|The Harvest]] in Witta — shared meals, paired work
 ## Ecosystem cross-links
 
 - [[act-farm|ACT Farm]] — the program hub these experiences operate inside
-- [[black-cockatoo-valley|Black Cockatoo Valley]] — the 150-acre land holding
+- [[black-cockatoo-valley|Black Cockatoo Valley]] — the 138-acre land holding
 - [[the-harvest|The Harvest]] — sister site in Witta for harvest pairings
 - [[lcaa-method|LCAA Method]] — the underlying method every experience works through
 - [[place-land-practice|Place & Land Practice]] — the land-first operating frame
