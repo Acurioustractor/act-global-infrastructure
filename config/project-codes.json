@@ -331,7 +331,8 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_core"
+        "syndication_slug": "act_core",
+        "tracked": false
       },
       "notion": {
         "page_id": "204ebcf9-81cf-80f4-a3c9-fb18b904b2cb"
@@ -525,6 +526,9 @@
       "empathy_ledger": {
         "project_id": "9bca5d4d-11bb-439c-8a01-9ab05f8f8ff0",
         "project_key": "picc-photo"
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-8152-b07f-ef13c8863f34"
       }
     },
     "ACT-SS": {
@@ -910,6 +914,9 @@
       "empathy_ledger": {
         "project_id": "9b90b47c-2a4c-409c-97d5-3718aaf8c30c",
         "project_key": "contained"
+      },
+      "notion": {
+        "page_id": "228ebcf9-81cf-809e-8368-f9dae2a41129"
       }
     },
     "ACT-FO": {
@@ -1095,6 +1102,9 @@
       "empathy_ledger": {
         "project_id": "b5aeb09c-55e2-44a9-966c-660d6c5d3719",
         "project_key": "campfire"
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-81b2-afad-cf4ab729bce4"
       }
     },
     "ACT-GP": {
@@ -1192,6 +1202,9 @@
       },
       "notion": {
         "page_id": "8d710c7b-4ba2-43c5-ac2f-88b5abe8d82c"
+      },
+      "empathy_ledger": {
+        "tracked": false
       }
     },
     "ACT-QF": {
@@ -1407,6 +1420,9 @@
       "empathy_ledger": {
         "project_id": "45e0c5de-902a-41a0-be32-8ef781eda0e7",
         "project_key": "redtape"
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-81db-8646-f81cb109ab99"
       }
     },
     "ACT-BG": {
@@ -1506,6 +1522,9 @@
         "syndication_slug": "act_cs",
         "project_id": "ec2ad2d8-13d6-4488-87ae-5385ddf73394",
         "project_key": "civicgraph"
+      },
+      "notion": {
+        "page_id": "32eebcf9-81cf-808b-8ecb-cec3fcfb544d"
       }
     },
     "ACT-MY": {
@@ -1644,12 +1663,12 @@
           "community capital"
         ]
       },
-      "notion": {
-        "page_id": "267ebcf9-81cf-80b8-ad56-d7c0ee509fcf"
-      },
       "empathy_ledger": {
         "project_id": "f7f046d1-75ff-4e6c-889d-270b9526ee30",
         "project_key": "community-capital"
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-8168-9a08-fa8b16b309ad"
       }
     },
     "ACT-CT": {
@@ -1691,6 +1710,9 @@
           "confit-pathways",
           "joe-kwon"
         ]
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-814d-a5f9-ca21638f7228"
       }
     },
     "ACT-DL": {
@@ -1812,6 +1834,12 @@
       "empathy_ledger": {
         "project_id": "e7439838-23a6-4dff-83a2-f570328aa41a",
         "project_key": "custodian-economy"
+      },
+      "slug_aliases": [
+        "custodian-economy"
+      ],
+      "notion": {
+        "page_id": "1d7ebcf9-81cf-808b-a394-f2e547d6ee6c"
       }
     },
     "ACT-AS": {
@@ -1890,6 +1918,9 @@
       "empathy_ledger": {
         "project_id": "32cbfb59-028e-4c4d-a37b-6b51c56dac48",
         "project_key": "regional-arts-fellowship"
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-8106-976f-d53002ea561e"
       }
     },
     "ACT-WJ": {
@@ -2133,7 +2164,8 @@
         ]
       },
       "empathy_ledger": {
-        "syndication_slug": "act_oo"
+        "syndication_slug": "act_oo",
+        "tracked": false
       },
       "notion": {
         "page_id": "1d4ebcf9-81cf-80a2-8c12-e5c56d78de10"
@@ -2310,6 +2342,9 @@
       },
       "notion": {
         "page_id": "229ebcf9-81cf-80f1-a053-e6b8cd3b0362"
+      },
+      "empathy_ledger": {
+        "tracked": false
       }
     },
     "ACT-JC": {
@@ -2340,6 +2375,9 @@
       },
       "notion": {
         "page_id": "1a0ebcf9-81cf-8016-859c-dc3443aed8d5"
+      },
+      "empathy_ledger": {
+        "tracked": false
       }
     },
     "ACT-TR": {
@@ -2418,6 +2456,9 @@
       },
       "notion": {
         "page_id": "22febcf9-81cf-800a-b4a5-ce2fa870a03d"
+      },
+      "empathy_ledger": {
+        "tracked": false
       }
     },
     "ACT-GL": {
@@ -2757,7 +2798,10 @@
       "notion": {
         "page_id": "211ebcf9-81cf-807b-a02f-cc3ea9711c05"
       },
-      "internal": true
+      "internal": true,
+      "empathy_ledger": {
+        "tracked": false
+      }
     },
     "ACT-GCC": {
       "name": "Global Community Connections",
@@ -2800,6 +2844,9 @@
       "empathy_ledger": {
         "project_id": "f7c66657-4d91-45ec-86a4-3091812ee91c",
         "project_key": "feel-good-project"
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-8178-8e27-dcea0351a790"
       }
     },
     "ACT-CB": {
@@ -2819,6 +2866,9 @@
       "empathy_ledger": {
         "project_id": "49f88946-ded0-4a80-abc5-b2ec96baf90d",
         "project_key": "marriage-celebrant"
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-8130-bd9c-d7e08bf7c9bf"
       }
     },
     "ACT-GS": {
@@ -2828,7 +2878,13 @@
       "category": "background",
       "status": "active",
       "description": "GrantScope tool / CivicGraph reference. Wiki page at wiki/projects/grantscope.md. Lives in separate repo at /Users/benknight/Code/grantscope.",
-      "tier": "background"
+      "tier": "background",
+      "empathy_ledger": {
+        "tracked": false
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-817b-8cc5-d6ec2664e400"
+      }
     },
     "ACT-PB": {
       "name": "Place-Based Policy Lab",
@@ -2837,7 +2893,13 @@
       "category": "background",
       "status": "active",
       "description": "Background record (added 2026-05-09 cleanup) — wiki page exists at wiki/projects/place-based-policy-lab.md.",
-      "tier": "background"
+      "tier": "background",
+      "empathy_ledger": {
+        "tracked": false
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-819b-8a96-d1ad5ded58e9"
+      }
     },
     "ACT-DLB": {
       "name": "Deadly Labs",
@@ -2846,7 +2908,13 @@
       "category": "background",
       "status": "active",
       "description": "Background record (added 2026-05-09 cleanup) — wiki page exists at wiki/projects/deadlylabs.md.",
-      "tier": "background"
+      "tier": "background",
+      "empathy_ledger": {
+        "tracked": false
+      },
+      "notion": {
+        "page_id": "3d3ebcf9-81cf-810a-a1e8-e3e099cbc3ac"
+      }
     }
   },
   "categories": {
