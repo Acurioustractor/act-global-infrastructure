@@ -6,7 +6,7 @@ date: 2026-05-16
 owner: ben
 description: |
   Single source of truth for ACT's fixed compliance obligations. Grant
-  acquittals are NOT listed here — they're auto-pulled from
+  acquittals are NOT listed here, they're auto-pulled from
   ghl_opportunities.acquittal_due_date at calendar-build time.
 
   Read by:
@@ -17,7 +17,7 @@ description: |
 
   EDIT THIS FILE when:
     - A new fixed obligation appears (annual review for a new entity, etc.)
-    - A due date moves (rare — most are statute-driven)
+    - A due date moves (rare, most are statute-driven)
     - An obligation is filed: change status to 'filed' and bump last_filed_at
 
 obligations:
@@ -45,15 +45,15 @@ obligations:
     lead_times_days: [30, 7, 1]
     notes: |
       LAST sole-trader BAS. Lodged by Standard Ledger early Jul 2026
-      (per Ben, 2026-07-08 — "SL just did the last two BAS"). ⚠ CONFIRM
+      (per Ben, 2026-07-08, "SL just did the last two BAS"). ⚠ CONFIRM
       exact lodge date + that Q4 (not another quarter) is one of the two.
       FY26 mirror is essentially reconciled (10 residual Visa lines/$2.3K).
-      Cutover to Pty: Xero still on the sole-trader org as of 2026-07-08 —
+      Cutover to Pty: Xero still on the sole-trader org as of 2026-07-08,
       Pty Ltd BAS lifecycle starts Q1 FY26-27 (Jul-Sep 2026) once its org
       is live.
 
   - id: bas-q1-fy26-27-pty
-    title: BAS Q1 FY26-27 (Jul-Sep 2026) — FIRST Pty Ltd BAS
+    title: BAS Q1 FY26-27 (Jul-Sep 2026), FIRST Pty Ltd BAS
     type: BAS
     entity: pty-ltd
     due_date: 2026-10-28
@@ -114,7 +114,7 @@ obligations:
   # ─── ASIC (Pty Ltd company review) ───
 
   - id: asic-annual-act-pty-1st
-    title: ASIC annual review — A Curious Tractor Pty Ltd (first)
+    title: ASIC annual review, A Curious Tractor Pty Ltd (first)
     type: ASIC
     entity: pty-ltd
     due_date: 2027-04-24
@@ -128,7 +128,7 @@ obligations:
   # ─── Charity reporting (A Kind Tractor Ltd, dormant) ───
 
   - id: acnc-annual-aiks-tractor
-    title: ACNC Annual Information Statement — A Kind Tractor Ltd
+    title: ACNC Annual Information Statement, A Kind Tractor Ltd
     type: ACNC
     entity: a-kind-tractor-ltd
     due_date: 2026-12-31
@@ -163,7 +163,7 @@ obligations:
 This page is generated from frontmatter above. Edit the `obligations:` array to
 add/change items. The companion script `scripts/build-compliance-calendar.mjs`
 merges this list with `ghl_opportunities.acquittal_due_date` rows (grant
-acquittals — dynamic) into a unified calendar published at
+acquittals, dynamic) into a unified calendar published at
 `/finance/command` (AT RISK TODAY pane) + Notion + Telegram.
 
 ## Entities
@@ -205,17 +205,17 @@ at run-time. To see all current grant acquittals on `/finance/command`,
 they appear in the AT RISK TODAY pane automatically.
 
 When a grant is acquitted: set `acquittal_status = 'complete'` in GHL
-(or via `/finance/workbench`) — the next cron run removes it from AT RISK.
+(or via `/finance/workbench`), the next cron run removes it from AT RISK.
 
 ## When to edit this file
 
 - New fixed obligation appears (e.g., new entity registered)
-- A statute-driven date changes (rare — ATO sometimes shifts BAS deadlines)
+- A statute-driven date changes (rare, ATO sometimes shifts BAS deadlines)
 - An obligation is filed: `status: filed` + `last_filed_at: YYYY-MM-DD`
 - Annual rollover: at start of each FY, add the new BAS quarters + reset rolling annual obligations
 
 ## When NOT to edit
 
 - For grant acquittals (they're auto-pulled)
-- For super/PAYG monthly (we don't have employees yet — add when we do)
+- For super/PAYG monthly (we don't have employees yet, add when we do)
 - For one-offs that already passed (let them stay with `status: filed`)
