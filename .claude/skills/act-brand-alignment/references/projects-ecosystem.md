@@ -33,7 +33,7 @@
 
 ### Black Cockatoo Valley (BCV)
 **Regeneration Estate & Living Lab**
-- Property on Jinibara lands near Witta, Queensland (size: see `wiki/projects/black-cockatoo-valley.md`; sources have disagreed, do not quote a figure from here)
+- Property on Jinibara lands near Witta, Queensland (size: see `wiki/projects/act-farm/black-cockatoo-valley.md`; sources have disagreed, do not quote a figure from here)
 - Working farm and living lab for R&D, residencies, accommodation, CSA exploration
 - Views to Mary River; creeks and forest down to Elaman Creek
 - Threatened species habitat (Glossy Black Cockatoo); conservation comes first
