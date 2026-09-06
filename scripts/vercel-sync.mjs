@@ -1,344 +1,113 @@
 #!/usr/bin/env node
 /**
- * ACT Vercel Projects Sync
+ * Vercel -> ecosystem_sites, driven by the typed project record.
  *
- * Syncs Vercel projects to ecosystem_sites table and tracks deployment history.
+ *   node scripts/vercel-sync.mjs            reconcile every registry site (daily cron)
+ *   node scripts/vercel-sync.mjs --dry      show the rows, write nothing
+ *   node scripts/vercel-sync.mjs --list     Vercel projects no registry site claims (delete candidates)
+ *   node scripts/vercel-sync.mjs --write-registry
+ *                                           pin vercel_project_id/name into config/project-codes.json
+ *                                           for sites matched by repo or host (local file only)
  *
- * Usage:
- *   node scripts/vercel-sync.mjs           - Sync all Vercel projects
- *   node scripts/vercel-sync.mjs --dry     - Dry run (show what would sync)
- *   node scripts/vercel-sync.mjs --list    - List Vercel projects only
+ * Which sites count is decided by @act/projects sites[], never by name patterns.
+ * Between reconciles the command-center webhook (api/webhooks/vercel) keeps
+ * status and last_deployment_at fresh per deployment event.
  *
- * Environment Variables:
- *   VERCEL_TOKEN - Vercel API token
- *   SUPABASE_URL / SUPABASE_SHARED_URL
- *   SUPABASE_SERVICE_ROLE_KEY / SUPABASE_SHARED_SERVICE_ROLE_KEY
+ * Env: VERCEL_TOKEN, VERCEL_TEAM_ID, SUPABASE_SHARED_URL|SUPABASE_URL,
+ *      SUPABASE_SHARED_SERVICE_ROLE_KEY|SUPABASE_SERVICE_ROLE_KEY
  */
-
+import { readFileSync, writeFileSync } from 'node:fs';
 import { createClient } from '@supabase/supabase-js';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { loadProjects, PROJECT_CODES_PATH } from '../packages/act-projects/src/index.mjs';
+import { buildSiteRow, matchVercelProject } from './lib/vercel-sites.mjs';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+await import('../lib/load-env.mjs');
 
-// Load environment
-await import(join(__dirname, '../lib/load-env.mjs'));
-
-// ============================================================================
-// CONFIGURATION
-// ============================================================================
-
-const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const args = new Set(process.argv.slice(2));
+const DRY = args.has('--dry');
+const TOKEN = process.env.VERCEL_TOKEN || process.env.VERCEL_ACCESS_TOKEN;
+const TEAM = process.env.VERCEL_TEAM_ID;
+const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
-const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
+if (!TOKEN) { console.error('VERCEL_TOKEN missing'); process.exit(2); }
 
-const supabase = SUPABASE_KEY ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
-
-const DRY_RUN = process.argv.includes('--dry');
-const LIST_ONLY = process.argv.includes('--list');
-
-// ACT team ID (if using Vercel teams)
-const VERCEL_TEAM_ID = process.env.VERCEL_TEAM_ID;
-
-// Category mapping based on project name patterns
-const CATEGORY_PATTERNS = {
-  core: [/^act-/, /command-center/, /dashboard/, /api/],
-  platform: [/empathy-ledger/, /justicehub/, /studio/, /intelligence/],
-  community: [/farm/, /goods/, /harvest/, /patch/, /bali/]
+const vercel = async (path) => {
+  const url = new URL(`https://api.vercel.com${path}`);
+  if (TEAM) url.searchParams.set('teamId', TEAM);
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${TOKEN}` } });
+  if (!res.ok) throw new Error(`vercel ${path}: ${res.status} ${await res.text()}`);
+  return res.json();
 };
 
-// ============================================================================
-// VERCEL API
-// ============================================================================
+async function allVercelProjects() {
+  const out = [];
+  let until;
+  for (;;) {
+    const j = await vercel(`/v9/projects?limit=100${until ? `&until=${until}` : ''}`);
+    out.push(...j.projects);
+    if (!j.pagination?.next) break;
+    until = j.pagination.next;
+  }
+  return out;
+}
 
-/**
- * Fetch all Vercel projects
- */
-async function fetchVercelProjects() {
-  const projects = [];
-  let next = null;
+async function latestProductionDeployment(projectId) {
+  try {
+    const j = await vercel(`/v6/deployments?projectId=${projectId}&target=production&limit=1`);
+    return j.deployments?.[0] || null;
+  } catch (err) {
+    console.warn(`  deployments for ${projectId}: ${err.message.split('\n')[0]}`);
+    return null;
+  }
+}
 
-  do {
-    const url = new URL('https://api.vercel.com/v9/projects');
-    url.searchParams.set('limit', '100');
-    if (next) url.searchParams.set('until', next);
-    if (VERCEL_TEAM_ID) url.searchParams.set('teamId', VERCEL_TEAM_ID);
+const { projects } = loadProjects();
+const vercelProjects = await allVercelProjects();
+console.log(`${vercelProjects.length} Vercel projects · ${Object.values(projects).reduce((n, p) => n + p.sites.length, 0)} registry sites`);
 
-    const response = await fetch(url.toString(), {
-      headers: {
-        Authorization: `Bearer ${VERCEL_TOKEN}`
-      }
+const claimed = new Set();
+const rows = [];
+const report = [];
+for (const project of Object.values(projects)) {
+  for (const site of project.sites) {
+    const m = matchVercelProject(site, vercelProjects);
+    if (m.project) claimed.add(m.project.id);
+    const deployment = m.project ? await latestProductionDeployment(m.project.id) : null;
+    const row = buildSiteRow({ project, site, vercelProject: m.project, deployment });
+    rows.push(row);
+    report.push({ code: project.code, slug: row.slug, via: m.via, vercel: m.project?.name || '-', status: row.status, last: row.last_deployment_at?.slice(0, 16) || '-', candidates: m.candidates });
+  }
+}
+
+for (const r of report) console.log(`  ${r.code.padEnd(9)} ${r.slug.padEnd(28)} ${r.via.padEnd(15)} ${r.vercel.padEnd(28)} ${r.status.padEnd(9)} ${r.last}${r.candidates ? '  ' + r.candidates.join(',') : ''}`);
+
+if (args.has('--list')) {
+  const unclaimed = vercelProjects.filter((v) => !claimed.has(v.id));
+  console.log(`\n${unclaimed.length} Vercel projects no registry site claims:`);
+  for (const v of unclaimed) console.log(`  ${v.name.padEnd(40)} ${v.link ? `${v.link.org}/${v.link.repo}` : '(no repo)'}  created ${new Date(v.createdAt).toISOString().slice(0, 10)}`);
+}
+
+if (args.has('--write-registry')) {
+  const file = JSON.parse(readFileSync(PROJECT_CODES_PATH, 'utf8'));
+  let n = 0;
+  for (const project of Object.values(projects)) {
+    project.sites.forEach((site, i) => {
+      const m = matchVercelProject(site, vercelProjects);
+      if (!m.project) return;
+      const target = file.projects[project.code].sites[i];
+      if (target.vercel_project_id === m.project.id && target.vercel_project_name === m.project.name) return;
+      target.vercel_project_id = m.project.id;
+      target.vercel_project_name = m.project.name;
+      n++;
     });
-
-    if (!response.ok) {
-      throw new Error(`Vercel API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    projects.push(...data.projects);
-    next = data.pagination?.next;
-  } while (next);
-
-  return projects;
+  }
+  writeFileSync(PROJECT_CODES_PATH, JSON.stringify(file, null, 2) + '\n');
+  console.log(`\npinned ${n} site(s) in ${PROJECT_CODES_PATH}`);
 }
 
-/**
- * Fetch recent deployments for a project
- */
-async function fetchProjectDeployments(projectId, limit = 5) {
-  const url = new URL('https://api.vercel.com/v6/deployments');
-  url.searchParams.set('projectId', projectId);
-  url.searchParams.set('limit', limit.toString());
-  if (VERCEL_TEAM_ID) url.searchParams.set('teamId', VERCEL_TEAM_ID);
-
-  const response = await fetch(url.toString(), {
-    headers: {
-      Authorization: `Bearer ${VERCEL_TOKEN}`
-    }
-  });
-
-  if (!response.ok) {
-    console.error(`  ⚠️ Failed to fetch deployments: ${response.status}`);
-    return [];
-  }
-
-  const data = await response.json();
-  return data.deployments || [];
-}
-
-// ============================================================================
-// HELPERS
-// ============================================================================
-
-/**
- * Determine category based on project name
- */
-function categorizeProject(name) {
-  for (const [category, patterns] of Object.entries(CATEGORY_PATTERNS)) {
-    for (const pattern of patterns) {
-      if (pattern.test(name.toLowerCase())) {
-        return category;
-      }
-    }
-  }
-  return 'community'; // Default
-}
-
-/**
- * Generate slug from project name
- */
-function generateSlug(name) {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
-/**
- * Get production URL for a project
- */
-function getProductionUrl(project) {
-  // Try to find production alias
-  if (project.alias?.length) {
-    const prodAlias = project.alias.find(a =>
-      !a.includes('vercel.app') && !a.includes('.vercel.')
-    ) || project.alias[0];
-    return `https://${prodAlias}`;
-  }
-
-  // Fall back to Vercel-provided URL
-  if (project.latestDeployments?.length) {
-    const prodDeploy = project.latestDeployments.find(d => d.target === 'production');
-    if (prodDeploy?.url) {
-      return `https://${prodDeploy.url}`;
-    }
-  }
-
-  // Default Vercel URL
-  return `https://${project.name}.vercel.app`;
-}
-
-/**
- * Extract GitHub repo from project link
- */
-function getGitHubRepo(project) {
-  if (project.link?.type === 'github') {
-    const org = project.link.org || project.link.repoOwner;
-    const repo = project.link.repo || project.link.repoSlug;
-    if (org && repo) {
-      return `${org}/${repo}`;
-    }
-  }
-  return null;
-}
-
-// ============================================================================
-// SYNC FUNCTIONS
-// ============================================================================
-
-/**
- * Sync a single project to ecosystem_sites
- */
-async function syncProject(project) {
-  const slug = generateSlug(project.name);
-  const url = getProductionUrl(project);
-  const category = categorizeProject(project.name);
-  const githubRepo = getGitHubRepo(project);
-
-  const siteData = {
-    name: project.name,
-    slug,
-    url,
-    category,
-    vercel_project_id: project.id,
-    vercel_project_name: project.name,
-    github_repo: githubRepo,
-    updated_at: new Date().toISOString()
-  };
-
-  if (DRY_RUN) {
-    console.log(`  Would sync: ${project.name} -> ${slug} (${category})`);
-    return { action: 'dry_run', slug };
-  }
-
-  // Upsert to ecosystem_sites
-  const { error } = await supabase
-    .from('ecosystem_sites')
-    .upsert(siteData, { onConflict: 'slug' });
-
-  if (error) {
-    console.error(`  ❌ Error syncing ${project.name}: ${error.message}`);
-    return { action: 'error', error: error.message };
-  }
-
-  return { action: 'synced', slug };
-}
-
-/**
- * Sync deployments for a site
- */
-async function syncDeployments(site, deployments) {
-  if (DRY_RUN || !deployments.length) return;
-
-  for (const deploy of deployments) {
-    const deployData = {
-      site_id: site.id,
-      vercel_deployment_id: deploy.uid,
-      status: deploy.state || deploy.readyState,
-      environment: deploy.target || 'preview',
-      git_commit_sha: deploy.meta?.githubCommitSha,
-      git_commit_message: deploy.meta?.githubCommitMessage,
-      git_branch: deploy.meta?.githubCommitRef,
-      build_duration_seconds: deploy.buildingAt && deploy.ready
-        ? Math.round((new Date(deploy.ready) - new Date(deploy.buildingAt)) / 1000)
-        : null,
-      deployed_at: deploy.ready ? new Date(deploy.ready).toISOString() : null
-    };
-
-    const { error } = await supabase
-      .from('site_deployments')
-      .upsert(deployData, { onConflict: 'vercel_deployment_id' });
-
-    if (error && !error.message.includes('duplicate')) {
-      console.error(`    ⚠️ Deploy sync error: ${error.message}`);
-    }
-  }
-}
-
-// ============================================================================
-// MAIN
-// ============================================================================
-
-async function main() {
-  console.log('\n========================================');
-  console.log('  ACT Vercel Projects Sync');
-  console.log('========================================\n');
-
-  if (!VERCEL_TOKEN) {
-    console.error('❌ VERCEL_TOKEN not configured');
-    process.exit(1);
-  }
-
-  if (!supabase && !LIST_ONLY) {
-    console.error('❌ Supabase not configured');
-    process.exit(1);
-  }
-
-  if (DRY_RUN) {
-    console.log('🔍 DRY RUN - No database writes\n');
-  }
-
-  // Fetch all Vercel projects
-  console.log('Fetching Vercel projects...');
-  const projects = await fetchVercelProjects();
-  console.log(`Found ${projects.length} projects\n`);
-
-  if (LIST_ONLY) {
-    console.log('Projects:');
-    for (const project of projects) {
-      const url = getProductionUrl(project);
-      const category = categorizeProject(project.name);
-      const repo = getGitHubRepo(project);
-      console.log(`  ${project.name}`);
-      console.log(`    ID: ${project.id}`);
-      console.log(`    URL: ${url}`);
-      console.log(`    Category: ${category}`);
-      if (repo) console.log(`    GitHub: ${repo}`);
-      console.log('');
-    }
-    return;
-  }
-
-  // Sync each project
-  console.log('Syncing projects...\n');
-  const results = { synced: 0, errors: 0, dry_run: 0 };
-
-  for (const project of projects) {
-    const result = await syncProject(project);
-    results[result.action] = (results[result.action] || 0) + 1;
-
-    // If synced, also sync deployments
-    if (result.action === 'synced') {
-      // Get the site ID
-      const { data: site } = await supabase
-        .from('ecosystem_sites')
-        .select('id')
-        .eq('slug', result.slug)
-        .single();
-
-      if (site) {
-        const deployments = await fetchProjectDeployments(project.id);
-        await syncDeployments(site, deployments);
-
-        // Update last deployment time
-        const latestDeploy = deployments.find(d => d.target === 'production' && d.ready);
-        if (latestDeploy) {
-          await supabase
-            .from('ecosystem_sites')
-            .update({ last_deployment_at: new Date(latestDeploy.ready).toISOString() })
-            .eq('id', site.id);
-        }
-
-        console.log(`  ✅ ${project.name} (${deployments.length} deployments)`);
-      }
-    }
-  }
-
-  // Summary
-  console.log('\n========================================');
-  console.log('  Summary');
-  console.log('========================================');
-  console.log(`  Total projects: ${projects.length}`);
-  console.log(`  Synced: ${results.synced || 0}`);
-  console.log(`  Errors: ${results.errors || 0}`);
-  if (DRY_RUN) console.log(`  Would sync: ${results.dry_run || 0}`);
-  console.log('========================================\n');
-}
-
-main().catch(err => {
-  console.error('❌ Sync failed:', err.message);
-  process.exit(1);
-});
-
-export { fetchVercelProjects, fetchProjectDeployments, syncProject };
+if (DRY) { console.log('\n--dry: nothing written'); process.exit(0); }
+if (!SUPABASE_KEY) { console.error('Supabase service key missing'); process.exit(2); }
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const { error } = await supabase.from('ecosystem_sites').upsert(rows, { onConflict: 'slug' });
+if (error) { console.error('upsert failed:', error.message); process.exit(1); }
+console.log(`\nupserted ${rows.length} rows into ecosystem_sites`);
