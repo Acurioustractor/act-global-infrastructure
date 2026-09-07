@@ -67,6 +67,37 @@ async function latestProductionDeployment(projectId) {
 
 const { projects } = loadProjects();
 const vercelProjects = await allVercelProjects();
+
+/**
+ * Story syndication state per site, from Empathy Ledger's admin views
+ * (admin_syndication_by_site: consented articles + stories per site;
+ * syndication_site_traffic: calls and last call). Read with the EL service
+ * key from infra env; skipped with a note when it is absent.
+ */
+async function empathyLedgerSiteState() {
+  const url = process.env.EL_SUPABASE_URL || 'https://yvnuayzslukamizrlhwb.supabase.co';
+  const key = process.env.EL_SUPABASE_SERVICE_ROLE_KEY || process.env.EL_SUPABASE_SERVICE_KEY;
+  if (!key) { console.warn('EL service key missing; story state not read'); return new Map(); }
+  const h = { apikey: key, Authorization: `Bearer ${key}` };
+  const get = (path) => fetch(`${url}/rest/v1/${path}`, { headers: h }).then((r) => (r.ok ? r.json() : []));
+  // Consented counts from the admin view. Last pull from api_key_usage_log by
+  // site_id, one small query per site: the syndication_site_traffic view only
+  // counts the legacy 'syndication:<slug>' routes, so content-hub consumers
+  // (Harvest, Goods) read as never there while the log shows them daily.
+  const [consented, sites] = await Promise.all([
+    get('admin_syndication_by_site?select=site_slug,articles,stories,total'),
+    get('syndication_sites?select=id,slug'),
+  ]);
+  const out = new Map();
+  for (const r of consented) out.set(r.site_slug, { stories_consented: Number(r.total || 0), stories_last_pull_at: null });
+  await Promise.all(sites.map(async (s) => {
+    const rows = await get(`api_key_usage_log?select=created_at&site_id=eq.${s.id}&order=created_at.desc&limit=1`);
+    const last = rows[0]?.created_at || null;
+    if (last || out.has(s.slug)) out.set(s.slug, { ...(out.get(s.slug) || { stories_consented: 0 }), stories_last_pull_at: last });
+  }));
+  return out;
+}
+const elState = await empathyLedgerSiteState();
 console.log(`${vercelProjects.length} Vercel projects · ${Object.values(projects).reduce((n, p) => n + p.sites.length, 0)} registry sites`);
 
 const claimed = new Set();
@@ -78,12 +109,19 @@ for (const project of Object.values(projects)) {
     if (m.project) claimed.add(m.project.id);
     const deployment = m.project ? await latestProductionDeployment(m.project.id) : null;
     const row = buildSiteRow({ project, site, vercelProject: m.project, deployment });
+    const elSlug = project.empathy_ledger?.site_slug;
+    if (elSlug && site.role === 'primary') {
+      const st = elState.get(elSlug) || { stories_consented: 0, stories_last_pull_at: null };
+      row.el_site_slug = elSlug;
+      row.stories_consented = st.stories_consented;
+      row.stories_last_pull_at = st.stories_last_pull_at;
+    }
     rows.push(row);
-    report.push({ code: project.code, slug: row.slug, via: m.via, vercel: m.project?.name || '-', status: row.status, last: row.last_deployment_at?.slice(0, 16) || '-', candidates: m.candidates });
+    report.push({ code: project.code, slug: row.slug, via: m.via, vercel: m.project?.name || '-', status: row.status, last: row.last_deployment_at?.slice(0, 16) || '-', candidates: m.candidates, stories: row.el_site_slug ? `${row.stories_consented} consented, last pull ${row.stories_last_pull_at ? row.stories_last_pull_at.slice(0, 10) : 'never'}` : '' });
   }
 }
 
-for (const r of report) console.log(`  ${r.code.padEnd(9)} ${r.slug.padEnd(28)} ${r.via.padEnd(15)} ${r.vercel.padEnd(28)} ${r.status.padEnd(9)} ${r.last}${r.candidates ? '  ' + r.candidates.join(',') : ''}`);
+for (const r of report) console.log(`  ${r.code.padEnd(9)} ${r.slug.padEnd(28)} ${r.via.padEnd(15)} ${r.vercel.padEnd(28)} ${r.status.padEnd(9)} ${r.last}${r.candidates ? '  ' + r.candidates.join(',') : ''}${r.stories ? '  | ' + r.stories : ''}`);
 
 if (args.has('--list')) {
   const unclaimed = vercelProjects.filter((v) => !claimed.has(v.id));

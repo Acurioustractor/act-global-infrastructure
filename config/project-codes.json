@@ -27,10 +27,10 @@
       "background"
     ],
     "tier_descriptions": {
-      "ecosystem": "The 5 core ACT ecosystem projects — these are the platforms",
-      "studio": "Art, storytelling, and creative projects that feed life into the ecosystem — if art isn't being made and stories aren't being told, the whole system dies",
+      "ecosystem": "The 5 core ACT ecosystem projects \u2014 these are the platforms",
+      "studio": "Art, storytelling, and creative projects that feed life into the ecosystem \u2014 if art isn't being made and stories aren't being told, the whole system dies",
       "satellite": "Supporting projects, partnerships, and community initiatives",
-      "background": "Background records — partners, archives, historical or test entries. Not surfaced on the public website but preserved for reflection and history."
+      "background": "Background records \u2014 partners, archives, historical or test entries. Not surfaced on the public website but preserved for reflection and history."
     },
     "art_medium_values": [
       "installation",
@@ -83,7 +83,7 @@
         "youth justice",
         "youth-justice"
       ],
-      "xero_tracking": "ACT-JH — JusticeHub",
+      "xero_tracking": "ACT-JH \u2014 JusticeHub",
       "xero_tracking_aliases": [
         "JusticeHub",
         "Confit"
@@ -122,7 +122,8 @@
       "empathy_ledger": {
         "syndication_slug": "act_jh",
         "project_id": "2e774118-471c-450b-a6bc-41467a43c0cf",
-        "project_key": "justicehub"
+        "project_key": "justicehub",
+        "site_slug": "justicehub"
       }
     },
     "ACT-DG": {
@@ -144,7 +145,7 @@
       "ghl_tags": [
         "diagrama"
       ],
-      "xero_tracking": "ACT-DG — Diagrama",
+      "xero_tracking": "ACT-DG \u2014 Diagrama",
       "dext_category": "Justice Projects",
       "alma_program": "education-rehab",
       "tier": "background",
@@ -190,7 +191,7 @@
       "ghl_tags": [
         "goods"
       ],
-      "xero_tracking": "ACT-GD — Goods",
+      "xero_tracking": "ACT-GD \u2014 Goods",
       "xero_tracking_aliases": [
         "Goods",
         "Goods."
@@ -220,7 +221,8 @@
       "empathy_ledger": {
         "syndication_slug": "act_gd",
         "project_id": "6bd47c8a-e676-456f-aa25-ddcbb5a31047",
-        "project_key": "goods"
+        "project_key": "goods",
+        "site_slug": "goods-asset-register"
       }
     },
     "ACT-EL": {
@@ -247,7 +249,7 @@
         "storytelling",
         "storyteller"
       ],
-      "xero_tracking": "ACT-EL — Empathy Ledger",
+      "xero_tracking": "ACT-EL \u2014 Empathy Ledger",
       "xero_tracking_aliases": [
         "Empathy Ledger"
       ],
@@ -313,7 +315,7 @@
         "studio",
         "act-studio"
       ],
-      "xero_tracking": "ACT-CORE — ACT Regenerative Studio",
+      "xero_tracking": "ACT-CORE \u2014 ACT Regenerative Studio",
       "xero_tracking_aliases": [
         "ACT",
         "ACT Studio",
@@ -347,7 +349,8 @@
       },
       "empathy_ledger": {
         "syndication_slug": "act_core",
-        "tracked": false
+        "tracked": false,
+        "site_slug": "act-regenerative-studio"
       },
       "notion": {
         "page_id": "204ebcf9-81cf-80f4-a3c9-fb18b904b2cb"
@@ -377,7 +380,7 @@
         "picc",
         "palm-island"
       ],
-      "xero_tracking": "ACT-PI — PICC",
+      "xero_tracking": "ACT-PI \u2014 PICC",
       "xero_tracking_aliases": [
         "PICC",
         "PICC Centre",
@@ -417,7 +420,8 @@
           "PICC-AR",
           "PICC-CV",
           "PICC-MOV"
-        ]
+        ],
+        "site_slug": "picc"
       },
       "notion": {
         "page_id": "22eebcf9-81cf-8002-abe6-d81960ea19da"
@@ -447,7 +451,7 @@
         "hull-river",
         "annual-report"
       ],
-      "xero_tracking": "ACT-ER — PICC Elders Room",
+      "xero_tracking": "ACT-ER \u2014 PICC Elders Room",
       "xero_tracking_aliases": [
         "PICC"
       ],
@@ -516,7 +520,7 @@
         "cultural-preservation",
         "participatory"
       ],
-      "xero_tracking": "ACT-PS — PICC Photo Studio",
+      "xero_tracking": "ACT-PS \u2014 PICC Photo Studio",
       "xero_tracking_aliases": [
         "PICC Photo Studio"
       ],
@@ -581,7 +585,7 @@
         "palm-island",
         "storm-stories"
       ],
-      "xero_tracking": "ACT-SS — Storm Stories",
+      "xero_tracking": "ACT-SS \u2014 Storm Stories",
       "xero_tracking_aliases": [
         "PICC",
         "PICC Storm Stories"
@@ -620,7 +624,7 @@
         "mingaminga",
         "rangers"
       ],
-      "xero_tracking": "ACT-MR — MingaMinga Rangers",
+      "xero_tracking": "ACT-MR \u2014 MingaMinga Rangers",
       "xero_tracking_aliases": [
         "MingaMinga"
       ],
@@ -665,7 +669,7 @@
         "cultural-preservation",
         "documentary"
       ],
-      "xero_tracking": "ACT-UA — Uncle Allan Palm Island Art",
+      "xero_tracking": "ACT-UA \u2014 Uncle Allan Palm Island Art",
       "xero_tracking_aliases": [
         "Uncle Allan Art"
       ],
@@ -688,7 +692,7 @@
         ],
         "piece_slug": "uncle-allan-palm-island-art",
         "status": "active",
-        "year": "2023–present",
+        "year": "2023\u2013present",
         "location": "Palm Island, Queensland",
         "lcaa_stages": [
           "Art"
@@ -720,7 +724,7 @@
       "ghl_tags": [
         "maningrida"
       ],
-      "xero_tracking": "ACT-MN — Maningrida",
+      "xero_tracking": "ACT-MN \u2014 Maningrida",
       "dext_category": "Justice Projects",
       "alma_program": "justice-reinvestment",
       "cultural_protocols": true,
@@ -749,7 +753,7 @@
         "first-nations",
         "youth-advocacy"
       ],
-      "xero_tracking": "ACT-FN — First Nations Youth Advocacy",
+      "xero_tracking": "ACT-FN \u2014 First Nations Youth Advocacy",
       "xero_tracking_aliases": [
         "FN Youth Advocacy"
       ],
@@ -782,7 +786,7 @@
       "tier": "ecosystem",
       "priority": "high",
       "status": "active",
-      "description": "Land-based healing and cultural connection, incl. Black Cockatoo Valley regenerative conservation (ACT-BV merged into ACT-FM 2026-06-08 — same Witta land)",
+      "description": "Land-based healing and cultural connection, incl. Black Cockatoo Valley regenerative conservation (ACT-BV merged into ACT-FM 2026-06-08 \u2014 same Witta land)",
       "notion_pages": [
         "The Farm",
         "ACT Farm",
@@ -795,11 +799,11 @@
         "bcv",
         "black-cockatoo"
       ],
-      "xero_tracking": "ACT-FM — The Farm",
+      "xero_tracking": "ACT-FM \u2014 The Farm",
       "xero_tracking_aliases": [
         "The Farm",
         "BCV",
-        "ACT-BV — Black Cockatoo Valley"
+        "ACT-BV \u2014 Black Cockatoo Valley"
       ],
       "dext_category": "Regenerative",
       "alma_program": "land-healing",
@@ -824,7 +828,8 @@
       },
       "empathy_ledger": {
         "project_id": "f2f111a8-9f3d-4ae0-8f86-6d01fe4e0d90",
-        "project_key": "black-cockatoo-valley"
+        "project_key": "black-cockatoo-valley",
+        "site_slug": "actfarm"
       },
       "notion": {
         "page_id": "334ebcf9-81cf-8078-b3f2-e59bb7c2c7b2"
@@ -853,7 +858,7 @@
         "the-harvest",
         "witta"
       ],
-      "xero_tracking": "ACT-HV — The Harvest Witta",
+      "xero_tracking": "ACT-HV \u2014 The Harvest Witta",
       "xero_tracking_aliases": [
         "The Harvest"
       ],
@@ -905,7 +910,8 @@
       "empathy_ledger": {
         "syndication_slug": "act_hv",
         "project_id": "0584b447-57a8-4c85-bc3e-5cd97511b7e4",
-        "project_key": "the-harvest"
+        "project_key": "the-harvest",
+        "site_slug": "theharvest"
       },
       "notion": {
         "page_id": "11debcf9-81cf-8082-8fd0-d6031a9709f2"
@@ -934,7 +940,7 @@
         "justice-art",
         "public-art"
       ],
-      "xero_tracking": "ACT-CN — Contained",
+      "xero_tracking": "ACT-CN \u2014 Contained",
       "dext_category": "Social Enterprise",
       "alma_program": "community-spaces",
       "ghl": {
@@ -953,7 +959,7 @@
         ],
         "piece_slug": "contained",
         "status": "active",
-        "year": "2022–present",
+        "year": "2022\u2013present",
         "location": "Justice and public-space contexts",
         "connected_code": "ACT-JH",
         "lcaa_stages": [
@@ -962,7 +968,8 @@
       },
       "empathy_ledger": {
         "project_id": "9b90b47c-2a4c-409c-97d5-3718aaf8c30c",
-        "project_key": "contained"
+        "project_key": "contained",
+        "site_slug": "contained"
       },
       "notion": {
         "page_id": "228ebcf9-81cf-809e-8368-f9dae2a41129"
@@ -994,7 +1001,7 @@
         "fishers-oysters",
         "fishers"
       ],
-      "xero_tracking": "ACT-FO — Fishers Oysters",
+      "xero_tracking": "ACT-FO \u2014 Fishers Oysters",
       "dext_category": "Regenerative",
       "alma_program": "aquaculture",
       "syndication_slug": "act_fo",
@@ -1017,7 +1024,8 @@
         "syndication_slug": "act_fo",
         "partner_codes": [
           "FO-FO"
-        ]
+        ],
+        "site_slug": "fishers"
       },
       "notion": {
         "page_id": "17bebcf9-81cf-801b-9a06-edf3f35bf7f4"
@@ -1041,7 +1049,7 @@
         "smart",
         "smart-connect"
       ],
-      "xero_tracking": "ACT-SM — SMART",
+      "xero_tracking": "ACT-SM \u2014 SMART",
       "xero_tracking_aliases": [
         "SMART",
         "Smart Stories"
@@ -1092,7 +1100,7 @@
         "participatory",
         "social-practice"
       ],
-      "xero_tracking": "ACT-CF — The Confessional",
+      "xero_tracking": "ACT-CF \u2014 The Confessional",
       "xero_tracking_aliases": [
         "Confessional"
       ],
@@ -1121,7 +1129,7 @@
         ],
         "piece_slug": "the-confessional",
         "status": "active",
-        "year": "2023–present",
+        "year": "2023\u2013present",
         "location": "Mobile / touring",
         "lcaa_stages": [
           "Listen"
@@ -1151,7 +1159,7 @@
         "campfire",
         "mount-isa"
       ],
-      "xero_tracking": "ACT-CM — CAMPFIRE",
+      "xero_tracking": "ACT-CM \u2014 CAMPFIRE",
       "xero_tracking_aliases": [
         "Campfire",
         "CAMPFIRE"
@@ -1179,7 +1187,8 @@
       },
       "empathy_ledger": {
         "project_id": "b5aeb09c-55e2-44a9-966c-660d6c5d3719",
-        "project_key": "campfire"
+        "project_key": "campfire",
+        "site_slug": "campfire"
       },
       "notion": {
         "page_id": "3d3ebcf9-81cf-81b2-afad-cf4ab729bce4"
@@ -1215,7 +1224,7 @@
         "public-art",
         "social-practice"
       ],
-      "xero_tracking": "ACT-GP — Gold Phone",
+      "xero_tracking": "ACT-GP \u2014 Gold Phone",
       "dext_category": "Arts",
       "alma_program": "connection",
       "lcaa_themes": [
@@ -1240,7 +1249,7 @@
         ],
         "piece_slug": "gold-phone",
         "status": "active",
-        "year": "2024–present",
+        "year": "2024\u2013present",
         "location": "Distributed / digital",
         "connected_code": "ACT-EL",
         "lcaa_stages": [
@@ -1272,7 +1281,7 @@
         "act-monthly",
         "dinners"
       ],
-      "xero_tracking": "ACT-MD — ACT Monthly Dinners",
+      "xero_tracking": "ACT-MD \u2014 ACT Monthly Dinners",
       "xero_tracking_aliases": [
         "Monthly Dinners"
       ],
@@ -1309,7 +1318,7 @@
       "ghl_tags": [
         "qfcc"
       ],
-      "xero_tracking": "ACT-QF — QFCC Empathy Ledger",
+      "xero_tracking": "ACT-QF \u2014 QFCC Empathy Ledger",
       "xero_tracking_aliases": [
         "QFCC"
       ],
@@ -1340,7 +1349,7 @@
       "ghl_tags": [
         "double-disadvantage"
       ],
-      "xero_tracking": "ACT-DD — Double Disadvantage",
+      "xero_tracking": "ACT-DD \u2014 Double Disadvantage",
       "dext_category": "Justice Projects",
       "alma_program": "disability-justice",
       "tier": "background",
@@ -1367,7 +1376,7 @@
       "ghl_tags": [
         "bimberi"
       ],
-      "xero_tracking": "ACT-BM — Bimberi",
+      "xero_tracking": "ACT-BM \u2014 Bimberi",
       "dext_category": "Justice Projects",
       "alma_program": "youth-detention",
       "tier": "background",
@@ -1394,7 +1403,7 @@
       "ghl_tags": [
         "aime"
       ],
-      "xero_tracking": "ACT-AI — AIME",
+      "xero_tracking": "ACT-AI \u2014 AIME",
       "dext_category": "Indigenous Projects",
       "alma_program": "mentoring",
       "tier": "background",
@@ -1427,7 +1436,7 @@
         "junes-patch",
         "patch"
       ],
-      "xero_tracking": "ACT-JP — June's Patch",
+      "xero_tracking": "ACT-JP \u2014 June's Patch",
       "xero_tracking_aliases": [
         "Junes Patch",
         "June's Patch"
@@ -1476,7 +1485,7 @@
         "public-art",
         "social-practice"
       ],
-      "xero_tracking": "ACT-RT — Redtape",
+      "xero_tracking": "ACT-RT \u2014 Redtape",
       "xero_tracking_aliases": [
         "Red Tape",
         "Redtape"
@@ -1534,7 +1543,7 @@
         "bg-fit",
         "bgfit"
       ],
-      "xero_tracking": "ACT-BG — BG Fit",
+      "xero_tracking": "ACT-BG \u2014 BG Fit",
       "xero_tracking_aliases": [
         "BG Fit"
       ],
@@ -1595,7 +1604,7 @@
         "civic-scope",
         "grantscope"
       ],
-      "xero_tracking": "ACT-CS — Civic Scope",
+      "xero_tracking": "ACT-CS \u2014 Civic Scope",
       "xero_tracking_aliases": [
         "Civic Scope",
         "CivicGraph",
@@ -1624,7 +1633,8 @@
       "empathy_ledger": {
         "syndication_slug": "act_cs",
         "project_id": "ec2ad2d8-13d6-4488-87ae-5385ddf73394",
-        "project_key": "civicgraph"
+        "project_key": "civicgraph",
+        "site_slug": "civicscope"
       },
       "notion": {
         "page_id": "32eebcf9-81cf-808b-8ecb-cec3fcfb544d"
@@ -1645,7 +1655,7 @@
       "ghl_tags": [
         "mounty-yarns"
       ],
-      "xero_tracking": "ACT-MY — Mounty Yarns",
+      "xero_tracking": "ACT-MY \u2014 Mounty Yarns",
       "xero_tracking_aliases": [
         "Mounty Yarns",
         "Mounty"
@@ -1690,7 +1700,7 @@
       "ghl_tags": [
         "tomnet"
       ],
-      "xero_tracking": "ACT-TN — TOMNET",
+      "xero_tracking": "ACT-TN \u2014 TOMNET",
       "dext_category": "Community",
       "alma_program": "network-building",
       "tier": "background",
@@ -1723,7 +1733,7 @@
         "10x10",
         "retreat"
       ],
-      "xero_tracking": "ACT-10 — 10x10 Retreat",
+      "xero_tracking": "ACT-10 \u2014 10x10 Retreat",
       "xero_tracking_aliases": [
         "10x10 Retreat",
         "Community Capital Retreat"
@@ -1763,7 +1773,7 @@
         "10x10",
         "community capital"
       ],
-      "xero_tracking": "ACT-CP — Community Capital",
+      "xero_tracking": "ACT-CP \u2014 Community Capital",
       "xero_tracking_aliases": [
         "Community Capital",
         "10x10 Retreat",
@@ -1809,7 +1819,7 @@
         "confit-pathways",
         "joe-kwon"
       ],
-      "xero_tracking": "ACT-CT — ConFit Pathways",
+      "xero_tracking": "ACT-CT \u2014 ConFit Pathways",
       "xero_tracking_aliases": [
         "ConFit",
         "ConFit Pathways"
@@ -1854,7 +1864,7 @@
       "ghl_tags": [
         "dadlab"
       ],
-      "xero_tracking": "ACT-DL — DadLab",
+      "xero_tracking": "ACT-DL \u2014 DadLab",
       "dext_category": "Community",
       "alma_program": "parenting",
       "ghl": {
@@ -1885,7 +1895,7 @@
       "ghl_tags": [
         "shed"
       ],
-      "xero_tracking": "ACT-SH — The Shed",
+      "xero_tracking": "ACT-SH \u2014 The Shed",
       "dext_category": "Technology",
       "alma_program": "maker-spaces",
       "tier": "background",
@@ -1913,7 +1923,7 @@
       "ghl_tags": [
         "sefa"
       ],
-      "xero_tracking": "ACT-SE — SEFA Partnership",
+      "xero_tracking": "ACT-SE \u2014 SEFA Partnership",
       "xero_tracking_aliases": [
         "SEFA"
       ],
@@ -1943,7 +1953,7 @@
       "ghl_tags": [
         "custodian-first-economy"
       ],
-      "xero_tracking": "ACT-CE — Custodian Economy",
+      "xero_tracking": "ACT-CE \u2014 Custodian Economy",
       "dext_category": "Social Enterprise",
       "alma_program": "economic-models",
       "ghl": {
@@ -1983,7 +1993,7 @@
       "ghl_tags": [
         "art-social-change"
       ],
-      "xero_tracking": "ACT-AS — Art for Social Change",
+      "xero_tracking": "ACT-AS \u2014 Art for Social Change",
       "xero_tracking_aliases": [
         "Art Social Change"
       ],
@@ -2021,7 +2031,7 @@
       "art_tags": [
         "social-practice"
       ],
-      "xero_tracking": "ACT-RA — Regional Arts Fellowship",
+      "xero_tracking": "ACT-RA \u2014 Regional Arts Fellowship",
       "xero_tracking_aliases": [
         "Regional Arts",
         "Radical Scoops"
@@ -2071,7 +2081,7 @@
       "ghl_tags": [
         "wilya-janta"
       ],
-      "xero_tracking": "ACT-WJ — Wilya Janta",
+      "xero_tracking": "ACT-WJ \u2014 Wilya Janta",
       "dext_category": "Indigenous Projects",
       "alma_program": "indigenous-comms",
       "cultural_protocols": true,
@@ -2099,7 +2109,7 @@
       "ghl_tags": [
         "yac"
       ],
-      "xero_tracking": "ACT-YC — YAC Story and Action",
+      "xero_tracking": "ACT-YC \u2014 YAC Story and Action",
       "xero_tracking_aliases": [
         "YAC"
       ],
@@ -2129,7 +2139,7 @@
       "ghl_tags": [
         "travelling-womens-car"
       ],
-      "xero_tracking": "ACT-TW — Travelling Women's Car",
+      "xero_tracking": "ACT-TW \u2014 Travelling Women's Car",
       "xero_tracking_aliases": [
         "Travelling Womens Car"
       ],
@@ -2157,7 +2167,7 @@
       "ghl_tags": [
         "project-herself"
       ],
-      "xero_tracking": "ACT-HS — Project Her-Self",
+      "xero_tracking": "ACT-HS \u2014 Project Her-Self",
       "xero_tracking_aliases": [
         "Project HerSelf"
       ],
@@ -2187,7 +2197,7 @@
       "ghl_tags": [
         "deadly-homes"
       ],
-      "xero_tracking": "ACT-DH — Deadly Homes and Gardens",
+      "xero_tracking": "ACT-DH \u2014 Deadly Homes and Gardens",
       "xero_tracking_aliases": [
         "Deadly Homes"
       ],
@@ -2218,7 +2228,7 @@
       "ghl_tags": [
         "mmeic"
       ],
-      "xero_tracking": "ACT-MM — MMEIC Justice",
+      "xero_tracking": "ACT-MM \u2014 MMEIC Justice",
       "xero_tracking_aliases": [
         "MMEIC"
       ],
@@ -2248,7 +2258,7 @@
       "ghl_tags": [
         "murrup"
       ],
-      "xero_tracking": "ACT-MU — Murrup + ACT",
+      "xero_tracking": "ACT-MU \u2014 Murrup + ACT",
       "xero_tracking_aliases": [
         "Murrup"
       ],
@@ -2280,7 +2290,7 @@
       "ghl_tags": [
         "oonchiumpa"
       ],
-      "xero_tracking": "ACT-OO — Oonchiumpa",
+      "xero_tracking": "ACT-OO \u2014 Oonchiumpa",
       "dext_category": "Indigenous Projects",
       "alma_program": "first-nations",
       "cultural_protocols": true,
@@ -2301,7 +2311,8 @@
       },
       "empathy_ledger": {
         "syndication_slug": "act_oo",
-        "tracked": false
+        "tracked": false,
+        "site_slug": "oonchiumpa"
       },
       "notion": {
         "page_id": "1d4ebcf9-81cf-80a2-8c12-e5c56d78de10"
@@ -2330,7 +2341,7 @@
         "social-practice",
         "community-portrait"
       ],
-      "xero_tracking": "ACT-CA — Caring for those who care",
+      "xero_tracking": "ACT-CA \u2014 Caring for those who care",
       "xero_tracking_aliases": [
         "Caring"
       ],
@@ -2386,7 +2397,7 @@
       "tier": "background",
       "priority": "medium",
       "status": "active",
-      "description": "Art and technology crossover — combining mechanical craft with microcontroller programming to create interactive installations",
+      "description": "Art and technology crossover \u2014 combining mechanical craft with microcontroller programming to create interactive installations",
       "notion_pages": [
         "Cars and microcontrollers"
       ],
@@ -2401,7 +2412,7 @@
         "digital",
         "participatory"
       ],
-      "xero_tracking": "ACT-MC — Cars and Microcontrollers",
+      "xero_tracking": "ACT-MC \u2014 Cars and Microcontrollers",
       "xero_tracking_aliases": [
         "Cars Micro"
       ],
@@ -2451,7 +2462,7 @@
         "bali",
         "retreat"
       ],
-      "xero_tracking": "ACT-BR — ACT Bali Retreat",
+      "xero_tracking": "ACT-BR \u2014 ACT Bali Retreat",
       "xero_tracking_aliases": [
         "Bali Retreat"
       ],
@@ -2483,7 +2494,7 @@
       "ghl_tags": [
         "barkly"
       ],
-      "xero_tracking": "ACT-BB — Barkly Backbone",
+      "xero_tracking": "ACT-BB \u2014 Barkly Backbone",
       "xero_tracking_aliases": [
         "Barkly"
       ],
@@ -2526,7 +2537,7 @@
         "justicehub",
         "coe"
       ],
-      "xero_tracking": "ACT-JC — JusticeHub Centre of Excellence",
+      "xero_tracking": "ACT-JC \u2014 JusticeHub Centre of Excellence",
       "dext_category": "Justice Projects",
       "alma_program": "justice-reform",
       "ghl": {
@@ -2564,7 +2575,7 @@
         "documentary",
         "justice-art"
       ],
-      "xero_tracking": "ACT-TR — Treacher",
+      "xero_tracking": "ACT-TR \u2014 Treacher",
       "dext_category": "Arts",
       "alma_program": "arts-impact",
       "ghl": {
@@ -2610,7 +2621,7 @@
       "ghl_tags": [
         "obsolescence"
       ],
-      "xero_tracking": "ACT-DO — Designing for Obsolescence",
+      "xero_tracking": "ACT-DO \u2014 Designing for Obsolescence",
       "xero_tracking_aliases": [
         "Design Obs"
       ],
@@ -2644,7 +2655,7 @@
         "gla",
         "global-laundry"
       ],
-      "xero_tracking": "ACT-GL — Global Laundry Alliance",
+      "xero_tracking": "ACT-GL \u2014 Global Laundry Alliance",
       "xero_tracking_aliases": [
         "GLA"
       ],
@@ -2679,7 +2690,7 @@
       "ghl_tags": [
         "conservation-collective"
       ],
-      "xero_tracking": "ACT-CC — Conservation Collective",
+      "xero_tracking": "ACT-CC \u2014 Conservation Collective",
       "dext_category": "Regenerative",
       "alma_program": "conservation",
       "tier": "background",
@@ -2707,7 +2718,7 @@
         "fairfax",
         "place-tech"
       ],
-      "xero_tracking": "ACT-FP — Fairfax PLACE Tech",
+      "xero_tracking": "ACT-FP \u2014 Fairfax PLACE Tech",
       "xero_tracking_aliases": [
         "Fairfax PLACE"
       ],
@@ -2739,7 +2750,7 @@
         "festivals",
         "activations"
       ],
-      "xero_tracking": "ACT-FA — Festival Activations",
+      "xero_tracking": "ACT-FA \u2014 Festival Activations",
       "dext_category": "Events",
       "alma_program": "community-building",
       "tier": "background",
@@ -2767,7 +2778,7 @@
       "ghl_tags": [
         "saf-foundation"
       ],
-      "xero_tracking": "ACT-SF — SAF Foundation",
+      "xero_tracking": "ACT-SF \u2014 SAF Foundation",
       "dext_category": "Funding",
       "alma_program": "social-finance",
       "tier": "background",
@@ -2795,7 +2806,7 @@
         "sxsw",
         "sxsw-2025"
       ],
-      "xero_tracking": "ACT-SX — SXSW 2025",
+      "xero_tracking": "ACT-SX \u2014 SXSW 2025",
       "xero_tracking_aliases": [
         "SXSW"
       ],
@@ -2827,7 +2838,7 @@
         "westpac",
         "summit"
       ],
-      "xero_tracking": "ACT-WE — Westpac Summit 2025",
+      "xero_tracking": "ACT-WE \u2014 Westpac Summit 2025",
       "xero_tracking_aliases": [
         "Westpac Summit"
       ],
@@ -2859,7 +2870,7 @@
         "rppp",
         "precinct"
       ],
-      "xero_tracking": "ACT-RP — RPPP Stream Two",
+      "xero_tracking": "ACT-RP \u2014 RPPP Stream Two",
       "xero_tracking_aliases": [
         "RPPP"
       ],
@@ -2891,7 +2902,7 @@
       "ghl_tags": [
         "olive-express"
       ],
-      "xero_tracking": "ACT-OE — Olive Express",
+      "xero_tracking": "ACT-OE \u2014 Olive Express",
       "dext_category": "Regenerative",
       "alma_program": "food-systems",
       "tier": "background",
@@ -2918,7 +2929,7 @@
       "ghl_tags": [
         "orange-sky"
       ],
-      "xero_tracking": "ACT-OS — Orange Sky EL",
+      "xero_tracking": "ACT-OS \u2014 Orange Sky EL",
       "xero_tracking_aliases": [
         "Orange Sky"
       ],
@@ -2955,7 +2966,7 @@
         "infrastructure",
         "operations"
       ],
-      "xero_tracking": "ACT-IN — ACT Infrastructure",
+      "xero_tracking": "ACT-IN \u2014 ACT Infrastructure",
       "xero_tracking_aliases": [
         "Operations"
       ],
@@ -3015,7 +3026,7 @@
       "priority": "medium",
       "status": "active",
       "description": "Community wellbeing initiative",
-      "xero_tracking": "ACT-FG — Feel Good Project",
+      "xero_tracking": "ACT-FG \u2014 Feel Good Project",
       "xero_tracking_aliases": [
         "Feel Good Project"
       ],
@@ -3037,7 +3048,7 @@
       "priority": "low",
       "status": "active",
       "description": "Marriage celebrant services",
-      "xero_tracking": "ACT-CB — Marriage Celebrant",
+      "xero_tracking": "ACT-CB \u2014 Marriage Celebrant",
       "xero_tracking_aliases": [
         "Marriage Celebrant"
       ],
@@ -3071,7 +3082,7 @@
       "canonical_slug": "place-based-policy-lab",
       "category": "background",
       "status": "active",
-      "description": "Background record (added 2026-05-09 cleanup) — wiki page exists at wiki/projects/place-based-policy-lab.md.",
+      "description": "Background record (added 2026-05-09 cleanup) \u2014 wiki page exists at wiki/projects/place-based-policy-lab.md.",
       "tier": "background",
       "empathy_ledger": {
         "tracked": false
@@ -3086,7 +3097,7 @@
       "canonical_slug": "deadlylabs",
       "category": "background",
       "status": "active",
-      "description": "Background record (added 2026-05-09 cleanup) — wiki page exists at wiki/projects/deadlylabs.md.",
+      "description": "Background record (added 2026-05-09 cleanup) \u2014 wiki page exists at wiki/projects/deadlylabs.md.",
       "tier": "background",
       "empathy_ledger": {
         "tracked": false
@@ -3124,7 +3135,7 @@
         ],
         "piece_slug": "the-caravan",
         "status": "active",
-        "year": "2024–present",
+        "year": "2024\u2013present",
         "location": "Mobile, Australia",
         "connected_code": "ACT-CP",
         "lcaa_stages": [
@@ -3194,7 +3205,7 @@
         ],
         "piece_slug": "picc-photo-kiosk",
         "status": "active",
-        "year": "2023–2025",
+        "year": "2023\u20132025",
         "location": "Palm Island, Queensland",
         "connected_code": "ACT-PI",
         "lcaa_stages": [
@@ -3245,57 +3256,57 @@
   },
   "categories": {
     "justice": {
-      "icon": "⚖️",
+      "icon": "\u2696\ufe0f",
       "color": "#E74C3C",
       "dext": "Justice Projects"
     },
     "indigenous": {
-      "icon": "🌏",
+      "icon": "\ud83c\udf0f",
       "color": "#27AE60",
       "dext": "Indigenous Projects"
     },
     "stories": {
-      "icon": "📖",
+      "icon": "\ud83d\udcd6",
       "color": "#9B59B6",
       "dext": "Stories"
     },
     "enterprise": {
-      "icon": "💼",
+      "icon": "\ud83d\udcbc",
       "color": "#3498DB",
       "dext": "Social Enterprise"
     },
     "regenerative": {
-      "icon": "🌱",
+      "icon": "\ud83c\udf31",
       "color": "#2ECC71",
       "dext": "Regenerative"
     },
     "health": {
-      "icon": "❤️",
+      "icon": "\u2764\ufe0f",
       "color": "#E91E63",
       "dext": "Health"
     },
     "community": {
-      "icon": "👥",
+      "icon": "\ud83d\udc65",
       "color": "#FF9800",
       "dext": "Community"
     },
     "arts": {
-      "icon": "🎨",
+      "icon": "\ud83c\udfa8",
       "color": "#673AB7",
       "dext": "Arts"
     },
     "events": {
-      "icon": "📅",
+      "icon": "\ud83d\udcc5",
       "color": "#00BCD4",
       "dext": "Events"
     },
     "funding": {
-      "icon": "💰",
+      "icon": "\ud83d\udcb0",
       "color": "#FFC107",
       "dext": "Funding"
     },
     "tech": {
-      "icon": "💻",
+      "icon": "\ud83d\udcbb",
       "color": "#607D8B",
       "dext": "Technology"
     }
