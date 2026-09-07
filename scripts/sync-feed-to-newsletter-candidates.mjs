@@ -58,15 +58,15 @@ function autoAudiencesFor(event) {
         if (event.project_codes?.length) audiences.add('partner');
       }
       break;
-    case 'plan_updated':
     case 'decision_logged':
       // Decisions affect partners (project-leads) and funders (if money-touching).
       // We can't easily detect "money-touching" from filename, so default partner only.
       audiences.add('partner');
       break;
+    case 'plan_updated':
     case 'handoff_updated':
-      // Handoffs are internal-ish — low-priority brand candidate.
-      audiences.add('brand');
+      // Plan and handoff edits are internal working notes. They produced 305 of the
+      // first 839 candidates and none were ever included (excluded 2026-09-07).
       break;
     case 'wiki_update':
     case 'wiki_page_synced':
