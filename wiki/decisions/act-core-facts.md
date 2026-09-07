@@ -37,6 +37,8 @@ review_cadence: weekly (via Alignment Loop agent)
 
 > **Pending decision (2026-06-12):** Standard Ledger proposed converting the Pty to a holding company with a new "ACT Projects" operating subsidiary taking contracts, R&D, founder payroll, and the Goods commercial arm. **Not decided; the table above stands until it is.** Blocks: Ben + Nick decision on the operating entity (target 19 June), DGR lawyer view on the Butterfly connection (before August). Hold novation letters until resolved. See [[2026-06-12-holdco-structure-proposal|the proposal page]].
 
+**Structure decided 2026-09-07 (Ben): Option A.** A Curious Tractor Pty Ltd is the one trading company for every ACT project; no holdco, no second trading company. The Harvest is a tracking category (ACT-HV) until Sonas takes shares, then its own Pty. Plan and sequence: `thoughts/shared/plans/act-one-company-alignment-2026-09-07.md`.
+
 **Do NOT use** the labels "ACT Foundation" or "ACT Ventures" as legal entity names. They are conceptual labels in older docs; not real entities.
 
 **On first reference:** "A Curious Tractor Pty Ltd" → then "the Pty"; "A Kind Tractor Ltd" → then "the charity".

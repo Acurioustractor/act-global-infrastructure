@@ -9,6 +9,10 @@ tags: [decisions, entity-structure, holdco, founder-pay, dgr, cutover, rd-tax]
 
 # Holding company + ACT Projects: the proposal on the table
 
+
+> **Decided 2026-09-07 (Ben, in session): Option A.** A Curious Tractor Pty Ltd is the single trading company. No ACT Projects Pty Ltd, no holdco now. Revisit only if an investor or a sale of one project forces ring-fencing; a Div 615 rollover can add a holdco then. Plan and sequence: `thoughts/shared/plans/act-one-company-alignment-2026-09-07.md`.
+
+
 > **Status: proposed, not decided.** From a strategy call with Standard Ledger, filed at [meeting record](../../thoughts/shared/meetings/2026-06-12-standard-ledger-structure-call.md). Canon ([ACT Core Facts](act-core-facts.md)) stays unchanged until Ben and Nick decide and the DGR lawyer answers. This page holds the whole picture so the decision gets made once, not in fragments.
 >
 > Nothing here is tax, legal, or financial advice. The professional calls sit with Standard Ledger and the DGR lawyer; this page organises the decision.
