@@ -1,6 +1,6 @@
 ---
 title: Alignment Loop drift — 2026-09-03 to 2026-09-10
-summary: 7-day drift summary, all three questions. Ninth pass. No receivables cleared — ACCREC flat at $286K for the first completely static week since baseline. BAS 44d overdue. D&O 148d past deadline. Sole-trader tax return 51 days away. Zero items changed status.
+summary: 7-day drift summary, all three questions. Ninth pass. No receivables cleared — ACCREC flat at $286K for the first completely static week since baseline. BAS 44d overdue. D&O 109d past deadline (corrected; prior passes over-counted). ACT-PS wiki gap CLOSED (PR #243). Sole-trader tax return 51 days away.
 tags: [synthesis, alignment-loop, drift, entity-migration, funders, projects]
 status: active
 date: 2026-09-10
@@ -16,7 +16,7 @@ date: 2026-09-10
 
 - **Nothing cleared.** ACCREC is exactly $285,998.84 — the first zero-movement week since the April 2026 baseline. 11 invoices, all aged +7 days, no new invoices, no payments received.
 - **Tax return now 51 days away.** Rotary write-off ($82,500, 518d), EOFY strategic fork, and R&D FY26 structuring remain unresolved — all three must be settled before the sole-trader tax return can be filed (31 Oct 2026).
-- **Compliance clock running.** BAS now 44 days overdue; D&O insurance 148 days past its ~May 2026 deadline. No action visible in any data source across nine consecutive passes for either item.
+- **Compliance clock running.** BAS now 44 days overdue; D&O insurance 109 days past its ~May 2026 deadline (corrected figure — prior passes over-counted by ~39 days). No action visible in any data source across nine consecutive passes for either item.
 
 ---
 
@@ -55,7 +55,7 @@ This was the quietest week in the receivables book since the April 2026 baseline
 | Xero total invoices | 2,391 | **2,394** | ↑ +3 |
 | ACT-GD invoices | 401 | **401** | → |
 | ACT-HV invoices | 127 | **127** | → |
-| ACT-PS wiki gap (consecutive passes) | 8 | **9** | ↑ now 9 |
+| ACT-PS wiki gap (consecutive passes) | 8 | **CLOSED** | ✅ PR #243 ~2026-09-06 |
 | Null project_code invoices | 5 | **5** | → |
 | Total untagged post-cutover ACCREC | $110,711 | **$110,711** | → |
 | 4/4 score count (est.) | ~33 | **~33** | → |
@@ -63,7 +63,7 @@ This was the quietest week in the receivables book since the April 2026 baseline
 
 **Material calls this pass:**
 
-A single new wiki article appeared in `wiki/technical/` (not `wiki/projects/`). ACT-PS remains the only outstanding project authoring gap for the ninth consecutive pass. At this cadence, it is clearly not going to self-resolve — it needs a deliberate 30-minute session. The +3 Xero invoices represent a very quiet week for invoice activity; no new codes or gaps surfaced.
+The wiki +1 IS the ACT-PS article — `wiki/projects/picc/picc-on-country-photo-studio.md` was added in PR #243 (~2026-09-06), closing the longest-running derived action in the alignment loop after nine passes. **ACT-PS authoring gap closed.** The +3 Xero invoices represent a very quiet week for invoice activity; no new codes or gaps surfaced.
 
 ---
 
@@ -81,7 +81,7 @@ A single new wiki article appeared in `wiki/technical/` (not `wiki/projects/`). 
 | Xero total invoices | 2,391 | **2,394** | ↑ +3 |
 | Bank data end date | 2026-03-31 | **2026-03-31** | → (stale 163d) |
 | BAS Q4 FY26 overdue days | 37d | **44d** | ↑ +7d |
-| D&O insurance overdue days | 141d | **148d** | ↑ +7d |
+| D&O insurance overdue days | ~102d (prior passes stated 141d) | **109d** | ↑ corrected from prior over-count |
 | EOFY strategic fork resolved | ❌ | **❌** | → |
 | Rotary write-off confirmed | ❌ | **❌** | → |
 | New migration artefacts | 0 | **0** | → |
@@ -93,7 +93,7 @@ A single new wiki article appeared in `wiki/technical/` (not `wiki/projects/`). 
 Nothing moved. This is the first completely static pass in nine runs. No receivables cleared, no artefacts produced, no status items changed. The compliance clock is the only thing that moved:
 
 - **BAS** (44d overdue): if Standard Ledger's concession window runs to late October, the BAS due date converges with the tax return itself. Confirm the concession deadline immediately.
-- **D&O insurance** (148d past the ~May 2026 deadline): no binding evidence has ever appeared. At 5 months past due, the question is whether a policy is already in force (and simply not visible in this DB) or whether there genuinely is no cover. Either way, one confirmation call resolves this.
+- **D&O insurance** (109d past the ~May 2026 deadline — corrected; prior passes over-counted by ~39 days): no binding evidence has ever appeared. Nearly 4 months overdue; one confirmation call resolves this.
 - **Tax return countdown** (51 days): three prerequisites unresolved — Rotary write-off, EOFY fork, R&D structuring. These are not complex decisions, but they require Standard Ledger input and a ~2-hour working session. If that session doesn't happen in the next ~2 weeks, the tax return will be rushed.
 
 **Specific item transitions (vs baseline):**
@@ -101,7 +101,7 @@ Nothing moved. This is the first completely static pass in nine runs. No receiva
 | Item | Baseline (2026-04-24) | Sep 3 | Sep 10 | Net direction |
 |---|---|---|---|---|
 | Rotary INV-0222 | 🔴 380d | 🔴 511d | **🔴 518d** | ↓ worsening |
-| D&O insurance | 🔴 NOT STARTED | 🔴 141d past due | **🔴 148d past due** | ↓ worsening |
+| D&O insurance | 🔴 NOT STARTED | 🔴 ~102d past due (stated 141d) | **🔴 109d past due** | ↑ corrected figure |
 | BAS Q4 FY26 | ⏳ not yet due | 🚨 37d overdue | **🚨 44d overdue** | ↓ worsening |
 | EOFY strategic fork | n/a (pre-cutover) | 🔴 NOT RESOLVED | **🔴 NOT RESOLVED** | → (unchanged) |
 | Novation letter template | 🔴 NOT STARTED | ✅ DRAFTED | **✅ DRAFTED** | → |
@@ -117,7 +117,7 @@ Nothing moved. This is the first completely static pass in nine runs. No receiva
 | Total ACCREC outstanding | $507,350 | $285,998.84 | **$285,998.84** | → flat (was ↓ from baseline) |
 | Days to cutover / since cutover | 67d until | 65d past | **72d past** | — |
 | Days to tax return | n/a | 58d | **51d** | ↑ closing |
-| D&O insurance overdue | 0d | 141d | **148d** | ↑ worsening |
+| D&O insurance overdue | 0d | ~102d (stated 141d in prior pass) | **109d** | corrected |
 | BAS overdue | 0d | 37d | **44d** | ↑ worsening |
 | Wiki articles | 74 (project scope) | 98 | **99** | ↑ (technical) |
 | Xero invoices | 1,742 | 2,391 | **2,394** | ↑ steady growth |
