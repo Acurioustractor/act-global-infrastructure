@@ -1,6 +1,6 @@
 ---
-title: Project truth-state — 74 codes × 4 sources, ninth pass (wiki +1, Xero +3, ACT-PS gap ninth consecutive)
-summary: Ninth pass of the ACT Alignment Loop (Q2), 2026-09-10. Config still 74 codes (v1.8.0, 139 days stale). Wiki now 99 articles (+1 from 98). ACT-PS wiki gap ninth consecutive pass. Xero +3 invoices (2,394 total); no tagged-code changes. Five null project_code invoices persist. Acceptance criterion still met.
+title: Project truth-state — 74 codes × 4 sources, ninth pass (wiki +1, Xero +3, ACT-PS gap CLOSED)
+summary: Ninth pass of the ACT Alignment Loop (Q2), 2026-09-10. Config still 74 codes (v1.8.0, 139 days stale). Wiki now 99 articles (+1). ACT-PS wiki gap CLOSED — picc-on-country-photo-studio.md was added ~2026-09-06 (PR #243). Xero +3 invoices (2,394 total). Five null project_code invoices persist. Acceptance criterion met. CORRECTED: initial version misstated ACT-PS as still-open.
 tags: [synthesis, projects, alignment-loop, project-codes]
 status: active
 date: 2026-09-10
@@ -12,13 +12,13 @@ date: 2026-09-10
 
 ## Headline findings
 
-1. **Wiki now 99 articles — up from 98 at Sep 3 (+1).** One new article added since the last pass. However, it is in `wiki/technical/` (not `wiki/projects/`), and ACT-PS remains the only outstanding project-level authoring gap. The +1 does not close any scoring gap.
+1. **Wiki now 99 articles — up from 98 at Sep 3 (+1). The +1 IS the ACT-PS article.** `wiki/projects/picc/picc-on-country-photo-studio.md` was added in PR #243 (~2026-09-06), closing the longest-running derived action in the alignment loop (nine passes). Initial synthesis incorrectly counted this as a technical/ article only — verified post-merge, the article exists in `wiki/projects/picc/`.
 
 2. **Xero +3 invoices — total now 2,394** (was 2,391 at Sep 3). Very low volume week. ACT-GD still at 401 (unchanged), ACT-HV at 127 (unchanged). The +3 likely span multiple codes but no single code shows visible movement.
 
 3. **`config/project-codes.json` still at v1.8.0 — now 139 days without a version bump.** Unchanged from Sep 3. Four ghost codes (`ACT-APO`, `ACT-AMT`, `ACT-EFI`, `ACT-GCC`) still present. Four DB-only codes (`ACT-DLB`, `ACT-PB`, `ACT-QD`, `ACT-RS`) still unresolved in config.
 
-4. **ACT-PS (PICC On Country Photo Studio) remains the only active studio project without a wiki article — ninth consecutive pass.** 6 Xero invoices, 79+ codebase references, no article. Estimated 30 minutes to close. It has been flagged in every pass since the April 2026 baseline.
+4. **ACT-PS authoring gap CLOSED.** ~~ninth consecutive pass without resolution~~ `wiki/projects/picc/picc-on-country-photo-studio.md` exists (PR #243, ~2026-09-06). ACT-PS moves from 3/4 to 4/4 — estimated ~34 projects now fully aligned.
 
 5. **Five invoices with null project_code persist** — INV-0289 (SIHF $21,780, 296d), INV-0332 (Tandanya $16,500, 85d), INV-0341 (ALIVE $66,000, 70d), INV-0347 (Tandanya $5,500, 13d), INV-0349 (Joy House $931, 10d). ALIVE and first Tandanya invoice have now been untagged for 70 and 85 days.
 
@@ -30,8 +30,8 @@ date: 2026-09-10
 
 | Score | Count | Share | Change from 2026-09-03 |
 |---|---:|---:|---|
-| **4/4** | ~33 | 45% | → stable |
-| **3/4** | ~10 | 14% | → stable (ACT-PS still here) |
+| **4/4** | ~34 | 46% | ↑ +1 (ACT-PS closed) |
+| **3/4** | ~9 | 12% | ↓ −1 (ACT-PS moved to 4/4) |
 | **2/4** | ~27 | 36% | → stable |
 | **1/4** | ~4 | 5% | → stable |
 | **0/4** | 0 | 0% | → |
@@ -47,7 +47,7 @@ _4 DB-only codes (ACT-DLB, ACT-PB, ACT-QD, ACT-RS) remain unscored — in DB but
 |---|---|---|
 | Every active/ideation project scores ≥2/4 | ✅ | All active/ideation projects have at minimum config + DB presence |
 | Any project at 0/4 flagged for retirement | ✅ | No 0/4 projects |
-| DB activity but no wiki surfaces as authoring backlog | ✅ | ACT-PS is the one real gap (ninth consecutive pass) |
+| DB activity but no wiki surfaces as authoring backlog | ✅ | ACT-PS gap CLOSED (PR #243 ~2026-09-06). No remaining authoring gap for active projects. |
 
 ---
 
@@ -102,9 +102,9 @@ One new article added since Sep 3 in `wiki/technical/` — does not change proje
 
 ---
 
-## Persistent authoring backlog
+## Authoring backlog
 
-**ACT-PS — PICC On Country Photo Studio:** active studio project, 6 Xero invoices, 79+ codebase references, no wiki article. **Ninth consecutive pass without resolution.** Estimated 30-minute task to close.
+**ACT-PS — PICC On Country Photo Studio: CLOSED.** `wiki/projects/picc/picc-on-country-photo-studio.md` was added in PR #243 (~2026-09-06). After nine passes as the only active-project authoring gap, all active studio projects now have wiki coverage.
 
 ---
 
@@ -121,7 +121,7 @@ One new article added since Sep 3 in `wiki/technical/` — does not change proje
 
 ## Derived actions (persistent, priority order)
 
-1. **Write `wiki/projects/picc/picc-on-country-photo-studio.md`** — nine passes flagged it. 30 minutes.
+1. ~~**Write `wiki/projects/picc/picc-on-country-photo-studio.md`**~~ ✅ DONE — PR #243 (~2026-09-06).
 2. **Tag INV-0341 ALIVE ($66,000) and INV-0332 Tandanya ($16,500)** — untracked 70d and 85d.
 3. **Identify Joy House Productions** — INV-0349 $931, null project_code, 10 days old.
 4. **Assess ACT-DLB, ACT-PB, ACT-QD, ACT-RS** — in DB, not in config. Promote or archive.
