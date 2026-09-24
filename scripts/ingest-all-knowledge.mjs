@@ -15,6 +15,8 @@
  */
 
 import '../lib/load-env.mjs';
+import { existsSync } from 'node:fs';
+import { loadAllCodebases, codebasesByTier, repoName } from '../packages/act-projects/src/index.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 
@@ -25,53 +27,10 @@ const __dirname = dirname(__filename);
 const studioPath = resolve(__dirname, '../../Code/act-regenerative-studio');
 
 // ACT Codebases to ingest
-const CODEBASES = [
-  {
-    path: '/Users/benknight/Code/act-regenerative-studio',
-    name: 'act-regenerative-studio',
-    description: 'ACT Studio main site + unified services'
-  },
-  {
-    path: '/Users/benknight/Code/empathy-ledger-v2',
-    name: 'empathy-ledger-v2',
-    description: 'Empathy Ledger ethical storytelling platform'
-  },
-  {
-    path: '/Users/benknight/Code/JusticeHub',
-    name: 'justicehub-platform',
-    description: 'JusticeHub community-led justice services'
-  },
-  {
-    path: '/Users/benknight/Code/The Harvest Website',
-    name: 'theharvest',
-    description: 'The Harvest regenerative farm + CSA'
-  },
-  {
-    path: '/Users/benknight/Code/act-farm',
-    name: 'act-farm',
-    description: 'ACT Farm R&D residency + innovation hub'
-  },
-  {
-    path: '/Users/benknight/Code/Goods Asset Register',
-    name: 'goods-asset-register',
-    description: 'Goods on Country asset register'
-  },
-  {
-    path: '/Users/benknight/Code/bcv-studio',
-    name: 'bcv-studio',
-    description: 'Black Cockatoo Valley ecological regeneration'
-  },
-  {
-    path: '/Users/benknight/Code/ACT Placemat',
-    name: 'act-placemat',
-    description: 'ACT Placemat business intelligence platform'
-  },
-  {
-    path: '/Users/benknight/act-global-infrastructure',
-    name: 'act-global-infrastructure',
-    description: 'ACT ecosystem automation + infrastructure'
-  }
-];
+// From config/codebases.json. Folders that are not on this machine (CI) are skipped.
+const CODEBASES = codebasesByTier(loadAllCodebases().codebases, 'platform', 'product', 'partner')
+  .filter((cb) => cb.path && existsSync(cb.path))
+  .map((cb) => ({ name: repoName(cb), path: cb.path, description: cb.name }));
 
 async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');

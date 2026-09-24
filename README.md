@@ -97,8 +97,7 @@ GITHUB_TOKEN=$GH_PROJECT_TOKEN node scripts/generate-weekly-report.mjs
 │
 ├── config/                     # Configuration
 │   ├── notion-database-ids.json  # Notion DB IDs
-│   ├── repos.json                # Codebase paths
-│   ├── CODEBASES.md              # Authoritative repo list
+│   ├── codebases.json            # The one codebase list (repo, checkout, Vercel, Supabase)
 │   └── workspace.code-workspace  # VS Code multi-root
 │
 └── docs/                       # Documentation
@@ -121,7 +120,7 @@ GITHUB_TOKEN=$GH_PROJECT_TOKEN node scripts/generate-weekly-report.mjs
 - [NOTION_QUICK_SETUP.md](docs/NOTION_QUICK_SETUP.md) - Original setup instructions
 
 **Reference**:
-- [CODEBASES.md](config/CODEBASES.md) - Authoritative list of 7 repos
+- [codebases.json](config/codebases.json) - The one list of codebases; `pnpm codebases:live` checks it
 - [WORLD_CLASS_DEVELOPMENT_PIPELINE.md](docs/WORLD_CLASS_DEVELOPMENT_PIPELINE.md) - Vision
 
 ---

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import codebasesJson from '../../../../../../../config/codebases.json'
 
 // ─── Static Mappings ─────────────────────────────────────────────
 
@@ -63,14 +64,12 @@ const CORE_SITES = [
   },
 ]
 
-const LOCAL_CODEBASES: Record<string, string> = {
-  'empathy-ledger-v2': '/Users/benknight/Code/empathy-ledger-v2',
-  'justicehub-platform': '/Users/benknight/Code/JusticeHub',
-  'goods-asset-tracker': '/Users/benknight/Code/Goods Asset Register',
-  'theharvest': '/Users/benknight/Code/The Harvest Website',
-  'act-global-infrastructure': '/Users/benknight/Code/act-global-infrastructure',
-  'act-regenerative-studio': '/Users/benknight/Code/act-regenerative-studio',
-}
+// Repo name → local checkout, from config/codebases.json (paths stored with ~).
+const LOCAL_CODEBASES: Record<string, string> = Object.fromEntries(
+  codebasesJson.codebases
+    .filter((cb) => cb.local_path)
+    .map((cb) => [cb.repo.split('/')[1], cb.local_path as string]),
+)
 
 // Maps repo names → screenshot slugs (for repos with Vercel deployments)
 const REPO_SCREENSHOT_MAP: Record<string, string> = {

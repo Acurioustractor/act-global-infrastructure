@@ -37,3 +37,6 @@ jobs:
 
       - name: Project record (config/project-codes.json)
         run: pnpm projects:check -- --strict && pnpm projects:art-index -- --check && pnpm projects:test
+
+      - name: Codebase list (config/codebases.json)
+        run: pnpm codebases:check

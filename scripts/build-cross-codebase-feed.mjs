@@ -27,20 +27,19 @@ import { existsSync, mkdirSync, writeFileSync, readdirSync, statSync } from 'nod
 import { join, basename } from 'node:path';
 import { createClient } from '@supabase/supabase-js';
 import 'dotenv/config';
+import { loadAllCodebases, codebasesByTier, repoName } from '../packages/act-projects/src/index.mjs';
 
 const args = process.argv.slice(2);
 const sinceArg = args.includes('--since') ? args[args.indexOf('--since') + 1] : '1d';
 const jsonOnly = args.includes('--json');
 
 // SCOPE — codebases to scan (must exist at these paths)
-const CODEBASES = [
-  { name: 'act-global-infrastructure', path: '/Users/benknight/Code/act-global-infrastructure' },
-  { name: 'act-regenerative-studio', path: '/Users/benknight/Code/act-regenerative-studio' },
-  { name: 'empathy-ledger-v2', path: '/Users/benknight/Code/empathy-ledger-v2' },
-  { name: 'justicehub', path: '/Users/benknight/Code/justicehub' },
-  { name: 'goods', path: '/Users/benknight/Code/goods' },
-  { name: 'act-farm', path: '/Users/benknight/Code/act-farm' },
-];
+// Every deployed codebase with a local checkout, from config/codebases.json. The old
+// hand list pointed Goods at ~/Code/goods, which is not a git repo, so Goods never
+// appeared in the feed; Harvest and CivicGraph were missing altogether.
+const CODEBASES = codebasesByTier(loadAllCodebases().codebases, 'platform', 'product', 'partner')
+  .filter((cb) => cb.path && existsSync(cb.path))
+  .map((cb) => ({ name: repoName(cb), path: cb.path }));
 
 const FEED_DIR = '/Users/benknight/Code/act-global-infrastructure/thoughts/shared/cross-codebase-feed';
 const today = new Date().toISOString().slice(0, 10);
