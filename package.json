@@ -18,6 +18,8 @@
     "ask": "node scripts/ask-act.mjs",
     "sync:ghl": "node scripts/sync-ghl-to-notion.mjs",
     "sync:ghl:supabase": "node scripts/sync-ghl-to-supabase.mjs",
+    "sync:social-ledger": "node scripts/sync-social-posts-to-supabase.mjs",
+    "sync:social-ledger:apply": "node scripts/sync-social-posts-to-supabase.mjs --apply",
     "sync:gmail": "node scripts/sync-gmail-to-supabase.mjs",
     "sync:notion": "node scripts/sync-notion-to-supabase.mjs",
     "sync:notion:full": "node scripts/sync-notion-to-supabase.mjs --full",
