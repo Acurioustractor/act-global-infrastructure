@@ -1,6 +1,6 @@
 ---
 title: Funder alignment — Joy House cleared, ACCREC at $285K, tax return 37 days away
-summary: Tenth pass of the ACT Alignment Loop (Q1), 2026-09-24. Outstanding ACCREC $285,067.84 — DOWN $931 from Sep 10 (Joy House INV-0349 paid). Now 10 invoices. Rotary INV-0222 now 532 days unpaid. BAS 58 days past standard due date. Sole-trader tax return (31 Oct 2026) 37 days away. funders.json unchanged at 25 entries.
+summary: Tenth pass of the ACT Alignment Loop (Q1), 2026-09-24. Outstanding ACCREC $285,067.84 — DOWN $931 from Sep 10 (Joy House INV-0349 cleared — paid or voided). Now 10 invoices. Rotary INV-0222 now 532 days unpaid. BAS 58 days past standard due date. Sole-trader tax return (31 Oct 2026) 37 days away. funders.json unchanged at 25 entries.
 tags: [synthesis, funders, alignment-loop, entity-migration]
 status: active
 date: 2026-09-24

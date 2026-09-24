@@ -1,6 +1,6 @@
 ---
-title: Project truth-state — Xero +54 invoices in 14 days, config stale 153 days, null-code invoices at 4
-summary: Tenth pass of the ACT Alignment Loop (Q2), 2026-09-24. Config still 74 codes (v1.8.0, 153 days stale). Wiki still 99 articles in projects/. Xero +54 invoices (2,448 total) — active burst in 14 days, ACT-GD +9, ACT-HV +4. Joy House INV-0349 cleared (null-code invoices now 4). ACT-PS authoring gap remains closed (PR #243). Acceptance criterion met.
+title: Project truth-state — Xero +54 invoices in 14 days, config now 78 codes (ACT-DLB/PB confirmed), null-code invoices at 4
+summary: Tenth pass of the ACT Alignment Loop (Q2), 2026-09-24. Config now 78 codes (v1.8.0 _meta stale since 2026-04-24 but content updated). Wiki still 99 articles in projects/. Xero +54 invoices (2,448 total) — active burst in 14 days, ACT-GD +9, ACT-HV +4. Joy House INV-0349 cleared (null-code invoices now 4). ACT-DLB and ACT-PB confirmed in config as active projects (not DB-only). Only ACT-QD and ACT-RS absent from config. ACT-PS authoring gap remains closed (PR #243). Acceptance criterion met.
 tags: [synthesis, projects, alignment-loop, project-codes]
 status: active
 date: 2026-09-24
@@ -14,7 +14,7 @@ date: 2026-09-24
 
 1. **Xero +54 invoices in 14 days — total now 2,448** (was 2,394 at Sep 10). This is the largest single-interval invoice burst since the ACT-GD grant coding surge at Aug 6. ACT-GD gained 9 invoices (401→410), ACT-HV gained 4 (127→131). ACT-10 (10x10 Retreat) and ACT-BG (Brodie Germaine) both appear in the top 20 with 23 invoices each — these are predominantly ACCPAY (expense) coding catch-ups, not new revenue.
 
-2. **`config/project-codes.json` still at v1.8.0 — now 153 days without a version bump.** Four ghost codes (`ACT-APO`, `ACT-AMT`, `ACT-EFI`, `ACT-GCC`) still present. Four DB-only codes (`ACT-DLB`, `ACT-PB`, `ACT-QD`, `ACT-RS`) still unresolved in config.
+2. **`config/project-codes.json` now has 78 projects** (prior passes reported 74 — the `_meta.updated` field still reads `2026-04-24` but the `projects` object has grown to 78 via commits since the baseline). **CORRECTION from prior passes: ACT-DLB (Deadly Labs, active) and ACT-PB (Place-Based Policy Lab, active) are already in config.** Only ACT-QD and ACT-RS remain absent from config (2 DB-only codes, not 4). Ghost codes (`ACT-APO`, `ACT-AMT`, `ACT-EFI`, `ACT-GCC`) still present.
 
 3. **Wiki projects/ still at 99 articles — no new project articles since Sep 10.** ACT-PS (`wiki/projects/picc/picc-on-country-photo-studio.md`, PR #243) remains the last addition. No new project wiki gaps.
 
@@ -30,14 +30,15 @@ date: 2026-09-24
 
 | Score | Count | Share | Change from 2026-09-10 |
 |---|---:|---:|---|
-| **4/4** | ~34 | 46% | → unchanged |
-| **3/4** | ~9 | 12% | → unchanged |
-| **2/4** | ~27 | 36% | → unchanged |
-| **1/4** | ~4 | 5% | → unchanged |
+| **4/4** | ~34 | 46% | → (estimated from active/ideation subset) |
+| **3/4** | ~9 | 12% | → |
+| **2/4** | ~27 | 36% | → |
+| **1/4** | ~4 | 5% | → |
 | **0/4** | 0 | 0% | → |
-| **Total (config)** | **74** | | → unchanged |
+| **Total (config)** | **78** | | ↑ corrected from prior-pass 74 count |
 
-_4 DB-only codes (ACT-DLB, ACT-PB, ACT-QD, ACT-RS) remain unscored — in DB but not config._
+_Config breakdown: 38 active, 4 ideation, 1 sunsetting, 2 transferred, 33 archived = 78 total._
+_2 DB-only codes (ACT-QD, ACT-RS) remain unscored — in DB but not config. ACT-DLB and ACT-PB are confirmed in config as active projects (correction from prior passes)._
 
 ---
 
@@ -57,14 +58,16 @@ _4 DB-only codes (ACT-DLB, ACT-PB, ACT-QD, ACT-RS) remain unscored — in DB but
 
 `config/project-codes.json` is at v1.8.0, last updated 2026-04-24. Now 153 days without a version bump. Four ghost codes (`ACT-APO`, `ACT-AMT`, `ACT-EFI`, `ACT-GCC`) still present.
 
-### DB — 4 DB-only codes persist (no change)
+### DB — 2 DB-only codes (ACT-DLB and ACT-PB now confirmed in config)
+
+**CORRECTION:** ACT-DLB (Deadly Labs, active) and ACT-PB (Place-Based Policy Lab, active) are in `config/project-codes.json`. They were incorrectly listed as DB-only in prior alignment loop passes — the config had grown from 74 to 78 codes via post-baseline commits while the `_meta.updated` field remained `2026-04-24`.
 
 | Code | Status in DB | Config? | Action needed |
 |------|------|------|---|
-| ACT-DLB | present in `projects` | ❌ | Add to config or archive |
-| ACT-PB | present in `projects` | ❌ | Add to config or archive |
-| ACT-QD | present in `projects` | ❌ | Add to config or archive |
-| ACT-RS | present in `projects` | ❌ | Add to config or archive |
+| ~~ACT-DLB~~ | confirmed in config | ✅ active | No action — was mis-classified |
+| ~~ACT-PB~~ | confirmed in config | ✅ active | No action — was mis-classified |
+| ACT-QD | present in `projects` DB | ❌ | Add to config or archive |
+| ACT-RS | present in `projects` DB | ❌ | Add to config or archive |
 
 ### Wiki (no change since Sep 10)
 
@@ -126,8 +129,8 @@ No active authoring gaps. ACT-PS closed PR #243 (~2026-09-06). Next candidate if
 ## Derived actions (persistent, priority order)
 
 1. **Tag INV-0341 ALIVE ($66,000) and INV-0332 Tandanya ($16,500)** — untagged 84d and 99d respectively.
-2. **Assess ACT-DLB, ACT-PB, ACT-QD, ACT-RS** — in DB, not in config. Promote or archive.
-3. **Version-bump `config/project-codes.json`** — 153 days without update while ecosystem evolves.
+2. **Assess ACT-QD and ACT-RS** — in DB but not in config. Promote or archive. (ACT-DLB and ACT-PB confirmed in config — no action needed.)
+3. **Update `_meta.updated` in `config/project-codes.json`** — the projects object has been updated but the meta field still reads `2026-04-24`, misleading all consumers of the file.
 4. **Remove `ACT-APO` and `ACT-AMT`** from config — self-described non-projects, flagged all ten passes.
 
 ---

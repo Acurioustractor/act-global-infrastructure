@@ -51,8 +51,8 @@ Joy House INV-0349 ($931) is cleared — either paid or voided. This is the only
 
 | Metric | 2026-09-10 | 2026-09-24 | Direction |
 |---|---|---|---|
-| Config version | v1.8.0 | **v1.8.0** | → (153d stale) |
-| Total project codes (config) | 74 | **74** | → |
+| Config version | v1.8.0 | **v1.8.0** | → (_meta.updated stale; actual content: 78 codes) |
+| Total project codes (config) | 74 (mis-counted prior passes) | **78** | ↑ corrected — ACT-DLB/PB confirmed in config |
 | Wiki articles (wiki/projects) | 99 | **99** | → unchanged |
 | Xero total invoices | 2,394 | **2,448** | ↑ +54 (burst) |
 | ACT-GD invoices | 401 | **410** | ↑ +9 |
@@ -62,7 +62,7 @@ Joy House INV-0349 ($931) is cleared — either paid or voided. This is the only
 | Null project_code invoices | 5 | **4** | ↓ -1 (Joy House cleared) |
 | Total untagged post-cutover ACCREC | $110,711 | **$109,780** | ↓ -$931 |
 | 4/4 score count (est.) | ~34 | **~34** | → unchanged |
-| DB-only codes not in config | 4 | **4** | → |
+| DB-only codes not in config | 4 (mis-counted) | **2** (ACT-QD, ACT-RS only) | ↑ corrected — ACT-DLB/PB confirmed in config |
 | ACT-PS authoring gap | CLOSED (PR #243) | **CLOSED** | → |
 
 **Material calls this pass:**
