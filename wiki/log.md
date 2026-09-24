@@ -18,6 +18,7 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-09-24 08:20 | ingest | 3 CivicGraph snapshots (4 Apr 2026) from retired social-impact-kb vault; its AI-compiled articles not imported (JusticeHub mis-described) | wiki/raw/2026-04-04-civicgraph-data-quality.md, wiki/raw/2026-04-04-civicgraph-discoveries.md, wiki/raw/2026-04-04-civicgraph-foundations-gaps.md
 - 2026-06-14 09:05 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-06-14.md, wiki/decisions/url-audit-latest.json
 - 2026-06-14 09:00 | lint | 359 canonical articles · 273 broken links · 88 orphans · 97% source-bridge coverage | wiki/output/lint-2026-06-14.md, wiki/output/status-latest.json
 - 2026-06-14 08:59 | lint | 359 canonical articles · 273 broken links · 88 orphans · 97% source-bridge coverage | wiki/output/lint-2026-06-14.md, wiki/output/status-latest.json

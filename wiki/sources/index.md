@@ -20,6 +20,9 @@ This separation matters: `raw/` is the historical record, `sources/` is the proc
 
 | Date | Source summary | Raw |
 |---|---|---|
+| 2026-09-25 | [[2026-04-04-civicgraph-data-quality|Source Summary: CivicGraph data quality snapshot (4 April 2026)]] — 61 agents overdue, enrichment gaps, table sizes. | [[../raw/2026-04-04-civicgraph-data-quality|raw]] |
+| 2026-09-25 | [[2026-04-04-civicgraph-discoveries|Source Summary: CivicGraph watch-agent discoveries (4 April 2026)]] — data quality issues and entity changes; flags JusticeHub in error. | [[../raw/2026-04-04-civicgraph-discoveries|raw]] |
+| 2026-09-25 | [[2026-04-04-civicgraph-foundations-gaps|Source Summary: CivicGraph foundations missing profiles (4 April 2026)]] — 200 high-giving foundations with no description. | [[../raw/2026-04-04-civicgraph-foundations-gaps|raw]] |
 | 2026-04-11 | [[README|Source Summary — Raw Sources]] — This directory contains immutable source documents that are compiled into wiki articles by the LLM. Files here are never modified after ingestion. | [[../raw/README|raw]] |
 | 2026-04-11 | [[2026-04-11-supabase-projects-snapshot|Source Summary — Supabase Projects Snapshot — 2026-04-11]] — Daily operational snapshot of Supabase project rows, used to keep canonical wiki identity, website sync, and system tagging aligned. | [[../raw/2026-04-11-supabase-projects-snapshot|raw]] |
 | 2026-04-11 | [[2026-04-09-empathy-ledger-strategy-synthesis|Source Summary — Empathy Ledger Strategy Synthesis — World Tour, Ecosystem, Money]] — **Provenance:** pasted by Ben into the narrative-system session on 2026-04-09. The content was generated in a separate session that had access to the editorial corpus (2,569 quotes), the ACT global i... | [[../raw/2026-04-09-empathy-ledger-strategy-synthesis|raw]] |
