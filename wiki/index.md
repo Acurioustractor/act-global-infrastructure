@@ -207,6 +207,10 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 
 ## Synthesis
 
+- [[alignment-loop-drift-2026-09-10-to-2026-09-24|Alignment Loop drift — 2026-09-10 to 2026-09-24]] — tenth pass. Joy House $931 cleared; ACCREC $285K; Xero +54 burst; tax return 37 days away; BAS 58d overdue; D&O 123d past deadline. Config correction: 78 codes, ACT-DLB/PB confirmed in config.
+- [[entity-migration-truth-state-2026-09-24|Entity migration truth-state — 2026-09-24]] — Q3 tenth pass. 86 days post-cutover; tax return 37d away; three prerequisites unresolved.
+- [[project-truth-state-2026-09-24|Project truth-state — 2026-09-24]] — Q2 tenth pass. Config corrected to 78 codes; Xero +54 burst; 4 null-code ACCREC invoices.
+- [[funder-alignment-2026-09-24|Funder alignment — 2026-09-24]] — Q1 tenth pass. Joy House cleared; 10 open invoices; $285,067.84 outstanding.
 - [[the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led|The Edge Is Where the Healing Is]] — JusticeHub as the world model for community-led justice
 - [[the-kettle|The Kettle]] — STAY reflection anchored in Oonchiumpa, Diagrama, and the four-layer infrastructure
 - [[how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time|How the Tractorpedia second-brain compounds knowledge]] — compounding pattern behind the wiki itself
