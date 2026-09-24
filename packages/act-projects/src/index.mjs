@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { ProjectCodesFile } from './schema.mjs';
 import { runGuards } from './guards.mjs';
 import { indexWiki } from './wiki.mjs';
+import { loadCodebases } from './codebases.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = resolve(here, '../../..');
@@ -29,6 +30,20 @@ export function loadProjects({ path = PROJECT_CODES_PATH, repoRoot = REPO_ROOT }
   }
   return { projects, gaps: failures.filter((f) => f.severity === 'gap'), meta: parsed.data._meta };
 }
+
+export const CODEBASES_PATH = join(REPO_ROOT, 'config/codebases.json');
+
+/**
+ * The codebase list, guarded against project-codes.json: every active project's
+ * github_repo must be on it. Each codebase carries its expanded `path` and the
+ * `project_codes` that point at it.
+ */
+export function loadAllCodebases({ path = CODEBASES_PATH, projectsPath = PROJECT_CODES_PATH, repoRoot = REPO_ROOT } = {}) {
+  const { projects } = loadProjects({ path: projectsPath, repoRoot });
+  return loadCodebases({ path, projects });
+}
+
+export { loadCodebases, codebasesByTier, findCodebase, repoName, expandHome, CODEBASE_TIERS } from './codebases.mjs';
 
 export function getProject(projects, codeOrSlug) {
   const key = String(codeOrSlug).trim();

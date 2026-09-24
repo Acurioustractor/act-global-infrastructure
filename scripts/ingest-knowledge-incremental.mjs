@@ -12,6 +12,8 @@
  */
 
 import '../lib/load-env.mjs';
+import { existsSync } from 'node:fs';
+import { loadAllCodebases, codebasesByTier, repoName } from '../packages/act-projects/src/index.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import { createClient } from '@supabase/supabase-js';
@@ -28,17 +30,10 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-const CODEBASES = [
-  { path: '/Users/benknight/Code/act-regenerative-studio', name: 'act-regenerative-studio' },
-  { path: '/Users/benknight/Code/empathy-ledger-v2', name: 'empathy-ledger-v2' },
-  { path: '/Users/benknight/Code/JusticeHub', name: 'justicehub-platform' },
-  { path: '/Users/benknight/Code/The Harvest Website', name: 'theharvest' },
-  { path: '/Users/benknight/Code/act-farm', name: 'act-farm' },
-  { path: '/Users/benknight/Code/Goods Asset Register', name: 'goods-asset-register' },
-  { path: '/Users/benknight/Code/bcv-studio', name: 'bcv-studio' },
-  { path: '/Users/benknight/Code/ACT Placemat', name: 'act-placemat' },
-  { path: '/Users/benknight/act-global-infrastructure', name: 'act-global-infrastructure' }
-];
+// From config/codebases.json. Folders that are not on this machine (CI) are skipped.
+const CODEBASES = codebasesByTier(loadAllCodebases().codebases, 'platform', 'product', 'partner')
+  .filter((cb) => cb.path && existsSync(cb.path))
+  .map((cb) => ({ name: repoName(cb), path: cb.path }));
 
 /**
  * Check if codebase has changes since last sync

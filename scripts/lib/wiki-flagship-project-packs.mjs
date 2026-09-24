@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { loadAllCodebases, repoName } from '../../packages/act-projects/src/index.mjs';
 
 export const FLAGSHIP_PROJECT_SLUGS = [
   'justicehub',
@@ -20,54 +21,54 @@ const FLAGSHIP_RELATIVE_PATHS = {
 const FLAGSHIP_IMPLEMENTATION_REPOS = {
   justicehub: {
     primary: {
-      name: 'JusticeHub',
+      repo: 'justicehub-platform',
       role: 'Primary public product surface and evidence platform codebase.',
     },
     supporting: [
       {
-        name: 'GrantScope',
+        repo: 'grantscope',
         role: 'CivicGraph, procurement, and capital-intelligence substrate feeding JusticeHub discovery and scoring.',
       },
     ],
   },
   'goods-on-country': {
     primary: {
-      name: 'Goods',
+      repo: 'goods-asset-tracker',
       role: 'Asset register, delivery workflow, and operational product infrastructure.',
     },
     supporting: [
       {
-        name: 'GrantScope',
+        repo: 'grantscope',
         role: 'Goods Workspace procurement and capital discovery layer.',
       },
       {
-        name: 'Palm Island Repository',
+        repo: 'palm-island-repository',
         role: 'Community deployment, reporting, and media archive connected to Palm Island delivery proof.',
       },
     ],
   },
   'the-harvest': {
     primary: {
-      name: 'The Harvest',
+      repo: 'theharvest',
       role: 'Primary public community hub surface and local program website.',
     },
     supporting: [
       {
-        name: 'ACT Farm',
+        repo: 'act-farm',
         role: 'Sibling place and land-practice surface connected to Harvest and Black Cockatoo Valley.',
       },
     ],
   },
   'empathy-ledger': {
     primary: {
-      name: 'Empathy Ledger',
+      repo: 'empathy-ledger-v2',
       role: 'Story, media, consent, and editorial platform.',
     },
     supporting: [],
   },
   'black-cockatoo-valley': {
     primary: {
-      name: 'ACT Farm',
+      repo: 'act-farm',
       role: 'Primary place, land practice, and Black Cockatoo Valley public surface.',
     },
     supporting: [],
@@ -162,13 +163,18 @@ function normalizeRepoName(value) {
     .replace(/[^a-z0-9]+/g, ' ');
 }
 
-async function loadRepoCatalog(wikiRoot) {
-  const configPath = path.resolve(wikiRoot, '..', 'config', 'repos.json');
-
+async function loadRepoCatalog() {
+  // config/codebases.json via @act/projects, in the shape the packs already use.
   try {
-    const raw = await fs.readFile(configPath, 'utf8');
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed.projects) ? parsed.projects : [];
+    return loadAllCodebases().codebases.map((cb) => ({
+      repo: repoName(cb),
+      name: cb.name,
+      path: cb.path,
+      github: cb.repo,
+      description: cb.notes || null,
+      stack: null,
+      deployment: cb.vercel_projects.length ? 'Vercel' : null,
+    }));
   } catch {
     return [];
   }
@@ -204,18 +210,18 @@ function buildImplementationData(slug, repoCatalog) {
   }
 
   const repoByName = new Map(
-    repoCatalog.map((repo) => [normalizeRepoName(repo.name), repo])
+    repoCatalog.map((repo) => [normalizeRepoName(repo.repo), repo])
   );
 
   const primaryRepo = buildImplementationRepoEntry(
-    repoByName.get(normalizeRepoName(repoMap.primary?.name)),
+    repoByName.get(normalizeRepoName(repoMap.primary?.repo)),
     repoMap.primary?.role || null
   );
 
   const supportingRepos = (repoMap.supporting || [])
     .map((entry) =>
       buildImplementationRepoEntry(
-        repoByName.get(normalizeRepoName(entry.name)),
+        repoByName.get(normalizeRepoName(entry.repo)),
         entry.role || null
       )
     )

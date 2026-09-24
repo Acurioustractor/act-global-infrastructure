@@ -84,7 +84,7 @@
     "living:report": "node scripts/living-ecosystem-report.mjs",
     "living:scan": "node scripts/living-ecosystem-alignment-scan.mjs",
     "living:validate": "node scripts/validate-living-ecosystem-config.mjs",
-    "repo:connections": "node scripts/verify-repo-connections.mjs",
+    "repo:connections": "node packages/act-projects/bin/codebases-check.mjs --live",
     "repo:hygiene": "node scripts/repo-hygiene.mjs",
     "wiki:bootstrap:sources": "node scripts/wiki-bootstrap-source-summaries.mjs",
     "wiki:bootstrap:sources:dry-run": "node scripts/wiki-bootstrap-source-summaries.mjs --dry-run",
@@ -150,6 +150,8 @@
     "contact:add-advisory": "node scripts/contact-manager.mjs add-advisory",
     "projects:check": "node packages/act-projects/bin/check.mjs",
     "projects:test": "node --test packages/act-projects/tests/*.test.mjs",
+    "codebases:check": "node packages/act-projects/bin/codebases-check.mjs",
+    "codebases:live": "node packages/act-projects/bin/codebases-check.mjs --live",
     "projects:art-index": "node packages/act-projects/bin/art-index.mjs"
   },
   "keywords": [],

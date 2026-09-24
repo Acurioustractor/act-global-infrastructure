@@ -1,4 +1,5 @@
 {
+  "_superseded_by": "config/codebases.json (2026-09-25). Kept only because act-regenerative-studio's wiki sync still reads it; archive once that copy reads codebases.json. Do not edit.",
   "projects": [
     {
       "name": "ACT Studio",
@@ -8,8 +9,15 @@
       "description": "Multi-project orchestrator and operations hub",
       "stack": "Next.js 15, Supabase, Tailwind",
       "deployment": "Vercel",
-      "workflows": ["snapshot-sprint", "auto-tag"],
-      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+      "workflows": [
+        "snapshot-sprint",
+        "auto-tag"
+      ],
+      "skills": [
+        "act-sprint-workflow",
+        "act-brand-alignment",
+        "ghl-crm-advisor"
+      ]
     },
     {
       "name": "Empathy Ledger",
@@ -19,8 +27,15 @@
       "description": "Ethical storytelling platform",
       "stack": "Next.js 14, Supabase, Tailwind",
       "deployment": "Vercel",
-      "workflows": ["snapshot-sprint", "auto-tag"],
-      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+      "workflows": [
+        "snapshot-sprint",
+        "auto-tag"
+      ],
+      "skills": [
+        "act-sprint-workflow",
+        "act-brand-alignment",
+        "ghl-crm-advisor"
+      ]
     },
     {
       "name": "JusticeHub",
@@ -30,8 +45,15 @@
       "description": "Youth justice and community services",
       "stack": "Next.js 14, Supabase, Tailwind",
       "deployment": "Vercel",
-      "workflows": ["snapshot-sprint", "auto-tag"],
-      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+      "workflows": [
+        "snapshot-sprint",
+        "auto-tag"
+      ],
+      "skills": [
+        "act-sprint-workflow",
+        "act-brand-alignment",
+        "ghl-crm-advisor"
+      ]
     },
     {
       "name": "The Harvest",
@@ -41,8 +63,15 @@
       "description": "Community hub and CSA programs",
       "stack": "Next.js, Supabase, Tailwind",
       "deployment": "Vercel",
-      "workflows": ["snapshot-sprint", "auto-tag"],
-      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+      "workflows": [
+        "snapshot-sprint",
+        "auto-tag"
+      ],
+      "skills": [
+        "act-sprint-workflow",
+        "act-brand-alignment",
+        "ghl-crm-advisor"
+      ]
     },
     {
       "name": "Goods",
@@ -52,8 +81,15 @@
       "description": "Circular economy asset management",
       "stack": "Next.js, Supabase, Tailwind",
       "deployment": "Vercel",
-      "workflows": ["snapshot-sprint", "auto-tag"],
-      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+      "workflows": [
+        "snapshot-sprint",
+        "auto-tag"
+      ],
+      "skills": [
+        "act-sprint-workflow",
+        "act-brand-alignment",
+        "ghl-crm-advisor"
+      ]
     },
     {
       "name": "GrantScope",
@@ -63,8 +99,15 @@
       "description": "CivicGraph, grants intelligence, and procurement discovery substrate",
       "stack": "Next.js, Supabase, MCP, Tailwind",
       "deployment": "Vercel",
-      "workflows": ["snapshot-sprint", "auto-tag"],
-      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+      "workflows": [
+        "snapshot-sprint",
+        "auto-tag"
+      ],
+      "skills": [
+        "act-sprint-workflow",
+        "act-brand-alignment",
+        "ghl-crm-advisor"
+      ]
     },
     {
       "name": "Palm Island Repository",
@@ -74,8 +117,13 @@
       "description": "PICC-linked community archive, reporting, and web-platform workspace",
       "stack": "Mixed repo (web-platform, templates, research, scripts)",
       "deployment": "Vercel",
-      "workflows": ["snapshot-sprint"],
-      "skills": ["act-brand-alignment", "content-publisher"]
+      "workflows": [
+        "snapshot-sprint"
+      ],
+      "skills": [
+        "act-brand-alignment",
+        "content-publisher"
+      ]
     },
     {
       "name": "ACT Farm",
@@ -85,8 +133,15 @@
       "description": "Black Cockatoo Valley regeneration estate",
       "stack": "Next.js, Supabase, Tailwind",
       "deployment": "Vercel",
-      "workflows": ["snapshot-sprint", "auto-tag"],
-      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+      "workflows": [
+        "snapshot-sprint",
+        "auto-tag"
+      ],
+      "skills": [
+        "act-sprint-workflow",
+        "act-brand-alignment",
+        "ghl-crm-advisor"
+      ]
     },
     {
       "name": "ACT Intelligence Platform",
@@ -110,8 +165,15 @@
       "description": "Intelligence layer and ecosystem dashboard",
       "stack": "Next.js, Supabase, Tailwind",
       "deployment": "Vercel",
-      "workflows": ["snapshot-sprint", "auto-tag"],
-      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+      "workflows": [
+        "snapshot-sprint",
+        "auto-tag"
+      ],
+      "skills": [
+        "act-sprint-workflow",
+        "act-brand-alignment",
+        "ghl-crm-advisor"
+      ]
     }
   ],
   "github_project": {

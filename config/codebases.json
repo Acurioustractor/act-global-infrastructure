@@ -1,0 +1,185 @@
+{
+  "_meta": {
+    "description": "The one list of ACT codebases: GitHub repo, local checkout, Vercel projects, Supabase projects, domains. Replaces config/repos.json, config/act-core-repos.json and config/CODEBASES.md (archived 2026-09-25). Loaded and guarded by @act/projects (loadCodebases); check with `pnpm codebases:check`, and `-- --live` to compare with GitHub.",
+    "verified": "2026-09-25: repos and last push from `gh repo list`; Vercel project to repo from each project's latest production deployment (githubRepo, or source=cli where noted); Supabase project ids from the supabase.co URLs in each checkout's .env files; domains from the production deployment aliases.",
+    "tiers": {
+      "platform": "runs the organisation: command-center, scripts, wiki",
+      "product": "an ACT product or project site, deployed and maintained",
+      "partner": "built with or for a partner or community, deployed, lighter upkeep",
+      "tooling": "developer and agent tooling, not deployed"
+    },
+    "project_links": "Which project a codebase belongs to lives in config/project-codes.json (github_repo). Not duplicated here."
+  },
+  "codebases": [
+    {
+      "repo": "Acurioustractor/act-global-infrastructure",
+      "name": "ACT Global Infrastructure",
+      "tier": "platform",
+      "local_path": "~/Code/act-global-infrastructure",
+      "vercel_projects": ["act-command-center"],
+      "supabase_projects": ["tednluwflfhxyucgwigh", "yvnuayzslukamizrlhwb", "cwsyhpiuepvdjtxaozwf", "bhwyqqbovcjoefezgfnq"],
+      "domains": [],
+      "notes": "Command-center, scripts, wiki. apps/command-center/.vercel links to a project named act-global-infrastructure that no longer exists; the live project is act-command-center."
+    },
+    {
+      "repo": "Acurioustractor/empathy-ledger-v2",
+      "name": "Empathy Ledger",
+      "tier": "product",
+      "local_path": "~/Code/empathy-ledger-v2",
+      "vercel_projects": ["empathy-ledger-v2", "caring-for-those-who-care"],
+      "supabase_projects": ["yvnuayzslukamizrlhwb", "tednluwflfhxyucgwigh"],
+      "domains": ["empathyledger.com"],
+      "notes": "caring-for-those-who-care is deployed by CLI (no git source) from this checkout, which is linked to it."
+    },
+    {
+      "repo": "Acurioustractor/justicehub-platform",
+      "name": "JusticeHub",
+      "tier": "product",
+      "local_path": "~/Code/JusticeHub",
+      "vercel_projects": ["justicehub", "contained-tv-site"],
+      "supabase_projects": ["tednluwflfhxyucgwigh", "yvnuayzslukamizrlhwb"],
+      "domains": ["justicehub.com.au"],
+      "notes": "contained-tv-site is linked from output/contained-tv-site in this checkout."
+    },
+    {
+      "repo": "Acurioustractor/grantscope",
+      "name": "CivicGraph (GrantScope)",
+      "tier": "product",
+      "local_path": "~/Code/grantscope",
+      "vercel_projects": ["grantscope"],
+      "supabase_projects": ["tednluwflfhxyucgwigh"],
+      "domains": ["civicgraph.app"],
+      "notes": ""
+    },
+    {
+      "repo": "Acurioustractor/goods-asset-tracker",
+      "name": "Goods on Country",
+      "tier": "product",
+      "local_path": "~/Code/Goods Asset Register",
+      "vercel_projects": ["goods-on-country"],
+      "supabase_projects": ["cwsyhpiuepvdjtxaozwf", "tednluwflfhxyucgwigh", "yvnuayzslukamizrlhwb"],
+      "domains": ["goodsoncountry.com"],
+      "notes": "Goods is The Butterfly Movement Ltd, a separate entity."
+    },
+    {
+      "repo": "Acurioustractor/theharvest",
+      "name": "The Harvest",
+      "tier": "product",
+      "local_path": "~/Code/The Harvest Website",
+      "vercel_projects": ["the-harvest"],
+      "supabase_projects": ["tednluwflfhxyucgwigh", "yvnuayzslukamizrlhwb"],
+      "domains": ["theharvestwitta.com.au"],
+      "notes": "Not the dormant the-harvest-website or harvest-community-hub."
+    },
+    {
+      "repo": "Acurioustractor/act-regenerative-studio",
+      "name": "ACT Regenerative Studio",
+      "tier": "product",
+      "local_path": "~/Code/act-regenerative-studio",
+      "vercel_projects": ["act-regenerative-studio"],
+      "supabase_projects": ["tednluwflfhxyucgwigh"],
+      "domains": [],
+      "notes": "No custom domain on the production deployment as of 2026-09-25. Which project serves act.place is unverified."
+    },
+    {
+      "repo": "Acurioustractor/act-farm",
+      "name": "Black Cockatoo Valley (ACT Farm)",
+      "tier": "product",
+      "local_path": "~/Code/act-farm",
+      "vercel_projects": ["act-farm"],
+      "supabase_projects": ["tednluwflfhxyucgwigh"],
+      "domains": ["blackcockatoovalley.com"],
+      "notes": ""
+    },
+    {
+      "repo": "Acurioustractor/Oonchiumpa",
+      "name": "Oonchiumpa",
+      "tier": "partner",
+      "local_path": "~/Code/Oochiumpa",
+      "vercel_projects": ["oonchiumpa"],
+      "supabase_projects": ["yvnuayzslukamizrlhwb"],
+      "domains": ["oonchiumpa.com.au"],
+      "notes": "Local folder is spelled Oochiumpa. Default branch is master."
+    },
+    {
+      "repo": "Acurioustractor/fishers-oysters",
+      "name": "Fishers Oysters",
+      "tier": "partner",
+      "local_path": "~/Code/fishers-oysters",
+      "vercel_projects": ["fishers-oysters"],
+      "supabase_projects": ["tednluwflfhxyucgwigh"],
+      "domains": ["fishersoysters.com"],
+      "notes": ""
+    },
+    {
+      "repo": "Acurioustractor/palm-island-repository",
+      "name": "Palm Island Repository (PICC)",
+      "tier": "partner",
+      "local_path": "~/Code/Palm Island Reposistory",
+      "vercel_projects": ["palm-island-repository"],
+      "supabase_projects": ["uaxhjzqrdotoahjnxmbj"],
+      "domains": ["picc.studio"],
+      "notes": "Production is deployed by CLI from a feature branch. Local folder name is misspelled."
+    },
+    {
+      "repo": "Acurioustractor/picc-station-site-plan",
+      "name": "PICC Station Site Plan",
+      "tier": "partner",
+      "local_path": null,
+      "vercel_projects": ["picc-station-map"],
+      "supabase_projects": [],
+      "domains": [],
+      "notes": "No local checkout."
+    },
+    {
+      "repo": "Acurioustractor/platform-1225",
+      "name": "Platform 1225 workshop package",
+      "tier": "partner",
+      "local_path": "~/Code/platform-1225",
+      "vercel_projects": ["platform-1225"],
+      "supabase_projects": [],
+      "domains": [],
+      "notes": "QYHC Platform 1225 2026 conference recording package."
+    },
+    {
+      "repo": "Acurioustractor/10-years",
+      "name": "10 Years",
+      "tier": "partner",
+      "local_path": "~/Code/10-years",
+      "vercel_projects": ["10-years"],
+      "supabase_projects": [],
+      "domains": [],
+      "notes": ""
+    },
+    {
+      "repo": "Acurioustractor/claude-config",
+      "name": "Claude config",
+      "tier": "tooling",
+      "local_path": "~/.claude",
+      "vercel_projects": [],
+      "supabase_projects": [],
+      "domains": [],
+      "notes": "Global rules, skills and hooks. No auto-sync; push by hand."
+    },
+    {
+      "repo": "Acurioustractor/act-claude-plugins",
+      "name": "ACT Claude plugins",
+      "tier": "tooling",
+      "local_path": "~/Code/act-claude-plugins",
+      "vercel_projects": [],
+      "supabase_projects": [],
+      "domains": [],
+      "notes": ""
+    },
+    {
+      "repo": "Acurioustractor/act-project-template",
+      "name": "ACT project template",
+      "tier": "tooling",
+      "local_path": "~/Code/act-project-template",
+      "vercel_projects": [],
+      "supabase_projects": [],
+      "domains": [],
+      "notes": "Stale since 2025-12; the live conventions are in theharvest and empathy-ledger-v2."
+    }
+  ]
+}
