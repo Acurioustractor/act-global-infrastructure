@@ -492,6 +492,7 @@ async function syncGmail(options = {}) {
   // Query for both sent and received emails
   const query = `after:${afterTimestamp}`;
   const transformed = [];
+  const authFailures = [];
 
   for (const delegatedUser of delegatedUsers) {
     console.log(`\n━━━ Mailbox: ${delegatedUser} ━━━\n`);
@@ -502,6 +503,7 @@ async function syncGmail(options = {}) {
     } catch (err) {
       console.error(`  Failed to auth for ${delegatedUser}: ${err.message}`);
       stats.errors++;
+      authFailures.push(`${delegatedUser}: ${err.message}`);
       continue;
     }
 
@@ -585,6 +587,12 @@ async function syncGmail(options = {}) {
         stats.errors++;
       }
     }
+  }
+
+  // Every mailbox failing auth is an outage, not a quiet day. From ~7 Sept 2026 the key
+  // vanished with Bitwarden and this logged "No new messages" as success for 18 days.
+  if (authFailures.length === delegatedUsers.length) {
+    throw new Error(`Gmail auth failed for every mailbox (${authFailures.join('; ')})`);
   }
 
   console.log();
