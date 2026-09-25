@@ -4,7 +4,7 @@ project: civicgraph
 type: claim
 frame: evidentiary
 secondary_frame: confrontational
-status: live
+status: corrected-hold
 first_used: 2026-04-14
 last_used: 2026-04-15
 times_deployed: 2
@@ -13,15 +13,13 @@ audiences: [public, funder, journalist, minister, magistrate]
 cycle: [aesthetics-of-asymmetry-month-1, minderoo-pitch, judges-on-country, always]
 campaigns: [aesthetics-of-asymmetry, minderoo-pitch, judges-on-country, contained-tour]
 sources:
-  - name: Queensland State Budget Papers FY24-25
-    path: (public record, Queensland Treasury)
-    quote: "Queensland Youth Detention Services appropriation, FY24-25: $225,580,000"
-  - name: Queensland State Budget Papers FY24-25
-    path: (public record)
-    quote: "Murri Watch contract, FY24-25: $1,449,408"
-  - name: ROGS 2024-25 (Report on Government Services)
-    path: (Productivity Commission public release)
-    quote: "Annual youth detention cost per young person per year nationally: ~$1.33M"
+  - name: Productivity Commission, Report on Government Services 2026, Table 17A.11
+    url: https://assets.pc.gov.au/2026-01/rogs-2026-partf-section17-youth-justice-dataset.csv
+    quote: "Queensland, 2024-25, detention-based supervision, recurrent expenditure total: $225,580k"
+  - name: Productivity Commission, ROGS 2026, Table 17A.20
+    quote: "Queensland, 2024-25, detention cost per average day per young person: $2,713.94"
+  - name: CivicGraph justice_funding_clean, recipient ABN 75628946046
+    quote: "2023-24 Murri Watch watch-house funding: $1,449,408"
 related_claims:
   - civicgraph:claim-murri-watch-cancellation
   - civicgraph:claim-gerber-22-unnamed
@@ -29,15 +27,17 @@ related_claims:
 backlinks_to_concepts:
   - civic-world-model
   - funding-transparency
-verification_status: verified
-math_verification: 225580000 / 1449408 = 155.6 (rounded to 155:1 for copy)
+verification_status: corrected-2026-09-25
+math_verification: 225580000 / 1449408 = 155.6; years differ (detention 2024-25, Murri Watch 2023-24)
 ---
 
-# Claim: Queensland spends 155 dollars on youth detention for every dollar on Murri Watch
+# Claim: Queensland spends about 155 dollars on youth detention for every dollar that went to Murri Watch's watch-house work
+
+> **Corrected 25 September 2026. HOLD with the Murri Watch claim** until Murri Watch agrees to be featured. The two figures are from different years; say so in any copy.
 
 ## Sentence for copy
 
-*"Queensland's youth detention budget in FY24-25 was $225,580,000. Murri Watch's contract for the same year was $1,449,408. The ratio is 155:1."*
+*"Queensland spent $225,580,000 on youth detention in 2024-25 (Productivity Commission, ROGS 2026). Murri Watch's watch-house funding in 2023-24 was $1,449,408. That is about 155 to 1."*
 
 ## Why this claim travels
 
@@ -53,13 +53,13 @@ This is the post's most shareable sentence. The 155:1 ratio is computed, checkab
 
 $225,580,000 ÷ $1,449,408 = 155.64 (rounded to 155:1 for copy to avoid false precision)
 
-For the price of one year of Murri Watch, Queensland's detention budget funds approximately 2.4 young people in detention for one year (using the ROGS 2024-25 national annual-detention figure of ~$1.33M per young person per year). "Keeps two kids in cells for a year" in the LinkedIn copy is conservative and verified.
+At ROGS 2026's Queensland cost of $2,713.94 per young person per day (2024-25), a year in detention costs about $990,600, so $1,449,408 is about 1.5 young people in detention for a year. The April copy's "two kids in cells for a year" used $225,580,000 ÷ 104,042 custody nights = $2,168 a night (ACT's own division, not a ROGS figure) and a national "~$1.33M per year" that could not be found. Use "about one and a half" with the ROGS source, or label the $2,168 as derived.
 
 ## Source chain
 
-- Queensland State Budget Papers FY24-25 — both line items verifiable against Treasury public releases
-- ROGS 2024-25 (Productivity Commission) — national youth detention cost per young person per year
-- Murri Watch Aboriginal & Torres Strait Islander Corporation — contract value confirmed via public record
+- Productivity Commission, ROGS 2026, Tables 17A.11 (expenditure) and 17A.20 (cost per day), 2024-25 data
+- CivicGraph `justice_funding_clean`, recipient ABN 75628946046
+- Removed 25 Sep 2026: "Queensland State Budget Papers FY24-25" (the $225,580,000 is ROGS recurrent expenditure, not a budget appropriation) and the national "~$1.33M per young person per year" (not found)
 
 ## Where used
 

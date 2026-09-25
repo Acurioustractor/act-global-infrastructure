@@ -4,7 +4,7 @@ project: civicgraph
 type: claim
 frame: evidentiary
 secondary_frame: testimonial
-status: live
+status: corrected-hold
 first_used: 2026-04-14
 last_used: 2026-04-15
 times_deployed: 2
@@ -13,16 +13,13 @@ audiences: [public, community-sector, funder, journalist, minister, magistrate]
 cycle: [aesthetics-of-asymmetry-month-1, minderoo-pitch-opening-proof, judges-on-country-framing]
 campaigns: [aesthetics-of-asymmetry, minderoo-pitch, judges-on-country]
 sources:
-  - name: ABC News article
-    url: https://www.abc.net.au/news/2026-04-14/queensland-murri-watch-contract-cancelled
+  - name: ABC News, "Murri Watch service for Indigenous children in watch houses to close over loss of government funding"
+    url: https://www.abc.net.au/news/2026-04-14/qld-murri-watch-support-program-closes/106547446
     date: 2026-04-14
-    quote: "Murri Watch's $1,449,408 Queensland government contract will end on 30 June 2026."
-  - name: Queensland State Budget Papers FY24-25
-    path: (public record, Queensland Treasury)
-    quote: "Youth Justice Services — Aboriginal and Torres Strait Islander Watch-house Support — $1,449,408"
-  - name: Murri Watch Aboriginal & Torres Strait Islander Corporation public statement
-    date: 2026-04-14
-    quote: "The corporation has served 1,233 young people across 16 watch-houses in FY24-25."
+    quote: "set to end on June 30, following the completion of a funding contract with the LNP government"
+  - name: CivicGraph justice_funding_clean (Queensland grants and contracts data), recipient ABN 75628946046
+    date: 2026-09-25
+    quote: "2023-24, YJ - WATCHHOUSE: $739,408 (Youth Cultural Support Program) + $710,000 (Caboolture Watchhouse Support) = $1,449,408"
 related_claims:
   - civicgraph:claim-gerber-22-unnamed
   - civicgraph:claim-qld-detention-ratio
@@ -30,29 +27,37 @@ related_claims:
 backlinks_to_concepts:
   - indigenous-data-sovereignty
   - civic-world-model
-verification_status: verified
+verification_status: corrected-2026-09-25
 ---
 
-# Claim: Queensland cut $1,449,408 from a 34-year-old Aboriginal-led watch-house program on 14 April 2026
+# Claim: Murri Watch's Queensland watch-house funding was not renewed; the contract ended 30 June 2026
+
+> **Corrected 25 September 2026. HOLD: do not deploy until Murri Watch has agreed to be featured** (no consent record exists; see Correction log). Artefact 001 was withdrawn from aesthetics.act.place the same day.
 
 ## Sentence for copy
 
-*"Queensland cut $1,449,408 from the 34-year-old Aboriginal-led Murri Watch program on 14 April 2026. The contract ends 30 June 2026. Murri Watch served 1,233 young people across 16 Queensland watch-houses last financial year."*
+*"Murri Watch, set up in 1991, lost its Queensland government funding: its contract ended on 30 June 2026. In the last financial year it supported 1,233 young people across 16 watch-houses. Its watch-house funding in 2023-24 was $1,449,408."*
 
 ## The facts
 
-- **Amount:** $1,449,408 (FY24-25 contract value)
-- **End date:** 30 June 2026
-- **Served:** 1,233 young people in FY24-25
-- **Locations:** 16 Queensland watch-houses (Brisbane, Caboolture, Southport, Mackay, Townsville, Cairns, and 10 others)
-- **Founded:** 1991 (year of Royal Commission into Aboriginal Deaths in Custody findings)
-- **Status:** Aboriginal-led, Queensland-based, Aboriginal & Torres Strait Islander Corporation (ORIC-registered)
+| Fact | Value | Source | Status |
+|---|---|---|---|
+| End of funding | Contract ended 30 June 2026 ("set to end on June 30, following the completion of a funding contract") | ABC, 14 Apr 2026 | Verified |
+| Announced | 14 April 2026 (ABC) | ABC | Verified |
+| Watch-houses | 16, including Brisbane, Caboolture, Southport, Mackay, Townsville, Cairns | ABC | Verified |
+| Young people | 1,233 "in the last financial year" (ABC gives no year label) | ABC | Verified (year label unverified) |
+| Founded | 1991 (35 years in 2026) | ABC | Verified |
+| General manager | Kristy-Lee Costello | ABC | Verified |
+| $1,449,408 | **2023-24** watch-house funding ($739,408 + $710,000), not FY24-25 | CivicGraph justice_funding_clean | Verified |
+| 2024-25 funding | $1,036,275 (only $255,000 of it watch-house) | CivicGraph justice_funding_clean | Verified |
+| Did it close on 30 June, or was it reprieved? | Unknown: no reporting found May to September 2026 | none | UNVERIFIED |
+| ORIC-registered | not checked | none | UNVERIFIED |
 
 ## The argument
 
-Murri Watch is not a boutique program. It is the service that has sat with Aboriginal and Torres Strait Islander kids inside Queensland watch-houses since 1991 — the year the Royal Commission handed down its findings. The average watch-house stay for a child in Queensland is 161 hours. Some stays run past 14 days. For 34 years, Murri Watch was the service inside those hours.
+Murri Watch is not a boutique program. It is the service that has sat with Aboriginal and Torres Strait Islander kids inside Queensland watch-houses since 1991 — the year the Royal Commission handed down its findings. The average watch-house stay for a child in Queensland is 161 hours, and some stays run past 14 days (UNVERIFIED: no source recorded; check before use). For 35 years, Murri Watch was the service inside those hours.
 
-The cancellation is not a funding cut dressed as a transition. It is a funding cut framed as a transition. See the companion claim `claim-gerber-22-unnamed.md` for the minister's counter-narrative and why the transition language collapses without a public list.
+The end of funding is not a funding cut dressed as a transition. It is a funding cut framed as a transition. See the companion claim `claim-gerber-22-unnamed.md` for the minister's counter-narrative and why the transition language collapses without a public list.
 
 ## Expanded context
 
@@ -63,10 +68,9 @@ The cancellation is not a funding cut dressed as a transition. It is a funding c
 
 ## Source chain
 
-- ABC News, 14 April 2026 — initial public reporting
-- Queensland State Budget Papers FY24-25 — line-item verification of $1,449,408 contract
-- Murri Watch Aboriginal & Torres Strait Islander Corporation — 1,233 young people + 16 watch-houses + 34-year history
-- Queensland Corrective Services / ROGS 2024-25 — context data on watch-house stays
+- ABC News, 14 April 2026: https://www.abc.net.au/news/2026-04-14/qld-murri-watch-support-program-closes/106547446
+- CivicGraph `justice_funding_clean`, recipient ABN 75628946046 (queried 25 Sep 2026)
+- Removed 25 Sep 2026: "Queensland State Budget Papers FY24-25" and a quoted "Murri Watch public statement". Neither was found; the $1,449,408 is grants data for 2023-24, not a budget line.
 
 ## Where used
 
@@ -100,3 +104,14 @@ The cancellation is not a funding cut dressed as a transition. It is a funding c
 - **Minderoo pitch:** Opening proof in canonical cover — demonstrates the stack surfacing ministerial decisions in under a week.
 - **Judges on Country:** Framing evidence — the kind of decision a magistrate-facing tool would surface before sentencing (if Queensland had one).
 - **CONTAINED (if QLD leg):** Would become the primary local claim.
+
+## Correction log
+
+**25 September 2026.** A fact check (the `ground` skill) against the ABC article, ROGS 2026 and CivicGraph's funding records found that the April version of this claim, and Artefact 001 built on it:
+- dated the end as "cancelled 11 April 2026" (the contract ended 30 June 2026) and called it a cancellation (the ABC reports a funding contract that was not renewed)
+- gave $1,449,408 as the FY24-25 contract value (it is 2023-24 watch-house funding)
+- cited budget papers and a Murri Watch statement that could not be found, and an ABC URL that does not match the article
+- said 34 years (35)
+
+Consent check: there is no approval record, correspondence or meeting with Murri Watch. The contacts sheet notes a yarn with Kristy-Lee Costello was "scheduled" on 15 April; nothing records that it happened. Before any further use: speak with Murri Watch and record the outcome in `wiki/decisions/`, then confirm whether the program closed on 30 June.
+
