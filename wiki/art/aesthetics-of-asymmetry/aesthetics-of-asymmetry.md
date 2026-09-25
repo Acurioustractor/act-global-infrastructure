@@ -24,12 +24,14 @@ It is also quietly the marketing layer for a real commercial arm: CivicGraph sub
 
 | #   | Slug                               | Status                     | After               | One-line                                                        |                                                                          |
 | --- | ---------------------------------- | -------------------------- | ------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| 01  | [[episode-01-keyhole               | The Keyhole]]              | LIVE · April 2026   | James C. Scott                                                  | What the applicant sees, what the funder sees, the distance between them |
+| 01  | [[episode-01-keyhole               | The Keyhole]]              | LIVE · 25 Sep 2026  | James C. Scott                                                  | What the applicant sees, what the funder sees, the distance between them |
 | 02  | Resolution                         | Building · May 2026        | Hito Steyerl        | Clarity can be care. Clarity can be capture. The pixel decides. |                                                                          |
 | 03  | The Missing Folder                 | Scheduled · June 2026      | Mimi Onuoha         | 873 postcodes where absence is the subject                      |                                                                          |
 | 04  | The Promise and the Purchase Order | Scheduled · July 2026      | —                   | Hansard vs the money trail                                      |                                                                          |
 | 05  | The Alibi                          | Scheduled · August 2026    | Hasan Elahi         | Total transparency as concealment                               |                                                                          |
 | 06  | CARE                               | Scheduled · September 2026 | Maiam nayri Wingara | Consent is the only honest transparency                         |                                                                          |
+
+Episodes 02 to 06 were scheduled May to September 2026; as of 25 September none has shipped. Only Episode 01 is live.
 
 ## How it connects to the ecosystem
 

@@ -1,6 +1,6 @@
 ---
 title: "Episode 01 — The Keyhole"
-status: Live · April 2026
+status: Live · 25 Sep 2026
 date: 2026-04-14
 entity_type: art-work
 canonical_slug: episode-01-keyhole
@@ -50,6 +50,10 @@ An A2 poster with a literal keyhole die-cut. 2-colour Riso: bone cream + urgent 
 - Hans Haacke, *Shapolsky et al. Manhattan Real Estate Holdings* (1971) — public records as institutional critique
 - Forensic Architecture (2010–) — counter-forensics methodology
 - James C. Scott, *Seeing Like a State* (1998) — legibility politics
+
+## Launch record
+
+Built in April 2026 but not public until 25 September 2026: every production build from 14 April errored and `aesthetics.act.place` had no DNS record. Revived in act-aesthetics-of-asymmetry#1. The graph is now a committed snapshot of CivicGraph's foundations graph (25 Sep 2026: 5,057 nodes, 126 foundations, 4,931 grantees, 14,709 edges), because civicgraph.app blocks server-side fetches. Refresh with `node scripts/snapshot-keyhole.mjs` in that repo. Earlier copy said ~6,000 entities.
 
 ## Backlinks
 

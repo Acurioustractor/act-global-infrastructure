@@ -146,6 +146,20 @@
       "notes": ""
     },
     {
+      "repo": "Acurioustractor/act-aesthetics-of-asymmetry",
+      "name": "The Aesthetics of Asymmetry",
+      "tier": "product",
+      "local_path": "~/Code/act-aesthetics-of-asymmetry",
+      "vercel_projects": [
+        "act-aesthetics-of-asymmetry"
+      ],
+      "supabase_projects": [],
+      "domains": [
+        "aesthetics.act.place"
+      ],
+      "notes": "Public art campaign. Episode 01 live 25 Sep 2026; the Keyhole graph is a committed CivicGraph snapshot (scripts/snapshot-keyhole.mjs). Murri Watch support page saved on wip/murri-watch-support-2026-04-15, not published."
+    },
+    {
       "repo": "Acurioustractor/Oonchiumpa",
       "name": "Oonchiumpa",
       "tier": "partner",
