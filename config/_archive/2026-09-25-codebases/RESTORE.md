@@ -11,9 +11,6 @@ local checkouts; also Vercel when VERCEL_TOKEN is set).
 | verify-repo-connections.mjs | scripts/ | Superseded by `codebases:live`, which checks the same things against the new list |
 | repo-connections-latest.json | config/ | Output of the script above, last written 2026-04-20 |
 | repo-connections-latest.md | wiki/output/ | Same output, markdown |
-
-Still live: `config/repos.json`. act-regenerative-studio's own copy of
-`scripts/lib/wiki-flagship-project-packs.mjs` reads it from this repo during wiki sync, so it stays
-until that copy reads `config/codebases.json`. Then archive it here too.
+| repos.json | config/ | Last reader was act-regenerative-studio's copy of the flagship module; it reads codebases.json since act-regenerative-studio#125. Archived the same day |
 
 Restore one: `git mv config/_archive/2026-09-25-codebases/<file> <was>/`
