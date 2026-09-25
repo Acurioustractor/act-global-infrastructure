@@ -115,6 +115,13 @@ function loadClaimsForProject(projDir, projSlug) {
 
 const claims = loadClaimsForProject(projectDir, project)
 
+// A claim on hold (status ending "-hold"), retired or in conflict must not reach new copy:
+// its facts are wrong, unverified or unconsented. Explicit requests fail; pools skip it.
+const isUsable = (c) => {
+  const st = String(c.meta.status || '')
+  return !(st.endsWith('-hold') || st === 'retired' || st === 'conflict')
+}
+
 // If a funder is specified, ALSO load other projects' claims so cross-project picks work
 let allProjectClaims = claims
 if (funderSlug) {
@@ -157,6 +164,10 @@ function pickClaims() {
       console.error(`[narrative-draft] claim not found: ${claimArg}`)
       process.exit(1)
     }
+    if (!isUsable(c)) {
+      console.error(`[narrative-draft] claim ${c.meta.id} is ${c.meta.status}; see its Correction log before any use`)
+      process.exit(1)
+    }
     return [c]
   }
 
@@ -171,7 +182,9 @@ function pickClaims() {
       const c = allProjectClaims.find(
         (x) => x.projectSlug === projPart && (x.meta.id === idPart || x.file.includes(idPart))
       )
-      if (c && !avoid.has(`${projPart}:${c.meta.id}`)) {
+      if (c && !isUsable(c)) {
+        console.warn(`[narrative-draft] skipping ${ref}: status ${c.meta.status}`)
+      } else if (c && !avoid.has(`${projPart}:${c.meta.id}`)) {
         picked.push(c)
       } else if (!c) {
         console.warn(`[narrative-draft] funder claim not found: ${ref}`)
@@ -184,7 +197,7 @@ function pickClaims() {
     return picked
   }
 
-  let pool = claims
+  let pool = claims.filter(isUsable)
 
   // Filter by cycle
   if (cycleFilter) {
