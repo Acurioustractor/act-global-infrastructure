@@ -171,7 +171,7 @@ async function loadRepoCatalog() {
       name: cb.name,
       path: cb.path,
       github: cb.repo,
-      description: cb.notes || null,
+      description: null,
       stack: null,
       deployment: cb.vercel_projects.length ? 'Vercel' : null,
     }));

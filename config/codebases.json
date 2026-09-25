@@ -16,8 +16,15 @@
       "name": "ACT Global Infrastructure",
       "tier": "platform",
       "local_path": "~/Code/act-global-infrastructure",
-      "vercel_projects": ["act-command-center"],
-      "supabase_projects": ["tednluwflfhxyucgwigh", "yvnuayzslukamizrlhwb", "cwsyhpiuepvdjtxaozwf", "bhwyqqbovcjoefezgfnq"],
+      "vercel_projects": [
+        "act-command-center"
+      ],
+      "supabase_projects": [
+        "tednluwflfhxyucgwigh",
+        "yvnuayzslukamizrlhwb",
+        "cwsyhpiuepvdjtxaozwf",
+        "bhwyqqbovcjoefezgfnq"
+      ],
       "domains": [],
       "notes": "Command-center, scripts, wiki. apps/command-center/.vercel links to a project named act-global-infrastructure that no longer exists; the live project is act-command-center."
     },
@@ -26,9 +33,17 @@
       "name": "Empathy Ledger",
       "tier": "product",
       "local_path": "~/Code/empathy-ledger-v2",
-      "vercel_projects": ["empathy-ledger-v2", "caring-for-those-who-care"],
-      "supabase_projects": ["yvnuayzslukamizrlhwb", "tednluwflfhxyucgwigh"],
-      "domains": ["empathyledger.com"],
+      "vercel_projects": [
+        "empathy-ledger-v2",
+        "caring-for-those-who-care"
+      ],
+      "supabase_projects": [
+        "yvnuayzslukamizrlhwb",
+        "tednluwflfhxyucgwigh"
+      ],
+      "domains": [
+        "empathyledger.com"
+      ],
       "notes": "caring-for-those-who-care is deployed by CLI (no git source) from this checkout, which is linked to it."
     },
     {
@@ -36,9 +51,17 @@
       "name": "JusticeHub",
       "tier": "product",
       "local_path": "~/Code/JusticeHub",
-      "vercel_projects": ["justicehub", "contained-tv-site"],
-      "supabase_projects": ["tednluwflfhxyucgwigh", "yvnuayzslukamizrlhwb"],
-      "domains": ["justicehub.com.au"],
+      "vercel_projects": [
+        "justicehub",
+        "contained-tv-site"
+      ],
+      "supabase_projects": [
+        "tednluwflfhxyucgwigh",
+        "yvnuayzslukamizrlhwb"
+      ],
+      "domains": [
+        "justicehub.com.au"
+      ],
       "notes": "contained-tv-site is linked from output/contained-tv-site in this checkout."
     },
     {
@@ -46,9 +69,15 @@
       "name": "CivicGraph (GrantScope)",
       "tier": "product",
       "local_path": "~/Code/grantscope",
-      "vercel_projects": ["grantscope"],
-      "supabase_projects": ["tednluwflfhxyucgwigh"],
-      "domains": ["civicgraph.app"],
+      "vercel_projects": [
+        "grantscope"
+      ],
+      "supabase_projects": [
+        "tednluwflfhxyucgwigh"
+      ],
+      "domains": [
+        "civicgraph.app"
+      ],
       "notes": ""
     },
     {
@@ -56,9 +85,17 @@
       "name": "Goods on Country",
       "tier": "product",
       "local_path": "~/Code/Goods Asset Register",
-      "vercel_projects": ["goods-on-country"],
-      "supabase_projects": ["cwsyhpiuepvdjtxaozwf", "tednluwflfhxyucgwigh", "yvnuayzslukamizrlhwb"],
-      "domains": ["goodsoncountry.com"],
+      "vercel_projects": [
+        "goods-on-country"
+      ],
+      "supabase_projects": [
+        "cwsyhpiuepvdjtxaozwf",
+        "tednluwflfhxyucgwigh",
+        "yvnuayzslukamizrlhwb"
+      ],
+      "domains": [
+        "goodsoncountry.com"
+      ],
       "notes": "Goods is The Butterfly Movement Ltd, a separate entity."
     },
     {
@@ -66,9 +103,16 @@
       "name": "The Harvest",
       "tier": "product",
       "local_path": "~/Code/The Harvest Website",
-      "vercel_projects": ["the-harvest"],
-      "supabase_projects": ["tednluwflfhxyucgwigh", "yvnuayzslukamizrlhwb"],
-      "domains": ["theharvestwitta.com.au"],
+      "vercel_projects": [
+        "the-harvest"
+      ],
+      "supabase_projects": [
+        "tednluwflfhxyucgwigh",
+        "yvnuayzslukamizrlhwb"
+      ],
+      "domains": [
+        "theharvestwitta.com.au"
+      ],
       "notes": "Not the dormant the-harvest-website or harvest-community-hub."
     },
     {
@@ -76,19 +120,29 @@
       "name": "ACT Regenerative Studio",
       "tier": "product",
       "local_path": "~/Code/act-regenerative-studio",
-      "vercel_projects": ["act-regenerative-studio"],
-      "supabase_projects": ["tednluwflfhxyucgwigh"],
+      "vercel_projects": [
+        "act-regenerative-studio"
+      ],
+      "supabase_projects": [
+        "tednluwflfhxyucgwigh"
+      ],
       "domains": [],
-      "notes": "No custom domain on the production deployment as of 2026-09-25. Which project serves act.place is unverified."
+      "notes": "act.place is still served by Webflow (2026-09-25) and is moving to this Vercel project; add act.place to domains when it does. No custom domain on the production deployment yet."
     },
     {
       "repo": "Acurioustractor/act-farm",
       "name": "Black Cockatoo Valley (ACT Farm)",
       "tier": "product",
       "local_path": "~/Code/act-farm",
-      "vercel_projects": ["act-farm"],
-      "supabase_projects": ["tednluwflfhxyucgwigh"],
-      "domains": ["blackcockatoovalley.com"],
+      "vercel_projects": [
+        "act-farm"
+      ],
+      "supabase_projects": [
+        "tednluwflfhxyucgwigh"
+      ],
+      "domains": [
+        "blackcockatoovalley.com"
+      ],
       "notes": ""
     },
     {
@@ -96,9 +150,15 @@
       "name": "Oonchiumpa",
       "tier": "partner",
       "local_path": "~/Code/Oochiumpa",
-      "vercel_projects": ["oonchiumpa"],
-      "supabase_projects": ["yvnuayzslukamizrlhwb"],
-      "domains": ["oonchiumpa.com.au"],
+      "vercel_projects": [
+        "oonchiumpa"
+      ],
+      "supabase_projects": [
+        "yvnuayzslukamizrlhwb"
+      ],
+      "domains": [
+        "oonchiumpa.com.au"
+      ],
       "notes": "Local folder is spelled Oochiumpa. Default branch is master."
     },
     {
@@ -106,9 +166,15 @@
       "name": "Fishers Oysters",
       "tier": "partner",
       "local_path": "~/Code/fishers-oysters",
-      "vercel_projects": ["fishers-oysters"],
-      "supabase_projects": ["tednluwflfhxyucgwigh"],
-      "domains": ["fishersoysters.com"],
+      "vercel_projects": [
+        "fishers-oysters"
+      ],
+      "supabase_projects": [
+        "tednluwflfhxyucgwigh"
+      ],
+      "domains": [
+        "fishersoysters.com"
+      ],
       "notes": ""
     },
     {
@@ -116,9 +182,15 @@
       "name": "Palm Island Repository (PICC)",
       "tier": "partner",
       "local_path": "~/Code/Palm Island Reposistory",
-      "vercel_projects": ["palm-island-repository"],
-      "supabase_projects": ["uaxhjzqrdotoahjnxmbj"],
-      "domains": ["picc.studio"],
+      "vercel_projects": [
+        "palm-island-repository"
+      ],
+      "supabase_projects": [
+        "uaxhjzqrdotoahjnxmbj"
+      ],
+      "domains": [
+        "picc.studio"
+      ],
       "notes": "Production is deployed by CLI from a feature branch. Local folder name is misspelled."
     },
     {
@@ -126,7 +198,9 @@
       "name": "PICC Station Site Plan",
       "tier": "partner",
       "local_path": null,
-      "vercel_projects": ["picc-station-map"],
+      "vercel_projects": [
+        "picc-station-map"
+      ],
       "supabase_projects": [],
       "domains": [],
       "notes": "No local checkout."
@@ -136,7 +210,9 @@
       "name": "Platform 1225 workshop package",
       "tier": "partner",
       "local_path": "~/Code/platform-1225",
-      "vercel_projects": ["platform-1225"],
+      "vercel_projects": [
+        "platform-1225"
+      ],
       "supabase_projects": [],
       "domains": [],
       "notes": "QYHC Platform 1225 2026 conference recording package."
@@ -146,7 +222,9 @@
       "name": "10 Years",
       "tier": "partner",
       "local_path": "~/Code/10-years",
-      "vercel_projects": ["10-years"],
+      "vercel_projects": [
+        "10-years"
+      ],
       "supabase_projects": [],
       "domains": [],
       "notes": ""
