@@ -1013,7 +1013,7 @@ a.wikilink:visited {
   <ul style="list-style:none; display:flex; gap:1em; flex-wrap:wrap; color:#72777d;">
     <li>Content is compiled by LLM from raw sources</li>
     <li>Powered by the <a href="#" onclick="navigateTo('llm-knowledge-base'); return false;">LLM Knowledge Base</a> pattern</li>
-    <li>Last compiled: 2026-09-24</li>
+    <li>Last compiled: 2026-09-25</li>
   </ul>
 </div>
 
@@ -8498,12 +8498,14 @@ It is also quietly the marketing layer for a real commercial arm: CivicGraph sub
 
 | #   | Slug                               | Status                     | After               | One-line                                                        |                                                                          |
 | --- | ---------------------------------- | -------------------------- | ------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| 01  | [[episode-01-keyhole               | The Keyhole]]              | LIVE · April 2026   | James C. Scott                                                  | What the applicant sees, what the funder sees, the distance between them |
+| 01  | [[episode-01-keyhole               | The Keyhole]]              | LIVE · 25 Sep 2026  | James C. Scott                                                  | What the applicant sees, what the funder sees, the distance between them |
 | 02  | Resolution                         | Building · May 2026        | Hito Steyerl        | Clarity can be care. Clarity can be capture. The pixel decides. |                                                                          |
 | 03  | The Missing Folder                 | Scheduled · June 2026      | Mimi Onuoha         | 873 postcodes where absence is the subject                      |                                                                          |
 | 04  | The Promise and the Purchase Order | Scheduled · July 2026      | —                   | Hansard vs the money trail                                      |                                                                          |
 | 05  | The Alibi                          | Scheduled · August 2026    | Hasan Elahi         | Total transparency as concealment                               |                                                                          |
 | 06  | CARE                               | Scheduled · September 2026 | Maiam nayri Wingara | Consent is the only honest transparency                         |                                                                          |
+
+Episodes 02 to 06 were scheduled May to September 2026; as of 25 September none has shipped. Only Episode 01 is live.
 
 ## How it connects to the ecosystem
 
@@ -17583,6 +17585,10 @@ An A2 poster with a literal keyhole die-cut. 2-colour Riso: bone cream + urgent 
 - Hans Haacke, *Shapolsky et al. Manhattan Real Estate Holdings* (1971) — public records as institutional critique
 - Forensic Architecture (2010–) — counter-forensics methodology
 - James C. Scott, *Seeing Like a State* (1998) — legibility politics
+
+## Launch record
+
+Built in April 2026 but not public until 25 September 2026: every production build from 14 April errored and \`aesthetics.act.place\` had no DNS record. Revived in act-aesthetics-of-asymmetry#1. The graph is now a committed snapshot of CivicGraph's foundations graph (25 Sep 2026: 5,057 nodes, 126 foundations, 4,931 grantees, 14,709 edges), because civicgraph.app blocks server-side fetches. Refresh with \`node scripts/snapshot-keyhole.mjs\` in that repo. Earlier copy said ~6,000 entities.
 
 ## Backlinks
 
@@ -46432,7 +46438,7 @@ function showMainPage() {
   // ── FOOTER ────────────────────────────────────────
   html += '<div class="mp-stats" style="text-align:center;font-size:12px;color:#888;border-top:1px solid #e5e5e5;padding-top:1em;margin-top:1em;">';
   html += 'Tractorpedia is maintained using the <a href="#llm-knowledge-base" class="wikilink" onclick="navigateTo(\'llm-knowledge-base\'); return false;">LLM Knowledge Base</a> pattern. ';
-  html += 'Photos live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Last compiled: 2026-09-24.';
+  html += 'Photos live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Last compiled: 2026-09-25.';
   html += '</div>';
 
   document.getElementById('mw-content-text').innerHTML = html;
@@ -47622,6 +47628,18 @@ function showArtPortfolio() {
       }
     });
   });
+  // Now async-load real photos for each card. fetchELMedia(slug) handles project_id + filename fallback.
+  artProjects.forEach(function(p) {
+    fetchELMedia(p.slug, 1).then(function(media) {
+      let el = document.getElementById('art-thumb-' + p.slug);
+      if (!el) return;
+      if (media && media.length > 0) {
+        el.innerHTML = '<img src="' + media[0].url + '" style="width:100%;height:100%;object-fit:cover;" alt="' + (media[0].title || p.name) + '">';
+      } else {
+        el.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#aaa;">photos coming soon</div><div style="font-size:11px;color:#bbb;margin-top:4px;">tag in Empathy Ledger</div></div>';
+      }
+    });
+  });
 }
 
 // ============================================================
@@ -47631,6 +47649,10 @@ function handleHash() {
   let hash = window.location.hash.substring(1);
   if (!hash) {
     showMainPage();
+    return;
+  }
+  if (hash === 'art-portfolio') {
+    showArtPortfolio();
     return;
   }
   if (hash === 'art-portfolio') {
