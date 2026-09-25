@@ -184,17 +184,24 @@ async function loadGhlContacts(supabase) {
 
 // Get existing message IDs to skip duplicates
 async function getExistingMessageIds(supabase) {
-  const { data, error } = await supabase
-    .from('communications_history')
-    .select('source_id')
-    .eq('source_system', 'gmail');
+  // Paginated: the default 1,000-row cap made this see 1,000 of ~21,500 IDs, so every
+  // run re-fetched mail it already had (the upsert kept it from duplicating).
+  const ids = new Set();
+  for (let from = 0; ; from += 1000) {
+    const { data, error } = await supabase
+      .from('communications_history')
+      .select('source_id')
+      .eq('source_system', 'gmail')
+      .order('source_id')
+      .range(from, from + 999);
 
-  if (error) {
-    console.warn('Warning: Could not fetch existing messages:', error.message);
-    return new Set();
+    if (error) {
+      console.warn('Warning: Could not fetch existing messages:', error.message);
+      return ids;
+    }
+    for (const r of data || []) ids.add(r.source_id);
+    if (!data || data.length < 1000) return ids;
   }
-
-  return new Set((data || []).map(r => r.source_id));
 }
 
 // Parse email header value
