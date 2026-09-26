@@ -124,7 +124,9 @@
         "project_id": "2e774118-471c-450b-a6bc-41467a43c0cf",
         "project_key": "justicehub",
         "site_slug": "justicehub"
-      }
+      },
+      "gmail_label": "ACT/ACT-JH JusticeHub",
+      "calendar_keyword": "[ACT-JH]"
     },
     "ACT-DG": {
       "name": "Diagrama",
@@ -132,7 +134,7 @@
       "canonical_slug": "diagrama",
       "category": "justice",
       "priority": "high",
-      "status": "active",
+      "status": "dormant",
       "description": "Alternative education and rehabilitation",
       "leads": [
         "Tina Morris",
@@ -223,7 +225,9 @@
         "project_id": "6bd47c8a-e676-456f-aa25-ddcbb5a31047",
         "project_key": "goods",
         "site_slug": "goods-asset-register"
-      }
+      },
+      "gmail_label": "ACT/ACT-GD Goods",
+      "calendar_keyword": "[ACT-GD]"
     },
     "ACT-EL": {
       "name": "Empathy Ledger",
@@ -287,7 +291,9 @@
         "syndication_slug": "act_el",
         "project_id": "a2e50220-b02a-445c-9b7b-b354b34e3429",
         "project_key": "empathy-ledger"
-      }
+      },
+      "gmail_label": "ACT/ACT-EL Empathy Ledger",
+      "calendar_keyword": "[ACT-EL]"
     },
     "ACT-CORE": {
       "name": "ACT Regenerative Studio",
@@ -354,7 +360,9 @@
       },
       "notion": {
         "page_id": "204ebcf9-81cf-80f4-a3c9-fb18b904b2cb"
-      }
+      },
+      "gmail_label": "ACT/ACT-CORE ACT Regenerative Studio",
+      "calendar_keyword": "[ACT-CORE]"
     },
     "ACT-PI": {
       "name": "PICC",
@@ -425,7 +433,9 @@
       },
       "notion": {
         "page_id": "22eebcf9-81cf-8002-abe6-d81960ea19da"
-      }
+      },
+      "gmail_label": "ACT/ACT-PI PICC",
+      "calendar_keyword": "[ACT-PI]"
     },
     "ACT-ER": {
       "name": "PICC Elders Room",
@@ -433,7 +443,7 @@
       "canonical_slug": "picc-elders-hull-river",
       "category": "indigenous",
       "priority": "high",
-      "status": "archived",
+      "status": "active",
       "description": "Hull River Elders video premiere, Elders Room launch, and PICC Annual Report - honouring elders through storytelling and cultural spaces",
       "parent_project": "ACT-PI",
       "notion_pages": [
@@ -491,7 +501,12 @@
       "empathy_ledger": {
         "project_id": "25f71589-461d-466a-a0ab-cc1f03d6cebf",
         "project_key": "picc-elders"
-      }
+      },
+      "legacy_codes": [
+        "ACT-PI-ER"
+      ],
+      "gmail_label": "ACT/ACT-ER PICC Elders Room",
+      "calendar_keyword": "[ACT-ER]"
     },
     "ACT-PS": {
       "name": "PICC On Country Photo Studio",
@@ -500,7 +515,7 @@
       "category": "indigenous",
       "tier": "background",
       "priority": "high",
-      "status": "active",
+      "status": "dormant",
       "description": "Mobile photo studio for Palm Island community storytelling",
       "parent_project": "ACT-PI",
       "notion_pages": [
@@ -615,7 +630,7 @@
       "canonical_slug": "mingaminga-rangers",
       "category": "indigenous",
       "priority": "medium",
-      "status": "archived",
+      "status": "dormant",
       "description": "Indigenous ranger program",
       "notion_pages": [
         "MingaMinga Rangers"
@@ -653,7 +668,7 @@
       "category": "indigenous",
       "tier": "background",
       "priority": "high",
-      "status": "active",
+      "status": "dormant",
       "description": "Indigenous art project",
       "notion_pages": [
         "Uncle Allan Palm Island Art"
@@ -833,7 +848,9 @@
       },
       "notion": {
         "page_id": "334ebcf9-81cf-8078-b3f2-e59bb7c2c7b2"
-      }
+      },
+      "gmail_label": "ACT/ACT-FM The Farm",
+      "calendar_keyword": "[ACT-FM]"
     },
     "ACT-HV": {
       "name": "The Harvest Witta",
@@ -915,7 +932,9 @@
       },
       "notion": {
         "page_id": "11debcf9-81cf-8082-8fd0-d6031a9709f2"
-      }
+      },
+      "gmail_label": "ACT/ACT-HV The Harvest Witta",
+      "calendar_keyword": "[ACT-HV]"
     },
     "ACT-CN": {
       "name": "Contained",
@@ -980,7 +999,12 @@
           "vercel_project_name": "contained-tv-site",
           "vercel_project_id": "prj_aDxG2tsTuVXDMOTnXHJA6IYYVzcp"
         }
-      ]
+      ],
+      "legacy_codes": [
+        "ACT-JH-CT"
+      ],
+      "gmail_label": "ACT/ACT-CN Contained",
+      "calendar_keyword": "[ACT-CN]"
     },
     "ACT-FO": {
       "name": "Fishers Oysters",
@@ -989,7 +1013,7 @@
       "category": "regenerative",
       "tier": "satellite",
       "priority": "medium",
-      "status": "transferred",
+      "status": "active",
       "description": "Sustainable oyster farming",
       "leads": [
         "Shaun Fisher"
@@ -1029,7 +1053,9 @@
       },
       "notion": {
         "page_id": "17bebcf9-81cf-801b-9a06-edf3f35bf7f4"
-      }
+      },
+      "gmail_label": "ACT/ACT-FO Fishers Oysters",
+      "calendar_keyword": "[ACT-FO]"
     },
     "ACT-SM": {
       "name": "SMART",
@@ -1070,7 +1096,9 @@
       },
       "notion": {
         "page_id": "18febcf9-81cf-800c-9f79-e44c2e9728ba"
-      }
+      },
+      "gmail_label": "ACT/ACT-SM SMART",
+      "calendar_keyword": "[ACT-SM]"
     },
     "ACT-CF": {
       "name": "The Confessional",
@@ -1138,7 +1166,9 @@
       "empathy_ledger": {
         "project_id": "24307c30-644e-4aa9-a37d-b583bca8c3b0",
         "project_key": "the-confessional"
-      }
+      },
+      "gmail_label": "ACT/ACT-CF The Confessional",
+      "calendar_keyword": "[ACT-CF]"
     },
     "ACT-CM": {
       "name": "CAMPFIRE",
@@ -1193,7 +1223,9 @@
       "notion": {
         "page_id": "3d3ebcf9-81cf-81b2-afad-cf4ab729bce4"
       },
-      "parent_project": "ACT-BG"
+      "parent_project": "ACT-BG",
+      "gmail_label": "ACT/ACT-CM CAMPFIRE",
+      "calendar_keyword": "[ACT-CM]"
     },
     "ACT-GP": {
       "name": "Gold Phone",
@@ -1263,7 +1295,9 @@
       "empathy_ledger": {
         "project_id": "461644e3-cfbe-4708-972c-ba49d4261c2c",
         "project_key": "goldphone"
-      }
+      },
+      "gmail_label": "ACT/ACT-GP Gold Phone",
+      "calendar_keyword": "[ACT-GP]"
     },
     "ACT-MD": {
       "name": "ACT Monthly Dinners",
@@ -1272,7 +1306,7 @@
       "category": "community",
       "tier": "satellite",
       "priority": "medium",
-      "status": "active",
+      "status": "dormant",
       "description": "Monthly community gatherings",
       "notion_pages": [
         "ACT Monthly Dinners"
@@ -1455,7 +1489,9 @@
       "empathy_ledger": {
         "project_id": "b42eb7de-67ab-4817-9202-4d3ad629eb06",
         "project_key": "junes-patch"
-      }
+      },
+      "gmail_label": "ACT/ACT-JP June's Patch",
+      "calendar_keyword": "[ACT-JP]"
     },
     "ACT-RT": {
       "name": "Redtape",
@@ -1525,7 +1561,9 @@
       },
       "notion": {
         "page_id": "3d3ebcf9-81cf-81db-8646-f81cb109ab99"
-      }
+      },
+      "gmail_label": "ACT/ACT-RT Redtape",
+      "calendar_keyword": "[ACT-RT]"
     },
     "ACT-BG": {
       "name": "BG Fit",
@@ -1534,7 +1572,7 @@
       "category": "health",
       "tier": "satellite",
       "priority": "medium",
-      "status": "active",
+      "status": "dormant",
       "description": "Culturally grounded fitness, healing and mentorship for Indigenous youth in Mount Isa and Doomadgee, run by Brodie Germaine. CAMPFIRE is the programme name.",
       "notion_pages": [
         "BG Fit"
@@ -1592,7 +1630,7 @@
       "category": "enterprise",
       "tier": "satellite",
       "priority": "high",
-      "status": "active",
+      "status": "dormant",
       "description": "Grant pipeline and civic engagement platform",
       "leads": [
         "Ben Knight"
@@ -1684,7 +1722,9 @@
           "vercel_project_name": "mounty-yarns",
           "vercel_project_id": "prj_kCsxXKym0DNAeZDkJbLpVAu7da25"
         }
-      ]
+      ],
+      "gmail_label": "ACT/ACT-MY Mounty Yarns",
+      "calendar_keyword": "[ACT-MY]"
     },
     "ACT-TN": {
       "name": "TOMNET",
@@ -1762,7 +1802,7 @@
       "category": "funding",
       "tier": "satellite",
       "priority": "medium",
-      "status": "active",
+      "status": "dormant",
       "description": "Leadership retreat linking community leaders with capital holders",
       "notion_pages": [
         "Community Capital",
@@ -1806,7 +1846,7 @@
       "category": "justice",
       "tier": "satellite",
       "priority": "medium",
-      "status": "active",
+      "status": "dormant",
       "description": "Lived-experience boxing and mentorship program for young people in or leaving the justice system",
       "leads": [
         "Joe Kwon"
@@ -1878,7 +1918,9 @@
       "empathy_ledger": {
         "project_id": "250856a9-4472-40e0-92c9-7aebb294e636",
         "project_key": "dadlab25"
-      }
+      },
+      "gmail_label": "ACT/ACT-DL DadLab",
+      "calendar_keyword": "[ACT-DL]"
     },
     "ACT-SH": {
       "name": "The Shed",
@@ -1886,7 +1928,7 @@
       "canonical_slug": "the-shed",
       "category": "tech",
       "priority": "low",
-      "status": "archived",
+      "status": "dormant",
       "description": "Maker space and tech hub",
       "notion_page_id": "215ebcf9-81cf-8086-a781-fa9df2559a13",
       "notion_pages": [
@@ -1915,7 +1957,7 @@
       "category": "funding",
       "tier": "background",
       "priority": "medium",
-      "status": "archived",
+      "status": "dormant",
       "description": "Social Enterprise Finance Australia",
       "notion_pages": [
         "SEFA Partnership"
@@ -1945,7 +1987,7 @@
       "category": "enterprise",
       "tier": "satellite",
       "priority": "medium",
-      "status": "active",
+      "status": "dormant",
       "description": "Partner program supporting young people on youth justice orders. ACT works with the partner; ACT does not run it. Detail pending Ben's brief (see wiki/projects/custodian-first-economy.md).",
       "notion_pages": [
         "Custodian First Economy"
@@ -2065,7 +2107,9 @@
       },
       "notion": {
         "page_id": "3d3ebcf9-81cf-8106-976f-d53002ea561e"
-      }
+      },
+      "gmail_label": "ACT/ACT-RA Regional Arts Fellowship",
+      "calendar_keyword": "[ACT-RA]"
     },
     "ACT-WJ": {
       "name": "Wilya Janta",
@@ -2189,7 +2233,7 @@
       "canonical_slug": "deadly-homes-and-gardens",
       "category": "indigenous",
       "priority": "medium",
-      "status": "archived",
+      "status": "dormant",
       "description": "Indigenous housing and gardens",
       "notion_pages": [
         "Deadly Homes and Gardens"
@@ -2220,7 +2264,7 @@
       "canonical_slug": "mmeic-justice",
       "category": "justice",
       "priority": "medium",
-      "status": "archived",
+      "status": "active",
       "description": "MMEIC Justice initiatives",
       "notion_pages": [
         "MMEIC - Justice Projects"
@@ -2242,7 +2286,10 @@
       },
       "notion": {
         "page_id": "179ebcf9-81cf-80be-a071-d6a6d13c821a"
-      }
+      },
+      "gmail_label": "ACT/ACT-MM MMEIC Justice",
+      "calendar_keyword": "[ACT-MM]",
+      "wiki_path": "wiki/projects/justicehub/three-circles.md"
     },
     "ACT-MU": {
       "name": "Murrup + ACT",
@@ -2316,7 +2363,9 @@
       },
       "notion": {
         "page_id": "1d4ebcf9-81cf-80a2-8c12-e5c56d78de10"
-      }
+      },
+      "gmail_label": "ACT/ACT-OO Oonchiumpa",
+      "calendar_keyword": "[ACT-OO]"
     },
     "ACT-CA": {
       "name": "Caring for those who care",
@@ -2387,7 +2436,9 @@
           "vercel_project_name": "caring-for-those-who-care",
           "vercel_project_id": "prj_xm3czrVHlLRcA95jozIy8DOCYP7a"
         }
-      ]
+      ],
+      "gmail_label": "ACT/ACT-CA Caring for those who care",
+      "calendar_keyword": "[ACT-CA]"
     },
     "ACT-MC": {
       "name": "Cars and Microcontrollers",
@@ -2396,7 +2447,7 @@
       "category": "arts",
       "tier": "background",
       "priority": "medium",
-      "status": "active",
+      "status": "dormant",
       "description": "Art and technology crossover \u2014 combining mechanical craft with microcontroller programming to create interactive installations",
       "notion_pages": [
         "Cars and microcontrollers"
@@ -2486,7 +2537,7 @@
       "category": "indigenous",
       "tier": "satellite",
       "priority": "medium",
-      "status": "ideation",
+      "status": "archived",
       "description": "Barkly region backbone infrastructure",
       "notion_pages": [
         "Barkly Backbone"
@@ -2527,7 +2578,7 @@
       "category": "justice",
       "tier": "background",
       "priority": "high",
-      "status": "ideation",
+      "status": "active",
       "description": "Centre of excellence for youth justice reform",
       "parent_project": "ACT-JH",
       "notion_pages": [
@@ -2551,7 +2602,9 @@
       },
       "empathy_ledger": {
         "tracked": false
-      }
+      },
+      "gmail_label": "ACT/ACT-JC JusticeHub Centre of Excellence",
+      "calendar_keyword": "[ACT-JC]"
     },
     "ACT-TR": {
       "name": "Treacher",
@@ -2613,7 +2666,7 @@
       "category": "tech",
       "tier": "satellite",
       "priority": "medium",
-      "status": "sunsetting",
+      "status": "active",
       "description": "Technology design and sustainability",
       "notion_pages": [
         "Designing for Obsolescence"
@@ -2637,7 +2690,9 @@
       },
       "empathy_ledger": {
         "tracked": false
-      }
+      },
+      "gmail_label": "ACT/ACT-DO Designing for Obsolescence",
+      "calendar_keyword": "[ACT-DO]"
     },
     "ACT-GL": {
       "name": "Global Laundry Alliance",
@@ -2646,7 +2701,7 @@
       "category": "enterprise",
       "tier": "satellite",
       "priority": "medium",
-      "status": "transferred",
+      "status": "dormant",
       "description": "Orange Sky's global network expansion",
       "notion_pages": [
         "Global Laundry Alliance (GLA)"
@@ -2709,7 +2764,7 @@
       "canonical_slug": "fairfax-place-tech",
       "category": "tech",
       "priority": "medium",
-      "status": "archived",
+      "status": "dormant",
       "description": "Fairfax and PLACE technology partnership",
       "notion_pages": [
         "Fairfax & PLACE tech"
@@ -2921,7 +2976,7 @@
       "canonical_slug": "orange-sky-empathy-ledger",
       "category": "stories",
       "priority": "low",
-      "status": "archived",
+      "status": "dormant",
       "description": "Orange Sky Empathy Ledger project repository",
       "notion_pages": [
         "Orange Sky Empathy Ledger Project Repository - review"
@@ -2991,7 +3046,9 @@
           "vercel_project_name": "act-command-center",
           "vercel_project_id": "prj_0aywu3Quj2hPxF3hQg1KyDeoyoMX"
         }
-      ]
+      ],
+      "gmail_label": "ACT/ACT-IN ACT Infrastructure",
+      "calendar_keyword": "[ACT-IN]"
     },
     "ACT-GCC": {
       "name": "Global Community Connections",
@@ -3024,7 +3081,7 @@
       "category": "community",
       "tier": "satellite",
       "priority": "medium",
-      "status": "active",
+      "status": "dormant",
       "description": "Community wellbeing initiative",
       "xero_tracking": "ACT-FG \u2014 Feel Good Project",
       "xero_tracking_aliases": [
@@ -3059,10 +3116,12 @@
       },
       "notion": {
         "page_id": "3d3ebcf9-81cf-8130-bd9c-d7e08bf7c9bf"
-      }
+      },
+      "gmail_label": "ACT/ACT-CB Marriage Celebrant",
+      "calendar_keyword": "[ACT-CB]"
     },
     "ACT-GS": {
-      "name": "GrantScope (CivicGraph)",
+      "name": "CivicGraph",
       "code": "ACT-GS",
       "canonical_slug": "grantscope",
       "category": "background",
@@ -3074,14 +3133,19 @@
       },
       "notion": {
         "page_id": "3d3ebcf9-81cf-817b-8cc5-d6ec2664e400"
-      }
+      },
+      "legacy_codes": [
+        "ACT-JH-CG"
+      ],
+      "gmail_label": "ACT/ACT-GS CivicGraph",
+      "calendar_keyword": "[ACT-GS]"
     },
     "ACT-PB": {
       "name": "Place-Based Policy Lab",
       "code": "ACT-PB",
       "canonical_slug": "place-based-policy-lab",
       "category": "background",
-      "status": "active",
+      "status": "dormant",
       "description": "Background record (added 2026-05-09 cleanup) \u2014 wiki page exists at wiki/projects/place-based-policy-lab.md.",
       "tier": "background",
       "empathy_ledger": {
@@ -3096,7 +3160,7 @@
       "code": "ACT-DLB",
       "canonical_slug": "deadlylabs",
       "category": "background",
-      "status": "active",
+      "status": "dormant",
       "description": "Background record (added 2026-05-09 cleanup) \u2014 wiki page exists at wiki/projects/deadlylabs.md.",
       "tier": "background",
       "empathy_ledger": {
@@ -3112,7 +3176,7 @@
       "canonical_slug": "the-caravan",
       "category": "arts",
       "tier": "studio",
-      "status": "active",
+      "status": "dormant",
       "description": "Born at the 10x10 Community Capital Leadership Retreat, The Caravan is a hand-built room on wheels that travels between communities for leadership gatherings, listening sessions and on-Country convers",
       "empathy_ledger": {
         "partner_codes": [
@@ -3179,7 +3243,7 @@
       "canonical_slug": "picc-photo-kiosk",
       "category": "indigenous",
       "tier": "studio",
-      "status": "active",
+      "status": "dormant",
       "description": "On Palm Island (Bwgcolman), a self-service photo station at the Palm Island Community Company shifted who holds the camera. Families, elders, young people and visitors documented their own stories on ",
       "parent_project": "ACT-PI",
       "empathy_ledger": {
@@ -3251,7 +3315,102 @@
           "Art"
         ],
         "connected_code": "ACT-CS"
-      }
+      },
+      "gmail_label": "ACT/ACT-CTP Confessions to Philanthropy",
+      "calendar_keyword": "[ACT-CTP]"
+    },
+    "ACT-QD": {
+      "name": "Quandamooka Justice and Healing Strategy",
+      "code": "ACT-QD",
+      "canonical_slug": "quandamooka-justice-and-healing-strategy",
+      "category": "justice",
+      "tier": "background",
+      "priority": "medium",
+      "status": "active",
+      "description": "Quandamooka Justice and Healing Strategy.",
+      "gmail_label": "ACT/ACT-QD Quandamooka Justice and Healing Strategy",
+      "calendar_keyword": "[ACT-QD]",
+      "wiki_path": "wiki/projects/quandamooka-justice-strategy.md"
+    },
+    "ACT-RS": {
+      "name": "ReSOLEution",
+      "code": "ACT-RS",
+      "canonical_slug": "resoleution",
+      "category": "community",
+      "tier": "background",
+      "priority": "medium",
+      "status": "dormant",
+      "description": "ReSOLEution."
+    },
+    "ACT-HQ": {
+      "name": "ACT Headquarters",
+      "code": "ACT-HQ",
+      "canonical_slug": "act-headquarters",
+      "category": "operations",
+      "tier": "background",
+      "priority": "medium",
+      "status": "active",
+      "description": "Overhead, admin, founder transfers and shared operational costs.",
+      "gmail_label": "ACT/ACT-HQ ACT Headquarters",
+      "calendar_keyword": "[ACT-HQ]",
+      "wiki_path": "wiki/projects/act-hq.md"
+    },
+    "ACT-BV": {
+      "name": "Black Cockatoo Valley",
+      "code": "ACT-BV",
+      "canonical_slug": "black-cockatoo-valley",
+      "category": "land",
+      "tier": "background",
+      "priority": "medium",
+      "status": "active",
+      "description": "Regenerative conservation at Black Cockatoo Valley; its own project, not the Farm (Ben, project code review 2026-09-26).",
+      "gmail_label": "ACT/ACT-BV Black Cockatoo Valley",
+      "calendar_keyword": "[ACT-BV]",
+      "wiki_path": "wiki/projects/black-cockatoo-valley.md"
+    },
+    "ACT-CG": {
+      "name": "CivicGraph (CivicScope)",
+      "code": "ACT-CG",
+      "canonical_slug": "civicgraph-civicscope",
+      "category": "technology",
+      "tier": "background",
+      "priority": "medium",
+      "status": "dormant",
+      "description": "Earlier code for CivicGraph kept in the projects table; the live code is ACT-GS (Ben, project code review 2026-09-26)."
+    },
+    "ACT-SP": {
+      "name": "Station Precinct",
+      "code": "ACT-SP",
+      "canonical_slug": "station-precinct",
+      "category": "indigenous",
+      "tier": "background",
+      "priority": "medium",
+      "status": "active",
+      "description": "Station Precinct, its own code from 2026-09-26 (was ACT-PI-SP in CivicGraph) (Ben, project code review 2026-09-26).",
+      "parent_project": "ACT-PI",
+      "legacy_codes": [
+        "ACT-PI-SP"
+      ],
+      "gmail_label": "ACT/ACT-SP Station Precinct",
+      "calendar_keyword": "[ACT-SP]",
+      "wiki_path": "wiki/projects/picc/README.md"
+    },
+    "ACT-AL": {
+      "name": "Australian Living Map of Alternatives (ALMA)",
+      "code": "ACT-AL",
+      "canonical_slug": "australian-living-map-of-alternatives",
+      "category": "justice",
+      "tier": "background",
+      "priority": "medium",
+      "status": "active",
+      "description": "Australian Living Map of Alternatives (ALMA), its own code from 2026-09-26 (was ACT-JH-AL in CivicGraph) (Ben, project code review 2026-09-26).",
+      "parent_project": "ACT-JH",
+      "legacy_codes": [
+        "ACT-JH-AL"
+      ],
+      "gmail_label": "ACT/ACT-AL Australian Living Map of Alternatives (ALMA)",
+      "calendar_keyword": "[ACT-AL]",
+      "wiki_path": "wiki/concepts/alma.md"
     }
   },
   "categories": {
