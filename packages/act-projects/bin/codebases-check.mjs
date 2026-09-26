@@ -6,10 +6,15 @@
 //            - a listed repo that is archived or gone on GitHub
 //            - a listed local_path that is missing, or whose origin is a different repo
 //            - a Vercel project updated in the last N days that no codebase claims
+//            - a top-level entry in the code folder (CODE_ROOT, default ~/Code) that no
+//              codebase claims: stray worktree, unlisted repo, folder or loose file
+//            - a Supabase project no codebase claims, or a claimed one paused or gone
+//              (needs SUPABASE_ACCESS_TOKEN)
 //   --strict exit 1 on gaps and live findings too
 import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
-import { loadAllCodebases, repoName } from '../src/index.mjs';
+import { loadAllCodebases, repoName, expandHome } from '../src/index.mjs';
+import { localDrift, supabaseDrift, scanCodeFolder } from '../src/drift.mjs';
 
 const args = process.argv.slice(2);
 const live = args.includes('--live');
@@ -89,7 +94,23 @@ if (live) {
     console.log('  (VERCEL_TOKEN not set: Vercel side not checked)');
   }
 
-  console.log(findings.length ? `\n${findings.length} live findings:\n  ${findings.join('\n  ')}` : '\nLive: GitHub, local checkouts and Vercel all match.');
+  const root = expandHome(process.env.CODE_ROOT || '~/Code');
+  for (const f of localDrift({ root, entries: scanCodeFolder(root), codebases })) findings.push(`${f.kind.padEnd(14)} ${f.name}: ${f.why}`);
+
+  if (process.env.SUPABASE_ACCESS_TOKEN) {
+    const res = await fetch('https://api.supabase.com/v1/projects', {
+      headers: { Authorization: `Bearer ${process.env.SUPABASE_ACCESS_TOKEN}` },
+    });
+    if (!res.ok) findings.push(`supabase  API returned ${res.status}; Supabase side not checked`);
+    else {
+      const projects = (await res.json()).map((p) => ({ ref: p.id, name: p.name, status: p.status }));
+      for (const f of supabaseDrift({ projects, codebases })) findings.push(`${f.kind.padEnd(9)} Supabase ${f.name} (${f.ref}): ${f.why}`);
+    }
+  } else {
+    console.log('  (SUPABASE_ACCESS_TOKEN not set: Supabase side not checked)');
+  }
+
+  console.log(findings.length ? `\n${findings.length} live findings:\n  ${findings.join('\n  ')}` : '\nLive: GitHub, local checkouts, the code folder, Vercel and Supabase all match.');
 }
 
 process.exit(strict && (gaps.length || findings.length) ? 1 : 0);
