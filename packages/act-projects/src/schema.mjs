@@ -3,7 +3,8 @@ import { z } from 'zod';
 // Values seen in config/project-codes.json on 2026-09-06. Adding a value here is a
 // decision, not a typo fix: it changes which guards apply.
 export const TIERS = ['ecosystem', 'studio', 'satellite', 'background'];
-export const STATUSES = ['active', 'ideation', 'sunsetting', 'archived', 'transferred'];
+// 'dormant' added 2026-09-26 (Ben's code review): a real project, quiet, not closed. Not live for the guards.
+export const STATUSES = ['active', 'ideation', 'sunsetting', 'dormant', 'archived', 'transferred'];
 export const SITE_ROLES = ['primary', 'campaign', 'archive', 'external'];
 
 const code = z.string().regex(/^ACT-[A-Z0-9]{2,4}$/, 'code must look like ACT-XX');
@@ -91,6 +92,10 @@ const legacy = {
   production_url: z.string().optional(),
   slug_aliases: z.array(z.string()).optional(),
   legacy_codes: z.array(z.string()).optional(),
+  /** Gmail label generated from the code, e.g. "ACT/ACT-GD Goods" (2026-09-26: one code set everywhere). */
+  gmail_label: z.string().optional(),
+  /** Prefix at the start of calendar event titles for this project, e.g. "[ACT-GD]". */
+  calendar_keyword: z.string().optional(),
   cultural_protocols: z.unknown().optional(),
   sub_projects: z.array(z.string()).optional(),
   parent_project: z.string().optional(),
