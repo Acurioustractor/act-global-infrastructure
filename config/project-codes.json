@@ -2258,39 +2258,6 @@
         "page_id": "17bebcf9-81cf-8099-bd1b-e0a57351a5b7"
       }
     },
-    "ACT-MM": {
-      "name": "MMEIC Justice",
-      "code": "ACT-MM",
-      "canonical_slug": "mmeic-justice",
-      "category": "justice",
-      "priority": "medium",
-      "status": "active",
-      "description": "MMEIC Justice initiatives",
-      "notion_pages": [
-        "MMEIC - Justice Projects"
-      ],
-      "ghl_tags": [
-        "mmeic"
-      ],
-      "xero_tracking": "ACT-MM \u2014 MMEIC Justice",
-      "xero_tracking_aliases": [
-        "MMEIC"
-      ],
-      "dext_category": "Justice Projects",
-      "alma_program": "justice-reform",
-      "tier": "background",
-      "ghl": {
-        "tags": [
-          "mmeic"
-        ]
-      },
-      "notion": {
-        "page_id": "179ebcf9-81cf-80be-a071-d6a6d13c821a"
-      },
-      "gmail_label": "ACT/ACT-MM MMEIC Justice",
-      "calendar_keyword": "[ACT-MM]",
-      "wiki_path": "wiki/projects/justicehub/three-circles.md"
-    },
     "ACT-MU": {
       "name": "Murrup + ACT",
       "code": "ACT-MU",
@@ -3327,10 +3294,20 @@
       "tier": "background",
       "priority": "medium",
       "status": "active",
-      "description": "Quandamooka Justice and Healing Strategy.",
+      "description": "Quandamooka Justice and Healing Strategy with Minjerribah Moorgumpin Elders-in-Council (MMEIC) on Minjerribah (North Stradbroke Island). One piece of work: the old code ACT-MM (MMEIC Justice) folds in here (Ben, 2026-09-26).",
       "gmail_label": "ACT/ACT-QD Quandamooka Justice and Healing Strategy",
       "calendar_keyword": "[ACT-QD]",
-      "wiki_path": "wiki/projects/quandamooka-justice-strategy.md"
+      "wiki_path": "wiki/projects/quandamooka-justice-strategy.md",
+      "legacy_codes": [
+        "ACT-MM"
+      ],
+      "xero_tracking_aliases": [
+        "ACT-MM \u2014 MMEIC Justice",
+        "MMEIC"
+      ],
+      "ghl_tags": [
+        "mmeic"
+      ]
     },
     "ACT-RS": {
       "name": "ReSOLEution",
@@ -3386,14 +3363,14 @@
       "tier": "background",
       "priority": "medium",
       "status": "active",
-      "description": "Station Precinct, its own code from 2026-09-26 (was ACT-PI-SP in CivicGraph) (Ben, project code review 2026-09-26).",
+      "description": "Station Precinct in Townsville: adaptive reuse of a heritage police station as a community and enterprise hub, with PICC. Its own code from 2026-09-26 (was ACT-PI-SP in CivicGraph).",
       "parent_project": "ACT-PI",
       "legacy_codes": [
         "ACT-PI-SP"
       ],
       "gmail_label": "ACT/ACT-SP Station Precinct",
       "calendar_keyword": "[ACT-SP]",
-      "wiki_path": "wiki/projects/picc/README.md"
+      "wiki_path": "wiki/projects/station-precinct.md"
     },
     "ACT-AL": {
       "name": "Australian Living Map of Alternatives (ALMA)",
