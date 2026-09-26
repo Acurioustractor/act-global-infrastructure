@@ -1013,7 +1013,7 @@ a.wikilink:visited {
   <ul style="list-style:none; display:flex; gap:1em; flex-wrap:wrap; color:#72777d;">
     <li>Content is compiled by LLM from raw sources</li>
     <li>Powered by the <a href="#" onclick="navigateTo('llm-knowledge-base'); return false;">LLM Knowledge Base</a> pattern</li>
-    <li>Last compiled: 2026-09-25</li>
+    <li>Last compiled: 2026-09-26</li>
   </ul>
 </div>
 
@@ -5243,6 +5243,20 @@ These are genuinely unknown from the digests — decide, don't let me guess.
 7. **API upsert → tag-added timing.** No source quantified the latency between the \`pushToGHL\` upsert and the tag-added event the welcome workflow listens for. If there's a race, the welcome may need the tag included in the upsert payload itself rather than added in a second call. Test this on the tracer contact.
 
 The frame holds: a ladder of belonging, one shape per project, consent as the structural floor, and recipients and storytellers walled off from every funnel. Build Harvest end-to-end, prove it, then give Goods the same shape with the recipient wall verified first.`
+  },
+  "act-hq": {
+    slug: "act-hq",
+    title: "ACT Headquarters",
+    domain: "projects",
+    links: [],
+    content: `# ACT Headquarters
+
+Project code \`ACT-HQ\`. The home for A Curious Tractor's overhead: administration, founder transfers and
+shared operating costs that belong to no single project. It keeps those costs out of the projects'
+own books, so each project's money shows whether it pays its way.
+
+Added to \`config/project-codes.json\` on 2026-09-26 from the Supabase \`projects\` table, where it was
+already in use.`
   },
   "act-identity": {
     slug: "act-identity",
@@ -36523,6 +36537,20 @@ None of these is the soul. They are how the soul stays operational without being
 - [[four-lanes|The Four Lanes]]: the body the soul lives in, the economy that sustains the work and the founders
 - [[beautiful-obsolescence|Beautiful Obsolescence]]: the discipline that lets the soul outlive the org`
   },
+  "station-precinct": {
+    slug: "station-precinct",
+    title: "Station Precinct",
+    domain: "projects",
+    links: ["picc"],
+    content: `# Station Precinct
+
+Project code \`ACT-SP\` (formerly \`ACT-PI-SP\` in CivicGraph). In Townsville, with Palm Island Community
+Company ([[picc|PICC]]): the adaptive reuse of a heritage police station as a community and enterprise
+hub.
+
+The Contained tour listed a stop at the PICC Station Precinct in Townsville for 1 July 2026. A Station
+Precinct innovation brief sits in CivicGraph's PICC dashboard output.`
+  },
   "staying": {
     slug: "staying",
     title: "Staying — Country & Council",
@@ -45176,7 +45204,7 @@ That is what Nigel's postcard does in a judge's hand. That is what the entire AC
     links: [],
     content: `# Wiki Health Report — 2026-04-07
 
-**Articles:** 385
+**Articles:** 387
 **Wikilinks:** 753
 
 ## Summary
@@ -46438,7 +46466,7 @@ function showMainPage() {
   // ── FOOTER ────────────────────────────────────────
   html += '<div class="mp-stats" style="text-align:center;font-size:12px;color:#888;border-top:1px solid #e5e5e5;padding-top:1em;margin-top:1em;">';
   html += 'Tractorpedia is maintained using the <a href="#llm-knowledge-base" class="wikilink" onclick="navigateTo(\'llm-knowledge-base\'); return false;">LLM Knowledge Base</a> pattern. ';
-  html += 'Photos live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Last compiled: 2026-09-25.';
+  html += 'Photos live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Last compiled: 2026-09-26.';
   html += '</div>';
 
   document.getElementById('mw-content-text').innerHTML = html;
@@ -47640,6 +47668,18 @@ function showArtPortfolio() {
       }
     });
   });
+  // Now async-load real photos for each card. fetchELMedia(slug) handles project_id + filename fallback.
+  artProjects.forEach(function(p) {
+    fetchELMedia(p.slug, 1).then(function(media) {
+      let el = document.getElementById('art-thumb-' + p.slug);
+      if (!el) return;
+      if (media && media.length > 0) {
+        el.innerHTML = '<img src="' + media[0].url + '" style="width:100%;height:100%;object-fit:cover;" alt="' + (media[0].title || p.name) + '">';
+      } else {
+        el.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#aaa;">photos coming soon</div><div style="font-size:11px;color:#bbb;margin-top:4px;">tag in Empathy Ledger</div></div>';
+      }
+    });
+  });
 }
 
 // ============================================================
@@ -47649,6 +47689,10 @@ function handleHash() {
   let hash = window.location.hash.substring(1);
   if (!hash) {
     showMainPage();
+    return;
+  }
+  if (hash === 'art-portfolio') {
+    showArtPortfolio();
     return;
   }
   if (hash === 'art-portfolio') {
