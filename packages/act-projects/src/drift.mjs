@@ -1,4 +1,16 @@
-import { basename, dirname } from 'node:path';
+import { existsSync, readdirSync, statSync } from 'node:fs';
+import { basename, dirname, join } from 'node:path';
+
+/** Top-level entries of a code folder as { name, kind }: 'repo', 'worktree' (.git is a file), 'dir' or 'file'. */
+export function scanCodeFolder(root) {
+  if (!existsSync(root)) return [];
+  return readdirSync(root, { withFileTypes: true }).map((d) => {
+    if (!d.isDirectory()) return { name: d.name, kind: 'file' };
+    const git = join(root, d.name, '.git');
+    if (!existsSync(git)) return { name: d.name, kind: 'dir' };
+    return { name: d.name, kind: statSync(git).isFile() ? 'worktree' : 'repo' };
+  });
+}
 
 /**
  * Compare a code folder (~/Code) with the codebase list. `entries` is what is on

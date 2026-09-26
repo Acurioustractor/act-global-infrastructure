@@ -51,6 +51,8 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, append
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { homedir } from 'node:os';
+import { loadAllCodebases, expandHome } from '../packages/act-projects/src/index.mjs';
+import { localDrift, scanCodeFolder } from '../packages/act-projects/src/drift.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -264,6 +266,19 @@ function loadFeed() {
   };
 }
 
+// Stray folders and worktrees in ~/Code that no codebase claims (local only; the
+// Supabase and Vercel sides need `pnpm codebases:live`). Never throws: a failure is the light's text.
+function codeFolderLight(light) {
+  try {
+    const root = expandHome(process.env.CODE_ROOT || '~/Code');
+    const found = localDrift({ root, entries: scanCodeFolder(root), codebases: loadAllCodebases().codebases });
+    const names = found.slice(0, 4).map((f) => f.name).join(', ');
+    return light(found.length > 0, 'Code folder drift', found.length ? `${found.length} unclaimed in ~/Code: ${names}${found.length > 4 ? ', ...' : ''}; run pnpm codebases:live` : 'every top-level folder is a listed codebase');
+  } catch (err) {
+    return light(false, 'Code folder drift', `check failed: ${err.message}`);
+  }
+}
+
 // ---------- build the fold (per-section isolation) ----------
 function buildCard() {
   const todayY = aestYmd();
@@ -341,6 +356,7 @@ function buildCard() {
           lanes.listenPct == null ? 'Listen % not found in card' : `Listen ${lanes.listenPct}%, last 90d`),
         light(lanes.laneBehind === 'To Us', 'To Us behind',
           lanes.laneBehind ? `soul check: lane most behind = ${lanes.laneBehind}` : 'lane-behind not found in card'),
+        codeFolderLight(light),
       ],
     };
   });

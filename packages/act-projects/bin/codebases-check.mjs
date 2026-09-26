@@ -12,10 +12,9 @@
 //              (needs SUPABASE_ACCESS_TOKEN)
 //   --strict exit 1 on gaps and live findings too
 import { execFileSync } from 'node:child_process';
-import { existsSync, readdirSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync } from 'node:fs';
 import { loadAllCodebases, repoName, expandHome } from '../src/index.mjs';
-import { localDrift, supabaseDrift } from '../src/drift.mjs';
+import { localDrift, supabaseDrift, scanCodeFolder } from '../src/drift.mjs';
 
 const args = process.argv.slice(2);
 const live = args.includes('--live');
@@ -96,15 +95,7 @@ if (live) {
   }
 
   const root = expandHome(process.env.CODE_ROOT || '~/Code');
-  if (existsSync(root)) {
-    const entries = readdirSync(root, { withFileTypes: true }).map((d) => {
-      if (!d.isDirectory()) return { name: d.name, kind: 'file' };
-      const git = join(root, d.name, '.git');
-      if (!existsSync(git)) return { name: d.name, kind: 'dir' };
-      return { name: d.name, kind: statSync(git).isFile() ? 'worktree' : 'repo' };
-    });
-    for (const f of localDrift({ root, entries, codebases })) findings.push(`${f.kind.padEnd(14)} ${f.name}: ${f.why}`);
-  }
+  for (const f of localDrift({ root, entries: scanCodeFolder(root), codebases })) findings.push(`${f.kind.padEnd(14)} ${f.name}: ${f.why}`);
 
   if (process.env.SUPABASE_ACCESS_TOKEN) {
     const res = await fetch('https://api.supabase.com/v1/projects', {
