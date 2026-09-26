@@ -2288,7 +2288,8 @@
         "page_id": "179ebcf9-81cf-80be-a071-d6a6d13c821a"
       },
       "gmail_label": "ACT/ACT-MM MMEIC Justice",
-      "calendar_keyword": "[ACT-MM]"
+      "calendar_keyword": "[ACT-MM]",
+      "wiki_path": "wiki/projects/justicehub/three-circles.md"
     },
     "ACT-MU": {
       "name": "Murrup + ACT",
@@ -3328,7 +3329,8 @@
       "status": "active",
       "description": "Quandamooka Justice and Healing Strategy.",
       "gmail_label": "ACT/ACT-QD Quandamooka Justice and Healing Strategy",
-      "calendar_keyword": "[ACT-QD]"
+      "calendar_keyword": "[ACT-QD]",
+      "wiki_path": "wiki/projects/quandamooka-justice-strategy.md"
     },
     "ACT-RS": {
       "name": "ReSOLEution",
@@ -3350,7 +3352,8 @@
       "status": "active",
       "description": "Overhead, admin, founder transfers and shared operational costs.",
       "gmail_label": "ACT/ACT-HQ ACT Headquarters",
-      "calendar_keyword": "[ACT-HQ]"
+      "calendar_keyword": "[ACT-HQ]",
+      "wiki_path": "wiki/projects/act-hq.md"
     },
     "ACT-BV": {
       "name": "Black Cockatoo Valley",
@@ -3362,7 +3365,8 @@
       "status": "active",
       "description": "Regenerative conservation at Black Cockatoo Valley; its own project, not the Farm (Ben, project code review 2026-09-26).",
       "gmail_label": "ACT/ACT-BV Black Cockatoo Valley",
-      "calendar_keyword": "[ACT-BV]"
+      "calendar_keyword": "[ACT-BV]",
+      "wiki_path": "wiki/projects/black-cockatoo-valley.md"
     },
     "ACT-CG": {
       "name": "CivicGraph (CivicScope)",
@@ -3388,7 +3392,8 @@
         "ACT-PI-SP"
       ],
       "gmail_label": "ACT/ACT-SP Station Precinct",
-      "calendar_keyword": "[ACT-SP]"
+      "calendar_keyword": "[ACT-SP]",
+      "wiki_path": "wiki/projects/picc/README.md"
     },
     "ACT-AL": {
       "name": "Australian Living Map of Alternatives (ALMA)",
@@ -3404,7 +3409,8 @@
         "ACT-JH-AL"
       ],
       "gmail_label": "ACT/ACT-AL Australian Living Map of Alternatives (ALMA)",
-      "calendar_keyword": "[ACT-AL]"
+      "calendar_keyword": "[ACT-AL]",
+      "wiki_path": "wiki/concepts/alma.md"
     }
   },
   "categories": {
