@@ -46,7 +46,7 @@ These are named here because they explain how Empathy Ledger works in real place
 ## Core Principles
 
 1. **Storyteller as Sovereign** — absolute control and agency over how narrative is used
-2. **Blockchain-secured ownership** — transparent, fair compensation flows back to storyteller
+2. ~~**Blockchain-secured ownership**, transparent, fair compensation flows back to storyteller~~ Retired 30 September 2026: Empathy Ledger has never used a blockchain
 3. **Do no harm** — community members are active co-creators, not subjects
 4. **Reject extractive metrics** — focus on agency, resilience, and truth, not passive victimhood
 
@@ -299,7 +299,7 @@ This framing — principles set by communities, not tech companies — is load-b
 
 ### What the Public Site Omits
 
-The public act.place page does not mention: blockchain ownership, TK Labels, Mukurtu integration, OCAP principles, or the five consent types. These are internal technical/governance details — the public page is purely relational and values-based. This is correct framing for a general audience but may leave sophisticated Indigenous governance partners wanting more. The internal wiki fills that gap.
+The public act.place page does not mention: TK Labels, Mukurtu integration, OCAP principles, or the five consent types. These are internal technical/governance details — the public page is purely relational and values-based. This is correct framing for a general audience but may leave sophisticated Indigenous governance partners wanting more. The internal wiki fills that gap. (Until 30 September 2026 this list began with "blockchain ownership", which was never built.)
 
 ## Backlinks
 

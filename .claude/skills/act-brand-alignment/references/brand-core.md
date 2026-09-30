@@ -25,7 +25,7 @@
 - The farm is a commons; the studio is the toolkit to practice care, accountability, and collective power.
 
 ## Outputs (Active "Seeds")
-- **Empathy Ledger**: Ethical storytelling platform with consent frameworks and blockchain. Storytellers retain control and share in value created.
+- **Empathy Ledger**: Ethical storytelling platform built on consent that storytellers can change or withdraw. Storytellers retain control and share in value created. (It has no blockchain. That claim stood here until 30 September 2026; see empathy-ledger-v2 `docs/01-principles/what-we-no-longer-say.md`.)
 - **JusticeHub**: Open-source justice network where grassroots programs "fork" proven models, access AI insights, co-create governance.
 - **Goods (Goods on Country)**: Circular-economy venture designing beds, mattresses and washing machines in community, with community and for community, for remote communities while converting local waste.
 - **Black Cockatoo Valley**: regeneration estate (size and boundaries: `act-global-infrastructure/wiki/projects/act-farm/black-cockatoo-valley.md`, do not quote a figure from here) combining eco-cottages, Indigenous land-care jobs, biodiversity credits to finance habitat restoration.

@@ -5,7 +5,7 @@
 ### Empathy Ledger
 **Ethical Storytelling Platform**
 - Living record of care, accountability, and shared memory; community-governed storytelling.
-- Using consent frameworks and blockchain, storytellers retain control over narratives and share in value created.
+- Through consent they can change or withdraw, storytellers retain control over narratives and share in value created. (No blockchain: Empathy Ledger has never used one. Retired 30 September 2026; see empathy-ledger-v2 `docs/01-principles/what-we-no-longer-say.md`.)
 - Tagline: "Your story, your power, your profit"
 - Technical stack: Next.js, Supabase, TypeScript, Tailwind
 - Registry: Consent-gated; only shared items show in public feed
