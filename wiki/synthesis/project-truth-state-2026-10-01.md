@@ -14,7 +14,7 @@ date: 2026-10-01
 
 1. **`config/project-codes.json` now has 84 projects** (was 78 at Sep 24 — a real +6 change). PR #275 "One project code set: statuses from Ben's code review" restructured the status taxonomy. The `_meta.updated` field is still stale at `2026-04-24`, but the `projects` object has grown. Most significantly, **"dormant" was introduced as a new status category** (24 projects now dormant). The "sunsetting" and "transferred" categories from the meta `status_values` list no longer appear in the data. Breakdown: 32 active, 24 dormant, 2 ideation, 26 archived = 84 total.
 
-2. **Wiki projects/ grows to 101 articles** (was 99 at Sep 24). PR #277 "Fold MMEIC Justice into Quandamooka; give Station Precinct its own page" added at least one net-new article (Station Precinct). The Quandamooka page likely replaced the MMEIC Justice stub.
+2. **Wiki projects/ grows to 101 articles** (was 99 at Sep 24). Two PRs each added one article: PR #275 "One project code set: statuses from Ben's code review" added `wiki/projects/act-hq.md` (99→100); PR #277 "Fold MMEIC Justice into Quandamooka; give Station Precinct its own page" added `wiki/projects/station-precinct.md` (100→101). The Quandamooka article was also updated in PR #277 (code ACT-QD consolidated from ACT-MM) but was not a net-new file.
 
 3. **Xero +18 invoices in 7 days — total now 2,466** (was 2,448 at Sep 24). ACT-HV gained 2 (131→133). The ACT-GD coding burst from the prior interval appears to have levelled off. No new null-project_code invoices in the +18.
 
@@ -39,7 +39,8 @@ date: 2026-10-01
 
 _Config breakdown (actual): 32 active, 24 dormant, 2 ideation, 26 archived = 84._
 _New "dormant" category (24 projects): likely migrated from prior "archived/sunsetting/transferred" statuses — not all inactive projects are deleted work._
-_2 DB-only codes (ACT-QD, ACT-RS) persist unscored — in DB but not in config._
+_Score distribution covers the active/ideation subset (~36 projects); dormant and archived projects are excluded from scoring as they are not expected to have Xero/wiki/codebase presence. The ~4-project gap in the distribution reflects rounding across "~" estimates._
+_ACT-QD (Quandamooka, active) and ACT-RS (ReSOLEution, dormant) are confirmed in config as of PR #275 — no DB-only codes remain outstanding._
 
 ---
 
@@ -73,16 +74,17 @@ _2 DB-only codes (ACT-QD, ACT-RS) persist unscored — in DB but not in config._
 
 The net +6 is from new project additions since the Sep 24 pass (PR #275 added codes and restructured statuses simultaneously). The "dormant" category captures projects that exist and have records but are not currently active — a meaningful distinction from "archived".
 
-### DB — ACT-QD and ACT-RS still DB-only (no change)
+### DB — No DB-only codes remaining (correction from prior passes)
 
-Two codes remain in DB but not in config (ACT-QD, ACT-RS). No change.
+**CORRECTION:** ACT-QD (Quandamooka Justice and Healing Strategy, `active`) and ACT-RS (ReSOLEution, `dormant`) are both in `config/project-codes.json` as of PR #275. Prior passes incorrectly classified them as DB-only. No DB-only codes remain outstanding.
 
 ### Wiki (+2 articles)
 
 | Article | PR | Change |
 |---|---|---|
-| Station Precinct | PR #277 | ↑ new article added |
-| Quandamooka | PR #277 | ↑ replaced MMEIC Justice stub |
+| ACT HQ (`act-hq.md`) | PR #275 | ↑ new article added (99→100) |
+| Station Precinct (`station-precinct.md`) | PR #277 | ↑ new article added (100→101) |
+| Quandamooka (`quandamooka-justice-strategy.md`) | PR #277 | updated — MMEIC Justice (ACT-MM) folded into ACT-QD; not a net-new file |
 
 ### Xero — +18 invoices
 
@@ -138,7 +140,7 @@ No active authoring gaps. ACT-PS closed PR #243 (~2026-09-06). Station Precinct 
 ## Derived actions (persistent, priority order)
 
 1. **Tag INV-0341 ALIVE ($66,000, 91d) and INV-0332 Tandanya ($16,500, 106d)** — both now >90d untagged.
-2. **Assess ACT-QD and ACT-RS** — in DB but not in config. Promote or archive.
+2. ~~Assess ACT-QD and ACT-RS~~ — **resolved**: both are in config (ACT-QD active, ACT-RS dormant per PR #275). No action needed.
 3. **Update `_meta.updated` and `_meta.version` in `config/project-codes.json`** — stale since 2026-04-24, misleading all consumers.
 4. **Remove `ACT-APO` and `ACT-AMT`** from config — self-described non-projects, flagged eleven passes.
 

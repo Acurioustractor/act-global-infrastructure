@@ -56,9 +56,9 @@ The receivables ledger has been static for two consecutive 7-day passes. The tax
 | Dormant projects (config) | 0 | **24** | ↑ NEW CATEGORY |
 | Ideation projects (config) | 4 | 2 | ↓ −2 |
 | Archived projects (config) | 33 | 26 | ↓ −7 |
-| DB-only codes (not in config) | 2 (ACT-QD, ACT-RS) | 2 (ACT-QD, ACT-RS) | → |
+| DB-only codes (not in config) | 2 (prior claim) | **0 — both now confirmed in config** (ACT-QD active, ACT-RS dormant per PR #275) | ↑ correction |
 | Ghost codes in config | 4 | 4 | → |
-| Wiki project articles | 99 | **101** | ↑ +2 (PR #277) |
+| Wiki project articles | 99 | **101** | ↑ +2 (PR #275 added ACT-HQ; PR #277 added Station Precinct) |
 | Xero total invoices | 2,448 | **2,466** | ↑ +18 |
 | ACT-HV invoice count | 131 | 133 | ↑ +2 |
 | Null project_code invoices | 4 | 4 | → |
