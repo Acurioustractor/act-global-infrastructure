@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Fill the Goods Finance master's "v2 · Actuals" tab from Butterfly's Xero (Goods on Country),
- * month by month for FY27. READ-ONLY against Xero; writes only to the v2 · Actuals tab.
+ * Fill the Goods Finance master's "Actuals" tab from Butterfly's Xero (Goods on Country),
+ * month by month for FY27. READ-ONLY against Xero; writes only to the Actuals tab.
  *
  *   node scripts/goods-actuals-to-sheet.mjs            # dry run: prints the months and the mapping
  *   node scripts/goods-actuals-to-sheet.mjs --apply    # writes the tab
@@ -29,7 +29,7 @@ const SOURCES = [
     filter: '&trackingCategoryID=1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe&trackingOptionID=63aee6ea-0005-48b8-8019-5fe9666ead29' },
 ];
 const SHEET = '1Wx0eYSSOqrtLeCWW5AhuBt5XdCVTA1EcfQqglizptL8';
-const TAB = 'v2 · Actuals';
+const TAB = 'Actuals';
 const FY_START = new Date(Date.UTC(2026, 6, 1)); // 1 Jul 2026
 
 // Actuals line -> row on the tab (after this script inserts "Other income" at row 11).
@@ -153,9 +153,9 @@ console.log(`FY27, ${months.length} months read. Accounts with activity:`);
 for (const [k, a] of accounts) if (a.byMonth.some((v) => v !== 0))
   console.log(`  ${a.entity.slice(0, 12).padEnd(12)} ${a.name.slice(0, 34).padEnd(34)} -> ${mapping.get(k).padEnd(20)} ${a.byMonth.slice(0, months.length).map((v) => v.toFixed(0)).join(' | ')}`);
 for (const [e, t] of Object.entries(byEntity)) console.log(`  TOTAL ${e}: income ${t.income.reduce((x, y) => x + y, 0).toFixed(2)}, costs ${t.cost.reduce((x, y) => x + y, 0).toFixed(2)}`);
-if (!APPLY) { console.log('\nDry run. --apply writes v2 · Actuals.'); process.exit(0); }
+if (!APPLY) { console.log('\nDry run. --apply writes Actuals.'); process.exit(0); }
 
-// 5. Write (v2 · Actuals only).
+// 5. Write (Actuals only).
 const tabId = tab0.properties.sheetId;
 const a11 = (await sheets.spreadsheets.values.get({ spreadsheetId: SHEET, range: `'${TAB}'!A11` })).data.values?.[0]?.[0];
 if (a11 !== 'Other income') {
