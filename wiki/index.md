@@ -207,6 +207,10 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 
 ## Synthesis
 
+- [[alignment-loop-drift-2026-09-24-to-2026-10-01|Alignment Loop drift — 2026-09-24 to 2026-10-01]] — eleventh pass. ACCREC flat at $285K — zero movement. Config 84 (+6, dormant introduced PR #275). Wiki 101 (+2). Tax return 30d away — final window. One-company alignment plan (PR #258) surfaced — structure decided, execution stalled 93d post-cutover.
+- [[entity-migration-truth-state-2026-10-01|Entity migration truth-state — 2026-10-01]] — Q3 eleventh pass. 93d post-cutover; tax return 30d away; BAS 65d overdue; D&O 130d past deadline.
+- [[project-truth-state-2026-10-01|Project truth-state — 2026-10-01]] — Q2 eleventh pass. Config 84 codes (+6, dormant introduced); wiki 101 articles (+2); ACT-QD/RS confirmed in config.
+- [[funder-alignment-2026-10-01|Funder alignment — 2026-10-01]] — Q1 eleventh pass. ACCREC flat $285K; Rotary 539d; tax return 30d away.
 - [[alignment-loop-drift-2026-09-10-to-2026-09-24|Alignment Loop drift — 2026-09-10 to 2026-09-24]] — tenth pass. Joy House $931 cleared; ACCREC $285K; Xero +54 burst; tax return 37 days away; BAS 58d overdue; D&O 123d past deadline. Config correction: 78 codes, ACT-DLB/PB confirmed in config.
 - [[entity-migration-truth-state-2026-09-24|Entity migration truth-state — 2026-09-24]] — Q3 tenth pass. 86 days post-cutover; tax return 37d away; three prerequisites unresolved.
 - [[project-truth-state-2026-09-24|Project truth-state — 2026-09-24]] — Q2 tenth pass. Config corrected to 78 codes; Xero +54 burst; 4 null-code ACCREC invoices.
