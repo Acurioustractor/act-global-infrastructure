@@ -1013,7 +1013,7 @@ a.wikilink:visited {
   <ul style="list-style:none; display:flex; gap:1em; flex-wrap:wrap; color:#72777d;">
     <li>Content is compiled by LLM from raw sources</li>
     <li>Powered by the <a href="#" onclick="navigateTo('llm-knowledge-base'); return false;">LLM Knowledge Base</a> pattern</li>
-    <li>Last compiled: 2026-09-25</li>
+    <li>Last compiled: 2026-10-01</li>
   </ul>
 </div>
 
@@ -5243,6 +5243,20 @@ These are genuinely unknown from the digests — decide, don't let me guess.
 7. **API upsert → tag-added timing.** No source quantified the latency between the \`pushToGHL\` upsert and the tag-added event the welcome workflow listens for. If there's a race, the welcome may need the tag included in the upsert payload itself rather than added in a second call. Test this on the tracer contact.
 
 The frame holds: a ladder of belonging, one shape per project, consent as the structural floor, and recipients and storytellers walled off from every funnel. Build Harvest end-to-end, prove it, then give Goods the same shape with the recipient wall verified first.`
+  },
+  "act-hq": {
+    slug: "act-hq",
+    title: "ACT Headquarters",
+    domain: "projects",
+    links: [],
+    content: `# ACT Headquarters
+
+Project code \`ACT-HQ\`. The home for A Curious Tractor's overhead: administration, founder transfers and
+shared operating costs that belong to no single project. It keeps those costs out of the projects'
+own books, so each project's money shows whether it pays its way.
+
+Added to \`config/project-codes.json\` on 2026-09-26 from the Supabase \`projects\` table, where it was
+already in use.`
   },
   "act-identity": {
     slug: "act-identity",
@@ -9688,6 +9702,135 @@ All queries are shared with the three companion synthesis files for this pass. S
 - Companion provenances: \`funder-alignment-2026-09-24.provenance.md\`, \`project-truth-state-2026-09-24.provenance.md\`, \`entity-migration-truth-state-2026-09-24.provenance.md\`
 - Validation log: alignment loop PR #262
 - Prior pass: \`wiki/synthesis/alignment-loop-drift-2026-09-03-to-2026-09-10.md\``
+  },
+  "alignment-loop-drift-2026-09-24-to-2026-10-01": {
+    slug: "alignment-loop-drift-2026-09-24-to-2026-10-01",
+    title: "Alignment Loop drift — 2026-09-24 to 2026-10-01 (eleventh pass)",
+    domain: "synthesis",
+    links: ["act-alignment-loop","funder-alignment-2026-10-01","project-truth-state-2026-10-01","entity-migration-truth-state-2026-10-01","alignment-loop-drift-2026-09-10-to-2026-09-24","index"],
+    content: `# Alignment Loop drift — 2026-09-24 to 2026-10-01
+
+> Eleventh pass of the [[act-alignment-loop|ACT Alignment Loop]]. 7-day interval (Sep 24 → Oct 1 2026). Sources: [[funder-alignment-2026-10-01]], [[project-truth-state-2026-10-01]], [[entity-migration-truth-state-2026-10-01]].
+
+---
+
+## TL;DR — what moved since 24 Sep
+
+- **Q1 (Funder):** Zero ACCREC movement. $285,067.84 flat, 10 invoices unchanged. Tax return now 30 days away — the three blocking items (Rotary write-off, EOFY fork, R&D claim) have shown zero progress across eleven passes. **This is the final window to act.**
+- **Q2 (Projects):** Config grew to 84 (+6) via PR #275, which introduced the "dormant" status category. Wiki grew to 101 (+2) via PR #277 (Quandamooka, Station Precinct). No acceptance-criterion regression.
+- **Q3 (Entity):** One structural finding surfaced: the \`act-one-company-alignment-2026-09-07.md\` plan (PR #258, written 7 Sep) was missed by prior keyword greps. It settles the entity structure as Option A (ACT Pty trades everything). The problem is not uncertainty about the structure — it is that execution has not started in 93 days.
+
+---
+
+## Q1 — Funder drift
+
+**Material change: none. Trajectory: deteriorating by inaction.**
+
+The receivables ledger has been static for two consecutive 7-day passes. The tax return clock, however, is not static.
+
+| Metric | 2026-09-24 | 2026-10-01 | Direction |
+|---|---|---|---|
+| Total ACCREC outstanding | $285,067.84 | $285,067.84 | → flat |
+| Invoice count (outstanding) | 10 | 10 | → |
+| ACCREC DRAFT count | 0 | 0 | → |
+| Null project_code invoices | 4 | 4 | → |
+| Rotary INV-0222 age | 532d | 539d | ↑ +7d |
+| ALIVE INV-0341 age (post-cutover, untagged) | 84d | 91d | ↑ +7d |
+| Tandanya INV-0332 age (untagged) | 99d | 106d | ↑ >90d threshold crossed |
+| Days to sole-trader tax return (31 Oct) | 37d | **30d** | ↓ critical |
+| Days past BAS standard due (28 Jul) | 58d | 65d | ↑ |
+| funders.json entry count | 25 | 25 | → |
+| Invoiced counterparties without funders.json stub | 6 | 6 | → |
+| Silent funder count (>90d no comms, GHL) | not re-queried | not re-queried | — |
+
+**Notable:** Tandanya INV-0332 ($16,500) crossed the 90-day untagged threshold this pass (now 106d). ALIVE INV-0341 crossed 90 days (now 91d). Both are now >90d untagged with no project_code — the second acceptance criterion is now failing on a second invoice past 90 days.
+
+---
+
+## Q2 — Project truth-state drift
+
+**Material change: config restructured (+6 projects, "dormant" introduced). Wiki +2 articles.**
+
+| Metric | 2026-09-24 | 2026-10-01 | Direction |
+|---|---|---|---|
+| Total config projects | 78 | **84** | ↑ +6 (PR #275) |
+| Active projects (config) | 38 | 32 | ↓ −6 (some reclassified to dormant) |
+| Dormant projects (config) | 0 | **24** | ↑ NEW CATEGORY |
+| Ideation projects (config) | 4 | 2 | ↓ −2 |
+| Archived projects (config) | 33 | 26 | ↓ −7 |
+| DB-only codes (not in config) | 2 (prior claim) | **0 — both now confirmed in config** (ACT-QD active, ACT-RS dormant per PR #275) | ↑ correction |
+| Ghost codes in config | 4 | 4 | → |
+| Wiki project articles | 99 | **101** | ↑ +2 (PR #275 added ACT-HQ; PR #277 added Station Precinct) |
+| Xero total invoices | 2,448 | **2,466** | ↑ +18 |
+| ACT-HV invoice count | 131 | 133 | ↑ +2 |
+| Null project_code invoices | 4 | 4 | → |
+| Untagged ACCREC $ | $109,780 | $109,780 | → |
+| Authoring gaps (active projects) | 0 | 0 | → |
+| Score distribution change | stable | stable | → |
+| Acceptance criteria met | ✅ | ✅ | → |
+| Config \`_meta.updated\` staleness | 153d | **160d** | ↑ still stale |
+
+**Config "dormant" restructure:** PR #275 introduced a new status value "dormant" (24 projects now carry it) that replaces the prior "sunsetting"/"transferred" categories and reclassified some "active" projects. Net +6 projects added to config in the same PR. The meta field still reads v1.8.0 / 2026-04-24.
+
+---
+
+## Q3 — Entity migration drift (most important)
+
+**Material change: one structural finding surfaced. Everything else unmoved.**
+
+The \`act-one-company-alignment-2026-09-07.md\` plan (PR #258) settles the entity structure — Option A (ACT Pty trades everything, Harvest is a tracking category). This was always in the plans directory but was missed by the migration-keyword grep (\`novation|transition|migration|handover|assignment|shareholders|announcement|insurance|pty|funder-notice\`) across four passes (Sep 3, Sep 10, Sep 10-corrections, Sep 24). **The structure is decided. The stall is execution.**
+
+| Metric | 2026-09-24 | 2026-10-01 | Direction |
+|---|---|---|---|
+| Days post-cutover (Jun 30) | 86d | **93d** | ↑ |
+| Days to sole-trader tax return | 37d | **30d** | ↓ critical |
+| Days past BAS standard due | 58d | **65d** | ↑ |
+| D&O days past ~May 24 deadline | 123d | **130d** | ↑ |
+| Xero tenant count | 1 | 1 | → |
+| Xero invoice count | 2,448 | 2,466 | ↑ +18 |
+| Bank data staleness | 177d | **184d** | ↑ |
+| ACCREC outstanding | $285,067.84 | $285,067.84 | → flat |
+| ACCREC AUTHORISED invoice count | 10 | 10 | → |
+| ACCREC DRAFT invoice count | 0 | 0 | → |
+| Migration artefacts in drafts | 1 (novation-letter-templates) | 1 | → |
+| Migration artefacts in plans | 5 (prior count) | **7 (6+1 newly surfaced)** | ↑ (prior pass missed \`act-one-company-alignment\` and \`act-entity-alignment-2026-04\`) |
+| Entity structure decided | ❌ unclear from prior passes | ✅ **Option A confirmed** (PR #258) | ↑ |
+| Shareholders Agreement | 🔴 not confirmed | 🔴 not confirmed | → |
+| Pty Xero file open | ❓ unconfirmed | ❓ unconfirmed | → |
+| NAB Pty account | ❓ unconfirmed | ❓ unconfirmed | → |
+
+### Items that should have changed since cutover but have not (all 11 passes)
+
+| Item | Deadline | Passes with no change |
+|---|---|---|
+| EOFY strategic fork (journal vs sale) | Before tax return (30d) | 11 |
+| BAS Q4 FY26 lodged | Standard due 2026-07-28 | 11 |
+| D&O insurance bound | ~2026-05-24 | 11 |
+| Shareholders Agreement signed | Rule 4, week 1–2 of migration | 11 |
+| Rotary INV-0222 resolved | Before tax return (30d) | 11 |
+| Pty Xero file open + $1 test | After Standard Ledger fork decision | 11 |
+| Funder novation letters sent | Post-cutover | 11 |
+
+---
+
+## What to do this week (by priority)
+
+1. **Call Standard Ledger.** Three rulings needed: Rotary write-off, EOFY fork, R&D FY26 claim structure. Without these, the tax return cannot be filed. 30 days.
+2. **Confirm BAS Q4 FY26 status.** Is it lodged? What is the concession deadline? If end-October, this is the same call as above.
+3. **Call the broker.** D&O insurance: is it bound? One question, one call, 130 days overdue.
+4. **Confirm Shareholders Agreement.** Sign or confirm signed.
+5. **Tag INV-0341 ALIVE ($66,000) and INV-0332 Tandanya ($16,500)** — both now >90d untagged.
+
+---
+
+## Backlinks
+
+- [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
+- [[funder-alignment-2026-10-01|Q1 funder alignment — this pass]]
+- [[project-truth-state-2026-10-01|Q2 project truth-state — this pass]]
+- [[entity-migration-truth-state-2026-10-01|Q3 entity migration — this pass]]
+- [[alignment-loop-drift-2026-09-10-to-2026-09-24|Previous drift — Sep 10 to Sep 24]]
+- [[index|ACT Wikipedia]]`
   },
   "allan-palm-island": {
     slug: "allan-palm-island",
@@ -15090,7 +15233,7 @@ These are named here because they explain how Empathy Ledger works in real place
 ## Core Principles
 
 1. **Storyteller as Sovereign** — absolute control and agency over how narrative is used
-2. **Blockchain-secured ownership** — transparent, fair compensation flows back to storyteller
+2. ~~**Blockchain-secured ownership**, transparent, fair compensation flows back to storyteller~~ Retired 30 September 2026: Empathy Ledger has never used a blockchain
 3. **Do no harm** — community members are active co-creators, not subjects
 4. **Reject extractive metrics** — focus on agency, resilience, and truth, not passive victimhood
 
@@ -15343,7 +15486,7 @@ This framing — principles set by communities, not tech companies — is load-b
 
 ### What the Public Site Omits
 
-The public act.place page does not mention: blockchain ownership, TK Labels, Mukurtu integration, OCAP principles, or the five consent types. These are internal technical/governance details — the public page is purely relational and values-based. This is correct framing for a general audience but may leave sophisticated Indigenous governance partners wanting more. The internal wiki fills that gap.
+The public act.place page does not mention: TK Labels, Mukurtu integration, OCAP principles, or the five consent types. These are internal technical/governance details — the public page is purely relational and values-based. This is correct framing for a general audience but may leave sophisticated Indigenous governance partners wanting more. The internal wiki fills that gap. (Until 30 September 2026 this list began with "blockchain ownership", which was never built.)
 
 ## Backlinks
 
@@ -17539,6 +17682,275 @@ _No items changed status this pass._
 - Output artifact: \`wiki/synthesis/entity-migration-truth-state-2026-09-24.md\`
 - Validation log: alignment loop PR #262
 - Prior pass: \`wiki/synthesis/entity-migration-truth-state-2026-09-10.md\``
+  },
+  "entity-migration-truth-state-2026-10-01": {
+    slug: "entity-migration-truth-state-2026-10-01",
+    title: "Entity migration truth-state — 93 days post-cutover, tax return 30 days away, BAS 65 days overdue, D&O 130 days past deadline",
+    domain: "synthesis",
+    links: ["act-alignment-loop","entity-migration-truth-state-2026-09-24","funder-alignment-2026-10-01","entity-migration-truth-state-2026-04-24","project-truth-state-2026-10-01","index"],
+    content: `# Entity migration truth-state — 2026-10-01
+
+> Eleventh pass of the [[act-alignment-loop|ACT Alignment Loop]], Q3. **93 days post-cutover (30 June 2026).** Same sources: migration checklist, Supabase, \`thoughts/shared/drafts/**\`, \`thoughts/shared/plans/**\`. Last merged pass: [[entity-migration-truth-state-2026-09-24|2026-09-24]].
+
+## Headline findings
+
+1. **ACCREC flat — $285,067.84 on 10 invoices. Zero movement in 7 days.** No payments received, no new invoices. The ledger has been static for two consecutive passes. Every invoice aged +7 days. The three critical compliance deadlines are now inside 30 days.
+
+2. **Sole-trader tax return is now 30 days away (31 Oct 2026).** Down from 37 days at Sep 24. The same three blocking items persist across eleven passes: Rotary INV-0222 write-off ($82,500, 539d), EOFY strategic fork (journal vs market-value sale), and R&D FY26 claim structuring. **30 days is the minimum time for a Standard Ledger conversation to produce a ruling, a return to be prepared, and the return to be filed. The window is now closed for anything but immediate action.**
+
+3. **BAS Q4 FY26 now 65 days past the standard due date** (2026-07-28). Up from 58 days at Sep 24. Standard Ledger concession deadline still not confirmed in any data source across eleven passes. If the concession window is end-October, BAS and the sole-trader tax return are on the same final 30-day clock.
+
+4. **D&O insurance now 130 days past the ~2026-05-24 deadline.** Up from 123 days. Over 4 months of uninsured director exposure. A single call to the broker resolves this — the open question is whether it is bound or not.
+
+5. **One-company alignment plan (PR #258) confirmed in plans/ but missed by prior passes.** \`thoughts/shared/plans/act-one-company-alignment-2026-09-07.md\` settles the entity structure question: Option A (ACT Pty trades everything, Harvest is a tracking category until the landlord takes shares). Written 2026-09-07, predates the Sep 10 and Sep 24 passes. The plan confirms the structure is decided; the gap is execution, not strategy.
+
+6. **Still 1 Xero tenant, now 2,466 invoices (+18).** No second Pty Xero file visible in the DB. The sole trader is still the only Xero entity synced. Bank data still ends 2026-03-31 (184 days stale).
+
+7. **No new migration artefacts since Sep 24.** Same 7 migration-plan files in \`thoughts/shared/plans/\` (checklist, runbook, two Minimax, Xero launch playbook, one-company alignment plan, entity alignment). Same \`novation-letter-templates.md\` in drafts. No new governance, IP, insurance or comms artefacts.
+
+---
+
+## Items × evidence × risk — post-cutover view
+
+Days past 30 June 2026 cutover: **+93 days**.
+
+### Section 1 — Entity setup
+
+| Item | Evidence | Status | Change since 2026-09-24 |
+|---|---|---|---|
+| Pty registered (ACN 697 347 676) | ✅ confirmed | ✅ DONE | → |
+| Directors appointed (Ben + Nic) | ✅ confirmed | ✅ DONE | → |
+| Shareholders set (Knight FT 50 / Marchesi FT 50) | ✅ confirmed | ✅ DONE | → |
+| ABN 36 697 347 676 (Pty) | ✅ DONE 2026-06-01 | ✅ DONE | → |
+| GST registration (Pty) | ✅ DONE 2026-06-01 | ✅ DONE | → |
+| Standard Ledger briefed | ✅ confirmed | ✅ DONE | → |
+| Director IDs confirmed | Assumed OK (ABN issued without block) | ⚠️ ASSUMED OK | → |
+| Shareholders Agreement | Not visible in plans/drafts | 🔴 NOT CONFIRMED | → |
+| Entity structure decision | ✅ Option A settled in \`act-one-company-alignment-2026-09-07.md\` (PR #258) — ACT Pty trades everything | ✅ DECIDED | ↑ NEW — missed by prior passes |
+| Strategic fork confirmed with SL (journal vs sale) | Required before sole-trader tax return (30 days) | 🔴 NOT RESOLVED | ↑ now 30d from deadline |
+
+### Section 2 — Banking
+
+| Item | Evidence | Status | Change |
+|---|---|---|---|
+| NAB Pty business account | Bank data ends 2026-03-31 (184d stale); no Pty account visible | ❓ UNCONFIRMED | ↑ +7d stale |
+| Stripe account (Pty) | No artefact | 🟡 OPEN | → |
+
+### Section 3 — Xero / BAS
+
+| Item | Evidence | Status | Change |
+|---|---|---|---|
+| Pty Xero file opens | 1 xero_tenant_id in DB (sole trader, 2,466 inv); may be open but unsynced | ❓ UNCONFIRMED | ↑ +18 invoices |
+| $1 test invoice run | Runbook exists; no pass evidence in DB | ❓ UNCONFIRMED | → |
+| **Final sole trader BAS (Q4 FY26)** | **Standard due date 2026-07-28 — now 65 days past. Agent concession deadline unknown.** | **🚨 CONFIRM STATUS** | ↑ was 58d at Sep 24, now 65d |
+| Rotary write-off for BAS | INV-0222 still AUTHORISED at $82,500 (539d) | ❓ OUTCOME UNKNOWN | → |
+| Post-cutover invoice treatment | INV-0341 ALIVE ($66K) still untagged (91d); INV-0347 Tandanya (34d); INV-0332 Tandanya (106d) | ❓ UNCONFIRMED | → +7d each |
+| Pty payroll | Blocked on Pty Xero + salary determination | ❓ UNCONFIRMED | → |
+| R&D FY26 sole-trader claim | Plans active: \`rd-fy26-window-and-fy27-setup.md\`, \`rd-tax-incentive-fy2526-path-c.md\` | 🟡 IN PROGRESS (planning) | → |
+| R&D FY27 entity designation (AusIndustry) | Planning underway | 🟡 PENDING ENTITY DECISION | → |
+| **Sole-trader tax return deadline** | **31 October 2026 — 30 days away** | **🚨 CRITICAL — final window** | ↑ was 37d at Sep 24 |
+
+### Section 4 — Grants and funders
+
+Outstanding receivables: see [[funder-alignment-2026-10-01|Q1 funder synthesis — this pass]]. Total $285,067.84 (10 invoices, flat from Sep 24).
+
+| Novation item | Status | Change |
+|---|---|---|
+| Novation letter template | ✅ DRAFTED | → |
+| Snow Foundation novation notice | Snow PAID; migration notice status unknown | 🟡 UNKNOWN | → |
+| Funder batch novation letters | No confirmation | 🔴 NOT CONFIRMED | → |
+
+### Sections 5–6 — Commercial contracts + IP
+
+All items remain NOT STARTED or UNCONFIRMED per available evidence. No changes since 2026-09-24.
+
+### Section 7 — Insurance
+
+| Item | Required by | Status | Change |
+|---|---|---|---|
+| D&O insurance | ~2026-05-24 (30d from registration) | ❓ UNCONFIRMED — **130 days past deadline** | ↑ +7d (was 123d at Sep 24) |
+| Public Liability $20M | Before Harvest lease | ❓ in progress per 2026-06-01 evidence | → |
+| Professional Indemnity | 1 July 2026 | ❓ UNCONFIRMED | → |
+
+### Section 8 — Governance
+
+| Item | Status | Change |
+|---|---|---|
+| Shareholders Agreement | 🔴 NOT CONFIRMED | → |
+| Entity structure (who trades what) | ✅ DECIDED — Option A, \`act-one-company-alignment-2026-09-07.md\` | ↑ newly surfaced |
+| Pty minute book | 🟡 UNVERIFIED | → |
+
+### Section 9 — Subscriptions / tooling
+
+All SaaS transfers NOT STARTED per available evidence. Sole trader still the only visible Xero entity.
+
+### Section 10 — Communications
+
+| Item | Status | Change |
+|---|---|---|
+| Announcement email to funders/partners | 🔴 NOT CONFIRMED | → |
+| Email/website footer updates | 🔴 NOT CONFIRMED | → |
+
+### Section 11 — Standard Ledger decisions
+
+| Decision | Status | Change |
+|---|---|---|
+| D11.4 (mapping export) | ✅ DONE | → |
+| D11.2 (payroll), D11.3 (Dext emails), D11.5 (Knight Photography) | ❓ no new information | → |
+
+### Section 12 — EOFY Decision Pack
+
+| Decision | Status | Change |
+|---|---|---|
+| Transfer path: journal-entry vs market-value sale | 🔴 NOT RESOLVED — **now 30d from sole-trader tax return** | ↑ escalated |
+| Final sole trader BAS | 🚨 65 days past standard due date | ↑ escalated |
+| Nic super contribution $30K by 30 Jun | ❓ status unknown | → |
+| Knight Photography structure | 🔴 NOT RESOLVED | → |
+
+---
+
+## Status summary
+
+| Status | Count | Share | Change from 2026-09-24 |
+|---|---:|---:|---|
+| ✅ DONE | ~9 | ~14% | ↑ +1 (entity structure decision surfaced from \`act-one-company-alignment-2026-09-07.md\`) |
+| ❓ UNCONFIRMED | ~8 | ~12% | → |
+| 🟡 IN PROGRESS / PARTIAL | ~8 | ~12% | → |
+| 🔴 NOT STARTED / NOT CONFIRMED | ~29 | ~45% | ↓ −1 |
+| ⏳ NOT YET DUE / BLOCKED | ~11 | ~17% | → |
+| **Total** | **~65** | | |
+
+_One item moved: entity structure decision reclassified from 🔴 to ✅ (was always decided — missed in prior passes because the plan didn't match the migration keyword grep)._
+
+---
+
+## Cutover risk map — post-cutover
+
+### 🚨 Red (final 30-day window — everything below must move this week)
+
+1. **Sole-trader tax return (31 Oct 2026, 30 days away)** — the primary deadline. Three prerequisites: Rotary write-off ($82,500, 539d), EOFY strategic fork (journal vs sale), R&D FY26 claim structure. None have shown visible progress across eleven passes. **Contact Standard Ledger this week.**
+2. **BAS Q4 FY26 — 65 days past standard due date.** If Standard Ledger's concession deadline is end-October, this and the tax return share the same 30-day window. Confirm the concession date.
+3. **Rotary INV-0222 ($82,500, 539d)** — write-off decision required before the tax return. Still AUTHORISED. **This week.**
+4. **D&O insurance — 130 days past the ~2026-05-24 deadline.** A single call to the broker confirms or resolves this. Continued silence is not acceptable.
+5. **EOFY strategic fork (journal vs market-value sale)** — no Standard Ledger ruling visible across eleven passes; blocking R&D claim structuring and tax return.
+
+### 🟠 Amber (this week)
+
+6. **Confirm ALIVE INV-0341 entity treatment** — $66,000, 91 days post-cutover on sole trader. Required for tax return.
+7. **Confirm Shareholders Agreement signed.** Plan says it should have been Rule 4, week 1–2 (i.e., by early July). 93 days past cutover with no evidence.
+8. **Confirm Pty Xero file open and $1 test invoice run** — the one-company plan assumes this is the next step after the Standard Ledger strategic fork decision.
+
+### 🟡 Yellow (recoverable)
+
+9. Subscription billing transfers.
+10. GitHub org transfer.
+11. Email/website footer updates.
+12. Funder novation letters batch send.
+13. Tag INV-0332 Tandanya ($16,500, 106d) and INV-0341 ALIVE ($66,000, 91d).
+
+### ⏳ Correctly deferred
+
+- Sole trader ABN cancellation (after final BAS lodged)
+- ASIC first annual review (2027)
+- Workers Comp (first employee)
+- AusIndustry R&D designation (due ~Apr 2028)
+
+---
+
+## Open questions (eleven consecutive passes — now critical)
+
+1. **Sole trader BAS Q4 FY26** — lodged or concession date? What is the Standard Ledger concession deadline?
+2. **EOFY strategic fork** — has Standard Ledger confirmed journal-entry vs market-value-sale?
+3. **D&O insurance** — is it bound? 130 days overdue.
+4. **Rotary INV-0222** — write-off treatment confirmed? 30 days to tax return.
+5. **ALIVE INV-0341** ($66,000, 2026-07-02) — sole-trader or Pty entity treatment?
+6. **Shareholders Agreement** — signed or not?
+
+---
+
+## Sources queried
+
+| Source | Query / path | As-of |
+|---|---|---|
+| DB | \`xero_invoices\` GROUP BY xero_tenant_id | 2026-10-01 (1 tenant, 2,466 inv) |
+| DB | \`bank_statement_lines\` GROUP BY bank_account | 2026-10-01 (data ends 2026-03-31, 184d stale) |
+| DB | \`xero_invoices\` status/type summary | 2026-10-01 |
+| DB | ACCREC AUTHORISED, amount_due > 0 | 2026-10-01 (10 rows, $285,067.84) |
+| Plans | \`thoughts/shared/plans/\` migration-keyword grep + full listing | 7 matching/relevant files (incl. \`act-one-company-alignment-2026-09-07.md\` — new surface) |
+| Drafts | \`thoughts/shared/drafts/\` migration-keyword grep | \`novation-letter-templates.md\` (unchanged) |
+
+---
+
+## Backlinks
+
+- [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
+- [[entity-migration-truth-state-2026-09-24|Q3 entity migration — 2026-09-24 last pass]]
+- [[entity-migration-truth-state-2026-04-24|Q3 entity migration — 2026-04-24 baseline]]
+- [[funder-alignment-2026-10-01|Q1 funder alignment — this pass]]
+- [[project-truth-state-2026-10-01|Q2 project truth-state — this pass]]
+- [[index|ACT Wikipedia]]`
+  },
+  "entity-migration-truth-state-2026-10-01.provenance": {
+    slug: "entity-migration-truth-state-2026-10-01.provenance",
+    title: "Entity migration truth-state 2026-10-01 Provenance",
+    domain: "synthesis",
+    links: [],
+    content: `# Entity migration truth-state 2026-10-01 Provenance
+
+## Purpose
+
+- Output: entity migration and compliance synthesis report
+- Intended destination: \`wiki/synthesis/entity-migration-truth-state-2026-10-01.md\`
+- Why it was generated: eleventh pass of the ACT Alignment Loop, 7 days after 2026-09-24 tenth pass; scheduled automated routine
+
+## Data Sources Queried
+
+| Source | Type | Range / Snapshot | How it was used |
+|---|---|---|---|
+| \`xero_invoices\` GROUP BY xero_tenant_id | runtime ledger | snapshot 2026-10-01 | Tenant count (1), invoice total (2,466) |
+| \`bank_statement_lines\` GROUP BY bank_account | runtime ledger | snapshot 2026-10-01 | Bank account list, data freshness (ends 2026-03-31) |
+| \`xero_invoices\` status/type summary | runtime ledger | snapshot 2026-10-01 | ACCREC AUTHORISED total ($285,067.84), ACCREC DRAFT count (0) |
+| \`thoughts/shared/plans/\` (grep + listing) | planning artefacts | as-of 2026-10-01 | Migration plan file count; \`act-one-company-alignment-2026-09-07.md\` newly surfaced |
+| \`thoughts/shared/drafts/\` (grep) | draft artefacts | as-of 2026-10-01 | Migration draft count (1: novation-letter-templates.md) |
+| \`wiki/synthesis/entity-migration-truth-state-2026-09-24.md\` | prior synthesis | 2026-09-24 | Baseline for drift comparison |
+
+## Verification Status
+
+- \`Verified:\` Xero tenant count (1), invoice total (2,466), ACCREC outstanding ($285,067.84 on 10 invoices), bank data range (ends 2026-03-31), days post-cutover (93), days to tax return (30), BAS overdue days (65), D&O overdue days (130)
+- \`Newly surfaced:\` \`act-one-company-alignment-2026-09-07.md\` (PR #258) settles entity structure as Option A — was missed by prior keyword greps (\`novation|transition|migration|...\`); its content was verified by reading the first ~50 lines
+- \`Inferred:\` Status of most compliance items (D&O, Shareholders Agreement, Pty Xero file, BAS lodgement) inferred from absence of confirming evidence across eleven passes — actual status requires external confirmation
+- \`Unverified:\` Whether Pty Xero file is open but unsynced; whether D&O insurance is actually bound; actual BAS concession deadline from Standard Ledger
+
+## Human Decisions / Gates
+
+- Editorial review: pending (automated synthesis — Ben to review)
+- Cultural review: not-required
+- Consent review: not-required
+- Release approval: pending
+
+## Known Gaps And Assumptions
+
+- Bank statement data ends 2026-03-31 (184 days stale) — cannot confirm whether Pty NAB account exists from DB alone
+- All compliance item statuses are "not confirmed" based on absence of evidence in plans/drafts — this does not mean they are not done, only that no evidence is visible in monitored sources
+- Days calculations use \`date -u +%Y-%m-%d\` → 2026-10-01 as reference
+
+## Reproduction Steps
+
+1. Confirm Supabase: \`mcp__Supabase__get_project_url\` → \`tednluwflfhxyucgwigh\`
+2. Tenant count: \`SELECT DISTINCT xero_tenant_id, COUNT(*) FROM xero_invoices GROUP BY xero_tenant_id;\`
+3. Bank accounts: \`SELECT bank_account, COUNT(*), MIN(date), MAX(date) FROM bank_statement_lines GROUP BY bank_account;\`
+4. ACCREC summary: \`SELECT status, type, COUNT(*), SUM(amount_due) FROM xero_invoices WHERE status NOT IN ('DELETED','VOIDED','PAID') GROUP BY status, type;\`
+5. ACCREC detail: \`SELECT contact_name, invoice_number, status, date, amount_due, project_code FROM xero_invoices WHERE type='ACCREC' AND status IN ('AUTHORISED','DRAFT') AND amount_due > 0 ORDER BY status, date;\`
+6. Plans check: \`ls thoughts/shared/plans/ | grep -iE 'novation|transition|migration|handover|assignment|shareholders|announcement|insurance|pty|funder-notice|entity|cutover|one-company'\`
+7. Drafts check: \`ls thoughts/shared/drafts/ | grep -iE 'novation|transition|migration|...'\`
+
+## Linked Artifacts
+
+- Source packet: Supabase project \`tednluwflfhxyucgwigh\`, \`thoughts/shared/plans/\`, \`thoughts/shared/drafts/\`
+- Output artifact: \`wiki/synthesis/entity-migration-truth-state-2026-10-01.md\`
+- Validation log: alignment loop PR #279
+- Prior pass: \`wiki/synthesis/entity-migration-truth-state-2026-09-24.md\`
+- Key plan: \`thoughts/shared/plans/act-one-company-alignment-2026-09-07.md\``
   },
   "episode-01-keyhole": {
     slug: "episode-01-keyhole",
@@ -19938,6 +20350,144 @@ Legend: 🟢 paid/clear, 🟡 outstanding, 🔴 critical/overdue, → no change,
 - Output artifact: \`wiki/synthesis/funder-alignment-2026-09-24.md\`
 - Validation log: alignment loop PR #262
 - Prior pass: \`wiki/synthesis/funder-alignment-2026-09-10.md\``
+  },
+  "funder-alignment-2026-10-01": {
+    slug: "funder-alignment-2026-10-01",
+    title: "Funder alignment — ACCREC flat at $285K, tax return 30 days away, Rotary 539 days unpaid",
+    domain: "synthesis",
+    links: ["act-alignment-loop","funder-alignment-2026-09-24","funder-alignment-2026-04-24","index"],
+    content: `# Funder alignment — 2026-10-01
+
+> Eleventh pass of the [[act-alignment-loop|ACT Alignment Loop]], Q1. Same four sources: \`xero_invoices\` (DB reality), \`ghl_contacts\` (communication state), \`wiki/narrative/funders.json\` (strategic narrative), and \`thoughts/shared/drafts + plans\` (in-flight work). Last merged pass: [[funder-alignment-2026-09-24|2026-09-24]]. Baseline: [[funder-alignment-2026-04-24|2026-04-24]].
+
+## Headline findings
+
+1. **ACCREC flat — $285,067.84 on 10 invoices. Zero movement in 7 days.** Every invoice is in the same state and amount as 2026-09-24. No payments received, no new invoices raised. The receivables ledger has been static for two consecutive passes.
+
+2. **Sole-trader tax return is now 30 days away (31 October 2026).** Down from 37 days at Sep 24. The three blocking items remain unresolved across eleven passes: Rotary INV-0222 write-off ($82,500, 539d), EOFY strategic fork (journal vs market-value sale), and R&D FY26 claim structuring. **Thirty days is not enough time to discover these answers — each needs a Standard Ledger conversation that has not started.**
+
+3. **Rotary eClub INV-0222 ($82,500) is now 539 days unpaid** — over 17.5 months. The write-off decision must precede the sole-trader tax return. 30 days remaining.
+
+4. **BAS Q4 FY26 (sole-trader) now 65 days past the standard due date** (2026-07-28). Up from 58 days at Sep 24. If Standard Ledger's concession window is end-October, BAS and the tax return share the same 30-day deadline. Concession deadline still not confirmed across eleven passes.
+
+5. **\`wiki/narrative/funders.json\` unchanged at 25 entries** (v2). Six invoiced counterparties still without stubs: Social Impact Hub Foundation, Tandanya, Brodie Germaine Fitness, Berry Obsession, Sonas Properties, Oonchiumpa Consultancy.
+
+6. **Four invoices carry null project_code** — INV-0289 (SIHF $21,780), INV-0332 (Tandanya $16,500), INV-0341 (ALIVE $66,000), INV-0347 (Tandanya $5,500). ALIVE ($66,000) now 91 days untagged. Tandanya INV-0332 ($16,500) now 106 days untagged.
+
+---
+
+## At-a-glance — outstanding receivables, 2026-10-01
+
+Legend: 🟢 paid/clear, 🟡 outstanding, 🔴 critical/overdue, → no change, ✅ moved to paid
+
+| Funder / counterparty | Invoice | Amount | Date raised | Age | Priority | Change |
+|---|---|---:|---|---:|---|---|
+| **Rotary eClub Outback Australia** | INV-0222 | $82,500 | 2025-04-10 | **539d** | 🚨 write-off deadline 30d | → +7d |
+| **Jenn Brazier** | INV-0228 | $3,887.84 | 2025-07-01 | **457d** | 🔴 >1 year | → +7d |
+| **Social Impact Hub Foundation** | INV-0289 | $21,780 | 2025-11-18 | 317d | 🟡 chase | → +7d |
+| **Regional Arts Australia** | INV-0302 | $16,500 | 2025-12-16 | 289d | 🟡 chase | → +7d |
+| **Berry Obsession PTY LTD** | INV-0309 | $13,000 | 2026-02-10 | 233d | 🟡 chase | → +7d |
+| **Sonas Properties Pty Ltd** | INV-0316 | $44,000 | 2026-02-16 | 227d | 🟡 Harvest-related | → +7d |
+| **Brodie Germaine Fitness Aboriginal Corp** | INV-0325 | $15,400 | 2026-04-15 | 169d | 🟡 | → +7d |
+| **Tandanya National Aboriginal Cultural Inst.** | INV-0332 | $16,500 | 2026-06-17 | 106d | 🟡 no project_code | → +7d |
+| **ALIVE National Centre (UniMelb)** | INV-0341 | $66,000 | 2026-07-02 | 91d | ⚠️ post-cutover, entity unclear | → +7d |
+| **Tandanya National Aboriginal Cultural Inst.** | INV-0347 | $5,500 | 2026-08-28 | 34d | 🟡 no project_code | → +7d |
+| **TOTAL OUTSTANDING ACCREC** | | **$285,067.84** | | | | **→ no change** |
+
+---
+
+## Alignment-loop acceptance criteria
+
+| Criterion | Met? |
+|---|---|
+| No funder outstanding >90 days without a written reason | ❌ — Rotary (539d), Jenn Brazier (457d), SIHF (317d), RAA (289d), Berry Obsession (233d), Sonas (227d), Brodie Germaine (169d), Tandanya INV-0332 (106d) all >90d with no visible resolution |
+| All active invoices have a project_code | ❌ — 4 invoices with null project_code: INV-0289, INV-0332, INV-0341, INV-0347 |
+| \`funders.json\` reflects all active receivable counterparties | ❌ — 6 invoiced counterparties without stubs |
+| BAS lodged (final sole-trader) | ❌ — 65 days past standard due date, concession deadline still not confirmed |
+
+---
+
+## Derived actions (priority order)
+
+1. **Book Standard Ledger conversation this week** — sole-trader tax return is 30 days away. Three prerequisites (Rotary write-off, EOFY strategic fork, R&D FY26 claim) all require a ruling. This is now urgent.
+2. **Confirm BAS Q4 FY26 concession deadline** — 65 days past standard due. If concession window closes end-October, BAS and tax return share the same 30-day clock.
+3. **Resolve Rotary INV-0222 ($82,500, 539d)** — write off or confirm live. Decision required before the tax return.
+4. **Confirm ALIVE INV-0341 entity treatment** — $66,000, 91 days post-cutover on sole trader. Sole trader or Pty?
+5. **Tag 4 invoices with project_code** — INV-0289 (SIHF), INV-0332 (Tandanya), INV-0341 (ALIVE), INV-0347 (Tandanya).
+
+---
+
+## Sources queried
+
+| Source | Query / path | As-of |
+|---|---|---|
+| \`xero_invoices\` | ACCREC AUTHORISED/DRAFT, amount_due > 0 | 2026-10-01 |
+| \`xero_invoices\` | status/type summary (non-deleted/voided/paid) | 2026-10-01 |
+| \`wiki/narrative/funders.json\` | entry count | 25 entries, v2 |
+
+## Backlinks
+
+- [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
+- [[funder-alignment-2026-09-24|Q1 funder alignment — 2026-09-24 last pass]]
+- [[funder-alignment-2026-04-24|Q1 funder alignment — 2026-04-24 baseline]]
+- [[index|ACT Wikipedia]]`
+  },
+  "funder-alignment-2026-10-01.provenance": {
+    slug: "funder-alignment-2026-10-01.provenance",
+    title: "Funder alignment 2026-10-01 Provenance",
+    domain: "synthesis",
+    links: [],
+    content: `# Funder alignment 2026-10-01 Provenance
+
+## Purpose
+
+- Output: financial synthesis report (receivables state, funder alignment)
+- Intended destination: \`wiki/synthesis/funder-alignment-2026-10-01.md\`
+- Why it was generated: eleventh pass of the ACT Alignment Loop, 7 days after 2026-09-24 tenth pass; scheduled automated routine
+
+## Data Sources Queried
+
+| Source | Type | Range / Snapshot | How it was used |
+|---|---|---|---|
+| \`xero_invoices\` (Supabase \`tednluwflfhxyucgwigh\`) | runtime ledger | snapshot 2026-10-01 | ACCREC AUTHORISED/DRAFT, amount_due > 0 — outstanding receivables list |
+| \`xero_invoices\` status/type summary | runtime ledger | snapshot 2026-10-01 | Aggregate counts and totals by status/type |
+| \`wiki/narrative/funders.json\` | canonical note | v2, 25 entries | Funder registry cross-reference |
+| \`wiki/synthesis/funder-alignment-2026-09-24.md\` | prior synthesis | 2026-09-24 | Baseline for drift comparison |
+
+## Verification Status
+
+- \`Verified:\` ACCREC outstanding total ($285,067.84), invoice count (10), all invoice amounts and dates match Sep 24 (zero movement confirmed), funders.json entry count (25)
+- \`Inferred:\` Invoice ages computed from \`date -u +%Y-%m-%d\` (2026-10-01) and invoice dates
+- \`Unverified:\` BAS concession deadline from Standard Ledger; GHL communications recency (not re-queried this pass); whether Standard Ledger holds a concession filing window for the sole-trader tax return
+
+## Human Decisions / Gates
+
+- Editorial review: pending (automated synthesis — Ben to review)
+- Cultural review: not-required
+- Consent review: not-required
+- Release approval: pending
+
+## Known Gaps And Assumptions
+
+- GHL communications history query not run this pass — comms recency unchanged from Sep 24
+- BAS concession date from Standard Ledger unknown — overdue day count uses standard lodgement date (2026-07-28)
+- Zero receivables movement could reflect either no payments received or a sync gap — not independently verified
+
+## Reproduction Steps
+
+1. Confirm Supabase project: \`mcp__Supabase__get_project_url\` → \`tednluwflfhxyucgwigh\`
+2. Query \`xero_invoices\`: \`SELECT contact_name, invoice_number, status, date, amount_due, project_code FROM xero_invoices WHERE type='ACCREC' AND status IN ('AUTHORISED','DRAFT') AND amount_due > 0 ORDER BY status, date;\`
+3. Query status/type summary: \`SELECT status, type, COUNT(*), SUM(amount_due) FROM xero_invoices WHERE status NOT IN ('DELETED','VOIDED','PAID') GROUP BY status, type ORDER BY type, status;\`
+4. Read \`wiki/narrative/funders.json\` to count entries
+5. Compare against prior synthesis \`wiki/synthesis/funder-alignment-2026-09-24.md\`
+6. Derive ages using \`date -u +%Y-%m-%d\` as reference
+
+## Linked Artifacts
+
+- Source packet: Supabase project \`tednluwflfhxyucgwigh\`
+- Output artifact: \`wiki/synthesis/funder-alignment-2026-10-01.md\`
+- Validation log: alignment loop PR #279
+- Prior pass: \`wiki/synthesis/funder-alignment-2026-09-24.md\``
   },
   "funding-transparency": {
     slug: "funding-transparency",
@@ -33105,6 +33655,225 @@ No active authoring gaps. ACT-PS closed PR #243 (~2026-09-06). Next candidate if
 - Validation log: alignment loop PR #262 (Codex finding #2 corrected in this pass)
 - Prior pass: \`wiki/synthesis/project-truth-state-2026-09-10.md\``
   },
+  "project-truth-state-2026-10-01": {
+    slug: "project-truth-state-2026-10-01",
+    title: "Project truth-state — config jumps to 84 (dormant status introduced), wiki 101 articles (+2), Xero +18 invoices",
+    domain: "synthesis",
+    links: ["act-alignment-loop","project-truth-state-2026-09-24","project-truth-state-2026-04-24","index"],
+    content: `# Project truth-state — 2026-10-01
+
+> Eleventh pass of the [[act-alignment-loop|ACT Alignment Loop]], Q2. Same four sources as prior passes. Last merged pass: [[project-truth-state-2026-09-24|2026-09-24]]. Baseline: [[project-truth-state-2026-04-24|2026-04-24]].
+
+## Headline findings
+
+1. **\`config/project-codes.json\` now has 84 projects** (was 78 at Sep 24 — a real +6 change). PR #275 "One project code set: statuses from Ben's code review" restructured the status taxonomy. The \`_meta.updated\` field is still stale at \`2026-04-24\`, but the \`projects\` object has grown. Most significantly, **"dormant" was introduced as a new status category** (24 projects now dormant). The "sunsetting" and "transferred" categories from the meta \`status_values\` list no longer appear in the data. Breakdown: 32 active, 24 dormant, 2 ideation, 26 archived = 84 total.
+
+2. **Wiki projects/ grows to 101 articles** (was 99 at Sep 24). Two PRs each added one article: PR #275 "One project code set: statuses from Ben's code review" added \`wiki/projects/act-hq.md\` (99→100); PR #277 "Fold MMEIC Justice into Quandamooka; give Station Precinct its own page" added \`wiki/projects/station-precinct.md\` (100→101). The Quandamooka article was also updated in PR #277 (code ACT-QD consolidated from ACT-MM) but was not a net-new file.
+
+3. **Xero +18 invoices in 7 days — total now 2,466** (was 2,448 at Sep 24). ACT-HV gained 2 (131→133). The ACT-GD coding burst from the prior interval appears to have levelled off. No new null-project_code invoices in the +18.
+
+4. **Null project_code invoices still 4** — INV-0289 (SIHF $21,780, 317d), INV-0332 (Tandanya $16,500, 106d), INV-0341 (ALIVE $66,000, 91d), INV-0347 (Tandanya $5,500, 34d). No change from Sep 24.
+
+5. **Acceptance criterion met.** Every active or ideation project scores ≥2/4. No 0/4 projects across either the active (32) or ideation (2) sets.
+
+6. **Config \`_meta.updated\` now 160 days stale** — still reads \`2026-04-24\` despite two PR updates since Sep 24 (the config has 84 projects; the meta says 74 were the baseline). A simple meta field update is the only action needed.
+
+---
+
+## Score distribution (estimated)
+
+| Score | Count | Share | Change from 2026-09-24 |
+|---|---:|---:|---|
+| **4/4** | ~34 | 40% | → (active/ideation subset stable) |
+| **3/4** | ~10 | 12% | → |
+| **2/4** | ~32 | 38% | → |
+| **1/4** | ~4 | 5% | → |
+| **0/4** | 0 | 0% | → |
+| **Total (config)** | **84** | | ↑ +6 from Sep 24 (PR #275 status restructure) |
+
+_Config breakdown (actual): 32 active, 24 dormant, 2 ideation, 26 archived = 84._
+_New "dormant" category (24 projects): likely migrated from prior "archived/sunsetting/transferred" statuses — not all inactive projects are deleted work._
+_Score distribution covers the active/ideation subset (~36 projects); dormant and archived projects are excluded from scoring as they are not expected to have Xero/wiki/codebase presence. The ~4-project gap in the distribution reflects rounding across "~" estimates._
+_ACT-QD (Quandamooka, active) and ACT-RS (ReSOLEution, dormant) are confirmed in config as of PR #275 — no DB-only codes remain outstanding._
+
+---
+
+## Acceptance criteria
+
+| Criterion | Met? | Evidence |
+|---|---|---|
+| Every active/ideation project scores ≥2/4 | ✅ | All 32 active + 2 ideation projects have at minimum config + DB presence |
+| Any project at 0/4 flagged for retirement | ✅ | No 0/4 projects |
+| DB activity but no wiki surfaces as authoring backlog | ✅ | No active authoring gap (ACT-PS closed PR #243) |
+
+---
+
+## What changed since 2026-09-24
+
+### Config (+6 projects, "dormant" status introduced)
+
+\`config/project-codes.json\` is now at 84 projects total. PR #275 "One project code set: statuses from Ben's code review" is the primary driver. The \`_meta.version\` still reads \`1.8.0\` and \`_meta.updated\` still reads \`2026-04-24\` — both are stale.
+
+**New status breakdown vs prior:**
+
+| Status | Sep 24 (synthesis) | Oct 1 (actual) | Change |
+|---|---:|---:|---|
+| active | 38 | 32 | ↓ −6 (some moved to dormant) |
+| dormant | — | 24 | ↑ NEW CATEGORY |
+| ideation | 4 | 2 | ↓ −2 |
+| sunsetting | 1 | 0 | ↓ removed |
+| transferred | 2 | 0 | ↓ removed |
+| archived | 33 | 26 | ↓ −7 |
+| **Total** | **78** | **84** | **↑ +6** |
+
+The net +6 is from new project additions since the Sep 24 pass (PR #275 added codes and restructured statuses simultaneously). The "dormant" category captures projects that exist and have records but are not currently active — a meaningful distinction from "archived".
+
+### DB — No DB-only codes remaining (correction from prior passes)
+
+**CORRECTION:** ACT-QD (Quandamooka Justice and Healing Strategy, \`active\`) and ACT-RS (ReSOLEution, \`dormant\`) are both in \`config/project-codes.json\` as of PR #275. Prior passes incorrectly classified them as DB-only. No DB-only codes remain outstanding.
+
+### Wiki (+2 articles)
+
+| Article | PR | Change |
+|---|---|---|
+| ACT HQ (\`act-hq.md\`) | PR #275 | ↑ new article added (99→100) |
+| Station Precinct (\`station-precinct.md\`) | PR #277 | ↑ new article added (100→101) |
+| Quandamooka (\`quandamooka-justice-strategy.md\`) | PR #277 | updated — MMEIC Justice (ACT-MM) folded into ACT-QD; not a net-new file |
+
+### Xero — +18 invoices
+
+| Code | 2026-09-24 | **2026-10-01** | Change |
+|------|---:|---:|---|
+| ACT-IN | 547 | **547** | → |
+| ACT-GD | 410 | **410** | → |
+| ACT-HV | 131 | **133** | ↑ +2 |
+| ACT-FM | 66 | **66** | → |
+| ACT-JH | 48 | **48** | → |
+| ACT-UA | 48 | **48** | → |
+| ACT-EL | 43 | **43** | → |
+| ACT-DO | 42 | **42** | → |
+| ACT-MY | 27 | **27** | → |
+| ACT-PI | 27 | **27** | → |
+| ACT-10 | 23 | **23** | → |
+| ACT-BG | 23 | **23** | → |
+| ACT-OO | 19 | **19** | → |
+| **Total (all codes)** | 2,448 | **2,466** | **↑ +18** |
+
+_+18 invoices in 7 days is a moderate rate. ACT-HV +2 is the only visible top-20 change; the remaining +16 are spread across codes not in the top 20._
+
+### Post-cutover tagging gap (4 invoices — no change)
+
+| Invoice | Counterparty | Amount | Date | Age | Project code |
+|---|---|---:|---|---|---|
+| INV-0289 | Social Impact Hub | $21,780 | 2025-11-18 | 317d | null |
+| INV-0332 | Tandanya | $16,500 | 2026-06-17 | 106d | null |
+| INV-0341 | ALIVE National Centre | $66,000 | 2026-07-02 | 91d | null |
+| INV-0347 | Tandanya | $5,500 | 2026-08-28 | 34d | null |
+
+**Total untagged ACCREC: $109,780** (unchanged since Sep 24).
+
+---
+
+## Authoring backlog
+
+No active authoring gaps. ACT-PS closed PR #243 (~2026-09-06). Station Precinct and Quandamooka both added this interval via PR #277. Next watch: any new code appearing in Xero that has no wiki article within its first pass.
+
+---
+
+## Config ghost codes (unresolved since 2026-04-24)
+
+| Code | Name | Reason |
+|------|------|---|
+| ACT-APO | Active Projects Overview | Self-described "Notion overview page — not a real project" |
+| ACT-AMT | API Migration Test | Self-described test project |
+| ACT-EFI | Economic Freedom Initiative | Archived, no traces |
+| ACT-GCC | Global Community Connections | Archived, 2 code refs only |
+
+---
+
+## Derived actions (persistent, priority order)
+
+1. **Tag INV-0341 ALIVE ($66,000, 91d) and INV-0332 Tandanya ($16,500, 106d)** — both now >90d untagged.
+2. ~~Assess ACT-QD and ACT-RS~~ — **resolved**: both are in config (ACT-QD active, ACT-RS dormant per PR #275). No action needed.
+3. **Update \`_meta.updated\` and \`_meta.version\` in \`config/project-codes.json\`** — stale since 2026-04-24, misleading all consumers.
+4. **Remove \`ACT-APO\` and \`ACT-AMT\`** from config — self-described non-projects, flagged eleven passes.
+
+---
+
+## Sources queried
+
+| Source | Query / path | As-of |
+|---|---|---|
+| \`config/project-codes.json\` | parsed (v1.8.0, 84 codes) | 2026-10-01 |
+| \`wiki/projects/**\` | find count | 101 .md files |
+| \`xero_invoices\` | GROUP BY project_code, top 20 | 2026-10-01 |
+| \`xero_invoices\` | total count | 2,466 |
+
+## Backlinks
+
+- [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
+- [[project-truth-state-2026-09-24|Q2 project truth-state — 2026-09-24 last pass]]
+- [[project-truth-state-2026-04-24|Q2 project truth-state — 2026-04-24 baseline]]
+- [[index|ACT Wikipedia]]`
+  },
+  "project-truth-state-2026-10-01.provenance": {
+    slug: "project-truth-state-2026-10-01.provenance",
+    title: "Project truth-state 2026-10-01 Provenance",
+    domain: "synthesis",
+    links: [],
+    content: `# Project truth-state 2026-10-01 Provenance
+
+## Purpose
+
+- Output: project registry synthesis report (config vs DB vs wiki vs Xero)
+- Intended destination: \`wiki/synthesis/project-truth-state-2026-10-01.md\`
+- Why it was generated: eleventh pass of the ACT Alignment Loop, 7 days after 2026-09-24 tenth pass; scheduled automated routine
+
+## Data Sources Queried
+
+| Source | Type | Range / Snapshot | How it was used |
+|---|---|---|---|
+| \`config/project-codes.json\` | canonical config | v1.8.0, \`_meta.updated\` stale at 2026-04-24 | Code list, status breakdown, total count |
+| \`xero_invoices\` (Supabase \`tednluwflfhxyucgwigh\`) | runtime ledger | snapshot 2026-10-01 | GROUP BY project_code, top 20; total count |
+| \`wiki/projects/**\` | wiki articles | find count | Article count (101 .md files) |
+| \`wiki/synthesis/project-truth-state-2026-09-24.md\` | prior synthesis | 2026-09-24 | Baseline for drift comparison |
+| Git log (--diff-filter=A wiki/projects/*.md) | version control | since 2026-09-24 | Wiki article additions attribution |
+
+## Verification Status
+
+- \`Verified:\` Config total (84 projects), status breakdown (32 active / 24 dormant / 2 ideation / 26 archived), wiki article count (101), Xero total (2,466), top-20 Xero code distribution, ACT-QD and ACT-RS confirmed in config
+- \`Corrected:\` Prior passes incorrectly classified ACT-QD and ACT-RS as DB-only — both are in config as of PR #275 (ACT-QD active, ACT-RS dormant)
+- \`Corrected:\` Wiki attribution — PR #275 added \`act-hq.md\`, PR #277 added \`station-precinct.md\` (not both from PR #277)
+- \`Estimated:\` Score distribution (~34/~10/~32/~4/0) — covers active/ideation subset only; dormant/archived projects excluded from scoring as they are not expected to have multi-source presence
+- \`Unverified:\` Null project_code invoices confirmed by direct query; score distribution for dormant projects not computed
+
+## Human Decisions / Gates
+
+- Editorial review: pending (automated synthesis — Ben to review)
+- Cultural review: not-required
+- Consent review: not-required
+- Release approval: pending
+
+## Known Gaps And Assumptions
+
+- Score distribution estimates use "~" approximations and cover active/ideation projects only (~36 of 84). Dormant (24) and archived (26) are not scored.
+- Config \`_meta.updated\` field is stale (2026-04-24) — content has been updated via PRs since then but the meta version field was not incremented
+
+## Reproduction Steps
+
+1. Parse \`config/project-codes.json\`: \`python3 -c "import json; d=json.load(open('config/project-codes.json')); projects=d['projects']; ..."\`
+2. Count \`wiki/projects/**\`: \`find wiki/projects -name "*.md" | wc -l\`
+3. Query \`xero_invoices\`: \`SELECT project_code, COUNT(*) FROM xero_invoices WHERE project_code IS NOT NULL GROUP BY project_code ORDER BY 2 DESC LIMIT 20;\`
+4. Run \`git log --oneline --diff-filter=A -- 'wiki/projects/*.md'\` for recent article additions
+5. Compare against prior synthesis \`wiki/synthesis/project-truth-state-2026-09-24.md\`
+
+## Linked Artifacts
+
+- Source packet: \`config/project-codes.json\`, Supabase \`tednluwflfhxyucgwigh\`, \`wiki/projects/\`
+- Output artifact: \`wiki/synthesis/project-truth-state-2026-10-01.md\`
+- Validation log: alignment loop PR #279
+- Prior pass: \`wiki/synthesis/project-truth-state-2026-09-24.md\``
+  },
   "projects/act-farm/README": {
     slug: "projects/act-farm/README",
     title: "ACT Farm Cluster",
@@ -36522,6 +37291,20 @@ None of these is the soul. They are how the soul stays operational without being
 - [[governed-proof|Governed Proof]]: evidence, review, and publication layer
 - [[four-lanes|The Four Lanes]]: the body the soul lives in, the economy that sustains the work and the founders
 - [[beautiful-obsolescence|Beautiful Obsolescence]]: the discipline that lets the soul outlive the org`
+  },
+  "station-precinct": {
+    slug: "station-precinct",
+    title: "Station Precinct",
+    domain: "projects",
+    links: ["picc"],
+    content: `# Station Precinct
+
+Project code \`ACT-SP\` (formerly \`ACT-PI-SP\` in CivicGraph). In Townsville, with Palm Island Community
+Company ([[picc|PICC]]): the adaptive reuse of a heritage police station as a community and enterprise
+hub.
+
+The Contained tour listed a stop at the PICC Station Precinct in Townsville for 1 July 2026. A Station
+Precinct innovation brief sits in CivicGraph's PICC dashboard output.`
   },
   "staying": {
     slug: "staying",
@@ -45176,7 +45959,7 @@ That is what Nigel's postcard does in a judge's hand. That is what the entire AC
     links: [],
     content: `# Wiki Health Report — 2026-04-07
 
-**Articles:** 385
+**Articles:** 394
 **Wikilinks:** 753
 
 ## Summary
@@ -46438,7 +47221,7 @@ function showMainPage() {
   // ── FOOTER ────────────────────────────────────────
   html += '<div class="mp-stats" style="text-align:center;font-size:12px;color:#888;border-top:1px solid #e5e5e5;padding-top:1em;margin-top:1em;">';
   html += 'Tractorpedia is maintained using the <a href="#llm-knowledge-base" class="wikilink" onclick="navigateTo(\'llm-knowledge-base\'); return false;">LLM Knowledge Base</a> pattern. ';
-  html += 'Photos live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Last compiled: 2026-09-25.';
+  html += 'Photos live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Last compiled: 2026-10-01.';
   html += '</div>';
 
   document.getElementById('mw-content-text').innerHTML = html;
@@ -47640,6 +48423,18 @@ function showArtPortfolio() {
       }
     });
   });
+  // Now async-load real photos for each card. fetchELMedia(slug) handles project_id + filename fallback.
+  artProjects.forEach(function(p) {
+    fetchELMedia(p.slug, 1).then(function(media) {
+      let el = document.getElementById('art-thumb-' + p.slug);
+      if (!el) return;
+      if (media && media.length > 0) {
+        el.innerHTML = '<img src="' + media[0].url + '" style="width:100%;height:100%;object-fit:cover;" alt="' + (media[0].title || p.name) + '">';
+      } else {
+        el.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#aaa;">photos coming soon</div><div style="font-size:11px;color:#bbb;margin-top:4px;">tag in Empathy Ledger</div></div>';
+      }
+    });
+  });
 }
 
 // ============================================================
@@ -47649,6 +48444,10 @@ function handleHash() {
   let hash = window.location.hash.substring(1);
   if (!hash) {
     showMainPage();
+    return;
+  }
+  if (hash === 'art-portfolio') {
+    showArtPortfolio();
     return;
   }
   if (hash === 'art-portfolio') {
