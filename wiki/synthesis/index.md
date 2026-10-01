@@ -24,6 +24,14 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
+- [[alignment-loop-drift-2026-09-24-to-2026-10-01|Alignment Loop drift — 2026-09-24 to 2026-10-01]] — 2026-10-01 · 7-day drift. ACCREC flat at $285K — zero movement. Config +6 (84 total, "dormant" introduced PR #275). Wiki +2 articles (PR #277). Tax return 30 days away — final window. One-company alignment plan (PR #258) surfaced — structure decided, execution stalled. Eleventh pass.
+
+- [[entity-migration-truth-state-2026-10-01|Entity migration truth-state — 93 days post-cutover, tax return 30 days away, BAS 65 days overdue, D&O 130 days past deadline]] — 2026-10-01 · Q3 eleventh pass of the ACT Alignment Loop
+
+- [[project-truth-state-2026-10-01|Project truth-state — config 84 codes (+6, dormant introduced), wiki 101 articles (+2), Xero +18]] — 2026-10-01 · Q2 eleventh pass of the ACT Alignment Loop
+
+- [[funder-alignment-2026-10-01|Funder alignment — ACCREC flat at $285K, tax return 30 days away, Rotary 539 days unpaid]] — 2026-10-01 · Q1 eleventh pass of the ACT Alignment Loop
+
 - [[alignment-loop-drift-2026-09-10-to-2026-09-24|Alignment Loop drift — 2026-09-10 to 2026-09-24]] — 2026-09-24 · 14-day drift. Joy House $931 cleared; ACCREC $285,067.84 on 10 invoices. Xero +54 (burst). BAS 58d overdue. D&O 123d past deadline. Tax return 37 days away — three prerequisites unresolved. Tenth pass.
 
 - [[entity-migration-truth-state-2026-09-24|Entity migration truth-state — 86 days post-cutover, tax return 37 days away, BAS 58 days overdue, D&O 123 days past deadline]] — 2026-09-24 · Q3 tenth pass of the ACT Alignment Loop
