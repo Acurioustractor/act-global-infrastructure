@@ -18,6 +18,7 @@ import './lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { mkdirSync, writeFileSync } from 'fs';
 import path from 'path';
+import { receiptMatchesTransaction } from './lib/finance/xero-read-safety.mjs';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_SHARED_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY;
@@ -297,12 +298,12 @@ function receiptSearchText(receipt) {
 function findBestReceipt(tx, receipts) {
   let best = null;
   for (const receipt of receipts) {
-    const linked = receipt.xero_bank_transaction_id === tx.xero_transaction_id || receipt.xero_transaction_id === tx.xero_transaction_id;
+    const linked = receiptMatchesTransaction(receipt, tx);
     const amount = amountScore(tx.total, receipt.amount_detected);
     const vendor = vendorScore(tx.contact_name, receiptSearchText(receipt));
     const date = dateScore(tx.date, String(receipt.received_at || '').slice(0, 10), 45);
 
-    if (receipt.xero_bank_transaction_id === tx.xero_transaction_id || receipt.xero_transaction_id === tx.xero_transaction_id) {
+    if (receiptMatchesTransaction(receipt, tx)) {
       const warning = [];
       const diff = amountDiff(tx.total, receipt.amount_detected);
       if (diff > 2 && amount < 0.85) warning.push(`amount differs by ${fmt(diff)}`);
@@ -370,7 +371,7 @@ async function main() {
 
   const txns = await fetchAll(
     'xero_transactions',
-    'xero_transaction_id, contact_name, total, date, type, bank_account, project_code, has_attachments, is_reconciled, status, line_items, rd_eligible, rd_category',
+    'id, xero_transaction_id, contact_name, total, date, type, bank_account, project_code, has_attachments, is_reconciled, status, line_items, rd_eligible, rd_category',
     (query) => query
       .eq('type', 'SPEND')
       .eq('status', 'AUTHORISED')
