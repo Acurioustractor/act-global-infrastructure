@@ -30,6 +30,7 @@ import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
 import path from 'path';
+import { fetchXeroPages, syncFailed, verifyOrganisation } from './lib/finance/xero-read-safety.mjs';
 
 // ============================================================================
 // CONFIGURATION
@@ -38,6 +39,9 @@ import path from 'path';
 const XERO_CLIENT_ID = process.env.XERO_CLIENT_ID;
 const XERO_CLIENT_SECRET = process.env.XERO_CLIENT_SECRET;
 const XERO_TENANT_ID = process.env.XERO_TENANT_ID;
+// Verified existing Dext/Xero ledger; other tenants require explicit configuration.
+const XERO_EXPECTED_LEGAL_NAME = process.env.XERO_EXPECTED_LEGAL_NAME
+  || (XERO_TENANT_ID === '786af1ed-e3ce-42fc-9ea9-ddf3447d79d0' ? 'Nicholas Marchesi' : null);
 let XERO_ACCESS_TOKEN = process.env.XERO_ACCESS_TOKEN;
 let XERO_REFRESH_TOKEN = process.env.XERO_REFRESH_TOKEN;
 
@@ -71,7 +75,7 @@ const stats = {
 /**
  * Load tokens from storage file if available
  */
-function loadStoredTokens() {
+function loadStoredTokens(allowRefreshFallback = true) {
   try {
     if (existsSync(TOKEN_FILE)) {
       const tokens = JSON.parse(readFileSync(TOKEN_FILE, 'utf8'));
@@ -80,7 +84,7 @@ function loadStoredTokens() {
         console.log('   Loaded valid access token from storage');
         return true;
       }
-      if (tokens.refresh_token) {
+      if (tokens.refresh_token && allowRefreshFallback) {
         XERO_REFRESH_TOKEN = tokens.refresh_token;
       }
     }
@@ -125,29 +129,15 @@ function saveTokens(accessToken, refreshToken, expiresIn) {
  * Save refresh token to Supabase (shared between local and CI)
  */
 async function saveTokenToSupabase(refreshToken, accessToken, expiresIn) {
-  if (!supabase) return;
-
-  try {
-    const expiresAt = new Date(Date.now() + (expiresIn * 1000) - 60000);
-    const { error } = await supabase
-      .from('xero_tokens')
-      .upsert({
-        id: 'default',
-        refresh_token: refreshToken,
-        access_token: accessToken,
-        expires_at: expiresAt.toISOString(),
-        updated_at: new Date().toISOString(),
-        updated_by: process.env.GITHUB_ACTIONS ? 'github-actions' : 'local'
-      }, { onConflict: 'id' });
-
-    if (error) {
-      console.warn('Could not save token to Supabase:', error.message);
-    } else {
-      console.log('   Token saved to Supabase (shared storage)');
-    }
-  } catch (e) {
-    console.warn('Supabase token save error:', e.message);
-  }
+  if (!supabase) throw new Error('Shared token storage unavailable');
+  const expiresAt = new Date(Date.now() + (expiresIn * 1000) - 60000);
+  const { error } = await supabase.from('xero_tokens').upsert({
+    id: 'default', refresh_token: refreshToken, access_token: accessToken,
+    expires_at: expiresAt.toISOString(), updated_at: new Date().toISOString(),
+    updated_by: process.env.GITHUB_ACTIONS ? 'github-actions' : 'local'
+  }, { onConflict: 'id' });
+  if (error) throw new Error('Refreshed Xero credentials could not be saved to shared storage');
+  console.log('   Token saved to Supabase (shared storage)');
 }
 
 /**
@@ -256,7 +246,7 @@ async function ensureValidToken() {
   }
 
   // 2. Try local stored tokens
-  if (loadStoredTokens()) {
+  if (loadStoredTokens(!supabaseTokens?.refresh_token)) {
     return true;
   }
 
@@ -308,12 +298,12 @@ async function xeroRequest(endpoint, options = {}) {
     });
 
     if (!response.ok) {
-      if (response.status === 401) {
+      if (response.status === 401 && !options._authRetried) {
         // Try to refresh token and retry once
         console.log('   Token expired, attempting refresh...');
         const refreshed = await refreshAccessToken();
         if (refreshed) {
-          return xeroRequest(endpoint, options);
+          return xeroRequest(endpoint, { ...options, _authRetried: true });
         }
         console.error('Token refresh failed');
       } else if (response.status === 429) {
@@ -604,21 +594,14 @@ async function syncInvoices(options = {}) {
   console.log(`   Fetching invoices (${modeLabel})`);
 
   // Paginate to get full line items with tracking categories
-  let allInvoices = [];
-  let page = 1;
-  while (true) {
-    const q = whereClause
-      ? `Invoices?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`
-      : `Invoices?order=Date DESC&page=${page}`;
-    const data = await xeroRequest(q, { headers: reqHeaders });
-    if (!data?.Invoices?.length) break;
-    allInvoices = allInvoices.concat(data.Invoices);
-    if (data.Invoices.length < 100) break;
-    page++;
-  }
+  const endpoint = whereClause
+    ? `Invoices?where=${encodeURIComponent(whereClause)}&order=Date DESC`
+    : 'Invoices?order=Date DESC';
+  const allInvoices = await fetchXeroPages(xeroRequest, endpoint, 'Invoices', { headers: reqHeaders, idField: 'InvoiceID' });
+  const page = Math.max(1, Math.ceil(allInvoices.length / 100));
 
   if (allInvoices.length === 0) {
-    console.error('   No invoice data received');
+    console.log('   No modified invoices in this scope');
     return { synced: 0, errors: 0 };
   }
 
@@ -631,6 +614,7 @@ async function syncInvoices(options = {}) {
     for (let i = 0; i < allInvoices.length; i++) {
       const inv = allInvoices[i];
       const detail = await xeroRequest(`Invoices/${inv.InvoiceID}`);
+      if (!detail?.Invoices?.[0]) throw new Error('Invoice detail fetch failed');
       if (detail?.Invoices?.[0]) {
         allInvoices[i] = detail.Invoices[0];
       }
@@ -784,21 +768,14 @@ async function syncTransactions(options = {}) {
 
   // Paginate to get full line items with tracking categories
   // The list endpoint omits Tracking[] unless we paginate with page=N
-  let allTransactions = [];
-  let page = 1;
-  while (true) {
-    const q = whereClause
-      ? `BankTransactions?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`
-      : `BankTransactions?order=Date DESC&page=${page}`;
-    const data = await xeroRequest(q, { headers: reqHeaders });
-    if (!data?.BankTransactions?.length) break;
-    allTransactions = allTransactions.concat(data.BankTransactions);
-    if (data.BankTransactions.length < 100) break; // last page
-    page++;
-  }
+  const endpoint = whereClause
+    ? `BankTransactions?where=${encodeURIComponent(whereClause)}&order=Date DESC`
+    : 'BankTransactions?order=Date DESC';
+  const allTransactions = await fetchXeroPages(xeroRequest, endpoint, 'BankTransactions', { headers: reqHeaders, idField: 'BankTransactionID' });
+  const page = Math.max(1, Math.ceil(allTransactions.length / 100));
 
   if (allTransactions.length === 0) {
-    console.error('   No transaction data received');
+    console.log('   No modified transactions in this scope');
     return { synced: 0, errors: 0 };
   }
 
@@ -811,6 +788,7 @@ async function syncTransactions(options = {}) {
     for (let i = 0; i < allTransactions.length; i++) {
       const txn = allTransactions[i];
       const detail = await xeroRequest(`BankTransactions/${txn.BankTransactionID}`);
+      if (!detail?.BankTransactions?.[0]) throw new Error('Transaction detail fetch failed');
       if (detail?.BankTransactions?.[0]) {
         allTransactions[i] = detail.BankTransactions[0];
       }
@@ -951,16 +929,17 @@ async function logSync(syncType, results) {
   try {
     const allErrors = [
       ...(results.invoices?.errorDetails || []),
-      ...(results.transactions?.errorDetails || [])
+      ...(results.transactions?.errorDetails || []),
+      ...(results.fatal?.errorDetails || [])
     ];
 
     const record = {
       sync_type: syncType,
       records_synced: (results.invoices?.synced || 0) + (results.transactions?.synced || 0),
-      errors: allErrors.length > 0 ? allErrors : [],
+      errors: allErrors.length > 0 ? allErrors : (syncFailed(results) ? [{ error_message: 'Sync failed; see runner logs' }] : []),
       started_at: new Date(stats.startTime).toISOString(),
       completed_at: new Date().toISOString(),
-      status: allErrors.length === 0 ? 'completed' : 'completed'
+      status: syncFailed(results) ? 'failed' : 'completed'
     };
 
     const { error } = await supabase
@@ -991,6 +970,8 @@ async function fullSync(options = {}) {
 
   // Log the sync
   await logSync('full', results);
+
+  if (syncFailed(results)) throw new Error('Full sync failed');
 
   // S2 2026-05-21: refresh materialized per-project quarterly view so downstream
   // dashboards (Notion + command-center) read fresh aggregates.
@@ -1087,11 +1068,14 @@ Token Refresh:
 // ── Incremental sync scope (modification-date based) ─────────────────────────
 const SYNC_STATE_FILE = '.xero-sync-state.json';
 function readSyncState() {
-  try { return existsSync(SYNC_STATE_FILE) ? JSON.parse(readFileSync(SYNC_STATE_FILE, 'utf8')) : null; }
+  try {
+    const state = existsSync(SYNC_STATE_FILE) ? JSON.parse(readFileSync(SYNC_STATE_FILE, 'utf8')) : null;
+    return state?.tenantId === XERO_TENANT_ID ? state : null;
+  }
   catch { return null; }
 }
 function writeSyncState(lastSyncIso) {
-  try { writeFileSync(SYNC_STATE_FILE, JSON.stringify({ lastSync: lastSyncIso, updatedAt: new Date().toISOString() }, null, 2)); }
+  try { writeFileSync(SYNC_STATE_FILE, JSON.stringify({ tenantId: XERO_TENANT_ID, lastSync: lastSyncIso, updatedAt: new Date().toISOString() }, null, 2)); }
   catch (e) { console.warn('   Could not persist sync state:', e.message); }
 }
 /**
@@ -1145,6 +1129,8 @@ async function main() {
       process.exit(1);
     }
 
+    if (!XERO_EXPECTED_LEGAL_NAME?.trim()) throw new Error('Missing XERO_EXPECTED_LEGAL_NAME; explicit legal organisation required');
+
     // Ensure we have valid token
     const hasToken = await ensureValidToken();
     if (!hasToken) {
@@ -1153,20 +1139,22 @@ async function main() {
       process.exit(1);
     }
 
-    console.log('   Configuration OK');
+    const organisation = await xeroRequest('Organisation');
+    verifyOrganisation(organisation?.Organisations, XERO_EXPECTED_LEGAL_NAME);
+    console.log('   Legal organisation verified');
   }
 
   switch (command) {
     case 'invoices':
-      await syncInvoices(syncOptions);
-      await logSync('invoices', { invoices: stats.invoices });
-      if (!days) writeSyncState(runStartIso);
+      const invoices = await syncInvoices(syncOptions);
+      await logSync('invoices', { invoices });
+      if (syncFailed({ invoices })) throw new Error('Invoice sync failed');
       break;
 
     case 'transactions':
-      await syncTransactions(syncOptions);
-      await logSync('transactions', { transactions: stats.transactions });
-      if (!days) writeSyncState(runStartIso);
+      const transactions = await syncTransactions(syncOptions);
+      await logSync('transactions', { transactions });
+      if (syncFailed({ transactions })) throw new Error('Transaction sync failed');
       break;
 
     case 'full':
@@ -1211,7 +1199,8 @@ Contact Matching:
   }
 }
 
-main().catch(error => {
+main().catch(async error => {
+  if (supabase) await logSync(process.argv[2] || 'full', { fatal: { errors: 1, errorDetails: [{ error_message: error.message }] } });
   console.error('\nFatal error:', error.message);
   process.exit(1);
 });

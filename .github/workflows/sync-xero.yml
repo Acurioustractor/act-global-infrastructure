@@ -24,6 +24,10 @@ on:
           - invoices
           - transactions
 
+concurrency:
+  group: xero-financial-sync
+  cancel-in-progress: false
+
 jobs:
   sync-xero:
     runs-on: ubuntu-latest
@@ -45,6 +49,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Test Xero read safety
+        run: node --test tests/unit/finance/test-xero-read-safety.mjs
+
       - name: Determine sync parameters
         id: params
         run: |
@@ -62,6 +69,7 @@ jobs:
           XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
           XERO_CLIENT_SECRET: ${{ secrets.XERO_CLIENT_SECRET }}
           XERO_TENANT_ID: ${{ secrets.XERO_TENANT_ID }}
+          XERO_EXPECTED_LEGAL_NAME: Nicholas Marchesi
           XERO_REFRESH_TOKEN: ${{ secrets.XERO_REFRESH_TOKEN }}
           # Supabase credentials
           SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
