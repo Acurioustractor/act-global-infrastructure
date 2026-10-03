@@ -59,11 +59,11 @@ function runnerHarness(request) {
   const stateWrites = [];
   const sandbox = { console: { log() {}, error() {}, warn() {} }, process: { env: {}, stdout: { write() {} } },
     stats: { invoices: { synced: 0, errors: 0 }, transactions: { synced: 0, errors: 0 }, startTime: Date.now() },
-    supabase: { from: () => ({ insert: async record => { logs.push(record); return {}; }, upsert: async () => ({ error: { message: 'mock persistence failure' } }) }) },
+    supabase: { from: () => ({ insert: async record => { logs.push(record); return {}; }, upsert: async () => ({ error: { message: 'mock persistence failure' } }), select: () => ({ eq: () => ({ single: async () => ({ error: { code: 'PGRST301' } }) }) }) }) },
     fetchXeroPages, syncFailed, verifyOrganisation, Date, setTimeout, URLSearchParams,
     existsSync: () => false, writeFileSync: (...args) => stateWrites.push(args),
     PROJECT_CODES: {}, XERO_TENANT_ID: 'mock-tenant' };
-  const api = vm.runInNewContext(body + '\nxeroRequest = injectedRequest; ({syncInvoices,syncTransactions,logSync,writeSyncState,saveTokenToSupabase});', { ...sandbox, injectedRequest: request });
+  const api = vm.runInNewContext(body + '\nxeroRequest = injectedRequest; ({syncInvoices,syncTransactions,logSync,writeSyncState,saveTokenToSupabase,loadTokenFromSupabase});', { ...sandbox, injectedRequest: request });
   return { api, logs, stateWrites };
 }
 test('real invoice and transaction sync reject malformed transport pages', async () => {
@@ -104,4 +104,9 @@ test('read inspector preserves currency, IDs and attachment metadata through GET
 test('real token persistence failure fails closed instead of silently succeeding', async () => {
   const { api } = runnerHarness(async () => null);
   await assert.rejects(api.saveTokenToSupabase('mock-refresh', 'mock-access', 1800), /could not be saved/);
+});
+
+test('shared token read failure rejects before credential fallback or refresh', async () => {
+  const { api } = runnerHarness(async () => null);
+  await assert.rejects(api.loadTokenFromSupabase(), /refresh not attempted/);
 });
