@@ -153,9 +153,8 @@ async function loadTokenFromSupabase() {
       .eq('id', 'default')
       .single();
 
-    if (error || !data || data.refresh_token === 'placeholder') {
-      return null;
-    }
+    if (error) throw new Error('Shared Xero token read failed');
+    if (!data || data.refresh_token === 'placeholder') return null;
 
     // Check if access token is still valid
     if (data.access_token && data.expires_at) {
@@ -173,8 +172,7 @@ async function loadTokenFromSupabase() {
     console.log('   Loaded refresh token from Supabase');
     return { refresh_token: data.refresh_token, valid: false };
   } catch (e) {
-    console.warn('Supabase token load error:', e.message);
-    return null;
+    throw new Error('Shared Xero token storage unavailable; refresh not attempted');
   }
 }
 
